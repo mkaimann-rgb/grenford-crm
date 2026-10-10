@@ -327,7 +327,7 @@ export function EingangBezahltView() {
           </div>
         )}
 
-        <div className="grid gap-[10px] xl:grid-cols-[minmax(0,1.12fr)_minmax(0,1fr)]">
+        <div className="grid gap-[10px] min-[1400px]:grid-cols-[minmax(0,1.12fr)_minmax(0,1fr)]">
           <ZahlungsTabelle
             title="Zahlungseingänge (Kunden)"
             rows={daten.einT}

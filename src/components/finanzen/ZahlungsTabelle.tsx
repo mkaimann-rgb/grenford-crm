@@ -69,7 +69,7 @@ export function ZahlungsTabelle<T extends { id: string }>({
       </div>
 
       <div className="mt-[8px] flex-1 overflow-x-auto">
-        <table className="w-full min-w-[560px] table-fixed text-left text-[11.5px]">
+        <table className="w-full min-w-[560px] table-fixed text-left text-[11.5px] min-[1400px]:min-w-0">
           <thead>
             <tr className="border-b border-fin-line text-fin-muted">
               <th className="w-[28px] py-[6px] pl-[4px] font-normal">
@@ -81,7 +81,7 @@ export function ZahlungsTabelle<T extends { id: string }>({
                 />
               </th>
               {spalten.map((s) => (
-                <th key={s.key} className={`whitespace-nowrap py-[6px] font-normal ${s.align === "right" ? "pr-[10px] text-right" : ""} ${s.className ?? ""}`}>
+                <th key={s.key} title={s.header} className={`truncate whitespace-nowrap py-[6px] font-normal ${s.align === "right" ? "pr-[10px] text-right" : ""} ${s.className ?? ""}`}>
                   {s.header}
                 </th>
               ))}
