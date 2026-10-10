@@ -69,7 +69,7 @@ Die Geschäftsregeln werden in der Architektur so berücksichtigt:
 
 ## 5. Offene Punkte / benötigte Zuarbeit
 
-1. **Original-Logodatei** (SVG oder hochauflösendes PNG) – das Logo ist derzeit ein SVG-Nachbau.
+1. **Logo**: Original eingebunden (`public/brand/grenford-logo.png`, aus „Grenford Logo“ / 22_15_50.png, nur zugeschnitten + Hintergrund transparent). Offen: Originaldatei mit Unterzeile „BOUTIQUE REAL ESTATE ADVISORY“ – liefert der Auftraggeber nach.
 2. **Hausschriften**, falls GRENFORD feste Schriften nutzt – derzeit Source Serif 4 (Überschriften) und Inter (Text) als nahe Entsprechung.
 3. **Objektfotos**: derzeit Ausschnitte aus der Visualisierung als markierte Testbilder (`public/testbilder/`).
 4. Zustimmung zu Supabase-Konto (EU-Region) vor Stufe 2.
