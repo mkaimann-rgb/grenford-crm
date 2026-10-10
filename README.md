@@ -32,6 +32,7 @@ Beenden mit `Strg + C` im Terminal.
 
 | Befehl | Zweck |
 |---|---|
+| `npm test` | Automatische Tests der Zahlungslogik |
 | `npm run typecheck` | TypeScript-Prüfung |
 | `npm run lint` | Code-Qualität (ESLint) |
 | `npm run build` | Produktions-Build |
@@ -40,9 +41,12 @@ Beenden mit `Strg + C` im Terminal.
 
 ```
 src/app/(crm)/dashboard     Dashboard
+src/app/(crm)/finanzen/eingang-bezahlt   Finanzen → Eingang / Bezahlt
 src/app/(crm)/[...slug]     Platzhalter für noch nicht umgesetzte Menüpunkte
 src/components/layout       Seitenleiste, Kopfzeile, Logo
 src/components/dashboard    Dashboard-Bausteine (KPIs, Diagramme, Listen …)
+src/components/finanzen     Bausteine der Finanzseiten
+src/lib/finanzen            Zahlungslogik (Forderungen, Verbindlichkeiten, Zahlungen) + Tests
 src/lib/navigation.ts       Vollständige Menüstruktur
 src/lib/testdata            Gekennzeichnete Testdaten
 public/testbilder           Platzhalter-Bilder (Ausschnitte aus der Visualisierung)

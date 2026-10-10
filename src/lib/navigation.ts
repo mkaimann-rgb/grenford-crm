@@ -4,6 +4,7 @@ import {
   ClipboardList,
   Database,
   FileSpreadsheet,
+  FileCheck2,
   FileText,
   Files,
   FolderKanban,
@@ -124,6 +125,7 @@ export const navSections: NavSection[] = [
           { label: "Bezahlt", href: "/finanzen/verbindlichkeiten?status=bezahlt" },
         ],
       },
+      { label: "Eingang / Bezahlt", href: "/finanzen/eingang-bezahlt", icon: FileCheck2 },
     ],
   },
 ];

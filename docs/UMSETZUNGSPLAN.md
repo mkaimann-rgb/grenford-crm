@@ -23,7 +23,8 @@ Ergänzungen (kurz begründet):
 | Stufe | Inhalt | Status |
 |---|---|---|
 | 1a | Projektgerüst, CI-Tokens, Layout mit vollständiger linker Navigation | ✅ fertig |
-| 1b | **Dashboard** gemäß `01_Dashboard_Grenford CI.jpg` | ✅ zur Freigabe |
+| 1b | **Dashboard** gemäß `01_Dashboard_Grenford CI.jpg` | ✅ freigegeben |
+| 1b+ | **Finanzen → Eingang / Bezahlt** gemäß `05_Finanzen_Eingang CI.jpg` | ✅ zur Freigabe |
 | 1c | Unternehmensübersicht mit Suche, Filtern, Detailansicht (`GRENFORD CRM Unternehmensübersicht.jpg`, `…mit Unternehmensmodal.jpg`) | ⏳ nach Freigabe 1b |
 | 2 | Supabase (EU), Anmeldung nur mit Google-Workspace-Konten, RLS, Datenmodell Stammdaten | ⏳ Zustimmung nötig |
 | 3+ | Investment, Property, Projects, Netzwerk, Finanzen – je Ansicht nach Referenzbild | ⏳ |
@@ -66,6 +67,14 @@ Die Geschäftsregeln werden in der Architektur so berücksichtigt:
 - **Provisionen**: Standardsätze als Konfiguration – Investment/Property 10 % der GRENFORD-Netto-Courtage, Projects 3 % der provisionspflichtigen Netto-Bausumme; individuelle Splits je Geschäft in eigener Tabelle, die den Standard übersteuert.
 - **Finanzen getrennt**: `forderungen` (an Kunden), `verbindlichkeiten` (an Partner) und `zahlungen` (tatsächliche Geldbewegungen, verknüpft mit einer Forderung oder Verbindlichkeit).
 - Beträge als Ganzzahl in Cent bzw. `numeric`, nie als Gleitkommazahl.
+
+### Zahlungslogik „Eingang / Bezahlt“ (umgesetzt mit Testdaten)
+
+- Getrennte Datensätze: Forderungen → Zahlungseingänge; Verbindlichkeiten → Auszahlungen (`src/lib/finanzen/logic.ts`).
+- Als Zahlung zählen nur gebuchte Zahlungen bis zum Stichtag. Offene/überfällige Restbeträge erscheinen ausschließlich in den Kennzahlen „Offen“ und „Überfällig“.
+- Status je Zahlungszeile = Status des Belegs: *Bezahlt*, *Teilzahlung* (Rest noch nicht fällig) oder *Rest überfällig*.
+- Kennzahlen und Diagramme werden aus denselben Zahlungszeilen berechnet; Monate nach dem Stichtag zeigen keine Werte.
+- Automatische Tests: `npm test`.
 
 ## 5. Offene Punkte / benötigte Zuarbeit
 

@@ -44,6 +44,22 @@
   --color-draft: #4b5f84;
   --color-draft-bg: #eaf2fd;
 
+  /* Finanzseiten (Vorlage „05_Finanzen_Eingang CI“) */
+  --color-fin-ink: #1a2da5;
+  --color-fin-text: #34479a;
+  --color-fin-muted: #6474a6;
+  --color-fin-line: #eef0f6;
+  --color-fin-green: #16a070;
+  --color-fin-green-bg: #e6f7ef;
+  --color-fin-blue: #0b2aa0;
+  --color-fin-blue-bg: #e6eefc;
+  --color-fin-lavender: #ebeaf9;
+  --color-fin-amber: #a8792c;
+  --color-fin-amber-bg: #fdf3dc;
+  --color-fin-red: #c31425;
+  --color-fin-red-bg: #fde8ea;
+  --color-fin-orange: #e07a14;
+
   --shadow-card: 0 1px 2px rgb(16 32 72 / 0.04), 0 2px 8px rgb(16 32 72 / 0.04);
 }
 
