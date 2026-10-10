@@ -50,6 +50,11 @@ Geplant ab Stufe 2:
 - **Hosting**: Supabase-Region Frankfurt (eu-central-1); App-Hosting in der EU (z. B. Vercel mit EU-Funktionen-Region oder ein deutscher Anbieter) – **Auswahl nur mit Ihrer Zustimmung**. HTTPS ist dort Standard.
 - **Datensicherung**: tägliche Backups (Supabase Pro inkl. Point-in-Time-Recovery – kostenpflichtig) plus regelmäßiger verschlüsselter Export; Wiederherstellung wird einmal testweise geprobt.
 
+### Geschützte Testvorschau (Vercel)
+
+- Nur Vorschau-Bereitstellungen (Preview) aus Pull Requests; geschützt durch **Vercel Authentication – Standard Protection** (vom Auftraggeber bestätigt: kein Passwort-Bypass, kein Automatisierungs-Bypass, keine teilbaren Links/Ausnahmen).
+- `vercel.json` legt Next.js als Framework fest und **deaktiviert automatische Bereitstellungen aus `main`**, damit nach einem Merge keine ungeschützte Produktionsversion entsteht. Aufheben erst nach Einbau der eigenen Anmeldung.
+
 ## 4. Datenmodell – Leitplanken für spätere Module
 
 Die Geschäftsregeln werden in der Architektur so berücksichtigt:
