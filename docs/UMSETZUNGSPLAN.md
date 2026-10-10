@@ -18,18 +18,47 @@ Ergänzungen (kurz begründet):
 - **Schriften selbst ausgeliefert** (`next/font`): keine Verbindung der Nutzer zu Google Fonts → DSGVO-freundlich.
 - Die bisherige Vite-Vorlage (`main.jsx`) wurde **nicht gelöscht**, sondern nach `legacy/prototype-v1/` verschoben.
 
-## 2. Schrittfolge
+## 2. Gesamtauftrag – Phasen
 
-| Stufe | Inhalt | Status |
+| Phase | Inhalt | Status |
 |---|---|---|
-| 1a | Projektgerüst, CI-Tokens, Layout mit vollständiger linker Navigation | ✅ fertig |
-| 1b | **Dashboard** gemäß `01_Dashboard_Grenford CI.jpg` | ✅ freigegeben |
-| 1b+ | **Finanzen → Eingang / Bezahlt** gemäß `05_Finanzen_Eingang CI.jpg` | ✅ zur Freigabe |
-| 1c | Unternehmensübersicht mit Suche, Filtern, Detailansicht (`GRENFORD CRM Unternehmensübersicht.jpg`, `…mit Unternehmensmodal.jpg`) | ⏳ nach Freigabe 1b |
-| 2 | Supabase (EU), Anmeldung nur mit Google-Workspace-Konten, RLS, Datenmodell Stammdaten | ⏳ Zustimmung nötig |
-| 3+ | Investment, Property, Projects, Netzwerk, Finanzen – je Ansicht nach Referenzbild | ⏳ |
+| – | Dashboard, Finanzen → Eingang / Bezahlt | ✅ freigegeben (Referenz) |
+| **A** | Stammdaten & Aktivitäten: Unternehmen, Ansprechpartner, Privatkunden, Sanierungskunden, Aktivitäten, gemeinsame Stammdatenlogik | ✅ zur fachlichen Freigabe |
+| B | Akquise & Investment: Pipeline, Projekte, Käuferprozesse, Ankaufsprofile, Suchaufträge | ⏳ nach Freigabe A |
+| C | Property: Objekte & Mandate, Käuferprozesse, Interessenten, Suchaufträge | ⏳ |
+| D | Projects: Mandate, Projekte, Projektprozesse, GU-Partner | ⏳ |
+| E | Netzwerk: Empfehlungspartner, Provisionsbeteiligte | ⏳ |
+| F | Finanzen: Übersicht, Provisionen & Zahlungen, Forderungen, Verbindlichkeiten (+ Integration Eingang / Bezahlt) | ⏳ |
+| G | Qualitätssicherung: Navigation, Verknüpfungen, Formulare, Berechnungen, Responsive, Tests | ⏳ |
+| danach | Supabase (EU) + Google-Workspace-Anmeldung – nur nach ausdrücklicher Freigabe | ⏳ |
 
-Arbeitsweise je Ansicht: Referenzbild analysieren → umsetzen → Screenshot der laufenden App → Vergleich → Korrektur → Freigabe durch Sie.
+Arbeitsweise je Seite: Referenzbild analysieren → umsetzen → Screenshot → Vergleich → Korrektur → Freigabe.
+
+### Prüfung der Visualisierungen (Drive-Ordner)
+
+| Bereich | Vorlage(n) |
+|---|---|
+| Dashboard / Aktivitäten | `01_Dashboard_Grenford Ci.jpg` · `GRENFORD Aktivitäten-Dashboard.jpg` |
+| Kunden | `GRENFORD CRM Unternehmensübersicht.jpg`, `…-Dashboard mit Unternehmensmodal.jpg` · `GRENFORD CRM – Ansprechpartnerübersicht.jpg` · `GRENFORD CRM Privatkunden-Dashboard.jpg`, `GRENFORD CRM_ Privatkunden-Dashboard.jpg` · `GRENFORD CRM Sanierungskunden-Übersicht.jpg`, `CRM-Dashboard für Sanierungskunden.jpg` |
+| Akquise | `Grenford Akquise-Pipeline_ MFH Berlin-Schöneberg.jpg` |
+| Investment | `01_Investment_Projekte` · `02_Investment_Käuferprozesse` · `03_Investment_Ankaufprofil_Tabelle`, `04_…_Einzelprofil` · `05_Investment_Suchaufträge` |
+| Property | `01_Property_Objekte und Mandanten` · `02_Property_Käuferprozesse` · `03_Property_Interessten`, `04_…_einzelprofil` · `05_Property_Suchaufträge` |
+| Projects | `02_Projects_Mandate` · `03_Projects_Projectprozeesse` · `04_Projects_GU-Partner` |
+| Netzwerk | `01_Netzwerk_Empfehlungspartner` · `02_Netzwerk_Provionsbeteiligung` |
+| Finanzen | `01_Finanzen_Übersicht` · `02_…_Provisionen Zahlungen` · `03_…_Forderungen (Kunden)` · `04_…_Verbindlichkeiten (Partner)` · `05_…_Eingang/Bezahlt` |
+
+**Fehlend / zu klären:**
+1. **Projects → Projekte**: `01_Projects_.jpg` ist dateigleich mit `02_Projects_Mandate` (gleiche Größe) – eigene Vorlage fehlt.
+2. **Einstellungen**: keine Vorlage vorhanden.
+3. Mehrere Dateien sind Duplikate (z. B. `Investment-Projekte CRM-Dashboard.jpg` = `01_Investment_Projekte`); verwendet werden jeweils die nummerierten Dateien.
+
+### Phase A – Umsetzungsstand
+
+- **Gemeinsame Stammdaten** (`src/lib/crm/`): Typen, zentrale Testdaten, Fachlogik (`logic.ts`, getestet), clientseitiger Store (`store.tsx`) hinter einer Repository-Schnittstelle (`repository.ts`) – später austauschbar gegen Supabase.
+- **Ein Datensatz je Unternehmen/Person**, Rollen am selben Datensatz (Ansprechpartner-Verknüpfung, Privatkunde, Sanierungskunde). Dublettenprüfung beim Anlegen (Firmenname ohne Rechtsform, USt-IdNr., HRB; Person: E-Mail oder Name + Geburtsdatum) mit Option „Bestehende Person verwenden“.
+- **Seiten**: Listen mit Kennzahlen (klickbar als Filter), Suche, Filtern, Schnellfiltern, Sortierung, Seitenumschaltung, Auswahl, Listen-/Kachelansicht, CSV-Export; Detailseiten mit Tabs; Anlegen/Bearbeiten-Dialoge mit Pflichtfeldprüfung; Statuswechsel; Labels; Vorhaben; Aktivitäten (Termin, Aufgabe, E-Mail-Protokoll, Telefon, Notiz) mit Erledigt-Status, Überfällig-Logik und Wochenkalender.
+- **Wiederverwendbare Bausteine**: `src/components/ui/` (Tabelle, Dialog, Formularfelder, Menüs, Meldungen) und `src/components/crm/` (Seitenkopf, Kennzahlen, Seitenleiste, Personen-/Unternehmensansichten).
+- **Nicht dauerhaft**: Änderungen gelten nur bis zum Neuladen der Seite (Testmodus, deutlich gekennzeichnet). Dateiablage, Import, Foto-Upload, E-Mail-Versand sind als „noch nicht implementiert“ markiert.
 
 ## 3. Sicherheitskonzept
 

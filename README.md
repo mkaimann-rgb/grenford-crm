@@ -2,8 +2,8 @@
 
 Internes CRM der GRENFORD Boutique Real Estate Advisory (Investment · Property · Projects).
 
-> **Entwicklungsstufe 1** – Layout, vollständige Navigation und Dashboard.
-> Alle angezeigten Daten sind **fiktive Testdaten** (`src/lib/testdata/`).
+> **Testversion** – Dashboard, Finanzen → Eingang / Bezahlt sowie Phase A (Kunden & Aktivitäten).
+> Alle angezeigten Daten sind **fiktive Testdaten**. Änderungen werden nicht dauerhaft gespeichert.
 > Keine Datenbank, keine Anmeldung, keine E-Mail-Anbindung.
 
 Technischer Plan, Sicherheits- und Datenmodellkonzept: [`docs/UMSETZUNGSPLAN.md`](docs/UMSETZUNGSPLAN.md)
@@ -32,7 +32,7 @@ Beenden mit `Strg + C` im Terminal.
 
 | Befehl | Zweck |
 |---|---|
-| `npm test` | Automatische Tests der Zahlungslogik |
+| `npm test` | Automatische Tests (Zahlungs- und Stammdatenlogik) |
 | `npm run typecheck` | TypeScript-Prüfung |
 | `npm run lint` | Code-Qualität (ESLint) |
 | `npm run build` | Produktions-Build |
@@ -47,6 +47,9 @@ src/components/layout       Seitenleiste, Kopfzeile, Logo
 src/components/dashboard    Dashboard-Bausteine (KPIs, Diagramme, Listen …)
 src/components/finanzen     Bausteine der Finanzseiten
 src/lib/finanzen            Zahlungslogik (Forderungen, Verbindlichkeiten, Zahlungen) + Tests
+src/lib/crm                 Stammdaten: Typen, Testdaten, Fachlogik, Store, Repository + Tests
+src/components/ui           Wiederverwendbare Bausteine (Tabelle, Dialog, Formulare, Menüs)
+src/components/crm          CRM-Seiten (Unternehmen, Personen, Aktivitäten)
 src/lib/navigation.ts       Vollständige Menüstruktur
 src/lib/testdata            Gekennzeichnete Testdaten
 public/testbilder           Platzhalter-Bilder (Ausschnitte aus der Visualisierung)
