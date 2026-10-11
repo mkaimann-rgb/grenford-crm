@@ -440,3 +440,54 @@ export type VerbindlichkeitCrm = Verbindlichkeit & { empfaengerRef?: Ref; quelle
 export type FinanzDaten = { forderungen: ForderungCrm[]; zahlungseingaenge: Zahlungseingang[]; verbindlichkeiten: VerbindlichkeitCrm[]; auszahlungen: Auszahlung[] };
 
 export const MAHNSTUFEN = ["Keine Mahnung", "1. Mahnung", "2. Mahnung", "Vollstreckung / rechtliche Eskalation"] as const;
+
+// ---------- Matching (Ankaufsprofile, Suchaufträge, Interessenten) ----------
+
+const OBJEKTGRUPPEN: Record<string, string[]> = {
+  wohnen: ["wohnen", "mfh", "mehrfamilienhaus", "wohnportfolio", "zinshaus", "eigentumswohnung", "wohnung", "penthouse", "einfamilienhaus", "wohn- und geschäftshaus"],
+  gewerbe: ["gewerbe", "büro", "büro / gewerbe", "mixed-use", "wohn- und geschäftshaus"],
+  hotel: ["hotel", "hotel / betreiber", "betreiber"],
+  logistik: ["logistik", "light industrial"],
+  living: ["co-living", "micro-living", "mikro-living", "senior living"],
+  healthcare: ["healthcare", "pflege"],
+  grundstueck: ["grundstück", "grundstücke"],
+};
+
+/** Prüft, ob eine Objektart zu einer gesuchten Kategorie passt (z. B. „Wohnen“ ↔ „Mehrfamilienhaus“) */
+export function objektartPasst(gesucht: string, objektart: string) {
+  const g = gesucht.toLowerCase().trim();
+  const o = objektart.toLowerCase().trim();
+  if (!g || !o) return false;
+  if (o.includes(g) || g.includes(o)) return true;
+  return Object.values(OBJEKTGRUPPEN).some((gr) => gr.some((x) => g.includes(x)) && gr.some((x) => o.includes(x)));
+}
+
+const REGION_ALIAS: Record<string, string[]> = { dach: ["deutschland", "österreich", "schweiz", "d-ch", "berlin", "hamburg", "münchen", "nrw", "leipzig", "potsdam", "erzgebirge", "ostsee", "süddeutschland", "bad reichenhall"], d: ["deutschland", "berlin", "hamburg", "münchen", "nrw", "leipzig", "potsdam", "erzgebirge", "ostsee", "süddeutschland"] };
+
+export function regionPasst(regionen: string[], standort: string) {
+  const s = standort.toLowerCase();
+  return regionen.some((r) => {
+    const x = r.toLowerCase().trim();
+    return s.includes(x) || x.includes(s.split(/[-, ]/)[0]) || (REGION_ALIAS[x] ?? []).some((a) => s.includes(a));
+  });
+}
+
+/**
+ * Passende Vorgänge zu Suchkriterien: Objektart, Region, Volumen (Mio. €, ±20 % Toleranz).
+ * Ergebnis mit Trefferquote 0–3 (3 = alle Kriterien erfüllt), nur Treffer ≥ 2.
+ */
+export function passend<T extends { id: string }>(
+  kriterien: { objektarten: string[]; regionen: string[]; von: number; bis: number },
+  kandidaten: T[],
+  daten: (k: T) => { objektart: string; standort: string; volumen: number },
+) {
+  return kandidaten
+    .map((k) => {
+      const d = daten(k);
+      const mio = d.volumen / 1e6;
+      const score = Number(kriterien.objektarten.some((o) => objektartPasst(o, d.objektart))) + Number(regionPasst(kriterien.regionen, d.standort)) + Number(mio >= kriterien.von * 0.8 && mio <= kriterien.bis * 1.2);
+      return { k, score };
+    })
+    .filter((x) => x.score >= 2)
+    .sort((a, b) => b.score - a.score);
+}

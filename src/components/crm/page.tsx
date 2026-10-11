@@ -75,7 +75,7 @@ export function KpiRow({ kpis }: { kpis: Kpi[] }) {
             <Icon className="mt-[2px] h-[30px] w-[30px] shrink-0 text-navy-900" strokeWidth={1.5} />
             <div className="min-w-0 flex-1 pr-2 text-left">
               <div className="truncate text-[11.5px] text-ink" title={k.label}>{k.label}</div>
-              <div className="mt-[4px] font-serif text-[27px] font-bold leading-none text-navy-950">{k.wert}</div>
+              <div className={`mt-[4px] font-serif font-bold leading-none text-navy-950 ${typeof k.wert === "string" && k.wert.length > 7 ? "whitespace-nowrap text-[clamp(17px,1.45vw,23px)]" : "text-[27px]"}`}>{k.wert}</div>
               <div className="mt-[8px] truncate text-[11.5px] text-muted">{k.sub}</div>
             </div>
             {k.onClick && <ChevronRight className="absolute bottom-[14px] right-[10px] h-4 w-4 text-navy-900" />}
