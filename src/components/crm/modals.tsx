@@ -28,7 +28,8 @@ import {
   type Unternehmensart,
 } from "@/lib/crm/types";
 import { Button, Tabs } from "@/components/ui/controls";
-import { ChipSelect, Field, FormSection, Modal, SelectField, TextArea, TextField } from "@/components/ui/modal";
+import { BereichAuswahl, ChipSelect, Field, FormSection, Modal, SelectField, TextArea, TextField } from "@/components/ui/modal";
+import { ausFormular, ergaenzeBereiche } from "@/lib/crm/bereiche";
 import { useToast } from "@/components/ui/toast";
 
 const GESPEICHERT = "(Testmodus – nur bis zum Neuladen der Seite gespeichert)";
@@ -125,6 +126,7 @@ export function UnternehmenModal({ initial, onClose, onSaved }: { initial?: Unte
     status: initial?.status ?? "In Kontakt",
     quelle: initial?.quelle ?? "",
     notiz: "",
+    bereiche: initial?.bereiche.map((z) => ({ bereich: z.bereich as string, funktion: z.funktion })) ?? ([] as { bereich: string; funktion: string }[]),
   }));
   const [leitung, setLeitung] = useState<PersonWahl>(leitungAlt ? { id: leitungAlt.id, name: personName(leitungAlt) } : { name: "" });
   const [leitungPos, setLeitungPos] = useState(pos(leitungAlt));
@@ -139,6 +141,7 @@ export function UnternehmenModal({ initial, onClose, onSaved }: { initial?: Unte
     const e: Record<string, string> = {};
     if (!f.name.trim()) e.name = "Bitte einen Unternehmensnamen angeben.";
     if (!f.art) e.art = "Bitte die Unternehmensart wählen.";
+    if (!f.bereiche.length) e.bereiche = "Bitte mindestens einen Geschäftsbereich wählen.";
     if (f.website && !/^https?:\/\//.test(f.website)) e.website = "Bitte mit https:// beginnen.";
     setFehler(e);
     if (Object.keys(e).length || dublette) return;
@@ -148,6 +151,9 @@ export function UnternehmenModal({ initial, onClose, onSaved }: { initial?: Unte
       ...(initial ?? { id: crm.neueId("f"), labels: [], telefon: "", email: "", erstelltAm: crm.heute, letzterKontakt: crm.heute }),
       name: f.name.trim(), arten, rechtsform: f.rechtsform, ustId: f.ustId.trim(), handelsregister: f.handelsregister.trim(), website: f.website.trim(), linkedin: f.linkedin.trim(),
       strasse: f.strasse, plz: f.plz, ort: f.ort, land: f.land, beschreibung: f.beschreibung, betreuerId: f.betreuerId, status: f.status as Unternehmen["status"], quelle: f.quelle,
+      bereiche: ausFormular(f.bereiche, initial?.bereiche),
+      // Bewusst im Formular geprüft → Prüfhinweis entfällt
+      bereichPruefen: undefined,
     };
     crm.speichereUnternehmen(u);
 
@@ -158,11 +164,13 @@ export function UnternehmenModal({ initial, onClose, onSaved }: { initial?: Unte
       const basis: Person = bestehend ?? {
         id: crm.neueId("p"), anrede: "", ...splitName(wahl.name), geburtsdatum: "", email: "", telefonMobil: "", telefonGeschaeftlich: "", linkedin: "",
         status: "In Kontakt", betreuerId: f.betreuerId, quelle: f.quelle, favorit: false, erstelltAm: crm.heute, letzterKontakt: crm.heute,
-        strasse: "", plz: "", ort: f.ort, land: f.land, kontakte: [],
+        strasse: "", plz: "", ort: f.ort, land: f.land, kontakte: [], bereiche: [],
       };
       const andere = basis.kontakte.filter((k) => k.unternehmenId !== u.id);
       const alt = basis.kontakte.find((k) => k.unternehmenId === u.id);
-      crm.speicherePerson({ ...basis, kontakte: [...andere, { unternehmenId: u.id, position: position || alt?.position || "", abteilung: alt?.abteilung ?? "", rolle: alt?.rolle ?? rolle, ...alt, ...extra, ...(position ? { position } : {}) }] });
+      // Ansprechpartner erbt fehlende Geschäftsbereiche des Unternehmens (eindeutige Beziehung, als „abgeleitet“ markiert)
+      const bereiche = ergaenzeBereiche(basis.bereiche, u.bereiche.map((z) => ({ bereich: z.bereich, funktion: alt?.rolle ?? rolle, grund: `Ansprechpartner von ${u.name}` })));
+      crm.speicherePerson({ ...basis, bereiche, kontakte: [...andere, { unternehmenId: u.id, position: position || alt?.position || "", abteilung: alt?.abteilung ?? "", rolle: alt?.rolle ?? rolle, ...alt, ...extra, ...(position ? { position } : {}) }] });
     };
     verknuepfe(leitung, leitungPos, { leitung: true }, "Entscheider");
     verknuepfe(haupt, hauptPos, { haupt: true }, "Projektkontakt");
@@ -208,6 +216,7 @@ export function UnternehmenModal({ initial, onClose, onSaved }: { initial?: Unte
             <SelectField label="Land" value={f.land} onChange={(v) => set({ land: v })} options={LAENDER} leer={null} />
           </FormSection>
           <ChipSelect label="Unternehmensrollen (mehrfach auswählbar)" options={UNTERNEHMENSARTEN} value={f.rollen} onChange={(v) => set({ rollen: v })} />
+          <BereichAuswahl value={f.bereiche} onChange={(v) => set({ bereiche: v })} fehler={fehler.bereiche} />
           <TextArea label="Beschreibung" value={f.beschreibung} onChange={(v) => set({ beschreibung: v })} placeholder="Kurzbeschreibung des Unternehmens …" />
         </div>
         <div className="space-y-5 lg:pl-6">
@@ -244,6 +253,7 @@ type PersonForm = {
   interessen: string[]; regionen: string; zeitrahmen: string; prioritaet: string; budget: string;
   unternehmenId: string; position: string; abteilung: string; kontaktRolle: string; haupt: boolean;
   vTitel: string; vArt: string; vOrt: string; vBudget: string; vStart: string; vEnde: string;
+  bereiche: { bereich: string; funktion: string }[];
 };
 
 function formAus(p: Person | undefined, rolle: PersonRolle, betreuer: string, unternehmenId?: string): PersonForm {
@@ -257,6 +267,8 @@ function formAus(p: Person | undefined, rolle: PersonRolle, betreuer: string, un
     interessen: r?.interessen ?? [], regionen: r?.regionen ?? "", zeitrahmen: r?.zeitrahmen ?? "", prioritaet: r?.prioritaet ?? "Normal", budget: r?.budget ? String(r.budget) : "",
     unternehmenId: kontakt?.unternehmenId ?? unternehmenId ?? "", position: kontakt?.position ?? "", abteilung: kontakt?.abteilung ?? "", kontaktRolle: kontakt?.rolle ?? "Projektkontakt", haupt: !!kontakt?.haupt,
     vTitel: "", vArt: "", vOrt: "", vBudget: "", vStart: "", vEnde: "",
+    // Bestehende Zuordnungen übernehmen; neuer Sanierungskunde → Projects ist eindeutig und wird vorgeschlagen
+    bereiche: p ? p.bereiche.map((z) => ({ bereich: z.bereich as string, funktion: z.funktion })) : rolle === "sanierung" ? [{ bereich: "Projects", funktion: "Sanierungskunde" }] : [],
   };
 }
 
@@ -289,6 +301,7 @@ export function PersonModal({ rolle, initial, onClose, onSaved, unternehmenId }:
     if (!f.nachname.trim()) e.nachname = "Pflichtfeld";
     if (f.email && !/^\S+@\S+\.\S+$/.test(f.email)) e.email = "Ungültige E-Mail-Adresse";
     if (rolle === "kontakt" && !f.unternehmenId) e.unternehmenId = "Bitte ein Unternehmen wählen.";
+    if (!f.bereiche.length) e.bereiche = "Bitte mindestens einen Geschäftsbereich wählen.";
     if (f.budget && isNaN(Number(f.budget))) e.budget = "Bitte eine Zahl angeben.";
     setFehler(e);
     if (Object.keys(e).length) { setTab("allgemein"); return; }
@@ -301,6 +314,9 @@ export function PersonModal({ rolle, initial, onClose, onSaved, unternehmenId }:
       anrede: f.anrede as Person["anrede"], titel: f.titel.trim(), vorname: f.vorname.trim(), nachname: f.nachname.trim(), geburtsdatum: f.geburtsdatum, email: f.email.trim(),
       telefonMobil: f.telefonMobil, telefonGeschaeftlich: f.telefonGeschaeftlich, linkedin: f.linkedin, strasse: f.strasse, plz: f.plz, ort: f.ort, land: f.land, quelle: f.quelle, betreuerId: f.betreuerId,
       status: rolle === "kontakt" ? (f.status as Person["status"]) : basis?.status ?? "Aktiv",
+      bereiche: ausFormular(f.bereiche, basis?.bereiche),
+      // Bewusst im Formular geprüft → Prüfhinweis entfällt
+      bereichPruefen: undefined,
     } as Person;
     const kundenrolle = { seit: crm.heute, ...(rolle === "privat" ? basis?.privat : basis?.sanierung), interessen: f.interessen, regionen: f.regionen, zeitrahmen: f.zeitrahmen, prioritaet: f.prioritaet, budget: f.budget ? Number(f.budget) : undefined };
     if (rolle === "privat") p.privat = { ...kundenrolle, status: f.status as never };
@@ -403,9 +419,17 @@ export function PersonModal({ rolle, initial, onClose, onSaved, unternehmenId }:
               </FormSection>
             </div>
             <div className="space-y-5 lg:pl-6">
+              <FormSection titel="Geschäftsbereiche">
+                <BereichAuswahl value={f.bereiche} onChange={(v) => set({ bereiche: v })} fehler={fehler.bereiche} />
+                <p className="text-[10.5px] text-muted">Getrennt von Kundenrolle ({rolle === "kontakt" ? "Ansprechpartner" : titel}) und fachlicher Rolle. Die Zuordnung gilt für den zentralen Personenstammsatz.</p>
+              </FormSection>
               {rolle === "kontakt" ? (
                 <FormSection titel="Unternehmen & Rolle">
-                  <SelectField label="Unternehmen" pflicht value={f.unternehmenId} onChange={(v) => set({ unternehmenId: v })} options={[...crm.unternehmen].sort((a, b) => a.name.localeCompare(b.name)).map((u) => ({ value: u.id, label: u.name }))} fehler={fehler.unternehmenId} />
+                  <SelectField label="Unternehmen" pflicht value={f.unternehmenId} onChange={(v) => {
+                    // Bereiche des Unternehmens vorschlagen, solange noch nichts gewählt ist
+                    const u = crm.unternehmenById(v);
+                    set({ unternehmenId: v, ...(f.bereiche.length || !u ? {} : { bereiche: u.bereiche.map((z) => ({ bereich: z.bereich as string, funktion: "" })) }) });
+                  }} options={[...crm.unternehmen].sort((a, b) => a.name.localeCompare(b.name)).map((u) => ({ value: u.id, label: u.name }))} fehler={fehler.unternehmenId} />
                   <TextField label="Position" value={f.position} onChange={(v) => set({ position: v })} placeholder="z. B. Geschäftsführer" />
                   <TextField label="Abteilung" value={f.abteilung} onChange={(v) => set({ abteilung: v })} />
                   <SelectField label="Rolle" pflicht value={f.kontaktRolle} onChange={(v) => set({ kontaktRolle: v })} options={KONTAKT_ROLLEN} leer={null} />

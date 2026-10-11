@@ -8,14 +8,16 @@ import { datumDe, dublettenPaare, naechste, notizen, personName, regionVon, such
 import type { Unternehmen } from "@/lib/crm/types";
 import { downloadCsv } from "@/lib/csv";
 import { DataTable, type Column } from "@/components/ui/DataTable";
-import { Avatar, FilterSelect, SearchInput, StatusBadge } from "@/components/ui/controls";
+import { Avatar, BereichBadges, FilterSelect, MultiFilter, SearchInput, StatusBadge } from "@/components/ui/controls";
+import { PRUEFEN, passtBereich } from "@/lib/crm/bereiche";
+import { GESCHAEFTSBEREICHE } from "@/lib/crm/types";
 import { Modal } from "@/components/ui/modal";
 import { useToast } from "@/components/ui/toast";
 import { CheckGroup, FilterBar, KpiRow, ListLayout, NotizenCard, PageHeader, QuickActions, QuickFilterCard, TermineCard } from "./page";
 import { PersonModal, UnternehmenModal } from "./modals";
 
-type Filter = { suche: string; typ: string[]; status: string[]; region: string[]; betreuer: string[]; aktivitaet: string[] };
-const LEER: Filter = { suche: "", typ: [], status: [], region: [], betreuer: [], aktivitaet: [] };
+type Filter = { suche: string; bereich: string[]; typ: string[]; status: string[]; region: string[]; betreuer: string[]; aktivitaet: string[] };
+const LEER: Filter = { suche: "", bereich: [], typ: [], status: [], region: [], betreuer: [], aktivitaet: [] };
 
 function aktivitaetBucket(datum: string, heute: string) {
   if (datum >= addDays(heute, -30)) return "Letzte 30 Tage";
@@ -47,7 +49,8 @@ export function UnternehmenListe() {
 
   const gefiltert = zeilen.filter(
     (z) =>
-      suchtreffer(f.suche, z.name, z.ort, z.haupt && personName(z.haupt), z.arten.join(" "), z.ustId) &&
+      suchtreffer(f.suche, z.name, z.ort, z.haupt && personName(z.haupt), z.arten.join(" "), z.ustId, ...z.bereiche.map((b) => b.bereich)) &&
+      passtBereich(z, f.bereich) &&
       (!f.typ.length || z.arten.some((a) => f.typ.includes(a))) &&
       (!f.status.length || f.status.includes(z.status)) &&
       (!f.region.length || f.region.includes(z.region)) &&
@@ -56,6 +59,10 @@ export function UnternehmenListe() {
   );
 
   const typen = zaehle(zeilen, (z) => z.arten);
+  const bereichOptionen = [
+    ...GESCHAEFTSBEREICHE.map((b) => ({ value: b as string, label: `GRENFORD ${b}`, anzahl: zeilen.filter((z) => z.bereiche.some((x) => x.bereich === b)).length })),
+    { value: PRUEFEN, label: "Bereich prüfen (unklar)", anzahl: zeilen.filter((z) => passtBereich(z, [PRUEFEN])).length },
+  ];
   const status = zaehle(zeilen, (z) => z.status);
   const one = (a: string[]) => (a.length === 1 ? a[0] : "");
   const aktiveKontakte = crm.personen.filter((p) => p.kontakte.length && (p.status === "Aktiv" || p.status === "In Kontakt")).length;
@@ -65,8 +72,8 @@ export function UnternehmenListe() {
 
   const exportieren = () => {
     const rows = selected.size ? gefiltert.filter((z) => selected.has(z.id)) : gefiltert;
-    downloadCsv("unternehmen.csv", ["Unternehmen", "Unternehmensart", "Weitere Rollen", "Rechtsform", "Ort", "Land", "Ansprechpartner", "Position", "Status", "Letzte Aktivität", "USt-IdNr.", "Website"],
-      rows.map((z) => [z.name, z.arten[0], z.arten.slice(1).join(", "), z.rechtsform, z.ort, z.land, z.haupt ? personName(z.haupt) : "", z.hauptPosition, z.status, datumDe(z.letzte), z.ustId, z.website]));
+    downloadCsv("unternehmen.csv", ["Unternehmen", "Geschäftsbereiche", "Bereich prüfen", "Unternehmensart", "Weitere Rollen", "Rechtsform", "Ort", "Land", "Ansprechpartner", "Position", "Status", "Letzte Aktivität", "USt-IdNr.", "Website"],
+      rows.map((z) => [z.name, z.bereiche.map((b) => b.bereich).join(", "), z.bereichPruefen ?? "", z.arten[0], z.arten.slice(1).join(", "), z.rechtsform, z.ort, z.land, z.haupt ? personName(z.haupt) : "", z.hauptPosition, z.status, datumDe(z.letzte), z.ustId, z.website]));
     toast(`${rows.length} Unternehmen als CSV exportiert (Testdaten).`);
   };
 
@@ -80,6 +87,7 @@ export function UnternehmenListe() {
         </div>
       ),
     },
+    { key: "bereich", header: "Geschäftsbereich", sort: (z) => z.bereiche.map((b) => b.bereich).join() || "~", cell: (z) => <BereichBadges kompakt bereiche={z.bereiche} pruefen={z.bereichPruefen} />, className: "w-[118px]" },
     { key: "typ", header: "Unternehmenstyp", sort: (z) => z.arten[0], cell: (z) => <span className="text-ink-soft">{z.arten[0]}</span> },
     { key: "ort", header: "Standort", sort: (z) => z.ort, cell: (z) => <span className="text-ink-soft">{z.ort}{z.land !== "Deutschland" ? ` (${z.land === "Schweiz" ? "CH" : z.land})` : ""}</span> },
     {
@@ -131,10 +139,10 @@ export function UnternehmenListe() {
             />
             <FilterBar ansicht={ansicht} onAnsicht={setAnsicht} onReset={() => setF(LEER)} resetAktiv={JSON.stringify(f) !== JSON.stringify(LEER)}>
               <SearchInput value={f.suche} onChange={(v) => set({ suche: v })} placeholder="Unternehmen suchen …" className="w-full sm:w-[150px]" />
+              <MultiFilter label="Geschäftsbereich" value={f.bereich} onChange={(v) => set({ bereich: v })} options={bereichOptionen} />
               <FilterSelect label="Unternehmenstyp" value={one(f.typ)} onChange={(v) => set({ typ: v ? [v] : [] })} options={[...typen.keys()].sort()} />
               <FilterSelect label="Status" value={one(f.status)} onChange={(v) => set({ status: v ? [v] : [] })} options={["Aktiv", "In Kontakt", "Potenzial", "Inaktiv"]} />
               <FilterSelect label="Region" value={one(f.region)} onChange={(v) => set({ region: v ? [v] : [] })} options={[...zaehle(zeilen, (z) => z.region).keys()].sort()} />
-              <FilterSelect label="Betreuer" value={one(f.betreuer)} onChange={(v) => set({ betreuer: v ? [v] : [] })} options={crm.benutzer.map((b) => b.name)} />
               <FilterSelect label="Letzte Aktivität" value={one(f.aktivitaet)} onChange={(v) => set({ aktivitaet: v ? [v] : [] })} options={["Letzte 30 Tage", "31–90 Tage", "Älter als 90 Tage"]} />
             </FilterBar>
             <DataTable
@@ -157,6 +165,7 @@ export function UnternehmenListe() {
                   <div className="min-w-0 flex-1">
                     <div className="truncate font-serif text-[13px] font-semibold text-navy-950">{z.name}</div>
                     <div className="text-[11.5px] text-muted">{z.arten[0]} · {z.ort}</div>
+                    <div className="mt-1"><BereichBadges kompakt bereiche={z.bereiche} pruefen={z.bereichPruefen} /></div>
                     <div className="mt-1 truncate text-[11.5px] text-ink">{z.haupt ? personName(z.haupt) : "—"}</div>
                     <div className="mt-2 flex items-center justify-between"><StatusBadge status={z.status} /><span className="text-[11px] text-muted">{datumDe(z.letzte)}</span></div>
                   </div>
@@ -168,7 +177,8 @@ export function UnternehmenListe() {
         aside={
           <>
             <QuickFilterCard filter={quick} aktiv={one(f.status)} onWahl={(id) => set({ status: id ? [id] : [] })}>
-              <CheckGroup titel="Unternehmenstyp" offen werte={[...typen.entries()].sort((a, b) => b[1] - a[1])} gewaehlt={f.typ} onChange={(v) => set({ typ: v })} />
+              <CheckGroup titel="Geschäftsbereich" offen werte={bereichOptionen.map((o) => [o.label, o.anzahl] as [string, number])} gewaehlt={f.bereich.map((b) => bereichOptionen.find((o) => o.value === b)?.label ?? b)} onChange={(v) => set({ bereich: v.map((l) => bereichOptionen.find((o) => o.label === l)?.value ?? l) })} />
+              <CheckGroup titel="Unternehmenstyp" werte={[...typen.entries()].sort((a, b) => b[1] - a[1])} gewaehlt={f.typ} onChange={(v) => set({ typ: v })} />
               <CheckGroup titel="Region" werte={[...zaehle(zeilen, (z) => z.region).entries()]} gewaehlt={f.region} onChange={(v) => set({ region: v })} />
               <CheckGroup titel="Betreuer" werte={[...zaehle(zeilen, (z) => crm.benutzerName(z.betreuerId)).entries()]} gewaehlt={f.betreuer} onChange={(v) => set({ betreuer: v })} />
               <CheckGroup titel="Status" werte={[...status.entries()]} gewaehlt={f.status} onChange={(v) => set({ status: v })} />

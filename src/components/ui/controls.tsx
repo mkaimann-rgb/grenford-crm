@@ -213,3 +213,106 @@ export function Checkbox({ checked, indeterminate = false, onChange, label }: { 
     />
   );
 }
+
+// ---------- Geschäftsbereiche ----------
+
+const BEREICH_STIL: Record<string, string> = {
+  Investment: "bg-[#e3eaf8] text-navy-800 ring-navy-800/20",
+  Property: "bg-pos-bg text-pos ring-pos/25",
+  Projects: "bg-[#fdeee2] text-[#b4570f] ring-[#b4570f]/25",
+};
+const BEREICH_KURZ: Record<string, string> = { Investment: "INV", Property: "PROP", Projects: "PROJ" };
+
+/**
+ * Kennzeichnung der Geschäftsbereiche.
+ * kompakt: Kürzel (INV / PROP / PROJ) für Tabellen; sonst voller Name inkl. Funktion.
+ */
+export function BereichBadges({
+  bereiche,
+  pruefen,
+  kompakt = false,
+}: {
+  bereiche: { bereich: string; funktion?: string; herkunft?: string; grund?: string }[];
+  pruefen?: string;
+  kompakt?: boolean;
+}) {
+  return (
+    <span className="inline-flex flex-wrap items-center gap-[4px]">
+      {bereiche.map((z) => {
+        const titel = `GRENFORD ${z.bereich}${z.funktion ? ` – ${z.funktion}` : ""}${z.herkunft === "abgeleitet" && z.grund ? ` (abgeleitet: ${z.grund})` : ""}`;
+        return (
+          <span key={z.bereich} title={titel} className={`relative inline-flex items-center whitespace-nowrap rounded-[4px] font-semibold ring-1 ring-inset ${BEREICH_STIL[z.bereich]} ${kompakt ? "px-[6px] py-[1px] text-[9.5px] tracking-[0.04em]" : "px-[9px] py-[3px] text-[11px]"}`}>
+            {kompakt ? <><span aria-hidden="true">{BEREICH_KURZ[z.bereich]}</span><span className="sr-only">{z.bereich}</span></> : z.bereich}
+            {!kompakt && z.funktion && <span className="ml-1 font-normal opacity-80">· {z.funktion}</span>}
+          </span>
+        );
+      })}
+      {(pruefen || !bereiche.length) && (
+        <span title={pruefen ?? "Kein Geschäftsbereich zugeordnet"} className={`inline-flex items-center whitespace-nowrap rounded-[4px] border border-dashed border-warn/60 bg-warn-bg font-semibold text-warn ${kompakt ? "px-[5px] py-[0px] text-[9.5px]" : "px-[9px] py-[2px] text-[11px]"}`}>
+          {kompakt ? "?" : "Bereich prüfen"}
+          <span className="sr-only">: {pruefen ?? "Kein Geschäftsbereich zugeordnet"}</span>
+        </span>
+      )}
+    </span>
+  );
+}
+
+/** Filter mit Mehrfachauswahl (Popover mit Kontrollkästchen) */
+export function MultiFilter({
+  label,
+  options,
+  value,
+  onChange,
+  className = "",
+}: {
+  label: string;
+  options: { value: string; label: string; anzahl?: number }[];
+  value: string[];
+  onChange: (v: string[]) => void;
+  className?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const close = (e: MouseEvent) => !ref.current?.contains(e.target as Node) && setOpen(false);
+    const esc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("mousedown", close);
+    document.addEventListener("keydown", esc);
+    return () => {
+      document.removeEventListener("mousedown", close);
+      document.removeEventListener("keydown", esc);
+    };
+  }, [open]);
+  const text = !value.length ? label : value.length === 1 ? options.find((o) => o.value === value[0])?.label ?? value[0] : `${label} (${value.length})`;
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        type="button"
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-label={`${label}: ${value.length ? value.join(", ") : "alle"}`}
+        onClick={() => setOpen((o) => !o)}
+        className={`focus-ring relative flex h-[34px] w-[124px] items-center rounded-[6px] border bg-white pl-3 pr-8 text-left text-[11.5px] text-navy-900 shadow-card ${value.length ? "border-navy-700/40 font-semibold" : "border-line"} ${className}`}
+      >
+        <span className="truncate">{text}</span>
+        <ChevronDown className="pointer-events-none absolute right-2.5 h-4 w-4" strokeWidth={2} />
+      </button>
+      {open && (
+        <div role="group" aria-label={label} className="absolute left-0 top-[calc(100%+4px)] z-30 min-w-[220px] rounded-lg border border-line bg-white p-2 shadow-lg">
+          {options.map((o) => (
+            <label key={o.value} className="flex cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-[12px] text-ink hover:bg-line-soft">
+              <input type="checkbox" checked={value.includes(o.value)} onChange={(e) => onChange(e.target.checked ? [...value, o.value] : value.filter((x) => x !== o.value))} className="h-[13px] w-[13px] accent-navy-900" />
+              <span className="flex-1">{o.label}</span>
+              {o.anzahl !== undefined && <span className="text-muted">{o.anzahl}</span>}
+            </label>
+          ))}
+          <p className="mt-1 border-t border-line-soft px-2 pt-1.5 text-[10.5px] text-muted">Mehrfachauswahl: Treffer in mindestens einem Bereich.</p>
+          {value.length > 0 && (
+            <button type="button" onClick={() => onChange([])} className="focus-ring mt-1 w-full rounded px-2 py-1 text-left text-[11.5px] text-royal-600 hover:bg-line-soft">Auswahl aufheben</button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}

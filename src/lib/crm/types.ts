@@ -11,6 +11,23 @@
 
 export type ID = string;
 
+/** Die drei Geschäftsbereiche von GRENFORD */
+export const GESCHAEFTSBEREICHE = ["Investment", "Property", "Projects"] as const;
+export type Geschaeftsbereich = (typeof GESCHAEFTSBEREICHE)[number];
+
+/**
+ * Zuordnung eines Stammsatzes (Unternehmen oder Person) zu einem Geschäftsbereich.
+ * Getrennt von Kundenrolle (Privat-/Sanierungskunde) und fachlicher Rolle (Entscheider, GU-Partner …).
+ * „funktion“ beschreibt optional die Funktion in genau diesem Bereich (z. B. Investment: Investor, Property: Verkäufer).
+ */
+export type BereichsZuordnung = {
+  bereich: Geschaeftsbereich;
+  funktion: string;
+  herkunft: "manuell" | "abgeleitet";
+  /** Begründung bei abgeleiteten Zuordnungen (Nachvollziehbarkeit) */
+  grund?: string;
+};
+
 export type Benutzer = { id: ID; name: string; kuerzel: string };
 
 export const UNTERNEHMENSARTEN = [
@@ -39,6 +56,10 @@ export type Adresse = { strasse: string; plz: string; ort: string; land: string 
 export type Unternehmen = Adresse & {
   id: ID;
   name: string;
+  /** Mehrfachzuordnung zu Investment / Property / Projects */
+  bereiche: BereichsZuordnung[];
+  /** Gesetzt, wenn die Zuordnung nicht eindeutig ist und fachlich geprüft werden muss */
+  bereichPruefen?: string;
   /** Erste Art = Haupttyp in Tabellen; weitere = zusätzliche Rollen */
   arten: Unternehmensart[];
   rechtsform: string;
@@ -133,6 +154,10 @@ export type Kundenrolle<S extends string> = {
 
 export type Person = Adresse & {
   id: ID;
+  /** Mehrfachzuordnung zu Investment / Property / Projects */
+  bereiche: BereichsZuordnung[];
+  /** Gesetzt, wenn die Zuordnung nicht eindeutig ist und fachlich geprüft werden muss */
+  bereichPruefen?: string;
   anrede: "Herr" | "Frau" | "Divers" | "";
   titel: string;
   vorname: string;

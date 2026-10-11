@@ -60,6 +60,17 @@ Arbeitsweise je Seite: Referenzbild analysieren → umsetzen → Screenshot → 
 - **Wiederverwendbare Bausteine**: `src/components/ui/` (Tabelle, Dialog, Formularfelder, Menüs, Meldungen) und `src/components/crm/` (Seitenkopf, Kennzahlen, Seitenleiste, Personen-/Unternehmensansichten).
 - **Nicht dauerhaft**: Änderungen gelten nur bis zum Neuladen der Seite (Testmodus, deutlich gekennzeichnet). Dateiablage, Import, Foto-Upload, E-Mail-Versand sind als „noch nicht implementiert“ markiert.
 
+### Korrektur Phase A – Geschäftsbereiche (Investment / Property / Projects)
+
+- **Drei getrennte Ebenen** am selben Stammsatz: *Geschäftsbereich* (`bereiche`, Mehrfachzuordnung mit optionaler Funktion je Bereich), *Kundenrolle* (Privat-/Sanierungskunde) und *fachliche Rolle* (Entscheider, GU-Partner …). Keine Kopien von Unternehmen oder Personen.
+- **Herkunft nachvollziehbar**: jede Zuordnung ist „manuell“ oder „abgeleitet“ (mit Begründung, sichtbar als Tooltip). Logik und Tests: `src/lib/crm/bereiche.ts`, `bereiche.test.mts`.
+- **Ableitung nur aus eindeutigen Beziehungen**: Unternehmensart (Investor, Projektentwickler, Bestandshalter, Family Office, Vermögensverwalter → Investment; Generalunternehmer, Küchenstudio → Projects), Finanz-/Dashboard-Vorgänge (INV-/PROP-/PRO-Nummern), Firmenverknüpfung (Person erbt Bereiche des Unternehmens, Funktion = Rolle), Sanierungsrolle/-vorhaben → Projects, Kauf (Eigennutzung)/Verkauf/Ferienimmobilie/Suchauftrag → Property.
+- **Bewusst offen („Bereich prüfen“)**: Makler, Finanzierer, Sonstige ohne weitere Beziehung (NOODLES, Sparkasse Berlin (Test), Privateigentum Legrand), Andre Reitemeyer, Interesse „Kauf (Kapitalanlage)“ (Investment oder Property – z. B. Claudia Weber, Marcello Rossi). Diese Fälle sind in Listen mit „?“ markiert und über den Filter „Bereich prüfen (unklar)“ auffindbar.
+- **Listen**: Spalte „Geschäftsbereich“ (INV / PROP / PROJ), Mehrfachfilter in der Filterleiste und Seitenleiste (Treffer in *mindestens einem* gewählten Bereich), Suche und CSV-Export inkl. Bereichen. Damit die Filterleiste einzeilig bleibt, sind „Betreuer“ (Unternehmen, Privat-, Sanierungskunden) und „Abteilung“ (Ansprechpartner) nur noch in der Seitenleiste. Ansprechpartner: Spalte „Telefon“ erst ab 1700 px Breite (Telefon bleibt in Detail und Export).
+- **Detailseiten**: Bereiche direkt unter dem Namen, darunter getrennt die Rollen. Hinweis, wenn aktuelle Beziehungen einen weiteren Bereich nahelegen („übernehmen“) – Grundlage für spätere Investment-Projekte, Property-Mandate und Projects-Vorhaben.
+- **Formulare**: Pflichtauswahl mindestens eines Bereichs, Funktion je Bereich optional. Beim Verknüpfen einer Person mit einem Unternehmen werden fehlende Bereiche ergänzt (nie entfernt).
+- Bekannt, nicht Teil dieser Korrektur: Auf Smartphone-Breite (390 px) ist die bestehende Kopfzeile (Suche/Benutzermenü) breiter als der Bildschirm – betrifft alle Seiten inkl. Dashboard; Anpassung nur mit Zustimmung.
+
 ## 3. Sicherheitskonzept
 
 Bereits umgesetzt (Stufe 1):

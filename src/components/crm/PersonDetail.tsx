@@ -12,6 +12,8 @@ import { Avatar, Badge, Button, Menu, StatusBadge, Tabs } from "@/components/ui/
 import { useToast } from "@/components/ui/toast";
 import { AktivitaetenPanel, TypIcon } from "./aktivitaeten";
 import { AktivitaetModal, PersonModal, VorhabenModal, personHref, type PersonRolle } from "./modals";
+import { BereichZeile } from "./bereichszeile";
+import { ableitenPerson } from "@/lib/crm/bereiche";
 import { InfoList, NichtImplementiert, NotizenCard, Panel, StatCard, TermineCard } from "./page";
 
 type Tab = "uebersicht" | "vorhaben" | "aktivitaeten" | "kommunikation" | "dateien" | "notizen" | "finanzen" | "einstellungen";
@@ -121,7 +123,15 @@ export function PersonDetail({ id, rolle }: { id: string; rolle: PersonRolle }) 
                 <Star className={`h-5 w-5 ${p.favorit ? "fill-[#f2b84b] text-[#f2b84b]" : "text-navy-900"}`} />
               </button>
             </div>
-            <div className="mt-2 flex flex-wrap gap-[6px]">
+            <BereichZeile
+              bereiche={p.bereiche}
+              pruefen={p.bereichPruefen}
+              abgeleitet={ableitenPerson(p, vorhaben, new Map(crm.unternehmen.map((x) => [x.id, x])), []).zuordnungen}
+              onSpeichern={(b, msg) => { crm.speicherePerson({ ...p, bereiche: b }); toast(`${msg} (Testmodus – nicht dauerhaft gespeichert)`); }}
+              onBearbeiten={() => setModal({ art: "edit", rolle })}
+            />
+            <div className="mt-2 flex flex-wrap items-center gap-[6px]">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">Rollen</span>
               {rollenChips.map((c) => c.href ? <Link key={c.label} href={c.href}><Badge tone="blue" className="px-3 py-[4px] hover:underline">{c.label}</Badge></Link> : <Badge key={c.label} tone="blue" className="px-3 py-[4px]">{c.label}</Badge>)}
               <Menu label="Rolle hinzufügen" align="left" items={fehlendeRollen} trigger={<span className="flex h-[24px] items-center rounded-[4px] border border-line px-2 text-navy-900 hover:bg-line-soft"><Plus className="h-3.5 w-3.5" /></span>} />
             </div>

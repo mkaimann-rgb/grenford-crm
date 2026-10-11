@@ -121,3 +121,56 @@ export function FormSection({ titel, children }: { titel: string; children: Reac
     </section>
   );
 }
+
+/** Auswahl der Geschäftsbereiche (Mehrfachauswahl, optional mit Funktion je Bereich) */
+export function BereichAuswahl({
+  value,
+  onChange,
+  fehler,
+}: {
+  value: { bereich: string; funktion: string }[];
+  onChange: (v: { bereich: string; funktion: string }[]) => void;
+  fehler?: string;
+}) {
+  const alle = ["Investment", "Property", "Projects"];
+  const farbe: Record<string, string> = { Investment: "border-navy-800 bg-navy-800", Property: "border-pos bg-pos", Projects: "border-[#b4570f] bg-[#b4570f]" };
+  return (
+    <fieldset>
+      <legend className="mb-[6px] text-[11.5px] text-ink-soft">
+        Geschäftsbereiche (mehrfach auswählbar)<span className="ml-0.5 text-neg">*</span>
+      </legend>
+      <div className="flex flex-wrap gap-[6px]">
+        {alle.map((b) => {
+          const on = value.some((z) => z.bereich === b);
+          return (
+            <button
+              key={b}
+              type="button"
+              aria-pressed={on}
+              onClick={() => onChange(on ? value.filter((z) => z.bereich !== b) : [...value, { bereich: b, funktion: "" }].sort((x, y) => alle.indexOf(x.bereich) - alle.indexOf(y.bereich)))}
+              className={`focus-ring rounded-[5px] border px-[12px] py-[5px] text-[11.5px] font-semibold ${on ? `${farbe[b]} text-white` : "border-line bg-white text-navy-900 hover:bg-line-soft"}`}
+            >
+              {on ? "✓ " : ""}GRENFORD {b}
+            </button>
+          );
+        })}
+      </div>
+      {value.length > 0 && (
+        <div className="mt-2 grid gap-2">
+          {value.map((z) => (
+            <label key={z.bereich} className="text-[11px] text-ink-soft">
+              Funktion in {z.bereich} (optional)
+              <input
+                value={z.funktion}
+                onChange={(e) => onChange(value.map((x) => (x.bereich === z.bereich ? { ...x, funktion: e.target.value } : x)))}
+                placeholder="z. B. Investor, Verkäufer"
+                className="focus-ring mt-1 h-[30px] w-full rounded-[6px] border border-line px-2 text-[12px] text-ink"
+              />
+            </label>
+          ))}
+        </div>
+      )}
+      {fehler && <p className="mt-1 text-[11px] text-neg">{fehler}</p>}
+    </fieldset>
+  );
+}

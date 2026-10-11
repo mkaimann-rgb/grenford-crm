@@ -135,7 +135,7 @@ export function DataTable<T extends { id: string }>({
           {!visible.length && <p className="col-span-full py-10 text-center text-[12px] text-muted">{leerText}</p>}
         </div>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="relative overflow-x-auto">
           <table className="w-full min-w-[760px] text-left text-[12px]">
             <thead>
               <tr className="border-b border-line bg-[#fafbfd] text-[11px] text-muted">

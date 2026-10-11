@@ -8,6 +8,7 @@
  */
 import { STICHTAG } from "../testdata/finanzen.ts";
 import { addDays } from "./logic.ts";
+import { ableitenPerson, ableitenUnternehmen, alsZuordnungen, type Ableitung } from "./bereiche.ts";
 import type { Aktivitaet, Benutzer, Kontaktverknuepfung, Person, Unternehmen, Vorhaben } from "./types.ts";
 
 export const HEUTE = STICHTAG;
@@ -18,6 +19,7 @@ const MK = "u-mk";
 
 type U = Partial<Unternehmen> & Pick<Unternehmen, "id" | "name" | "arten" | "ort" | "status">;
 const firma = (u: U): Unternehmen => ({
+  bereiche: [],
   rechtsform: "GmbH",
   ustId: "",
   handelsregister: "",
@@ -37,7 +39,7 @@ const firma = (u: U): Unternehmen => ({
   ...u,
 });
 
-export const unternehmen: Unternehmen[] = [
+const unternehmenRoh: Unternehmen[] = [
   firma({
     id: "f-montesana", name: "Montesana AG", arten: ["Bestandshalter", "Investor", "Projektentwickler"], rechtsform: "AG", ort: "Bad Reichenhall", plz: "83435",
     strasse: "Reichenhaller Straße 10", ustId: "DE123456789", handelsregister: "HRB 123456", website: "https://www.montesana-ag.de",
@@ -72,6 +74,7 @@ export const unternehmen: Unternehmen[] = [
 
 type P = Partial<Person> & Pick<Person, "id" | "anrede" | "vorname" | "nachname" | "ort" | "status">;
 const person = (p: P): Person => ({
+  bereiche: [],
   titel: "",
   geburtsdatum: "",
   email: `${p.vorname[0].toLowerCase()}.${p.nachname.toLowerCase().replace(/[^a-z]/g, "")}@beispiel.test`,
@@ -93,7 +96,7 @@ const k = (unternehmenId: string, position: string, rolle: Kontaktverknuepfung["
   unternehmenId, position, rolle, abteilung: extra.abteilung ?? "Geschäftsführung", ...extra,
 });
 
-export const personen: Person[] = [
+const personenRoh: Person[] = [
   person({ id: "p-hoffmann", anrede: "Herr", titel: "Dr.", vorname: "Stefan", nachname: "Hoffmann", ort: "Bad Reichenhall", status: "Aktiv", email: "s.hoffmann@montesana-ag.de", telefonGeschaeftlich: "+49 8651 123400", kontakte: [k("f-montesana", "Vorstandsvorsitzender (CEO)", "Entscheider", { leitung: true })], letzterKontakt: d(-30) }),
   person({ id: "p-berger", anrede: "Frau", vorname: "Katharina", nachname: "Berger", ort: "Bad Reichenhall", status: "Aktiv", email: "k.berger@montesana-ag.de", telefonGeschaeftlich: "+49 8651 123401", kontakte: [k("f-montesana", "Head of Real Estate", "Projektkontakt", { haupt: true, abteilung: "Real Estate" }), k("f-schoeneberg", "Geschäftsführerin", "Entscheider", { haupt: true })], letzterKontakt: d(-25) }),
   person({ id: "p-brandes", anrede: "Herr", vorname: "Kay", nachname: "Brandes", ort: "Berlin", status: "Aktiv", email: "kay.brandes@kb-immo.de", telefonMobil: "+49 30 555 1234", kontakte: [k("f-brandes", "Inhaber", "Partner", { haupt: true, leitung: true })], letzterKontakt: d(-30) }),
@@ -196,3 +199,44 @@ export const aktivitaeten: Aktivitaet[] = [
   a({ typ: "Notiz", titel: "Angebot", beschreibung: "Angebot Bau Frosch erhalten und geprüft.", datum: d(-52), von: "14:30", bezug: [Pn("p-keil"), U("f-baufrosch")] }),
   a({ typ: "Notiz", titel: "Angebot Sander Bau", beschreibung: "Angebot Sander Bau erhalten.", datum: d(-35), von: "11:10", bezug: [U("f-sander")] }),
 ];
+
+// ---------- Geschäftsbereiche (Investment / Property / Projects) ----------
+// Nur eindeutige Beziehungen werden übernommen. Quellen: Finanz-Testdaten
+// (Referenzen INV-/PROP-/PRO-…), Dashboard-Testdaten (Top-Deals/-Mandate/-Projects),
+// Unternehmensarten, Kundenrollen und Vorhaben. Unklare Fälle → „Bereich prüfen“.
+
+const ex = (bereich: Ableitung["bereich"], funktion: string, grund: string): Ableitung => ({ bereich, funktion, grund });
+
+const EXPLIZIT_UNTERNEHMEN: Record<string, Ableitung[]> = {
+  "f-montesana": [ex("Investment", "Verkäufer / Bestandshalter", "Top Investment-Deal „Montesana“ (Dashboard)")],
+  "f-schoeneberg": [ex("Investment", "Projektentwickler", "Top Investment-Deal „Berlin-Schöneberg (MFH)“ (Dashboard)")],
+  "f-erz": [ex("Investment", "Bestandshalter", "Top Investment-Deal „das ERZ“ (Dashboard)"), ex("Projects", "Bauherr", "Vorhaben „Hotel das ERZ“")],
+  "f-brandes": [ex("Investment", "Empfehlungspartner", "Empfehlungsprovision INV-2026-001 (Finanzen)"), ex("Property", "Empfehlungspartner", "Empfehlungsprovision PROP-2026-003 (Finanzen)")],
+  "f-simple": [ex("Investment", "Provisionsbeteiligter", "Provisionen INV-2026-001 / INV-2026-004 (Finanzen)")],
+  "f-financoncept": [ex("Investment", "Provisionsbeteiligter", "Provisionen INV-2026-003 / INV-2026-005 (Finanzen)"), ex("Projects", "Kunde", "Rechnung RE-2026-009, Bereich Projects (Finanzen)")],
+  "f-bankhaus": [ex("Projects", "Finanzierer", "Verbindlichkeit PRO-2026-010 (Finanzen)")],
+  "f-malerwerk": [ex("Projects", "Ausführender Betrieb", "Verbindlichkeiten PRO-2026-002 / PRO-2026-004 (Finanzen)")],
+  "f-sander": [ex("Projects", "GU-Partner", "Verbindlichkeiten PRO-2026-003 / PRO-2026-006 (Finanzen)")],
+  "f-kuechenaktiv": [ex("Projects", "Ausführender Betrieb", "Verbindlichkeit PRO-2026-012 (Finanzen)")],
+  "f-baufrosch": [ex("Projects", "GU-Partner", "Vorhaben „MFH Weichselstraße 20“")],
+};
+
+const EXPLIZIT_PERSONEN: Record<string, Ableitung[]> = {
+  "p-brandes": [ex("Investment", "Empfehlungspartner", "Empfehlungsprovision INV-2026-001 (Finanzen)"), ex("Property", "Empfehlungspartner, Kunde", "Empfehlungsprovision PROP-2026-003, Rechnung RE-2026-008 (Finanzen)")],
+  "p-brinkmann": [ex("Investment", "Empfehlungspartner", "Empfehlungsprovision INV-2026-002 (Finanzen)"), ex("Property", "Empfehlungspartner", "Empfehlungsprovision PROP-2026-002 (Finanzen)")],
+  "p-spannaus": [ex("Investment", "Provisionsbeteiligter", "Provisionen INV-2026-001 / INV-2026-004 (Finanzen)")],
+};
+
+function mitBereichUnternehmen(u: Unternehmen): Unternehmen {
+  const e = ableitenUnternehmen(u, EXPLIZIT_UNTERNEHMEN[u.id]);
+  return { ...u, bereiche: alsZuordnungen(e.zuordnungen), bereichPruefen: e.unklar.length ? e.unklar.join("; ") : undefined };
+}
+
+export const unternehmen: Unternehmen[] = unternehmenRoh.map(mitBereichUnternehmen);
+const firmenMap = new Map(unternehmen.map((u) => [u.id, u]));
+
+export const personen: Person[] = personenRoh.map((p) => {
+  const e = ableitenPerson(p, vorhaben.filter((v) => v.personId === p.id), firmenMap, EXPLIZIT_PERSONEN[p.id]);
+  const pruefen = [...e.unklar, ...(e.zuordnungen.length ? [] : ["Keine eindeutige Beziehung zu einem Geschäftsbereich"])];
+  return { ...p, bereiche: alsZuordnungen(e.zuordnungen), bereichPruefen: pruefen.length ? pruefen.join("; ") : undefined };
+});

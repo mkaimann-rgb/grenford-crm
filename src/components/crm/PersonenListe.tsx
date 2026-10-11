@@ -7,11 +7,12 @@ import {
 } from "lucide-react";
 import { useCrm } from "@/lib/crm/store";
 import { addDays, datumDe, naechste, notizen, personName, regionVon, suchtreffer, summeBudget, zaehle } from "@/lib/crm/logic";
-import type { Person, Vorhaben } from "@/lib/crm/types";
+import { GESCHAEFTSBEREICHE, type Person, type Vorhaben } from "@/lib/crm/types";
 import { euroCompact } from "@/lib/format";
 import { downloadCsv } from "@/lib/csv";
 import { DataTable, type Column } from "@/components/ui/DataTable";
-import { Avatar, Badge, FilterSelect, SearchInput, StatusBadge } from "@/components/ui/controls";
+import { Avatar, Badge, BereichBadges, FilterSelect, MultiFilter, SearchInput, StatusBadge } from "@/components/ui/controls";
+import { PRUEFEN, passtBereich } from "@/lib/crm/bereiche";
 import { useToast } from "@/components/ui/toast";
 import { CheckGroup, FilterBar, KpiRow, ListLayout, NotizenCard, PageHeader, QuickFilterCard, TermineCard } from "./page";
 import { PersonModal, personHref, type PersonRolle } from "./modals";
@@ -43,6 +44,11 @@ function budgetBucket(b: number) {
   return "über 2 Mio. €";
 }
 
+const BEREICH_SPALTE: Column<PersonZeile> = {
+  key: "bereich", header: "Geschäftsbereich", sort: (z) => z.bereiche.map((b) => b.bereich).join() || "~",
+  cell: (z) => <BereichBadges kompakt bereiche={z.bereiche} pruefen={z.bereichPruefen} />, className: "w-[104px]",
+};
+
 const KONFIG: Record<PersonRolle, {
   titel: string; untertitel: string; neu: string; suche: string; filter: FilterDef[]; quick: QuickDef[]; kpis: KpiDef[]; spalten: (crm: ReturnType<typeof useCrm>) => Column<PersonZeile>[]; csv: string;
 }> = {
@@ -51,7 +57,7 @@ const KONFIG: Record<PersonRolle, {
     filter: [
       { key: "unternehmen", label: "Alle Unternehmen", wert: (z) => z.kontakte.length ? z.unternehmen : "ohne Unternehmen", inBar: true },
       { key: "rolle", label: "Alle Rollen", wert: (z) => z.rolle, inBar: true, offen: true },
-      { key: "abteilung", label: "Alle Abteilungen", wert: (z) => z.abteilung || "ohne Angabe", inBar: true },
+      { key: "abteilung", label: "Abteilung", wert: (z) => z.abteilung || "ohne Angabe" },
       { key: "status", label: "Alle Status", wert: (z) => z.status, inBar: true },
       { key: "position", label: "Position", wert: (z) => z.position || "ohne Angabe" },
       { key: "region", label: "Region", wert: (z) => z.region },
@@ -77,10 +83,12 @@ const KONFIG: Record<PersonRolle, {
     ],
     spalten: () => [
       { key: "name", header: "Name", sort: (z) => z.nachname, cell: (z) => <div className="flex items-center gap-2.5"><Avatar name={z.name} size={30} /><span className="font-semibold text-navy-950">{z.name}</span></div> },
-      { key: "position", header: "Position", sort: (z) => z.position, cell: (z) => <span className="text-ink-soft">{z.position || "—"}</span> },
+      BEREICH_SPALTE,
+      { key: "position", header: "Position", sort: (z) => z.position, cell: (z) => <span title={z.position} className="line-clamp-2 max-w-[116px] hyphens-auto text-ink-soft">{z.position || "—"}</span> },
       { key: "unternehmen", header: "Unternehmen", sort: (z) => z.unternehmen, cell: (z) => <span className="text-ink-soft">{z.unternehmen || "Privatkunde"}</span> },
-      { key: "email", header: "E-Mail", cell: (z) => <span className="text-ink-soft">{z.email}</span> },
-      { key: "tel", header: "Telefon", cell: (z) => <span className="whitespace-nowrap text-ink-soft">{z.telefonGeschaeftlich || z.telefonMobil || "—"}</span> },
+      { key: "email", header: "E-Mail", cell: (z) => <span title={z.email} className="block max-w-[140px] truncate text-ink-soft">{z.email}</span> },
+      // Telefon erst ab 1700 px, damit Status und Letzte Aktivität trotz Spalte „Geschäftsbereich“ sichtbar bleiben
+      { key: "tel", header: "Telefon", cell: (z) => <span className="whitespace-nowrap text-ink-soft">{z.telefonGeschaeftlich || z.telefonMobil || "—"}</span>, className: "hidden min-[1700px]:table-cell" },
       { key: "rolle", header: "Rolle", sort: (z) => z.rolle, cell: (z) => <Badge tone={z.rolle === "Entscheider" ? "orange" : "blue"}>{z.rolle}</Badge> },
       { key: "status", header: "Status", sort: (z) => z.status, cell: (z) => <StatusBadge status={z.status} /> },
       { key: "letzte", header: "Letzte Aktivität", sort: (z) => z.letzte, cell: (z) => <span className="text-ink-soft">{datumDe(z.letzte)}</span> },
@@ -93,7 +101,7 @@ const KONFIG: Record<PersonRolle, {
       { key: "status", label: "Status", wert: (z) => z.rolleStatus, inBar: true },
       { key: "region", label: "Region", wert: (z) => z.region, inBar: true },
       { key: "budget", label: "Budget", wert: (z) => budgetBucket(z.budget) },
-      { key: "betreuer", label: "Betreuer", wert: () => "Marco Kaimann", inBar: true },
+      { key: "betreuer", label: "Betreuer", wert: () => "Marco Kaimann" },
     ],
     quick: [
       { id: "", label: "Alle Privatkunden", icon: Users, test: () => true },
@@ -116,9 +124,10 @@ const KONFIG: Record<PersonRolle, {
     ],
     spalten: () => [
       { key: "name", header: "Name", sort: (z) => z.nachname, cell: (z) => <div className="flex items-center gap-2.5"><Avatar name={z.name} size={30} /><span className="font-semibold text-navy-950">{z.name}</span></div> },
+      BEREICH_SPALTE,
       { key: "ort", header: "Ort", sort: (z) => z.ort, cell: (z) => <span className="text-ink-soft">{z.ort}</span> },
       { key: "int", header: "Interessen / Vorhaben", cell: (z) => z.interessen[0] ? <Badge tone="blue">{z.interessen[0]}</Badge> : <span className="text-muted">—</span> },
-      { key: "objekt", header: "Objekt / Projekt", sort: (z) => z.vorhaben[0]?.titel ?? "~", cell: (z) => z.vorhaben[0] ? <div className="flex items-center gap-2"><Avatar name={z.vorhaben[0].titel} bild={z.vorhaben[0].bild} size={30} rund={false} /><span className="text-ink-soft">{z.vorhaben[0].titel}</span></div> : <span className="text-muted">—</span> },
+      { key: "objekt", header: "Objekt / Projekt", sort: (z) => z.vorhaben[0]?.titel ?? "~", cell: (z) => z.vorhaben[0] ? <div className="flex items-center gap-2"><Avatar name={z.vorhaben[0].titel} bild={z.vorhaben[0].bild} size={30} rund={false} /><span title={z.vorhaben[0].titel} className="line-clamp-2 max-w-[150px] text-ink-soft">{z.vorhaben[0].titel}</span></div> : <span className="text-muted">—</span> },
       { key: "budget", header: "Budget", sort: (z) => z.budget, cell: (z) => <span className="text-ink">{z.budget ? euroCompact(z.budget) : "—"}</span> },
       { key: "status", header: "Status", sort: (z) => z.rolleStatus, cell: (z) => <StatusBadge status={z.rolleStatus} /> },
       { key: "letzte", header: "Letzte Aktivität", sort: (z) => z.letzte, cell: (z) => <span className="text-ink-soft">{datumDe(z.letzte)}</span> },
@@ -130,7 +139,7 @@ const KONFIG: Record<PersonRolle, {
       { key: "art", label: "Vorhaben / Projektart", wert: (z) => z.interessen, inBar: true, offen: true },
       { key: "status", label: "Status", wert: (z) => z.rolleStatus, inBar: true },
       { key: "region", label: "Region", wert: (z) => z.region, inBar: true },
-      { key: "betreuer", label: "Betreuer", wert: () => "Marco Kaimann", inBar: true },
+      { key: "betreuer", label: "Betreuer", wert: () => "Marco Kaimann" },
       { key: "budget", label: "Budgetrahmen", wert: (z) => budgetBucket(z.budget), inBar: true },
     ],
     quick: [
@@ -155,9 +164,10 @@ const KONFIG: Record<PersonRolle, {
     ],
     spalten: () => [
       { key: "name", header: "Name", sort: (z) => z.nachname, cell: (z) => <div className="flex items-center gap-2.5"><Avatar name={z.name} size={30} /><span className="font-semibold text-navy-950">{z.name}</span></div> },
+      BEREICH_SPALTE,
       { key: "ort", header: "Ort", sort: (z) => z.ort, cell: (z) => <span className="text-ink-soft">{z.ort}</span> },
-      { key: "art", header: "Vorhaben / Projektart", cell: (z) => (z.vorhaben[0]?.art || z.interessen[0]) ? <Badge tone="blue">{z.vorhaben[0]?.art || z.interessen[0]}</Badge> : <span className="text-muted">—</span> },
-      { key: "objekt", header: "Objekt / Adresse", sort: (z) => z.vorhaben[0]?.titel ?? "~", cell: (z) => z.vorhaben[0] ? <div className="flex items-center gap-2"><Avatar name={z.vorhaben[0].titel} bild={z.vorhaben[0].bild} size={30} rund={false} /><span className="text-ink-soft">{z.vorhaben[0].titel}</span></div> : <span className="text-muted">—</span> },
+      { key: "art", header: "Vorhaben / Projektart", cell: (z) => (z.vorhaben[0]?.art || z.interessen[0]) ? <span title={z.vorhaben[0]?.art || z.interessen[0]}><Badge tone="blue" className="max-w-[138px]"><span className="min-w-0 truncate">{z.vorhaben[0]?.art || z.interessen[0]}</span></Badge></span> : <span className="text-muted">—</span> },
+      { key: "objekt", header: "Objekt / Adresse", sort: (z) => z.vorhaben[0]?.titel ?? "~", cell: (z) => z.vorhaben[0] ? <div className="flex items-center gap-2"><Avatar name={z.vorhaben[0].titel} bild={z.vorhaben[0].bild} size={30} rund={false} /><span title={z.vorhaben[0].titel} className="line-clamp-2 max-w-[150px] text-ink-soft">{z.vorhaben[0].titel}</span></div> : <span className="text-muted">—</span> },
       { key: "budget", header: "Budget (ca.)", sort: (z) => z.budget, cell: (z) => <span className="text-ink">{z.budget ? euroCompact(z.budget) : "—"}</span> },
       { key: "status", header: "Status", sort: (z) => z.rolleStatus, cell: (z) => <StatusBadge status={z.rolleStatus} /> },
       { key: "letzte", header: "Letzte Aktivität", sort: (z) => z.letzte, cell: (z) => <span className="text-ink-soft">{datumDe(z.letzte)}</span> },
@@ -172,6 +182,7 @@ export function PersonenListe({ rolle }: { rolle: PersonRolle }) {
   const k = KONFIG[rolle];
   const [suche, setSuche] = useState("");
   const [werte, setWerte] = useState<Record<string, string[]>>({});
+  const [bereich, setBereich] = useState<string[]>([]);
   const [quick, setQuick] = useState("");
   const [ansicht, setAnsicht] = useState<"liste" | "kacheln">("liste");
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -206,7 +217,8 @@ export function PersonenListe({ rolle }: { rolle: PersonRolle }) {
   const quickTest = k.quick.find((q) => q.id === quick)?.test ?? (() => true);
   const gefiltert = zeilen.filter((z) => {
     if (!quickTest(z)) return false;
-    if (!suchtreffer(suche, z.name, z.email, z.unternehmen, z.ort, z.position, ...z.vorhaben.map((v) => v.titel))) return false;
+    if (!suchtreffer(suche, z.name, z.email, z.unternehmen, z.ort, z.position, ...z.vorhaben.map((v) => v.titel), ...z.bereiche.map((b) => b.bereich))) return false;
+    if (!passtBereich(z, bereich)) return false;
     return k.filter.every((f) => {
       const sel = werte[f.key];
       if (!sel?.length) return true;
@@ -214,12 +226,16 @@ export function PersonenListe({ rolle }: { rolle: PersonRolle }) {
       return (Array.isArray(w) ? w : [w]).some((x) => sel.includes(x));
     });
   });
-  const aktivFilter = !!suche || quick !== "" || Object.values(werte).some((v) => v.length);
+  const aktivFilter = !!suche || quick !== "" || bereich.length > 0 || Object.values(werte).some((v) => v.length);
+  const bereichOptionen = [
+    ...GESCHAEFTSBEREICHE.map((b) => ({ value: b as string, label: `GRENFORD ${b}`, anzahl: zeilen.filter((z) => z.bereiche.some((x) => x.bereich === b)).length })),
+    { value: PRUEFEN, label: "Bereich prüfen (unklar)", anzahl: zeilen.filter((z) => passtBereich(z, [PRUEFEN])).length },
+  ];
 
   const exportieren = () => {
     const rows = selected.size ? gefiltert.filter((z) => selected.has(z.id)) : gefiltert;
-    downloadCsv(k.csv, ["Name", "E-Mail", "Telefon", "Ort", "Unternehmen", "Position", "Rolle", "Status", "Interessen", "Budget", "Letzte Aktivität"],
-      rows.map((z) => [z.name, z.email, z.telefonGeschaeftlich || z.telefonMobil, z.ort, z.unternehmen, z.position, z.rolle, z.rolleStatus, z.interessen.join(", "), z.budget, datumDe(z.letzte)]));
+    downloadCsv(k.csv, ["Name", "Geschäftsbereiche", "Bereich prüfen", "E-Mail", "Telefon", "Ort", "Unternehmen", "Position", "Rolle", "Status", "Interessen", "Budget", "Letzte Aktivität"],
+      rows.map((z) => [z.name, z.bereiche.map((b) => `${b.bereich}${b.funktion ? ` (${b.funktion})` : ""}`).join(", "), z.bereichPruefen ?? "", z.email, z.telefonGeschaeftlich || z.telefonMobil, z.ort, z.unternehmen, z.position, z.rolle, z.rolleStatus, z.interessen.join(", "), z.budget, datumDe(z.letzte)]));
     toast(`${rows.length} Datensätze als CSV exportiert (Testdaten).`);
   };
 
@@ -253,8 +269,9 @@ export function PersonenListe({ rolle }: { rolle: PersonRolle }) {
                 aktiv: kp.quick !== undefined && quick === kp.quick && kp.quick !== "",
               }))}
             />
-            <FilterBar ansicht={ansicht} onAnsicht={setAnsicht} onReset={() => { setSuche(""); setWerte({}); setQuick(""); }} resetAktiv={aktivFilter}>
+            <FilterBar ansicht={ansicht} onAnsicht={setAnsicht} onReset={() => { setSuche(""); setWerte({}); setBereich([]); setQuick(""); }} resetAktiv={aktivFilter}>
               <SearchInput value={suche} onChange={setSuche} placeholder={k.suche} className="w-full sm:w-[150px]" />
+              <MultiFilter label="Geschäftsbereich" value={bereich} onChange={setBereich} options={bereichOptionen} />
               {k.filter.filter((f) => f.inBar).map((f) => (
                 <FilterSelect key={f.key} label={f.label} value={one(f.key)} onChange={(v) => setWert(f.key, v ? [v] : [])} options={[...zaehle(zeilen, f.wert).keys()].sort()} />
               ))}
@@ -267,7 +284,7 @@ export function PersonenListe({ rolle }: { rolle: PersonRolle }) {
               onSelected={setSelected}
               onRowClick={(z) => router.push(personHref(rolle, z.id))}
               ansicht={ansicht}
-              resetKey={`${suche}|${quick}|${JSON.stringify(werte)}`}
+              resetKey={`${suche}|${quick}|${bereich.join()}|${JSON.stringify(werte)}`}
               rowMenu={(z) => [
                 { label: "Öffnen", onClick: () => router.push(personHref(rolle, z.id)) },
                 { label: z.favorit ? "Favorit entfernen" : "Als Favorit markieren", onClick: () => crm.speicherePerson({ ...crm.personById(z.id)!, favorit: !z.favorit }) },
@@ -278,6 +295,7 @@ export function PersonenListe({ rolle }: { rolle: PersonRolle }) {
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-[13px] font-semibold text-navy-950">{z.name}</div>
                     <div className="truncate text-[11.5px] text-muted">{rolle === "kontakt" ? `${z.position || "—"} · ${z.unternehmen || "Privat"}` : `${z.ort} · ${z.vorhaben[0]?.titel ?? z.interessen[0] ?? "—"}`}</div>
+                    <div className="mt-1"><BereichBadges kompakt bereiche={z.bereiche} pruefen={z.bereichPruefen} /></div>
                     <div className="mt-2 flex items-center justify-between"><StatusBadge status={z.rolleStatus} /><span className="text-[11px] text-muted">{datumDe(z.letzte)}</span></div>
                   </div>
                 </div>
@@ -288,6 +306,7 @@ export function PersonenListe({ rolle }: { rolle: PersonRolle }) {
         aside={
           <>
             <QuickFilterCard filter={k.quick.map((q) => ({ id: q.id, label: q.label, icon: q.icon, anzahl: zeilen.filter(q.test).length }))} aktiv={quick} onWahl={setQuick}>
+              <CheckGroup titel="Geschäftsbereich" offen werte={bereichOptionen.map((o) => [o.label, o.anzahl] as [string, number])} gewaehlt={bereich.map((b) => bereichOptionen.find((o) => o.value === b)?.label ?? b)} onChange={(v) => setBereich(v.map((l) => bereichOptionen.find((o) => o.label === l)?.value ?? l))} />
               {k.filter.map((f) => (
                 <CheckGroup key={f.key} titel={f.label.replace(/^Alle /, "")} offen={f.offen} werte={[...zaehle(zeilen, f.wert).entries()].sort((a, b) => b[1] - a[1])} gewaehlt={werte[f.key] ?? []} onChange={(v) => setWert(f.key, v)} />
               ))}

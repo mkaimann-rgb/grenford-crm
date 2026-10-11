@@ -12,6 +12,8 @@ import { DataTable } from "@/components/ui/DataTable";
 import { useToast } from "@/components/ui/toast";
 import { AktivitaetenPanel } from "./aktivitaeten";
 import { AktivitaetModal, PersonModal, UnternehmenModal, personHref } from "./modals";
+import { BereichZeile } from "./bereichszeile";
+import { ableitenUnternehmen } from "@/lib/crm/bereiche";
 import { InfoList, NichtImplementiert, NotizenCard, Panel, StatCard, TermineCard } from "./page";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
@@ -72,7 +74,15 @@ export function UnternehmenDetail({ id }: { id: string }) {
           <Avatar name={u.name} bild={u.bild} size={96} rund={false} />
           <div className="min-w-0">
             <h1 className="font-serif text-[28px] font-bold leading-tight text-navy-950">{u.name}</h1>
-            <div className="mt-2 flex flex-wrap gap-[6px]">
+            <BereichZeile
+              bereiche={u.bereiche}
+              pruefen={u.bereichPruefen}
+              abgeleitet={ableitenUnternehmen(u).zuordnungen}
+              onSpeichern={(b, msg) => speichere({ bereiche: b }, msg)}
+              onBearbeiten={() => setModal("edit")}
+            />
+            <div className="mt-2 flex flex-wrap items-center gap-[6px]">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">Rollen</span>
               {u.arten.map((a) => <Badge key={a} tone="blue" className="px-3 py-[4px]">{a}</Badge>)}
               <button type="button" onClick={() => setModal("edit")} aria-label="Rolle hinzufügen" className="focus-ring rounded-[4px] border border-line px-2 text-navy-900 hover:bg-line-soft"><Plus className="h-3.5 w-3.5" /></button>
             </div>
