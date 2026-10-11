@@ -7,6 +7,7 @@ import { useCrm } from "@/lib/crm/store";
 import { findeFirmenDublette, findePersonDublette, personName } from "@/lib/crm/logic";
 import {
   AKTIVITAET_TYPEN,
+  GESCHAEFTSBEREICHE,
   KONTAKT_ROLLEN,
   KONTAKT_STATUS,
   PRIORITAETEN,
@@ -21,6 +22,9 @@ import {
   type Aktivitaet,
   type AktivitaetTyp,
   type Bezug,
+  type Geschaeftsbereich,
+  type Vorhaben,
+  type VorhabenStatus,
   type KontaktRolle,
   type Person,
   type TerminArt,
@@ -30,6 +34,7 @@ import {
 import { Button, Tabs } from "@/components/ui/controls";
 import { BereichAuswahl, ChipSelect, Field, FormSection, Modal, SelectField, TextArea, TextField } from "@/components/ui/modal";
 import { ausFormular, ergaenzeBereiche } from "@/lib/crm/bereiche";
+import { einstufen, findeObjekt, ROLLEN_JE_BEREICH } from "@/lib/crm/vorgaenge";
 import { useToast } from "@/components/ui/toast";
 
 const GESPEICHERT = "(Testmodus – nur bis zum Neuladen der Seite gespeichert)";
@@ -328,9 +333,13 @@ export function PersonModal({ rolle, initial, onClose, onSaved, unternehmenId }:
     }
     crm.speicherePerson(p);
     if (f.vTitel.trim()) {
+      const vBereich = rolle === "sanierung" ? "sanierung" : "privat";
+      const vArt = f.vArt || f.interessen[0] || "Sonstige";
+      const vOrt = f.vOrt || f.ort;
       crm.speichereVorhaben({
-        id: crm.neueId("v"), personId: p.id, bereich: rolle === "sanierung" ? "sanierung" : "privat", art: f.vArt || f.interessen[0] || "Sonstige", titel: f.vTitel.trim(), ort: f.vOrt || f.ort,
+        id: crm.neueId("v"), personId: p.id, bereich: vBereich, art: vArt, titel: f.vTitel.trim(), ort: vOrt,
         beschreibung: "", budget: Number(f.vBudget) || Number(f.budget) || 0, status: "In Planung", fortschritt: 0, zeithorizont: f.zeitrahmen, geplanterStart: f.vStart, geplanteFertigstellung: f.vEnde,
+        objektId: crm.objektZuordnen(f.vTitel, vOrt), ...einstufen({ bereich: vBereich, art: vArt }), herkunft: "abgeleitet", grund: `Vorgangsart „${vArt}“`,
       });
     }
     if (f.notiz.trim()) {
@@ -567,43 +576,89 @@ export function AktivitaetModal({ initial, typ = "Termin", bezug = [], onClose }
 
 // ---------- Vorhaben ----------
 
-export function VorhabenModal({ personId, bereich, initial, onClose }: { personId: string; bereich: "privat" | "sanierung"; initial?: import("@/lib/crm/types").Vorhaben; onClose: () => void }) {
+export function VorhabenModal({ personId, bereich, initial, onClose }: { personId: string; bereich: "privat" | "sanierung"; initial?: Vorhaben; onClose: () => void }) {
   const crm = useCrm();
   const toast = useToast();
+  const startObjekt = initial?.objektId ? crm.objektById(initial.objektId) : undefined;
   const [f, setF] = useState({
-    art: initial?.art ?? "", titel: initial?.titel ?? "", ort: initial?.ort ?? "", beschreibung: initial?.beschreibung ?? "", budget: initial ? String(initial.budget) : "",
+    art: initial?.art ?? "", titel: startObjekt?.titel ?? initial?.titel ?? "", ort: startObjekt?.ort ?? initial?.ort ?? "", beschreibung: initial?.beschreibung ?? "", budget: initial ? String(initial.budget) : "",
     status: initial?.status ?? "In Planung", fortschritt: initial ? String(initial.fortschritt) : "0", zeithorizont: initial?.zeithorizont ?? "", unternehmenId: initial?.unternehmenId ?? "",
     geplanterStart: initial?.geplanterStart ?? "", geplanteFertigstellung: initial?.geplanteFertigstellung ?? "",
+    geschaeftsbereich: initial ? (initial.geschaeftsbereich ?? "unklar") : "", rolle: initial?.rolle ?? "", unternehmenRolle: initial?.unternehmenRolle ?? "",
   });
+  // Bereich und Rolle werden aus der Vorgangsart vorgeschlagen, solange sie nicht von Hand geändert wurden
+  const [automatisch, setAutomatisch] = useState(!initial);
   const [fehler, setFehler] = useState<Record<string, string>>({});
   const set = (p: Partial<typeof f>) => setF((x) => ({ ...x, ...p }));
+  const setArt = (art: string) => {
+    if (!automatisch || !art) return set({ art });
+    const e = einstufen({ bereich, art });
+    set({ art, geschaeftsbereich: e.geschaeftsbereich ?? "unklar", rolle: e.rolle });
+  };
+  const vorhandenesObjekt = f.titel.trim() ? findeObjekt(crm.objekte, f.titel, f.ort) : undefined;
+  const gb = f.geschaeftsbereich && f.geschaeftsbereich !== "unklar" ? (f.geschaeftsbereich as Geschaeftsbereich) : null;
   const speichern = () => {
     const e: Record<string, string> = {};
     if (!f.titel.trim()) e.titel = "Bitte Objekt / Projekt angeben.";
     if (!f.art) e.art = "Bitte die Art wählen.";
+    if (!f.geschaeftsbereich) e.geschaeftsbereich = "Bitte den Geschäftsbereich des Vorgangs wählen (oder „noch unklar“).";
+    if (!f.rolle.trim()) e.rolle = "Bitte die Rolle des Kunden in diesem Vorgang angeben.";
     const fp = Number(f.fortschritt);
     if (isNaN(fp) || fp < 0 || fp > 100) e.fortschritt = "0 bis 100";
     setFehler(e);
     if (Object.keys(e).length) return;
+    const unveraendert = initial && initial.geschaeftsbereich === gb && initial.rolle === f.rolle.trim();
     crm.speichereVorhaben({
-      id: initial?.id ?? crm.neueId("v"), personId, bereich, art: f.art, titel: f.titel.trim(), ort: f.ort, beschreibung: f.beschreibung, budget: Number(f.budget) || 0,
-      status: f.status as import("@/lib/crm/types").VorhabenStatus, fortschritt: fp, zeithorizont: f.zeithorizont, unternehmenId: f.unternehmenId || undefined, bild: initial?.bild,
+      ...initial,
+      id: initial?.id ?? crm.neueId("v"), personId, bereich, art: f.art, titel: vorhandenesObjekt?.titel ?? f.titel.trim(), ort: vorhandenesObjekt?.ort ?? f.ort, beschreibung: f.beschreibung, budget: Number(f.budget) || 0,
+      status: f.status as VorhabenStatus, fortschritt: fp, zeithorizont: f.zeithorizont, unternehmenId: f.unternehmenId || undefined,
+      unternehmenRolle: f.unternehmenId ? f.unternehmenRolle.trim() || undefined : undefined, bild: initial?.bild ?? vorhandenesObjekt?.bild,
       geplanterStart: f.geplanterStart || undefined, geplanteFertigstellung: f.geplanteFertigstellung || undefined,
+      objektId: crm.objektZuordnen(f.titel, f.ort, initial?.bild),
+      geschaeftsbereich: gb, rolle: f.rolle.trim(),
+      pruefen: gb ? (unveraendert ? initial?.pruefen : undefined) : "Geschäftsbereich des Vorgangs noch offen",
+      herkunft: unveraendert ? initial?.herkunft : "manuell",
     });
-    toast(`Vorhaben „${f.titel.trim()}“ ${initial ? "aktualisiert" : "angelegt"} ${GESPEICHERT}`);
+    toast(`Vorhaben „${vorhandenesObjekt?.titel ?? f.titel.trim()}“ ${initial ? "aktualisiert" : "angelegt"}${vorhandenesObjekt && !initial ? " – mit bestehendem Objekt verknüpft" : ""} ${GESPEICHERT}`);
     onClose();
   };
   return (
     <Modal titel={initial ? "Vorhaben bearbeiten" : "Neues Vorhaben"} onClose={onClose} breit="max-w-[640px]" footer={<><Button onClick={onClose}>Abbrechen</Button><Button variant="primary" onClick={speichern}>Speichern</Button></>}>
       <div className="grid gap-3 sm:grid-cols-2">
         <TextField label="Objekt / Projekt" pflicht value={f.titel} onChange={(v) => set({ titel: v })} fehler={fehler.titel} />
-        <SelectField label="Art" pflicht value={f.art} onChange={(v) => set({ art: v })} options={bereich === "sanierung" ? SANIERUNG_INTERESSEN : PRIVAT_INTERESSEN} fehler={fehler.art} />
+        <SelectField label="Art" pflicht value={f.art} onChange={setArt} options={bereich === "sanierung" ? SANIERUNG_INTERESSEN : PRIVAT_INTERESSEN} fehler={fehler.art} />
         <TextField label="Ort" value={f.ort} onChange={(v) => set({ ort: v })} />
         <TextField label="Budget (€)" value={f.budget} onChange={(v) => set({ budget: v.replace(/[^\d]/g, "") })} />
+        {vorhandenesObjekt && vorhandenesObjekt.id !== initial?.objektId && (
+          <p role="status" className="rounded-[6px] bg-pos-bg px-3 py-2 text-[11.5px] text-pos sm:col-span-2">
+            Objekt „{vorhandenesObjekt.titel}, {vorhandenesObjekt.ort}“ existiert bereits – der Vorgang wird damit verknüpft, es entsteht kein zweiter Objektdatensatz.
+          </p>
+        )}
+        <div className="rounded-[8px] border border-line p-3 sm:col-span-2">
+          <p className="mb-2 text-[11px] text-muted">Geschäftsbereich und Rolle gelten nur für diesen Vorgang – getrennt von den Geschäftsbereichen und Rollen des Kontakts.</p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <SelectField
+              label="Geschäftsbereich des Vorgangs" pflicht value={f.geschaeftsbereich} fehler={fehler.geschaeftsbereich}
+              onChange={(v) => { setAutomatisch(false); set({ geschaeftsbereich: v }); }}
+              options={[...GESCHAEFTSBEREICHE.map((b) => ({ value: b, label: `GRENFORD ${b}` })), { value: "unklar", label: "Noch unklar (prüfen)" }]}
+            />
+            <Field label="Rolle des Kunden im Vorgang" pflicht fehler={fehler.rolle}>
+              {(id) => (<>
+              <input
+                id={id} aria-invalid={!!fehler.rolle}
+                list="vorgang-rollen" value={f.rolle} onChange={(e) => { setAutomatisch(false); set({ rolle: e.target.value }); }} placeholder="z. B. Kaufinteressent, Verkäufer, Bauherr"
+                className="focus-ring h-[34px] w-full rounded-[6px] border border-line bg-white px-3 text-[12px] text-ink"
+              />
+              <datalist id="vorgang-rollen">{[...new Set(gb ? ROLLEN_JE_BEREICH[gb] : Object.values(ROLLEN_JE_BEREICH).flat())].map((r) => <option key={r} value={r} />)}</datalist>
+              </>)}
+            </Field>
+          </div>
+        </div>
         <SelectField label="Status" value={f.status} onChange={(v) => set({ status: v as never })} options={["Aktiv", "In Planung", "Angebotsphase", "Abgeschlossen", "Pausiert"]} leer={null} />
         <TextField label="Fortschritt (%)" value={f.fortschritt} onChange={(v) => set({ fortschritt: v.replace(/[^\d]/g, "") })} fehler={fehler.fortschritt} />
         <SelectField label="Zeithorizont" value={f.zeithorizont} onChange={(v) => set({ zeithorizont: v })} options={ZEITRAHMEN} />
         <SelectField label={bereich === "sanierung" ? "Ausführendes Unternehmen (GU)" : "Beteiligtes Unternehmen"} value={f.unternehmenId} onChange={(v) => set({ unternehmenId: v })} leer="– keines –" options={[...crm.unternehmen].sort((a, b) => a.name.localeCompare(b.name)).map((u) => ({ value: u.id, label: u.name }))} />
+        {f.unternehmenId && <TextField label="Rolle des Unternehmens im Vorgang" value={f.unternehmenRolle} onChange={(v) => set({ unternehmenRolle: v })} placeholder="z. B. GU-Partner, Bauherr" />}
         {bereich === "sanierung" && (
           <>
             <TextField label="Geplanter Start" value={f.geplanterStart} onChange={(v) => set({ geplanterStart: v })} placeholder="Q4/2026" />

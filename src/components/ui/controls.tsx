@@ -216,7 +216,7 @@ export function Checkbox({ checked, indeterminate = false, onChange, label }: { 
 
 // ---------- Geschäftsbereiche ----------
 
-const BEREICH_STIL: Record<string, string> = {
+export const BEREICH_STIL: Record<string, string> = {
   Investment: "bg-[#e3eaf8] text-navy-800 ring-navy-800/20",
   Property: "bg-pos-bg text-pos ring-pos/25",
   Projects: "bg-[#fdeee2] text-[#b4570f] ring-[#b4570f]/25",
@@ -315,4 +315,12 @@ export function MultiFilter({
       )}
     </div>
   );
+}
+
+/** Geschäftsbereich eines einzelnen Vorgangs (nicht des Kontakts) – gleiche Farben wie BereichBadges */
+export function BereichMarke({ bereich, className = "" }: { bereich: string | null; className?: string }) {
+  if (!bereich) {
+    return <span className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-[4px] border border-dashed border-warn/60 bg-warn-bg px-[6px] py-[1px] text-[10px] font-semibold text-warn ${className}`}>Bereich prüfen</span>;
+  }
+  return <span title={`Geschäftsbereich des Vorgangs: GRENFORD ${bereich}`} className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-[4px] px-[6px] py-[1px] text-[10px] font-semibold ring-1 ring-inset ${BEREICH_STIL[bereich]} ${className}`}>{bereich}</span>;
 }

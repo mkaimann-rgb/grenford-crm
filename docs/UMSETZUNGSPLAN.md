@@ -71,6 +71,15 @@ Arbeitsweise je Seite: Referenzbild analysieren → umsetzen → Screenshot → 
 - **Formulare**: Pflichtauswahl mindestens eines Bereichs, Funktion je Bereich optional. Beim Verknüpfen einer Person mit einem Unternehmen werden fehlende Bereiche ergänzt (nie entfernt).
 - Bekannt, nicht Teil dieser Korrektur: Auf Smartphone-Breite (390 px) ist die bestehende Kopfzeile (Suche/Benutzermenü) breiter als der Bildschirm – betrifft alle Seiten inkl. Dashboard; Anpassung nur mit Zustimmung.
 
+### Korrektur Phase A – Geschäftsbereich je Objekt / Vorgang
+
+- **Drei Ebenen, strikt getrennt**: Geschäftsbereich des *Kontakts* (Kopf der Detailseite, unverändert) · Geschäftsbereich des *Vorgangs* (`Vorhaben.geschaeftsbereich`, genau einer je Vorgang) · *Rolle* des Kontakts im Vorgang (`rolle`, `unternehmenRolle`, `beteiligte[].rolle`). Logik: `src/lib/crm/vorgaenge.ts`, Tests: `vorgaenge.test.mts`.
+- **Objekt-Stammsätze** (`objekte`): jedes Objekt genau einmal; Vorgänge verweisen per `objektId`. Ein Objekt in mehreren Bereichen hat je Bereich einen eigenen Vorgang (Beispiel: Hotel das ERZ – Investment-Transaktion und Projects-Renovierung). Beim Erfassen wird ein vorhandenes Objekt (gleicher Titel + Ort, normalisiert) automatisch verknüpft statt neu angelegt.
+- **Anzeige**: In „Zugeordnete Objekte / Projekte“ und im Reiter „Vorhaben & Objekte“ (Personen) bzw. „Objekte & Projekte“ (Unternehmen) je Eintrag: farbige Bereichsmarke, Rolle, Vorgangsart, Ort/Budget; Hinweis „Objekt auch in …“ bei weiteren Bereichen; im Reiter zusätzlich Referenz, Beteiligte und Herkunft.
+- **Automatische Einstufung nur bei Eindeutigkeit**: Kauf (Eigennutzung)/Suchauftrag → Property, Kaufinteressent · Verkauf → Property, Verkäufer · Sanierung/Ausbau (Privatkunde) → Projects, Bauherr · Sanierungskunde → Projects, Sanierungskunde. Investment-Vorgänge aus den Dashboard-Deals (Montesana, Berlin-Schöneberg, das ERZ) und Finanzreferenzen (INV-/PROP-/PRO-2026-…) mit den dort genannten Rollen.
+- **Gekennzeichnete unklare Fälle**: Kauf (Kapitalanlage) (Claudia Weber, Marcello Rossi) → Bereich offen · Ferienimmobilie (Frank Doerwald) → Rolle offen · Berlin-Schöneberg (MFH) → Investor/Käufer in den Testdaten nicht benannt · Brautstraße 29 (Kay Brandes) → Rolle und Vorgangsart offen · Finanzreferenzen ohne Objekt → „Objekt noch nicht zugeordnet“ · „Einfamilienhaus Zehlendorf“ / „EFH Zehlendorf“ → mögliche Dublette, nicht zusammengeführt.
+- **Spätere Module**: `referenz` (z. B. INV-2026-001, Dashboard-ID) und `objektId` sind die Verknüpfungspunkte für Investment (Phase B), Property (C) und Projects (D). Bestehende IDs (`v-…`, `p-…`, `f-…`) unverändert.
+
 ## 3. Sicherheitskonzept
 
 Bereits umgesetzt (Stufe 1):

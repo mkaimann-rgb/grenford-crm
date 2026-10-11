@@ -181,11 +181,38 @@ export type Person = Adresse & {
 export const VORHABEN_STATUS = ["Aktiv", "In Planung", "Angebotsphase", "Abgeschlossen", "Pausiert"] as const;
 export type VorhabenStatus = (typeof VORHABEN_STATUS)[number];
 
-/** Kauf-, Verkaufs- oder Sanierungsvorhaben einer Person (später: Verknüpfung zu Property-/Projects-Datensätzen) */
+/**
+ * Objekt-Stammsatz (Immobilie / Liegenschaft). Existiert genau einmal –
+ * mehrere Vorgänge (auch aus verschiedenen Geschäftsbereichen) verweisen per objektId darauf.
+ * Später: gemeinsame Basis für Investment-Projekte, Property-Objekte und Projects-Projekte.
+ */
+export type Objekt = {
+  id: ID;
+  titel: string;
+  ort: string;
+  bild?: string;
+  /** Hinweis bei möglicher Dublette o. Ä. – wird sichtbar gekennzeichnet, nie automatisch zusammengeführt */
+  hinweis?: string;
+};
+
+/** Weitere Beteiligte an einem Vorgang, jeweils mit eigener Rolle */
+export type Beteiligung = { art: "person" | "unternehmen"; id: ID; rolle: string };
+
+/**
+ * Fachlicher Vorgang („Vorhaben“) an einem Objekt – z. B. Kauf, Verkauf, Sanierung, Investment-Transaktion.
+ * Drei getrennte Ebenen:
+ *  - Geschäftsbereich des Kontakts  → Person.bereiche / Unternehmen.bereiche
+ *  - Geschäftsbereich des Vorgangs  → geschaeftsbereich (genau einer je Vorgang)
+ *  - Rolle des Kontakts im Vorgang  → rolle / unternehmenRolle / beteiligte[].rolle
+ * Ein Objekt mit mehreren Bereichen hat je Bereich einen eigenen Vorgang.
+ */
 export type Vorhaben = {
   id: ID;
-  personId: ID;
-  bereich: "privat" | "sanierung";
+  /** Kunde (Person), sofern der Vorgang an einer Person hängt */
+  personId?: ID;
+  /** Kundenrolle, unter der der Vorgang beim Kunden geführt wird (nicht der Geschäftsbereich) */
+  bereich?: "privat" | "sanierung";
+  /** Vorgangsart, z. B. Kauf (Eigennutzung), Verkauf, Komplettsanierung, Investment-Transaktion */
   art: string;
   titel: string;
   ort: string;
@@ -197,8 +224,23 @@ export type Vorhaben = {
   bild?: string;
   /** Ausführendes oder beteiligtes Unternehmen (z. B. GU) */
   unternehmenId?: ID;
+  /** Rolle dieses Unternehmens im Vorgang (z. B. GU-Partner, Bauherr) */
+  unternehmenRolle?: string;
   geplanterStart?: string;
   geplanteFertigstellung?: string;
+  /** Objekt-Stammsatz; leer = noch kein konkretes Objekt (z. B. Suchauftrag) */
+  objektId?: ID;
+  /** Geschäftsbereich dieses Vorgangs; null = nicht eindeutig → pruefen */
+  geschaeftsbereich: Geschaeftsbereich | null;
+  /** Rolle der Person (personId) in diesem Vorgang, z. B. Kaufinteressent, Verkäufer, Bauherr */
+  rolle: string;
+  beteiligte?: Beteiligung[];
+  /** Spätere Modulverknüpfung, z. B. INV-2026-001 oder Dashboard-ID */
+  referenz?: string;
+  /** Begründung, falls Bereich oder Rolle nicht eindeutig sind */
+  pruefen?: string;
+  herkunft?: "manuell" | "abgeleitet";
+  grund?: string;
 };
 
 export const AKTIVITAET_TYPEN = ["Termin", "Aufgabe", "E-Mail", "Telefon", "Notiz"] as const;

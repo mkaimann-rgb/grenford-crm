@@ -13,6 +13,8 @@ import { useToast } from "@/components/ui/toast";
 import { AktivitaetenPanel } from "./aktivitaeten";
 import { AktivitaetModal, PersonModal, UnternehmenModal, personHref } from "./modals";
 import { BereichZeile } from "./bereichszeile";
+import { VorgangEintrag, VorgangLegende } from "./vorgaenge";
+import { vorgaengeVonUnternehmen } from "@/lib/crm/vorgaenge";
 import { ableitenUnternehmen } from "@/lib/crm/bereiche";
 import { InfoList, NichtImplementiert, NotizenCard, Panel, StatCard, TermineCard } from "./page";
 import { ChevronDown, ChevronRight } from "lucide-react";
@@ -40,6 +42,7 @@ export function UnternehmenDetail({ id }: { id: string }) {
 
   const kontakte = crm.ansprechpartnerVon(u.id).map((p) => ({ p, k: p.kontakte.find((k) => k.unternehmenId === u.id)! }));
   const verantwortlich = [...kontakte].sort((a, b) => Number(!!b.k.leitung) - Number(!!a.k.leitung) || Number(!!b.k.haupt) - Number(!!a.k.haupt));
+  const zeilen = vorgaengeVonUnternehmen(u, crm.vorhaben, crm.objekte);
   const akt = crm.aktivitaetenVonUnternehmen(u);
   const letzte = crm.letzteAktivitaetUnternehmen(u);
   const letzteAkt = akt.filter((a) => a.datum === letzte).sort((a, b) => (b.von ?? "").localeCompare(a.von ?? ""))[0];
@@ -51,7 +54,7 @@ export function UnternehmenDetail({ id }: { id: string }) {
   const tabs: { id: Tab; label: string }[] = [
     { id: "uebersicht", label: "Übersicht" },
     { id: "ansprechpartner", label: `Ansprechpartner (${kontakte.length})` },
-    { id: "projekte", label: "Projekte" },
+    { id: "projekte", label: `Objekte & Projekte (${zeilen.length})` },
     { id: "aktivitaeten", label: "Aktivitäten" },
     { id: "dateien", label: "Dateien" },
     { id: "notizen", label: "Notizen" },
@@ -159,6 +162,11 @@ export function UnternehmenDetail({ id }: { id: string }) {
                   {!verantwortlich.length && <li className="py-3 text-[12px] text-muted">Noch keine Ansprechpartner verknüpft.</li>}
                 </ul>
               </Panel>
+              <Panel titel="Zugeordnete Objekte / Projekte" aktion={<button type="button" onClick={() => setTab("projekte")} className="link-more">Alle anzeigen</button>}>
+                <ul className="divide-y divide-line-soft" data-testid="objekte-uebersicht">{zeilen.slice(0, 3).map((z) => <VorgangEintrag key={z.v.id} z={z} />)}</ul>
+                {!zeilen.length && <p className="text-[12px] text-muted">Noch keine Objekte oder Projekte zugeordnet.</p>}
+                {zeilen.length > 3 && <p className="mt-1 text-[11px] text-muted">+ {zeilen.length - 3} weitere im Reiter „Objekte &amp; Projekte“</p>}
+              </Panel>
               <Panel titel="Unternehmensrollen & Kategorien">
                 <div className="flex flex-wrap gap-[6px]">{u.arten.map((a) => <Badge key={a} tone="blue" className="px-3 py-1">{a}</Badge>)}</div>
                 <h3 className="mt-4 font-serif text-[14px] font-bold text-navy-950">Zugeordnete Labels</h3>
@@ -198,7 +206,14 @@ export function UnternehmenDetail({ id }: { id: string }) {
         )}
         {tab === "aktivitaeten" && <AktivitaetenPanel aktivitaeten={akt.filter((a) => a.typ !== "Notiz")} bezug={[{ art: "unternehmen", id: u.id }]} />}
         {tab === "notizen" && <AktivitaetenPanel nurNotizen aktivitaeten={akt.filter((a) => a.typ === "Notiz")} bezug={[{ art: "unternehmen", id: u.id }]} />}
-        {tab === "projekte" && <NichtImplementiert was="Die Verknüpfung mit Investment-, Property- und Projects-Datensätzen (Phasen B–D)" />}
+        {tab === "projekte" && (
+          <Panel titel="Objekte & Projekte">
+            <VorgangLegende />
+            <ul className="divide-y divide-line-soft" data-testid="vorgaenge-liste">{zeilen.map((z) => <VorgangEintrag key={z.v.id} z={z} details />)}</ul>
+            {!zeilen.length && <p className="py-6 text-center text-[12px] text-muted">Noch keine Objekte oder Projekte zugeordnet.</p>}
+            <p className="mt-3 text-[11px] text-muted">Hinweis: Bearbeitung der Vorgänge beim jeweiligen Kunden bzw. ab Phase B–D in den Modulen Investment, Property und Projects.</p>
+          </Panel>
+        )}
         {tab === "dateien" && <NichtImplementiert was="Die Dateiablage (nach Datenbank- und Speicheranbindung)" />}
         {tab === "finanzen" && <NichtImplementiert was="Die Finanzübersicht je Unternehmen (Phase F)" />}
         {tab === "einstellungen" && <NichtImplementiert was="Die Datensatz-Einstellungen (Archivieren, Zusammenführen, Rechte)" />}

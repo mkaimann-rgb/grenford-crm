@@ -63,7 +63,7 @@ export function ableitenUnternehmen(u: Pick<Unternehmen, "arten">, explizit: Abl
 /** Ableitung für eine Person aus Kundenrollen, Vorhaben, Firmenverknüpfungen und expliziten Beziehungen */
 export function ableitenPerson(
   p: Pick<Person, "kontakte" | "privat" | "sanierung">,
-  vorhaben: Pick<Vorhaben, "bereich" | "art" | "titel">[],
+  vorhaben: (Pick<Vorhaben, "bereich" | "art" | "titel"> & Partial<Pick<Vorhaben, "geschaeftsbereich">>)[],
   firmen: Map<string, Pick<Unternehmen, "name" | "bereiche">>,
   explizit: Ableitung[] = [],
 ): Ergebnis {
@@ -81,7 +81,8 @@ export function ableitenPerson(
     else unklar.push(`Interesse „${i}“: Investment oder Property – bitte prüfen`);
   }
   for (const v of vorhaben) {
-    const b = v.bereich === "sanierung" ? "Projects" : interesseBereich(v.art);
+    // Geschäftsbereich des Vorgangs hat Vorrang (auch null = bewusst unklar)
+    const b = v.geschaeftsbereich !== undefined ? v.geschaeftsbereich : v.bereich === "sanierung" ? "Projects" : interesseBereich(v.art);
     if (b) zu.push({ bereich: b, funktion: v.bereich === "sanierung" ? "Sanierungskunde" : "Privatkunde", grund: `Vorhaben „${v.titel}“` });
     else unklar.push(`Vorhaben „${v.titel}“ (${v.art}): Bereich nicht eindeutig`);
   }

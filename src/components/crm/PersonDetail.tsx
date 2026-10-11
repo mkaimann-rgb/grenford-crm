@@ -13,6 +13,8 @@ import { useToast } from "@/components/ui/toast";
 import { AktivitaetenPanel, TypIcon } from "./aktivitaeten";
 import { AktivitaetModal, PersonModal, VorhabenModal, personHref, type PersonRolle } from "./modals";
 import { BereichZeile } from "./bereichszeile";
+import { VorgangEintrag, VorgangLegende } from "./vorgaenge";
+import { vorgaengeVonPerson, type VorgangZeile } from "@/lib/crm/vorgaenge";
 import { ableitenPerson } from "@/lib/crm/bereiche";
 import { InfoList, NichtImplementiert, NotizenCard, Panel, StatCard, TermineCard } from "./page";
 
@@ -22,26 +24,6 @@ const LISTE: Record<PersonRolle, { label: string; href: string }> = {
   privat: { label: "Privatkunden", href: "/kunden/privatkunden" },
   sanierung: { label: "Sanierungskunden", href: "/kunden/sanierungskunden" },
 };
-
-function VorhabenZeile({ v, onEdit, kompakt = false }: { v: Vorhaben; onEdit: () => void; kompakt?: boolean }) {
-  return (
-    <li className="flex items-center gap-3 py-2">
-      {!kompakt && <Avatar name={v.titel} bild={v.bild} size={48} rund={false} />}
-      <button type="button" onClick={onEdit} className="focus-ring min-w-0 flex-1 rounded text-left">
-        <div className="truncate text-[12px] font-semibold text-navy-950" title={v.titel}>{v.titel}</div>
-        <div className="truncate text-[11px] text-muted">{v.ort} · {v.art}</div>
-        <div className="truncate text-[11px] text-muted">Budget: {v.budget ? euroCompact(v.budget) : "—"}{v.zeithorizont ? ` · ${v.zeithorizont}` : ""}</div>
-      </button>
-      <div className="flex w-[92px] shrink-0 flex-col items-end gap-1">
-        <StatusBadge status={v.status} />
-        <div className="flex w-full items-center gap-2">
-          <div className="h-[6px] flex-1 overflow-hidden rounded-full bg-line-soft"><div className="h-full rounded-full bg-[#1f5a96]" style={{ width: `${v.fortschritt}%` }} /></div>
-          <span className="text-[10.5px] text-muted">{v.fortschritt} %</span>
-        </div>
-      </div>
-    </li>
-  );
-}
 
 export function PersonDetail({ id, rolle }: { id: string; rolle: PersonRolle }) {
   const crm = useCrm();
@@ -66,6 +48,10 @@ export function PersonDetail({ id, rolle }: { id: string; rolle: PersonRolle }) 
   const letzte = crm.letzteAktivitaetPerson(p);
   const letzteAkt = akt.filter((a) => a.datum === letzte).sort((a, b) => (b.von ?? "").localeCompare(a.von ?? ""))[0];
   const vorhaben = crm.vorhaben.filter((v) => v.personId === p.id);
+  // Alle Vorgänge: eigene (als Kunde), als Beteiligte und über verknüpfte Unternehmen
+  const zeilen = vorgaengeVonPerson(p, crm.vorhaben, crm.objekte, new Map(crm.unternehmen.map((x) => [x.id, x])));
+  const eigene = zeilen.filter((z) => z.v.personId === p.id);
+  const bearbeiten = (z: VorgangZeile) => (z.v.personId === p.id ? () => setModal({ art: "vorhaben", v: z.v, bereich: z.v.bereich ?? bereich }) : undefined);
   const bereich: "privat" | "sanierung" = rolle === "sanierung" ? "sanierung" : "privat";
   const kundenrolle = rolle === "privat" ? p.privat : rolle === "sanierung" ? p.sanierung : undefined;
   const statusWert = kundenrolle?.status ?? p.status;
@@ -95,7 +81,7 @@ export function PersonDetail({ id, rolle }: { id: string; rolle: PersonRolle }) 
 
   const tabs: { id: Tab; label: string }[] = [
     { id: "uebersicht", label: "Übersicht" },
-    { id: "vorhaben", label: `Vorhaben & ${rolle === "sanierung" ? "Projekte" : "Objekte"} (${vorhaben.length})` },
+    { id: "vorhaben", label: `Vorhaben & ${rolle === "sanierung" ? "Projekte" : "Objekte"} (${zeilen.length})` },
     { id: "aktivitaeten", label: "Aktivitäten" },
     { id: "kommunikation", label: "Kommunikation" },
     { id: "dateien", label: "Dateien" },
@@ -191,7 +177,7 @@ export function PersonDetail({ id, rolle }: { id: string; rolle: PersonRolle }) 
               ) : (
                 <Panel titel={rolle === "sanierung" ? `Aktuelle Vorhaben / Projekte (${sanVorhaben.length})` : "Interessen & Vorhaben"} aktion={<Button size="sm" onClick={() => setModal({ art: "vorhaben", bereich })}><Plus className="h-3.5 w-3.5" />Neues Vorhaben</Button>}>
                   <ul className="divide-y divide-line-soft">
-                    {vorhaben.filter((v) => rolle === "privat" || v.bereich === "sanierung").map((v) => <VorhabenZeile key={v.id} v={v} kompakt={rolle === "privat"} onEdit={() => setModal({ art: "vorhaben", v, bereich: v.bereich })} />)}
+                    {eigene.filter((z) => rolle === "privat" || z.v.bereich === "sanierung").map((z) => <VorgangEintrag key={z.v.id} z={z} kompakt={rolle === "privat"} onEdit={bearbeiten(z)} />)}
                     {!vorhaben.length && <li className="py-3 text-[12px] text-muted">Noch keine Vorhaben erfasst.</li>}
                   </ul>
                   {kundenrolle && (
@@ -232,8 +218,9 @@ export function PersonDetail({ id, rolle }: { id: string; rolle: PersonRolle }) 
                 </Panel>
               ) : (
                 <Panel titel="Zugeordnete Objekte / Projekte" aktion={<button type="button" onClick={() => setTab("vorhaben")} className="link-more">Alle anzeigen</button>}>
-                  <ul className="divide-y divide-line-soft">{vorhaben.slice(0, 3).map((v) => <VorhabenZeile key={v.id} v={v} onEdit={() => setModal({ art: "vorhaben", v, bereich: v.bereich })} />)}</ul>
-                  {!vorhaben.length && <p className="text-[12px] text-muted">Noch keine Objekte zugeordnet.</p>}
+                  <ul className="divide-y divide-line-soft" data-testid="objekte-uebersicht">{zeilen.slice(0, 3).map((z) => <VorgangEintrag key={z.v.id} z={z} onEdit={bearbeiten(z)} />)}</ul>
+                  {!zeilen.length && <p className="text-[12px] text-muted">Noch keine Objekte zugeordnet.</p>}
+                  {zeilen.length > 3 && <p className="mt-1 text-[11px] text-muted">+ {zeilen.length - 3} weitere im Reiter „Vorhaben & Objekte“</p>}
                 </Panel>
               )}
               <Panel titel="Letzte Kommunikation" aktion={<button type="button" onClick={() => setTab("kommunikation")} className="link-more">Alle anzeigen</button>}>
@@ -257,9 +244,10 @@ export function PersonDetail({ id, rolle }: { id: string; rolle: PersonRolle }) 
         )}
         {tab === "vorhaben" && (
           <Panel titel="Vorhaben & Objekte" aktion={<Button size="sm" variant="primary" onClick={() => setModal({ art: "vorhaben", bereich })}><Plus className="h-3.5 w-3.5" />Neues Vorhaben</Button>}>
-            <ul className="divide-y divide-line-soft">{vorhaben.map((v) => <VorhabenZeile key={v.id} v={v} onEdit={() => setModal({ art: "vorhaben", v, bereich: v.bereich })} />)}</ul>
-            {!vorhaben.length && <p className="py-6 text-center text-[12px] text-muted">Noch keine Vorhaben erfasst.</p>}
-            <p className="mt-3 text-[11px] text-muted">Hinweis: Die Verknüpfung mit Property-Objekten und Projects-Projekten folgt in den Phasen C und D.</p>
+            <VorgangLegende />
+            <ul className="divide-y divide-line-soft" data-testid="vorgaenge-liste">{zeilen.map((z) => <VorgangEintrag key={z.v.id} z={z} details onEdit={bearbeiten(z)} />)}</ul>
+            {!zeilen.length && <p className="py-6 text-center text-[12px] text-muted">Noch keine Vorhaben erfasst.</p>}
+            <p className="mt-3 text-[11px] text-muted">Hinweis: Jeder Vorgang trägt eine Referenz für die spätere Verknüpfung mit den Modulen Investment (Phase B), Property (Phase C) und Projects (Phase D). Vorgänge, die über Unternehmen oder Finanzreferenzen bestehen, werden dort bearbeitet.</p>
           </Panel>
         )}
         {tab === "aktivitaeten" && <AktivitaetenPanel aktivitaeten={akt.filter((a) => a.typ !== "Notiz")} bezug={[{ art: "person", id: p.id }]} />}

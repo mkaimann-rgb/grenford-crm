@@ -40,8 +40,10 @@ test("Testdaten sind dublettenfrei und referenziell konsistent", () => {
   assert.equal(pIds.size, td.personen.length);
   for (const p of td.personen) for (const k of p.kontakte) assert.ok(uIds.has(k.unternehmenId), `${p.id} → ${k.unternehmenId}`);
   for (const v of td.vorhaben) {
-    assert.ok(pIds.has(v.personId));
     if (v.unternehmenId) assert.ok(uIds.has(v.unternehmenId));
+    for (const b of v.beteiligte ?? []) assert.ok(b.art === "unternehmen" ? uIds.has(b.id) : pIds.has(b.id), `${v.id} → ${b.id}`);
+    if (!v.personId) continue;
+    assert.ok(pIds.has(v.personId));
     const p = td.personen.find((x) => x.id === v.personId)!;
     assert.ok(v.bereich === "sanierung" ? p.sanierung : p.privat, `${v.id}: Person hat Rolle ${v.bereich}`);
   }

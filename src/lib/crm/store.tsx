@@ -4,7 +4,8 @@ import { createContext, useCallback, useContext, useMemo, useState, type ReactNo
 import { HEUTE } from "./testdata";
 import { testdatenRepository, type CrmDaten } from "./repository";
 import { aktivitaetenFuerUnternehmen, betrifft, letzteAktivitaet } from "./logic";
-import type { Aktivitaet, ID, Person, Unternehmen, Vorhaben } from "./types";
+import { findeObjekt } from "./vorgaenge";
+import type { Aktivitaet, ID, Objekt, Person, Unternehmen, Vorhaben } from "./types";
 
 type Store = CrmDaten & {
   heute: string;
@@ -12,6 +13,9 @@ type Store = CrmDaten & {
   speichereUnternehmen: (u: Unternehmen) => void;
   speicherePerson: (p: Person) => void;
   speichereVorhaben: (v: Vorhaben) => void;
+  /** Liefert die ID des bestehenden Objekts (gleicher Titel + Ort) oder legt genau ein neues an – keine Dubletten */
+  objektZuordnen: (titel: string, ort: string, bild?: string) => ID;
+  objektById: (id: ID) => Objekt | undefined;
   speichereAktivitaet: (a: Aktivitaet) => void;
   setzeErledigt: (id: ID, erledigt: boolean) => void;
   neueId: (prefix: string) => string;
@@ -51,6 +55,14 @@ export function CrmStoreProvider({ children }: { children: ReactNode }) {
   );
 
   const value = useMemo<Store>(() => {
+    const oMap = new Map(daten.objekte.map((o) => [o.id, o]));
+    const objektZuordnen = (titel: string, ort: string, bild?: string) => {
+      const vorhanden = findeObjekt(daten.objekte, titel, ort);
+      if (vorhanden) return vorhanden.id;
+      const neu: Objekt = { id: `o-neu-${Date.now().toString(36)}-${++zaehler}`, titel: titel.trim(), ort: ort.trim(), bild };
+      setDaten((d) => (findeObjekt(d.objekte, titel, ort) ? d : { ...d, objekte: [neu, ...d.objekte] }));
+      return neu.id;
+    };
     const uMap = new Map(daten.unternehmen.map((u) => [u.id, u]));
     const pMap = new Map(daten.personen.map((p) => [p.id, p]));
     const vonUnternehmen = (u: Unternehmen) => aktivitaetenFuerUnternehmen(daten.aktivitaeten, u, daten.personen);
@@ -62,6 +74,8 @@ export function CrmStoreProvider({ children }: { children: ReactNode }) {
       speichereUnternehmen,
       speicherePerson,
       speichereVorhaben,
+      objektZuordnen,
+      objektById: (id) => oMap.get(id),
       speichereAktivitaet,
       setzeErledigt,
       neueId: (prefix) => `${prefix}-neu-${Date.now().toString(36)}-${++zaehler}`,

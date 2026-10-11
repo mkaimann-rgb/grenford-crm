@@ -8,12 +8,15 @@
  * umgebaut werden.
  */
 import * as testdaten from "./testdata";
-import type { Aktivitaet, Benutzer, Person, Unternehmen, Vorhaben } from "./types";
+import type { Aktivitaet, Benutzer, Objekt, Person, Unternehmen, Vorhaben } from "./types";
 
 export type CrmDaten = {
   benutzer: Benutzer[];
   unternehmen: Unternehmen[];
   personen: Person[];
+  /** Objekt-Stammsätze (je Objekt genau einer) */
+  objekte: Objekt[];
+  /** Vorgänge je Geschäftsbereich (verweisen per objektId auf Objekte) */
   vorhaben: Vorhaben[];
   aktivitaeten: Aktivitaet[];
 };
@@ -31,6 +34,7 @@ export const testdatenRepository: CrmRepository = {
     benutzer: testdaten.benutzer,
     unternehmen: testdaten.unternehmen,
     personen: testdaten.personen,
+    objekte: testdaten.objekte,
     vorhaben: testdaten.vorhaben,
     aktivitaeten: testdaten.aktivitaeten,
   }),

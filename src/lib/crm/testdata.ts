@@ -9,7 +9,8 @@
 import { STICHTAG } from "../testdata/finanzen.ts";
 import { addDays } from "./logic.ts";
 import { ableitenPerson, ableitenUnternehmen, alsZuordnungen, type Ableitung } from "./bereiche.ts";
-import type { Aktivitaet, Benutzer, Kontaktverknuepfung, Person, Unternehmen, Vorhaben } from "./types.ts";
+import { einstufen } from "./vorgaenge.ts";
+import type { Aktivitaet, Benutzer, Kontaktverknuepfung, Objekt, Person, Unternehmen, Vorhaben } from "./types.ts";
 
 export const HEUTE = STICHTAG;
 const d = (offset: number) => addDays(HEUTE, offset);
@@ -131,13 +132,15 @@ const personenRoh: Person[] = [
   person({ id: "p-richter-bank", anrede: "Frau", vorname: "Helena", nachname: "Richter", ort: "Frankfurt", status: "Aktiv", erstelltAm: "2026-10-02", email: "h.richter@bankhaus-richter.de", kontakte: [k("f-bankhaus", "Firmenkundenbetreuerin", "Projektkontakt", { haupt: true, abteilung: "Firmenkunden" })], letzterKontakt: d(-53) }),
 ];
 
-export const vorhaben: Vorhaben[] = [
+type VorhabenRoh = Omit<Vorhaben, "geschaeftsbereich" | "rolle"> & Partial<Pick<Vorhaben, "geschaeftsbereich" | "rolle">>;
+
+const vorhabenRoh: VorhabenRoh[] = [
   { id: "v-legrand-1", personId: "p-legrand", bereich: "privat", art: "Kauf (Eigennutzung)", titel: "Penthouse Charlottenburg", ort: "Berlin", beschreibung: "Eigentumswohnung, 3–4 Zimmer, Berlin-Charlottenburg", budget: 1_500_000, status: "Aktiv", fortschritt: 60, zeithorizont: "6–12 Monate", bild: "/testbilder/prop-2.jpg" },
   { id: "v-legrand-2", personId: "p-legrand", bereich: "privat", art: "Sanierung / Modernisierung", titel: "Malplaquetstraße 39", ort: "Berlin", beschreibung: "Wohnung Malplaquetstraße 39, Berlin", budget: 400_000, status: "In Planung", fortschritt: 30, zeithorizont: "3–6 Monate", bild: "/testbilder/prop-3.jpg" },
-  { id: "v-ghazzawi-1", personId: "p-ghazzawi", bereich: "sanierung", art: "Neubau / Innenausbau", titel: "MF Neubau Potsdam", ort: "Potsdam", beschreibung: "Innenausbau Neubau", budget: 600_000, status: "Angebotsphase", fortschritt: 40, zeithorizont: "3–6 Monate", bild: "/testbilder/proj-1.jpg", unternehmenId: "f-sander" },
-  { id: "v-keil-1", personId: "p-keil", bereich: "sanierung", art: "Komplettsanierung", titel: "MFH Weichselstraße 20", ort: "Berlin", beschreibung: "Komplettsanierung – 8 WE", budget: 250_000, status: "Aktiv", fortschritt: 60, zeithorizont: "0–3 Monate", bild: "/testbilder/inv-2.jpg", unternehmenId: "f-baufrosch", geplanterStart: "Q4/2026", geplanteFertigstellung: "Q3/2027" },
+  { id: "v-ghazzawi-1", personId: "p-ghazzawi", bereich: "sanierung", art: "Neubau / Innenausbau", titel: "MF Neubau Potsdam", ort: "Potsdam", beschreibung: "Innenausbau Neubau", budget: 600_000, status: "Angebotsphase", fortschritt: 40, zeithorizont: "3–6 Monate", bild: "/testbilder/proj-1.jpg", unternehmenId: "f-sander", unternehmenRolle: "GU-Partner" },
+  { id: "v-keil-1", personId: "p-keil", bereich: "sanierung", art: "Komplettsanierung", titel: "MFH Weichselstraße 20", ort: "Berlin", beschreibung: "Komplettsanierung – 8 WE", budget: 250_000, status: "Aktiv", fortschritt: 60, zeithorizont: "0–3 Monate", bild: "/testbilder/inv-2.jpg", unternehmenId: "f-baufrosch", unternehmenRolle: "GU-Partner", geplanterStart: "Q4/2026", geplanteFertigstellung: "Q3/2027" },
   { id: "v-keil-2", personId: "p-keil", bereich: "sanierung", art: "Bad / Innenausbau", titel: "Eigentumswohnung", ort: "Berlin-Charlottenburg", beschreibung: "Bad + Innenausbau", budget: 45_000, status: "In Planung", fortschritt: 30, zeithorizont: "3–6 Monate", bild: "/testbilder/prop-2.jpg" },
-  { id: "v-ozden-1", personId: "p-ozden", bereich: "sanierung", art: "Küche / Innenausbau", titel: "Malplaquetstraße 39", ort: "Berlin", beschreibung: "Küche und Innenausbau", budget: 400_000, status: "In Planung", fortschritt: 20, zeithorizont: "3–6 Monate", unternehmenId: "f-kuechenaktiv" },
+  { id: "v-ozden-1", personId: "p-ozden", bereich: "sanierung", art: "Küche / Innenausbau", titel: "Malplaquetstraße 39", ort: "Berlin", beschreibung: "Küche und Innenausbau", budget: 400_000, status: "In Planung", fortschritt: 20, zeithorizont: "3–6 Monate", unternehmenId: "f-kuechenaktiv", unternehmenRolle: "Ausführender Betrieb" },
   { id: "v-doerwald-1", personId: "p-doerwald", bereich: "privat", art: "Ferienimmobilie", titel: "Beach House Usedom", ort: "Zirchow (Usedom)", beschreibung: "Ferienhaus mit Umbau", budget: 900_000, status: "Aktiv", fortschritt: 50, zeithorizont: "6–12 Monate", bild: "/testbilder/proj-2.jpg" },
   { id: "v-weber-1", personId: "p-weber", bereich: "privat", art: "Kauf (Kapitalanlage)", titel: "Mehrfamilienhaus NRW", ort: "Düsseldorf", beschreibung: "MFH als Kapitalanlage", budget: 2_000_000, status: "In Planung", fortschritt: 20, zeithorizont: "6–12 Monate" },
   { id: "v-fischer-1", personId: "p-fischer", bereich: "privat", art: "Verkauf", titel: "ETW Hamburg", ort: "Hamburg", beschreibung: "Verkauf Eigentumswohnung", budget: 800_000, status: "Aktiv", fortschritt: 40, zeithorizont: "3–6 Monate" },
@@ -149,7 +152,91 @@ export const vorhaben: Vorhaben[] = [
   { id: "v-rossi-1", personId: "p-rossi", bereich: "privat", art: "Kauf (Kapitalanlage)", titel: "MFH Berlin", ort: "Berlin", beschreibung: "Kapitalanlage MFH", budget: 3_000_000, status: "In Planung", fortschritt: 25, zeithorizont: "6–12 Monate" },
   { id: "v-rossi-2", personId: "p-rossi", bereich: "sanierung", art: "Sanierung / Modernisierung", titel: "EFH Zehlendorf", ort: "Berlin", beschreibung: "Modernisierung EFH", budget: 1_500_000, status: "In Planung", fortschritt: 15, zeithorizont: "6–12 Monate" },
   { id: "v-lange-1", personId: "p-lange", bereich: "sanierung", art: "Innenausbau", titel: "DHH Potsdam", ort: "Potsdam", beschreibung: "Innenausbau Doppelhaushälfte", budget: 1_100_000, status: "In Planung", fortschritt: 15, zeithorizont: "3–6 Monate" },
-  { id: "v-litus-1", personId: "p-litus", bereich: "sanierung", art: "Renovierung", titel: "Hotel das ERZ", ort: "Erzgebirge", beschreibung: "Renovierung Hotelzimmer", budget: 800_000, status: "In Planung", fortschritt: 20, zeithorizont: "3–6 Monate", unternehmenId: "f-erz" },
+  { id: "v-litus-1", personId: "p-litus", bereich: "sanierung", art: "Renovierung", titel: "Hotel das ERZ", ort: "Erzgebirge", beschreibung: "Renovierung Hotelzimmer", budget: 800_000, status: "In Planung", fortschritt: 20, zeithorizont: "3–6 Monate", unternehmenId: "f-erz", unternehmenRolle: "Bauherr" },
+];
+
+
+// ---------- Objekte & Vorgänge je Geschäftsbereich ----------
+// Ein Objekt existiert genau einmal. Je Geschäftsbereich gibt es einen eigenen Vorgang (Vorhaben) mit objektId.
+// Übernommen werden nur eindeutige Bezüge (gleiche Adresse/Bezeichnung, Dashboard- und Finanz-Referenzen).
+
+export const objekte: Objekt[] = [
+  { id: "o-penthouse-charlottenburg", titel: "Penthouse Charlottenburg", ort: "Berlin", bild: "/testbilder/prop-2.jpg" },
+  { id: "o-malplaquet-39", titel: "Malplaquetstraße 39", ort: "Berlin", bild: "/testbilder/prop-3.jpg" },
+  { id: "o-mf-neubau-potsdam", titel: "MF Neubau Potsdam", ort: "Potsdam", bild: "/testbilder/proj-1.jpg" },
+  { id: "o-weichsel-20", titel: "MFH Weichselstraße 20", ort: "Berlin", bild: "/testbilder/inv-2.jpg" },
+  { id: "o-etw-charlottenburg", titel: "Eigentumswohnung", ort: "Berlin-Charlottenburg", bild: "/testbilder/prop-2.jpg" },
+  { id: "o-beach-house-usedom", titel: "Beach House Usedom", ort: "Zirchow (Usedom)", bild: "/testbilder/proj-2.jpg" },
+  { id: "o-mfh-nrw", titel: "Mehrfamilienhaus NRW", ort: "Düsseldorf" },
+  { id: "o-etw-hamburg", titel: "ETW Hamburg", ort: "Hamburg" },
+  { id: "o-etw-sommer", titel: "Eigentumswohnung", ort: "Berlin" },
+  { id: "o-altbau-sommer", titel: "Gäste-WC Altbauwohnung", ort: "Berlin" },
+  { id: "o-wohnung-sendling", titel: "Wohnung Sendling", ort: "München" },
+  { id: "o-efh-zehlendorf-richter", titel: "Einfamilienhaus Zehlendorf", ort: "Berlin", hinweis: "Möglicherweise identisch mit „EFH Zehlendorf“ (Marcello Rossi) – nicht automatisch zusammengeführt, bitte prüfen." },
+  { id: "o-efh-zehlendorf-rossi", titel: "EFH Zehlendorf", ort: "Berlin", hinweis: "Möglicherweise identisch mit „Einfamilienhaus Zehlendorf“ (Stefan Richter) – nicht automatisch zusammengeführt, bitte prüfen." },
+  { id: "o-mfh-berlin-rossi", titel: "MFH Berlin", ort: "Berlin" },
+  { id: "o-dhh-potsdam", titel: "DHH Potsdam", ort: "Potsdam" },
+  { id: "o-hotel-erz", titel: "Hotel das ERZ", ort: "Erzgebirge", bild: "/testbilder/inv-3.jpg" },
+  { id: "o-montesana", titel: "Montesana", ort: "Bad Reichenhall (DE/CH)", bild: "/testbilder/inv-1.jpg" },
+  { id: "o-schoeneberg-mfh", titel: "Berlin-Schöneberg (MFH)", ort: "Berlin", bild: "/testbilder/inv-2.jpg" },
+  { id: "o-brautstrasse-29", titel: "Brautstraße 29", ort: "Berlin" },
+];
+
+const OBJEKT_VON_VORHABEN: Record<string, { objektId?: string; referenz?: string }> = {
+  "v-legrand-1": { objektId: "o-penthouse-charlottenburg", referenz: "Property-Mandat prop-2 (Dashboard)" },
+  "v-legrand-2": { objektId: "o-malplaquet-39" },
+  "v-ghazzawi-1": { objektId: "o-mf-neubau-potsdam", referenz: "Projects-Projekt proj-1 „Potsdam (Neubau)“ (Dashboard), RE-2026-002" },
+  "v-keil-1": { objektId: "o-weichsel-20" },
+  "v-keil-2": { objektId: "o-etw-charlottenburg" },
+  "v-ozden-1": { objektId: "o-malplaquet-39" },
+  "v-doerwald-1": { objektId: "o-beach-house-usedom" },
+  "v-weber-1": { objektId: "o-mfh-nrw" },
+  "v-fischer-1": { objektId: "o-etw-hamburg" },
+  "v-sommer-1": {}, // Suchauftrag – noch kein konkretes Objekt
+  "v-sommer-2": { objektId: "o-etw-sommer" },
+  "v-sommer-0": { objektId: "o-altbau-sommer" },
+  "v-mlehmann-1": { objektId: "o-wohnung-sendling" },
+  "v-srichter-1": { objektId: "o-efh-zehlendorf-richter" },
+  "v-rossi-1": { objektId: "o-mfh-berlin-rossi" },
+  "v-rossi-2": { objektId: "o-efh-zehlendorf-rossi" },
+  "v-lange-1": { objektId: "o-dhh-potsdam" },
+  "v-litus-1": { objektId: "o-hotel-erz" },
+};
+
+/** Vorgänge ohne Privatkunden: Investment-Deals (Dashboard) und Finanzreferenzen (INV-/PROP-/PRO-…) */
+const fv = (x: Partial<Vorhaben> & Pick<Vorhaben, "id" | "titel" | "art" | "geschaeftsbereich">): Vorhaben => ({
+  ort: "", beschreibung: "", budget: 0, status: "Aktiv", fortschritt: 0, zeithorizont: "", rolle: "", herkunft: "abgeleitet", ...x,
+});
+const U_ = (id: string, rolle: string) => ({ art: "unternehmen" as const, id, rolle });
+const P_ = (id: string, rolle: string) => ({ art: "person" as const, id, rolle });
+const OHNE_OBJEKT = "Objekt in den Testdaten noch nicht zugeordnet";
+
+const weitereVorgaenge: Vorhaben[] = [
+  fv({ id: "v-inv-montesana", objektId: "o-montesana", titel: "Montesana", ort: "Bad Reichenhall (DE/CH)", art: "Investment-Transaktion", geschaeftsbereich: "Investment", budget: 1_200_000, fortschritt: 60, referenz: "Investment-Deal inv-1 (Dashboard)", beteiligte: [U_("f-montesana", "Verkäufer / Bestandshalter")], grund: "Top Investment-Deal „Montesana“", bild: "/testbilder/inv-1.jpg" }),
+  fv({ id: "v-inv-schoeneberg", objektId: "o-schoeneberg-mfh", titel: "Berlin-Schöneberg (MFH)", ort: "Berlin", art: "Investment-Transaktion", geschaeftsbereich: "Investment", budget: 2_900_000, fortschritt: 70, referenz: "Investment-Deal inv-2 (Dashboard)", beteiligte: [U_("f-schoeneberg", "Projektentwickler")], pruefen: "Investor (Käufer) in den Testdaten nicht eindeutig benannt – bitte zuordnen", grund: "Top Investment-Deal „Berlin-Schöneberg (MFH)“", bild: "/testbilder/inv-2.jpg" }),
+  fv({ id: "v-inv-erz", objektId: "o-hotel-erz", titel: "das ERZ", ort: "Erzgebirge", art: "Investment-Transaktion", geschaeftsbereich: "Investment", budget: 800_000, fortschritt: 40, referenz: "Investment-Deal inv-3 (Dashboard)", beteiligte: [U_("f-erz", "Bestandshalter")], grund: "Top Investment-Deal „das ERZ“", bild: "/testbilder/inv-3.jpg" }),
+  fv({ id: "v-ref-inv-001", titel: "INV-2026-001", art: "Investment-Transaktion", geschaeftsbereich: "Investment", referenz: "INV-2026-001", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-simple", "Provisionsbeteiligter"), P_("p-spannaus", "Provisionsbeteiligter"), P_("p-brandes", "Empfehlungspartner"), U_("f-brandes", "Empfehlungspartner"), P_("p-brinkmann", "Empfehlungspartner")], grund: "Verbindlichkeiten VB-2026-014/-015/-016 (Finanzen)" }),
+  fv({ id: "v-ref-inv-002", titel: "INV-2026-002", art: "Investment-Transaktion", geschaeftsbereich: "Investment", referenz: "INV-2026-002", pruefen: OHNE_OBJEKT, beteiligte: [P_("p-brinkmann", "Empfehlungspartner")], grund: "Verbindlichkeit VB-2026-011 (Finanzen)" }),
+  fv({ id: "v-ref-inv-003", titel: "INV-2026-003", art: "Investment-Transaktion", geschaeftsbereich: "Investment", referenz: "INV-2026-003", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-financoncept", "Provisionsbeteiligter")], grund: "Verbindlichkeit VB-2026-001 (Finanzen)" }),
+  fv({ id: "v-ref-inv-004", titel: "INV-2026-004", art: "Investment-Transaktion", geschaeftsbereich: "Investment", referenz: "INV-2026-004", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-simple", "Provisionsbeteiligter"), P_("p-spannaus", "Provisionsbeteiligter")], grund: "Verbindlichkeit VB-2026-006 (Finanzen)" }),
+  fv({ id: "v-ref-inv-005", titel: "INV-2026-005", art: "Investment-Transaktion", geschaeftsbereich: "Investment", referenz: "INV-2026-005", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-financoncept", "Provisionsbeteiligter")], grund: "Verbindlichkeit VB-2026-008 (Finanzen)" }),
+  fv({ id: "v-ref-prop-002", titel: "PROP-2026-002", art: "Property-Vermittlung", geschaeftsbereich: "Property", referenz: "PROP-2026-002", pruefen: OHNE_OBJEKT, beteiligte: [P_("p-brinkmann", "Empfehlungspartner")], grund: "Verbindlichkeit VB-2026-003 (Finanzen)" }),
+  fv({ id: "v-ref-prop-003", titel: "PROP-2026-003", art: "Property-Vermittlung", geschaeftsbereich: "Property", referenz: "PROP-2026-003", pruefen: OHNE_OBJEKT, beteiligte: [P_("p-brandes", "Empfehlungspartner"), U_("f-brandes", "Empfehlungspartner")], grund: "Verbindlichkeit VB-2026-007 (Finanzen)" }),
+  fv({ id: "v-prop-brautstrasse", objektId: "o-brautstrasse-29", titel: "Brautstraße 29", ort: "Berlin", art: "Objektbesichtigung", geschaeftsbereich: "Property", beteiligte: [P_("p-brandes", "Rolle offen")], pruefen: "Nur Termin „Objektbesichtigung“ vorhanden – Rolle von Kay Brandes (Interessent, Eigentümer oder Makler) und Vorgangsart bitte prüfen", grund: "Termin „Objektbesichtigung Brautstraße 29“ (Property)" }),
+  fv({ id: "v-ref-pro-002", titel: "PRO-2026-002", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-002", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-malerwerk", "Ausführender Betrieb")], grund: "Verbindlichkeit VB-2026-002 (Finanzen)" }),
+  fv({ id: "v-ref-pro-004", titel: "PRO-2026-004", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-004", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-malerwerk", "Ausführender Betrieb")], grund: "Verbindlichkeit VB-2026-013 (Finanzen)" }),
+  fv({ id: "v-ref-pro-003", titel: "PRO-2026-003", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-003", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-sander", "GU-Partner")], grund: "Verbindlichkeit VB-2026-005 (Finanzen)" }),
+  fv({ id: "v-ref-pro-006", titel: "PRO-2026-006", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-006", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-sander", "GU-Partner")], grund: "Verbindlichkeit VB-2026-009 (Finanzen)" }),
+  fv({ id: "v-ref-pro-010", titel: "PRO-2026-010", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-010", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-bankhaus", "Finanzierer")], grund: "Verbindlichkeit VB-2026-010 (Finanzen)" }),
+  fv({ id: "v-ref-pro-012", titel: "PRO-2026-012", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-012", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-kuechenaktiv", "Ausführender Betrieb")], grund: "Verbindlichkeit VB-2026-012 (Finanzen)" }),
+];
+
+export const vorhaben: Vorhaben[] = [
+  ...vorhabenRoh.map((v): Vorhaben => {
+    const e = einstufen(v);
+    return { ...OBJEKT_VON_VORHABEN[v.id], ...v, geschaeftsbereich: e.geschaeftsbereich, rolle: e.rolle, pruefen: e.pruefen, herkunft: "abgeleitet", grund: `Vorgangsart „${v.art}“${v.bereich === "sanierung" ? " (Sanierungskunde)" : ""}` };
+  }),
+  ...weitereVorgaenge,
 ];
 
 let n = 0;
