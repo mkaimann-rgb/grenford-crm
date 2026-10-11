@@ -1,0 +1,19 @@
+# Abhängigkeiten
+node_modules/
+
+# Next.js Build
+.next/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
+
+# Geheimnisse – niemals einchecken
+.env
+.env.*
+!.env.example
+
+# System / Editor
+.DS_Store
+*.log
+.vercel

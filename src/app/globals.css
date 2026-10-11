@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/*
+ * GRENFORD CI – Design-Tokens
+ * Abgeleitet aus der freigegebenen Visualisierung "01_Dashboard_Grenford CI".
+ */
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+
+  /* Marke */
+  --color-navy-950: #021442;
+  --color-navy-900: #04205a;
+  --color-navy-800: #0b2d6b;
+  --color-navy-700: #173f86;
+  --color-royal-600: #1f5fbf;
+  --color-royal-500: #2f74d0;
+  --color-royal-300: #9fc6f8;
+  --color-royal-100: #e7f0fc;
+  --color-sand-400: #d9bea3;
+  --color-sand-200: #f1e6da;
+
+  /* Flächen */
+  --color-cream: #f8f4eb;
+  --color-cream-active: #e9e6df;
+  --color-cream-line: #ebe5d8;
+  --color-topbar: #eeeeef;
+  --color-line: #e8ebf1;
+  --color-line-soft: #f0f2f6;
+
+  /* Text */
+  --color-ink: #0d1b3e;
+  --color-ink-soft: #2c3b50;
+  --color-muted: #6b7690;
+  --color-muted-soft: #8c95b4;
+
+  /* Status */
+  --color-pos: #2d855f;
+  --color-pos-bg: #e6f4ec;
+  --color-neg: #c9373a;
+  --color-neg-bg: #fde8e9;
+  --color-warn: #a77a45;
+  --color-warn-bg: #fdf3e3;
+  --color-draft: #4b5f84;
+  --color-draft-bg: #eaf2fd;
+
+  /* Finanzseiten (Vorlage „05_Finanzen_Eingang CI“) */
+  --color-fin-ink: #1a2da5;
+  --color-fin-text: #34479a;
+  --color-fin-muted: #6474a6;
+  --color-fin-line: #eef0f6;
+  --color-fin-green: #16a070;
+  --color-fin-green-bg: #e6f7ef;
+  --color-fin-blue: #0b2aa0;
+  --color-fin-blue-bg: #e6eefc;
+  --color-fin-lavender: #ebeaf9;
+  --color-fin-amber: #a8792c;
+  --color-fin-amber-bg: #fdf3dc;
+  --color-fin-red: #c31425;
+  --color-fin-red-bg: #fde8ea;
+  --color-fin-orange: #e07a14;
+
+  --shadow-card: 0 1px 2px rgb(16 32 72 / 0.04), 0 2px 8px rgb(16 32 72 / 0.04);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Feine Scrollbalken passend zur CI */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d6dae4 transparent;
+}
+
+@layer components {
+  .card {
+    @apply rounded-[10px] border border-line bg-white shadow-card;
+  }
+  .card-title {
+    @apply font-serif text-[17px] font-semibold tracking-[-0.01em] text-navy-900;
+  }
+  .link-more {
+    @apply inline-flex shrink-0 items-center gap-1 whitespace-nowrap text-[11.5px] font-medium text-royal-500 hover:text-royal-600;
+  }
+  .focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-royal-500/60 focus-visible:ring-offset-1;
+  }
+}
+
+/* Smartphone/Tablet: Rasterzellen dürfen schmaler als ihr Inhalt werden (verhindert horizontales Scrollen).
+   Desktop-Layout (≥ 1024 px) bleibt unverändert. */
+@media (max-width: 1023px) {
+  .grid > * {
+    min-width: 0;
+  }
+}
