@@ -25,6 +25,7 @@ import {
   type ZeitraumKey,
 } from "@/lib/finanzen/logic";
 import * as td from "@/lib/testdata/finanzen";
+import { useCrm } from "@/lib/crm/store";
 import { euro } from "@/lib/format";
 import { FinanzKpis } from "./FinanzKpis";
 import { EingangAuszahlungChart, SaldoChart } from "./ZahlungsCharts";
@@ -33,8 +34,6 @@ import { ZahlungsTabelle, type Spalte } from "./ZahlungsTabelle";
 
 const NICHT_IMPLEMENTIERT = "ist noch nicht implementiert (Testversion).";
 
-const alleEingaenge = eingangZeilen(td.forderungen, td.zahlungseingaenge, td.STICHTAG);
-const alleAuszahlungen = auszahlungZeilen(td.verbindlichkeiten, td.auszahlungen, td.STICHTAG);
 const ZEITRAEUME = zeitraeume(td.STICHTAG);
 
 const eingangSpalten: Spalte<EingangZeile>[] = [
@@ -70,6 +69,9 @@ function deltaPct(aktuell: number, vorjahr: number) {
 }
 
 export function EingangBezahltView() {
+  // Gemeinsame Finanzdatenbasis (Store): dieselben Belege wie Forderungen, Verbindlichkeiten und Provisionen
+  const crm = useCrm();
+  const { forderungen, zahlungseingaenge, verbindlichkeiten, auszahlungen } = crm;
   const [zeitraumKey, setZeitraumKey] = useState<ZeitraumKey>("jahr");
   const [filter, setFilter] = useState<Filter>(LEERER_FILTER);
   const [gruppe, setGruppe] = useState<"monat" | "quartal">("monat");
@@ -109,11 +111,13 @@ export function EingangBezahltView() {
   }, [exportOffen]);
 
   const daten = useMemo(() => {
+    const alleEingaenge = eingangZeilen(forderungen, zahlungseingaenge, td.STICHTAG);
+    const alleAuszahlungen = auszahlungZeilen(verbindlichkeiten, auszahlungen, td.STICHTAG);
     const einK = filterKennzahlen(alleEingaenge, filter, zeitraum);
     const ausK = filterKennzahlen(alleAuszahlungen, filter, zeitraum);
     const einT = filterTabelle(alleEingaenge, filter, zeitraum, (r) => [r.rechnungNr, r.kunde]);
     const ausT = filterTabelle(alleAuszahlungen, filter, zeitraum, (r) => [r.verbindlichkeitNr, r.empfaenger, r.referenz]);
-    const bestand = forderungsbestand(td.forderungen, td.zahlungseingaenge, td.STICHTAG, filter.bereich || undefined);
+    const bestand = forderungsbestand(forderungen, zahlungseingaenge, td.STICHTAG, filter.bereich || undefined);
     // Vorjahresvergleich nur ohne Zusatzfilter und für „Dieses Jahr“ (nur dafür liegen Vergleichswerte vor)
     const vergleich = zeitraum.key === "jahr" && !filter.bereich && !filter.typ;
     return {
@@ -130,7 +134,7 @@ export function EingangBezahltView() {
       balken: balkenReihe(einK, ausK, zeitraum, td.STICHTAG, gruppe),
       kumuliert: kumulierteReihe(einK, ausK, zeitraum, td.STICHTAG),
     };
-  }, [filter, zeitraum, gruppe]);
+  }, [filter, zeitraum, gruppe, forderungen, zahlungseingaenge, verbindlichkeiten, auszahlungen]);
 
   const aktiveFilter = [filter.suche, filter.bereich, filter.typ, filter.status].filter(Boolean).length;
 
