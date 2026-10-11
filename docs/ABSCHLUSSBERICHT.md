@@ -83,7 +83,8 @@ Die Browser-Skripte liegen in `tests/e2e/` und sind dort beschrieben. Screenshot
 2. Der feste Stichtag 10.10.2026 ist für echte Nutzung auf das Tagesdatum umzustellen. Das geht zusammen mit der Datenbank.
 3. Die Unterphasen von Projects sind ein Vorschlag (die Vorlage nennt nur die Hauptphasen).
 4. Smartphone 390 px: Im Dashboard ragt der Umschalter „Monat/Quartal/Jahr“ in der Diagrammkarte wenige Pixel über den Kartenrand. Die Seite scrollt nicht. Bewusst nicht geändert, um das freigegebene Dashboard nicht anzutasten.
-5. Es sind keine offenen Programmfehler bekannt. Alle während der QA gefundenen Abweichungen wurden behoben:
+5. **Dashboard-Kennzahlen sind noch statisch**: Die Kacheln des freigegebenen Dashboards (z. B. „Offene Forderungen € 482.000“, Umsatz, Pipeline) stammen aus den Dashboard-Testdaten von Stufe 1 und sind nicht an die Finanzmodule angebunden. Laut Finanzmodul sind zum Stichtag 640.000 € offen (480.000 € nicht überfällig + 160.000 € überfällig). Die Anbindung würde die Werte im freigegebenen Dashboard ändern und ist deshalb nicht eigenmächtig erfolgt (siehe Abschnitt 6).
+6. Es sind keine offenen Programmfehler bekannt. Alle während der QA gefundenen Abweichungen wurden behoben:
    - Smartphone-Überbreiten auf Detailseiten und im Dashboard
    - Topbar 3 px versetzt
    - Diagramm-Warnungen
@@ -115,3 +116,4 @@ Bitte bestätigen oder korrigieren Sie diese Punkte (Details in `docs/UMSETZUNGS
 - Brautstraße 29: Eigentümer und Rolle
 - Käufer Berlin-Schöneberg
 - Bemessungsgrundlage der Empfehlungsprovision: vor oder nach Provisionsbeteiligungen Dritter
+- Dashboard-Kennzahlen an die gemeinsame Finanz- und Vorgangsdatenbasis anbinden? Die Werte im freigegebenen Dashboard ändern sich dadurch, das Layout bleibt gleich.
