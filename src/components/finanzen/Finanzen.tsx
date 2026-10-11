@@ -9,7 +9,7 @@ import { useCrm } from "@/lib/crm/store";
 import { datumDe } from "@/lib/crm/logic";
 import { MAHNSTUFEN, beteiligungsbetrag } from "@/lib/crm/module";
 import { GESCHAEFTSBEREICHE } from "@/lib/crm/types";
-import { finanzKennzahlen, forderungZeilen, naechsteBelegNr, pruefeZahlung, verbindlichkeitZeilen, type ForderungZeile, type VerbindlichkeitZeile } from "@/lib/finanzen/buchung";
+import { finanzKennzahlen, forderungZeilen, pruefeZahlung, verbindlichkeitZeilen, type ForderungZeile, type VerbindlichkeitZeile } from "@/lib/finanzen/buchung";
 import { downloadCsv } from "@/lib/csv";
 import { euro, euroCompact } from "@/lib/format";
 import { BereichMarke, Button, FilterSelect, SearchInput, StatusBadge, Tabs } from "@/components/ui/controls";
@@ -42,10 +42,10 @@ function ZahlungDialog({ art, nr, rest, refId, onClose }: { art: "eingang" | "au
       onClose={onClose}
       speichern={(w) => {
         if (art === "eingang") {
-          const id = naechsteBelegNr("ZE-", crm.zahlungseingaenge.map((z) => z.id));
+          const id = crm.nummer("zahlungseingang");
           crm.speichere("zahlungseingaenge", { id, datum: text(w.datum), rechnungNr: nr, betrag: zahl(w.betrag) }, { ref: refId ?? nr, text: `Zahlungseingang ${id} über ${euro(zahl(w.betrag))} auf ${nr}` });
         } else {
-          const id = naechsteBelegNr("AZ-", crm.auszahlungen.map((z) => z.id));
+          const id = crm.nummer("auszahlung");
           crm.speichere("auszahlungen", { id, datum: text(w.datum), verbindlichkeitNr: nr, betrag: zahl(w.betrag) }, { ref: refId ?? nr, text: `Auszahlung ${id} über ${euro(zahl(w.betrag))} auf ${nr}` });
         }
         toast(`${art === "eingang" ? "Zahlungseingang" : "Auszahlung"} verbucht ${TESTMODUS}`);

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Area, CartesianGrid, ComposedChart, Line, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { YTick } from "./AxisTick";
-import { aktuellerMonat, umsatzentwicklung } from "@/lib/testdata/dashboard";
+import { useDashboard } from "./useDashboard";
 
 const NAVY = "#0b2d6b";
 const SAND = "#d2a77a";
@@ -18,11 +18,12 @@ function formatTsd(v: number) {
 export function RevenueChart() {
   // Monat/Quartal werden mit echten Buchungsdaten befüllt; in Stufe 1 zeigt jede Auswahl die Jahressicht.
   const [range, setRange] = useState<Range>("Jahr");
+  const { umsatzentwicklung, aktuellerMonat, umsatzAchse, jahr } = useDashboard();
 
   return (
     <section className="card flex flex-col px-[14px] pb-[4px] pt-[11px]" aria-labelledby="umsatz-title">
       <div className="flex items-start justify-between gap-3">
-        <h2 id="umsatz-title" className="card-title">Umsatzentwicklung 2026</h2>
+        <h2 id="umsatz-title" className="card-title">Umsatzentwicklung {jahr}</h2>
         <div className="flex gap-[6px]" role="group" aria-label="Zeitraum">
           {ranges.map((r) => (
             <button
@@ -75,7 +76,7 @@ export function RevenueChart() {
                 );
               }}
             />
-            <YAxis interval={0} axisLine={false} tickLine={false} width={70} domain={[0, 400]} ticks={[0, 100, 200, 300, 400]} tick={(p) => <YTick {...p} format={formatTsd} />} />
+            <YAxis interval={0} axisLine={false} tickLine={false} width={70} domain={[0, umsatzAchse.max]} ticks={umsatzAchse.ticks} tick={(p) => <YTick {...p} format={formatTsd} />} />
             <Tooltip
               formatter={(v, name) => [formatTsd(Number(v)), name]}
               contentStyle={{ borderRadius: 8, border: "1px solid #e8ebf1", fontSize: 12 }}

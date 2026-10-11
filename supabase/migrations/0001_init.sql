@@ -417,6 +417,7 @@ create table kaeuferprozesse (
   status             text not null,
   letzter_kontakt    date,
   suchauftrag_id     text references suchauftraege (id),
+  pruefen            text,                          -- Rolle/Stand fachlich nicht eindeutig belegt (Prüfhinweis)
   verantwortlich_id  text references benutzer (id),
   erstellt_am        date not null default current_date,
   notiz              text,
@@ -525,6 +526,9 @@ create table provisionsbeteiligungen (
   grund            text not null default '',
   anteil           numeric(6,3) not null default 0,  -- individueller Satz, KEIN automatischer Standardsatz
   festbetrag       numeric(14,2),
+  -- true = vorrangiger externer Makleranteil: mindert die Bemessungsgrundlage der Empfehlungsprovision;
+  -- false = interne Provisionsbeteiligung (kein Abzug)
+  vorrangig        boolean not null default false,
   basis            numeric(14,2) not null default 0,
   faelligkeit      text not null default '',
   status           text not null,

@@ -3,10 +3,10 @@
 import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Ellipsis, Plus } from "lucide-react";
+import { CircleAlert, Ellipsis, Plus } from "lucide-react";
 import { useCrm } from "@/lib/crm/store";
 import { datumDe } from "@/lib/crm/logic";
-import { KAEUFER_STATUS, PHASEN_INVESTMENT, PHASEN_PROPERTY, naechsteNummer, phaseTitel, type Kaeuferprozess, type Phase } from "@/lib/crm/module";
+import { KAEUFER_STATUS, PHASEN_INVESTMENT, PHASEN_PROPERTY, phaseTitel, type Kaeuferprozess, type Phase } from "@/lib/crm/module";
 import { HREF } from "@/lib/crm/projektion";
 import { euroCompact } from "@/lib/format";
 import { Avatar, Menu, StatusBadge } from "@/components/ui/controls";
@@ -79,7 +79,7 @@ export function KaeuferprozessDetail({ k, phasen, objektTitel }: { k: Kaeuferpro
         }
       >
         <div className="grid grid-cols-2 gap-2 border-b border-line-soft pb-2 text-[11.5px] sm:grid-cols-5">
-          {[["Käufer", name], ["Typ", k.typ], ["Zielkaufpreis", euroCompact(k.indikation)], ["Wahrscheinl.", `${k.wahrscheinlichkeit} %`], ["Letzter Kontakt", datumDe(k.letzterKontakt)]].map(([l, w]) => (
+          {[[k.status === "Gekauft" ? "Käufer" : "Kaufinteressent", name], ["Typ", k.typ], ["Zielkaufpreis", euroCompact(k.indikation)], ["Wahrscheinl.", `${k.wahrscheinlichkeit} %`], ["Letzter Kontakt", datumDe(k.letzterKontakt)]].map(([l, w]) => (
             <div key={l} className="min-w-0"><div className="truncate text-muted" title={l}>{l}</div><div className="truncate text-ink" title={w}>{w}</div></div>
           ))}
         </div>
@@ -89,6 +89,7 @@ export function KaeuferprozessDetail({ k, phasen, objektTitel }: { k: Kaeuferpro
             {phasen.flatMap((p) => p.unter.map((u) => <option key={u.code} value={u.code}>{u.code} – {u.titel}</option>))}
           </select>
           <span className="text-muted">Status:</span><StatusBadge status={k.status} />
+          {k.pruefen && <span className="flex w-full items-start gap-1.5 rounded-[6px] bg-warn-bg px-2 py-1 text-[11px] text-warn"><CircleAlert className="mt-[1px] h-3.5 w-3.5 shrink-0" />Prüfen: {k.pruefen}</span>}
           {k.suchauftragId && <span className="text-muted">aus Suchauftrag <Link className="text-royal-600 hover:underline" href={k.bereich === "Investment" ? HREF.suchI(k.suchauftragId) : HREF.suchP(k.suchauftragId)}>{k.suchauftragId}</Link></span>}
         </div>
       </Panel>
@@ -126,8 +127,7 @@ export function KaeuferprozessModal({ bereich, projektId, initial, onClose }: { 
       }}
       onClose={onClose}
       speichern={(w) => {
-        const prefix = bereich === "Investment" ? "INV-OPT-" : "PROP-OPT-";
-        const id = initial?.id ?? naechsteNummer(prefix, crm.kaeuferprozesse.map((k) => k.id), 4);
+        const id = initial?.id ?? crm.nummer(bereich === "Investment" ? "kaeuferInvestment" : "kaeuferProperty");
         crm.speichere("kaeuferprozesse", {
           ...(initial ?? { erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, status: "Aktiv" as const, letzterKontakt: crm.heute }),
           id, bereich, projektId, kaeufer: refAus(w.kaeufer)!, ansprechpartnerId: text(w.ansprechpartnerId) || undefined, typ: text(w.typ), indikation: zahl(w.indikation), wahrscheinlichkeit: zahl(w.wahrscheinlichkeit), phase: text(w.phase),

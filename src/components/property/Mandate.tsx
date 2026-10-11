@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { BarChart3, Building2, CircleDot, Clock3, FolderOpen, Handshake, Home, Layers, MapPin, Search, ShieldCheck, Target, TrendingUp, Wallet } from "lucide-react";
 import { useCrm } from "@/lib/crm/store";
 import { datumDe } from "@/lib/crm/logic";
-import { MANDAT_STATUS, PHASEN_PROPERTY, VERMARKTUNG_STATUS, naechsteNummer, passend, phaseTitel, type PropertyMandat } from "@/lib/crm/module";
+import { MANDAT_STATUS, PHASEN_PROPERTY, VERMARKTUNG_STATUS, passend, phaseTitel, type PropertyMandat } from "@/lib/crm/module";
 import { HREF } from "@/lib/crm/projektion";
 import type { Objekt } from "@/lib/crm/types";
 import { euroCompact, euroMio } from "@/lib/format";
@@ -130,7 +130,7 @@ export function MandatModal({ initial, onClose, vorbelegung }: { initial?: Prope
       }}
       onClose={onClose}
       speichern={(w) => {
-        const id = initial?.id ?? naechsteNummer(`PROP-${crm.heute.slice(0, 4)}-`, crm.propertyMandate.map((x) => x.id));
+        const id = initial?.id ?? crm.nummer("propertyMandat");
         crm.speichere("propertyMandate", {
           erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, tags: [], beteiligte: [], ...m,
           id, objektId: text(w.objektId), mandatstyp: text(w.mandatstyp), eigentuemer: refAus(w.eigentuemer), preis: zahl(w.preis), courtageSatz: zahl(w.courtageSatz), courtageModell: text(w.courtageModell),

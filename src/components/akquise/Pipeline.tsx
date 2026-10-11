@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight, Building2, CalendarPlus, CircleDot, ClipboardList, FileText, FileUp, Flag, Mail, MapPin, NotebookPen, PauseCircle, Plus, Star, Target, Trophy, UserRound, Wallet, XCircle } from "lucide-react";
 import { useCrm } from "@/lib/crm/store";
 import { datumDe, naechste, notizen } from "@/lib/crm/logic";
-import { AKQUISE_STATUS, PIPELINE_STUFEN, PRIORITAETEN_MODUL, naechsteNummer, type Akquise } from "@/lib/crm/module";
+import { AKQUISE_STATUS, PIPELINE_STUFEN, PRIORITAETEN_MODUL, type Akquise } from "@/lib/crm/module";
 import { HREF } from "@/lib/crm/projektion";
 import { GESCHAEFTSBEREICHE, type Geschaeftsbereich } from "@/lib/crm/types";
 import { euro, euroCompact, euroMio } from "@/lib/format";
@@ -122,7 +122,7 @@ export function AkquiseModal({ initial, onClose }: { initial?: Akquise; onClose:
       pruefen={(w) => (zahl(w.wahrscheinlichkeit) > 100 ? { wahrscheinlichkeit: "0 bis 100" } : ({} as Record<string, string>))}
       onClose={onClose}
       speichern={(w) => {
-        const id = initial?.id ?? naechsteNummer(`AK-${crm.heute.slice(0, 4)}-`, crm.akquise.map((a) => a.id));
+        const id = initial?.id ?? crm.nummer("akquise");
         crm.speichere("akquise", {
           erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, tags: [], checkliste: [], bewertung: "", kooperationsart: "Alleinmandat", vereinbarung: "", erwarteterAbschluss: "", ...initial,
           id, titel: text(w.titel), bereich: text(w.bereich) as Geschaeftsbereich, quelle: text(w.quelle), objektart: text(w.objektart), kunde: refAus(w.kunde), ansprechpartnerId: text(w.ansprechpartnerId) || undefined, eigentuemer: refAus(w.eigentuemer),
@@ -142,10 +142,9 @@ function useUebernahme() {
   const toast = useToast();
   const router = useRouter();
   return (a: Akquise) => {
-    const jahr = crm.heute.slice(0, 4);
     let ziel: { id: string; href: string };
     if (a.bereich === "Investment") {
-      const id = naechsteNummer(`INV-${jahr}-`, crm.investmentProjekte.map((x) => x.id));
+      const id = crm.nummer("investmentProjekt");
       crm.speichere("investmentProjekte", {
         id, erstelltAm: crm.heute, verantwortlichId: a.verantwortlichId, titel: a.titel, objektId: a.objektId ?? crm.objektZuordnen(a.titel, a.ort), assetklasse: a.objektart || "Mehrfamilienhaus", standort: a.ort, volumen: a.volumen, zielpreis: "",
         phase: "A1", status: "Aktiv", naechsterSchritt: a.naechsterSchritt, wiedervorlage: a.wiedervorlage, eigentuemer: a.eigentuemer, vermarktungsart: a.tags.includes("Off-Market") ? "Off-Market" : "Exklusiv",
@@ -154,7 +153,7 @@ function useUebernahme() {
       }, { ref: id, text: `Projekt aus Akquise ${a.id} übernommen – Stammdaten verknüpft, keine Kopie` });
       ziel = { id, href: HREF.invest(id) };
     } else if (a.bereich === "Property") {
-      const id = naechsteNummer(`PROP-${jahr}-`, crm.propertyMandate.map((x) => x.id));
+      const id = crm.nummer("propertyMandat");
       crm.speichere("propertyMandate", {
         id, erstelltAm: crm.heute, verantwortlichId: a.verantwortlichId, objektId: a.objektId ?? crm.objektZuordnen(a.titel, a.ort), mandatstyp: a.titel.toLowerCase().includes("vermietung") ? "Vermietung" : "Verkauf", eigentuemer: a.eigentuemer ?? a.kunde,
         preis: a.volumen, courtageSatz: 3.57, courtageModell: "Käufercourtage", status: "In Vorbereitung", vermarktung: "Vorbereitung", phase: "A1", naechsterSchritt: a.naechsterSchritt, wiedervorlage: a.wiedervorlage,
@@ -162,7 +161,7 @@ function useUebernahme() {
       }, { ref: id, text: `Mandat aus Akquise ${a.id} übernommen` });
       ziel = { id, href: HREF.mandat(id) };
     } else {
-      const id = naechsteNummer(`MAN-${jahr}-`, crm.projectsMandate.map((x) => x.id));
+      const id = crm.nummer("projectsMandat");
       crm.speichere("projectsMandate", {
         id, erstelltAm: crm.heute, verantwortlichId: a.verantwortlichId, kunde: a.kunde!, objektId: a.objektId, kundentyp: a.kunde?.art === "unternehmen" ? "Unternehmen" : "Privatkunde", sanierungsart: a.titel, status: "Planung", verguetungSatz: crm.einstellungen.provisionsstandards.Projects,
       }, { ref: id, text: `Mandat aus Akquise ${a.id} übernommen` });

@@ -1,14 +1,19 @@
-import { MapPin, UsersRound, Video, type LucideIcon } from "lucide-react";
-import { termine, type TerminArt } from "@/lib/testdata/dashboard";
+"use client";
+
+import { MapPin, Phone, UsersRound, Video, type LucideIcon } from "lucide-react";
+import type { TerminArt } from "@/lib/crm/dashboard";
+import { useDashboard } from "./useDashboard";
 import { MoreLink } from "./MoreLink";
 
 const artIcon: Record<TerminArt, { icon: LucideIcon; label: string }> = {
   video: { icon: Video, label: "Videocall" },
   ort: { icon: MapPin, label: "Vor-Ort-Termin" },
   person: { icon: UsersRound, label: "Persönliches Treffen" },
+  telefon: { icon: Phone, label: "Telefontermin" },
 };
 
 export function Appointments() {
+  const { termine } = useDashboard();
   return (
     <section className="card px-[11px] pb-[6px] pt-[12px]">
       <div className="flex items-center justify-between gap-2">
@@ -19,7 +24,7 @@ export function Appointments() {
         {termine.map((t, i) => {
           const { icon: Icon, label } = artIcon[t.art];
           return (
-            <li key={i} className="flex items-center gap-[12px] py-[4px]">
+            <li key={t.id} className="flex items-center gap-[12px] py-[4px]">
               <div className="flex h-[42px] w-[33px] shrink-0 flex-col items-center justify-center rounded-[5px] bg-line-soft">
                 <span className="font-serif text-[15px] font-bold leading-none text-navy-950">{t.tag}</span>
                 <span className="mt-[3px] text-[10px] leading-none text-ink-soft">{t.wochentag}</span>
@@ -33,6 +38,7 @@ export function Appointments() {
             </li>
           );
         })}
+        {!termine.length && <li className="py-[6px] text-[11px] text-muted">Keine anstehenden Termine.</li>}
       </ul>
     </section>
   );

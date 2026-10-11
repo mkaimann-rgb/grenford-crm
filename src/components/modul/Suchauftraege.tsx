@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { CircleX, FileSearch, Hourglass, HeartHandshake, Search, Sparkles } from "lucide-react";
 import { useCrm } from "@/lib/crm/store";
 import { datumDe, letzteAktivitaet } from "@/lib/crm/logic";
-import { PRIORITAETEN_MODUL, SUCH_STATUS, naechsteNummer, passend, type Suchauftrag } from "@/lib/crm/module";
+import { PRIORITAETEN_MODUL, SUCH_STATUS, passend, type Suchauftrag } from "@/lib/crm/module";
 import { HREF } from "@/lib/crm/projektion";
 import { euroCompact } from "@/lib/format";
 import { Avatar, Button, StatusBadge, Tabs } from "@/components/ui/controls";
@@ -180,7 +180,7 @@ export function SuchauftragModal({ bereich, initial, onClose }: { bereich: "Inve
       pruefen={(w) => (zahl(w.volumenBis) < zahl(w.volumenVon) ? { volumenBis: "„bis“ muss mindestens „von“ sein." } : ({} as Record<string, string>))}
       onClose={onClose}
       speichern={(w) => {
-        const id = initial?.id ?? naechsteNummer(`SRCH-${bereich[0]}-`, crm.suchauftraege.map((s) => s.id));
+        const id = initial?.id ?? crm.nummer(bereich === "Investment" ? "suchauftragInvestment" : "suchauftragProperty");
         crm.speichere("suchauftraege", { erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, verknuepft: [], ...initial, id, bereich, kunde: refAus(w.kunde)!, ansprechpartnerId: text(w.ansprechpartnerId) || undefined, typ: text(w.typ), mandatstyp: bereich === "Property" ? text(w.mandatstyp) : undefined, objektart: text(w.objektart), regionen: liste(w.regionen), volumenVon: zahl(w.volumenVon), volumenBis: zahl(w.volumenBis), status: text(w.status) as Suchauftrag["status"], prioritaet: text(w.prioritaet), zielzeitraum: text(w.zielzeitraum), kriterien: text(w.kriterien) }, { ref: id, text: initial ? "Suchauftrag geändert" : "Suchauftrag angelegt" });
         toast(`Suchauftrag ${id} gespeichert ${TESTMODUS}`);
       }}

@@ -3,13 +3,15 @@
 import Image from "next/image";
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { hervorgehobeneProjekte } from "@/lib/testdata/dashboard";
+import { useDashboard } from "./useDashboard";
 
 export function FeaturedProject() {
   const [index, setIndex] = useState(0);
-  const p = hervorgehobeneProjekte[index];
+  const hervorgehobeneProjekte = useDashboard().hervorgehoben;
   const count = hervorgehobeneProjekte.length;
+  const p = hervorgehobeneProjekte[Math.min(index, count - 1)];
   const next = () => setIndex((i) => (i + 1) % count);
+  if (!p) return null;
 
   return (
     <section className="relative overflow-hidden rounded-[10px] bg-[#0a1f45] text-white shadow-card" aria-roledescription="Karussell" aria-label="Hervorgehobene Vorgänge">

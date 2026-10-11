@@ -73,6 +73,9 @@ function zeile(v: Vorhaben, rolle: string, alle: Vorhaben[], objekte: Map<ID, Ob
 }
 
 /** Alle Vorgänge einer Person: als Kunde, als Beteiligte und (nachrangig) über verknüpfte Unternehmen */
+/** Rolle mit sichtbarem Prüfhinweis, falls nicht eindeutig belegt */
+export const rolleText = (b: { rolle: string; pruefen?: string }) => (b.pruefen && !/prüfen/i.test(b.rolle) ? `${b.rolle} – Rolle prüfen` : b.rolle);
+
 export function vorgaengeVonPerson(
   p: Pick<Person, "id" | "kontakte">,
   alle: Vorhaben[],
@@ -88,12 +91,13 @@ export function vorgaengeVonPerson(
     if (gesehen.has(v.id)) continue;
     if (v.personId === p.id) { out.push(zeile(v, v.rolle, alle, objekte)); gesehen.add(v.id); continue; }
     const b = v.beteiligte?.find((x) => x.art === "person" && x.id === p.id);
-    if (b) { out.push(zeile(v, b.rolle, alle, objekte)); gesehen.add(v.id); }
+    if (b) { out.push(zeile(v, rolleText(b), alle, objekte)); gesehen.add(v.id); }
   }
   for (const k of p.kontakte) {
     for (const v of alle) {
       if (gesehen.has(v.id)) continue;
-      const rolle = v.unternehmenId === k.unternehmenId ? v.unternehmenRolle : v.beteiligte?.find((x) => x.art === "unternehmen" && x.id === k.unternehmenId)?.rolle;
+      const bu = v.beteiligte?.find((x) => x.art === "unternehmen" && x.id === k.unternehmenId);
+      const rolle = v.unternehmenId === k.unternehmenId ? v.unternehmenRolle : bu && rolleText(bu);
       if (rolle) { out.push(zeile(v, rolle, alle, objekte, firmen.get(k.unternehmenId)?.name)); gesehen.add(v.id); }
     }
   }

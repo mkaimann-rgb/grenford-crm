@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Building2, CircleCheck, CircleDot, HeartHandshake, Search, Sparkles, Users, XCircle } from "lucide-react";
 import { useCrm } from "@/lib/crm/store";
 import { datumDe, letzteAktivitaet } from "@/lib/crm/logic";
-import { PROFIL_STATUS, naechsteNummer, passend, type Ankaufsprofil } from "@/lib/crm/module";
+import { PROFIL_STATUS, passend, type Ankaufsprofil } from "@/lib/crm/module";
 import { HREF } from "@/lib/crm/projektion";
 import { euroCompact } from "@/lib/format";
 import { Avatar, Button, StatusBadge, Tabs } from "@/components/ui/controls";
@@ -161,7 +161,7 @@ export function AnkaufsprofilModal({ initial, onClose }: { initial?: Ankaufsprof
       }}
       onClose={onClose}
       speichern={(w) => {
-        const id = initial?.id ?? naechsteNummer(`ANK-${crm.heute.slice(0, 4)}-`, crm.ankaufsprofile.map((a) => a.id));
+        const id = initial?.id ?? crm.nummer("ankaufsprofil");
         crm.speichere("ankaufsprofile", { erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, ...initial, id, unternehmenId: text(w.unternehmenId) || undefined, personId: text(w.personId) || undefined, investorentyp: text(w.investorentyp), status: text(w.status) as Ankaufsprofil["status"], assetklassen: liste(w.assetklassen), regionen: liste(w.regionen), renditeMin: zahl(w.renditeMin) || undefined, volumenVon: zahl(w.volumenVon), volumenBis: zahl(w.volumenBis), kriterien: text(w.kriterien) }, { ref: id, text: initial ? "Ankaufsprofil geändert" : "Ankaufsprofil angelegt" });
         toast(`Ankaufsprofil ${id} gespeichert ${TESTMODUS}`);
       }}

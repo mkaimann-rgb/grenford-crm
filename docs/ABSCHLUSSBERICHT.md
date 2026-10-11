@@ -8,13 +8,27 @@ https://grenford-crm-git-claude-grenford-f35e77-mkaimann-3010s-projects.vercel.a
 > werden nur im jeweiligen Browser zwischengespeichert. Für echte Kundendaten ist das System erst nach den unten
 > genannten Schritten geeignet.
 
+## 0. Fachliche Abschlusskorrekturen (vom Auftraggeber beauftragt, umgesetzt)
+
+| Nr. | Korrektur | Umsetzung |
+|---|---|---|
+| 1 | Dashboard aus der zentralen Datenbasis | Alle Kennzahlen, Diagramme, Top-Listen, Finanz-Tabs, Termine, Aufgaben und Aktivitäten werden aus denselben Daten wie die Fach- und Finanzmodule berechnet (`src/lib/crm/dashboard.ts`); feste Werte entfernt. Layout unverändert. Beispiel: Offene Forderungen 640.000 € = Finanzen → Forderungen. Ohne Vorjahresdaten zeigt „vs. Vorjahr“ ehrlich „k. A.“. |
+| 2 | Nummernkreise | Bestehende IDs/Referenzen unverändert. Neue Nummern zentral je Vorgangstyp und Geschäftsbereich (`src/lib/crm/nummern.ts`), geprüft gegen alle IDs und Referenzen; neu erfasste Objekte erhalten eine `OPP-`Nummer. |
+| 3 | Ungeklärte Zuordnungen | Strukturierter Prüfhinweis an Beteiligten und Käuferprozessen. Brautstraße 29 prüfbedürftig; **Benjamin Maspohl bei Berlin-Schöneberg nur Kaufinteressent** (kein bestätigter Käufer); „Käufer“ nur bei Status „Gekauft“. |
+| 4 | Empfehlungsprovision Investment/Property | 10 % der maßgeblichen GRENFORD-Netto-Courtage **nach Abzug vorrangiger externer Makleranteile**; interne Provisionsbeteiligungen werden nicht abgezogen; individuelle Vereinbarungen haben Vorrang. Neue Einordnung je Provisionsbeteiligung (intern / externer Makleranteil). |
+| 5 | Empfehlungsprovision Projects | 3 % der vertraglich maßgeblichen provisionspflichtigen Netto-Bausumme inkl. vereinbarter Nachträge; individuelle Vereinbarungen haben Vorrang. |
+| 6 | Projects-Unterphasen | Vorläufig beibehalten, als fachlich noch nicht endgültig freigegeben gekennzeichnet (Code, Dokumentation, Seite Projektprozesse). |
+
+Damit steht der Entwicklungsstand für die **Datenbank- und Google-Workspace-Integration** bereit (Schritte in Abschnitt 5). Es wurde keine produktive Datenbank- oder Google-Anbindung vorgenommen.
+
 ## 1. Ergebnis in vier Kategorien
 
 ### a) Vollständig umgesetzt (Oberfläche + Fachlogik, getestet)
 
 | Bereich | Module |
 |---|---|
-| Dashboard, Finanzen → Eingang/Bezahlt | freigegeben, pixelgleich erhalten (1536 px) |
+| Dashboard | freigegebenes Layout unverändert; alle Werte aus der zentralen Datenbasis |
+| Finanzen → Eingang/Bezahlt | freigegeben, pixelgleich erhalten (1536 px) |
 | Stammdaten (Phase A) | Unternehmen, Ansprechpartner, Privatkunden, Sanierungskunden, Aktivitäten; Geschäftsbereich auf Kontakt- **und** Vorgangsebene; Objekt-Stammsätze ohne Dubletten |
 | Akquise (B) | Pipeline 1–7, Übernahme in Investment/Property/Projects ohne Stammdaten-Kopie |
 | Investment (B) | Projekte (A–F), Käuferprozesse (mehrere je Projekt, eigene ID), Ankaufsprofile mit Matching, Suchaufträge mit Verknüpfung |
@@ -54,7 +68,8 @@ https://grenford-crm-git-claude-grenford-f35e77-mkaimann-3010s-projects.vercel.a
 - **Vorgänge**: Akquise `AK-`, Investment `INV-`, Käuferprozesse `INV-OPT-`/`PROP-OPT-`, Property-Mandate `PROP-`, Projects-Mandate `MAN-` und Projekte `PRO-`, Suchaufträge `SRCH-I-`/`SRCH-P-`, Ankaufsprofile `ANK-`, Interessenten `INT-`. Vollständige Tabelle in `docs/UMSETZUNGSPLAN.md`.
 - **Finanzkette**: erwartete Provision → entstandener Anspruch (`PRV-`) → Rechnung = Forderung (`RE-`) → Zahlungseingänge → Rest/überfällig. Verbindlichkeit (`VB-`) → Auszahlungen. Rest und Status werden immer berechnet, nie gespeichert. Geplante Zahlungen zählen nie als bezahlt.
 - **Projects**: Eine Vergabe mit Auftraggeber „Kunde“ (Standard) erzeugt **keine** GRENFORD-Verbindlichkeit. Nur Auftraggeber „GRENFORD“ erzeugt eine.
-- **Provisionen Netzwerk**: Empfehlungspartner haben einen Standard aus den Einstellungen, eine individuelle Vereinbarung hat Vorrang. Provisionsbeteiligte haben nur individuelle Vereinbarungen. Verbindlichkeiten entstehen erst auf ausdrückliche Aktion.
+- **Provisionen Netzwerk**: Empfehlungsprovision Investment/Property 10 % der GRENFORD-Netto-Courtage nach Abzug vorrangiger externer Makleranteile (interne Beteiligungen ohne Abzug), Projects 3 % der vertraglichen Netto-Bausumme inkl. Nachträge; individuelle Vereinbarung hat Vorrang. Provisionsbeteiligte haben nur individuelle Vereinbarungen. Verbindlichkeiten entstehen erst auf ausdrückliche Aktion.
+- **Rollen**: „Käufer“ nur bei abgeschlossenem Käuferprozess, sonst „Kaufinteressent“; nicht eindeutig belegte Rollen tragen einen sichtbaren Prüfhinweis.
 - **Mahnstufen** 1., 2. und Vollstreckung/Eskalation dienen nur der Nachverfolgung. Es werden keine automatischen Schritte ausgelöst.
 
 ## 3. Tests und Ergebnisse (11.10.2026)
@@ -64,16 +79,17 @@ https://grenford-crm-git-claude-grenford-f35e77-mkaimann-3010s-projects.vercel.a
 | TypeScript (`npm run typecheck`) | ✅ fehlerfrei |
 | ESLint (`npm run lint`) | ✅ fehlerfrei |
 | Produktions-Build (`npm run build`) | ✅ 43 Routen-Einträge, keine Warnungen |
-| Logiktests (`npm test`) | ✅ 51/51: Finanzlogik, Teilzahlungen, Kennzahlen = Summe der Einzelbuchungen, Eingang/Bezahlt unverändert, Nummernkreise, Phasen, Provisionsregeln, Anonymisierung, Vergaberegel, Matching, Projektion |
+| Logiktests (`npm test`) | ✅ 70/70: Finanzlogik, Teilzahlungen, Kennzahlen = Summe der Einzelbuchungen, Eingang/Bezahlt unverändert, Nummernkreise (Eindeutigkeit, keine Kollision mit Referenzen, bestehende IDs unverändert), Phasen, Empfehlungsprovision (externe Makleranteile, interne ohne Abzug, Vorrang individuell, Projects 3 %), Kaufinteressent/Käufer, Prüfhinweise, Dashboard = Finanzmodul, Anonymisierung, Vergaberegel, Matching, Projektion |
 | Datenbankregeln (`supabase/tests/regeln.sql`, Wegwerf-DB) | ✅ 9/9: Nummernkreis, Personen-Dublette, ungültiger Verweis, Teilzahlung/überfällig, Überzahlung, bezahlt, Audit, RLS fremdes Konto, RLS GRENFORD-Konto |
 | Integrationstest 1 Investment | ✅ Unternehmen → Kontakt → Projekt → 2 Käuferprozesse (+ Dublettenschutz) → Provision erwartet/entstanden → Rechnung → Teilzahlung 100.000 € (Rest 200.000 €), Überzahlung und Zukunftsbuchung abgewiesen → Verlauf, Forderungen, Eingang/Bezahlt |
 | Integrationstest 2 Property | ✅ Privatkunde → Suchauftrag → Objekt + Mandat → Käuferprozess → Status „Gekauft“ → Provision 23.400 € → Rechnung |
 | Integrationstest 3 Projects | ✅ Mandat → Projekt → 3 GU-Angebote → Vergleich (Spanne 8.400 €) → Memo anonymisiert → Vergabe durch Kunden (keine Verbindlichkeit) → Empfehlungsprovision 3 % von 80.000 € = 2.400 € → Verbindlichkeit → Teil-Auszahlung |
 | Integrationstest 4 Person bereichsübergreifend | ✅ dieselbe Person als Property-Käuferin und Projects-Bauherrin, genau ein Datensatz, beide Vorgänge sichtbar |
 | Integrationstest 5 Finanzkonsistenz | ✅ überfällige Posten mit Mahnstufen, Kennzahlen aus derselben Datenbasis (zusätzlich per Logiktest) |
-| Navigation | ✅ 38 Seiten × 5 Breiten (1536, 1440, 1280, Tablet 820, Smartphone 390): kein Fehlerstatus, keine Konsolenfehler, kein horizontales Scrollen |
+| Navigation | ✅ 40 Seiten × 5 Breiten (1536, 1440, 1280, Tablet 820, Smartphone 390): kein Fehlerstatus, keine Konsolenfehler, kein horizontales Scrollen |
 | Regression Phase A / Bereiche / Vorgänge | ✅ 29/29 · 26/26 · 16/16 (Erwartungen an neue Testdaten angepasst: 25 statt 24 Unternehmen, 8 statt 7 Investoren durch Maspohl Invest GmbH) |
-| Pixelvergleich Dashboard, Eingang/Bezahlt (1536 px) | ✅ identisch zur Freigabe |
+| Pixelvergleich Eingang/Bezahlt (1536 px) | ✅ identisch zur Freigabe |
+| Dashboard (1536 px, Tablet, Smartphone) | ✅ Layout unverändert, Werte aus der zentralen Datenbasis (beauftragte Änderung), kein horizontales Scrollen |
 
 Die Browser-Skripte liegen in `tests/e2e/` und sind dort beschrieben. Screenshots liegen in `docs/screenshots/gesamt-*.png`.
 
@@ -81,9 +97,9 @@ Die Browser-Skripte liegen in `tests/e2e/` und sind dort beschrieben. Screenshot
 
 1. Testmodus: Daten liegen nur im Browser. Bei mehreren Geräten oder Nutzern gibt es keinen gemeinsamen Stand, und das Leeren der Browserdaten setzt alles zurück.
 2. Der feste Stichtag 10.10.2026 ist für echte Nutzung auf das Tagesdatum umzustellen. Das geht zusammen mit der Datenbank.
-3. Die Unterphasen von Projects sind ein Vorschlag (die Vorlage nennt nur die Hauptphasen).
+3. Die Unterphasen von Projects sind vorläufig und fachlich noch nicht endgültig freigegeben.
 4. Smartphone 390 px: Im Dashboard ragt der Umschalter „Monat/Quartal/Jahr“ in der Diagrammkarte wenige Pixel über den Kartenrand. Die Seite scrollt nicht. Bewusst nicht geändert, um das freigegebene Dashboard nicht anzutasten.
-5. **Dashboard-Kennzahlen sind noch statisch**: Die Kacheln des freigegebenen Dashboards (z. B. „Offene Forderungen € 482.000“, Umsatz, Pipeline) stammen aus den Dashboard-Testdaten von Stufe 1 und sind nicht an die Finanzmodule angebunden. Laut Finanzmodul sind zum Stichtag 640.000 € offen (480.000 € nicht überfällig + 160.000 € überfällig). Die Anbindung würde die Werte im freigegebenen Dashboard ändern und ist deshalb nicht eigenmächtig erfolgt (siehe Abschnitt 6).
+5. Dashboard „vs. Vorjahr“: Die Testdaten enthalten keine Vorjahreswerte, daher „k. A.“; mit echten Daten wird der Vergleich automatisch berechnet.
 6. Es sind keine offenen Programmfehler bekannt. Alle während der QA gefundenen Abweichungen wurden behoben:
    - Smartphone-Überbreiten auf Detailseiten und im Dashboard
    - Topbar 3 px versetzt
@@ -107,13 +123,9 @@ Die Browser-Skripte liegen in `tests/e2e/` und sind dort beschrieben. Screenshot
    - Drive: Ordner je Vorgang
 8. **Produktion**: eigene Domain, EU-Region der Funktionen, Backups und Wiederherstellungstest. Erst danach den Merge in `main` und das Aufheben der Sperre in `vercel.json`.
 
-## 6. Bitte fachlich bestätigen
+## 6. Noch fachlich zu bestätigen (keine Blocker für die Integration)
 
-Bitte bestätigen oder korrigieren Sie diese Punkte (Details in `docs/UMSETZUNGSPLAN.md`, Abschnitt „Abweichungen“):
-
-- Nummernkreis Investment
-- Unterphasen Projects
-- Brautstraße 29: Eigentümer und Rolle
-- Käufer Berlin-Schöneberg
-- Bemessungsgrundlage der Empfehlungsprovision: vor oder nach Provisionsbeteiligungen Dritter
-- Dashboard-Kennzahlen an die gemeinsame Finanz- und Vorgangsdatenbasis anbinden? Die Werte im freigegebenen Dashboard ändern sich dadurch, das Layout bleibt gleich.
+- Einordnung der Test-Provisionsbeteiligungen: PROV-2026-001/-002 (Gemeinschaftsgeschäft Simple Invest) als vorrangiger externer Makleranteil; FinanConcept und Kay Brandes als intern.
+- Brautstraße 29: Eigentümer, Rolle von Kay Brandes und Vorgangsart.
+- Berlin-Schöneberg: Stand des Kaufinteressenten Maspohl (Phase D1/LOI).
+- Endgültige Projects-Unterphasen.

@@ -1,4 +1,4 @@
-import type { BelegStatus } from "@/lib/testdata/dashboard";
+import type { BelegStatus } from "@/lib/crm/dashboard";
 
 const styles: Record<BelegStatus, string> = {
   Überfällig: "bg-neg-bg text-neg",

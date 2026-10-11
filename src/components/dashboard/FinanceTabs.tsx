@@ -2,22 +2,25 @@
 
 import { useState } from "react";
 import { Ellipsis } from "lucide-react";
-import { bezahlt, bezahltAnzahl, offeneForderungen, verbindlichkeiten, type Beleg } from "@/lib/testdata/dashboard";
+import type { Beleg } from "@/lib/crm/dashboard";
+import { useDashboard } from "./useDashboard";
 import { euro } from "@/lib/format";
 import { MoreLink } from "./MoreLink";
 import { StatusBadge } from "./StatusBadge";
 
 /** Forderungen, Verbindlichkeiten und Zahlungen bleiben getrennte Datensätze – hier nur gemeinsam angezeigt. */
-const tabs = [
-  { id: "forderungen", label: "Offene Forderungen", count: offeneForderungen.length, rows: offeneForderungen, nrLabel: "Rechnungs-Nr.", partyLabel: "Kunde / Projekt", href: "/finanzen/forderungen" },
-  { id: "verbindlichkeiten", label: "Verbindlichkeiten", count: verbindlichkeiten.length, rows: verbindlichkeiten, nrLabel: "Gutschrift-Nr.", partyLabel: "Partner / Projekt", href: "/finanzen/verbindlichkeiten" },
-  { id: "bezahlt", label: "Bezahlt", count: bezahltAnzahl, rows: bezahlt, nrLabel: "Rechnungs-Nr.", partyLabel: "Kunde / Projekt", href: "/finanzen/provisionen" },
-] as const;
+type TabId = "forderungen" | "verbindlichkeiten" | "bezahlt";
 
 const VISIBLE_ROWS = 4;
 
 export function FinanceTabs() {
-  const [active, setActive] = useState<(typeof tabs)[number]["id"]>("forderungen");
+  const { forderungen, verbindlichkeiten, bezahlt } = useDashboard().belege;
+  const tabs: { id: TabId; label: string; count: number; rows: Beleg[]; nrLabel: string; partyLabel: string; href: string }[] = [
+    { id: "forderungen", label: "Offene Forderungen", count: forderungen.length, rows: forderungen, nrLabel: "Rechnungs-Nr.", partyLabel: "Kunde / Projekt", href: "/finanzen/forderungen" },
+    { id: "verbindlichkeiten", label: "Verbindlichkeiten", count: verbindlichkeiten.length, rows: verbindlichkeiten, nrLabel: "Gutschrift-Nr.", partyLabel: "Partner / Projekt", href: "/finanzen/verbindlichkeiten" },
+    { id: "bezahlt", label: "Bezahlt", count: bezahlt.length, rows: bezahlt, nrLabel: "Rechnungs-Nr.", partyLabel: "Kunde / Projekt", href: "/finanzen/eingang-bezahlt" },
+  ];
+  const [active, setActive] = useState<TabId>("forderungen");
   const tab = tabs.find((t) => t.id === active)!;
   const rows: readonly Beleg[] = tab.rows.slice(0, VISIBLE_ROWS);
 

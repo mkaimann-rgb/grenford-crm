@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { CircleCheck, CircleDot, Hourglass, HeartHandshake, Search, UserCheck, Users, XCircle } from "lucide-react";
 import { useCrm } from "@/lib/crm/store";
 import { datumDe, letzteAktivitaet } from "@/lib/crm/logic";
-import { INTERESSENT_STATUS, naechsteNummer, passend, type Interessent } from "@/lib/crm/module";
+import { INTERESSENT_STATUS, passend, type Interessent } from "@/lib/crm/module";
 import { HREF } from "@/lib/crm/projektion";
 import { euroCompact } from "@/lib/format";
 import { Avatar, Button, StatusBadge, Tabs } from "@/components/ui/controls";
@@ -163,7 +163,7 @@ export function InteressentModal({ initial, onClose }: { initial?: Interessent; 
       }}
       onClose={onClose}
       speichern={(w) => {
-        const id = initial?.id ?? naechsteNummer(`INT-${crm.heute.slice(0, 4)}-`, crm.interessenten.map((i) => i.id));
+        const id = initial?.id ?? crm.nummer("interessent");
         crm.speichere("interessenten", { erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, weitere: [], ...initial, id, ref: refAus(w.ref)!, ansprechpartnerId: text(w.ansprechpartnerId) || undefined, typ: text(w.typ), status: text(w.status) as Interessent["status"], objektarten: liste(w.objektarten), regionen: liste(w.regionen), budgetVon: zahl(w.budgetVon), budgetBis: zahl(w.budgetBis), kriterien: text(w.kriterien) }, { ref: id, text: initial ? "Interessentenprofil geändert" : "Interessent angelegt" });
         toast(`Interessent ${id} gespeichert ${TESTMODUS}`);
       }}

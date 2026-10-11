@@ -5,7 +5,7 @@
  */
 import type { Geschaeftsbereich, ID, Vorhaben, VorhabenStatus } from "./types.ts";
 import {
-  PHASEN_INVESTMENT, PHASEN_PROJECTS, PHASEN_PROPERTY, PIPELINE_STUFEN, phaseTitel,
+  PHASEN_INVESTMENT, PHASEN_PROJECTS, PHASEN_PROPERTY, PIPELINE_STUFEN, kaeuferRolle, phaseTitel,
   type Akquise, type Beteiligter, type InvestmentProjekt, type Kaeuferprozess, type Phase, type PropertyMandat,
   type ProjectsMandat, type ProjectsProjekt, type Provisionsbeteiligung, type Ref, type Ankaufsprofil, type Suchauftrag,
   type Interessent, type GUPartner, type Empfehlungspartner,
@@ -106,7 +106,7 @@ export function modulVorgaenge(m: ModulDaten): Vorhaben[] {
     const parent = k.bereich === "Investment" ? m.investmentProjekte.find((p) => p.id === k.projektId) : m.propertyMandate.find((p) => p.id === k.projektId);
     const phasen = k.bereich === "Investment" ? PHASEN_INVESTMENT : PHASEN_PROPERTY;
     out.push(v({ id: k.id, referenz: k.id, href: k.bereich === "Investment" ? HREF.investKp(k.id) : HREF.propKp(k.id), titel: parent && "titel" in parent ? parent.titel : k.projektId, art: `Käuferprozess · ${phaseTitel(phasen, k.phase)}`, geschaeftsbereich: k.bereich, status: statusVon(k.status), objektId: parent?.objektId, budget: k.indikation, fortschritt: fortschritt(phasen, k.phase),
-      beteiligte: dedupeBet([{ ...k.kaeufer, rolle: k.bereich === "Investment" ? "Käufer (Investor)" : "Kaufinteressent / Käufer" }, ...(k.ansprechpartnerId ? [{ art: "person" as const, id: k.ansprechpartnerId, rolle: "Ansprechpartner Käufer" }] : [])]), grund: `Käuferprozess zu ${k.projektId}` }));
+      beteiligte: dedupeBet([{ ...k.kaeufer, rolle: kaeuferRolle(k), pruefen: k.pruefen }, ...(k.ansprechpartnerId ? [{ art: "person" as const, id: k.ansprechpartnerId, rolle: k.status === "Gekauft" ? "Ansprechpartner Käufer" : "Ansprechpartner Kaufinteressent", pruefen: k.pruefen }] : [])]), pruefen: k.pruefen, grund: `Käuferprozess zu ${k.projektId}` }));
   }
   for (const p of m.propertyMandate) {
     out.push(v({ id: p.id, referenz: p.id, href: HREF.mandat(p.id), titel: p.id, art: `Property-Mandat (${p.mandatstyp}) · ${phaseTitel(PHASEN_PROPERTY, p.phase)}`, geschaeftsbereich: "Property", status: statusVon(p.status), objektId: p.objektId, budget: p.preis, fortschritt: fortschritt(PHASEN_PROPERTY, p.phase),

@@ -5,6 +5,7 @@ import { HEUTE } from "./testdata";
 import { DATEN_VERSION, LOCAL_KEY, testdatenLaden, testdatenRepository, type CrmDaten } from "./repository";
 import { aktivitaetenFuerUnternehmen, betrifft, letzteAktivitaet } from "./logic";
 import { findeObjekt } from "./vorgaenge";
+import { naechsteFreieNummer, vergebeneIds, type NummernSchluessel } from "./nummern";
 import { modulVorgaenge, vorgangsIndex, type VorgangInfo } from "./projektion";
 import type { Aktivitaet, ID, Objekt, Person, Unternehmen, Vorhaben } from "./types";
 import type { Einstellungen } from "./module";
@@ -36,6 +37,10 @@ type Store = CrmDaten & {
   speichereAktivitaet: (a: Aktivitaet) => void;
   setzeErledigt: (id: ID, erledigt: boolean) => void;
   neueId: (prefix: string) => string;
+  /** Alle vergebenen IDs und Referenzen (Grundlage der Nummernvergabe) */
+  vergebeneIds: string[];
+  /** Nächste freie fachliche Nummer eines Nummernkreises (siehe nummern.ts) */
+  nummer: (kreis: NummernSchluessel) => string;
   unternehmenById: (id: ID) => Unternehmen | undefined;
   personById: (id: ID) => Person | undefined;
   /** Anzeigename eines Stammsatz-Verweises */
@@ -130,10 +135,12 @@ export function CrmStoreProvider({ children }: { children: ReactNode }) {
     const oMap = new Map(daten.objekte.map((o) => [o.id, o]));
     const vonUnternehmen = (u: Unternehmen) => aktivitaetenFuerUnternehmen(daten.aktivitaeten, u, daten.personen);
     const vonPerson = (p: Person) => daten.aktivitaeten.filter((a) => betrifft(a, "person", p.id));
+    const vergeben = vergebeneIds((Object.values(daten) as unknown[]).filter((x): x is unknown[] => Array.isArray(x)));
+    const nummer = (kreis: NummernSchluessel) => naechsteFreieNummer(kreis, vergeben, HEUTE);
     const objektZuordnen = (titel: string, ort: string, bild?: string) => {
       const vorhanden = findeObjekt(daten.objekte, titel, ort);
       if (vorhanden) return vorhanden.id;
-      const neu: Objekt = { id: `o-neu-${Date.now().toString(36)}-${++zaehler}`, titel: titel.trim(), ort: ort.trim(), bild };
+      const neu: Objekt = { id: `o-neu-${Date.now().toString(36)}-${++zaehler}`, nummer: nummer("objekt"), titel: titel.trim(), ort: ort.trim(), bild };
       setDaten((d) => (findeObjekt(d.objekte, titel, ort) ? d : { ...d, objekte: [neu, ...d.objekte] }));
       return neu.id;
     };
@@ -168,6 +175,8 @@ export function CrmStoreProvider({ children }: { children: ReactNode }) {
       speichereAktivitaet,
       setzeErledigt,
       neueId: (prefix) => `${prefix}-neu-${Date.now().toString(36)}-${++zaehler}`,
+      vergebeneIds: vergeben,
+      nummer,
       unternehmenById: (id) => uMap.get(id),
       personById: (id) => pMap.get(id),
       refName,

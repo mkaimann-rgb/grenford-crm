@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Bell, Building, CircleAlert, CircleCheck, CircleDashed, Database, Hash, KeyRound, ListChecks, Lock, Percent, Plug, RotateCcw, Shield, UserRound, Users } from "lucide-react";
+import { NUMMERNKREISE } from "@/lib/crm/nummern";
 import { useCrm } from "@/lib/crm/store";
 import {
   AKQUISE_STATUS, ANGEBOT_STATUS, BETEILIGUNG_STATUS, GU_STATUS, INTERESSENT_STATUS, INVEST_STATUS, KAEUFER_STATUS, MAHNSTUFEN, MANDAT_STATUS, PARTNER_STATUS,
@@ -60,26 +61,17 @@ export function EinstellungenSeite() {
   const [reset, setReset] = useState(false);
   const e = crm.einstellungen;
   const jahr = crm.heute.slice(0, 4);
-  const nummern: [string, string, string, number][] = [
-    ["Akquise", `AK-${jahr}-###`, crm.akquise.at(0)?.id ?? "", crm.akquise.length],
-    ["Investment-Projekte", `INV-${jahr}-###`, "", crm.investmentProjekte.length],
-    ["Käuferprozesse Investment", "INV-OPT-####", "", crm.kaeuferprozesse.filter((k) => k.bereich === "Investment").length],
-    ["Ankaufsprofile", `ANK-${jahr}-###`, "", crm.ankaufsprofile.length],
-    ["Suchaufträge Investment / Property", "SRCH-I-### / SRCH-P-###", "", crm.suchauftraege.length],
-    ["Objekte (Stammsatz)", `OPP-${jahr}-###`, "", crm.objekte.length],
-    ["Property-Mandate", `PROP-${jahr}-###`, "", crm.propertyMandate.length],
-    ["Käuferprozesse Property", "PROP-OPT-####", "", crm.kaeuferprozesse.filter((k) => k.bereich === "Property").length],
-    ["Interessenten", `INT-${jahr}-###`, "", crm.interessenten.length],
-    ["Projects-Mandate", `MAN-${jahr}-###`, "", crm.projectsMandate.length],
-    ["Projects-Projekte", `PRO-${jahr}-###`, "", crm.projectsProjekte.length],
-    ["Angebote", "ANG-###", "", crm.angebote.length],
-    ["GU-Partner / Empfehlungspartner", "GU-### / EP-###", "", crm.guPartner.length + crm.empfehlungspartner.length],
-    ["Provisionsbeteiligungen", `PROV-${jahr}-###`, "", crm.provisionsbeteiligungen.length],
-    ["Provisionsansprüche", `PRV-${jahr}-###`, "", crm.provisionen.length],
-    ["Rechnungen (Forderungen)", `RE-${jahr}-###`, "", crm.forderungen.length],
-    ["Verbindlichkeiten", `VB-${jahr}-###`, "", crm.verbindlichkeiten.length],
-    ["Zahlungseingänge / Auszahlungen", "ZE-### / AZ-###", "", crm.zahlungseingaenge.length + crm.auszahlungen.length],
-  ];
+  const bestand: Record<string, number> = {
+    akquise: crm.akquise.length, investmentProjekt: crm.investmentProjekte.length, kaeuferInvestment: crm.kaeuferprozesse.filter((k) => k.bereich === "Investment").length,
+    ankaufsprofil: crm.ankaufsprofile.length, suchauftragInvestment: crm.suchauftraege.filter((x) => x.bereich === "Investment").length, propertyMandat: crm.propertyMandate.length,
+    kaeuferProperty: crm.kaeuferprozesse.filter((k) => k.bereich === "Property").length, interessent: crm.interessenten.length, suchauftragProperty: crm.suchauftraege.filter((x) => x.bereich === "Property").length,
+    projectsMandat: crm.projectsMandate.length, projectsProjekt: crm.projectsProjekte.length, angebot: crm.angebote.length, guPartner: crm.guPartner.length, objekt: crm.objekte.length,
+    empfehlungspartner: crm.empfehlungspartner.length, empfehlung: crm.empfehlungen.length, provisionsbeteiligung: crm.provisionsbeteiligungen.length, provisionsanspruch: crm.provisionen.length,
+    rechnung: crm.forderungen.length, verbindlichkeit: crm.verbindlichkeiten.length, zahlungseingang: crm.zahlungseingaenge.length, auszahlung: crm.auszahlungen.length,
+  };
+  const nummern: [string, string, string, number][] = NUMMERNKREISE.map((k) => [
+    `${k.typ} · ${k.bereich}`, `${k.praefix(jahr)}${"#".repeat(k.stellen)} (nächste: ${crm.nummer(k.schluessel)})`, k.schluessel, bestand[k.schluessel] ?? 0,
+  ]);
   const rechte: [string, boolean, boolean, boolean][] = [
     ["Kunden & Stammdaten", true, true, false], ["Akquise & Investment", true, true, false], ["Property", true, true, false], ["Projects", true, true, false],
     ["Netzwerk & Provisionen", true, false, false], ["Finanzen", true, false, false], ["Einstellungen & Benutzer", true, false, false], ["Export (CSV)", true, true, false],
@@ -135,8 +127,8 @@ export function EinstellungenSeite() {
           )}
           {tab === "nummern" && (
             <Panel titel="Nummernkreise">
-              <div className="overflow-x-auto"><table className="w-full min-w-[520px] text-left text-[12px]"><thead className="text-[11px] text-muted"><tr><th className="py-1.5 font-normal">Datensatz</th><th className="font-normal">Format</th><th className="font-normal">Bestand</th></tr></thead><tbody className="divide-y divide-line-soft">{nummern.map(([n, f, , c]) => <tr key={n}><td className="py-2">{n}</td><td className="font-mono text-[11.5px]">{f}</td><td>{c}</td></tr>)}</tbody></table></div>
-              <p className="mt-2 text-[11px] text-muted">Neue Nummern werden fortlaufend je Kreis vergeben (höchste vorhandene + 1). In der Datenbank als eindeutige Schlüssel (UNIQUE) abgesichert.</p>
+              <div className="overflow-x-auto"><table className="w-full min-w-[520px] text-left text-[12px]"><thead className="text-[11px] text-muted"><tr><th className="py-1.5 font-normal">Datensatz</th><th className="font-normal">Format</th><th className="font-normal">Bestand</th></tr></thead><tbody className="divide-y divide-line-soft">{nummern.map(([n, f, k, c]) => <tr key={k}><td className="py-2">{n}</td><td className="font-mono text-[11.5px]">{f}</td><td>{c}</td></tr>)}</tbody></table></div>
+              <p className="mt-2 text-[11px] text-muted">Bestehende IDs und Referenzen bleiben unverändert. Neue Nummern werden je Vorgangstyp und Geschäftsbereich fortlaufend vergeben (höchste vorhandene + 1, geprüft gegen alle IDs und Referenzen). Finanzbelege laufen je Belegart fortlaufend über alle Bereiche (lückenlose Rechnungsnummern). In der Datenbank als eindeutige Schlüssel (UNIQUE) abgesichert.</p>
             </Panel>
           )}
           {tab === "status" && (

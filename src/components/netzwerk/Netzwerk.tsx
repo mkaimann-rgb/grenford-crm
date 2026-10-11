@@ -7,13 +7,13 @@ import { Building2, CircleDot, Coins, FolderOpen, HardHat, Home, Layers, MapPin,
 import { useCrm } from "@/lib/crm/store";
 import { datumDe } from "@/lib/crm/logic";
 import {
-  BETEILIGUNG_STATUS, PARTNER_STATUS, PHASEN_BETEILIGUNG, beteiligungsbetrag, empfehlungsprovision, naechsteNummer, phaseTitel,
+  BETEILIGUNG_STATUS, PARTNER_STATUS, PHASEN_BETEILIGUNG, beteiligungsbetrag, empfehlungsBemessung, empfehlungsprovision, phaseTitel,
   type Empfehlungspartner, type Provisionsbeteiligung,
 } from "@/lib/crm/module";
 import type { Empfehlung } from "@/lib/crm/testdata-module";
 import { HREF } from "@/lib/crm/projektion";
 import { GESCHAEFTSBEREICHE, type Geschaeftsbereich } from "@/lib/crm/types";
-import { bezahlt, naechsteBelegNr } from "@/lib/finanzen/buchung";
+import { bezahlt } from "@/lib/finanzen/buchung";
 import { euro, euroCompact, euroMio } from "@/lib/format";
 import { Avatar, BereichMarke, Button, Menu, StatusBadge, Tabs } from "@/components/ui/controls";
 import { Modal } from "@/components/ui/modal";
@@ -34,17 +34,9 @@ import { FinanzPanel } from "@/components/modul/FinanzPanel";
  * Investment/Property: GRENFORD-Netto-Courtage des Vorgangs (entstandene Ansprüche; sonst erwartete, gekennzeichnet).
  * Projects: provisionspflichtige Netto-Bausumme inkl. vereinbarter Nachträge (Vergabesumme) – erst nach Vergabe.
  */
-export function empfehlungsBasis(crm: ReturnType<typeof useCrm>, referenz: string): { bereich: Geschaeftsbereich | null; basis: number; art: string; erwartet: boolean } {
-  const info = crm.index.get(referenz);
-  const bereich = info?.bereich ?? (referenz.startsWith("PRO-") ? "Projects" : referenz.startsWith("PROP") ? "Property" : referenz.startsWith("INV") ? "Investment" : null);
-  if (bereich === "Projects") {
-    const p = crm.projectsProjekte.find((x) => x.id === referenz);
-    return { bereich, basis: p?.vergabe?.vergabesumme ?? 0, art: "Netto-Bausumme inkl. Nachträge", erwartet: !p?.vergabe };
-  }
-  const prov = crm.provisionen.filter((p) => p.referenz === referenz || crm.kaeuferprozesse.some((k) => k.id === p.referenz && k.projektId === referenz));
-  const entstanden = prov.filter((p) => p.status !== "Erwartet").reduce((s, p) => s + p.betrag, 0);
-  const erwartet = prov.filter((p) => p.status === "Erwartet").reduce((s, p) => s + p.betrag, 0);
-  return { bereich, basis: entstanden || erwartet, art: "GRENFORD-Netto-Courtage", erwartet: !entstanden };
+/** Bemessungsgrundlage der Empfehlungsprovision – Regel siehe empfehlungsBemessung() in module.ts */
+export function empfehlungsBasis(crm: ReturnType<typeof useCrm>, referenz: string) {
+  return empfehlungsBemessung(referenz, crm, crm.index.get(referenz)?.bereich ?? null);
 }
 
 // ======================= Empfehlungspartner =======================
@@ -130,7 +122,7 @@ function EmpfehlungspartnerEinzel({ e, name, onClose }: { e: Empfehlungspartner;
   });
   const volumen = zeilen.reduce((s, z) => s + z.basis.basis, 0);
   const verbindlichkeitAnlegen = (z: (typeof zeilen)[number]) => {
-    const nr = naechsteBelegNr(`VB-${crm.heute.slice(0, 4)}-`, crm.verbindlichkeiten.map((v) => v.nr));
+    const nr = crm.nummer("verbindlichkeit");
     const faellig = new Date(Date.parse(crm.heute) + 30 * 86_400_000).toISOString().slice(0, 10);
     crm.speichere("verbindlichkeiten", { nr, empfaenger: name, referenz: z.x.referenz, bereich: z.basis.bereich as Geschaeftsbereich, typ: "Empfehlungsprovision", betrag: z.r.betrag, faellig, empfaengerRef: e.unternehmenId ? { art: "unternehmen", id: e.unternehmenId } : { art: "person", id: e.personId }, quelle: z.x.id }, { ref: z.x.referenz, text: `Empfehlungsprovision ${euro(z.r.betrag)} für ${name} als Verbindlichkeit ${nr} angelegt` });
     crm.speichere("empfehlungen", { ...z.x, verbindlichkeitNr: nr }, { ref: e.id, text: `Empfehlung ${z.x.id}: Verbindlichkeit ${nr} angelegt (${z.r.quelle})` });
@@ -176,7 +168,7 @@ function EmpfehlungspartnerEinzel({ e, name, onClose }: { e: Empfehlungspartner;
                       <td className="py-2"><BereichMarke bereich={z.basis.bereich} /> <VorgangLink id={z.x.referenz} /></td>
                       <td><RefLink r={z.x.kunde} /></td>
                       <td>{datumDe(z.x.datum)}</td>
-                      <td>{z.basis.basis ? euro(z.basis.basis) : "—"}<div className="text-[10px] text-muted">{z.basis.art}{z.basis.erwartet ? " (noch nicht entstanden)" : ""}</div></td>
+                      <td>{z.basis.basis ? euro(z.basis.basis) : "—"}<div className="text-[10px] text-muted">{z.basis.art}{z.basis.erwartet ? " (noch nicht entstanden)" : ""}</div>{z.basis.abzug > 0 && <div className="text-[10px] text-muted">{euro(z.basis.courtage)} − {euro(z.basis.abzug)} ext. Makleranteil</div>}</td>
                       <td>{z.r.satz.toLocaleString("de-DE")} %<div className="text-[10px] text-muted">{z.r.quelle}</div></td>
                       <td className="font-semibold">{z.r.betrag ? euro(z.r.betrag) : "—"}</td>
                       <td>{z.vb ? z.vb.nr : z.basis.erwartet || !z.r.betrag ? <span className="text-muted">noch nicht fällig</span> : <button type="button" className="link-more" onClick={() => verbindlichkeitAnlegen(z)}>Verbindlichkeit anlegen</button>}</td>
@@ -225,7 +217,7 @@ function EmpfehlungspartnerModal({ initial, onClose }: { initial?: Empfehlungspa
       pruefen={(w) => (crm.empfehlungspartner.some((e) => e.personId === w.personId && e.id !== initial?.id) ? { personId: "Diese Person ist bereits als Empfehlungspartner erfasst." } : ({} as Record<string, string>))}
       onClose={onClose}
       speichern={(w) => {
-        const id = initial?.id ?? naechsteNummer("EP-", crm.empfehlungspartner.map((e) => e.id));
+        const id = initial?.id ?? crm.nummer("empfehlungspartner");
         const saetze: Empfehlungspartner["saetze"] = {};
         for (const b of GESCHAEFTSBEREICHE) { const v = w[`s${b}`]; if (typeof v === "string" && v.trim()) saetze[b] = zahl(v); }
         crm.speichere("empfehlungspartner", { erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, seit: crm.heute, ...initial, id, unternehmenId: text(w.unternehmenId) || undefined, personId: text(w.personId), kategorie: text(w.kategorie), status: text(w.status) as Empfehlungspartner["status"], bereiche: liste(w.bereiche) as Geschaeftsbereich[], saetze, kooperation: { status: text(w.koop), vom: text(w.vom) || undefined, laufzeit: initial?.kooperation.laufzeit ?? "Unbefristet" } }, { ref: id, text: initial ? "Empfehlungspartner geändert" : "Empfehlungspartner angelegt" });
@@ -254,7 +246,7 @@ function EmpfehlungModal({ partner, onClose }: { partner: Empfehlungspartner; on
       start={{ referenz: "", kunde: "", datum: crm.heute, satz: "", festbetrag: "", grund: "" }}
       onClose={onClose}
       speichern={(w) => {
-        const id = naechsteBelegNr("EMP-", crm.empfehlungen.map((x) => x.id));
+        const id = crm.nummer("empfehlung");
         const indiv = text(w.satz) || text(w.festbetrag) ? { satz: text(w.satz) ? zahl(w.satz) : undefined, festbetrag: text(w.festbetrag) ? zahl(w.festbetrag) : undefined, grund: text(w.grund) || "Projektbezogene Vereinbarung" } : undefined;
         const neu: Empfehlung = { id, partnerId: partner.id, referenz: text(w.referenz), kunde: refAus(w.kunde), datum: text(w.datum), individuell: indiv };
         crm.speichere("empfehlungen", neu, { ref: partner.id, text: `Empfehlung ${id} zu ${text(w.referenz)} erfasst` });
@@ -337,19 +329,20 @@ function BeteiligungModal({ initial, onClose }: { initial?: Provisionsbeteiligun
         { key: "referenz", label: "Vorgang", typ: "select", pflicht: true, breit: true, options: vorgaenge.map((v) => ({ value: v.id, label: `${v.id} – ${v.titel}` })) },
         { key: "art", label: "Beteiligungsart", typ: "select", pflicht: true, options: ["Kooperationsverkauf", "Gemeinschaftsgeschäft", "Planungspartner", "Tippgeber (individuell)"] },
         { key: "grund", label: "Beteiligungsgrund", typ: "text", pflicht: true },
+        { key: "vorrangig", label: "Einordnung", typ: "select", pflicht: true, breit: true, options: [{ value: "intern", label: "Interne Provisionsbeteiligung – kein Abzug von der Bemessungsgrundlage der Empfehlungsprovision" }, { value: "extern", label: "Vorrangiger externer Makleranteil – mindert die Bemessungsgrundlage der Empfehlungsprovision" }] },
         { key: "anteil", label: "Individueller Anteil (%)", typ: "zahl", pflicht: true },
         { key: "basis", label: "Berechnungsgrundlage: GRENFORD-Provision netto (€)", typ: "zahl", pflicht: true },
         { key: "status", label: "Status", typ: "select", pflicht: true, options: BETEILIGUNG_STATUS },
         { key: "faelligkeit", label: "Fälligkeit", typ: "datum" },
       ]}
-      start={{ beteiligter: refZu(initial?.beteiligter), referenz: initial?.referenz ?? "", art: initial?.art ?? "", grund: initial?.grund ?? "", anteil: initial ? String(initial.anteil).replace(".", ",") : "", basis: initial ? String(initial.basis) : "", status: initial?.status ?? "In Verhandlung", faelligkeit: initial?.faelligkeit ?? "" }}
+      start={{ beteiligter: refZu(initial?.beteiligter), referenz: initial?.referenz ?? "", art: initial?.art ?? "", grund: initial?.grund ?? "", vorrangig: initial?.vorrangig ? "extern" : "intern", anteil: initial ? String(initial.anteil).replace(".", ",") : "", basis: initial ? String(initial.basis) : "", status: initial?.status ?? "In Verhandlung", faelligkeit: initial?.faelligkeit ?? "" }}
       pruefen={(w) => (zahl(w.anteil) <= 0 || zahl(w.anteil) > 100 ? { anteil: "Anteil zwischen 0 und 100 %" } : ({} as Record<string, string>))}
       onClose={onClose}
       speichern={(w) => {
-        const id = initial?.id ?? naechsteNummer(`PROV-${crm.heute.slice(0, 4)}-`, crm.provisionsbeteiligungen.map((b) => b.id));
+        const id = initial?.id ?? crm.nummer("provisionsbeteiligung");
         const ref = text(w.referenz);
         const bereich = (crm.index.get(ref)?.bereich ?? "Investment") as Geschaeftsbereich;
-        crm.speichere("provisionsbeteiligungen", { erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, phase: "1.1", vereinbartAm: "", ...initial, id, beteiligter: refAus(w.beteiligter)!, referenz: ref, bereich, art: text(w.art), grund: text(w.grund), anteil: zahl(w.anteil), festbetrag: initial?.festbetrag, basis: zahl(w.basis), status: text(w.status) as Provisionsbeteiligung["status"], faelligkeit: text(w.faelligkeit) }, { ref: id, text: initial ? "Beteiligung geändert" : `Beteiligung an ${ref} angelegt` });
+        crm.speichere("provisionsbeteiligungen", { erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, phase: "1.1", vereinbartAm: "", ...initial, id, beteiligter: refAus(w.beteiligter)!, referenz: ref, bereich, art: text(w.art), vorrangig: text(w.vorrangig) === "extern", grund: text(w.grund), anteil: zahl(w.anteil), festbetrag: initial?.festbetrag, basis: zahl(w.basis), status: text(w.status) as Provisionsbeteiligung["status"], faelligkeit: text(w.faelligkeit) }, { ref: id, text: initial ? "Beteiligung geändert" : `Beteiligung an ${ref} angelegt` });
         toast(`Beteiligung ${id} gespeichert ${TESTMODUS}`);
       }}
     />
@@ -372,7 +365,7 @@ export function BeteiligungDetail({ id }: { id: string }) {
   const aufgaben = akt.filter((a) => a.typ === "Aufgabe");
   const speichern = (neu: Provisionsbeteiligung, t: string) => { crm.speichere("provisionsbeteiligungen", neu, { ref: b.id, text: t }); toast(`${t} ${TESTMODUS}`); };
   const verbindlichkeitAnlegen = () => {
-    const nr = naechsteBelegNr(`VB-${crm.heute.slice(0, 4)}-`, crm.verbindlichkeiten.map((x) => x.nr));
+    const nr = crm.nummer("verbindlichkeit");
     crm.speichere("verbindlichkeiten", { nr, empfaenger: crm.refName(b.beteiligter), referenz: b.referenz, bereich: b.bereich, typ: "Provision", betrag, faellig: b.faelligkeit || crm.heute, empfaengerRef: b.beteiligter, quelle: b.id }, { ref: b.id, text: `Verbindlichkeit ${nr} über ${euro(betrag)} angelegt` });
     speichern({ ...b, status: "Abgerechnet", verbindlichkeitNr: nr, phase: "4.1" }, `Abgerechnet – Verbindlichkeit ${nr}`);
   };
@@ -419,7 +412,7 @@ export function BeteiligungDetail({ id }: { id: string }) {
             <div className="space-y-[12px]">
               <BeteiligtePanel titel="Beteiligte (1)" beteiligte={[{ ...b.beteiligter, rolle: "Hauptbeteiligter" }]} />
               <Panel titel="Projektinformationen"><InfoList rows={[["Vorgang", v ? <Link key="v" href={v.href} className="text-royal-600 hover:underline">{v.titel}</Link> : b.referenz], ["Vorgangs-ID", b.referenz], ["Typ", v?.typ ?? "Altvorgang (nicht im CRM erfasst)"], ["Objekt", o ? `${o.titel} (${o.nummer ?? o.id})` : "—"], ["Standort", o?.ort ?? "—"], ["Status Vorgang", v?.status ?? "—"], ["Verantwortlicher", crm.benutzerName(b.verantwortlichId)]]} /></Panel>
-              <Panel titel="Beteiligungsdetails"><InfoList rows={[["Beteiligungsart", b.art], ["Geschäftsbereich", <BereichMarke key="b" bereich={b.bereich} />], ["Beteiligungsgrund", b.grund], ["Vereinbarter Anteil", b.festbetrag !== undefined ? `Festbetrag ${euro(b.festbetrag)} (individuell)` : `${b.anteil.toLocaleString("de-DE")} % an GRENFORD-Provision`], ["GRENFORD-Provision (netto)", euro(b.basis)], ["Auszahlungsbetrag (netto)", euro(betrag)], ["Status", <StatusBadge key="s" status={b.status} />], ["Vereinbart am", b.vereinbartAm ? datumDe(b.vereinbartAm) : "—"], ["Fälligkeit", b.faelligkeit ? datumDe(b.faelligkeit) : "—"], ["Verbindlichkeit", b.verbindlichkeitNr ?? "noch nicht abgerechnet"]]} /></Panel>
+              <Panel titel="Beteiligungsdetails"><InfoList rows={[["Beteiligungsart", b.art], ["Einordnung", b.vorrangig ? "Vorrangiger externer Makleranteil (mindert Basis Empfehlungsprovision)" : "Interne Provisionsbeteiligung (kein Abzug)"], ["Geschäftsbereich", <BereichMarke key="b" bereich={b.bereich} />], ["Beteiligungsgrund", b.grund], ["Vereinbarter Anteil", b.festbetrag !== undefined ? `Festbetrag ${euro(b.festbetrag)} (individuell)` : `${b.anteil.toLocaleString("de-DE")} % an GRENFORD-Provision`], ["GRENFORD-Provision (netto)", euro(b.basis)], ["Auszahlungsbetrag (netto)", euro(betrag)], ["Status", <StatusBadge key="s" status={b.status} />], ["Vereinbart am", b.vereinbartAm ? datumDe(b.vereinbartAm) : "—"], ["Fälligkeit", b.faelligkeit ? datumDe(b.faelligkeit) : "—"], ["Verbindlichkeit", b.verbindlichkeitNr ?? "noch nicht abgerechnet"]]} /></Panel>
             </div>
             <div className="space-y-[12px]">
               <Panel titel="Beteiligungsvereinbarung" aktion={<StatusBadge status={b.status} />}>

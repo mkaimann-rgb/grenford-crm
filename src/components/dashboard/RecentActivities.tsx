@@ -1,5 +1,8 @@
+"use client";
+
 import { CalendarCheck, FileText, Mail, Phone, type LucideIcon } from "lucide-react";
-import { letzteAktivitaeten, type AktivitaetArt } from "@/lib/testdata/dashboard";
+import type { AktivitaetArt } from "@/lib/crm/dashboard";
+import { useDashboard } from "./useDashboard";
 import { MoreLink } from "./MoreLink";
 
 const icons: Record<AktivitaetArt, { icon: LucideIcon; color: string }> = {
@@ -10,6 +13,7 @@ const icons: Record<AktivitaetArt, { icon: LucideIcon; color: string }> = {
 };
 
 export function RecentActivities() {
+  const { letzteAktivitaeten } = useDashboard();
   return (
     <section className="card px-[14px] pb-[6px] pt-[12px]">
       <div className="flex items-center justify-between">
@@ -17,10 +21,10 @@ export function RecentActivities() {
         <MoreLink href="/aktivitaeten" />
       </div>
       <ul className="mt-[6px] divide-y divide-line-soft">
-        {letzteAktivitaeten.map((a, i) => {
+        {letzteAktivitaeten.map((a) => {
           const { icon: Icon, color } = icons[a.art];
           return (
-            <li key={i} className="flex items-center gap-[14px] py-[6px]">
+            <li key={a.id} className="flex items-center gap-[14px] py-[6px]">
               <Icon className={`h-[20px] w-[20px] shrink-0 ${color}`} strokeWidth={1.6} />
               <div className="min-w-0 flex-1">
                 <div className="text-[11.5px] font-semibold text-navy-950">{a.titel}</div>

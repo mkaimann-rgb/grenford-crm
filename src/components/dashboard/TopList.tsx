@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import type { TopEntry } from "@/lib/testdata/dashboard";
+import { useDashboard } from "./useDashboard";
 import { euroMio } from "@/lib/format";
 import { MoreLink } from "./MoreLink";
 
@@ -18,7 +20,8 @@ function Progress({ value }: { value: number }) {
  * Top-Liste (Investment-Deals, Property-Mandate, Projects).
  * phaseRight: Phase steht rechts unter dem Volumen (Investment) statt links unter dem Ort.
  */
-export function TopList({ title, href, entries, phaseRight = false }: { title: string; href: string; entries: TopEntry[]; phaseRight?: boolean }) {
+export function TopList({ title, href, bereich, phaseRight = false }: { title: string; href: string; bereich: "investment" | "property" | "projects"; phaseRight?: boolean }) {
+  const entries = useDashboard().top[bereich];
   return (
     <section className="card px-[12px] pb-[4px] pt-[10px]">
       <div className="flex items-center justify-between gap-2">

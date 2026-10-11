@@ -206,7 +206,8 @@ export type Objekt = {
 };
 
 /** Weitere Beteiligte an einem Vorgang, jeweils mit eigener Rolle */
-export type Beteiligung = { art: "person" | "unternehmen"; id: ID; rolle: string };
+/** `pruefen`: Rolle bzw. Zuordnung fachlich nicht eindeutig belegt (sichtbarer Prüfhinweis) */
+export type Beteiligung = { art: "person" | "unternehmen"; id: ID; rolle: string; pruefen?: string };
 
 /**
  * Fachlicher Vorgang („Vorhaben“) an einem Objekt – z. B. Kauf, Verkauf, Sanierung, Investment-Transaktion.

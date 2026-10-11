@@ -42,7 +42,7 @@ export function KaeuferprozesseListe({ bereich }: { bereich: "Investment" | "Pro
         href={href}
         defaultSort={{ key: "kontakt", richtung: "desc" }}
         columns={[
-          { key: "id", header: "Käuferprozess", sort: (k) => k.id, cell: (k) => <div className="flex items-center gap-2.5"><Avatar name={crm.refName(k.kaeufer)} size={30} /><div><div className="font-semibold text-navy-950">{crm.refName(k.kaeufer)}</div><div className="text-[10.5px] text-muted">{k.id} · {k.typ}</div></div></div> },
+          { key: "id", header: "Käuferprozess", sort: (k) => k.id, cell: (k) => <div className="flex items-center gap-2.5"><Avatar name={crm.refName(k.kaeufer)} size={30} /><div><div className="font-semibold text-navy-950">{crm.refName(k.kaeufer)}</div><div className="text-[10.5px] text-muted">{k.id} · {k.typ}</div>{k.pruefen && <div className="text-[10.5px] text-warn" title={k.pruefen}>Kaufinteressent – prüfen</div>}</div></div> },
           { key: "projekt", header: bereich === "Investment" ? "Projekt" : "Objekt / Mandat", sort: (k) => parentTitel(k), cell: (k) => <div><div className="text-ink">{parentTitel(k)}</div><div className="text-[10.5px] text-muted">{k.projektId}</div></div> },
           { key: "ind", header: "Kaufpreisindikation", sort: (k) => k.indikation, cell: (k) => euroCompact(k.indikation) },
           { key: "w", header: "Wahrscheinlichkeit", sort: (k) => k.wahrscheinlichkeit, cell: (k) => `${k.wahrscheinlichkeit} %` },

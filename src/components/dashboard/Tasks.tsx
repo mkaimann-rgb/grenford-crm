@@ -1,12 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { aufgaben } from "@/lib/testdata/dashboard";
+import { useCrm } from "@/lib/crm/store";
+import { useDashboard } from "./useDashboard";
 import { MoreLink } from "./MoreLink";
 
 export function Tasks() {
-  // Erledigt-Status nur lokal im Browser (Testmodus) – wird später in der Datenbank gespeichert.
-  const [done, setDone] = useState<Record<string, boolean>>({});
+  // Erledigt-Status wird in der zentralen Datenbasis gesetzt (wie unter Aktivitäten); abgehakte Aufgaben bleiben bis zum Verlassen der Seite sichtbar.
+  const crm = useCrm();
+  const [behalten, setBehalten] = useState<string[]>([]);
+  const { aufgaben } = useDashboard(behalten);
+  const done = Object.fromEntries(aufgaben.map((a) => [a.id, a.erledigt]));
+  const setDone = (id: string, wert: boolean) => {
+    setBehalten((b) => (b.includes(id) ? b : [...b, id]));
+    crm.setzeErledigt(id, wert);
+  };
   return (
     <section className="card px-[12px] pb-[8px] pt-[12px]">
       <div className="flex items-center justify-between">
@@ -20,7 +28,7 @@ export function Tasks() {
               <input
                 type="checkbox"
                 checked={!!done[a.id]}
-                onChange={(e) => setDone((d) => ({ ...d, [a.id]: e.target.checked }))}
+                onChange={(e) => setDone(a.id, e.target.checked)}
                 className="h-[14px] w-[14px] shrink-0 rounded-[3px] accent-navy-900"
               />
               <span className={`min-w-0 flex-1 truncate text-[11.5px] ${done[a.id] ? "text-muted line-through" : "text-ink"}`}>{a.titel}</span>
@@ -28,6 +36,7 @@ export function Tasks() {
             </label>
           </li>
         ))}
+        {!aufgaben.length && <li className="px-[4px] py-[5px] text-[11px] text-muted">Keine offenen Aufgaben.</li>}
       </ul>
     </section>
   );

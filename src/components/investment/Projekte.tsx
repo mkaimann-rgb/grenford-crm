@@ -7,7 +7,7 @@ import { BarChart3, Building2, CircleDot, Clock3, FolderOpen, Handshake, Layers,
 import { useCrm } from "@/lib/crm/store";
 import { datumDe, personName } from "@/lib/crm/logic";
 import {
-  INVEST_STATUS, PHASEN_INVESTMENT, erwarteteCourtage, gewichtet, naechsteNummer, phaseTitel, phasenIndex, type InvestmentProjekt,
+  INVEST_STATUS, PHASEN_INVESTMENT, erwarteteCourtage, vorgangsWahrscheinlichkeit, gewichtet, phaseTitel, phasenIndex, type InvestmentProjekt,
 } from "@/lib/crm/module";
 import { euroCompact, euroMio } from "@/lib/format";
 import { Avatar, Badge, Button, Menu, StatusBadge } from "@/components/ui/controls";
@@ -26,9 +26,7 @@ const VERMARKTUNGSARTEN = ["Off-Market", "Bieterverfahren", "Exklusiv", "Offene 
 
 /** Wahrscheinlichkeit eines Projekts = beste Wahrscheinlichkeit seiner aktiven Käuferprozesse */
 export function projektWahrscheinlichkeit(p: InvestmentProjekt, kps: { projektId: string; wahrscheinlichkeit: number; status: string }[]) {
-  if (p.status === "Abgeschlossen") return 100;
-  const w = kps.filter((k) => k.projektId === p.id && k.status !== "Abgesagt").map((k) => k.wahrscheinlichkeit);
-  return w.length ? Math.max(...w) : 10;
+  return vorgangsWahrscheinlichkeit(p, kps);
 }
 
 function Wiedervorlage({ datum, heute }: { datum?: string; heute: string }) {
@@ -138,7 +136,7 @@ export function InvestmentProjektModal({ initial, onClose, vorbelegung }: { init
       }}
       onClose={onClose}
       speichern={(w) => {
-        const id = initial?.id ?? naechsteNummer(`INV-${crm.heute.slice(0, 4)}-`, crm.investmentProjekte.map((x) => x.id));
+        const id = initial?.id ?? crm.nummer("investmentProjekt");
         const neu: InvestmentProjekt = {
           erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, zielpreis: "", tags: [], beteiligte: [], abschlussErwartet: "", ...p,
           id, titel: text(w.titel), assetklasse: text(w.assetklasse), objektId: text(w.objektId), standort: text(w.standort), eigentuemer: refAus(w.eigentuemer), volumen: zahl(w.volumen), courtageSatz: zahl(w.courtageSatz),

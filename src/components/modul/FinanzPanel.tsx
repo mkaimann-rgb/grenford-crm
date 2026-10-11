@@ -6,7 +6,7 @@ import { useCrm } from "@/lib/crm/store";
 import { datumDe } from "@/lib/crm/logic";
 import type { Geschaeftsbereich, ID } from "@/lib/crm/types";
 import type { Provision, Ref } from "@/lib/crm/module";
-import { forderungZeilen, naechsteBelegNr, pruefeZahlung, rechnungAusProvision, verbindlichkeitZeilen } from "@/lib/finanzen/buchung";
+import { forderungZeilen, pruefeZahlung, rechnungAusProvision, verbindlichkeitZeilen } from "@/lib/finanzen/buchung";
 import { euro } from "@/lib/format";
 import { StatusBadge } from "@/components/ui/controls";
 import { useToast } from "@/components/ui/toast";
@@ -33,7 +33,7 @@ export function FinanzPanel({ refIds, bereich, zahler, basis, satz }: { refIds: 
   const verbindlichkeiten = verbindlichkeitZeilen(crm, crm.heute).filter((v) => refIds.includes(v.referenz) || (v.quelle && refIds.includes(v.quelle)));
 
   const rechnungStellen = (p: Provision) => {
-    const nr = naechsteBelegNr(`RE-${crm.heute.slice(0, 4)}-`, crm.forderungen.map((f) => f.nr));
+    const nr = crm.nummer("rechnung");
     crm.speichere("forderungen", rechnungAusProvision(p, nr, crm.heute), { ref: p.referenz, text: `Rechnung ${nr} über ${euro(p.betrag)} aus ${p.id} erzeugt (Forderung)` });
     crm.speichere("provisionen", { ...p, status: "Abgerechnet", rechnungNr: nr });
     toast(`Rechnung ${nr} erzeugt – Forderung angelegt ${TESTMODUS}`);
@@ -100,7 +100,7 @@ export function FinanzPanel({ refIds, bereich, zahler, basis, satz }: { refIds: 
           speichern={(w: Werte) => {
             const b = zahl(w.basis);
             const s = zahl(w.satz);
-            const id = naechsteBelegNr(`PRV-${crm.heute.slice(0, 4)}-`, crm.provisionen.map((p) => p.id));
+            const id = crm.nummer("provisionsanspruch");
             const r = refAus(w.zahler);
             crm.speichere("provisionen", { id, referenz: refIds[0], bereich, art: text(w.art), zahler: r ? crm.refName(r) : "noch offen", zahlerRef: r, basis: b, satz: s, betrag: Math.round((b * s) / 100), status: text(w.status) as Provision["status"], datum: crm.heute }, { ref: refIds[0], text: `Provisionsanspruch ${id} erfasst (${text(w.status)})` });
             toast(`Provisionsanspruch ${id} erfasst ${TESTMODUS}`);
@@ -121,10 +121,10 @@ export function FinanzPanel({ refIds, bereich, zahler, basis, satz }: { refIds: 
           speichern={(w) => {
             const ref = refIds[0];
             if (dialog.art === "zahlung") {
-              const id = naechsteBelegNr("ZE-", crm.zahlungseingaenge.map((z) => z.id));
+              const id = crm.nummer("zahlungseingang");
               crm.speichere("zahlungseingaenge", { id, datum: text(w.datum), rechnungNr: dialog.nr, betrag: zahl(w.betrag) }, { ref, text: `Zahlungseingang ${id} über ${euro(zahl(w.betrag))} auf ${dialog.nr} verbucht` });
             } else {
-              const id = naechsteBelegNr("AZ-", crm.auszahlungen.map((z) => z.id));
+              const id = crm.nummer("auszahlung");
               crm.speichere("auszahlungen", { id, datum: text(w.datum), verbindlichkeitNr: dialog.nr, betrag: zahl(w.betrag) }, { ref, text: `Auszahlung ${id} über ${euro(zahl(w.betrag))} auf ${dialog.nr} verbucht` });
             }
             toast(`${dialog.art === "zahlung" ? "Zahlungseingang" : "Auszahlung"} verbucht ${TESTMODUS}`);

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Check, CircleDot, HardHat, Handshake, MapPin, Search, Star, Users } from "lucide-react";
 import { useCrm } from "@/lib/crm/store";
-import { GU_STATUS, naechsteNummer, type GUPartner } from "@/lib/crm/module";
+import { GU_STATUS, type GUPartner } from "@/lib/crm/module";
 import { HREF } from "@/lib/crm/projektion";
 import { euroCompact } from "@/lib/format";
 import { Avatar, Button, StatusBadge, Tabs } from "@/components/ui/controls";
@@ -155,7 +155,7 @@ function GUModal({ initial, onClose }: { initial?: GUPartner; onClose: () => voi
       pruefen={(w) => (crm.guPartner.some((g) => g.unternehmenId === w.unternehmenId && g.id !== initial?.id) ? { unternehmenId: "Dieses Unternehmen ist bereits als GU-Partner erfasst." } : ({} as Record<string, string>))}
       onClose={onClose}
       speichern={(w) => {
-        const id = initial?.id ?? naechsteNummer("GU-", crm.guPartner.map((g) => g.id));
+        const id = initial?.id ?? crm.nummer("guPartner");
         crm.speichere("guPartner", { erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, ...initial, id, unternehmenId: text(w.unternehmenId), ansprechpartnerId: text(w.ansprechpartnerId) || undefined, kategorie: text(w.kategorie) as GUPartner["kategorie"], status: text(w.status) as GUPartner["status"], gewerke: liste(w.gewerke), regionen: liste(w.regionen), seit: text(w.seit), bevorzugt: w.bevorzugt === "ja", vereinbarung: { ...initial?.vereinbarung, status: text(w.vstatus), provisionsregelung: text(w.provisionsregelung) } }, { ref: id, text: initial ? "GU-Partner geändert" : "GU-Partner angelegt" });
         toast(`GU-Partner ${id} gespeichert ${TESTMODUS}`);
       }}

@@ -106,3 +106,62 @@ test("Projektion: übernommene Akquise erscheint nicht doppelt; Index vollständ
   const idx = vorgangsIndex(tm);
   for (const p of tm.projectsProjekte) assert.ok(idx.get(p.id)?.href, p.id);
 });
+
+// ---------- Abschlusskorrekturen ----------
+import { empfehlungsBemessung, kaeuferRolle } from "./module.ts";
+
+test("Empfehlungsprovision Investment: Netto-Courtage nach Abzug vorrangiger externer Makleranteile", () => {
+  // INV-2026-001: Käufercourtage 450.000 € − Gemeinschaftsgeschäft Simple Invest (externer Makler) 240.000 € = 210.000 €
+  const b = empfehlungsBemessung("INV-2026-001", tm);
+  assert.equal(b.courtage, 450_000);
+  assert.equal(b.abzug, 240_000);
+  assert.equal(b.basis, 210_000);
+  assert.equal(empfehlungsprovision(b.basis, 10).betrag, 21_000);
+});
+
+test("Interne Provisionsbeteiligungen mindern die Bemessungsgrundlage nicht", () => {
+  // INV-2026-007: interne Beteiligung Kay Brandes (PROV-2026-005) wird nicht abgezogen
+  const b = empfehlungsBemessung("INV-2026-007", tm);
+  assert.equal(b.abzug, 0);
+  assert.equal(b.basis, 180_000);
+  assert.equal(b.erwartet, true);
+  const extern = empfehlungsBemessung("INV-2026-007", { ...tm, provisionsbeteiligungen: tm.provisionsbeteiligungen.map((x) => (x.id === "PROV-2026-005" ? { ...x, vorrangig: true } : x)) });
+  assert.equal(extern.basis, 135_000, "nur als externer Makleranteil gekennzeichnet → Abzug 25 %");
+});
+
+test("Individuelle Vereinbarung hat Vorrang vor dem Standardsatz", () => {
+  const b = empfehlungsBemessung("INV-2026-001", tm);
+  assert.equal(empfehlungsprovision(b.basis, 10, { festbetrag: 87_000 }).betrag, 87_000);
+  assert.equal(empfehlungsprovision(b.basis, 10, { satz: 12 }).betrag, 25_200);
+});
+
+test("Empfehlungsprovision Projects: 3 % der vertraglichen Netto-Bausumme inkl. Nachträge", () => {
+  const b = empfehlungsBemessung("PRO-2026-015", tm);
+  assert.equal(b.basis, 248_000);
+  assert.equal(empfehlungsprovision(b.basis, 3).betrag, 7_440);
+  const ohne = empfehlungsBemessung("PRO-2026-014", tm);
+  assert.equal(ohne.basis, 0, "ohne Vergabe keine vertragliche Basis");
+  assert.equal(ohne.erwartet, true);
+});
+
+test("Kaufinteressent ≠ bestätigter Käufer; Maspohl bei Berlin-Schöneberg nur Kaufinteressent mit Prüfhinweis", () => {
+  assert.equal(kaeuferRolle({ bereich: "Investment", status: "Aktiv" }), "Kaufinteressent (Investor)");
+  assert.equal(kaeuferRolle({ bereich: "Investment", status: "Gekauft" }), "Käufer (Investor)");
+  assert.equal(kaeuferRolle({ bereich: "Property", status: "Aktiv" }), "Kaufinteressent");
+  const kp = tm.kaeuferprozesse.find((k) => k.id === "INV-OPT-0008")!;
+  assert.equal(kp.status, "Aktiv");
+  assert.ok(kp.pruefen);
+  const v = modulVorgaenge(tm).find((x) => x.id === "INV-OPT-0008")!;
+  const maspohl = v.beteiligte!.find((b) => b.id === "p-maspohl")!;
+  assert.equal(maspohl.rolle, "Ansprechpartner Kaufinteressent");
+  assert.ok(!v.beteiligte!.some((b) => /^Käufer/.test(b.rolle)), "kein bestätigter Käufer");
+  assert.ok(v.pruefen);
+});
+
+test("Brautstraße 29 und unklare Rollen sind prüfbedürftig gekennzeichnet", () => {
+  const m = tm.propertyMandate.find((x) => x.id === "PROP-2026-008")!;
+  assert.equal(m.eigentuemer, undefined);
+  assert.ok(m.beteiligte.every((b) => b.pruefen));
+  const inv = tm.investmentProjekte.find((x) => x.id === "INV-2026-007")!;
+  assert.ok(inv.beteiligte.find((b) => b.id === "p-spannaus")?.pruefen);
+});

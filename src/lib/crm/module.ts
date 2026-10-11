@@ -14,7 +14,8 @@ import type { Auszahlung, Forderung, Verbindlichkeit, Zahlungseingang } from "..
 /** Verweis auf einen Stammsatz (Person oder Unternehmen) */
 export type Ref = { art: "person" | "unternehmen"; id: ID };
 /** Beteiligte eines Vorgangs mit Rolle in genau diesem Vorgang */
-export type Beteiligter = Ref & { rolle: string };
+/** Beteiligter mit Rolle im Vorgang; `pruefen` = Rolle/Zuordnung fachlich nicht eindeutig belegt */
+export type Beteiligter = Ref & { rolle: string; pruefen?: string };
 
 export type Unterphase = { code: string; titel: string };
 export type Phase = { code: string; titel: string; unter: Unterphase[] };
@@ -43,7 +44,8 @@ export const PHASEN_PROPERTY: Phase[] = [
 /**
  * Projects – Projektphasen A–F. Hauptphasen gemäß Vorlage „03_Projects_Projektprozesse“
  * (Akquise → Projektaufnahme → Angebotsphase → GU-Auswahl → Vertragsabschluss → Begleitung).
- * Die Unterphasen sind in der Vorlage nicht ausgeführt – Vorschlag, dokumentiert zur Bestätigung.
+ * Die Unterphasen sind in der Vorlage nicht ausgeführt – VORLÄUFIGER VORSCHLAG, vom Auftraggeber vorläufig
+ * beibehalten, fachlich noch nicht endgültig freigegeben (Stand 2026-10).
  */
 export const PHASEN_PROJECTS: Phase[] = [
   P("A", "Akquise", ["Erstgespräch", "Bedarfsermittlung"]),
@@ -163,6 +165,8 @@ export type Kaeuferprozess = Basis & {
   status: (typeof KAEUFER_STATUS)[number];
   letzterKontakt: string;
   suchauftragId?: ID;
+  /** Rolle/Stand fachlich nicht eindeutig belegt – sichtbar als Prüfhinweis */
+  pruefen?: string;
 };
 
 export const PROFIL_STATUS = ["Aktiv", "In Prüfung", "In Verhandlung", "Platziert", "Inaktiv"] as const;
@@ -328,6 +332,11 @@ export type Provisionsbeteiligung = Basis & {
   anteil: number;
   /** Individuell vereinbarter Festbetrag – hat Vorrang vor dem Anteil */
   festbetrag?: number;
+  /**
+   * Vorrangiger externer Makleranteil (z. B. Gemeinschaftsgeschäft mit externem Makler): mindert die maßgebliche
+   * GRENFORD-Netto-Courtage als Bemessungsgrundlage der Empfehlungsprovision. Interne Beteiligungen (false/leer) nicht.
+   */
+  vorrangig?: boolean;
   /** Berechnungsgrundlage: GRENFORD-Provision netto */
   basis: number;
   faelligkeit: string;
@@ -399,6 +408,20 @@ export function naechsteNummer(prefix: string, vorhanden: string[], stellen = 3)
 /** Erwartete GRENFORD-Provision eines Investment-Projekts */
 export const erwarteteCourtage = (p: Pick<InvestmentProjekt, "volumen" | "courtageSatz">) => Math.round((p.volumen * p.courtageSatz) / 100);
 
+/**
+ * Wahrscheinlichkeit eines Investment-Projekts bzw. Property-Mandats: abgeschlossen = 100 %,
+ * sonst die höchste Wahrscheinlichkeit der nicht abgesagten Käuferprozesse, ohne Käuferprozess 10 %.
+ */
+export function vorgangsWahrscheinlichkeit(v: { id: ID; status: string }, kps: { projektId: string; wahrscheinlichkeit: number; status: string }[]) {
+  if (v.status === "Abgeschlossen") return 100;
+  const w = kps.filter((k) => k.projektId === v.id && k.status !== "Abgesagt").map((k) => k.wahrscheinlichkeit);
+  return w.length ? Math.max(...w) : 10;
+}
+
+/** Rolle des Käufers im Käuferprozess: nur bei Status „Gekauft“ bestätigter Käufer, sonst Kaufinteressent */
+export const kaeuferRolle = (k: { bereich: string; status: string }) =>
+  k.status === "Gekauft" ? (k.bereich === "Investment" ? "Käufer (Investor)" : "Käufer") : k.bereich === "Investment" ? "Kaufinteressent (Investor)" : "Kaufinteressent";
+
 /** Gewichteter Wert (Provision × Wahrscheinlichkeit) */
 export const gewichtet = (betrag: number, wahrscheinlichkeit: number) => Math.round((betrag * wahrscheinlichkeit) / 100);
 
@@ -414,6 +437,35 @@ export function empfehlungsprovision(basis: number, standardSatz: number, indivi
 
 /** Vergabe Projects: Nur wenn GRENFORD selbst Auftraggeber des GU ist, entsteht eine GRENFORD-Verbindlichkeit (Direktbeauftragung durch den Kunden: keine). */
 export const vergabeErzeugtVerbindlichkeit = (auftraggeber: string) => auftraggeber === "GRENFORD";
+
+/**
+ * Bemessungsgrundlage der Empfehlungsprovision (Regel laut Auftraggeber, 2026-10):
+ *  - Investment/Property: maßgebliche GRENFORD-Netto-Courtage des Vorgangs (Provisionsansprüche; entstanden,
+ *    sonst erwartet) NACH Abzug vorrangiger externer Makleranteile. Interne Provisionsbeteiligungen werden
+ *    nicht zusätzlich abgezogen.
+ *  - Projects: vertraglich maßgebliche provisionspflichtige Netto-Bausumme inkl. vereinbarter Nachträge
+ *    (Vergabesumme). Ohne Vergabe gibt es noch keine vertragliche Basis (0, „erwartet“).
+ *  Satz: Standard aus den Einstellungen (10 % / 10 % / 3 %); individuelle Vereinbarungen haben Vorrang (empfehlungsprovision()).
+ */
+export function empfehlungsBemessung(
+  referenz: ID,
+  d: { provisionen: Provision[]; kaeuferprozesse: Pick<Kaeuferprozess, "id" | "projektId">[]; provisionsbeteiligungen: Provisionsbeteiligung[]; projectsProjekte: Pick<ProjectsProjekt, "id" | "vergabe">[] },
+  bereichVorgabe?: Geschaeftsbereich | null,
+) {
+  const bereich: Geschaeftsbereich | null = bereichVorgabe ?? (referenz.startsWith("PRO-") ? "Projects" : referenz.startsWith("PROP") ? "Property" : referenz.startsWith("INV") ? "Investment" : null);
+  if (bereich === "Projects") {
+    const p = d.projectsProjekte.find((x) => x.id === referenz);
+    const basis = p?.vergabe?.vergabesumme ?? 0;
+    return { bereich, courtage: basis, abzug: 0, basis, art: "Netto-Bausumme inkl. vereinbarter Nachträge", erwartet: !p?.vergabe };
+  }
+  const zumVorgang = (r: ID) => r === referenz || d.kaeuferprozesse.some((k) => k.id === r && k.projektId === referenz);
+  const prov = d.provisionen.filter((p) => zumVorgang(p.referenz));
+  const entstanden = prov.filter((p) => p.status !== "Erwartet").reduce((s, p) => s + p.betrag, 0);
+  const erwartet = prov.filter((p) => p.status === "Erwartet").reduce((s, p) => s + p.betrag, 0);
+  const courtage = entstanden || erwartet;
+  const abzug = d.provisionsbeteiligungen.filter((b) => b.vorrangig && b.status !== "Storniert" && zumVorgang(b.referenz)).reduce((s, b) => s + beteiligungsbetrag(b), 0);
+  return { bereich, courtage, abzug, basis: Math.max(0, courtage - abzug), art: abzug ? "GRENFORD-Netto-Courtage nach Abzug externer Makleranteile" : "GRENFORD-Netto-Courtage", erwartet: !entstanden };
+}
 
 /** Provisionsbeteiligung: ausschließlich individueller Anteil, kein Standardsatz */
 export const beteiligungsbetrag = (b: Pick<Provisionsbeteiligung, "basis" | "anteil" | "festbetrag">) => b.festbetrag ?? Math.round((b.basis * b.anteil) / 100);

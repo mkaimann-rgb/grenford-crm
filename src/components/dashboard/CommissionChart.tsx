@@ -2,7 +2,7 @@
 
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { YTick } from "./AxisTick";
-import { provisionen } from "@/lib/testdata/dashboard";
+import { useDashboard } from "./useDashboard";
 
 const series = [
   { key: "bezahlt", label: "Bezahlt", color: "#0b2d6b" },
@@ -15,6 +15,7 @@ function formatMio(v: number) {
 }
 
 export function CommissionChart() {
+  const { provisionen, provAchse } = useDashboard();
   return (
     <section className="card flex flex-col px-[14px] pb-[4px] pt-[11px]" aria-labelledby="provisionen-title">
       <h2 id="provisionen-title" className="card-title">Provisionen nach Geschäftsbereich</h2>
@@ -31,7 +32,7 @@ export function CommissionChart() {
           <BarChart data={provisionen} margin={{ top: 10, right: 6, bottom: 0, left: 0 }} barGap={7} barCategoryGap="22%">
             <CartesianGrid stroke="#eef1f6" vertical={false} />
             <XAxis dataKey="bereich" axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: "#2c3b50" }} />
-            <YAxis interval={0} axisLine={false} tickLine={false} width={66} domain={[0, 2]} ticks={[0, 0.5, 1, 1.5, 2]} tick={(p) => <YTick {...p} format={formatMio} />} />
+            <YAxis interval={0} axisLine={false} tickLine={false} width={66} domain={[0, provAchse.max]} ticks={provAchse.ticks} tick={(p) => <YTick {...p} format={formatMio} />} />
             <Tooltip
               cursor={{ fill: "#f4f6fa" }}
               formatter={(v, name) => [formatMio(Number(v)), name]}

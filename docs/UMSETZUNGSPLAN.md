@@ -1,6 +1,6 @@
 # GRENFORD CRM Lightning v7.3 – Technischer Umsetzungsplan
 
-Stand: 11.10.2026 · Gesamtauftrag Phasen A–G umgesetzt (Testmodus) · Abschlussbericht: `docs/ABSCHLUSSBERICHT.md`
+Stand: 11.10.2026 · Gesamtauftrag Phasen A–G umgesetzt (Testmodus), fachliche Abschlusskorrekturen eingearbeitet · Abschlussbericht: `docs/ABSCHLUSSBERICHT.md`
 
 ## 1. Technologieentscheidung
 
@@ -96,13 +96,18 @@ Arbeitsweise je Seite: Referenzbild analysieren → umsetzen → Screenshot → 
 
 - GRENFORD berät/vermittelt; **nicht** automatisch Bauherr oder GU. Bauherr ist ein Stammdatensatz (Kunde), Auftraggeber des GU wird bei der Vergabe ausdrücklich gewählt (Standard: Kunde).
 - **Mandat** (`MAN-…`) enthält mehrere **Projekte** (`PRO-…`, eigene ID, Objekt, Einheit, Bauherr, Leistungsumfang, Budget, Status, Beteiligte, Dokumente, Aktivitäten, Angebote, GU-Zuordnung).
-- **Projektprozesse A–F** – Hauptphasen laut Vorlage; die **Unterphasen sind ein Vorschlag** (Vorlage zeigt keine): A Akquise (Erstgespräch, Bedarfsermittlung) · B Projektaufnahme (Vor-Ort-Termin/Aufmaß, Leistungsbeschreibung) · C Angebotsphase (Anfrage an GU-Partner, Angebote eingegangen, Angebotsvergleich) · D GU-Auswahl (Kundengespräch, Vergabeentscheidung durch Kunden) · E Vertragsabschluss (Bauvertrag Kunde–GU, Vergütungsvereinbarung) · F Begleitung (Ausführung, Abnahme, Abrechnung).
+- **Projektprozesse A–F** – Hauptphasen laut Vorlage; die **Unterphasen sind ein vorläufiger Vorschlag – vom Auftraggeber vorläufig beibehalten, fachlich noch nicht endgültig freigegeben** (Hinweis auch auf der Seite Projektprozesse): A Akquise (Erstgespräch, Bedarfsermittlung) · B Projektaufnahme (Vor-Ort-Termin/Aufmaß, Leistungsbeschreibung) · C Angebotsphase (Anfrage an GU-Partner, Angebote eingegangen, Angebotsvergleich) · D GU-Auswahl (Kundengespräch, Vergabeentscheidung durch Kunden) · E Vertragsabschluss (Bauvertrag Kunde–GU, Vergütungsvereinbarung) · F Begleitung (Ausführung, Abnahme, Abrechnung).
 - **GU-Partner** (`GU-…`): Gewerke, Regionen, Projekte, Angebote, Kooperationsvereinbarung, Provisionsregelung, Status.
 - **Renovation Memo**: mehrere Originalangebote je Projekt, Vergleich (min/max/Spanne), Anonymisierung als „Partner A/B/C“ (Reihenfolge nach Eingang). Die Vergabeentscheidung trifft der Kunde; nur wenn **GRENFORD** als Auftraggeber gewählt wird, entsteht eine Verbindlichkeit.
 
 ### Phase E – Netzwerk
 
-- **Empfehlungspartner** (`EP-…`) verweisen auf vorhandene Personen (optional Unternehmen) – keine neuen Stammsätze. Standardsätze aus den Einstellungen: Investment/Property **10 % der GRENFORD-Netto-Courtage**, Projects **3 % der provisionspflichtigen Netto-Bausumme inkl. vereinbarter Nachträge**. Je Partner/Bereich und je Empfehlung kann ein individueller Satz oder Festbetrag vereinbart werden – dieser hat Vorrang. Verbindlichkeiten entstehen erst auf ausdrücklichen Klick („Verbindlichkeit anlegen“).
+- **Empfehlungspartner** (`EP-…`) verweisen auf vorhandene Personen (optional Unternehmen) – keine neuen Stammsätze. Verbindlichkeiten entstehen erst auf ausdrücklichen Klick („Verbindlichkeit anlegen“).
+- **Empfehlungsprovision – verbindliche Regel (bestätigt durch den Auftraggeber)**, umgesetzt in `empfehlungsBemessung()` und `empfehlungsprovision()` (`src/lib/crm/module.ts`, getestet):
+  - *Investment/Property*: grundsätzlich **10 % der maßgeblichen GRENFORD-Netto-Courtage nach Abzug vorrangiger externer Makleranteile**. Maßgebliche Courtage = GRENFORD-Provisionsansprüche zum Vorgang (entstanden, sonst erwartet – dann gekennzeichnet). Abgezogen werden nur Provisionsbeteiligungen mit der Einordnung „Vorrangiger externer Makleranteil“; **interne Provisionsbeteiligungen werden nicht zusätzlich abgezogen**. Beispiel INV-2026-001: 450.000 € − 240.000 € (Gemeinschaftsgeschäft Simple Invest) = 210.000 € Basis.
+  - *Projects*: grundsätzlich **3 % der vertraglich maßgeblichen provisionspflichtigen Netto-Bausumme inkl. vereinbarter Nachträge** (Vergabesumme). Ohne Vergabe keine vertragliche Basis.
+  - **Individuelle Vereinbarungen haben Vorrang** (Satz oder Festbetrag je Partner/Bereich bzw. je Empfehlung). Standardsätze in den Einstellungen änderbar.
+  - Einordnung je Provisionsbeteiligung im Formular „Einordnung“ (intern / vorrangiger externer Makleranteil). Testannahme: PROV-2026-001/-002 (Gemeinschaftsgeschäft mit Makler Simple Invest) = extern; FinanConcept (Finanzierungsvermittlung) und Kay Brandes (Co-Partner) = intern – bitte bei Bedarf korrigieren.
 - **Provisionsbeteiligte** (`PROV-2026-…`): ausschließlich individuell vereinbarte Anteile oder Festbeträge, **kein Standardsatz**, nicht automatisch Empfehlungspartner. Schritte 1–4 laut Vorlage; „Abrechnen“ legt die Verbindlichkeit an.
 
 ### Phase F – Finanzen
@@ -121,28 +126,48 @@ Arbeitsweise je Seite: Referenzbild analysieren → umsetzen → Screenshot → 
 
 ### Nummernkreise
 
-| Datensatz | Format | Hinweis |
+Eine Definition für Vergabe, Einstellungen und Tests: `src/lib/crm/nummern.ts` (Datenbank: `naechste_nummer()`).
+**Bestehende IDs und Referenzen bleiben unverändert.** Neue Nummern: je Vorgangstyp und Geschäftsbereich eigener, eindeutiger Präfix; vergeben wird „höchste vorhandene + 1“, geprüft gegen **alle** IDs und Referenzen (auch nur in Rechnungen/Verbindlichkeiten referenzierte Nummern, z. B. PRO-2026-001). Kein Präfix ist Anfang eines anderen (getestet).
+
+| Vorgangstyp | Bereich | Format |
 |---|---|---|
-| Investment-Projekt | `INV-2026-001` | 001–005 abgeschlossene Deals aus den Finanz-Testdaten |
-| Property-Mandat | `PROP-2026-001` | |
-| Projects-Mandat / -Projekt | `MAN-2026-001` / `PRO-2026-001` | |
-| Käuferprozess | `INV-OPT-0001` / `PROP-OPT-0001` | je Bereich eigener Kreis |
-| Akquise | `AK-2026-001` | |
-| Ankaufsprofil / Interessent | `ANK-2026-001` / `INT-2026-001` | |
-| Suchauftrag | `SRCH-I-001` / `SRCH-P-001` | Investment / Property getrennt |
-| Objekt | `OPP-2026-001` | |
-| GU-Partner / Empfehlungspartner | `GU-001` / `EP-001` | |
-| Provisionsbeteiligung | `PROV-2026-001` | |
-| Provisionsanspruch | `PRV-2026-001` | |
-| Rechnung (Forderung) / Verbindlichkeit | `RE-2026-001` / `VB-2026-001` | aus der Freigabe übernommen |
+| Investment-Projekt | Investment | `INV-2026-###` (001–005 = abgeschlossene Deals der Finanz-Testdaten) |
+| Käuferprozess | Investment / Property | `INV-OPT-####` / `PROP-OPT-####` |
+| Ankaufsprofil | Investment | `ANK-2026-###` |
+| Suchauftrag | Investment / Property | `SRCH-I-###` / `SRCH-P-###` |
+| Property-Mandat | Property | `PROP-2026-###` |
+| Interessent | Property | `INT-2026-###` |
+| Projects-Mandat / -Projekt | Projects | `MAN-2026-###` / `PRO-2026-###` |
+| GU-Angebot / GU-Partner | Projects | `ANG-###` / `GU-###` |
+| Akquise-Vorgang | bereichsübergreifend¹ | `AK-2026-###` |
+| Objekt (Stammsatz) | bereichsübergreifend | `OPP-2026-###` (auch für neu erfasste Objekte) |
+| Empfehlungspartner / Empfehlung | bereichsübergreifend | `EP-###` / `EMP-###` |
+| Provisionsbeteiligung / Provisionsanspruch | bereichsübergreifend² | `PROV-2026-###` / `PRV-2026-###` |
+| Rechnung (Forderung) / Verbindlichkeit | bereichsübergreifend² | `RE-2026-###` / `VB-2026-###` |
+| Zahlungseingang / Auszahlung | bereichsübergreifend² | `ZE-###` / `AZ-###` |
+
+¹ Der Bereich eines Akquise-Vorgangs kann sich bei der Qualifizierung ändern; die Nummer bleibt stabil, bei Übernahme entsteht die Nummer des Fachbereichs.
+² Finanzbelege laufen je Belegart fortlaufend über alle Bereiche (lückenlose Rechnungsnummern); der Geschäftsbereich ist Merkmal des Belegs.
+
+### Dashboard – zentrale Datenbasis (Abschlusskorrektur)
+
+Alle Dashboard-Werte werden in `src/lib/crm/dashboard.ts` aus derselben Datenbasis wie die Fach- und Finanzmodule berechnet (getestet in `dashboard.test.mts`); feste Zahlen wurden entfernt. Layout unverändert.
+- **Umsatz YTD (bezahlt)**: gebuchte Zahlungseingänge des Jahres bis zum Stichtag. **Offene Forderungen**: Summe der offenen Restbeträge (= Finanzen → Forderungen). **Pipeline (gewichtet)**: erwartete GRENFORD-Provision aktiver Vorgänge × Wahrscheinlichkeit (Investment/Property: höchste Wahrscheinlichkeit der Käuferprozesse, sonst 10 %; Projects: vergeben 100 %, sonst Phasenfortschritt; Akquise: eigener Courtage-Anteil × Wahrscheinlichkeit). **Aktive Vorgänge**: aktive Investment-Projekte, Property-Mandate, Projects-Projekte.
+- **„vs. Vorjahr“** nur bei vorhandenen Vorjahreswerten – die Testdaten enthalten keine, daher „k. A.“.
+- **Umsatzentwicklung**: Ist-Zahlungen bis zum aktuellen Monat; danach nur Forecast offener, nicht überfälliger Forderungen nach Fälligkeit; geplante Auszahlungen werden nicht als Zahlungsausgang gezeigt.
+- **Provisionen nach Bereich**: bezahlt (Jahr), offen (Rest), erwartet (Ansprüche „Erwartet“). **Top-Listen / hervorgehobene Vorgänge**: größte aktive Vorgänge je Bereich. **Finanz-Tabs**: offene Forderungen (Restbetrag), offene Verbindlichkeiten, vollständig bezahlte Rechnungen. **Termine, Aufgaben, letzte Aktivitäten**: aus dem Modul Aktivitäten; Abhaken setzt die Aufgabe dort auf erledigt.
 
 ### Abweichungen und offene fachliche Punkte (dokumentiert, nicht eigenmächtig entschieden)
 
 1. **Nummerierung Investment**: Die Visualisierung zeigt andere Beispielnummern; verwendet wird der Kreis, der zu den freigegebenen Finanz-Testdaten passt (INV-2026-001 = Wohnportfolio NRW mit RE-2026-001).
-2. **Projects-Unterphasen**: Vorschlag (s. o.), Vorlage nennt nur Hauptphasen.
-3. **Brautstraße 29 (PROP-2026-008)**: Eigentümer unbekannt, Rolle von Kay Brandes offen – als „prüfen“ markiert.
-4. **Berlin-Schöneberg (INV-2026-007)**: Käufer/Investor in den Vorlagen nicht benannt – Käuferprozesse sind Testannahmen.
-5. **Empfehlungsprovision Investment/Property**: Bemessungsgrundlage ist die Summe der GRENFORD-Provisionsansprüche zum Vorgang (entstanden; solange keiner entstanden ist, die erwarteten – dann als „erwartet“ gekennzeichnet). Provisionsbeteiligungen Dritter werden **nicht** vorab abgezogen – bitte bestätigen, ob die Basis vor oder nach solchen Beteiligungen gilt.
+2. **Projects-Unterphasen**: vorläufig beibehalten, **fachlich noch nicht endgültig freigegeben** (Code, Dokumentation und Seite Projektprozesse gekennzeichnet).
+3. **Prüfbedürftige Zuordnungen** (strukturiertes Feld `pruefen` an Beteiligten und Käuferprozessen, sichtbar als „· prüfen“ bzw. Prüfhinweis; in Vorgangslisten als „Rolle prüfen“):
+   - Brautstraße 29 (PROP-2026-008): Eigentümer unbekannt; Rolle von Kay Brandes (Interessent, Eigentümer-Vertreter oder Makler) und Vorgangsart nicht belegt.
+   - Berlin-Schöneberg (INV-2026-007): **Benjamin Maspohl / Maspohl Invest GmbH ausschließlich Kaufinteressent**, kein bestätigter Käufer (INV-OPT-0008, Prüfhinweis zu Phase D1/LOI); Gino Spannaus – Zuordnung „Käuferseite“ nicht belegt.
+   - Allgemein: Käufer gelten nur bei Status „Gekauft“ als bestätigte Käufer, sonst „Kaufinteressent“.
+   - Weiterhin offen gekennzeichnet: Kauf (Kapitalanlage) ohne Bereich, Ferienimmobilie ohne Rolle, mögliche Objekt-Dublette Zehlendorf.
+4. **Berlin-Schöneberg (INV-2026-007)**: Käufer in den Vorlagen nicht benannt – die Käuferprozesse sind Testannahmen (s. o.).
+5. **Empfehlungsprovision**: Regel bestätigt und umgesetzt (Abschnitt Phase E). Offen ist nur die Einordnung einzelner Test-Beteiligungen als intern/extern.
 6. **Testdaten-Stichtag**: Die Anwendung rechnet mit dem festen Stichtag 10.10.2026 der freigegebenen Testdaten.
 
 ## 3. Sicherheitskonzept

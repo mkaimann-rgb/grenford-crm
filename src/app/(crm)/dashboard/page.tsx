@@ -9,7 +9,6 @@ import { RecentActivities } from "@/components/dashboard/RecentActivities";
 import { RevenueChart } from "@/components/dashboard/RevenueChart";
 import { Tasks } from "@/components/dashboard/Tasks";
 import { TopList } from "@/components/dashboard/TopList";
-import { topInvestmentDeals, topProjects, topPropertyMandate } from "@/lib/testdata/dashboard";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
@@ -27,9 +26,9 @@ export default function DashboardPage() {
             <CommissionChart />
           </div>
           <div className="grid gap-[10px] lg:grid-cols-2 xl:grid-cols-3">
-            <TopList title="Top Investment-Deals" href="/investment/projekte" entries={topInvestmentDeals} phaseRight />
-            <TopList title="Top Property-Mandate" href="/property/objekte" entries={topPropertyMandate} />
-            <TopList title="Top Projects" href="/projects/projekte" entries={topProjects} />
+            <TopList title="Top Investment-Deals" href="/investment/projekte" bereich="investment" phaseRight />
+            <TopList title="Top Property-Mandate" href="/property/objekte" bereich="property" />
+            <TopList title="Top Projects" href="/projects/projekte" bereich="projects" />
           </div>
           <div className="grid gap-[10px] xl:grid-cols-[minmax(0,1.44fr)_minmax(0,1fr)]">
             <FinanceTabs />

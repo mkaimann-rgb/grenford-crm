@@ -185,7 +185,7 @@ export function BeteiligtePanel({ beteiligte, onAendern, titel = "Beteiligte" }:
                 {href ? <Link href={href} className="block truncate text-[12px] font-semibold text-navy-950 hover:underline">{name}</Link> : <span className="text-[12px] font-semibold">{name}</span>}
                 <div className="truncate text-[10.5px] text-muted">{b.art === "person" ? crm.personById(b.id)?.kontakte.map((k) => crm.unternehmenById(k.unternehmenId)?.name).filter(Boolean).join(", ") || "Person" : "Unternehmen"}</div>
               </div>
-              <span className="max-w-[45%] truncate text-right text-[11px] text-ink-soft" title={b.rolle}>{b.rolle}</span>
+              <span className={`max-w-[45%] truncate text-right text-[11px] ${b.pruefen ? "text-warn" : "text-ink-soft"}`} title={b.pruefen ? `${b.rolle} – prüfen: ${b.pruefen}` : b.rolle}>{b.rolle}{b.pruefen && " · prüfen"}</span>
               {onAendern && (
                 <Menu label={`Aktionen ${name}`} items={[{ label: "Entfernen", danger: true, onClick: () => onAendern(beteiligte.filter((_, j) => j !== i)) }]} trigger={<span className="px-1 text-navy-900">⋯</span>} />
               )}

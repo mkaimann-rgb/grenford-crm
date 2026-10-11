@@ -7,12 +7,11 @@ import { BarChart3, Building2, CircleDot, ClipboardCheck, Database, FileSearch, 
 import { useCrm } from "@/lib/crm/store";
 import { datumDe } from "@/lib/crm/logic";
 import {
-  ANGEBOT_STATUS, PHASEN_PROJECTS, PMANDAT_STATUS, PROJEKT_STATUS, anonymisiere, angebotsvergleich, naechsteNummer, phaseTitel, phasenIndex, projectsVerguetung,
+  ANGEBOT_STATUS, PHASEN_PROJECTS, PMANDAT_STATUS, PROJEKT_STATUS, anonymisiere, angebotsvergleich, phaseTitel, phasenIndex, projectsVerguetung,
   type Angebot, type ProjectsMandat, type ProjectsProjekt,
   vergabeErzeugtVerbindlichkeit,
 } from "@/lib/crm/module";
 import { HREF } from "@/lib/crm/projektion";
-import { naechsteBelegNr } from "@/lib/finanzen/buchung";
 import { euro, euroCompact, euroMio } from "@/lib/format";
 import { Avatar, Badge, Button, Menu, StatusBadge } from "@/components/ui/controls";
 import { Modal } from "@/components/ui/modal";
@@ -111,7 +110,7 @@ export function ProjectsMandatModal({ initial, onClose }: { initial?: ProjectsMa
       start={{ kunde: refZu(initial?.kunde), objektId: initial?.objektId ?? "", kundentyp: initial?.kundentyp ?? "Privatkunde", status: initial?.status ?? "Planung", sanierungsart: initial?.sanierungsart ?? "", verguetungSatz: String(initial?.verguetungSatz ?? crm.einstellungen.provisionsstandards.Projects) }}
       onClose={onClose}
       speichern={(w) => {
-        const id = initial?.id ?? naechsteNummer(`MAN-${crm.heute.slice(0, 4)}-`, crm.projectsMandate.map((m) => m.id));
+        const id = initial?.id ?? crm.nummer("projectsMandat");
         crm.speichere("projectsMandate", { erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, ...initial, id, kunde: refAus(w.kunde)!, objektId: text(w.objektId) || undefined, kundentyp: text(w.kundentyp), status: text(w.status) as ProjectsMandat["status"], sanierungsart: text(w.sanierungsart), verguetungSatz: zahl(w.verguetungSatz) }, { ref: id, text: initial ? "Mandat geändert" : "Mandat angelegt" });
         toast(`Mandat ${id} gespeichert ${TESTMODUS}`);
         if (!initial) router.push(HREF.pmandat(id));
@@ -236,6 +235,7 @@ function ProzessBoard() {
       <nav aria-label="Brotkrumen" className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#596b83]">Projects › Projektprozesse <span className="ml-2 rounded-full bg-warn-bg px-2 py-[1px] text-[9px] font-bold tracking-[0.12em] text-warn">Testdaten</span></nav>
       <h1 className="mt-[6px] font-serif text-[31px] font-bold text-navy-950">Projektprozesse</h1>
       <p className="font-serif text-[15.5px] text-muted-soft">Alle laufenden Projekte nach Prozessphase A–F – von der Bedarfsermittlung bis zur Begleitung der Ausführung.</p>
+      <p className="mt-1 text-[11px] text-warn">Hinweis: Die Unterphasen (z. B. A1, B2, C3) sind ein vorläufiger Vorschlag und fachlich noch nicht endgültig freigegeben.</p>
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6">
         {PHASEN_PROJECTS.map((ph) => {
           const liste = aktiv.filter((p) => p.phase.startsWith(ph.code));
@@ -298,7 +298,7 @@ export function ProjektModal({ initial, mandat, onClose }: { initial?: ProjectsP
       }}
       onClose={onClose}
       speichern={(w) => {
-        const id = initial?.id ?? naechsteNummer(`PRO-${crm.heute.slice(0, 4)}-`, crm.projectsProjekte.map((p) => p.id));
+        const id = initial?.id ?? crm.nummer("projectsProjekt");
         crm.speichere("projectsProjekte", {
           erstelltAm: crm.heute, verantwortlichId: crm.benutzer[0].id, ziele: [], beteiligte: [], ...initial,
           id, mandatId: text(w.mandatId), titel: text(w.titel), bauherr: refAus(w.bauherr)!, objektId: text(w.objektId) || undefined, einheit: text(w.einheit), budget: zahl(w.budget), leistungsumfang: text(w.leistungsumfang), phase: text(w.phase),
@@ -470,7 +470,7 @@ function AngebotModal({ projektId, onClose }: { projektId: string; onClose: () =
       pruefen={(w) => (w.status !== "Angefragt" && !zahl(w.summe) ? { summe: "Bitte die Angebotssumme angeben." } : crm.angebote.some((a) => a.projektId === projektId && a.guId === w.guId && a.status !== "Abgelehnt") ? { guId: "Für diesen GU-Partner besteht bereits ein Angebot zu diesem Projekt." } : ({} as Record<string, string>))}
       onClose={onClose}
       speichern={(w) => {
-        const id = naechsteBelegNr("ANG-", crm.angebote.map((a) => a.id));
+        const id = crm.nummer("angebot");
         crm.speichere("angebote", { id, projektId, guId: text(w.guId), status: text(w.status) as Angebot["status"], datum: w.status !== "Angefragt" ? text(w.datum) : undefined, summe: w.status !== "Angefragt" ? zahl(w.summe) : undefined, umfang: text(w.umfang), dokument: text(w.dokument) || undefined }, { ref: projektId, text: `Angebot ${id} erfasst (${text(w.status)})` });
         toast(`Angebot ${id} erfasst ${TESTMODUS}`);
       }}
@@ -541,7 +541,7 @@ function VergabeModal({ p, angebote, guName, onClose }: { p: ProjectsProjekt; an
         crm.speichere("projectsProjekte", { ...p, vergabe: { angebotId: aId, datum: text(w.datum), vergabesumme: summe, auftraggeber }, phase: p.phase < "E1" ? "E1" : p.phase }, { ref: p.id, text: `Vergabe dokumentiert: ${guName(a)} (${euro(summe)}), Auftraggeber ${auftraggeber}` });
         if (vergabeErzeugtVerbindlichkeit(auftraggeber)) {
           const g = crm.guPartner.find((x) => x.id === a.guId);
-          const nr = naechsteBelegNr(`VB-${crm.heute.slice(0, 4)}-`, crm.verbindlichkeiten.map((v) => v.nr));
+          const nr = crm.nummer("verbindlichkeit");
           const faellig = new Date(Date.parse(text(w.datum)) + 30 * 86_400_000).toISOString().slice(0, 10);
           crm.speichere("verbindlichkeiten", { nr, empfaenger: guName(a), referenz: p.id, bereich: "Projects", typ: "Bau- / GU-Leistung", betrag: summe, faellig, empfaengerRef: g ? { art: "unternehmen", id: g.unternehmenId } : undefined, quelle: p.id }, { ref: p.id, text: `Verbindlichkeit ${nr} (GRENFORD als Auftraggeber) angelegt` });
         }
