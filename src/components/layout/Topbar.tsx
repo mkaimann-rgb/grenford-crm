@@ -89,6 +89,7 @@ export function Topbar({ onMenu }: { onMenu: () => void }) {
 
       <div className="flex shrink-0 items-center gap-2 sm:gap-4 lg:gap-5">
         <Menu
+          flach
           label="Neu anlegen"
           items={[
             { label: "Neue Aufgabe", onClick: () => setNeu("Aufgabe") },
@@ -102,6 +103,7 @@ export function Topbar({ onMenu }: { onMenu: () => void }) {
           trigger={<span className="flex h-[31px] w-[31px] items-center justify-center rounded-full bg-navy-900 text-white shadow-card hover:bg-navy-800"><Plus className="h-4 w-4" strokeWidth={2.2} /></span>}
         />
         <Menu
+          flach
           label="Benachrichtigungen"
           items={[
             { label: `${heute} Termine/Aufgaben heute`, onClick: () => router.push("/aktivitaeten") },
@@ -117,6 +119,7 @@ export function Topbar({ onMenu }: { onMenu: () => void }) {
           }
         />
         <Menu
+          flach
           label="Benutzermenü"
           items={[
             { label: "Benutzerprofil & Einstellungen", onClick: () => router.push("/einstellungen") },

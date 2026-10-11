@@ -192,7 +192,7 @@ export function Tabs<T extends string>({ tabs, value, onChange }: { tabs: { id: 
 
 export type MenuItem = { label: string; onClick: () => void; danger?: boolean; hinweis?: string };
 
-export function Menu({ trigger, items, align = "right", label }: { trigger: ReactNode; items: MenuItem[]; align?: "left" | "right"; label: string }) {
+export function Menu({ trigger, items, align = "right", label, flach = false }: { trigger: ReactNode; items: MenuItem[]; align?: "left" | "right"; label: string; /** Button ohne Zeilenhöhe (exakte Ausrichtung in der Kopfzeile) */ flach?: boolean }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -208,7 +208,7 @@ export function Menu({ trigger, items, align = "right", label }: { trigger: Reac
   }, [open]);
   return (
     <div className="relative" ref={ref}>
-      <button type="button" aria-haspopup="menu" aria-expanded={open} aria-label={label} onClick={(e) => { e.stopPropagation(); setOpen((o) => !o); }} className="focus-ring rounded">
+      <button type="button" aria-haspopup="menu" aria-expanded={open} aria-label={label} onClick={(e) => { e.stopPropagation(); setOpen((o) => !o); }} className={`focus-ring rounded ${flach ? "flex" : ""}`}>
         {trigger}
       </button>
       {open && (

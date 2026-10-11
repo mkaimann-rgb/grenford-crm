@@ -24,7 +24,7 @@ export function FinanceTabs() {
   return (
     <section className="card px-[6px] pb-[6px] pt-[8px]">
       <div className="flex items-center justify-between gap-2 px-[4px]">
-        <div role="tablist" aria-label="Finanzen" className="flex gap-1 overflow-x-auto">
+        <div role="tablist" aria-label="Finanzen" className="flex min-w-0 gap-1 overflow-x-auto">
           {tabs.map((t) => {
             const selected = t.id === active;
             return (
@@ -50,7 +50,7 @@ export function FinanceTabs() {
         <span className="pr-2"><MoreLink href={tab.href} /></span>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="relative overflow-x-auto">
         <table className="w-full min-w-[520px] text-left text-[11px]" role="tabpanel">
           <thead>
             <tr className="bg-line-soft/70 text-muted">
