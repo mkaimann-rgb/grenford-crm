@@ -36,7 +36,7 @@ export function PageHeader({
               {c.href ? <Link href={c.href} className="focus-ring rounded hover:text-navy-900">{c.label}</Link> : <span aria-current="page">{c.label}</span>}
             </span>
           ))}
-          <span className="rounded-full bg-warn-bg px-2 py-[1px] text-[9px] font-bold tracking-[0.12em] text-warn" title="Testversion – fiktive Daten, Änderungen werden nicht dauerhaft gespeichert">Testdaten</span>
+          <span className="rounded-full bg-warn-bg px-2 py-[1px] text-[9px] font-bold tracking-[0.12em] text-warn" title="Testversion – fiktive Daten, Änderungen nur in diesem Browser zwischengespeichert (keine Datenbank)">Testdaten</span>
         </nav>
         <h1 className="mt-[6px] truncate font-serif text-[31px] font-bold leading-[1.1] tracking-[-0.015em] text-navy-950">{titel}</h1>
         <p className="mt-[4px] font-serif text-[15.5px] text-muted-soft">{untertitel}</p>
@@ -218,6 +218,7 @@ export function bezugLabel(a: Aktivitaet, crm: ReturnType<typeof useCrm>) {
   const b = a.bezug[0];
   if (!b) return a.kontext ?? "—";
   if (b.art === "unternehmen") return crm.unternehmenById(b.id)?.name ?? "—";
+  if (b.art === "vorgang") return crm.index.get(b.id)?.titel ?? b.id;
   const p = crm.personById(b.id);
   return p ? `${p.vorname} ${p.nachname}` : "—";
 }

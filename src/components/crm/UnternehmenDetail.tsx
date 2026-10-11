@@ -34,7 +34,7 @@ export function UnternehmenDetail({ id }: { id: string }) {
     return (
       <div className="card mx-auto mt-10 max-w-lg p-8 text-center">
         <p className="font-serif text-[16px] font-semibold text-navy-900">Unternehmen nicht gefunden.</p>
-        <p className="mt-1 text-[12px] text-muted">Neu angelegte Testdatensätze gehen beim Neuladen der Seite verloren.</p>
+        <p className="mt-1 text-[12px] text-muted">Testdaten werden nur in diesem Browser zwischengespeichert – ggf. wurden sie unter Einstellungen zurückgesetzt.</p>
         <Link href="/kunden/unternehmen" className="link-more mt-4">Zur Unternehmensübersicht</Link>
       </div>
     );
@@ -42,7 +42,7 @@ export function UnternehmenDetail({ id }: { id: string }) {
 
   const kontakte = crm.ansprechpartnerVon(u.id).map((p) => ({ p, k: p.kontakte.find((k) => k.unternehmenId === u.id)! }));
   const verantwortlich = [...kontakte].sort((a, b) => Number(!!b.k.leitung) - Number(!!a.k.leitung) || Number(!!b.k.haupt) - Number(!!a.k.haupt));
-  const zeilen = vorgaengeVonUnternehmen(u, crm.vorhaben, crm.objekte);
+  const zeilen = vorgaengeVonUnternehmen(u, crm.vorgaenge, crm.objekte);
   const akt = crm.aktivitaetenVonUnternehmen(u);
   const letzte = crm.letzteAktivitaetUnternehmen(u);
   const letzteAkt = akt.filter((a) => a.datum === letzte).sort((a, b) => (b.von ?? "").localeCompare(a.von ?? ""))[0];

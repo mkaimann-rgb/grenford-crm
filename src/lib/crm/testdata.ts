@@ -71,6 +71,8 @@ const unternehmenRoh: Unternehmen[] = [
   firma({ id: "f-simple", name: "Simple Invest GmbH", arten: ["Makler", "Investor"], ort: "Berlin", plz: "10623", status: "Aktiv", letzterKontakt: d(-15) }),
   firma({ id: "f-sparkasse", name: "Sparkasse Berlin (Test)", arten: ["Finanzierer"], rechtsform: "Sonstige", ort: "Berlin", plz: "10117", status: "Potenzial", letzterKontakt: d(-70) }),
   firma({ id: "f-privateigentum", name: "Privateigentum Legrand", arten: ["Sonstige"], rechtsform: "Sonstige", ort: "Berlin", plz: "10777", status: "Inaktiv", letzterKontakt: d(-120) }),
+  // Ergänzt für Phasen B–F (Namen aus den Visualisierungen; je ein zentraler Stammsatz)
+  firma({ id: "f-maspohl", name: "Maspohl Invest GmbH", arten: ["Investor"], ort: "Berlin", plz: "10719", strasse: "Kurfürstendamm 123", status: "Aktiv", website: "https://www.maspohl-invest.de", telefon: "+49 30 123456-0", email: "info@maspohl-invest.de", beschreibung: "Institutioneller Investor (Investmentgesellschaft) – Bestand, Core+, ESG-konform.", erstelltAm: "2026-05-20", letzterKontakt: d(-2) }),
 ];
 
 type P = Partial<Person> & Pick<Person, "id" | "anrede" | "vorname" | "nachname" | "ort" | "status">;
@@ -130,6 +132,13 @@ const personenRoh: Person[] = [
   person({ id: "p-frosch", anrede: "Herr", vorname: "Peter", nachname: "Frosch", ort: "Berlin", status: "Aktiv", erstelltAm: "2026-09-21", email: "p.frosch@baufrosch.de", kontakte: [k("f-baufrosch", "Geschäftsführer", "GU-Partner", { haupt: true, leitung: true })], letzterKontakt: d(-20) }),
   person({ id: "p-spannaus", anrede: "Herr", vorname: "Gino", nachname: "Spannaus", ort: "Berlin", status: "Aktiv", erstelltAm: "2026-09-30", email: "g.spannaus@simple-invest.de", kontakte: [k("f-simple", "Geschäftsführer", "Partner", { haupt: true, leitung: true })], letzterKontakt: d(-15) }),
   person({ id: "p-richter-bank", anrede: "Frau", vorname: "Helena", nachname: "Richter", ort: "Frankfurt", status: "Aktiv", erstelltAm: "2026-10-02", email: "h.richter@bankhaus-richter.de", kontakte: [k("f-bankhaus", "Firmenkundenbetreuerin", "Projektkontakt", { haupt: true, abteilung: "Firmenkunden" })], letzterKontakt: d(-53) }),
+  // Ergänzt für Phasen B–F (Namen aus den Visualisierungen; je ein zentraler Stammsatz)
+  person({ id: "p-maspohl", anrede: "Herr", vorname: "Benjamin", nachname: "Maspohl", ort: "Berlin", status: "Aktiv", email: "b.maspohl@maspohl-invest.de", telefonMobil: "+49 171 1234567", telefonGeschaeftlich: "+49 30 123456-0", kontakte: [k("f-maspohl", "Geschäftsführer", "Investor", { haupt: true, leitung: true })], erstelltAm: "2026-05-20", letzterKontakt: d(-2) }),
+  person({ id: "p-thweber", anrede: "Herr", titel: "Dr.", vorname: "Thomas", nachname: "Weber", ort: "Berlin", status: "Aktiv", email: "t.weber@beispiel.test", telefonMobil: "+49 172 5550101", kontakte: [], privat: { status: "Aktiv", seit: "2026-07-01", interessen: ["Kauf (Eigennutzung)"], regionen: "Berlin", zeitrahmen: "0–3 Monate", prioritaet: "Hoch", budget: 1_800_000 }, erstelltAm: "2026-07-01", letzterKontakt: d(0) }),
+  person({ id: "p-lhoffmann", anrede: "Frau", vorname: "Lisa", nachname: "Hoffmann", ort: "Potsdam", status: "Aktiv", email: "l.hoffmann@beispiel.test", telefonMobil: "+49 173 5550102", kontakte: [], privat: { status: "Qualifiziert", seit: "2026-08-03", interessen: ["Kauf (Eigennutzung)"], regionen: "Berlin, Potsdam", zeitrahmen: "3–6 Monate", prioritaet: "Normal", budget: 2_000_000 }, erstelltAm: "2026-08-03", letzterKontakt: d(-6) }),
+  person({ id: "p-mkaimann", anrede: "Frau", vorname: "Martina", nachname: "Kaimann", ort: "Berlin", plz: "12045", strasse: "Weichselstraße 20", status: "Aktiv", email: "m.kaimann@beispiel.test", telefonMobil: "+49 174 5550103", kontakte: [], sanierung: { status: "Angebotsphase", seit: "2026-08-12", interessen: ["Bad / Sanitär"], regionen: "Berlin", zeitrahmen: "0–3 Monate", prioritaet: "Hoch", budget: 80_000 }, erstelltAm: "2026-08-12", letzterKontakt: d(-5) }),
+  person({ id: "p-krueger", anrede: "Herr", vorname: "Jens", nachname: "Krüger", ort: "Berlin", status: "Aktiv", email: "j.krueger@malerwerk.de", telefonMobil: "+49 30 1234567", kontakte: [k("f-malerwerk", "Geschäftsführer", "GU-Partner", { haupt: true, leitung: true })], erstelltAm: "2026-06-15", letzterKontakt: d(-53) }),
+  person({ id: "p-mberger", anrede: "Herr", vorname: "Michael", nachname: "Berger", ort: "Berlin", status: "Aktiv", email: "m.berger@financoncept.de", telefonGeschaeftlich: "+49 30 7788990", kontakte: [k("f-financoncept", "Berater", "Empfehlungspartner", { haupt: true })], erstelltAm: "2026-03-01", letzterKontakt: d(-60) }),
 ];
 
 type VorhabenRoh = Omit<Vorhaben, "geschaeftsbereich" | "rolle"> & Partial<Pick<Vorhaben, "geschaeftsbereich" | "rolle">>;
@@ -140,7 +149,7 @@ const vorhabenRoh: VorhabenRoh[] = [
   { id: "v-ghazzawi-1", personId: "p-ghazzawi", bereich: "sanierung", art: "Neubau / Innenausbau", titel: "MF Neubau Potsdam", ort: "Potsdam", beschreibung: "Innenausbau Neubau", budget: 600_000, status: "Angebotsphase", fortschritt: 40, zeithorizont: "3–6 Monate", bild: "/testbilder/proj-1.jpg", unternehmenId: "f-sander", unternehmenRolle: "GU-Partner" },
   { id: "v-keil-1", personId: "p-keil", bereich: "sanierung", art: "Komplettsanierung", titel: "MFH Weichselstraße 20", ort: "Berlin", beschreibung: "Komplettsanierung – 8 WE", budget: 250_000, status: "Aktiv", fortschritt: 60, zeithorizont: "0–3 Monate", bild: "/testbilder/inv-2.jpg", unternehmenId: "f-baufrosch", unternehmenRolle: "GU-Partner", geplanterStart: "Q4/2026", geplanteFertigstellung: "Q3/2027" },
   { id: "v-keil-2", personId: "p-keil", bereich: "sanierung", art: "Bad / Innenausbau", titel: "Eigentumswohnung", ort: "Berlin-Charlottenburg", beschreibung: "Bad + Innenausbau", budget: 45_000, status: "In Planung", fortschritt: 30, zeithorizont: "3–6 Monate", bild: "/testbilder/prop-2.jpg" },
-  { id: "v-ozden-1", personId: "p-ozden", bereich: "sanierung", art: "Küche / Innenausbau", titel: "Malplaquetstraße 39", ort: "Berlin", beschreibung: "Küche und Innenausbau", budget: 400_000, status: "In Planung", fortschritt: 20, zeithorizont: "3–6 Monate", unternehmenId: "f-kuechenaktiv", unternehmenRolle: "Ausführender Betrieb" },
+  { id: "v-ozden-1", personId: "p-ozden", bereich: "sanierung", art: "Küche / Innenausbau", titel: "Malplaquetstraße 39", ort: "Berlin", beschreibung: "Küche und Innenausbau", budget: 400_000, status: "Aktiv", fortschritt: 60, zeithorizont: "3–6 Monate", unternehmenId: "f-kuechenaktiv", unternehmenRolle: "Ausführender Betrieb" },
   { id: "v-doerwald-1", personId: "p-doerwald", bereich: "privat", art: "Ferienimmobilie", titel: "Beach House Usedom", ort: "Zirchow (Usedom)", beschreibung: "Ferienhaus mit Umbau", budget: 900_000, status: "Aktiv", fortschritt: 50, zeithorizont: "6–12 Monate", bild: "/testbilder/proj-2.jpg" },
   { id: "v-weber-1", personId: "p-weber", bereich: "privat", art: "Kauf (Kapitalanlage)", titel: "Mehrfamilienhaus NRW", ort: "Düsseldorf", beschreibung: "MFH als Kapitalanlage", budget: 2_000_000, status: "In Planung", fortschritt: 20, zeithorizont: "6–12 Monate" },
   { id: "v-fischer-1", personId: "p-fischer", bereich: "privat", art: "Verkauf", titel: "ETW Hamburg", ort: "Hamburg", beschreibung: "Verkauf Eigentumswohnung", budget: 800_000, status: "Aktiv", fortschritt: 40, zeithorizont: "3–6 Monate" },
@@ -183,60 +192,31 @@ export const objekte: Objekt[] = [
 ];
 
 const OBJEKT_VON_VORHABEN: Record<string, { objektId?: string; referenz?: string }> = {
-  "v-legrand-1": { objektId: "o-penthouse-charlottenburg", referenz: "Property-Mandat prop-2 (Dashboard)" },
-  "v-legrand-2": { objektId: "o-malplaquet-39" },
-  "v-ghazzawi-1": { objektId: "o-mf-neubau-potsdam", referenz: "Projects-Projekt proj-1 „Potsdam (Neubau)“ (Dashboard), RE-2026-002" },
-  "v-keil-1": { objektId: "o-weichsel-20" },
-  "v-keil-2": { objektId: "o-etw-charlottenburg" },
-  "v-ozden-1": { objektId: "o-malplaquet-39" },
+  "v-legrand-1": { objektId: "o-penthouse-charlottenburg", referenz: "PROP-OPT-0011" },
+  "v-legrand-2": { objektId: "o-malplaquet-39", referenz: "PRO-2026-016" },
+  "v-ghazzawi-1": { objektId: "o-mf-neubau-potsdam", referenz: "PRO-2026-006" },
+  "v-keil-1": { objektId: "o-weichsel-20", referenz: "PRO-2026-015" },
+  "v-keil-2": { objektId: "o-etw-charlottenburg", referenz: "PRO-2026-017" },
+  "v-ozden-1": { objektId: "o-malplaquet-39", referenz: "PRO-2026-012" },
   "v-doerwald-1": { objektId: "o-beach-house-usedom" },
   "v-weber-1": { objektId: "o-mfh-nrw" },
-  "v-fischer-1": { objektId: "o-etw-hamburg" },
+  "v-fischer-1": { objektId: "o-etw-hamburg", referenz: "PROP-2026-010" },
   "v-sommer-1": {}, // Suchauftrag – noch kein konkretes Objekt
   "v-sommer-2": { objektId: "o-etw-sommer" },
   "v-sommer-0": { objektId: "o-altbau-sommer" },
   "v-mlehmann-1": { objektId: "o-wohnung-sendling" },
-  "v-srichter-1": { objektId: "o-efh-zehlendorf-richter" },
+  "v-srichter-1": { objektId: "o-efh-zehlendorf-richter", referenz: "PROP-2026-009" },
   "v-rossi-1": { objektId: "o-mfh-berlin-rossi" },
-  "v-rossi-2": { objektId: "o-efh-zehlendorf-rossi" },
-  "v-lange-1": { objektId: "o-dhh-potsdam" },
-  "v-litus-1": { objektId: "o-hotel-erz" },
+  "v-rossi-2": { objektId: "o-efh-zehlendorf-rossi", referenz: "PRO-2026-010" },
+  "v-lange-1": { objektId: "o-dhh-potsdam", referenz: "PRO-2026-002" },
+  "v-litus-1": { objektId: "o-hotel-erz", referenz: "PRO-2026-004" },
 };
-
-/** Vorgänge ohne Privatkunden: Investment-Deals (Dashboard) und Finanzreferenzen (INV-/PROP-/PRO-…) */
-const fv = (x: Partial<Vorhaben> & Pick<Vorhaben, "id" | "titel" | "art" | "geschaeftsbereich">): Vorhaben => ({
-  ort: "", beschreibung: "", budget: 0, status: "Aktiv", fortschritt: 0, zeithorizont: "", rolle: "", herkunft: "abgeleitet", ...x,
-});
-const U_ = (id: string, rolle: string) => ({ art: "unternehmen" as const, id, rolle });
-const P_ = (id: string, rolle: string) => ({ art: "person" as const, id, rolle });
-const OHNE_OBJEKT = "Objekt in den Testdaten noch nicht zugeordnet";
-
-const weitereVorgaenge: Vorhaben[] = [
-  fv({ id: "v-inv-montesana", objektId: "o-montesana", titel: "Montesana", ort: "Bad Reichenhall (DE/CH)", art: "Investment-Transaktion", geschaeftsbereich: "Investment", budget: 1_200_000, fortschritt: 60, referenz: "Investment-Deal inv-1 (Dashboard)", beteiligte: [U_("f-montesana", "Verkäufer / Bestandshalter")], grund: "Top Investment-Deal „Montesana“", bild: "/testbilder/inv-1.jpg" }),
-  fv({ id: "v-inv-schoeneberg", objektId: "o-schoeneberg-mfh", titel: "Berlin-Schöneberg (MFH)", ort: "Berlin", art: "Investment-Transaktion", geschaeftsbereich: "Investment", budget: 2_900_000, fortschritt: 70, referenz: "Investment-Deal inv-2 (Dashboard)", beteiligte: [U_("f-schoeneberg", "Projektentwickler")], pruefen: "Investor (Käufer) in den Testdaten nicht eindeutig benannt – bitte zuordnen", grund: "Top Investment-Deal „Berlin-Schöneberg (MFH)“", bild: "/testbilder/inv-2.jpg" }),
-  fv({ id: "v-inv-erz", objektId: "o-hotel-erz", titel: "das ERZ", ort: "Erzgebirge", art: "Investment-Transaktion", geschaeftsbereich: "Investment", budget: 800_000, fortschritt: 40, referenz: "Investment-Deal inv-3 (Dashboard)", beteiligte: [U_("f-erz", "Bestandshalter")], grund: "Top Investment-Deal „das ERZ“", bild: "/testbilder/inv-3.jpg" }),
-  fv({ id: "v-ref-inv-001", titel: "INV-2026-001", art: "Investment-Transaktion", geschaeftsbereich: "Investment", referenz: "INV-2026-001", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-simple", "Provisionsbeteiligter"), P_("p-spannaus", "Provisionsbeteiligter"), P_("p-brandes", "Empfehlungspartner"), U_("f-brandes", "Empfehlungspartner"), P_("p-brinkmann", "Empfehlungspartner")], grund: "Verbindlichkeiten VB-2026-014/-015/-016 (Finanzen)" }),
-  fv({ id: "v-ref-inv-002", titel: "INV-2026-002", art: "Investment-Transaktion", geschaeftsbereich: "Investment", referenz: "INV-2026-002", pruefen: OHNE_OBJEKT, beteiligte: [P_("p-brinkmann", "Empfehlungspartner")], grund: "Verbindlichkeit VB-2026-011 (Finanzen)" }),
-  fv({ id: "v-ref-inv-003", titel: "INV-2026-003", art: "Investment-Transaktion", geschaeftsbereich: "Investment", referenz: "INV-2026-003", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-financoncept", "Provisionsbeteiligter")], grund: "Verbindlichkeit VB-2026-001 (Finanzen)" }),
-  fv({ id: "v-ref-inv-004", titel: "INV-2026-004", art: "Investment-Transaktion", geschaeftsbereich: "Investment", referenz: "INV-2026-004", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-simple", "Provisionsbeteiligter"), P_("p-spannaus", "Provisionsbeteiligter")], grund: "Verbindlichkeit VB-2026-006 (Finanzen)" }),
-  fv({ id: "v-ref-inv-005", titel: "INV-2026-005", art: "Investment-Transaktion", geschaeftsbereich: "Investment", referenz: "INV-2026-005", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-financoncept", "Provisionsbeteiligter")], grund: "Verbindlichkeit VB-2026-008 (Finanzen)" }),
-  fv({ id: "v-ref-prop-002", titel: "PROP-2026-002", art: "Property-Vermittlung", geschaeftsbereich: "Property", referenz: "PROP-2026-002", pruefen: OHNE_OBJEKT, beteiligte: [P_("p-brinkmann", "Empfehlungspartner")], grund: "Verbindlichkeit VB-2026-003 (Finanzen)" }),
-  fv({ id: "v-ref-prop-003", titel: "PROP-2026-003", art: "Property-Vermittlung", geschaeftsbereich: "Property", referenz: "PROP-2026-003", pruefen: OHNE_OBJEKT, beteiligte: [P_("p-brandes", "Empfehlungspartner"), U_("f-brandes", "Empfehlungspartner")], grund: "Verbindlichkeit VB-2026-007 (Finanzen)" }),
-  fv({ id: "v-prop-brautstrasse", objektId: "o-brautstrasse-29", titel: "Brautstraße 29", ort: "Berlin", art: "Objektbesichtigung", geschaeftsbereich: "Property", beteiligte: [P_("p-brandes", "Rolle offen")], pruefen: "Nur Termin „Objektbesichtigung“ vorhanden – Rolle von Kay Brandes (Interessent, Eigentümer oder Makler) und Vorgangsart bitte prüfen", grund: "Termin „Objektbesichtigung Brautstraße 29“ (Property)" }),
-  fv({ id: "v-ref-pro-002", titel: "PRO-2026-002", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-002", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-malerwerk", "Ausführender Betrieb")], grund: "Verbindlichkeit VB-2026-002 (Finanzen)" }),
-  fv({ id: "v-ref-pro-004", titel: "PRO-2026-004", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-004", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-malerwerk", "Ausführender Betrieb")], grund: "Verbindlichkeit VB-2026-013 (Finanzen)" }),
-  fv({ id: "v-ref-pro-003", titel: "PRO-2026-003", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-003", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-sander", "GU-Partner")], grund: "Verbindlichkeit VB-2026-005 (Finanzen)" }),
-  fv({ id: "v-ref-pro-006", titel: "PRO-2026-006", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-006", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-sander", "GU-Partner")], grund: "Verbindlichkeit VB-2026-009 (Finanzen)" }),
-  fv({ id: "v-ref-pro-010", titel: "PRO-2026-010", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-010", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-bankhaus", "Finanzierer")], grund: "Verbindlichkeit VB-2026-010 (Finanzen)" }),
-  fv({ id: "v-ref-pro-012", titel: "PRO-2026-012", art: "Projects-Projekt", geschaeftsbereich: "Projects", referenz: "PRO-2026-012", pruefen: OHNE_OBJEKT, beteiligte: [U_("f-kuechenaktiv", "Ausführender Betrieb")], grund: "Verbindlichkeit VB-2026-012 (Finanzen)" }),
-];
 
 export const vorhaben: Vorhaben[] = [
   ...vorhabenRoh.map((v): Vorhaben => {
     const e = einstufen(v);
     return { ...OBJEKT_VON_VORHABEN[v.id], ...v, geschaeftsbereich: e.geschaeftsbereich, rolle: e.rolle, pruefen: e.pruefen, herkunft: "abgeleitet", grund: `Vorgangsart „${v.art}“${v.bereich === "sanierung" ? " (Sanierungskunde)" : ""}` };
   }),
-  ...weitereVorgaenge,
 ];
 
 let n = 0;

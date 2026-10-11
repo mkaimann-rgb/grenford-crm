@@ -193,6 +193,16 @@ export type Objekt = {
   bild?: string;
   /** Hinweis bei möglicher Dublette o. Ä. – wird sichtbar gekennzeichnet, nie automatisch zusammengeführt */
   hinweis?: string;
+  /** Sichtbare Objekt-ID, z. B. OPP-2026-003 */
+  nummer?: string;
+  adresse?: string;
+  objektart?: string;
+  einheiten?: number;
+  /** Wohn- bzw. Nutzfläche in m² */
+  wohnflaeche?: number;
+  grundstueck?: number;
+  baujahr?: number;
+  zustand?: string;
 };
 
 /** Weitere Beteiligte an einem Vorgang, jeweils mit eigener Rolle */
@@ -235,8 +245,10 @@ export type Vorhaben = {
   /** Rolle der Person (personId) in diesem Vorgang, z. B. Kaufinteressent, Verkäufer, Bauherr */
   rolle: string;
   beteiligte?: Beteiligung[];
-  /** Spätere Modulverknüpfung, z. B. INV-2026-001 oder Dashboard-ID */
+  /** Verknüpfung zum Vorgang im Fachmodul, z. B. INV-2026-007, PROP-OPT-0011, PRO-2026-015 */
   referenz?: string;
+  /** Nur Anzeige: Link zur Detailseite im Fachmodul (bei abgeleiteten Modul-Vorgängen) */
+  href?: string;
   /** Begründung, falls Bereich oder Rolle nicht eindeutig sind */
   pruefen?: string;
   herkunft?: "manuell" | "abgeleitet";
@@ -247,7 +259,8 @@ export const AKTIVITAET_TYPEN = ["Termin", "Aufgabe", "E-Mail", "Telefon", "Noti
 export type AktivitaetTyp = (typeof AKTIVITAET_TYPEN)[number];
 export type TerminArt = "video" | "vor-ort" | "persoenlich" | "telefon";
 
-export type Bezug = { art: "unternehmen" | "person"; id: ID };
+/** Bezug einer Aktivität: Stammsatz oder fachlicher Vorgang (z. B. INV-2026-007, PRO-2026-001) */
+export type Bezug = { art: "unternehmen" | "person" | "vorgang"; id: ID };
 
 export type Aktivitaet = {
   id: ID;

@@ -37,7 +37,7 @@ import { ausFormular, ergaenzeBereiche } from "@/lib/crm/bereiche";
 import { einstufen, findeObjekt, ROLLEN_JE_BEREICH } from "@/lib/crm/vorgaenge";
 import { useToast } from "@/components/ui/toast";
 
-const GESPEICHERT = "(Testmodus – nur bis zum Neuladen der Seite gespeichert)";
+const GESPEICHERT = "(Testmodus – nur in diesem Browser zwischengespeichert)";
 const LAENDER = ["Deutschland", "Österreich", "Schweiz", "Sonstige"];
 
 // ---------- Personensuche ----------
@@ -512,7 +512,8 @@ export function AktivitaetModal({ initial, typ = "Termin", bezug = [], onClose }
     if (f.von && f.bis && f.bis < f.von) e.bis = "Ende liegt vor Beginn.";
     setFehler(e);
     if (Object.keys(e).length) return;
-    const bz: Bezug[] = [];
+    // Bezüge zu Vorgängen (z. B. INV-2026-007) bleiben erhalten
+    const bz: Bezug[] = (initial?.bezug ?? bezug).filter((b) => b.art === "vorgang");
     if (f.unternehmenId) bz.push({ art: "unternehmen", id: f.unternehmenId });
     if (f.personId) bz.push({ art: "person", id: f.personId });
     crm.speichereAktivitaet({

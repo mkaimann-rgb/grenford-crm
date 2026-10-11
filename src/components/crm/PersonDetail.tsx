@@ -37,7 +37,7 @@ export function PersonDetail({ id, rolle }: { id: string; rolle: PersonRolle }) 
     return (
       <div className="card mx-auto mt-10 max-w-lg p-8 text-center">
         <p className="font-serif text-[16px] font-semibold text-navy-900">Person nicht gefunden.</p>
-        <p className="mt-1 text-[12px] text-muted">Neu angelegte Testdatensätze gehen beim Neuladen der Seite verloren.</p>
+        <p className="mt-1 text-[12px] text-muted">Testdaten werden nur in diesem Browser zwischengespeichert – ggf. wurden sie unter Einstellungen zurückgesetzt.</p>
         <Link href={LISTE[rolle].href} className="link-more mt-4">Zur Übersicht</Link>
       </div>
     );
@@ -49,7 +49,7 @@ export function PersonDetail({ id, rolle }: { id: string; rolle: PersonRolle }) 
   const letzteAkt = akt.filter((a) => a.datum === letzte).sort((a, b) => (b.von ?? "").localeCompare(a.von ?? ""))[0];
   const vorhaben = crm.vorhaben.filter((v) => v.personId === p.id);
   // Alle Vorgänge: eigene (als Kunde), als Beteiligte und über verknüpfte Unternehmen
-  const zeilen = vorgaengeVonPerson(p, crm.vorhaben, crm.objekte, new Map(crm.unternehmen.map((x) => [x.id, x])));
+  const zeilen = vorgaengeVonPerson(p, crm.vorgaenge, crm.objekte, new Map(crm.unternehmen.map((x) => [x.id, x])));
   const eigene = zeilen.filter((z) => z.v.personId === p.id);
   const bearbeiten = (z: VorgangZeile) => (z.v.personId === p.id ? () => setModal({ art: "vorhaben", v: z.v, bereich: z.v.bereich ?? bereich }) : undefined);
   const bereich: "privat" | "sanierung" = rolle === "sanierung" ? "sanierung" : "privat";

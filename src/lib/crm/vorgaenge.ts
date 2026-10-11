@@ -82,7 +82,10 @@ export function vorgaengeVonPerson(
   const objekte = new Map(objekteListe.map((o) => [o.id, o]));
   const out: VorgangZeile[] = [];
   const gesehen = new Set<ID>();
+  // Eigene Vorhaben, die bereits auf einen Modul-Vorgang verweisen, ersetzen dessen Projektion (keine Doppelanzeige)
+  for (const v of alle) if (v.personId === p.id && v.referenz && v.referenz !== v.id) gesehen.add(v.referenz);
   for (const v of alle) {
+    if (gesehen.has(v.id)) continue;
     if (v.personId === p.id) { out.push(zeile(v, v.rolle, alle, objekte)); gesehen.add(v.id); continue; }
     const b = v.beteiligte?.find((x) => x.art === "person" && x.id === p.id);
     if (b) { out.push(zeile(v, b.rolle, alle, objekte)); gesehen.add(v.id); }
@@ -100,7 +103,9 @@ export function vorgaengeVonPerson(
 /** Alle Vorgänge eines Unternehmens (ausführend oder beteiligt) */
 export function vorgaengeVonUnternehmen(u: Pick<Unternehmen, "id">, alle: Vorhaben[], objekteListe: Objekt[]): VorgangZeile[] {
   const objekte = new Map(objekteListe.map((o) => [o.id, o]));
+  const ersetzt = new Set(alle.filter((v) => v.unternehmenId === u.id && v.referenz && v.referenz !== v.id).map((v) => v.referenz!));
   return alle.flatMap((v) => {
+    if (ersetzt.has(v.id)) return [];
     const rolle = v.unternehmenId === u.id ? v.unternehmenRolle ?? "Beteiligtes Unternehmen" : v.beteiligte?.find((x) => x.art === "unternehmen" && x.id === u.id)?.rolle;
     return rolle ? [zeile(v, rolle, alle, objekte)] : [];
   });
