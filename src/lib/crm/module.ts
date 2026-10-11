@@ -412,6 +412,9 @@ export function empfehlungsprovision(basis: number, standardSatz: number, indivi
   return { satz, betrag: Math.round((basis * satz) / 100), quelle: individuell?.satz !== undefined ? "individuell vereinbart" : "Standard laut Vertrag" };
 }
 
+/** Vergabe Projects: Nur wenn GRENFORD selbst Auftraggeber des GU ist, entsteht eine GRENFORD-Verbindlichkeit (Direktbeauftragung durch den Kunden: keine). */
+export const vergabeErzeugtVerbindlichkeit = (auftraggeber: string) => auftraggeber === "GRENFORD";
+
 /** Provisionsbeteiligung: ausschließlich individueller Anteil, kein Standardsatz */
 export const beteiligungsbetrag = (b: Pick<Provisionsbeteiligung, "basis" | "anteil" | "festbetrag">) => b.festbetrag ?? Math.round((b.basis * b.anteil) / 100);
 

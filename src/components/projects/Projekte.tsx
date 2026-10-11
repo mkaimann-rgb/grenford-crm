@@ -9,6 +9,7 @@ import { datumDe } from "@/lib/crm/logic";
 import {
   ANGEBOT_STATUS, PHASEN_PROJECTS, PMANDAT_STATUS, PROJEKT_STATUS, anonymisiere, angebotsvergleich, naechsteNummer, phaseTitel, phasenIndex, projectsVerguetung,
   type Angebot, type ProjectsMandat, type ProjectsProjekt,
+  vergabeErzeugtVerbindlichkeit,
 } from "@/lib/crm/module";
 import { HREF } from "@/lib/crm/projektion";
 import { naechsteBelegNr } from "@/lib/finanzen/buchung";
@@ -538,7 +539,7 @@ function VergabeModal({ p, angebote, guName, onClose }: { p: ProjectsProjekt; an
         }
         const a = angebote.find((x) => x.id === aId)!;
         crm.speichere("projectsProjekte", { ...p, vergabe: { angebotId: aId, datum: text(w.datum), vergabesumme: summe, auftraggeber }, phase: p.phase < "E1" ? "E1" : p.phase }, { ref: p.id, text: `Vergabe dokumentiert: ${guName(a)} (${euro(summe)}), Auftraggeber ${auftraggeber}` });
-        if (auftraggeber === "GRENFORD") {
+        if (vergabeErzeugtVerbindlichkeit(auftraggeber)) {
           const g = crm.guPartner.find((x) => x.id === a.guId);
           const nr = naechsteBelegNr(`VB-${crm.heute.slice(0, 4)}-`, crm.verbindlichkeiten.map((v) => v.nr));
           const faellig = new Date(Date.parse(text(w.datum)) + 30 * 86_400_000).toISOString().slice(0, 10);
