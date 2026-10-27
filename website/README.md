@@ -31,15 +31,23 @@ node tests/transport.mjs      # Formular-Übertragung (ohne echten Request)
 
 ## Vor dem Livegang erledigen
 
-1. **Formular-Endpunkt eintragen:** `site.json` → `formEndpoint`. Der Wert stand in der bisherigen `dist/ux.js`, die mir nicht vorlag. Das Schema der Übertragung ist unverändert (`fields` + `context`, geprüft durch `tests/transport.mjs`). Solange das Feld leer ist, zeigen beide Formulare nach dem Absenden den vorbereiteten Text mit „Text kopieren“ und „E-Mail-Programm öffnen“.
-2. **Fehlende Originalbilder** nach `static/assets/` kopieren (der Build listet sie auf; bis dahin erscheint „Bild folgt“):
-   `marco-kaimann.jpg`, `penthouse-before.webp`, `penthouse-after.webp`, `soemmering-wohnzimmer.webp`, `soemmering-schlafzimmer.webp`, `soemmering-bad.webp`
-3. **Hero-Galerien prüfen:** Die bisherigen Dateien (`hero-home-*.webp`, `hero-investment-*.webp`, `hero-property-*.webp`, `hero-projects-*.webp`) lagen nicht vor. `site.json` → `gallery` nutzt vorerst die Bilder, die vorlagen. Originale nach `static/assets/` kopieren und die Listen in `site.json` zurückstellen:
-   - Start: `hero-investment-4, hero-home-1, hero-home-4, hero-home-2, hero-home-5`
-   - Investment: `hero-investment-1` bis `-4` · Property: `hero-property-1` bis `-5` · Projects: `hero-projects-1` bis `-3`
-4. **Bildrechte/Kennzeichnung:** Mehrere KI-Bilder zeigen das Gemini-Wasserzeichen (✦), erfundene Firmennamen oder echte Markenlogos (Fachmarktzentrum: toom, JYSK, Fressnapf, KODi). Vor Verwendung als Kennzeichnung „Visualisierung“ ergänzen oder austauschen.
-5. **Impressum/Datenschutz:** Links zeigen auf `www.grenford.de/imprint` und `/privacy` (`site.json`). Sicherstellen, dass diese Seiten zum neuen Auftritt gehören und erreichbar sind.
-6. **`siteUrl`** in `site.json` prüfen (Canonical, Open Graph, Sitemap).
+1. **Originalbilder aus dem ZIP** (`dist/assets/` des veröffentlichten Stands) nach `static/assets/` kopieren. Der Build listet fehlende Dateien auf; bis dahin erscheinen „Bild folgt“ bzw. die Vorschau-Bilder:
+   - `marco-kaimann.jpg`, `penthouse-before.webp`, `penthouse-after.webp`, `soemmering-wohnzimmer.webp`, `soemmering-schlafzimmer.webp`, `soemmering-bad.webp`
+   - alle `hero-*.webp` aus `site.json` → `gallery` (Start ohne das entfernte `hero-home-3`). Sind sie vorhanden, nutzt der Build automatisch sie statt `previewGallery`.
+   - Nicht mehr benötigt: `hero-home-3.webp`, `house.webp`, `investment.webp`, `projects.webp`, `property.webp`, `dm-sans-600.ttf`.
+2. **CRM-Eingang einmal echt prüfen:** `formEndpoint` ist das HubSpot-Formular aus dem veröffentlichten Stand; Schema und Nachrichtentext sind unverändert (geprüft mit `tests/transport.mjs` und einem Browsertest mit simuliertem HubSpot). Ein echter Test-Lead wurde bewusst nicht gesendet. Nach dem Deployment eine Testanfrage absenden und in HubSpot kontrollieren.
+3. **Bildrechte/Kennzeichnung:** Mehrere KI-Bilder zeigen das Gemini-Wasserzeichen (✦), erfundene Firmennamen oder echte Markenlogos (Fachmarktzentrum: toom, JYSK, Fressnapf, KODi). Vor Verwendung als Kennzeichnung „Visualisierung“ ergänzen oder austauschen.
+4. **Impressum/Datenschutz:** Links zeigen auf `www.grenford.de/imprint` und `/privacy` (`site.json`). Sicherstellen, dass diese Seiten zum neuen Auftritt gehören und erreichbar sind.
+5. **`siteUrl`** in `site.json` prüfen (Canonical, Open Graph, Sitemap).
+
+## Prüfung: Erhält die Python-Generierung den veröffentlichten Stand?
+
+Geprüft mit dem Originalquelltext (`build.py`, `ux_refinement.py`, `collection.py`, `projects_comparison.py`, JSON-Dateien) gegen das veröffentlichte `dist/`:
+
+- `investment/`, `property/`, `projects/`: **byte-identisch** neu erzeugt.
+- `index.html`: identisch bis auf **ein Leerzeichen** (`data-cover-image fetchpriority` statt mit zwei Leerzeichen). Die veröffentlichte Startseite wurde also nach dem letzten Build minimal von Hand geändert; funktional ohne Folgen.
+- `style.css`, `art.css`, `immersive.css`, `app.js`, `ux.js` und `assets/` erzeugt der Original-Build **nicht**. Sie existierten nur in `dist/` und blieben beim Neugenerieren nur deshalb erhalten, weil `build.py` sie nicht anfasst. In diesem Projekt liegen sie jetzt als Quelle in `static/`.
+- `checks/transport.mjs` besteht gegen das veröffentlichte `ux.js`.
 
 ## Was gegenüber dem bisherigen Stand geändert wurde
 
@@ -49,12 +57,12 @@ node tests/transport.mjs      # Formular-Übertragung (ohne echten Request)
 - Keine stillen `.replace()`-Ketten mehr auf fertigem HTML; Überschriften und Vorauswahl werden direkt erzeugt.
 - Nummerierung mit `{n:02d}` (auch ab 10 korrekt). Ungenutzter Code entfernt (`perspectives()`, Memo-Auswahl der Startseite, Tab-Logik).
 - Fehlende Bilder brechen den Build nicht, sondern werden gemeldet und durch `placeholder.svg` ersetzt.
-- `ux_refinement.py` und `property-collection.json` lagen nicht vor und wurden aus dem dist-Stand nachgebaut.
+- `ux_refinement.py` und `property-collection.json` entsprechen dem veröffentlichten Stand (Original-Markup) plus den unten genannten Verbesserungen. Ungenutzte Altfunktionen (`refine()`, `compact_process()`) sind entfallen.
 
 **Formulare (Datenschutz, Spam, Bedienung)**
 - `method="post"`: Ohne JavaScript landen keine Personendaten mehr in der URL.
-- Honeypot-Feld und Mindest-Ausfüllzeit (3 s) gegen Bots.
-- Neues `ux.js`: Validierung je Schritt mit verständlichen Fehlermeldungen, `aria-invalid`, Fokus auf das fehlerhafte Feld, Prüfseite, Doppelklick-Schutz, Erfolgsmeldung in einer Live-Region.
+- Unsichtbares Köderfeld (Honeypot) gegen Bots; keine Zeitsperre, damit schnelle echte Anfragen nie verloren gehen.
+- `ux.js` übernimmt Texte, Ablauf und Nachrichtenformat des veröffentlichten Stands (HubSpot-Schema, „Strategische Projektanfrage · …“, Vorbelegungen „Noch offen“ usw.). Dazu: Validierung je Schritt mit verständlichen Fehlermeldungen, `aria-invalid`, Fokus auf das fehlerhafte Feld, Prüfseite, Doppelklick-Schutz, Erfolgsmeldung in einer Live-Region.
 - Bei Übertragungsfehlern bleibt nichts verloren: vorbereiteter Text zum Kopieren oder per E-Mail.
 - „… anfragen“-Buttons füllen Bereich, Anliegen und Objekt vor; auf der Startseite öffnet `#anfrage` das eingeklappte Formular.
 - `noscript`-Hinweis mit E-Mail-Adresse.

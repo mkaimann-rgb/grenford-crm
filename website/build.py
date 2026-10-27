@@ -63,7 +63,7 @@ def structured_data():
 
 def shell(active, meta, body):
     path = '' if active == 'home' else active + '/'
-    hero = meta['gallery'][0]
+    hero = hero_images(meta)[0]
     fonts = ''.join(f'<link rel="preload" href="{asset(f"fonts/dm-sans-{w}.woff2")}" as="font" type="font/woff2" crossorigin>' for w in (400, 500))
     social = (f'<meta property="og:type" content="website"><meta property="og:locale" content="de_DE"><meta property="og:site_name" content="GRENFORD">'
               f'<meta property="og:title" content="{E(meta["title"])}"><meta property="og:description" content="{E(meta["description"])}">'
@@ -79,6 +79,15 @@ def shell(active, meta, body):
             '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail() + '</body></html>')
 
 
+def hero_images(meta):
+    """Originalbilder, soweit in static/assets vorhanden; sonst die Vorschau-Auswahl."""
+    pics = [p for p in meta['gallery'] if (paths.ASSETS / p).is_file()]
+    skipped = [p for p in meta['gallery'] if p not in pics]
+    if skipped:
+        paths.skipped_heroes.update(skipped)
+    return pics or meta.get('previewGallery', [])
+
+
 def gallery(pics):
     h = '<figure class="cover-gallery" data-cover aria-label="GRENFORD Bildwelt">'
     for i, p in enumerate(pics):
@@ -92,7 +101,7 @@ def gallery(pics):
 
 def home_hero():
     routes = ''.join(f'<a href="{page(k)}"><span>{i:02d}</span>{d["label"]}<b aria-hidden="true">↗</b></a>' for i, (k, d) in enumerate(D.items(), 1))
-    return ('<section class="immersive-hero">' + gallery(SITE['home']['gallery']) +
+    return ('<section class="immersive-hero">' + gallery(hero_images(SITE['home'])) +
             '<div class="hero-content"><div class="hero-kicker"><span>BOUTIQUE REAL ESTATE ADVISORY</span><span class="hero-coordinate" aria-hidden="true">G / 01</span></div>'
             '<h1>Der nächste<br><em>Schritt zählt.</em></h1><div class="hero-bottom"><p>Immobilienentscheidungen brauchen einen klaren Blick. Und jemanden, der ihn mit Ihnen teilt.</p>'
             '<a class="hero-link" href="#perspektiven"><span>Ihre Perspektive wählen</span><span class="arrow-circle" aria-hidden="true">↓</span></a></div></div>'
@@ -159,7 +168,7 @@ def subpage(k):
     d = D[k]
     titles = {'investment': 'Werte erkennen.<br><em>Chancen einordnen.</em>', 'property': 'Räume entdecken.<br><em>Menschen verbinden.</em>', 'projects': 'Angebote verstehen.<br><em>Baupartner finden.</em>'}
     second = f'<a class="text-link" href="#memo">{d["memo"]} ↓</a>' if k == 'projects' else request(d['secondIntent'], d['second'], 'text-button')
-    body = ('<section class="immersive-hero immersive-sub">' + gallery(SITE['pages'][k]['gallery']) +
+    body = ('<section class="immersive-hero immersive-sub">' + gallery(hero_images(SITE['pages'][k])) +
             f'<div class="hero-content"><div class="hero-kicker"><a href="{page("home")}">GRENFORD / {d["label"].upper()}</a><span class="hero-coordinate" aria-hidden="true">G / {d["n"]}</span></div>'
             f'<h1>{titles[k]}</h1><div class="hero-bottom"><p>{d["intro"]}</p><div class="hero-actions">' + request(d['intent'], d['primary']) + second + '</div></div></div></section>')
     body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#leistung">Leistung</a>'
@@ -235,6 +244,8 @@ def main():
     parser.add_argument('--preview', action='store_true', help='Links mit index.html, Ausgabe nach preview/')
     args = parser.parse_args()
     paths.pretty = not args.preview
+    if args.preview:
+        SITE['formEndpoint'] = ''  # Vorschau: keine Übermittlung ins CRM
     out = ROOT / ('preview' if args.preview else 'dist')
     if out.exists():
         shutil.rmtree(out)
@@ -255,6 +266,10 @@ def main():
     if paths.missing:
         print('Fehlende Bilder (Ersatzbild eingesetzt), bitte nach static/assets/ kopieren:')
         for name in sorted(paths.missing):
+            print('  -', name)
+    if paths.skipped_heroes:
+        print('Hero-Bilder fehlen (Vorschau-Auswahl bzw. übersprungen), bitte nach static/assets/ kopieren:')
+        for name in sorted(paths.skipped_heroes):
             print('  -', name)
     if not SITE['formEndpoint']:
         print('Hinweis: site.json "formEndpoint" ist leer. Formulare bieten den Versand per E-Mail an.')

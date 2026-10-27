@@ -1,42 +1,102 @@
 {
  "siteUrl": "https://www.grenford.de",
- "formEndpoint": "",
- "formEndpointNote": "Hier den Endpunkt aus der bisherigen dist/ux.js eintragen (z. B. https://api.hsforms.com/submissions/v3/integration/submit/<portalId>/<formGuid>). Leer = Formulare bieten den Versand per E-Mail an.",
+ "formEndpoint": "https://api.hsforms.com/submissions/v3/integration/submit/146610940/cd06de30-eaee-4d74-b9e2-52d8f2dccae4",
+ "formEndpointNote": "Öffentliches HubSpot-Formular aus dem veröffentlichten Stand. Leer = Formulare bieten den Versand per E-Mail an. Der Vorschau-Build (--preview) setzt den Endpunkt immer leer, damit keine Test-Leads entstehen.",
  "email": "kontakt@grenford.de",
  "phone": "+49 172 425 9087",
  "phoneHref": "+491724259087",
  "whatsapp": "https://wa.me/491724259087",
  "calendar": "https://calendar.app.google/QCTQ3PActJhp8pYf8",
- "address": {"street": "Kurfürstendamm 96", "zip": "10709", "city": "Berlin", "country": "DE"},
+ "address": {
+  "street": "Kurfürstendamm 96",
+  "zip": "10709",
+  "city": "Berlin",
+  "country": "DE"
+ },
  "mapsQuery": "Kurf%C3%BCrstendamm+96+10709+Berlin",
  "vatId": "DE362752159",
  "imprint": "https://www.grenford.de/imprint",
  "privacy": "https://www.grenford.de/privacy",
  "socials": [
-  {"label": "Marco Kaimann auf LinkedIn", "icon": "linkedin", "url": "https://de.linkedin.com/in/marco-kaimann-0512b884"},
-  {"label": "GRENFORD auf Instagram", "icon": "instagram", "url": null},
-  {"label": "GRENFORD auf Facebook", "icon": "facebook", "url": null}
+  {
+   "label": "Marco Kaimann auf LinkedIn",
+   "icon": "linkedin",
+   "url": "https://de.linkedin.com/in/marco-kaimann-0512b884"
+  },
+  {
+   "label": "GRENFORD auf Instagram",
+   "icon": "instagram",
+   "url": null
+  },
+  {
+   "label": "GRENFORD auf Facebook",
+   "icon": "facebook",
+   "url": null
+  }
  ],
  "home": {
   "title": "GRENFORD | Immobilienberatung Berlin für Investment, Property und Projects",
   "description": "Persönliche Immobilienberatung aus Berlin: Off-Market-Investments, Verkauf und Kauf privater Immobilien sowie vergleichbare Bauangebote für Ihre Sanierung. Mit Marco Kaimann.",
-  "gallery": ["skyline-frankfurt.webp", "altbau-berlin.webp", "skyline-muenchen.webp", "wohnraum-visualisierung.webp"]
+  "gallery": [
+   "hero-investment-4.webp",
+   "hero-home-1.webp",
+   "hero-home-4.webp",
+   "hero-home-2.webp",
+   "hero-home-5.webp"
+  ],
+  "previewGallery": [
+   "skyline-frankfurt.webp",
+   "altbau-berlin.webp",
+   "skyline-muenchen.webp",
+   "wohnraum-visualisierung.webp"
+  ]
  },
  "pages": {
   "investment": {
    "title": "Investment | GRENFORD – Off-Market, Globalverkauf, Suchauftrag",
    "description": "Off-Market-Transaktionen, Globalverkäufe und gezielte Objektsuche im Kundenauftrag. GRENFORD bringt Anlageziele und passende Immobilien zusammen.",
-   "gallery": ["skyline-frankfurt.webp", "skyline-muenchen.webp", "altbau-berlin.webp"]
+   "gallery": [
+    "hero-investment-1.webp",
+    "hero-investment-2.webp",
+    "hero-investment-3.webp",
+    "hero-investment-4.webp"
+   ],
+   "previewGallery": [
+    "skyline-frankfurt.webp",
+    "skyline-muenchen.webp",
+    "altbau-berlin.webp"
+   ]
   },
   "property": {
    "title": "Property | GRENFORD – Immobilie verkaufen oder kaufen in Berlin",
    "description": "Wohnungen, Häuser und kleine Gewerbeeinheiten persönlich positioniert, verständlich präsentiert und passend vermarktet. Für private Eigentümer und Käufer.",
-   "gallery": ["wohnraum-visualisierung.webp", "altbau-berlin.webp", "ferienhaus-usedom.webp"]
+   "gallery": [
+    "hero-property-1.webp",
+    "hero-property-2.webp",
+    "hero-property-3.webp",
+    "hero-property-4.webp",
+    "hero-property-5.webp"
+   ],
+   "previewGallery": [
+    "wohnraum-visualisierung.webp",
+    "altbau-berlin.webp",
+    "ferienhaus-usedom.webp"
+   ]
   },
   "projects": {
    "title": "Projects | GRENFORD – Sanierung planen, Bauangebote vergleichen",
    "description": "Originalangebote vergleichbar machen und den passenden Baupartner wählen: Das Renovation Memo stellt Leistungen, Kosten und offene Punkte gegenüber.",
-   "gallery": ["projects-bauplan.webp", "projects-badsanierung.webp", "dachgeschoss-after.webp"]
+   "gallery": [
+    "hero-projects-1.webp",
+    "hero-projects-2.webp",
+    "hero-projects-3.webp"
+   ],
+   "previewGallery": [
+    "projects-bauplan.webp",
+    "projects-badsanierung.webp",
+    "dachgeschoss-after.webp"
+   ]
   }
- }
+ },
+ "galleryNote": "gallery = Originaldateien in static/assets. Fehlt eine Datei, wird sie übersprungen; fehlen alle, nutzt der Build previewGallery."
 }

@@ -15,6 +15,7 @@ _prefix = ''
 pretty = True          # False = Links mit index.html (für Vorschau ohne Verzeichnis-Index)
 missing = set()        # Bilder, die in static/assets fehlen
 used = set()           # Bilder, die tatsächlich eingebunden werden
+skipped_heroes = set() # Hero-Originale, die in static/assets fehlen
 
 
 def set_page(depth):

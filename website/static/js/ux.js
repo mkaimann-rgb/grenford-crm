@@ -1,11 +1,11 @@
 // GRENFORD / Formulare: Projektanfrage in sechs Schritten, Kurznachricht, Karte, Kontaktleiste.
 //
 // Teil 1 (bis zur Formular-Konstante "strategic") ist DOM-frei und wird von tests/transport.mjs geprüft.
-// Endpunkt: <meta name="grenford-form-endpoint"> aus site.json "formEndpoint".
-// Leer = keine Online-Übermittlung; die Formulare bieten dann den Versand per E-Mail an.
+// Übertragung an das bestehende HubSpot-Formular (Schema unverändert). Kein Versand vor ausdrücklichem Absenden.
+// Endpunkt: <meta name="grenford-form-endpoint"> aus site.json "formEndpoint". Leer = Versand per E-Mail anbieten.
 
-var FORM_ENDPOINT = globalThis.GRENFORD_FORM_ENDPOINT || '/api/anfrage';
-var FORM_TIMEOUT = 15000;
+var FORM_ENDPOINT = globalThis.GRENFORD_FORM_ENDPOINT || 'https://api.hsforms.com/submissions/v3/integration/submit/146610940/cd06de30-eaee-4d74-b9e2-52d8f2dccae4';
+var FORM_TIMEOUT = 20000;
 
 function splitName(name) {
   var parts = String(name || '').trim().split(/\s+/);
@@ -24,7 +24,7 @@ async function sendRequest(data) {
   var timer = setTimeout(function () { controller.abort(); }, FORM_TIMEOUT);
   try {
     var response = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: controller.signal });
-    if (!response.ok) throw new Error('status ' + response.status);
+    if (!response.ok) throw new Error('submission_failed');
     return response;
   } finally {
     clearTimeout(timer);
@@ -37,16 +37,24 @@ const reduceMotionUx = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 const endpointMeta = document.querySelector('meta[name="grenford-form-endpoint"]');
 if (endpointMeta) FORM_ENDPOINT = endpointMeta.content.trim();
 const MAIL = (document.querySelector('meta[name="grenford-email"]') || {}).content || 'kontakt@grenford.de';
-const MIN_FILL_MS = 3000;
 
-const LABEL = { investment: 'Investment', property: 'Property', projects: 'Projects' };
-const SUBJECT = { investment: 'investment', property: 'property', projects: 'renovation' };
-const CONTEXT_TEXT = {
-  '': { legend: 'Asset-Klasse', question: 'Wählen Sie oben Ihren Bereich. Danach erscheinen die passenden Optionen.', budget: 'Budget / Preisrahmen (optional)' },
-  investment: { legend: 'Asset-Klasse', question: 'Um welche Art von Immobilie handelt es sich bei der geplanten Transaktion?', budget: 'Budget / Volumen (optional)', title: 'Investment Memo anfragen.' },
-  property: { legend: 'Immobilienart', question: 'Um welche Immobilie geht es?', budget: 'Preisrahmen (optional)', title: 'Property Brief anfragen.' },
-  projects: { legend: 'Art des Vorhabens', question: 'Welches Objekt oder welchen Raum möchten Sie verändern?', budget: 'Budgetrahmen (optional)', title: 'Renovation Memo anfragen.' }
+// Texte wie auf der veröffentlichten Seite.
+const TITLES = { investment: 'Investment Memo anfragen.', property: 'Property Brief anfragen.', projects: 'Renovation Memo anfragen.' };
+const LEADS = {
+  '': 'Investment, Property oder Projects: Wählen Sie Ihren Bereich und stellen Sie Ihr Vorhaben vor. Das strategische Erstgespräch ist kostenfrei.',
+  investment: 'Strukturierte Qualifikation für Ihr Transaktionsmandat oder Suchprofil. Das strategische Erstgespräch ist kostenfrei.',
+  property: 'Eine erste Einordnung für Ihren Verkauf oder Ihr Kaufinteresse. Das strategische Erstgespräch ist kostenfrei.',
+  projects: 'Ihre Wünsche, Ihr Bestand und der Weg zum passenden Baupartner. Das strategische Erstgespräch ist kostenfrei.'
 };
+const LEGEND = { '': 'Bereich & Objektart', investment: 'Asset-Klasse', property: 'Objektart', projects: 'Objektart' };
+const QUESTION = {
+  '': 'Wählen Sie zunächst Ihren Bereich. Danach erscheinen die passenden Objektarten.',
+  investment: 'Um welche Art von Immobilie handelt es sich bei der geplanten Transaktion?',
+  property: 'Welche Immobilie möchten Sie verkaufen oder kaufen?',
+  projects: 'Welchen Bestand möchten Sie verändern?'
+};
+const BUDGET_PLACEHOLDER = { projects: 'z. B. 30.000 € netto oder noch offen' };
+const SUBJECT = { investment: 'investment', property: 'property', projects: 'renovation' };
 const INTENT = {
   'investment-search': ['investment', 'Suchprofil im Kundenauftrag'],
   'investment-offer': ['investment', 'Immobilie / Portfolio verkaufen'],
@@ -55,6 +63,8 @@ const INTENT = {
   'property-buy': ['property', 'Kaufinteresse / Property Brief'],
   'projects': ['projects', 'Sanierung / Innenumbau planen']
 };
+const FAILED = 'Die Übermittlung konnte nicht bestätigt werden. Ihre Eingaben bleiben erhalten. Bitte versuchen Sie es erneut oder senden Sie die vorbereitete E-Mail.';
+const NOT_CONFIGURED = 'Die Online-Übermittlung ist hier nicht eingerichtet. Bitte senden Sie die vorbereitete E-Mail.';
 
 // ---------------------------------------------------------------- Hilfen
 
@@ -63,16 +73,12 @@ const el = (tag, props, children) => {
   (children || []).forEach(child => node.append(child));
   return node;
 };
-const isEmail = value => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
 const scrollTo = node => node.scrollIntoView({ behavior: reduceMotionUx ? 'auto' : 'smooth', block: 'start' });
 
-function stamp(form) {
-  const started = form && form.querySelector('[name="started"]');
-  if (started) started.value = String(Date.now());
-}
+// Köderfeld ausgefüllt = Bot: Erfolg anzeigen, aber nichts senden.
 function looksAutomated(form) {
-  const trap = form.querySelector('[name="website"]'), started = Number((form.querySelector('[name="started"]') || {}).value);
-  return (trap && trap.value) || (started && Date.now() - started < MIN_FILL_MS);
+  const trap = form.querySelector('[name="gf_hp"]');
+  return Boolean(trap && trap.value);
 }
 function clearErrors(form, box) {
   form.querySelectorAll('[aria-invalid]').forEach(field => { field.removeAttribute('aria-invalid'); field.removeAttribute('aria-describedby'); });
@@ -83,160 +89,168 @@ function fail(field, box, message) {
   if (field) { field.setAttribute('aria-invalid', 'true'); field.setAttribute('aria-describedby', box.id); field.focus(); }
   return false;
 }
+// Erste ungültige Pflichtangabe in einem Bereich (Browser-Validierung, versteckte Felder ausgenommen).
+function firstInvalid(scope) {
+  return [...scope.querySelectorAll('input,textarea,select')].find(field =>
+    field.willValidate && !field.closest('[hidden]') && field.type !== 'hidden' && (!field.checkValidity() || (field.required && !field.value.trim())));
+}
+function invalidMessage(field) {
+  return field.validity.typeMismatch ? 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' : 'Bitte ergänzen Sie die markierte Pflichtangabe.';
+}
 
-// Ergebnis anzeigen: Erfolg oder E-Mail-Alternative mit vorbereitetem Text.
 function showSuccess(result, text) {
   result.replaceChildren(el('p', { textContent: text }));
   result.focus();
 }
-function showFallback(result, subject, body, reason) {
-  const intro = reason === 'no-endpoint'
-    ? 'Die Online-Übermittlung ist hier nicht eingerichtet. Bitte senden Sie Ihre Anfrage per E-Mail an'
-    : 'Ihre Anfrage konnte gerade nicht übertragen werden. Ihre Eingaben sind nicht verloren. Bitte senden Sie sie per E-Mail an';
+// E-Mail-Alternative mit vorbereitetem Text, falls die Übermittlung scheitert.
+function showFallback(result, data, reason) {
+  const body = data.message + '\n\n' + data.name + '\n' + data.email + (data.phone ? '\n' + data.phone : '');
+  const subject = 'GRENFORD · ' + data.subject;
   const text = el('textarea', { readOnly: true, value: body, id: result.id + '-text' });
   text.setAttribute('aria-label', 'Vorbereiteter Text Ihrer Anfrage');
-  const mail = el('a', { className: 'text-link', href: 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), textContent: 'E-Mail-Programm öffnen ↗' });
+  const mail = el('a', { className: 'text-link', href: 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), textContent: 'Alternativ per E-Mail senden ↗' });
   const copy = el('button', { type: 'button', className: 'text-button', textContent: 'Text kopieren' });
   copy.addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(body); copy.textContent = 'Text kopiert'; }
     catch (e) { text.focus(); text.select(); copy.textContent = 'Text markiert – jetzt kopieren'; }
   });
   result.replaceChildren(el('div', { className: 'form-fallback' }, [
-    el('p', {}, [intro + ' ', el('span', { className: 'fallback-address', textContent: MAIL }), '.']),
+    el('p', {}, [(reason === 'no-endpoint' ? NOT_CONFIGURED : FAILED) + ' Adresse: ', el('span', { className: 'fallback-address', textContent: MAIL })]),
     text, el('div', { className: 'fallback-actions' }, [copy, mail])
   ]));
   result.focus();
 }
 
-async function deliver(form, button, result, payload, mailSubject, successText, onSuccess) {
-  if (looksAutomated(form)) { showSuccess(result, successText); onSuccess(); return; }
-  button.disabled = true; button.setAttribute('aria-busy', 'true');
-  try {
-    await sendRequest(payload);
-    showSuccess(result, successText);
-    onSuccess();
-  } catch (error) {
-    showFallback(result, mailSubject, payload.message + '\n\n' + payload.name + '\n' + payload.email + (payload.phone ? '\n' + payload.phone : ''), error.message);
-  } finally {
-    button.disabled = false; button.removeAttribute('aria-busy');
-  }
-}
-
 // ---------------------------------------------------------------- Projektanfrage
 
+let inquirySent = false;
 if (strategic) {
-  stamp(strategic);
   const section = strategic.closest('.strategic-inquiry');
-  const contextSelect = document.getElementById('inquiry-context');
-  const steps = [...strategic.querySelectorAll('[data-inquiry-step]')];
-  const progress = document.getElementById('inquiry-progress');
-  const stepLabel = document.getElementById('inquiry-step-label');
-  const percent = document.getElementById('inquiry-percent');
+  const context = document.getElementById('inquiry-context');
+  const panels = [...strategic.querySelectorAll('[data-inquiry-step]')];
   const back = document.getElementById('inquiry-back');
   const next = document.getElementById('inquiry-next');
-  const errorBox = document.getElementById('inquiry-error');
+  const error = document.getElementById('inquiry-error');
   const result = document.getElementById('inquiry-result');
   const title = document.getElementById('inquiry-title');
-  const defaultTitle = title.textContent;
-  let step = 1;
+  const lead = document.getElementById('inquiry-lead');
+  let step = 1, sending = false;
 
-  const context = () => contextSelect.value;
-  const value = name => ((strategic.elements[name] || {}).value || '').trim();
-  const checked = name => { const input = strategic.querySelector(`input[name="${name}"]:checked`); return input ? input.value : ''; };
+  const val = name => ((strategic.elements.namedItem(name) || {}).value || '').trim();
+  const selected = name => [...strategic.querySelectorAll(`input[name="${name}"]:checked`)].map(input => input.value);
 
-  function applyContext() {
-    const c = context(), text = CONTEXT_TEXT[c] || CONTEXT_TEXT[''];
+  function review() {
+    const c = context.value;
+    const rows = [['Bereich', context.selectedOptions[0].text], ['Objektart', selected('Objektart-' + c).join(', ')], ['Anliegen', selected('Anliegen-' + c).join(', ')],
+      ['Schwerpunkte', selected('Themen-' + c).join(', ') || 'Im Gespräch klären'], ['Standort / Suchregion', val('Region')],
+      ['Budget / Preisrahmen', val('Rahmen') || 'Noch offen'], ['Zeitrahmen', val('Zeitrahmen') || 'Noch offen'], ['Größe', val('Groesse') || 'Noch offen'],
+      ['Weitere Angaben', val('Beschreibung') || 'Keine ergänzenden Angaben'], ['Name', val('Name')], ['E-Mail', val('Email')],
+      ['Telefon', val('Telefon') || 'Nicht angegeben'], ['Unternehmen', val('Unternehmen') || 'Nicht angegeben']];
+    document.getElementById('inquiry-review').replaceChildren(...rows.flatMap(([label, text]) => [el('dt', { textContent: label }), el('dd', { textContent: text })]));
+    return rows;
+  }
+
+  function show(focus) {
+    panels.forEach((panel, i) => panel.hidden = i !== step - 1);
+    back.hidden = step === 1;
+    next.textContent = step === 6 ? 'Anfrage senden ↗' : step === 3 ? 'Weiter / überspringen →' : 'Weiter →';
+    document.getElementById('inquiry-step-label').textContent = 'Schritt ' + step + ' von 6';
+    document.getElementById('inquiry-percent').textContent = Math.round(step / 6 * 100) + ' %';
+    const progress = document.getElementById('inquiry-progress');
+    progress.value = step; progress.textContent = step + ' von 6';
+    clearErrors(strategic, error);
+    if (step === 6) review();
+    if (focus !== false) panels[step - 1].querySelector('legend').focus();
+  }
+
+  function changeContext() {
+    const c = context.value;
+    section.dataset.inquiryContext = c;
+    title.textContent = TITLES[c] || 'Ihr Vorhaben anfragen.';
+    lead.textContent = LEADS[c] || LEADS[''];
     strategic.querySelectorAll('[data-context-assets],[data-context-intents],[data-context-topics]').forEach(block => {
       block.hidden = (block.dataset.contextAssets || block.dataset.contextIntents || block.dataset.contextTopics) !== c;
     });
-    strategic.querySelector('[data-asset-legend]').textContent = text.legend;
-    strategic.querySelector('[data-asset-question]').textContent = text.question;
-    strategic.querySelector('[data-budget-label]').textContent = text.budget;
-    title.textContent = text.title || defaultTitle;
-    section.dataset.inquiryContext = c;
+    strategic.querySelector('[data-asset-legend]').textContent = LEGEND[c] || LEGEND[''];
+    strategic.querySelector('[data-asset-question]').textContent = QUESTION[c] || QUESTION[''];
+    strategic.elements.Rahmen.placeholder = BUDGET_PLACEHOLDER[c] || 'z. B. bis 2 Mio. € oder noch offen';
+    step = 1; show(false);
   }
 
-  function collect() {
-    const c = context();
-    const topics = [...strategic.querySelectorAll(`input[name="Themen-${c}"]:checked`)].map(input => input.value).join(', ');
-    return [['Bereich', LABEL[c] || ''], ['Objektart', checked('Objektart-' + c)], ['Anliegen', checked('Anliegen-' + c)], ['Themen', topics],
-      ['Region', value('Region')], ['Budget / Rahmen', value('Rahmen')], ['Zeitrahmen', value('Zeitrahmen')], ['Fläche / Größe', value('Groesse')],
-      ['Beschreibung', value('Beschreibung')], ['Name', value('Name')], ['E-Mail', value('Email')], ['Telefon', value('Telefon')], ['Unternehmen', value('Unternehmen')]]
-      .filter(pair => pair[1]);
-  }
-
-  function buildReview() {
-    const list = document.getElementById('inquiry-review');
-    list.replaceChildren(...collect().flatMap(([label, text]) => [el('dt', { textContent: label }), el('dd', { textContent: text })]));
-  }
-
-  function showStep(n, focus) {
-    step = n;
-    steps.forEach(fieldset => fieldset.hidden = Number(fieldset.dataset.inquiryStep) !== n);
-    progress.value = n; progress.textContent = n + ' von 6';
-    stepLabel.textContent = 'Schritt ' + n + ' von 6';
-    percent.textContent = Math.round(n / 6 * 100) + ' %';
-    back.hidden = n === 1;
-    next.textContent = n === 6 ? 'Anfrage senden ↗' : 'Weiter →';
-    if (n === 6) buildReview();
-    if (focus !== false) steps[n - 1].querySelector('legend').focus();
-  }
-
-  function validate(n) {
-    clearErrors(strategic, errorBox);
-    const c = context();
-    if (n === 1) {
-      if (!c) return fail(contextSelect, errorBox, 'Bitte wählen Sie oben Ihren Bereich: Investment, Property oder Projects.');
-      if (!checked('Objektart-' + c)) return fail(strategic.querySelector(`input[name="Objektart-${c}"]`), errorBox, 'Bitte wählen Sie eine Option aus.');
+  function validate() {
+    clearErrors(strategic, error);
+    if (!context.value) return fail(context, error, 'Bitte wählen Sie Investment, Property oder Projects.');
+    if (step === 1 || step === 2) {
+      const name = (step === 1 ? 'Objektart-' : 'Anliegen-') + context.value;
+      if (!selected(name).length) return fail(strategic.querySelector(`input[name="${name}"]`), error,
+        step === 1 ? 'Bitte wählen Sie eine Objektart aus. „Sonstiges“ ist ebenfalls möglich.' : 'Bitte wählen Sie Ihr Anliegen aus.');
     }
-    if (n === 2 && !checked('Anliegen-' + c)) return fail(strategic.querySelector(`input[name="Anliegen-${c}"]`), errorBox, 'Bitte wählen Sie Ihr Anliegen aus.');
-    if (n === 4 && !value('Region')) return fail(strategic.elements.Region, errorBox, 'Bitte nennen Sie Standort oder Suchregion, zum Beispiel „Berlin“.');
-    if (n === 5) {
-      if (!value('Name')) return fail(strategic.elements.Name, errorBox, 'Bitte geben Sie Ihren Namen ein.');
-      if (!isEmail(value('Email'))) return fail(strategic.elements.Email, errorBox, 'Bitte geben Sie eine gültige E-Mail-Adresse ein, zum Beispiel name@firma.de.');
-    }
+    const invalid = firstInvalid(panels[step - 1]);
+    if (invalid) return fail(invalid, error, invalidMessage(invalid));
     return true;
   }
 
-  contextSelect.addEventListener('change', () => { applyContext(); clearErrors(strategic, errorBox); });
-  back.addEventListener('click', () => { clearErrors(strategic, errorBox); showStep(step - 1); });
-  strategic.addEventListener('submit', event => {
+  context.addEventListener('change', changeContext);
+  strategic.addEventListener('input', event => { event.target.removeAttribute('aria-invalid'); error.textContent = ''; });
+  back.addEventListener('click', () => { if (!sending && step > 1) { step--; show(); } });
+
+  strategic.addEventListener('submit', async event => {
     event.preventDefault();
-    if (!validate(step)) return;
-    if (step < 6) { showStep(step + 1); return; }
-    const c = context(), name = value('Name');
-    const lines = collect().filter(([label]) => !['Name', 'E-Mail', 'Telefon'].includes(label)).map(([label, text]) => label + ': ' + text);
-    if (value('Kontaktweg')) lines.push('Bevorzugter Kontakt: ' + value('Kontaktweg'));
-    const payload = { name, email: value('Email'), phone: value('Telefon'), subject: SUBJECT[c] || 'general', message: lines.join('\n') };
-    deliver(strategic, next, result, payload, 'Projektanfrage ' + (LABEL[c] || ''),
-      'Vielen Dank, ' + name + '. Ihre Projektanfrage ist eingegangen. Ich melde mich persönlich bei Ihnen.',
-      () => { steps.forEach(fieldset => fieldset.hidden = true); next.hidden = true; back.hidden = true; });
+    if (sending || inquirySent || !validate()) return;
+    if (step < 6) { step++; show(); return; }
+    const rows = review();
+    const data = {
+      name: val('Name'), email: val('Email'), phone: val('Telefon'), subject: SUBJECT[context.value],
+      message: 'Strategische Projektanfrage · ' + TITLES[context.value] + '\n\n' + rows.map(([a, b]) => a + ': ' + b).join('\n') + '\nBevorzugter Kontakt: ' + val('Kontaktweg')
+    };
+    const finish = () => {
+      inquirySent = true;
+      showSuccess(result, 'Vielen Dank. Ihre Anfrage wurde übermittelt. Ich melde mich persönlich bei Ihnen. – Marco Kaimann');
+      next.hidden = true; back.hidden = true; context.disabled = true; panels.forEach(panel => panel.hidden = true);
+    };
+    if (looksAutomated(strategic)) { finish(); return; }
+    sending = true; next.disabled = true; back.disabled = true; context.disabled = true;
+    next.setAttribute('aria-busy', 'true'); next.textContent = 'Wird gesendet …';
+    try {
+      await sendRequest(data);
+      finish();
+    } catch (e) {
+      showFallback(result, data, e.message);
+    } finally {
+      sending = false; next.removeAttribute('aria-busy');
+      if (!inquirySent) { next.disabled = false; back.disabled = false; context.disabled = false; next.textContent = 'Anfrage senden ↗'; }
+    }
   });
 
-  // "… anfragen"-Buttons auf der Seite füllen die Anfrage vor.
-  document.querySelectorAll('[data-enquire]').forEach(button => button.addEventListener('click', () => {
-    const preset = INTENT[button.dataset.enquire];
-    if (!preset) return;
+  // "… anfragen"-Buttons füllen Bereich, Anliegen und Objekt vor.
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-enquire]');
+    if (!trigger) return;
+    event.preventDefault();
+    if (inquirySent) { scrollTo(document.getElementById('kontakt')); return; }
+    const preset = INTENT[trigger.dataset.enquire];
+    if (preset) context.value = preset[0];
+    changeContext();
+    if (preset) {
+      const intent = [...strategic.querySelectorAll(`input[name="Anliegen-${preset[0]}"]`)].find(input => input.value === preset[1]);
+      if (intent) intent.checked = true;
+    }
+    if (trigger.dataset.object) strategic.elements.Beschreibung.value = 'Ich interessiere mich für: ' + trigger.dataset.object;
     const gateway = section.closest('details');
     if (gateway) gateway.open = true;
-    contextSelect.value = preset[0];
-    applyContext();
-    const intent = strategic.querySelector(`input[name="Anliegen-${preset[0]}"][value="${CSS.escape(preset[1])}"]`);
-    if (intent) intent.checked = true;
-    const notes = strategic.elements.Beschreibung;
-    if (button.dataset.object && notes && !notes.value.trim()) notes.value = 'Interesse an: ' + button.dataset.object;
-    showStep(1, false);
     scrollTo(section);
-    setTimeout(() => steps[0].querySelector('legend').focus({ preventScroll: true }), reduceMotionUx ? 0 : 450);
-  }));
+    title.tabIndex = -1;
+    title.focus({ preventScroll: true });
+  });
 
-  applyContext();
+  changeContext();
 }
 
 // Startseite: #anfrage zeigt auf das eingeklappte <details> und soll es öffnen.
 function openTarget(hash) {
   const target = hash && document.getElementById(hash.slice(1));
-  if (target && target.tagName === 'DETAILS') { target.open = true; scrollTo(target); }
+  const details = target && (target.tagName === 'DETAILS' ? target : target.closest('details'));
+  if (details) details.open = true;
 }
 document.addEventListener('click', event => {
   const link = event.target.closest('a[href^="#"]');
@@ -244,39 +258,50 @@ document.addEventListener('click', event => {
 });
 window.addEventListener('hashchange', () => openTarget(location.hash));
 openTarget(location.hash);
-document.querySelectorAll('details').forEach(details => details.addEventListener('toggle', () => {
-  if (details.open) details.querySelectorAll('form').forEach(stamp);
-}));
 
 // ---------------------------------------------------------------- Kurznachricht
 
 if (quick) {
-  stamp(quick);
-  const errorBox = document.getElementById('contact-error');
+  const error = document.getElementById('contact-error');
   const result = document.getElementById('contact-result');
-  const button = quick.querySelector('button[type="submit"]');
-  const value = name => (quick.elements[name].value || '').trim();
-  quick.addEventListener('submit', event => {
+  const button = quick.querySelector('[type="submit"]');
+  let busy = false;
+  quick.addEventListener('input', event => { event.target.removeAttribute('aria-invalid'); error.textContent = ''; });
+  quick.addEventListener('submit', async event => {
     event.preventDefault();
-    clearErrors(quick, errorBox);
-    if (!value('name')) return fail(quick.elements.name, errorBox, 'Bitte geben Sie Ihren Namen ein.');
-    if (!isEmail(value('email'))) return fail(quick.elements.email, errorBox, 'Bitte geben Sie eine gültige E-Mail-Adresse ein, zum Beispiel name@firma.de.');
-    if (!value('message')) return fail(quick.elements.message, errorBox, 'Bitte schreiben Sie kurz, worum es geht.');
-    const subjectSelect = quick.elements.subject;
-    const payload = { name: value('name'), email: value('email'), phone: value('phone'), subject: subjectSelect.value, message: value('message') };
-    deliver(quick, button, result, payload, subjectSelect.options[subjectSelect.selectedIndex].text,
-      'Vielen Dank, ' + payload.name + '. Ihre Nachricht ist eingegangen. Ich melde mich persönlich bei Ihnen.',
-      () => { quick.elements.message.value = ''; });
+    if (busy) return;
+    clearErrors(quick, error);
+    const invalid = firstInvalid(quick);
+    if (invalid) return fail(invalid, error, invalidMessage(invalid));
+    const fd = new FormData(quick);
+    const data = { name: fd.get('name').trim(), email: fd.get('email').trim(), phone: fd.get('phone').trim(), subject: fd.get('subject'), message: fd.get('message').trim() };
+    const finish = () => {
+      showSuccess(result, 'Vielen Dank. Ihre Nachricht wurde übermittelt. Ich melde mich persönlich bei Ihnen.');
+      button.hidden = true;
+      quick.querySelectorAll('input,textarea,select').forEach(field => field.disabled = true);
+    };
+    if (looksAutomated(quick)) { finish(); return; }
+    busy = true; button.disabled = true; button.setAttribute('aria-busy', 'true'); button.textContent = 'Wird gesendet …';
+    try {
+      await sendRequest(data);
+      finish();
+    } catch (e) {
+      showFallback(result, data, e.message);
+      button.disabled = false; button.textContent = 'Nachricht senden ↗';
+    } finally {
+      busy = false; button.removeAttribute('aria-busy');
+    }
   });
 }
 
 // ---------------------------------------------------------------- Karte (lädt erst nach Klick)
 
 document.querySelectorAll('[data-load-map]').forEach(button => button.addEventListener('click', () => {
-  const box = button.closest('.ux-map'), host = box.querySelector('[data-map-host]');
-  const link = box.querySelector('a[href*="google.com/maps"]');
-  const query = link ? (link.getAttribute('href').split('query=')[1] || '') : '';
-  host.replaceChildren(el('iframe', { src: 'https://www.google.com/maps?q=' + query + '&output=embed', title: 'Karte: Büro GRENFORD', loading: 'lazy', referrerPolicy: 'no-referrer-when-downgrade' }));
+  const host = button.closest('.ux-map').querySelector('[data-map-host]');
+  host.replaceChildren(el('iframe', {
+    title: 'GRENFORD Büro – Kurfürstendamm 96, Berlin', loading: 'lazy', referrerPolicy: 'no-referrer',
+    src: 'https://www.google.com/maps?q=Kurf%C3%BCrstendamm%2096%2C%2010709%20Berlin&output=embed'
+  }));
   button.hidden = true;
 }));
 
@@ -285,7 +310,7 @@ document.querySelectorAll('[data-load-map]').forEach(button => button.addEventLi
 const contactRail = document.querySelector('.ux-contact-rail');
 const contactSection = document.getElementById('kontakt');
 if (contactRail && contactSection && 'IntersectionObserver' in window) {
-  new IntersectionObserver(entries => contactRail.classList.toggle('is-muted', entries[0].isIntersecting), { threshold: 0.15 }).observe(contactSection);
+  new IntersectionObserver(entries => contactRail.classList.toggle('is-muted', entries[0].isIntersecting), { threshold: 0.05 }).observe(contactSection);
 }
-document.addEventListener('focusin', event => { if (event.target.closest('form')) document.body.classList.add('form-focused'); });
-document.addEventListener('focusout', event => { if (event.target.closest('form')) document.body.classList.remove('form-focused'); });
+document.addEventListener('focusin', event => document.body.classList.toggle('form-focused', Boolean(event.target.closest('form'))));
+document.addEventListener('focusout', event => { if (!(event.relatedTarget && event.relatedTarget.closest('form'))) document.body.classList.remove('form-focused'); });

@@ -2,7 +2,7 @@
 
 Rekonstruiert aus dem dist-Stand (Original-Quelle lag nicht vor) und ergänzt um:
 - method="post" (ohne JavaScript landen keine Daten mehr in der URL)
-- Honeypot-Feld und Zeitstempel gegen Spam
+- Honeypot-Feld gegen Spam
 - noscript-Hinweis mit E-Mail-Adresse
 - Social-Icons nur für hinterlegte Profile
 """
@@ -42,13 +42,14 @@ def icon(name):
 
 
 def _form_attrs(form_id):
-    action = f' action="{E(SITE["formEndpoint"], quote=True)}"' if SITE['formEndpoint'] else ''
-    return f'id="{form_id}" method="post"{action} novalidate'
+    # Kein action: Die Übermittlung läuft nur per ux.js (JSON an HubSpot). Ohne JavaScript
+    # verhindert method="post", dass Personendaten in der URL landen; noscript nennt die E-Mail.
+    return f'id="{form_id}" method="post" novalidate'
 
 
 def _spam_trap():
-    return ('<div class="hp-field" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>'
-            '<input type="hidden" name="started" value="">')
+    # Unsichtbares Köderfeld: Bots füllen es aus, Menschen sehen es nicht. Name ohne Autofill-Bedeutung.
+    return '<div class="hp-field" aria-hidden="true"><label>Bitte leer lassen<input name="gf_hp" tabindex="-1" autocomplete="off"></label></div>'
 
 
 def _noscript():
@@ -70,7 +71,7 @@ def inquiry(k):
     active = k if k in LABELS else ''
     section_id = 'anfrage' if active else 'projektanfrage'
     title = f'{MEMO[active]} anfragen.' if active else 'Ihr Vorhaben anfragen.'
-    options = (f'<option value=""{" selected" if not active else ""}>Bereich wählen</option>'
+    options = (('' if active else '<option value="" selected>Bereich wählen</option>')
                + ''.join(f'<option value="{key}"{" selected" if key == active else ""}>{label}</option>' for key, label in LABELS.items()))
     return (f'<section class="strategic-inquiry" id="{section_id}" data-inquiry-context="{active}">'
             '<div class="inquiry-intro"><span class="eyebrow">STRATEGISCHE PROJEKTANFRAGE</span>'
