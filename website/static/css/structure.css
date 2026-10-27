@@ -549,3 +549,6 @@
 .site-header .brand-header,.site-header .brand-header.brand--investment,.site-header .brand-header.brand--property,.site-header .brand-header.brand--projects{height:90px}
 .site-header .brand-header:before{mask-position:left top;-webkit-mask-position:left top;top:3px}
 @media(max-width:760px){.site-header .brand-header,.site-header .brand-header.brand--investment,.site-header .brand-header.brand--property,.site-header .brand-header.brand--projects{height:70px}}
+/* Drei Bereiche: nebeneinander auf gleicher Höhe, ohne Versatz */
+.pathway:nth-child(n){margin:0}
+.pathway-grid{align-items:stretch}
