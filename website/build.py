@@ -205,11 +205,13 @@ def pathways():
             'projects': ('Bauangebote vergleichen und den richtigen Baupartner wählen, bevor Sie sanieren.', 'Für Bauherren & Eigentümer')}
     h = ('<section class="pathways" id="perspektiven"><div class="section-head">'
          '<h2>Worum geht es bei Ihnen?</h2><p>Die meisten Anfragen betreffen eines von drei Themen. Wählen Sie Ihres, der Rest ergibt sich im Gespräch.</p></div><div class="pathway-grid">')
+    pics = {'investment': 'hero-inv-wohnhaus.webp', 'property': 'hero-prop-altbauwohnung.webp', 'projects': 'dachgeschoss-after.webp'}
     for k, d in D.items():
         desc, audience = copy[k]
-        h += (f'<a class="pathway pathway-{k}" href="{page(k)}"><div class="pathway-top"><span>{audience}</span><span aria-hidden="true">↗</span></div>'
-              f'<h3>{d["label"]}</h3><div class="pathway-description"><p>{desc}</p></div>'
-              f'<div class="pathway-memo"><span class="memo-mark" aria-hidden="true"></span><div><small>Am Ende erhalten Sie</small><strong>{d["memo"]}</strong></div><span aria-hidden="true">→</span></div></a>')
+        h += (f'<a class="pathway pathway-{k}" href="{page(k)}"><figure class="pathway-media">'
+              + img(pics[k], '', '(max-width:760px) 88vw, 30vw', 'loading="lazy"') + '<span class="pathway-arrow" aria-hidden="true">↗</span></figure>'
+              f'<div class="pathway-body"><small>{audience}</small><h3>{d["label"]}</h3><p>{desc}</p>'
+              f'<span class="pathway-result">Am Ende erhalten Sie das <strong>{d["memo"]}</strong></span></div></a>')
     return h + '</div></section>'
 
 
@@ -233,9 +235,9 @@ def process(k=None):
     steps = D[k]['steps'] if k else [('Verstehen', 'Ihr Vorhaben, Ihre Wünsche und Ihre Ziele kennenlernen.'), ('Einordnen', 'Rahmen, Unterlagen und Möglichkeiten zusammenbringen.'),
                                      ('Analysieren', 'Informationen und Unterschiede verständlich machen.'), ('Entscheiden', 'Eine fundierte Richtung und die nächsten Schritte festlegen.'),
                                      ('Begleiten', 'Bis zum Notartermin oder zur Fertigstellung, im vereinbarten Umfang.')]
-    items = ''.join(f'<li><span>{i:02d}</span><div><h3>{E(a)}</h3><p>{E(b)}</p></div></li>' for i, (a, b) in enumerate(steps, 1))
-    return ('<section class="method" id="ablauf"><div><span class="eyebrow">So arbeitet GRENFORD</span><h2>Vom ersten Gespräch bis zum Abschluss</h2>'
-            f'<p>Jedes Mandat läuft in derselben Reihenfolge ab. Wie viel davon Sie brauchen, entscheiden Sie.</p></div><ol>{items}</ol></section>')
+    items = ''.join(f'<li><span>{i:02d}</span><h3>{E(a)}</h3><p>{E(b)}</p></li>' for i, (a, b) in enumerate(steps, 1))
+    return ('<section class="method" id="ablauf"><div class="section-head"><span class="eyebrow">So arbeitet GRENFORD</span><h2>Der GRENFORD 5-Point Process</h2>'
+            f'<p>Jedes Mandat läuft in derselben Reihenfolge ab. Wie viel davon Sie brauchen, entscheiden Sie.</p></div><ol class="memo-timeline">{items}</ol></section>')
 
 
 def founder():

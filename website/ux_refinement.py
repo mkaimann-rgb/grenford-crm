@@ -116,6 +116,29 @@ def socials():
     return f'<div class="social-links" role="group" aria-label="GRENFORD online">{out}</div>'
 
 
+
+# Lageskizze des Büros (eigene Zeichnung, kein Kartendienst): lädt ohne Google und ohne Lizenzfragen.
+MAP_SKETCH = (
+    '<svg class="ux-map-sketch" viewBox="0 0 600 360" role="img" aria-label="Lageskizze: GRENFORD am Kurfürstendamm 96, westlich des Adenauerplatzes">'
+    '<rect width="600" height="360" class="m-bg"/>'
+    '<g class="m-blocks">'
+    + ''.join(f'<path d="M{x} 0 L{x - 40} 360"/>' for x in (70, 170, 280, 390, 470, 580))
+    + ''.join(f'<path d="M0 {y} L600 {y - 70}"/>' for y in (70, 330))
+    + '</g>'
+    '<path class="m-main" d="M-10 262 L610 150"/>'
+    '<circle class="m-square" cx="468" cy="178" r="30"/>'
+    '<path class="m-blocks" d="M468 120 L468 236 M410 178 L526 178"/>'
+    '<text class="m-label" x="30" y="240" transform="rotate(-10.2 30 240)">KURFÜRSTENDAMM</text>'
+    '<text class="m-label m-small" x="440" y="238">ADENAUERPLATZ</text>'
+    '<text class="m-label m-small" x="440" y="258">U7</text>'
+    '<text class="m-label m-small" x="18" y="320">← HALENSEE</text>'
+    '<text class="m-label m-small" x="380" y="36">CHARLOTTENBURG ↗</text>'
+    '<g class="m-pin" transform="translate(300 220)"><circle r="46" class="m-halo"/><circle r="24"/>'
+    '<text y="8" text-anchor="middle">G</text></g>'
+    '<text class="m-label m-office" x="300" y="300" text-anchor="middle">GRENFORD · KURFÜRSTENDAMM 96</text>'
+    '</svg>')
+
+
 def contact(subject=None, collapsible=False, hint='inquiry'):
     a = SITE['address']
     subjects = [('general', 'Allgemeine Anfrage'), ('investment', 'Investment Memo anfragen'), ('property', 'Property Brief anfragen'), ('renovation', 'Renovation Memo anfragen')]
@@ -147,9 +170,10 @@ def contact(subject=None, collapsible=False, hint='inquiry'):
             f'<div class="ux-contact-links"><a href="{E(SITE["calendar"])}" target="_blank" rel="noopener noreferrer">{icon("calendar")}<span><b>Termin buchen ↗</b><small>Google Kalender · 30 Minuten</small></span></a>'
             f'<a href="{E(SITE["whatsapp"])}" target="_blank" rel="noopener noreferrer">{icon("whatsapp")}<span><b>WhatsApp ↗</b><small>Direktnachricht</small></span></a></div>'
             + socials() +
-            '<details class="ux-map"><summary>Büro auf der Karte ansehen <span aria-hidden="true">＋</span></summary><p>Die Karte wird erst nach Ihrem Klick von Google geladen.</p>'
-            '<button type="button" class="text-button" data-load-map>Google-Karte laden ↗</button><div data-map-host></div>'
-            f'<a class="small" href="https://www.google.com/maps/search/?api=1&amp;query={SITE["mapsQuery"]}" target="_blank" rel="noopener noreferrer">In Google Maps öffnen ↗</a></details></div>'
+            '<figure class="ux-map">' + MAP_SKETCH + '<figcaption><span>Kurfürstendamm 96 · Nähe Adenauerplatz (U7)</span>'
+            f'<a class="small" href="https://www.google.com/maps/search/?api=1&amp;query={SITE["mapsQuery"]}" target="_blank" rel="noopener noreferrer">In Google Maps öffnen ↗</a>'
+            '<button type="button" class="text-button" data-load-map>Interaktive Karte laden</button></figcaption>'
+            '<div data-map-host></div><small class="ux-map-note">Lageskizze, nicht maßstabsgetreu. Die Google-Karte wird erst nach Ihrem Klick geladen.</small></figure></div>'
             + form_block + '</div></section>')
 
 
