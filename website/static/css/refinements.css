@@ -69,7 +69,24 @@ img[data-missing]{object-fit:contain;background:var(--ivory)}
  .immersive-hero h1 em{-webkit-text-stroke:1.5px var(--paper)}
 }
 .collection-viewport.is-gliding{scroll-snap-type:none}
+/* Akzentfarbe zentral: alle Orange-Töne hängen an diesen Variablen (bisher teils fest eingetragen).
+   --on-orange = Schrift auf oranger Fläche, --on-orange-accent = vorher orange Schrift auf oranger Fläche. */
+:root{--orange-hover:#ff982f;--orange-tint:#ffebd8;--on-orange:var(--blue);--on-orange-accent:#fff;--on-orange-line:rgba(37,38,34,.35)}
+.button,.immersive-sub .hero-actions .button,.hero-bottom .arrow-circle,.project-gateway summary>b{color:var(--on-orange)!important}
+.button:hover,.immersive-sub .hero-actions .button:hover{background:var(--orange-hover)!important;border-color:var(--orange-hover)}
+.inquiry-options input:checked+span{background:var(--orange-tint)}
+.memo-paper:before{border-color:color-mix(in srgb,var(--orange) 33%,transparent)}
+.memo-paper--projects{--edition-ink:var(--on-orange);--edition-line:var(--on-orange-line)}
+
 /* Collection-Karten: beim Überfahren mit der Maus (und bei Tastaturfokus) orange Fläche, vorher orange Schrift wird weiß */
-.mandate-card,.property-card,.property-card-body,.mandate-region,.property-card-body>.eyebrow,.mandate-status i,.mandate-card>p,.property-card p,.mandate-top,.collection-enquire{transition:background-color .35s ease,color .35s ease,border-color .35s ease}
-@media(hover:hover){.mandate-card:hover,.property-card:hover{background:var(--orange);border-color:var(--orange)}.mandate-card:hover .mandate-region,.property-card:hover .property-card-body>.eyebrow{color:#fff}.mandate-card:hover .mandate-status i{background:#fff}.mandate-card:hover>p,.property-card:hover p{color:var(--blue)}.mandate-card:hover .mandate-top,.mandate-card:hover .collection-enquire,.property-card:hover .collection-enquire{border-color:rgba(37,38,34,.35)}}
-.mandate-card:focus-within,.property-card:focus-within{background:var(--orange);border-color:var(--orange)}.mandate-card:focus-within .mandate-region,.property-card:focus-within .property-card-body>.eyebrow{color:#fff}.mandate-card:focus-within .mandate-status i{background:#fff}.mandate-card:focus-within>p,.property-card:focus-within p{color:var(--blue)}
+.mandate-card,.property-card,.property-card-body,.mandate-card *,.property-card-body *{transition:background-color .35s ease,color .35s ease,border-color .35s ease}
+@media(hover:hover){
+.mandate-card:hover,.property-card:hover{background:var(--orange);border-color:var(--orange)}
+.mandate-card:hover *,.property-card:hover .property-card-body *{color:var(--on-orange)}
+.mandate-card:hover .mandate-region,.property-card:hover .property-card-body>.eyebrow{color:var(--on-orange-accent)}
+.mandate-card:hover .mandate-status i{background:var(--on-orange-accent)}
+.mandate-card:hover .mandate-top,.mandate-card:hover .collection-enquire,.property-card:hover .collection-enquire{border-color:var(--on-orange-line)}}
+.mandate-card:focus-within,.property-card:focus-within{background:var(--orange);border-color:var(--orange)}
+.mandate-card:focus-within *,.property-card:focus-within .property-card-body *{color:var(--on-orange)}
+.mandate-card:focus-within .mandate-region,.property-card:focus-within .property-card-body>.eyebrow{color:var(--on-orange-accent)}
+.mandate-card:focus-within .mandate-status i{background:var(--on-orange-accent)}

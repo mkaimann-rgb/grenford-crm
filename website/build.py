@@ -73,7 +73,7 @@ def shell(active, meta, body):
             f'<link rel="canonical" href="{absolute(path)}">{social}<meta name="theme-color" content="#252622">'
             f'<meta name="grenford-form-endpoint" content="{E(SITE["formEndpoint"], quote=True)}"><meta name="grenford-email" content="{E(SITE["email"])}">'
             f'<link rel="icon" type="image/webp" href="{asset("grenford-original.webp")}">{fonts}'
-            f'<link rel="stylesheet" href="{root("site.css")}"><script defer src="{root("app.js")}"></script><script defer src="{root("ux.js")}"></script>'
+            f'<link rel="stylesheet" href="{root("site.css")}"><script defer src="{root("app.js")}"></script><script defer src="{root("ux.js")}"></script>{PREVIEW_HEAD.replace("{root}", root(""))}'
             + (structured_data() if active == 'home' else '') +
             f'</head><body class="page-{active}"><a class="skip" href="#main">Zum Inhalt</a>' + header(active) +
             '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail() + '</body></html>')
@@ -203,6 +203,10 @@ def home():
 
 # ---------------------------------------------------------------- Ausgabe
 
+# Nur im Vorschau-Build: Farbumschalter zum Vergleich der Akzentfarben (static/preview/).
+PREVIEW_HEAD = ''
+
+
 def copy_static(out):
     shutil.copytree(STATIC / 'assets', out / 'assets')
     shutil.copy(STATIC / 'js' / 'app.js', out / 'app.js')
@@ -244,11 +248,17 @@ def main():
     paths.pretty = not args.preview
     if args.preview:
         SITE['formEndpoint'] = ''  # Vorschau: keine Übermittlung ins CRM
+        global PREVIEW_HEAD
+        PREVIEW_HEAD = ('<script>try{var f=localStorage.getItem("gf-palette");if(f)document.documentElement.dataset.palette=f}catch(e){}</script>'
+                        f'<link rel="stylesheet" href="{{root}}palette.css"><script defer src="{{root}}palette.js"></script>')
     out = ROOT / ('preview' if args.preview else 'dist')
     if out.exists():
         shutil.rmtree(out)
     out.mkdir()
     copy_static(out)
+    if args.preview:
+        for name in ('palette.css', 'palette.js'):
+            shutil.copy(STATIC / 'preview' / name, out / name)
 
     pages = {'index.html': (0, home)}
     for k in D:
