@@ -12,6 +12,7 @@ import argparse, html, json, re, shutil, sys
 import paths
 from paths import SITE, page, asset, img, absolute, root
 from collection import collection
+from offmarket import offmarket
 from projects_comparison import comparisons
 from ux_refinement import inquiry, contact, rail
 from valuation import wizard_tabs, svg, TAB_LABELS_BEWERTEN
@@ -50,7 +51,7 @@ def request(intent, label, kind='button'):
 # Großmenü je Bereich: Bild, Sprungziele der Seite, rechts das Memo als nächster Schritt
 MEGA = {
     'investment': (['Leistung', '#leistung'], ['Asset einordnen', '#bewertung'], ['Ankaufsprofil', '#bewertung-investment-search'],
-                   ['Ausgewählte Mandate', '#collection'], ['Investment Memo', '#memo'], ['Fragen', '#fragen']),
+                   ['Off-Market-Angebote', '#collection'], ['Investment Memo', '#memo'], ['Fragen', '#fragen']),
     'property': (['Leistung', '#leistung'], ['Immobilie bewerten', '#bewertung'], ['Suchprofil hinterlegen', '#bewertung-property-search'],
                  ['Ausgewählte Immobilien', '#collection'], ['Property Brief', '#memo'], ['Fragen', '#fragen']),
     'projects': (['Leistung', '#leistung'], ['Wert nach Sanierung', '#bewertung'], ['Vergütung', '#verguetung'],
@@ -316,7 +317,7 @@ def subpage(k):
     body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#leistung">Leistung</a><a href="#bewertung">'
              + {'investment': 'Asset einordnen', 'property': 'Bewertung & Suchprofil', 'projects': 'Wert nach Sanierung'}[k] + '</a>'
              + ('<a href="#verguetung">Vergütung</a>' if k == 'projects' else '')
-             + ('<a href="#collection">Immobilien</a>' if k != 'projects' else '<a href="#beforeafter">Vorher & Nachher</a>')
+             + {'investment': '<a href="#collection">Off-Market</a>', 'property': '<a href="#collection">Immobilien</a>', 'projects': '<a href="#beforeafter">Vorher & Nachher</a>'}[k]
              + f'<a href="#memo">{d["memo"]}</a><a href="#ablauf">5-Point Process</a><a href="#fragen">Fragen</a><a href="#kontakt">Kontakt</a></nav>')
     intros = {
         'investment': ('Verkaufen oder ankaufen', 'Eigentümer begleitet GRENFORD beim Verkauf an passende Investoren. Käufer beauftragen GRENFORD, nach Anlageimmobilien zu suchen, die ihrem Profil entsprechen.',
@@ -338,7 +339,7 @@ def subpage(k):
              f'<div><article><h3>{a}</h3><p>{aa}</p></article><article><h3>{b}</h3><p>{bb}</p></article></div>'
              f'<div class="service-focus"><span class="eyebrow">Typische Objekte</span><p>{focus}</p></div></section>')
     body += valuation_section(k)
-    body += collection(k) if k != 'projects' else fee_band() + comparisons()
+    body += {'investment': offmarket, 'property': lambda: collection('property'), 'projects': lambda: fee_band() + comparisons()}[k]()
     body += memos(k) + process(k)
     faq = ''.join(f'<details><summary>{E(q)}<span aria-hidden="true">＋</span></summary><p>{E(a)}</p></details>' for q, a in d['faq'])
     body += (f'<section class="questions" id="fragen"><div><h2>Häufige Fragen</h2></div><div>{faq}</div></section>'

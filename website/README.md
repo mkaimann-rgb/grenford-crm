@@ -143,3 +143,11 @@ Typografie, Hero-Karussell, Collection-Karussell und Gestaltung der bestehenden 
 - Kein Berlin-Bezug in Texten („aus Berlin“, „von Berlin aus“); die Adresse steht nur im Kontakt und im Footer.
 - Ein Einstieg pro Seite: Bewertung, darunter eingeklappt „Oder beschreiben Sie Ihr Vorhaben“ (`gateway(k)` in build.py). Kein zweiter Anfrage-Block.
 - Kontakt ist auf allen Seiten derselbe Block (`contact()` in ux_refinement.py); Investment nutzt `contact_for('investment')` mit Firmenfeld und eigener Einleitung.
+
+## Off-Market-Steckbriefe (Investment)
+
+`offmarket.json` + `offmarket.py`. **Derzeit Musterdaten** (`"muster": true`, Hinweis auf der Seite). Vor Veröffentlichung echte, freigegebene
+Steckbriefe eintragen und `muster` auf `false` setzen. Öffentlich nur Region, Assetklasse, Größenordnung, Status und wenige Eckdaten;
+`gesperrt` nennt nur die Feldnamen. „Unterlagen anfordern“ öffnet ein Fenster (Investorentyp, Ticketgröße, Bereitschaft zur
+Vertraulichkeitsvereinbarung) und sendet wie alle Formulare ans CRM-Sheet (Betreff `investment`, Text beginnt mit „Off-Market · Unterlagen anfordern“).
+Es gibt keinen Login: Prüfung, Vertraulichkeitsvereinbarung und Versand der Unterlagen laufen manuell.

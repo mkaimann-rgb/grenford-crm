@@ -266,6 +266,57 @@ openTarget(location.hash);
 
 // ---------------------------------------------------------------- Kurznachricht
 
+// ---------------------------------------------------------------- Off-Market: Filter und „Unterlagen anfordern“
+
+const omDialog = document.getElementById('om-dialog');
+document.querySelectorAll('[data-om-filter]').forEach(chip => chip.addEventListener('click', () => {
+  const kind = chip.dataset.omFilter;
+  document.querySelectorAll('[data-om-filter]').forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+  document.querySelectorAll('.om-card').forEach(card => { card.hidden = Boolean(kind) && card.dataset.asset !== kind; });
+}));
+if (omDialog) {
+  const form = document.getElementById('om-form');
+  const error = document.getElementById('om-error');
+  const result = document.getElementById('om-result');
+  const button = form.querySelector('[type="submit"]');
+  let opener = null, busy = false, sent = false;
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-om-request]');
+    if (!trigger) return;
+    opener = trigger;
+    document.getElementById('om-object').textContent = trigger.dataset.omRequest;
+    document.getElementById('om-object-field').value = trigger.dataset.omRequest;
+    if (typeof omDialog.showModal === 'function') omDialog.showModal(); else omDialog.setAttribute('open', '');
+    form.querySelector('input[name="name"]').focus();
+  });
+  const close = () => { omDialog.close ? omDialog.close() : omDialog.removeAttribute('open'); if (opener) opener.focus(); };
+  omDialog.querySelector('[data-om-close]').addEventListener('click', close);
+  omDialog.addEventListener('click', event => { if (event.target === omDialog) close(); });
+  form.addEventListener('input', event => { event.target.removeAttribute('aria-invalid'); error.textContent = ''; });
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (busy || sent) return;
+    clearErrors(form, error);
+    const invalid = firstInvalid(form);
+    if (invalid) return fail(invalid, error, invalid.type === 'checkbox' ? 'Bitte bestätigen Sie die Vertraulichkeitsvereinbarung.' : invalidMessage(invalid));
+    const fd = new FormData(form);
+    const rows = [['Objekt', fd.get('Objekt')], ['Investorentyp', fd.get('Investorentyp')], ['Ticketgröße', fd.get('Ticket') || 'Noch offen'],
+      ['Unternehmen', (fd.get('company') || '').trim() || 'Nicht angegeben'], ['Vertraulichkeitsvereinbarung', 'Bereit zu unterzeichnen']];
+    const data = { name: fd.get('name').trim(), email: fd.get('email').trim(), phone: (fd.get('phone') || '').trim(), subject: 'investment',
+      message: 'Off-Market · Unterlagen anfordern\n\n' + rows.map(([a, b]) => a + ': ' + b).join('\n') };
+    const finish = () => {
+      sent = true; button.hidden = true;
+      showSuccess(result, 'Vielen Dank. Ich prüfe Ihre Anfrage und melde mich innerhalb von 48 Stunden mit der Vertraulichkeitsvereinbarung.\nMarco Kaimann');
+      form.querySelectorAll('input,select').forEach(field => field.disabled = true);
+    };
+    if (looksAutomated(form)) { finish(); return; }
+    busy = true; button.disabled = true; button.textContent = 'Wird gesendet …';
+    try { await sendRequest(data); finish(); }
+    catch (e) { showFallback(result, data, e.message); button.disabled = false; button.textContent = 'Zugang anfragen ↗'; }
+    finally { busy = false; }
+  });
+}
+
 if (quick) {
   const error = document.getElementById('contact-error');
   const result = document.getElementById('contact-result');

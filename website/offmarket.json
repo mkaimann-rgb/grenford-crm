@@ -1,0 +1,18 @@
+{
+ "hinweis": "MUSTERDATEN für das Konzept. Alle Objekte sind erfunden. Vor Veröffentlichung durch echte, freigegebene Steckbriefe ersetzen und 'muster' auf false setzen. Öffentlich nur Region, Assetklasse, Größenordnung und Status; alle Kennzahlen bleiben gesperrt.",
+ "muster": true,
+ "objekte": [
+  {"id": "GF-INV-101", "assetklasse": "Wohn- und Geschäftshaus", "region": "Berlin-Charlottenburg", "status": "Exklusiv",
+   "volumen": "8–12 Mio. €", "eckdaten": ["ca. 2.400 m² Mietfläche", "24 Einheiten", "Baujahr um 1900"], "gesperrt": ["Ist-Miete p. a.", "Faktor", "Leerstand"], "bild": "hero-berlin.webp"},
+  {"id": "GF-INV-102", "assetklasse": "Mehrfamilienhaus-Portfolio", "region": "Berlin und Potsdam", "status": "Bieterverfahren",
+   "volumen": "20–30 Mio. €", "eckdaten": ["3 Objekte", "ca. 6.800 m² Wohnfläche", "92 Einheiten"], "gesperrt": ["Ist-Miete p. a.", "Mietpotenzial", "Objektadressen"], "bild": "hero-berlin.webp"},
+  {"id": "GF-INV-103", "assetklasse": "Boutique-Hotel", "region": "Ostseeküste", "status": "Neu",
+   "volumen": "5–8 Mio. €", "eckdaten": ["38 Zimmer", "ca. 3.100 m² Grundstück", "betreiberfrei"], "gesperrt": ["Umsatz und GOP", "Auslastung", "Lage"], "bild": "hero-berlin.webp"},
+  {"id": "GF-INV-104", "assetklasse": "Grundstück mit Baurecht", "region": "Berlin-Pankow", "status": "Exklusiv",
+   "volumen": "3–5 Mio. €", "eckdaten": ["ca. 4.200 m² Grundstück", "Wohnnutzung", "Vorbescheid liegt vor"], "gesperrt": ["Geschossfläche", "Bodenwert", "Flurstück"], "bild": "hero-berlin.webp"},
+  {"id": "GF-INV-105", "assetklasse": "Projektentwicklung Wohnen", "region": "Raum Leipzig", "status": "Investorengespräche",
+   "volumen": "15–20 Mio. €", "eckdaten": ["ca. 70 Wohnungen", "Baugenehmigung", "Forward-Deal möglich"], "gesperrt": ["Kalkulation", "Kaufpreisfaktor", "Bauträger"], "bild": "hero-berlin.webp"},
+  {"id": "GF-INV-106", "assetklasse": "Büro- und Geschäftshaus", "region": "Berlin-Mitte", "status": "Neu",
+   "volumen": "12–18 Mio. €", "eckdaten": ["ca. 3.900 m² Mietfläche", "Multi-Tenant", "WALT ca. 4 Jahre"], "gesperrt": ["Ist-Miete p. a.", "Mieterliste", "Faktor"], "bild": "hero-berlin.webp"}
+ ]
+}
