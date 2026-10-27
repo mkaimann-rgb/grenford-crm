@@ -41,3 +41,29 @@ Fallzahl soweit veröffentlicht, Quelle mit Adresse, Nutzungshinweis, Prüfdatum
 
 Datensatz in `market.json` → `marketData` eintragen, `python3 build.py`, dann `python3 tests/markup.py` und `python3 tests/market.py`.
 Der Build bricht ab, wenn Pflichtfelder fehlen, `checkedAt` nicht im Format JJJJ-MM-TT ist oder `dataType` nicht `asking`/`transaction` lautet.
+
+## 5. Entwurf zur Freigabe (Gutachterausschuss Berlin)
+
+`markt/entwurf-freigabe.json` enthält sieben Kandidaten aus dem Immobilienmarktbericht Berlin 2025/2026 und dem Bericht
+zum 1. Halbjahr 2026. Die Datei wird vom Build **nicht** eingelesen. Die Werte stammen aus Suchergebnissen, die die Berichte
+zitieren; das Original konnte nicht direkt geöffnet werden. Übernahme in `market.json` erst nach Prüfung am PDF und
+Bestätigung der Nutzung (siehe `hinweis` in der Datei). Dort steht auch, was bewusst **nicht** übernommen wurde und warum.
+
+## 6. Eigene Erhebung GRENFORD (später)
+
+Eigene Zahlen sind das, was große Häuser nicht haben. Sie werden als eigener Datentyp **„Eigene Erhebung GRENFORD“**
+geführt, nie mit Marktdaten des Gutachterausschusses vermischt und nur veröffentlicht, wenn:
+- mindestens **5 Fälle** je Kennzahl vorliegen (sonst Rückschluss auf Einzelobjekte möglich),
+- alle Angaben **anonymisiert** sind (keine Adressen, Namen, Baufirmen),
+- die **Vertraulichkeit** gewahrt ist: Die Memos erklären Angebote der Baufirmen für vertraulich. Eine anonymisierte,
+  aggregierte Auswertung vorher rechtlich prüfen lassen und künftig in AGB bzw. Auftrag ausdrücklich vorsehen.
+
+| Quelle | Mögliche Kennzahlen | Art der Zahl |
+|---|---|---|
+| Renovation Memo | Angebotspreise der Baufirmen je Gewerk (Bad komplett, Elektro je m², Böden je m², Fußbodenheizung/Wärmepumpe), Spanne zwischen den Angeboten, Anteil nicht enthaltener Leistungen | Angebotspreise Baufirmen (nicht ausgeführte Kosten) |
+| Property Brief | Angebotspreis je m² eigener Objekte, Vermarktungsdauer, Anfragen je Objekt; nach Abschluss Abstand Angebots- zu Kaufpreis | eigene Angebots- bzw. Transaktionsdaten |
+| Investment Memo und Ankaufsprofile | Nachfrage nach Assetklasse und Ticketgröße (aus den Ankaufsprofilen der Website), angebotene vs. vereinbarte Faktoren | eigene Nachfrage- und Transaktionsdaten |
+
+Technisch: `dataType` um `own` erweitern, eigene Kennzeichnung („Eigene Erhebung GRENFORD, n = …, Zeitraum …“) und
+Mindestfallzahl im Build prüfen. Die Daten können aus dem CRM-Sheet kommen (Blätter Projects, Property, Investment und
+„Website-Anfragen“).

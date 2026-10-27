@@ -1,0 +1,82 @@
+{
+ "hinweis": "ENTWURF ZUR FREIGABE. Wird vom Build NICHT eingelesen und NICHT veröffentlicht. Alle Werte stammen aus Suchergebnissen vom 27.10.2026, die den Immobilienmarktbericht bzw. Veröffentlichungen des Gutachterausschusses Berlin zitieren; das Original-PDF konnte nicht direkt geöffnet werden. Vor Übernahme in market.json: (1) Wert, Einheit und Statistik im Original prüfen, (2) Nutzung mit Quellenangabe bestätigen, (3) checkedAt und usageRightsNote setzen, (4) Felder 'pruefstatus' und 'gefundenUeber' entfernen.",
+ "quellen": {
+  "Immobilienmarktbericht Berlin 2025/2026": "https://www.berlin.de/gutachterausschuss/_assets/amarktinformationen/amarktanalyse/04-03-010-2500.pdf",
+  "Pressemitteilung Senatsverwaltung zum Marktbericht": "https://www.berlin.de/sen/stadt/presse/pressemeldungen/pressemitteilung.1699073.php",
+  "Bericht 1. Halbjahr 2026 (Geschäftsstelle)": "https://www.berlin.de/gutachterausschuss/_assets/amarktinformationen/amarktanalyse/04-02-010-2602.pdf",
+  "BORIS Berlin, Bodenrichtwerte": "https://www.berlin.de/gutachterausschuss/marktinformationen/bodenrichtwerte/"
+ },
+ "kandidaten": [
+  {
+   "city": "Berlin", "assetType": "apartment", "period": "2025", "dataType": "transaction",
+   "metric": "Mittlerer Kaufpreis je m² Wohnfläche, Eigentumswohnungen", "statistic": "mean", "value": 5511, "unit": "€/m² Wohnfläche", "sampleSize": null,
+   "sourceName": "Gutachterausschuss für Grundstückswerte in Berlin, Immobilienmarktbericht Berlin 2025/2026",
+   "sourceUrl": "https://www.berlin.de/gutachterausschuss/_assets/amarktinformationen/amarktanalyse/04-03-010-2500.pdf",
+   "usageRightsNote": "", "checkedAt": "",
+   "methodologyNote": "Alle notariell beurkundeten Verkäufe 2025. Laut Bericht +5 % zum Vorjahr. Ob ‚mittlerer Kaufpreis‘ das arithmetische Mittel ist, im Bericht prüfen.",
+   "pruefstatus": "Zitat aus dem Bericht in Suchergebnis; am PDF prüfen", "gefundenUeber": "Websuche, Zitat aus 04-03-010-2500.pdf"
+  },
+  {
+   "city": "Berlin", "assetType": "apartment", "period": "2025", "dataType": "transaction",
+   "metric": "Mittlerer Kaufpreis je m² Wohnfläche, neu errichtete Wohnanlagen (Erstverkauf)", "statistic": "mean", "value": 8108, "unit": "€/m² Wohnfläche", "sampleSize": null,
+   "sourceName": "Gutachterausschuss für Grundstückswerte in Berlin, Immobilienmarktbericht Berlin 2025/2026",
+   "sourceUrl": "https://www.berlin.de/gutachterausschuss/_assets/amarktinformationen/amarktanalyse/04-03-010-2500.pdf",
+   "usageRightsNote": "", "checkedAt": "",
+   "methodologyNote": "Neubau getrennt vom Bestand ausweisen. Eine Zweitquelle nennt für Q4 2025 abweichend 7.200 €/m²; Abgrenzung im Bericht klären.",
+   "pruefstatus": "nur Zweitquelle (Zusammenfassung des Berichts); am PDF prüfen", "gefundenUeber": "Websuche, Sekundärzusammenfassung"
+  },
+  {
+   "city": "Berlin", "assetType": "house", "period": "2025", "dataType": "transaction",
+   "metric": "Mittlerer Kaufpreis je m² wertrelevante Geschossfläche, Ein- und Zweifamilienhäuser", "statistic": "mean", "value": 3830, "unit": "€/m² wertrelevante Geschossfläche", "sampleSize": null,
+   "sourceName": "Gutachterausschuss für Grundstückswerte in Berlin, Immobilienmarktbericht Berlin 2025/2026",
+   "sourceUrl": "https://www.berlin.de/gutachterausschuss/_assets/amarktinformationen/amarktanalyse/04-03-010-2500.pdf",
+   "usageRightsNote": "", "checkedAt": "",
+   "methodologyNote": "Achtung: Bezugsgröße ist die wertrelevante Geschossfläche, nicht die Wohnfläche; nicht mit Wohnungspreisen vergleichen. Laut Bericht rund 3.830 €/m², +1 % zum Vorjahr.",
+   "pruefstatus": "Zitat aus dem Bericht in Suchergebnis; am PDF prüfen", "gefundenUeber": "Websuche, Zitat aus 04-03-010-2500.pdf"
+  },
+  {
+   "city": "Berlin-Grunewald", "assetType": "house", "period": "2025", "dataType": "transaction",
+   "metric": "Durchschnittlicher Kaufpreis je m² Wohnfläche, Ein- und Zweifamilienhäuser (höchstes Preisniveau Berlins)", "statistic": "mean", "value": 9650, "unit": "€/m² Wohnfläche", "sampleSize": null,
+   "sourceName": "Gutachterausschuss für Grundstückswerte in Berlin, Immobilienmarktbericht Berlin 2025/2026",
+   "sourceUrl": "https://www.berlin.de/gutachterausschuss/_assets/amarktinformationen/amarktanalyse/04-03-010-2500.pdf",
+   "usageRightsNote": "", "checkedAt": "",
+   "methodologyNote": "Ortsteil Grunewald. Fallzahl im Bericht nachsehen; bei kleiner Fallzahl Hinweis ergänzen.",
+   "pruefstatus": "Zitat aus dem Bericht in Suchergebnis; am PDF prüfen", "gefundenUeber": "Websuche, Zitat aus 04-03-010-2500.pdf"
+  },
+  {
+   "city": "Berlin", "assetType": "other", "period": "2025", "dataType": "transaction",
+   "metric": "Kauffälle gesamt (alle Teilmärkte)", "statistic": "other", "value": 22912, "unit": "Kauffälle", "sampleSize": null,
+   "sourceName": "Gutachterausschuss für Grundstückswerte in Berlin, Immobilienmarktbericht Berlin 2025/2026",
+   "sourceUrl": "https://www.berlin.de/sen/stadt/presse/pressemeldungen/pressemitteilung.1699073.php",
+   "usageRightsNote": "", "checkedAt": "",
+   "methodologyNote": "Rund +10 % zum Vorjahr; Geldumsatz rund 16,1 Mrd. € (+8 %). Ein vorläufiger Bericht nannte 22.696 Fälle; der Endbericht ist maßgeblich.",
+   "pruefstatus": "Suchergebnis zu Bericht und Pressemitteilung; Abweichung zum vorläufigen Wert klären", "gefundenUeber": "Websuche"
+  },
+  {
+   "city": "Berlin", "assetType": "apartment", "period": "1. Halbjahr 2026", "dataType": "transaction",
+   "metric": "Veränderung des durchschnittlichen Kaufpreises, Eigentumswohnungen, zum Vorjahreszeitraum", "statistic": "other", "value": 1, "unit": "%", "sampleSize": null,
+   "sourceName": "Gutachterausschuss für Grundstückswerte in Berlin, Bericht 1. Halbjahr 2026",
+   "sourceUrl": "https://www.berlin.de/gutachterausschuss/_assets/amarktinformationen/amarktanalyse/04-02-010-2602.pdf",
+   "usageRightsNote": "", "checkedAt": "",
+   "methodologyNote": "Laut Bericht ‚nahezu unverändert‘; Anzahl der Verkäufe −3 % zum Vorjahreszeitraum. Vorläufige unterjährige Werte.",
+   "pruefstatus": "Suchergebnis zum Halbjahresbericht; am PDF prüfen", "gefundenUeber": "Websuche"
+  },
+  {
+   "city": "Berlin", "assetType": "house", "period": "1. Halbjahr 2026", "dataType": "transaction",
+   "metric": "Veränderung der Anzahl der Verkäufe, Ein- und Zweifamilienhäuser, zum Vorjahreszeitraum", "statistic": "other", "value": -5, "unit": "%", "sampleSize": null,
+   "sourceName": "Gutachterausschuss für Grundstückswerte in Berlin, Bericht 1. Halbjahr 2026",
+   "sourceUrl": "https://www.berlin.de/gutachterausschuss/_assets/amarktinformationen/amarktanalyse/04-02-010-2602.pdf",
+   "usageRightsNote": "", "checkedAt": "",
+   "methodologyNote": "Geldumsatz −7 %; durchschnittliches Preisniveau laut Bericht stabil. Vorläufige unterjährige Werte.",
+   "pruefstatus": "Suchergebnis zum Halbjahresbericht; am PDF prüfen", "gefundenUeber": "Websuche"
+  }
+ ],
+ "nichtUebernommen": [
+  "Q2 2026: 4.700 €/m² Bestand und 7.850 €/m² Neubau – nur aus einem Makler-Blog mit Verweis auf den Gutachterausschuss, nicht bestätigt.",
+  "Q1 2026: 4.811 Kaufverträge (−10 %) bzw. 3.434 Wohnungsverkäufe (−6 %) – widersprüchliche Zweitquellen, Abgrenzung unklar.",
+  "1. Halbjahr 2026 gesamt: 10.330 Kauffälle, rund 6,1 Mrd. € – nur Zweitquelle.",
+  "Bodenrichtwert-Durchschnitte und -Mediane für Bezirke – nur von privaten Aggregatoren (z. B. borisportal.de, bodenrichtwerte-deutschland.de) mit widersprüchlichen Werten; amtlich gibt BORIS Werte je Bodenrichtwertzone aus, keine Bezirksdurchschnitte.",
+  "Mediane für Bestand/Neubau von VALUE oder CBRE – Angebotsdaten bzw. Fremdauswertungen, lizenzpflichtig."
+ ],
+ "bodenrichtwerteVorschlag": "Statt Bezirksdurchschnitten 5–6 typische Lagen festlegen (z. B. Mierendorffkiez, Westend, Grunewald, Wilmersdorf Volkspark, Zehlendorf Mitte, Potsdam Babelsberg) und den amtlichen Wert zum Stichtag 01.01.2026 je Lage in BORIS Berlin bzw. BORIS Brandenburg abrufen. Lizenz laut Metadaten neuerer Jahrgänge: Datenlizenz Deutschland – Zero – 2.0 (am Datensatz bestätigen)."
+}

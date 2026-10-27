@@ -17,6 +17,18 @@ MUSTER = {'city': 'Berlin', 'assetType': 'apartment', 'period': 'MUSTER 2025', '
 for r in market.M['marketData']:
     assert 'MUSTER' not in str(r), 'market.json enthält Musterdaten'
 
+# 1b. Der Freigabe-Entwurf wird nicht eingelesen und ist ohne Prüfung nicht gültig
+import json
+draft = json.loads((ROOT / 'markt' / 'entwurf-freigabe.json').read_text(encoding='utf-8'))
+for r in draft['kandidaten']:
+    try:
+        market.validate([r])
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError('Entwurfsdatensatz ohne Prüfdatum/Nutzungshinweis wurde als gültig akzeptiert')
+assert 'entwurf' not in (ROOT / 'market.py').read_text(encoding='utf-8'), 'market.py darf den Entwurf nicht einlesen'
+
 # 2. Unvollständige Datensätze brechen den Build ab
 for broken in ({**MUSTER, 'sourceUrl': ''}, {**MUSTER, 'checkedAt': '01.01.2026'}, {**MUSTER, 'dataType': 'estimate'}, {**MUSTER, 'value': '1.234'}):
     try:
