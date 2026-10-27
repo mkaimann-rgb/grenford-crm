@@ -29,6 +29,7 @@ node tests/transport.mjs      # Formular-Übertragung (ohne echten Request)
 | `static/js/` | `app.js` (Menü, Galerie, Karussell, Regler), `ux.js` (Formulare, Übertragung), `wizard.js` (Bewertung/Suchprofile, Reiter, Bewertungsleiste, Ablauf-Slides) |
 | `static/assets/` | Bilder, Schriften (`fonts/`), `placeholder.svg` |
 | `tests/` | `markup.py`, `transport.mjs` |
+| `tools/brand_images.py` | erzeugt Browser-Symbole, Teilen-Bild und kleines Logo |
 | `crm/` | Google-Apps-Script für den Eingang der Anfragen im CRM-Sheet, mit Anleitung |
 
 ## Vor dem Livegang erledigen
@@ -69,6 +70,14 @@ Typografie, Hero-Karussell, Collection-Karussell und Gestaltung der bestehenden 
 - **Footer:** Linkspalten je Bereich und GRENFORD, Adresse und Kontakt.
 - **Antwortzeit:** „Antwort innerhalb von 48 Stunden“ ist zugesagt (Bewertung, Teaser, Leiste, Bestätigungen); das CRM-Blatt zeigt dazu die Spalte „Antwort bis“.
 - **Offen:** Newsletter (Name noch offen, nicht „Memo“) noch nicht eingebaut; braucht Double-Opt-in.
+
+## Feinschliff (Block B)
+
+- **Projektanfrage eingeklappt** auf allen Seiten (wie bisher auf der Startseite); Bewertung und Suchprofile sind der Haupteinstieg. `#anfrage` und die „… anfragen/besprechen“-Buttons öffnen sie mit vorgewähltem Bereich.
+- **Bilder:** zusätzliche 1600-px-Stufe und stärkere Kompression der Varianten; Logo in Kopf und Footer als 256-px-Datei. Startseite am Desktop 1,23 MB statt 1,73 MB.
+- **404-Seite** (`dist/404.html`, absolute Pfade, `noindex`). Beim Hoster als Fehlerseite eintragen.
+- **Symbole und Teilen-Bild:** `favicon-32.png`, `favicon-192.png`, `apple-touch-icon.png`, `og-grenford.jpg` (1200 × 630), erzeugt mit `python3 tools/brand_images.py`.
+- **Google-Zusatzinfos (strukturierte Daten):** Fragen als FAQ auf den Bereichsseiten und „Bewerten“, Leistung „Immobilienbewertung“, Brotkrumen-Navigation.
 
 ## Akzentfarbe und Markenstimme
 

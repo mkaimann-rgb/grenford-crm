@@ -259,3 +259,7 @@
   .valuation-teaser .section-head h2,.valuation .section-head h2,.ways .section-head h2,.value-steps .section-head h2,.values .section-head h2,.fields .section-head h2,.memo-line .section-head h2,.fee-band h2,.reach-band h2{font-size:clamp(34px,10vw,42px);overflow-wrap:break-word}
   .valuation-teaser .section-head>p,.valuation .section-head>p,.ways .section-head>p,.value-steps .section-head>p,.values .section-head>p,.fields .section-head>p,.memo-line .section-head>p{margin-top:16px}
 }
+
+/* Unterseiten: eingeklappte Projektanfrage als ruhiges Band vor dem Kontakt */
+.gateway-band{padding:44px 0;background:var(--paper)}
+@media(max-width:760px){.gateway-band{padding:28px 0}}

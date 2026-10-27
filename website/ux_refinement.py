@@ -69,7 +69,7 @@ def _group(kind, name, data, active):
 
 def inquiry(k):
     active = k if k in LABELS else ''
-    section_id = 'anfrage' if active else 'projektanfrage'
+    section_id = 'projektanfrage'  # Sprungziel #anfrage liegt auf dem umgebenden <details>
     title = f'{MEMO[active]} anfragen.' if active else 'Ihr Vorhaben anfragen.'
     options = (('' if active else '<option value="" selected>Bereich wählen</option>')
                + ''.join(f'<option value="{key}"{" selected" if key == active else ""}>{label}</option>' for key, label in LABELS.items()))

@@ -37,6 +37,9 @@ class Markup(HTMLParser):
 
 def resolve(page, ref):
     ref = ref.split('#')[0].split('?')[0]
+    if ref.startswith('/'):  # 404-Seite: Pfade ab der Domain-Wurzel
+        ref = ref.lstrip('/')
+        return OUT / ref / 'index.html' if ref.endswith('/') or ref == '' else OUT / ref
     target = (page.parent / ref).resolve()
     return target / 'index.html' if ref.endswith('/') or ref in ('', './') else target
 
@@ -54,6 +57,10 @@ for page in pages:
     assert m.forms_without_post == 0, (page, 'Formular ohne method="post"')
     for ref in m.files:
         assert resolve(page, ref).is_file(), (page, 'Datei fehlt', ref)
+    if page.name == '404.html':
+        assert 'noindex' in s, (page, '404 ohne noindex')
+        print(page.relative_to(ROOT), 'verified')
+        continue
     if 'id="strategic-form"' in s:
         assert s.count('data-inquiry-step=') == 6
     else:

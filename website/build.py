@@ -26,7 +26,7 @@ CSS_ORDER = ['style.css', 'art.css', 'immersive.css', 'refinements.css', 'struct
 # ---------------------------------------------------------------- Bausteine
 
 def logo():
-    return f'<a class="brand" href="{page("home")}" aria-label="GRENFORD Startseite"><img src="{asset("grenford-original.webp")}" alt="" width="1024" height="1024"></a>'
+    return f'<a class="brand" href="{page("home")}" aria-label="GRENFORD Startseite"><img src="{asset("grenford-logo-256.webp")}" alt="" width="256" height="256"></a>'
 
 
 def request(intent, label, kind='button'):
@@ -107,22 +107,39 @@ def structured_data():
     return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
 
 
-def shell(active, meta, body):
+def ld_json(data):
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
+
+
+def faq_data(items):
+    return {'@context': 'https://schema.org', '@type': 'FAQPage',
+            'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in items]}
+
+
+def crumbs(active, label):
+    return {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': 1, 'name': 'GRENFORD', 'item': absolute()},
+        {'@type': 'ListItem', 'position': 2, 'name': label, 'item': absolute(active + '/')}]}
+
+
+def shell(active, meta, body, ld=()):
     path = '' if active == 'home' else active + '/'
-    hero = hero_images(meta)[0]
     fonts = ''.join(f'<link rel="preload" href="{asset(f"fonts/dm-sans-{w}.woff2")}" as="font" type="font/woff2" crossorigin>' for w in (400, 500))
     social = (f'<meta property="og:type" content="website"><meta property="og:locale" content="de_DE"><meta property="og:site_name" content="GRENFORD">'
               f'<meta property="og:title" content="{E(meta["title"])}"><meta property="og:description" content="{E(meta["description"])}">'
-              f'<meta property="og:url" content="{absolute(path)}"><meta property="og:image" content="{absolute("assets/" + hero)}"><meta name="twitter:card" content="summary_large_image">')
+              f'<meta property="og:url" content="{absolute(path)}"><meta property="og:image" content="{absolute("assets/og-grenford.jpg")}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
+              f'<meta property="og:image:alt" content="GRENFORD – Der nächste Schritt zählt."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{absolute("assets/og-grenford.jpg")}">')
+    meta_robots = '<meta name="robots" content="noindex">' if active == '404' else f'<link rel="canonical" href="{absolute(path)}">'
     return ('<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{E(meta["title"])}</title><meta name="description" content="{E(meta["description"])}">'
-            f'<link rel="canonical" href="{absolute(path)}">{social}<meta name="theme-color" content="#222e41">'
+            f'{meta_robots}{social}<meta name="theme-color" content="#222e41">'
             f'<meta name="grenford-form-endpoint" content="{E(SITE["formEndpoint"], quote=True)}"><meta name="grenford-email" content="{E(SITE["email"])}">'
-            f'<link rel="icon" type="image/webp" href="{asset("grenford-original.webp")}">{fonts}'
+            f'<link rel="icon" type="image/png" sizes="32x32" href="{asset("favicon-32.png")}"><link rel="icon" type="image/png" sizes="192x192" href="{asset("favicon-192.png")}">'
+            f'<link rel="apple-touch-icon" href="{asset("apple-touch-icon.png")}">{fonts}'
             f'<link rel="stylesheet" href="{root("site.css")}"><script defer src="{root("app.js")}"></script><script defer src="{root("ux.js")}"></script><script defer src="{root("wizard.js")}"></script>{PREVIEW_HEAD.replace("{root}", root(""))}'
-            + (structured_data() if active == 'home' else '') +
+            + (structured_data() if active == 'home' else '') + ''.join(ld_json(x) for x in ld) +
             f'</head><body class="page-{active}"><a class="skip" href="#main">Zum Inhalt</a>' + header(active) +
-            '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail() + ('' if active == 'bewerten' else value_bar()) + '</body></html>')
+            '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail() + ('' if active in ('bewerten', '404') else value_bar()) + '</body></html>')
 
 
 def hero_images(meta):
@@ -211,11 +228,15 @@ def founder():
 
 
 def inquiries(k):
+    # Die Projektanfrage in sechs Schritten ist überall eingeklappt: Bewertung und Suchprofile sind der Haupteinstieg,
+    # so stehen nicht mehrere offene Formulare untereinander. #anfrage und die „… anfragen“-Buttons öffnen sie.
+    summary = {'home': ('Ihr Vorhaben. Konkret werden.', 'In sechs Schritten · kostenfreies Erstgespräch')}.get(
+        k, (f'{D[k]["memo"]} anfragen.', 'In sechs Schritten · kostenfreies Erstgespräch · Antwort innerhalb von 48 Stunden') if k in D else None)
+    gateway = ('<details class="project-gateway" id="anfrage"><summary><span><small>STRATEGISCHE PROJEKTANFRAGE</small>'
+               f'<strong>{summary[0]}</strong><em>{summary[1]}</em></span><b aria-hidden="true">＋</b></summary>' + inquiry(k) + '</details>')
     if k == 'home':
-        gateway = ('<details class="project-gateway" id="anfrage"><summary><span><small>STRATEGISCHE PROJEKTANFRAGE</small><strong>Ihr Vorhaben. Konkret werden.</strong>'
-                   '<em>In sechs Schritten · kostenfreies Erstgespräch</em></span><b aria-hidden="true">＋</b></summary>' + inquiry(k) + '</details>')
         return gateway + contact(collapsible=True)
-    return inquiry(k) + contact(subject='renovation' if k == 'projects' else k)
+    return '<div class="gateway-band">' + gateway + '</div>' + contact(subject='renovation' if k == 'projects' else k)
 
 
 def subpage(k):
@@ -258,7 +279,7 @@ def subpage(k):
     faq = ''.join(f'<details><summary>{E(q)}<span aria-hidden="true">＋</span></summary><p>{E(a)}</p></details>' for q, a in d['faq'])
     body += (f'<section class="questions" id="fragen"><div><span class="eyebrow">GUT ZU WISSEN</span><h2>Die Fragen<br><em>vor dem ersten Schritt.</em></h2></div><div>{faq}</div></section>'
              + inquiries(k))
-    return shell(k, SITE['pages'][k], body)
+    return shell(k, SITE['pages'][k], body, ld=(faq_data(d['faq']), crumbs(k, d['label'])))
 
 
 def valuation_teaser():
@@ -348,16 +369,21 @@ def bewerten():
     body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#bewertung">Bewertung</a><a href="#wege">Drei Wege</a><a href="#ablauf">Der Ablauf</a>'
              '<a href="#fragen">Fragen</a><a href="#kontakt">Kontakt</a></nav>')
     body += valuation_section('bewerten') + ways() + value_steps()
-    body += faq_section([
+    faqs = [
         ('Was kostet die Bewertung?', 'Die Ersteinschätzung ist kostenfrei und unverbindlich. Ein Auftrag entsteht dadurch nicht.'),
         ('Wie schnell erhalte ich eine Rückmeldung?', 'Innerhalb von 48 Stunden meldet sich Marco Kaimann persönlich, auf dem Weg, den Sie im letzten Schritt gewählt haben: per E-Mail, Telefon oder im Video-Termin.'),
         ('Ist das ein automatisch berechneter Wert?', 'Nein. Ihre Angaben liest Marco Kaimann persönlich und ordnet sie mit Lage, Zustand und vergleichbaren Objekten ein. Sie erhalten eine Wertspanne und eine Erläuterung.'),
         ('Was bedeutet „Wert nach der Sanierung“?', 'Neben dem heutigen Wert zeigt die Einschätzung, wie sich eine sinnvolle Sanierung auf den Wert auswirken kann, mit einem groben Kostenrahmen. So sehen Sie, ob sich ein Vorhaben lohnt, bevor Sie Angebote einholen.'),
         ('Welche Unterlagen helfen?', 'Für die Ersteinschätzung genügen Ihre Angaben. Für eine genaue Wertermittlung helfen Grundriss, Wohnflächenberechnung, Energieausweis und bei vermieteten Objekten die Mietaufstellung.'),
         ('Was passiert mit meinen Angaben?', 'Ihre Angaben werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und vertraulich behandelt. Details finden Sie in der Datenschutzerklärung.'),
-    ])
+    ]
+    body += faq_section(faqs)
     body += contact(hint='valuation')
-    return shell('bewerten', SITE['pages']['bewerten'], body)
+    service = {'@context': 'https://schema.org', '@type': 'Service', 'serviceType': 'Immobilienbewertung', 'name': 'Immobilienbewertung: Wert heute und nach der Sanierung',
+               'description': SITE['pages']['bewerten']['description'], 'areaServed': {'@type': 'City', 'name': 'Berlin'},
+               'provider': {'@type': 'RealEstateAgent', 'name': 'GRENFORD', 'url': absolute()},
+               'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'EUR', 'description': 'Kostenfreie Ersteinschätzung, Antwort innerhalb von 48 Stunden'}}
+    return shell('bewerten', SITE['pages']['bewerten'], body, ld=(faq_data(faqs), service, crumbs('bewerten', 'Immobilie bewerten')))
 
 
 def ueber():
@@ -391,7 +417,25 @@ def ueber():
              '<div><p class="reach-cities">' + ' · '.join(E(c) for c in SITE['home']['reach']) + '</p>'
              '<p>Je nach Vorhaben arbeitet GRENFORD mit spezialisierten Fach- und Baupartnern zusammen. So verbindet sich persönliche Beratung mit der passenden Expertise.</p></div></section>')
     body += contact(hint='valuation')
-    return shell('ueber-grenford', SITE['pages']['ueber-grenford'], body)
+    return shell('ueber-grenford', SITE['pages']['ueber-grenford'], body, ld=(crumbs('ueber-grenford', 'Über GRENFORD'),))
+
+
+def not_found():
+    """404-Seite: absolute Pfade, weil der Server sie unter beliebigen Adressen ausliefert."""
+    links = ''.join(f'<a class="field-row" href="{page(k)}"><span class="eyebrow">{D[k]["label"].upper()}</span><h3>{t}</h3><p>{x}</p>'
+                    f'<span class="field-memo">Zur Seite <span aria-hidden="true">↗</span></span></a>' for k, t, x in (
+                        ('investment', 'Transaktionen und Kapital', 'Off-Market, Globalverkauf, Ankaufsprofil.'),
+                        ('property', 'Immobilien und Perspektiven', 'Verkaufen, kaufen, bewerten.'),
+                        ('projects', 'Umbau und Entwicklung', 'Sanierung planen, Angebote vergleichen.')))
+    body = ('<section class="immersive-hero immersive-sub not-found-hero">' + gallery(['hero-berlin.webp']) +
+            f'<div class="hero-content"><div class="hero-kicker"><a href="{page("home")}">GRENFORD / 404</a><span class="hero-coordinate" aria-hidden="true">G / 404</span></div>'
+            '<h1>Diese Seite<br><em>gibt es nicht.</em></h1><div class="hero-bottom"><p>Vielleicht wurde sie verschoben oder die Adresse ist unvollständig. '
+            'Hier geht es weiter.</p><div class="hero-actions">'
+            f'<a class="button" href="{page("home")}">Zur Startseite<span aria-hidden="true">↗</span></a><a class="text-link" href="{page("bewerten")}">Immobilie bewerten ↗</a></div></div></div></section>'
+            f'<section class="fields" id="felder"><div class="section-head"><span class="eyebrow">DIE DREI BEREICHE</span><h2>Wohin<br><em>möchten Sie?</em></h2>'
+            f'<p>Oder schreiben Sie direkt an {E(SITE["email"])}.</p></div><div class="field-rows">{links}</div></section>' + contact(hint='valuation'))
+    meta = {'title': 'Seite nicht gefunden | GRENFORD', 'description': 'Diese Seite gibt es nicht. Zur Startseite von GRENFORD oder direkt zu Investment, Property und Projects.'}
+    return shell('404', meta, body)
 
 
 # ---------------------------------------------------------------- Ausgabe
@@ -425,7 +469,7 @@ def responsive_variants(out):
                 if w < im.width * 0.9:
                     target = out / 'assets' / f'w{w}' / name
                     target.parent.mkdir(parents=True, exist_ok=True)
-                    im.resize((w, round(im.height * w / im.width)), Image.LANCZOS).save(target, quality=80)
+                    im.resize((w, round(im.height * w / im.width)), Image.LANCZOS).save(target, quality=76, method=6)
 
 
 def seo_files(out):
@@ -463,6 +507,9 @@ def main():
         paths.set_page(depth)
         (out / target).parent.mkdir(parents=True, exist_ok=True)
         (out / target).write_text(render(), encoding='utf-8')
+    if not args.preview:
+        paths.set_root_absolute()
+        (out / '404.html').write_text(not_found(), encoding='utf-8')
     responsive_variants(out)
     seo_files(out)
 

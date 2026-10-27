@@ -9,7 +9,7 @@ import html, json
 ROOT = Path(__file__).parent
 ASSETS = ROOT / 'static' / 'assets'
 SITE = json.loads((ROOT / 'site.json').read_text(encoding='utf-8'))
-WIDTHS = (800, 1280)  # zusätzliche Breiten für srcset; das Original bleibt die größte Stufe
+WIDTHS = (800, 1280, 1600)  # zusätzliche Breiten für srcset; das Original bleibt die größte Stufe
 
 _prefix = ''
 pretty = True          # False = Links mit index.html (für Vorschau ohne Verzeichnis-Index)
@@ -21,6 +21,12 @@ skipped_heroes = set() # Hero-Originale, die in static/assets fehlen
 def set_page(depth):
     global _prefix
     _prefix = '../' * depth
+
+
+def set_root_absolute():
+    """Für die 404-Seite: Links und Dateien ab der Wurzel der Domain („/…“)."""
+    global _prefix
+    _prefix = '/'
 
 
 def page(key):
