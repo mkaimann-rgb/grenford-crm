@@ -50,15 +50,11 @@
    "title": "Investment | GRENFORD – Off-Market, Globalverkauf, Suchauftrag",
    "description": "Off-Market-Transaktionen, Globalverkäufe und gezielte Objektsuche im Kundenauftrag. GRENFORD bringt Anlageziele und passende Immobilien zusammen.",
    "gallery": [
-    "hero-investment-1.webp",
-    "hero-investment-2.webp",
-    "hero-investment-3.webp",
-    "hero-investment-4.webp"
-   ],
-   "previewGallery": [
-    "hero-frankfurt.webp",
-    "hero-muenchen.webp",
-    "altbau-berlin.webp"
+    "hero-inv-wohnhaus.webp",
+    "hero-inv-fachmarkt.webp",
+    "hero-inv-boutiquehaus.webp",
+    "hero-inv-eckhaus.webp",
+    "hero-inv-altbau.webp"
    ]
   },
   "property": {
@@ -73,7 +69,7 @@
    ],
    "previewGallery": [
     "wohnraum-visualisierung.webp",
-    "altbau-berlin.webp",
+    "hero-inv-altbau.webp",
     "ferienhaus-usedom.webp"
    ]
   },
