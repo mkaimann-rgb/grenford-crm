@@ -107,7 +107,7 @@ WIZARDS = {
     'property-value': {
         'subject': 'property', 'title': 'Bewertungsanfrage · Property', 'submit': 'Einschätzung anfordern',
         'eyebrow': 'PROPERTY · IMMOBILIE BEWERTEN', 'tab': ('Verkaufen', 'Immobilie bewerten'),
-        'success': 'Vielen Dank. Ihre Angaben sind angekommen. Ich melde mich persönlich mit Ihrer Einschätzung. – Marco Kaimann',
+        'success': 'Vielen Dank. Ihre Angaben sind angekommen. Innerhalb von 48 Stunden melde ich mich persönlich mit Ihrer Einschätzung. – Marco Kaimann',
         'steps': [
             step('Ihre Immobilie', 'Welche Immobilie möchten Sie bewerten lassen?',
                  tiles('Objektart', [('Wohnung', 'wohnung'), ('Haus', 'haus'), ('Mehrfamilienhaus', 'mfh'), ('Grundstück', 'grundstueck'), ('Gewerbeeinheit', 'gewerbe')])),
@@ -161,7 +161,7 @@ WIZARDS = {
     'projects-value': {
         'subject': 'renovation', 'title': 'Sanierungsanfrage · Wert heute und nach Sanierung', 'submit': 'Einschätzung anfordern',
         'eyebrow': 'PROJECTS · WERT HEUTE UND SANIERT', 'tab': ('Sanieren', 'Wert nach Sanierung'),
-        'success': 'Vielen Dank. Ihr Vorhaben ist angekommen. Ich melde mich persönlich und wir besprechen den nächsten Schritt. Für Sie als Eigentümer bleibt die Beratung kostenfrei. – Marco Kaimann',
+        'success': 'Vielen Dank. Ihr Vorhaben ist angekommen. Innerhalb von 48 Stunden melde ich mich persönlich und wir besprechen den nächsten Schritt. Für Sie als Eigentümer bleibt die Beratung kostenfrei. – Marco Kaimann',
         'steps': [
             step('Ihre Immobilie', 'Was möchten Sie sanieren oder umbauen?',
                  tiles('Objektart', [('Wohnung', 'wohnung'), ('Haus', 'haus'), ('Mehrfamilienhaus', 'mfh'), ('Dachgeschoss / Rohbau', 'dach'), ('Gewerbeeinheit', 'gewerbe')])),
@@ -185,7 +185,7 @@ WIZARDS = {
     'investment-value': {
         'subject': 'investment', 'title': 'Asset-Einordnung · Investment', 'submit': 'Einordnung anfragen',
         'eyebrow': 'INVESTMENT · ASSET EINORDNEN', 'tab': ('Verkaufen', 'Asset einordnen'), 'company': True,
-        'success': 'Vielen Dank. Ihre Angaben sind angekommen. Ich melde mich persönlich und vertraulich bei Ihnen. – Marco Kaimann',
+        'success': 'Vielen Dank. Ihre Angaben sind angekommen. Innerhalb von 48 Stunden melde ich mich persönlich und vertraulich bei Ihnen. – Marco Kaimann',
         'steps': [
             step('Die Assetklasse', 'Um welches Objekt geht es?',
                  tiles('Assetklasse', [('Wohn- und Geschäftshaus', 'mfh'), ('Portfolio', 'portfolio'), ('Hotel / Serviced', 'hotel'), ('Büro / Gewerbe', 'gewerbe'),
@@ -308,7 +308,7 @@ def _contact_step(wid, w, total):
             f'<label class="wz-consent w4" for="wz-{wid}-ok"><input id="wz-{wid}-ok" type="checkbox" name="Einwilligung" value="ja" required>'
             '<span>Ich bin einverstanden, dass GRENFORD meine Angaben zur Bearbeitung dieser Anfrage verwendet. Die Einwilligung kann ich jederzeit widerrufen. *</span></label>'
             '</div><aside class="wz-person">' + img('marco-kaimann.jpg', '', '96px', 'loading="lazy"') +
-            '<p><strong>Marco Kaimann</strong><span>Founder &amp; Strategic Advisor</span>Ihre Angaben lese ich persönlich. Sie erhalten eine Einschätzung von mir, keinen automatisch errechneten Wert.</p></aside></div></fieldset>')
+            '<p><strong>Marco Kaimann</strong><span>Founder &amp; Strategic Advisor</span>Ihre Angaben lese ich persönlich. Innerhalb von 48 Stunden erhalten Sie eine Einschätzung von mir, keinen automatisch errechneten Wert.</p></aside></div></fieldset>')
 
 
 def wizard(wid):

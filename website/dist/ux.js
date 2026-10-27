@@ -1,10 +1,11 @@
 // GRENFORD / Formulare: Projektanfrage in sechs Schritten, Kurznachricht, Karte, Kontaktleiste.
 //
 // Teil 1 (bis zur Formular-Konstante "strategic") ist DOM-frei und wird von tests/transport.mjs geprüft.
-// Übertragung an das bestehende HubSpot-Formular (Schema unverändert). Kein Versand vor ausdrücklichem Absenden.
+// Übertragung an das GRENFORD-CRM (Google Sheet) über eine Google-Apps-Script-Web-App (crm/website-anfragen.gs).
+// Kein Versand vor ausdrücklichem Absenden.
 // Endpunkt: <meta name="grenford-form-endpoint"> aus site.json "formEndpoint". Leer = Versand per E-Mail anbieten.
 
-var FORM_ENDPOINT = globalThis.GRENFORD_FORM_ENDPOINT || 'https://api.hsforms.com/submissions/v3/integration/submit/146610940/cd06de30-eaee-4d74-b9e2-52d8f2dccae4';
+var FORM_ENDPOINT = globalThis.GRENFORD_FORM_ENDPOINT || '';
 var FORM_TIMEOUT = 20000;
 
 function splitName(name) {
@@ -12,20 +13,24 @@ function splitName(name) {
   return [parts.shift() || '', parts.join(' ')];
 }
 
-// Überträgt eine Anfrage im bisherigen CRM-Schema (fields + context). Wirft bei HTTP-Fehler und Netzwerkfehler.
+// Überträgt eine Anfrage als JSON (text/plain, damit der Browser keine CORS-Vorabfrage braucht).
+// Erfolg nur, wenn die Web-App {"ok": true} zurückgibt. Wirft bei HTTP-Fehler, Netzwerkfehler und abgelehnter Anfrage.
 async function sendRequest(data) {
   if (!FORM_ENDPOINT) throw new Error('no-endpoint');
   var name = splitName(data.name);
-  var fields = [['firstname', name[0]], ['lastname', name[1]], ['email', data.email], ['phone', data.phone || ''],
-    ['subject', data.subject || 'general'], ['message', data.message || ''], ['brand', 'grenford']]
-    .map(function (pair) { return { name: pair[0], value: String(pair[1] == null ? '' : pair[1]) }; });
-  var payload = { fields: fields, context: { pageUri: String(location.href).split('#')[0], pageName: document.title } };
+  var payload = {
+    source: 'grenford-website', name: String(data.name || '').trim(), firstname: name[0], lastname: name[1],
+    email: data.email, phone: data.phone || '', subject: data.subject || 'general', message: data.message || '',
+    page: String(location.href).split('#')[0], pageTitle: document.title
+  };
   var controller = new AbortController();
   var timer = setTimeout(function () { controller.abort(); }, FORM_TIMEOUT);
   try {
-    var response = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: controller.signal });
+    var response = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload), signal: controller.signal });
     if (!response.ok) throw new Error('submission_failed');
-    return response;
+    var result = await response.json().catch(function () { return null; });
+    if (!result || result.ok !== true) throw new Error('submission_failed');
+    return result;
   } finally {
     clearTimeout(timer);
   }
@@ -64,7 +69,7 @@ const INTENT = {
   'projects': ['projects', 'Sanierung / Innenumbau planen']
 };
 const FAILED = 'Die Übermittlung konnte nicht bestätigt werden. Ihre Eingaben bleiben erhalten. Bitte versuchen Sie es erneut oder senden Sie die vorbereitete E-Mail.';
-const NOT_CONFIGURED = 'Die Online-Übermittlung ist hier nicht eingerichtet. Bitte senden Sie die vorbereitete E-Mail.';
+const NOT_CONFIGURED = 'Ihre Anfrage ist fertig vorbereitet. Bitte senden Sie sie mit einem Klick per E-Mail, Ihre Eingaben bleiben erhalten.';
 
 // ---------------------------------------------------------------- Hilfen
 

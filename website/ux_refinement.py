@@ -42,7 +42,7 @@ def icon(name):
 
 
 def _form_attrs(form_id):
-    # Kein action: Die Übermittlung läuft nur per ux.js (JSON an HubSpot). Ohne JavaScript
+    # Kein action: Die Übermittlung läuft nur per ux.js (JSON an das CRM-Sheet). Ohne JavaScript
     # verhindert method="post", dass Personendaten in der URL landen; noscript nennt die E-Mail.
     return f'id="{form_id}" method="post" novalidate'
 

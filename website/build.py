@@ -89,7 +89,7 @@ def footer():
 
 def value_bar():
     return ('<aside class="value-bar" data-value-bar hidden aria-label="Immobilienbewertung"><p><strong>Was ist Ihre Immobilie wert?</strong>'
-            '<span>Heute und nach der Sanierung. Persönlich eingeschätzt, kostenfrei.</span></p>'
+            '<span>Heute und nach der Sanierung. Persönlich eingeschätzt, Antwort innerhalb von 48 Stunden.</span></p>'
             f'<a class="button" href="{page("bewerten")}">Bewertung starten <span aria-hidden="true">↗</span></a>'
             '<button type="button" class="value-bar-close" data-value-bar-close aria-label="Hinweis schließen">×</button></aside>')
 
@@ -116,7 +116,7 @@ def shell(active, meta, body):
               f'<meta property="og:url" content="{absolute(path)}"><meta property="og:image" content="{absolute("assets/" + hero)}"><meta name="twitter:card" content="summary_large_image">')
     return ('<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{E(meta["title"])}</title><meta name="description" content="{E(meta["description"])}">'
-            f'<link rel="canonical" href="{absolute(path)}">{social}<meta name="theme-color" content="#252622">'
+            f'<link rel="canonical" href="{absolute(path)}">{social}<meta name="theme-color" content="#222e41">'
             f'<meta name="grenford-form-endpoint" content="{E(SITE["formEndpoint"], quote=True)}"><meta name="grenford-email" content="{E(SITE["email"])}">'
             f'<link rel="icon" type="image/webp" href="{asset("grenford-original.webp")}">{fonts}'
             f'<link rel="stylesheet" href="{root("site.css")}"><script defer src="{root("app.js")}"></script><script defer src="{root("ux.js")}"></script><script defer src="{root("wizard.js")}"></script>{PREVIEW_HEAD.replace("{root}", root(""))}'
@@ -268,7 +268,7 @@ def valuation_teaser():
     return ('<section class="valuation-teaser" id="bewertung"><div class="section-head"><span class="eyebrow">02 / BEWERTUNG</span>'
             '<h2>Was ist Ihre Immobilie wert?<br><em>Heute und nach der Sanierung.</em></h2>'
             '<p>Zwei Zahlen statt einer: der Wert im heutigen Zustand und der Wert nach einer sinnvollen Sanierung. Persönlich eingeschätzt, nicht automatisch errechnet.</p></div>'
-            f'<div class="teaser-tiles">{links}</div><div class="teaser-foot"><p class="wz-checks"><span>Kostenfrei und unverbindlich</span><span>Persönliche Einschätzung</span>'
+            f'<div class="teaser-tiles">{links}</div><div class="teaser-foot"><p class="wz-checks"><span>Kostenfrei und unverbindlich</span><span>Antwort innerhalb von 48 Stunden</span>'
             f'<span>Mit Sanierungsblick</span></p><a class="button" href="{page("bewerten")}">Bewertung starten <span aria-hidden="true">↗</span></a></div></section>')
 
 
@@ -286,7 +286,7 @@ def valuation_section(k):
     eyebrow, title, lead = heads[k]
     return (f'<section class="valuation" id="bewertung"><div class="section-head"><span class="eyebrow">{eyebrow}</span><h2>{title}</h2><p>{lead}</p></div>'
             f'<div class="valuation-frame">{wizard_tabs(k, TAB_LABELS_BEWERTEN if k == "bewerten" else None)}</div>'
-            '<p class="wz-checks"><span>Kostenfrei und unverbindlich</span><span>Persönlich von Marco Kaimann</span><span>Vertraulich behandelt</span></p></section>')
+            '<p class="wz-checks"><span>Kostenfrei und unverbindlich</span><span>Antwort innerhalb von 48 Stunden</span><span>Persönlich von Marco Kaimann</span><span>Vertraulich behandelt</span></p></section>')
 
 
 def fee_band():
@@ -311,7 +311,7 @@ def sub_hero(key, kicker, n, title, lead, actions):
 
 
 def ways():
-    items = [('Persönlich · digital', 'Ersteinschätzung', 'Sie beschreiben Ihre Immobilie in wenigen Schritten. Sie erhalten eine Einschätzung mit Wertspanne, persönlich erstellt.',
+    items = [('Innerhalb von 48 Stunden · digital', 'Ersteinschätzung', 'Sie beschreiben Ihre Immobilie in wenigen Schritten. Innerhalb von 48 Stunden erhalten Sie eine Einschätzung mit Wertspanne, persönlich erstellt.',
               '<a class="button" href="#bewertung">Bewertung starten <span aria-hidden="true">↑</span></a>'),
              ('30 Minuten · Video', 'Video-Termin', 'Gemeinsam Unterlagen, Fotos und Ihre Fragen durchgehen. Direkt im Kalender buchbar.',
               f'<a class="text-link" href="{E(SITE["calendar"])}" target="_blank" rel="noopener noreferrer">Termin buchen <span aria-hidden="true">↗</span></a>'),
@@ -343,13 +343,14 @@ def faq_section(items, title='Die Fragen<br><em>vor dem ersten Schritt.</em>'):
 
 def bewerten():
     body = sub_hero('bewerten', 'BEWERTUNG', '04', 'Den Wert kennen.<br><em>Die Richtung wählen.</em>',
-                    'Was ist Ihre Immobilie heute wert, und was nach einer Sanierung? GRENFORD ordnet beides persönlich ein. Kostenfrei und unverbindlich.',
+                    'Was ist Ihre Immobilie heute wert, und was nach einer Sanierung? GRENFORD ordnet beides persönlich ein. Kostenfrei, unverbindlich und mit Antwort innerhalb von 48 Stunden.',
                     '<a class="button" href="#bewertung">Bewertung starten<span aria-hidden="true">↓</span></a><a class="text-link" href="#ablauf">So läuft es ab ↓</a>')
     body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#bewertung">Bewertung</a><a href="#wege">Drei Wege</a><a href="#ablauf">Der Ablauf</a>'
              '<a href="#fragen">Fragen</a><a href="#kontakt">Kontakt</a></nav>')
     body += valuation_section('bewerten') + ways() + value_steps()
     body += faq_section([
         ('Was kostet die Bewertung?', 'Die Ersteinschätzung ist kostenfrei und unverbindlich. Ein Auftrag entsteht dadurch nicht.'),
+        ('Wie schnell erhalte ich eine Rückmeldung?', 'Innerhalb von 48 Stunden meldet sich Marco Kaimann persönlich, auf dem Weg, den Sie im letzten Schritt gewählt haben: per E-Mail, Telefon oder im Video-Termin.'),
         ('Ist das ein automatisch berechneter Wert?', 'Nein. Ihre Angaben liest Marco Kaimann persönlich und ordnet sie mit Lage, Zustand und vergleichbaren Objekten ein. Sie erhalten eine Wertspanne und eine Erläuterung.'),
         ('Was bedeutet „Wert nach der Sanierung“?', 'Neben dem heutigen Wert zeigt die Einschätzung, wie sich eine sinnvolle Sanierung auf den Wert auswirken kann, mit einem groben Kostenrahmen. So sehen Sie, ob sich ein Vorhaben lohnt, bevor Sie Angebote einholen.'),
         ('Welche Unterlagen helfen?', 'Für die Ersteinschätzung genügen Ihre Angaben. Für eine genaue Wertermittlung helfen Grundriss, Wohnflächenberechnung, Energieausweis und bei vermieteten Objekten die Mietaufstellung.'),

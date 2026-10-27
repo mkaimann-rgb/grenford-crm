@@ -325,6 +325,12 @@ img[data-missing]{object-fit:contain;background:var(--ivory)}
 .hero-reach>span:last-child{color:var(--orange-light)}
 @media(max-width:760px){.hero-reach{margin-top:16px;font-size:10px;gap:4px 14px}.hero-reach-cities{gap:2px 10px}.hero-reach-cities span+span:before{margin-right:10px}}
 
+/* GRENFORD Memo-CI (Standard): Navy, Bronze und Elfenbein wie in Property Brief und Renovation Memo.
+   Ersetzt Graphit und Patina; eine Marke von der Website bis zum Memo. Bronze für kleine Schrift leicht dunkler (#7a6a52, 4,9:1 auf Elfenbein). */
+:root{--blue:#222e41;--paper:#faf6f2;--ivory:#efe9e1;--line:#cfc8bc;--muted:#5f6470;
+      --orange:#7a6a52;--orange-hover:#8b7a60;--orange-ink:#7a6a52;--orange-light:#c9b48f;--rust:#7a6a52;--orange-tint:#efe8dc}
+body{background:var(--paper)}
+
 /* ---- structure.css ---- */
 /* GRENFORD / Struktur: Großmenü, Bewertung und Suchprofile, neue Seiten (Bewerten, Über GRENFORD), Footer-Spalten, Bewertungsleiste.
    Baut auf style/art/immersive/refinements auf: gleiche Schrift (DM Sans), Linien, Papier- und Graphittöne, Akzent über --orange (Patina). */

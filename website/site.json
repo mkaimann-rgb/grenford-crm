@@ -1,7 +1,7 @@
 {
  "siteUrl": "https://www.grenford.de",
- "formEndpoint": "https://api.hsforms.com/submissions/v3/integration/submit/146610940/cd06de30-eaee-4d74-b9e2-52d8f2dccae4",
- "formEndpointNote": "Öffentliches HubSpot-Formular aus dem veröffentlichten Stand. Leer = Formulare bieten den Versand per E-Mail an. Der Vorschau-Build (--preview) setzt den Endpunkt immer leer, damit keine Test-Leads entstehen.",
+ "formEndpoint": "",
+ "formEndpointNote": "URL der Google-Apps-Script-Web-App, die Anfragen ins GRENFORD CRM schreibt (crm/website-anfragen.gs, Anleitung in crm/README.md). Leer = Formulare bieten den Versand per E-Mail an. Der Vorschau-Build (--preview) setzt den Endpunkt immer leer.",
  "email": "kontakt@grenford.de",
  "phone": "+49 172 425 9087",
  "phoneHref": "+491724259087",

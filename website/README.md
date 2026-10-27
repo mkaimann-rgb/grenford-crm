@@ -29,13 +29,14 @@ node tests/transport.mjs      # Formular-Übertragung (ohne echten Request)
 | `static/js/` | `app.js` (Menü, Galerie, Karussell, Regler), `ux.js` (Formulare, Übertragung), `wizard.js` (Bewertung/Suchprofile, Reiter, Bewertungsleiste, Ablauf-Slides) |
 | `static/assets/` | Bilder, Schriften (`fonts/`), `placeholder.svg` |
 | `tests/` | `markup.py`, `transport.mjs` |
+| `crm/` | Google-Apps-Script für den Eingang der Anfragen im CRM-Sheet, mit Anleitung |
 
 ## Vor dem Livegang erledigen
 
 1. **Originalbilder aus dem ZIP** (`dist/assets/` des veröffentlichten Stands) nach `static/assets/` kopieren. Der Build listet fehlende Dateien auf; bis dahin erscheinen „Bild folgt“ bzw. die Vorschau-Bilder:
    - Projects-Hero: `hero-projects-1..3.webp` aus `site.json` → `gallery`. Sind sie vorhanden, nutzt der Build automatisch sie statt `previewGallery`. Startseite, Investment und Property haben bereits ihre Hero-Bilder; der Penthouse-Vergleich (`penthouse-before/after.webp`) ist ebenfalls vorhanden.
    - Nicht mehr benötigt: `hero-home-*.webp`, `house.webp`, `investment.webp`, `projects.webp`, `property.webp`, `dm-sans-600.ttf`.
-2. **CRM-Eingang einmal echt prüfen:** `formEndpoint` ist das HubSpot-Formular aus dem veröffentlichten Stand; Schema und Nachrichtentext sind unverändert (geprüft mit `tests/transport.mjs` und einem Browsertest mit simuliertem HubSpot). Ein echter Test-Lead wurde bewusst nicht gesendet. Nach dem Deployment eine Testanfrage absenden und in HubSpot kontrollieren.
+2. **CRM-Anbindung einrichten:** HubSpot wird nicht mehr genutzt. Die Formulare senden an eine Google-Apps-Script-Web-App, die Anfragen ins CRM-Sheet (Blatt „Website-Anfragen“) schreibt. Einrichtung in `crm/README.md`, danach die Web-App-URL in `site.json` → `formEndpoint` eintragen. Bis dahin ist `formEndpoint` leer und die Formulare bieten den Versand per E-Mail an.
 3. **Bildrechte/Kennzeichnung:** Mehrere KI-Bilder zeigen das Gemini-Wasserzeichen (✦), erfundene Firmennamen oder echte Markenlogos (Fachmarktzentrum: toom, JYSK, Fressnapf, KODi). Vor Verwendung als Kennzeichnung „Visualisierung“ ergänzen oder austauschen.
 4. **Impressum/Datenschutz:** Links zeigen auf `www.grenford.de/imprint` und `/privacy` (`site.json`). Sicherstellen, dass diese Seiten zum neuen Auftritt gehören und erreichbar sind.
 5. **`siteUrl`** in `site.json` prüfen (Canonical, Open Graph, Sitemap).
@@ -63,10 +64,11 @@ Typografie, Hero-Karussell, Collection-Karussell und Gestaltung der bestehenden 
 | `/ueber-grenford/` | Gründer, Haltung (vier Grundsätze), drei Geschäftsfelder, „So entsteht ein Memo“ (5 Schritte), Reichweite, Kontakt |
 
 - **Navigation:** Investment, Property, Projects mit Großmenü (Bild, Sprungziele, Memo und Bewertung als nächster Schritt), dazu „Bewerten“ und „Über GRENFORD“. Auf dem Handy das bisherige einfache Menü.
-- **Bewertung und Suchprofile** (`valuation.py`, `wizard.js`): fünf Varianten, je Bereich angepasst. Kontaktdaten erst im letzten Schritt, Pflichtangaben je Schritt geprüft, Zweige (z. B. Hausart nur bei „Haus“, Miete nur bei „Vermietet“). Übertragung über das bestehende HubSpot-Formular (`subject` investment / property / renovation, Nachricht zeilenweise „Feld: Wert“). Sprungziele `#bewertung-property-search` usw. öffnen den passenden Reiter, auch von anderen Seiten.
+- **Bewertung und Suchprofile** (`valuation.py`, `wizard.js`): fünf Varianten, je Bereich angepasst. Kontaktdaten erst im letzten Schritt, Pflichtangaben je Schritt geprüft, Zweige (z. B. Hausart nur bei „Haus“, Miete nur bei „Vermietet“). Übertragung über `sendRequest()` an das CRM-Sheet (`subject` investment / property / renovation, Nachricht zeilenweise „Feld: Wert“). Sprungziele `#bewertung-property-search` usw. öffnen den passenden Reiter, auch von anderen Seiten.
 - **Bewertungsleiste:** dezent am unteren Rand nach dem Hero, nicht über Formularen und dem Footer, schließbar (gilt für die Sitzung). Nicht auf `/bewerten/`.
 - **Footer:** Linkspalten je Bereich und GRENFORD, Adresse und Kontakt.
-- **Offen:** Antwortzeit für die Ersteinschätzung (z. B. „innerhalb von 48 Stunden“) bewusst nicht zugesagt, bis sie feststeht. Newsletter „Das GRENFORD Memo“ noch nicht eingebaut (braucht Double-Opt-in in HubSpot).
+- **Antwortzeit:** „Antwort innerhalb von 48 Stunden“ ist zugesagt (Bewertung, Teaser, Leiste, Bestätigungen); das CRM-Blatt zeigt dazu die Spalte „Antwort bis“.
+- **Offen:** Newsletter (Name noch offen, nicht „Memo“) noch nicht eingebaut; braucht Double-Opt-in.
 
 ## Akzentfarbe und Markenstimme
 
@@ -88,7 +90,7 @@ Typografie, Hero-Karussell, Collection-Karussell und Gestaltung der bestehenden 
 **Formulare (Datenschutz, Spam, Bedienung)**
 - `method="post"`: Ohne JavaScript landen keine Personendaten mehr in der URL.
 - Unsichtbares Köderfeld (Honeypot) gegen Bots; keine Zeitsperre, damit schnelle echte Anfragen nie verloren gehen.
-- `ux.js` übernimmt Texte, Ablauf und Nachrichtenformat des veröffentlichten Stands (HubSpot-Schema, „Strategische Projektanfrage · …“, Vorbelegungen „Noch offen“ usw.). Dazu: Validierung je Schritt mit verständlichen Fehlermeldungen, `aria-invalid`, Fokus auf das fehlerhafte Feld, Prüfseite, Doppelklick-Schutz, Erfolgsmeldung in einer Live-Region.
+- `ux.js` übernimmt Texte, Ablauf und Nachrichtenformat des veröffentlichten Stands („Strategische Projektanfrage · …“, Vorbelegungen „Noch offen“ usw.). Dazu: Validierung je Schritt mit verständlichen Fehlermeldungen, `aria-invalid`, Fokus auf das fehlerhafte Feld, Prüfseite, Doppelklick-Schutz, Erfolgsmeldung in einer Live-Region.
 - Bei Übertragungsfehlern bleibt nichts verloren: vorbereiteter Text zum Kopieren oder per E-Mail.
 - „… anfragen“-Buttons füllen Bereich, Anliegen und Objekt vor; auf der Startseite öffnet `#anfrage` das eingeklappte Formular.
 - `noscript`-Hinweis mit E-Mail-Adresse.
