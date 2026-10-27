@@ -268,3 +268,10 @@ noscript p{font-size:12px;margin-top:12px}
 
 /* Ersatzbild, solange ein Originalbild in static/assets fehlt (siehe README). */
 img[data-missing]{object-fit:contain;background:var(--ivory)}
+
+/* Hero: automatische Überblendung (app.js, alle 5 s) mit leichtem Zoom je Bild. */
+.immersive-hero .cover-gallery>img{opacity:0;transition:opacity 1.4s ease;will-change:opacity,transform}
+.immersive-hero .cover-gallery>img.is-active{opacity:1;z-index:1;animation:hero-zoom 6.6s ease-out forwards}
+.immersive-hero .cover-gallery>img.is-leaving{opacity:0;z-index:0;transform:scale(1.07)}
+@keyframes hero-zoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+@media(prefers-reduced-motion:reduce){.immersive-hero .cover-gallery>img.is-active{animation:none}}

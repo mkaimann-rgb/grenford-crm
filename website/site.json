@@ -38,17 +38,11 @@
   "title": "GRENFORD | Immobilienberatung Berlin für Investment, Property und Projects",
   "description": "Persönliche Immobilienberatung aus Berlin: Off-Market-Investments, Verkauf und Kauf privater Immobilien sowie vergleichbare Bauangebote für Ihre Sanierung. Mit Marco Kaimann.",
   "gallery": [
-   "hero-investment-4.webp",
-   "hero-home-1.webp",
-   "hero-home-4.webp",
-   "hero-home-2.webp",
-   "hero-home-5.webp"
-  ],
-  "previewGallery": [
-   "skyline-frankfurt.webp",
-   "altbau-berlin.webp",
-   "skyline-muenchen.webp",
-   "wohnraum-visualisierung.webp"
+   "hero-muenchen.webp",
+   "hero-frankfurt.webp",
+   "hero-berlin.webp",
+   "hero-koeln.webp",
+   "hero-hamburg.webp"
   ]
  },
  "pages": {
@@ -62,8 +56,8 @@
     "hero-investment-4.webp"
    ],
    "previewGallery": [
-    "skyline-frankfurt.webp",
-    "skyline-muenchen.webp",
+    "hero-frankfurt.webp",
+    "hero-muenchen.webp",
     "altbau-berlin.webp"
    ]
   },
@@ -98,5 +92,6 @@
    ]
   }
  },
- "galleryNote": "gallery = Originaldateien in static/assets. Fehlt eine Datei, wird sie übersprungen; fehlen alle, nutzt der Build previewGallery."
+ "galleryNote": "gallery = Originaldateien in static/assets. Fehlt eine Datei, wird sie übersprungen; fehlen alle, nutzt der Build previewGallery.",
+ "heroRotationNote": "Hero-Galerien wechseln automatisch alle 5 Sekunden mit leichtem Zoom (static/js/app.js, HERO_INTERVAL)."
 }

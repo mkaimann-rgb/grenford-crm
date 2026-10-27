@@ -89,14 +89,12 @@ def hero_images(meta):
 
 
 def gallery(pics):
+    """Hero-Bildwelt: wechselt automatisch (app.js), ohne Bedienelemente. Bilder sind dekorativ (alt="")."""
     h = '<figure class="cover-gallery" data-cover aria-label="GRENFORD Bildwelt">'
     for i, p in enumerate(pics):
-        attrs = 'data-cover-image ' + ('hidden loading="lazy"' if i else 'fetchpriority="high"')
-        h += img(p, '', '100vw', attrs)  # dekorativ: alt=""
-    n = len(pics)
-    return h + (f'<figcaption><span>GRENFORD / RÄUME MIT PERSPEKTIVE</span><div><span data-cover-count aria-live="polite">01 / {n:02d}</span>'
-                '<button type="button" data-cover-prev aria-label="Vorheriges Hero-Bild">←</button>'
-                '<button type="button" data-cover-next aria-label="Nächstes Hero-Bild">→</button></div></figcaption></figure>')
+        attrs = 'data-cover-image ' + ('class="is-active" fetchpriority="high"' if i == 0 else 'loading="lazy"')
+        h += img(p, '', '100vw', attrs)
+    return h + '<figcaption><span>GRENFORD / RÄUME MIT PERSPEKTIVE</span></figcaption></figure>'
 
 
 def home_hero():

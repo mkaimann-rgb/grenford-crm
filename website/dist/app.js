@@ -26,30 +26,31 @@ if (menu && nav) {
   });
 }
 
-// Hero-Galerie: Pfeile, Wischen, Nachbarbilder vorladen
+// Hero-Galerie: wechselt automatisch alle 5 Sekunden in einer Schleife, jedes Bild mit leichtem Zoom (CSS).
+// Pausiert, solange der Hero nicht sichtbar oder der Tab im Hintergrund ist. Bei reduzierter Bewegung bleibt das erste Bild stehen.
+const HERO_INTERVAL = 5000;
 document.querySelectorAll('[data-cover]').forEach(gallery => {
   const images = [...gallery.querySelectorAll('[data-cover-image]')];
-  const count = gallery.querySelector('[data-cover-count]');
-  if (images.length < 2) { gallery.querySelectorAll('[data-cover-prev],[data-cover-next]').forEach(b => b.hidden = true); return; }
-  let current = 0;
-  const pad = n => String(n).padStart(2, '0');
-  const warm = i => { const img = images[(i + images.length) % images.length]; img.loading = 'eager'; };
-  function move(delta) {
-    current = (current + delta + images.length) % images.length;
-    images.forEach((img, i) => img.hidden = i !== current);
-    if (count) count.textContent = pad(current + 1) + ' / ' + pad(images.length);
-    warm(current + 1); warm(current - 1);
+  if (images.length < 2 || reduceMotion) return;
+  let current = 0, timer = null, visible = true;
+  const show = index => {
+    const previous = images[current];
+    previous.classList.replace('is-active', 'is-leaving');            // blendet aus, behält den Zoom
+    setTimeout(() => previous.classList.remove('is-leaving'), 1600);
+    current = index;
+    const image = images[current];
+    image.classList.remove('is-active'); void image.offsetWidth;  // Zoom-Animation neu starten
+    image.classList.add('is-active');
+    images[(current + 1) % images.length].loading = 'eager';      // nächstes Bild vorladen
+  };
+  const stop = () => { clearInterval(timer); timer = null; };
+  const start = () => { if (!timer && visible && !document.hidden) timer = setInterval(() => show((current + 1) % images.length), HERO_INTERVAL); };
+  images[1].loading = 'eager';
+  document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => { visible = entries[0].isIntersecting; visible ? start() : stop(); }).observe(gallery);
   }
-  gallery.querySelector('[data-cover-prev]').addEventListener('click', () => move(-1));
-  gallery.querySelector('[data-cover-next]').addEventListener('click', () => move(1));
-  gallery.addEventListener('pointerenter', () => warm(1), { once: true });
-  let startX = null;
-  gallery.parentElement.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-  gallery.parentElement.addEventListener('touchend', e => {
-    if (startX === null || e.target.closest('a,button')) return;
-    const dx = e.changedTouches[0].clientX - startX; startX = null;
-    if (Math.abs(dx) > 50) move(dx < 0 ? 1 : -1);
-  }, { passive: true });
+  start();
 });
 
 // Collection-Karussell
