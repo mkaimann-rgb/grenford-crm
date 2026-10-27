@@ -566,3 +566,11 @@
 @media(prefers-reduced-motion:reduce){.ux-contact-rail a{transition:none}}
 /* Reichweite im Hero: Himmelsrichtung mit Stadt, daneben „Deutschlandweit aktiv“ */
 .hero-reach-cities small{font-size:inherit;letter-spacing:inherit;opacity:.75}
+/* Zeitlinie: Verbindungsstriche nur zwischen den Kreisen, kein Strich nach dem letzten Schritt */
+.memo-timeline:before,.method .memo-timeline:before{display:none}
+.memo-timeline li{position:relative}
+.memo-timeline li:not(:last-child):after{content:"";position:absolute;top:22px;left:52px;right:4px;height:1px;background:var(--blue)}
+.method .memo-timeline li:not(:last-child):after{top:24px;left:56px;right:8px}
+@media(max-width:760px){
+ .memo-timeline li:not(:last-child):after,.method .memo-timeline li:not(:last-child):after{top:52px;bottom:-22px;left:22px;right:auto;width:1px;height:auto}
+ .method .memo-timeline li:not(:last-child):after{top:56px;left:24px}}
