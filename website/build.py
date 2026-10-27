@@ -186,8 +186,11 @@ def gallery(pics):
     """Hero-Bildwelt: wechselt automatisch (app.js), ohne Bedienelemente. Bilder sind dekorativ (alt="")."""
     h = '<figure class="cover-gallery" data-cover aria-label="GRENFORD Bildwelt">'
     for i, p in enumerate(pics):
-        attrs = 'data-cover-image ' + ('class="is-active" fetchpriority="high"' if i == 0 else 'loading="lazy"')
-        h += img(p, '', '100vw', attrs)
+        attrs = 'data-cover-image ' + ('class="is-active" fetchpriority="high"' if i == 0 else 'decoding="async"')
+        tag = img(p, '', '100vw', attrs)
+        if i:  # erst laden, wenn das erste Bild steht (app.js: hydrate)
+            tag = tag.replace(' srcset="', ' data-srcset="', 1).replace(' src="', ' data-src="', 1)
+        h += tag
     return h + '</figure>'
 
 

@@ -178,6 +178,8 @@ def contact(subject=None, company=False, lead=None):
 
 def rail():
     # Läuft auf jeder Seite dauerhaft mit: Termin buchen (Akzentfarbe) und WhatsApp (WhatsApp-Grün).
+    # Auf dem Handy wird daraus eine Leiste am unteren Rand mit „Bewertung starten“ (ersetzt dort die Bewertungsleiste).
     return ('<aside class="ux-contact-rail" aria-label="Direktkontakt">'
+            f'<a class="rail-value" href="{page("bewerten")}">Bewertung starten <span aria-hidden="true">↗</span></a>'
             f'<a class="rail-termin" href="{E(SITE["calendar"])}" target="_blank" rel="noopener noreferrer" aria-label="Termin buchen">{icon("calendar")}<span aria-hidden="true">Termin buchen</span></a>'
             f'<a class="rail-whatsapp" href="{E(SITE["whatsapp"])}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">{icon("whatsapp")}<span aria-hidden="true">WhatsApp</span></a></aside>')

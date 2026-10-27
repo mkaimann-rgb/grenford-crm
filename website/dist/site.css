@@ -1136,3 +1136,64 @@ body{background:var(--paper)}
 @media(prefers-reduced-motion:reduce){.om-card,.om-card .om-body,.om-card .om-body *{transition:none}}
 .om-carousel .om-card:hover .om-body .button,.om-carousel .om-card.is-selected .om-body .button{background:var(--paper)!important;border-color:var(--paper)!important;color:var(--blue)!important}
 .om-carousel .om-card:hover .om-body .button *,.om-carousel .om-card.is-selected .om-body .button *{color:var(--blue)!important}
+
+/* ================================================================ UX-Runde 2026 */
+/* Pause-Knöpfe für selbstlaufende Inhalte (Hero-Bildwechsel, Karussell) */
+.motion-toggle{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--white);color:var(--blue);font-size:11px;letter-spacing:-.1em;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.motion-toggle:hover,.motion-toggle:focus-visible{border-color:var(--blue)}
+.motion-toggle[aria-pressed=true]{background:var(--blue);color:var(--paper);border-color:var(--blue)}
+.hero-toggle{position:absolute;z-index:6;right:6%;bottom:26px;background:rgba(17,19,26,.35);border-color:rgba(250,246,242,.5);color:var(--paper);pointer-events:auto}
+.hero-toggle[aria-pressed=true]{background:var(--paper);color:var(--blue)}
+.collection-navigation{display:flex;align-items:center;gap:10px}
+@media(max-width:760px){.hero-toggle{bottom:18px}}
+
+/* Schriftgrößen: nichts Lesbares unter 12 px */
+.om-status,.om-id,.hero-reach,.hero-reach-cities span,.rx-stamp,.om-sample,.om-note,.ux-map-note,.memo-timeline .step-gets small,.collection-context,.collection-toolbar button span,
+.wizard-count,.wizard-head .eyebrow,.wz-switch small,.wz-switch span,.eyebrow,.mega figcaption,.footer-cols strong,.footer-bottom,.footer-bottom a,.ux-privacy,.om-locked p,.rx-facts dt,.contact-channels small,.pathway-body small,.hero-intents>span,.comparison-hint span,.comparison-tag,.wz-scale span,.ux-required{font-size:max(12px,1em)}
+.om-status,.om-id,.hero-reach,.rx-stamp,.ux-map-note,.memo-timeline .step-gets small,.collection-context,.wizard-count,.wz-switch small,.comparison-tag,.comparison-hint span,.eyebrow{font-size:12px}
+.ux-privacy,.om-note,.rx-note,.wz-note,.collection-note{font-size:13px}
+
+/* Klickflächen: mindestens 44 px hoch */
+.hero-intents a{min-height:44px;padding:0 17px}
+.section-nav a{min-height:44px}
+.site-footer .footer-cols a,.site-footer address a,.footer-bottom a{display:inline-flex;align-items:center;min-height:44px}
+.footer-cols>div{display:grid;align-content:start;gap:0}
+.contact .ux-map figcaption a,.contact .ux-map figcaption button,.ux-privacy a,.wz-note a{display:inline-flex;align-items:center;min-height:44px}
+.collection-toolbar button,.om-tabs button{min-height:44px}
+.collection-navigation button{min-width:44px;min-height:44px}
+
+/* Hero-Öffnen auf Unterseiten kürzer (Startseite unverändert) */
+@media(min-width:761px){
+ body:not(.page-home) .hero-stage.is-opening{height:calc(max(100svh,760px) + 35vh)}
+ body:not(.page-home) .hero-stage.is-opening + *{margin-top:-28vh}}
+
+/* Abschnittsleiste läuft oben mit, aktueller Abschnitt markiert */
+.section-nav,.hero-stage.is-opening + .section-nav{position:sticky!important;top:0;z-index:20!important;background:rgba(250,246,242,.96);backdrop-filter:saturate(1.2) blur(6px);box-shadow:0 1px 0 var(--line)}
+.section-nav a{position:relative;transition:color .2s}
+.section-nav a[aria-current=true]{color:var(--orange-ink,var(--orange))}
+.section-nav a[aria-current=true]:after{content:"";position:absolute;left:0;right:0;bottom:6px;height:2px;background:currentColor;border-radius:2px}
+main section[id],main [id^=bewertung],main details[id]{scroll-margin-top:72px}
+@media(max-width:760px){.section-nav{scrollbar-width:none}.section-nav::-webkit-scrollbar{display:none}}
+
+/* Handy: eine Leiste unten (Bewertung, Termin, WhatsApp) statt Bewertungsleiste + zwei Knöpfe */
+.ux-contact-rail .rail-value{display:none}
+@media(max-width:760px){
+ .value-bar{display:none!important}
+ .ux-contact-rail{left:0;right:0;bottom:0!important;top:auto!important;transform:none!important;flex-direction:row;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(250,246,242,.97);backdrop-filter:blur(8px);box-shadow:0 -1px 0 var(--line),0 -8px 24px rgba(17,19,26,.08)}
+ .ux-contact-rail .rail-value{display:flex;flex:1;align-items:center;justify-content:center;gap:10px;height:48px;border-radius:999px;background:var(--blue);color:var(--paper);font-size:14px;box-shadow:none}
+ .ux-contact-rail a.rail-termin,.ux-contact-rail a.rail-whatsapp{flex:none;box-shadow:none}
+ body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}}
+@media(max-width:760px){
+ .section-nav{font-size:13px;gap:18px}
+ .section-nav a{padding:0 4px;min-width:44px;justify-content:center}
+ .immersive-hero .hero-actions .button,.immersive-hero .hero-actions .text-link{font-size:13px}
+ .service-focus p span{font-size:12px}
+ .wz-tiles .wz-box{font-size:12px}}
+@media(min-width:761px){.section-nav{font-size:13px}.service-focus p span{font-size:12px}}
+.method .memo-timeline li>p,.personal-approach .method .memo-timeline li>p,.memo-timeline li>p{font-size:14px;line-height:1.55}
+.method .memo-timeline li>p.step-gets,.memo-timeline .step-gets{font-size:13px}
+.comparison-card header p,.comparison-details p,.comparison-result p{font-size:13px;line-height:1.55}
+.comparison-note p,.comparison-note a{font-size:13px}
+.collection-navigation [data-counter]{font-size:12px}
+.contact .ux-map figcaption a,.contact .ux-map figcaption button{font-size:13px}
+.section-nav a{flex:none;white-space:nowrap}

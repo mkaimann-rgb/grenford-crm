@@ -29,10 +29,17 @@ if (menu && nav) {
 // Hero-Galerie: wechselt automatisch alle 6 Sekunden in einer Schleife, jedes Bild mit leichtem Zoom (CSS).
 // Pausiert, solange der Hero nicht sichtbar oder der Tab im Hintergrund ist. Bei reduzierter Bewegung bleibt das erste Bild stehen.
 const HERO_INTERVAL = 6000;
+// Bilder 2…n tragen ihre Quelle zunächst nur in data-src (build.py) und laden erst, wenn die Seite steht.
+const hydrate = image => {
+  if (image.dataset.srcset) { image.srcset = image.dataset.srcset; image.removeAttribute('data-srcset'); }
+  if (image.dataset.src) { image.src = image.dataset.src; image.removeAttribute('data-src'); }
+};
 document.querySelectorAll('[data-cover]').forEach(gallery => {
   const images = [...gallery.querySelectorAll('[data-cover-image]')];
   if (images.length < 2 || reduceMotion) return;
-  let current = 0, timer = null, visible = true;
+  let current = 0, timer = null, visible = true, paused = false;
+  const later = () => setTimeout(() => images.slice(1).forEach(hydrate), 1200);
+  document.readyState === 'complete' ? later() : window.addEventListener('load', later, { once: true });
   const cities = [...(gallery.closest('section')?.querySelectorAll('[data-reach-city]') || [])];  // Reichweiten-Zeile der Startseite
   const show = index => {
     const previous = images[current];
@@ -44,11 +51,21 @@ document.querySelectorAll('[data-cover]').forEach(gallery => {
     const image = images[current];
     image.classList.remove('is-active'); void image.offsetWidth;  // Zoom-Animation neu starten
     image.classList.add('is-active');
-    images[(current + 1) % images.length].loading = 'eager';      // nächstes Bild vorladen
+    hydrate(images[(current + 1) % images.length]);               // nächstes Bild sicher geladen
   };
   const stop = () => { clearInterval(timer); timer = null; };
-  const start = () => { if (!timer && visible && !document.hidden) timer = setInterval(() => show((current + 1) % images.length), HERO_INTERVAL); };
-  images[1].loading = 'eager';
+  const start = () => { if (!timer && !paused && visible && !document.hidden) timer = setInterval(() => show((current + 1) % images.length), HERO_INTERVAL); };
+  // Sichtbarer Pause-Knopf (WCAG 2.2.2: sich selbst bewegende Inhalte anhalten können)
+  const toggle = document.createElement('button');
+  toggle.type = 'button'; toggle.className = 'motion-toggle hero-toggle'; toggle.setAttribute('aria-pressed', 'false');
+  toggle.setAttribute('aria-label', 'Bildwechsel anhalten'); toggle.innerHTML = '<span aria-hidden="true">❚❚</span>';
+  toggle.addEventListener('click', () => {
+    paused = !paused; paused ? stop() : start();
+    toggle.setAttribute('aria-pressed', String(paused));
+    toggle.setAttribute('aria-label', paused ? 'Bildwechsel fortsetzen' : 'Bildwechsel anhalten');
+    toggle.innerHTML = paused ? '<span aria-hidden="true">▶</span>' : '<span aria-hidden="true">❚❚</span>';
+  });
+  gallery.closest('section').appendChild(toggle);
   document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => { visible = entries[0].isIntersecting; visible ? start() : stop(); }).observe(gallery);
@@ -121,12 +138,31 @@ collectionPanels.forEach(panel => {
     pos = viewport.scrollLeft; last = performance.now();
     frame = requestAnimationFrame(tick);
   };
+  if (looping) {
+    const toggle = document.createElement('button');
+    toggle.type = 'button'; toggle.className = 'motion-toggle'; toggle.setAttribute('aria-pressed', 'false');
+    toggle.setAttribute('aria-label', 'Karussell anhalten'); toggle.innerHTML = '<span aria-hidden="true">❚❚</span>';
+    toggle.addEventListener('click', () => {
+      stopped = !stopped; clearTimeout(resume);
+      stopped ? (pause(), panel.classList.add('is-stopped')) : (panel.classList.remove('is-stopped'), held = false, play());
+      toggle.setAttribute('aria-pressed', String(stopped));
+      toggle.setAttribute('aria-label', stopped ? 'Karussell fortsetzen' : 'Karussell anhalten');
+      toggle.innerHTML = stopped ? '<span aria-hidden="true">▶</span>' : '<span aria-hidden="true">❚❚</span>';
+    });
+    panel.querySelector('.collection-navigation').prepend(toggle);
+    panel._syncToggle = () => {
+      toggle.setAttribute('aria-pressed', String(stopped));
+      toggle.setAttribute('aria-label', stopped ? 'Karussell fortsetzen' : 'Karussell anhalten');
+      toggle.innerHTML = stopped ? '<span aria-hidden="true">▶</span>' : '<span aria-hidden="true">❚❚</span>';
+    };
+  }
   const holdFor = ms => { held = true; pause(); clearTimeout(resume); resume = setTimeout(() => { held = false; wrap(); play(); }, ms); };
   // Maus über einer Karte: anhalten (Karte färbt sich per CSS); weg ohne Klick: weiter. Klick: dauerhaft anhalten, Karte bleibt markiert.
   viewport.addEventListener('pointerover', event => { if (event.pointerType === 'mouse' && event.target.closest('.collection-track > article')) { hovering = true; pause(); } });
   viewport.addEventListener('pointerleave', event => { if (event.pointerType === 'mouse') { hovering = false; play(); } });
   track.addEventListener('click', event => {
     stopped = true; clearTimeout(resume); pause(); panel.classList.add('is-stopped');
+    if (panel._syncToggle) panel._syncToggle();
     const card = event.target.closest('.collection-track > article');
     track.querySelectorAll('.is-selected').forEach(c => c.classList.remove('is-selected'));
     if (card) card.classList.add('is-selected');
@@ -211,7 +247,7 @@ if (heroStage && !reduceMotion) {
   heroStage.classList.add('is-opening');
   const wide = window.matchMedia('(min-width: 761px)');
   scrollStories.push(vh => {
-    const span = wide.matches ? vh * 0.6 : vh * 0.8;
+    const span = wide.matches ? vh * (document.body.classList.contains('page-home') ? 0.6 : 0.35) : vh * 0.8;
     heroStage.style.setProperty('--hp', clamp(window.scrollY / span, 0, 1).toFixed(3));
   });
 }
@@ -223,4 +259,31 @@ if (scrollStories.length) {
   window.addEventListener('scroll', queue, { passive: true });
   window.addEventListener('resize', queue);
   run();
+}
+
+// Abschnittsleiste: markiert den Abschnitt, in dem man sich gerade befindet; auf dem Handy rückt der Eintrag ins Bild.
+const sectionNav = document.querySelector('.section-nav');
+if (sectionNav) {
+  const links = [...sectionNav.querySelectorAll('a[href^="#"]')];
+  const pairs = links.map(link => [link, document.getElementById(link.getAttribute('href').slice(1))]).filter(([, t]) => t);
+  let currentLink = null, queued = false;
+  const mark = link => {
+    if (link === currentLink) return;
+    currentLink = link;
+    links.forEach(l => l === link ? l.setAttribute('aria-current', 'true') : l.removeAttribute('aria-current'));
+    if (link && sectionNav.scrollWidth > sectionNav.clientWidth) {
+      sectionNav.scrollTo({ left: link.offsetLeft - 24, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+  };
+  // Aktiv ist der letzte Abschnitt, dessen Anfang das obere Drittel erreicht hat; am Seitenende der letzte.
+  const update = () => {
+    queued = false;
+    const line = window.innerHeight * 0.35;
+    let active = null;
+    pairs.forEach(([link, target]) => { if (target.getBoundingClientRect().top <= line) active = link; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) active = pairs[pairs.length - 1][0];
+    mark(active);
+  };
+  window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
 }
