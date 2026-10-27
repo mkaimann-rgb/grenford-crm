@@ -921,3 +921,11 @@ body{background:var(--paper)}
  .memo-timeline li:nth-last-child(2):after{right:calc(-100% + 52px)}
  .method .memo-timeline li:nth-last-child(2):after{right:calc(-100% + 56px)}
  .memo-timeline li:last-child p{margin-left:auto;max-width:220px}}
+/* Zeitstrahl Desktop: fünf gleich breite Spalten, Kreis mittig über dem Text, gleiche Abstände; Linie nur zwischen den Kreisen */
+@media(min-width:761px){
+ .method ol.memo-timeline,ol.memo-timeline{grid-template-columns:repeat(5,minmax(0,1fr))}
+ .memo-timeline li,.method .memo-timeline li,.memo-timeline li:last-child,.method .memo-timeline li:last-child{text-align:center;justify-items:center;padding:0 12px}
+ .memo-timeline li>span,.method .memo-timeline li>span,.memo-timeline li:last-child>span,.method .memo-timeline li:last-child>span{justify-self:center}
+ .memo-timeline li:last-child p{margin:0 auto;max-width:none}
+ .memo-timeline li:not(:last-child):after,.memo-timeline li:nth-last-child(2):after{left:calc(50% + 30px);right:calc(-50% + 30px)}
+ .method .memo-timeline li:not(:last-child):after,.method .memo-timeline li:nth-last-child(2):after{left:calc(50% + 32px);right:calc(-50% + 32px)}}
