@@ -33,6 +33,16 @@ def logo():
     return f'<a class="brand" href="{page("home")}" aria-label="GRENFORD Startseite"><img src="{asset("grenford-logo-256.webp")}" alt="" width="256" height="256"></a>'
 
 
+# Logo in der Kopfzeile je Seite: Bereichsseiten zeigen ihr Bereichslogo, alle übrigen das Markenlogo „Boutique Real Estate Advisory“.
+HEADER_LOGO = {'investment': ('investment', 786, 392), 'property': ('property', 785, 391), 'projects': ('projects', 785, 391)}
+
+
+def header_logo(active):
+    name, w, h = HEADER_LOGO.get(active, ('boutique', 900, 390))
+    return (f'<a class="brand brand-header brand--{name}" href="{page("home")}" aria-label="GRENFORD Startseite">'
+            f'<img src="{asset(f"logo-{name}.webp")}" alt="" width="{w}" height="{h}"></a>')
+
+
 def request(intent, label, kind='button'):
     return f'<button class="{kind}" type="button" data-enquire="{intent}">{label}<span aria-hidden="true">↗</span></button>'
 
@@ -83,7 +93,7 @@ def header(active):
     current = ' aria-current="page"'
     items = ''.join(f'<div class="nav-item"><a href="{page(k)}"{current if active == k else ""}>{d["label"]}</a>{mega(k)}</div>' for k, d in D.items())
     items += mega_grenford(active)
-    return ('<header class="site-header">' + logo() +
+    return ('<header class="site-header">' + header_logo(active) +
             '<button class="menu" type="button" aria-controls="mainnav" aria-expanded="false">Menü <span aria-hidden="true">＋</span></button>'
             f'<nav id="mainnav" aria-label="Hauptnavigation">{items}<a class="nav-contact" href="#kontakt">Kontakt <span aria-hidden="true">↗</span></a></nav></header>')
 

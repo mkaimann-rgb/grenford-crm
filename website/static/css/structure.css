@@ -529,3 +529,13 @@
 .contact .ux-map{border:0;padding:0;max-width:none}
 .contact .ux-map:before{display:none}
 @media(max-width:600px){.contact-card .ux-form-grid{grid-template-columns:1fr}}
+
+/* Kopfzeilen-Logo je Seite (Masken aus den GRENFORD-Logos, Farbe über currentColor) */
+.site-header .brand-header{width:194px;height:84px}
+.site-header .brand-header.brand--investment,.site-header .brand-header.brand--property,.site-header .brand-header.brand--projects{width:168px}
+.site-header .brand-header:before{mask-size:contain;-webkit-mask-size:contain;mask-position:left center;-webkit-mask-position:left center}
+.site-header .brand--boutique:before{mask-image:url('/assets/logo-boutique.webp');-webkit-mask-image:url('/assets/logo-boutique.webp')}
+.site-header .brand--investment:before{mask-image:url('/assets/logo-investment.webp');-webkit-mask-image:url('/assets/logo-investment.webp')}
+.site-header .brand--property:before{mask-image:url('/assets/logo-property.webp');-webkit-mask-image:url('/assets/logo-property.webp')}
+.site-header .brand--projects:before{mask-image:url('/assets/logo-projects.webp');-webkit-mask-image:url('/assets/logo-projects.webp')}
+@media(max-width:760px){.site-header .brand-header{width:150px;height:66px}.site-header .brand-header.brand--investment,.site-header .brand-header.brand--property,.site-header .brand-header.brand--projects{width:130px}}
