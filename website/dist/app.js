@@ -55,44 +55,75 @@ document.querySelectorAll('[data-cover]').forEach(gallery => {
 });
 
 // Collection-Karussell (Startseite, Investment, Property: identisches Verhalten)
-const COLLECTION_INTERVAL = 5000;
+// Gleitet langsam und durchgehend nach links, als Endlosschleife (die Karten sind dafür einmal unsichtbar für Screenreader dupliziert).
+// Ein Klick auf eine Karte hält es dauerhaft an; die Pfeile bleiben nutzbar. Pausiert bei Wischen, Tastaturfokus,
+// außerhalb des Sichtbereichs und im Hintergrund-Tab. Bei reduzierter Bewegung kein automatischer Lauf und keine Duplikate.
+const COLLECTION_SPEED = 28;  // Pixel pro Sekunde
 const collectionTabs = [...document.querySelectorAll('[data-collection-tab]')], collectionPanels = [...document.querySelectorAll('[data-collection-panel]')], carouselUpdates = [];
 collectionPanels.forEach(panel => {
   const viewport = panel.querySelector('.collection-viewport'), track = panel.querySelector('.collection-track'), cards = [...track.children];
   const previous = panel.querySelector('[data-prev]'), next = panel.querySelector('[data-next]'), counter = panel.querySelector('[data-counter]');
+  const looping = !reduceMotion && cards.length > 1;
+  if (looping) cards.forEach(card => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    clone.querySelectorAll('a, button, [tabindex]').forEach(el => el.setAttribute('tabindex', '-1'));
+    track.appendChild(clone);
+  });
   const gap = () => parseFloat(getComputedStyle(track).gap) || 0;
   const step = () => cards[0].getBoundingClientRect().width + gap();
+  const loopWidth = () => cards.length * step();
+  const wrap = () => {  // unsichtbarer Sprung zwischen Original und Duplikat
+    if (!looping) return;
+    const w = loopWidth();
+    if (viewport.scrollLeft >= w) viewport.scrollLeft -= w;
+  };
   function update() {
     if (panel.hidden) return;
     const max = viewport.scrollWidth - viewport.clientWidth, per = Math.max(1, Math.floor((viewport.clientWidth + gap() + 2) / step()));
-    let index = Math.round(viewport.scrollLeft / step());
-    if (viewport.scrollLeft >= max - 3) index = Math.max(0, cards.length - per);
-    previous.disabled = viewport.scrollLeft <= 3; next.disabled = viewport.scrollLeft >= max - 3;
-    const text = (index + 1) + (per > 1 ? '–' + Math.min(cards.length, index + per) : '') + ' / ' + cards.length;
-    if (counter.textContent !== text) counter.textContent = text;  // Live-Region nur bei echter Änderung
+    let index = Math.round(viewport.scrollLeft / step()) % cards.length;
+    if (!looping && viewport.scrollLeft >= max - 3) index = Math.max(0, cards.length - per);
+    previous.disabled = !looping && viewport.scrollLeft <= 3; next.disabled = !looping && viewport.scrollLeft >= max - 3;
+    const last = (index + per - 1) % cards.length + 1;
+    const text = (index + 1) + (per > 1 ? (last > index + 1 ? '–' : ', ') + last : '') + ' / ' + cards.length;
+    if (counter.textContent !== text) counter.textContent = text;
   }
   let settle;
-  const scheduleUpdate = () => { clearTimeout(settle); settle = setTimeout(update, 120); };  // erst nach dem Scrollen ansagen
-  const move = sign => viewport.scrollBy({ left: sign * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
+  const scheduleUpdate = () => { clearTimeout(settle); settle = setTimeout(() => { if (!frame) wrap(); update(); }, 150); };
+  const move = sign => {
+    if (looping && sign < 0 && viewport.scrollLeft < step() - 3) viewport.scrollLeft += loopWidth();
+    const target = Math.round(viewport.scrollLeft / step()) + sign;
+    viewport.scrollTo({ left: target * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
+  };
 
-  // Automatischer Lauf: alle COLLECTION_INTERVAL ms eine Karte weiter, am Ende zurück zum Anfang.
-  // Ein Klick auf eine Karte hält das Karussell dauerhaft an; die Pfeile bleiben nutzbar.
-  // Pausiert außerdem bei Tastaturfokus im Karussell, außerhalb des Sichtbereichs und im Hintergrund-Tab.
-  let auto = null, stopped = reduceMotion, visible = false, focused = false;
-  const advance = () => {
-    const max = viewport.scrollWidth - viewport.clientWidth;
-    if (viewport.scrollLeft >= max - 3) viewport.scrollTo({ left: 0, behavior: 'smooth' });
-    else move(1);
+  let frame = null, last = 0, pos = 0, stopped = !looping, visible = false, focused = false, held = false, resume;
+  const tick = now => {
+    pos += Math.min(now - last, 100) / 1000 * COLLECTION_SPEED; last = now;
+    const w = loopWidth();
+    if (pos >= w) pos -= w;
+    viewport.scrollLeft = pos;
+    frame = requestAnimationFrame(tick);
   };
-  const pause = () => { clearInterval(auto); auto = null; };
+  const pause = () => {
+    if (frame) cancelAnimationFrame(frame);
+    frame = null;
+    viewport.classList.remove('is-gliding');
+    counter.setAttribute('aria-live', 'polite');
+  };
   const play = () => {
-    if (!auto && !stopped && !panel.hidden && visible && !focused && !document.hidden) auto = setInterval(advance, COLLECTION_INTERVAL);
+    if (frame || stopped || held || panel.hidden || !visible || focused || document.hidden) return;
+    viewport.classList.add('is-gliding');           // Einrasten aus, solange es gleitet
+    counter.setAttribute('aria-live', 'off');       // keine Dauer-Ansagen während des Gleitens
+    pos = viewport.scrollLeft; last = performance.now();
+    frame = requestAnimationFrame(tick);
   };
-  const restart = () => { pause(); play(); };
-  track.addEventListener('click', () => { stopped = true; pause(); panel.classList.add('is-stopped'); });
-  previous.addEventListener('click', () => { move(-1); restart(); });
-  next.addEventListener('click', () => { move(1); restart(); });
-  viewport.addEventListener('touchstart', restart, { passive: true });  // nach eigenem Wischen neu takten
+  const holdFor = ms => { held = true; pause(); clearTimeout(resume); resume = setTimeout(() => { held = false; wrap(); play(); }, ms); };
+  track.addEventListener('click', () => { stopped = true; clearTimeout(resume); pause(); panel.classList.add('is-stopped'); });
+  previous.addEventListener('click', () => { holdFor(4000); move(-1); });
+  next.addEventListener('click', () => { holdFor(4000); move(1); });
+  viewport.addEventListener('touchstart', () => { held = true; clearTimeout(resume); pause(); }, { passive: true });
+  viewport.addEventListener('touchend', () => holdFor(4000), { passive: true });
+  viewport.addEventListener('wheel', () => holdFor(4000), { passive: true });
   viewport.addEventListener('focusin', () => { focused = true; pause(); });
   viewport.addEventListener('focusout', event => { if (!viewport.contains(event.relatedTarget)) { focused = false; play(); } });
   document.addEventListener('visibilitychange', () => document.hidden ? pause() : play());
@@ -103,7 +134,7 @@ collectionPanels.forEach(panel => {
   viewport.addEventListener('scroll', scheduleUpdate, { passive: true });
   viewport.addEventListener('keydown', event => {
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1); }
-    if (event.key === 'Home' || event.key === 'End') { event.preventDefault(); viewport.scrollTo({ left: event.key === 'Home' ? 0 : viewport.scrollWidth, behavior: reduceMotion ? 'auto' : 'smooth' }); }
+    if (event.key === 'Home' || event.key === 'End') { event.preventDefault(); viewport.scrollTo({ left: event.key === 'Home' ? 0 : (looping ? (cards.length - 1) * step() : viewport.scrollWidth), behavior: reduceMotion ? 'auto' : 'smooth' }); }
   });
   window.addEventListener('resize', scheduleUpdate);
   carouselUpdates.push(() => { update(); panel.hidden ? pause() : play(); });

@@ -68,3 +68,4 @@ img[data-missing]{object-fit:contain;background:var(--ivory)}
  .immersive-hero .cover-gallery:after{background:linear-gradient(90deg,#151611a6,#15161173),linear-gradient(0deg,#151611e6,#15161100 60%,#15161159 100%)}
  .immersive-hero h1 em{-webkit-text-stroke:1.5px var(--paper)}
 }
+.collection-viewport.is-gliding{scroll-snap-type:none}
