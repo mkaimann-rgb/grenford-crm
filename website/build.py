@@ -220,7 +220,7 @@ def pathways():
         h += (f'<a class="pathway pathway-{k}" href="{page(k)}"><figure class="pathway-media">'
               + img(pics[k], '', '(max-width:760px) 88vw, 30vw', 'loading="lazy"') + '<span class="pathway-arrow" aria-hidden="true">↗</span></figure>'
               f'<div class="pathway-body"><small>{audience}</small><h3>{d["label"]}</h3><p>{desc}</p>'
-              f'<span class="pathway-result">Am Ende erhalten Sie das <strong>{d["memo"]}</strong></span></div></a>')
+              f'<span class="pathway-result">Am Ende erhalten Sie {"den" if k == "property" else "das"} <strong>{d["memo"]}</strong></span></div></a>')
     return h + '</div></section>'
 
 
