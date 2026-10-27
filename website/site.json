@@ -61,16 +61,11 @@
    "title": "Property | GRENFORD – Immobilie verkaufen oder kaufen in Berlin",
    "description": "Wohnungen, Häuser und kleine Gewerbeeinheiten persönlich positioniert, verständlich präsentiert und passend vermarktet. Für private Eigentümer und Käufer.",
    "gallery": [
-    "hero-property-1.webp",
-    "hero-property-2.webp",
-    "hero-property-3.webp",
-    "hero-property-4.webp",
-    "hero-property-5.webp"
-   ],
-   "previewGallery": [
-    "wohnraum-visualisierung.webp",
-    "hero-inv-altbau.webp",
-    "ferienhaus-usedom.webp"
+    "hero-prop-reetdach.webp",
+    "hero-prop-doppelhaus.webp",
+    "hero-prop-altbauwohnung.webp",
+    "hero-prop-ladenlokal.webp",
+    "hero-prop-einfamilienhaus.webp"
    ]
   },
   "projects": {
