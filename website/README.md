@@ -51,7 +51,7 @@ Geprüft mit dem Originalquelltext (`build.py`, `ux_refinement.py`, `collection.
 
 ## Akzentfarbe (Vergleich in der Vorschau)
 
-Alle Orange-Töne hängen an Variablen in `static/css/refinements.css` bzw. `immersive.css` (`--orange`, `--orange-hover`, `--orange-ink`, `--orange-light`, `--orange-tint`, `--rust`, dazu `--on-orange` für Schrift auf oranger Fläche). Nur der Vorschau-Build (`--preview`) enthält einen Farbumschalter (`static/preview/palette.css`, `palette.js`) mit „Aktuell“, „Kupfer“, „Terrakotta“ und „Cognac“; `dist/` bleibt davon unberührt. Ist eine Farbe gewählt, deren Werte aus `palette.css` in `:root` von `refinements.css` übernehmen und den Umschalter wieder entfernen.
+Alle Orange-Töne hängen an Variablen in `static/css/refinements.css` bzw. `immersive.css` (`--orange`, `--orange-hover`, `--orange-ink`, `--orange-light`, `--orange-tint`, `--rust`, dazu `--on-orange` für Schrift auf oranger Fläche). Nur der Vorschau-Build (`--preview`) enthält einen Farbumschalter (`static/preview/palette.css`, `palette.js`) mit „Aktuell“, „Cognac“, „Terrakotta“, „Tannengrün“, „Nachtblau“, „Bordeaux“ und „Bronze“; `dist/` bleibt davon unberührt. Ist eine Farbe gewählt, deren Werte aus `palette.css` in `:root` von `refinements.css` übernehmen und den Umschalter wieder entfernen.
 
 ## Was gegenüber dem bisherigen Stand geändert wurde
 
