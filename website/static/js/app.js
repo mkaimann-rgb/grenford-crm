@@ -154,5 +154,51 @@ document.querySelectorAll('.comparison-stage input[type="range"]').forEach(range
     range.parentElement.style.setProperty('--split', range.value + '%');
     range.setAttribute('aria-valuetext', range.value + ' Prozent Bestand, ' + (100 - range.value) + ' Prozent Zielbild');
   };
-  range.addEventListener('input', update); update();
+  range.addEventListener('input', event => { if (event.isTrusted) range.dataset.manual = '1'; update(); });
+  update();
 });
+
+// ---------------------------------------------------------------- Erzählen beim Scrollen (ruhig, nur scrollgesteuert)
+// Vorher-Nachher: Beim Scrollen wandelt sich der Raum vom Bestand zum Zielbild. Sobald jemand den Regler selbst bewegt,
+// übernimmt er. Zeitstrahl: Die Linie füllt sich von 01 bis 05, erreichte Schritte werden hervorgehoben.
+// Ohne JavaScript oder mit „Bewegung reduzieren“ bleibt alles im Ausgangszustand vollständig sichtbar.
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+const scrollStories = [];
+
+if (!reduceMotion) {
+  document.querySelectorAll('.comparison-stage input[type="range"]').forEach(range => {
+    const stage = range.parentElement;
+    scrollStories.push(vh => {
+      if (range.dataset.manual) return;
+      const r = stage.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      const p = clamp((vh * 0.85 - r.top) / (vh * 0.55), 0, 1);
+      range.value = Math.round(90 - p * 80);  // 90 % Bestand → 10 % Bestand
+      range.dispatchEvent(new Event('input'));
+    });
+  });
+
+  document.querySelectorAll('.memo-timeline').forEach(line => {
+    const steps = [...line.children];
+    if (steps.length < 2) return;
+    line.classList.add('is-staged');
+    scrollStories.push(vh => {
+      const r = line.getBoundingClientRect();
+      const p = clamp((vh * 0.82 - r.top) / Math.max(r.height, vh * 0.35), 0, 1);
+      const pos = p * (steps.length - 1);
+      steps.forEach((step, i) => {
+        step.classList.toggle('is-reached', p > 0 && pos >= i - 0.001);
+        step.style.setProperty('--fill', clamp(pos - i, 0, 1).toFixed(3));
+      });
+    });
+  });
+}
+
+if (scrollStories.length) {
+  let queued = false;
+  const run = () => { queued = false; const vh = window.innerHeight; scrollStories.forEach(story => story(vh)); };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(run); } };
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  run();
+}

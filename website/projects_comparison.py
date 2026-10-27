@@ -29,7 +29,7 @@ def comparisons():
               + '<span class="comparison-tag is-before" aria-hidden="true">Bestand</span><span class="comparison-tag is-after" aria-hidden="true">Zielbild</span>'
               '<span class="comparison-line" aria-hidden="true"><b>↔</b></span>'
               f'<input type="range" min="0" max="100" value="50" id="compare-{slug}" aria-label="Vorher-Nachher-Vergleich: {t}" aria-valuetext="50 Prozent Bestand, 50 Prozent Zielbild"></div>'
-              '<div class="comparison-hint" aria-hidden="true"><span>← BESTAND</span><span>REGLER VERSCHIEBEN</span><span>ZIELBILD →</span></div>'
+              '<div class="comparison-hint" aria-hidden="true"><span>← BESTAND</span><span>SCROLLEN ODER ZIEHEN</span><span>ZIELBILD →</span></div>'
               f'<div class="comparison-details"><div><small>Vorher</small><h4>{E(start)}</h4><p>{E(desc)}</p></div>'
               f'<div><small>Was gemacht wurde</small><h4>{E(scope)}</h4><p>{E(work)}</p></div>'
               f'<div class="comparison-result"><small>Ergebnis nach {E(weeks)}</small><p>{E(result)}</p></div></div></article>')
