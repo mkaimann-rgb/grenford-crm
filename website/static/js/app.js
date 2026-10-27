@@ -100,7 +100,7 @@ collectionPanels.forEach(panel => {
     viewport.scrollTo({ left: target * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
   };
 
-  let frame = null, last = 0, pos = 0, stopped = !looping, visible = false, focused = false, held = false, resume;
+  let frame = null, last = 0, pos = 0, stopped = !looping, visible = false, focused = false, held = false, hovering = false, resume;
   const tick = now => {
     pos += Math.min(now - last, 100) / 1000 * COLLECTION_SPEED; last = now;
     const w = loopWidth();
@@ -115,14 +115,22 @@ collectionPanels.forEach(panel => {
     counter.setAttribute('aria-live', 'polite');
   };
   const play = () => {
-    if (frame || stopped || held || panel.hidden || !visible || focused || document.hidden) return;
+    if (frame || stopped || held || hovering || panel.hidden || !visible || focused || document.hidden) return;
     viewport.classList.add('is-gliding');           // Einrasten aus, solange es gleitet
     counter.setAttribute('aria-live', 'off');       // keine Dauer-Ansagen während des Gleitens
     pos = viewport.scrollLeft; last = performance.now();
     frame = requestAnimationFrame(tick);
   };
   const holdFor = ms => { held = true; pause(); clearTimeout(resume); resume = setTimeout(() => { held = false; wrap(); play(); }, ms); };
-  track.addEventListener('click', () => { stopped = true; clearTimeout(resume); pause(); panel.classList.add('is-stopped'); });
+  // Maus über einer Karte: anhalten (Karte färbt sich per CSS); weg ohne Klick: weiter. Klick: dauerhaft anhalten, Karte bleibt markiert.
+  viewport.addEventListener('pointerover', event => { if (event.pointerType === 'mouse' && event.target.closest('.collection-track > article')) { hovering = true; pause(); } });
+  viewport.addEventListener('pointerleave', event => { if (event.pointerType === 'mouse') { hovering = false; play(); } });
+  track.addEventListener('click', event => {
+    stopped = true; clearTimeout(resume); pause(); panel.classList.add('is-stopped');
+    const card = event.target.closest('.collection-track > article');
+    track.querySelectorAll('.is-selected').forEach(c => c.classList.remove('is-selected'));
+    if (card) card.classList.add('is-selected');
+  });
   previous.addEventListener('click', () => { holdFor(4000); move(-1); });
   next.addEventListener('click', () => { holdFor(4000); move(1); });
   viewport.addEventListener('touchstart', () => { held = true; clearTimeout(resume); pause(); }, { passive: true });
