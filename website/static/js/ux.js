@@ -1,4 +1,4 @@
-// GRENFORD / Formulare: Projektanfrage in sechs Schritten, Kurznachricht, Karte, Kontaktleiste.
+// GRENFORD / Formulare: Projektanfrage in sechs Schritten, Kurznachricht, Karte.
 //
 // Teil 1 (bis zur Formular-Konstante "strategic") ist DOM-frei und wird von tests/transport.mjs geprüft.
 // Übertragung an das GRENFORD-CRM (Google Sheet) über eine Google-Apps-Script-Web-App (crm/website-anfragen.gs).
@@ -314,10 +314,6 @@ document.querySelectorAll('[data-load-map]').forEach(button => button.addEventLi
 
 // ---------------------------------------------------------------- Kontaktleiste
 
-const contactRail = document.querySelector('.ux-contact-rail');
-const contactSection = document.getElementById('kontakt');
-if (contactRail && contactSection && 'IntersectionObserver' in window) {
-  new IntersectionObserver(entries => contactRail.classList.toggle('is-muted', entries[0].isIntersecting), { threshold: 0.05 }).observe(contactSection);
-}
+// Die Leiste (Termin buchen, WhatsApp) bleibt immer sichtbar, auch im Kontaktbereich.
 document.addEventListener('focusin', event => document.body.classList.toggle('form-focused', Boolean(event.target.closest('form'))));
 document.addEventListener('focusout', event => { if (!(event.relatedTarget && event.relatedTarget.closest('form'))) document.body.classList.remove('form-focused'); });

@@ -21,21 +21,9 @@
  "home": {
   "title": "GRENFORD | Investment, Property und Projects mit Marco Kaimann",
   "description": "Immobilienberatung von Marco Kaimann: Off-Market-Transaktionen, Verkauf und Kauf privater Immobilien sowie vergleichbare Bauangebote für Ihre Sanierung. Mit Marco Kaimann.",
-  "gallery": [
-   "hero-muenchen.webp",
-   "hero-frankfurt.webp",
-   "hero-berlin.webp",
-   "hero-koeln.webp",
-   "hero-hamburg.webp"
-  ],
-  "reach": [
-   "München",
-   "Frankfurt",
-   "Berlin",
-   "Köln",
-   "Hamburg"
-  ],
-  "reachNote": "",
+  "gallery": ["hero-hamburg.webp", "hero-berlin.webp", "hero-muenchen.webp", "hero-koeln.webp", "hero-frankfurt.webp"],
+  "reach": [["Nord", "Hamburg"], ["Ost", "Berlin"], ["Süd", "München"], ["West", "Köln"], ["Mitte", "Frankfurt"]],
+  "reachNote": "Deutschlandweit aktiv",
   "reachHint": "reach = Städte in derselben Reihenfolge wie gallery; die gerade gezeigte Stadt wird hervorgehoben (app.js)."
  },
  "pages": {

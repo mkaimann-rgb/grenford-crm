@@ -552,3 +552,17 @@
 /* Drei Bereiche: nebeneinander auf gleicher Höhe, ohne Versatz */
 .pathway:nth-child(n){margin:0}
 .pathway-grid{align-items:stretch}
+
+/* Mitlaufende Leiste rechts: auf allen Seiten immer sichtbar, Termin in der Akzentfarbe, WhatsApp im WhatsApp-Grün */
+.ux-contact-rail,.ux-contact-rail.is-muted,.hero-in-view .ux-contact-rail,.inquiry-in-view .ux-contact-rail,.form-focused .ux-contact-rail{visibility:visible!important;display:flex!important;opacity:1!important}
+.ux-contact-rail{position:fixed;z-index:60;right:14px;top:50%;bottom:auto;transform:translateY(-50%);flex-direction:column;gap:8px}
+.ux-contact-rail a,.ux-contact-rail a:last-child{width:48px;height:48px;border:0;border-radius:50%;box-shadow:0 6px 18px rgba(15,20,30,.22);transition:transform .2s ease}
+.ux-contact-rail a:hover{transform:scale(1.07)}
+.ux-contact-rail .rail-termin{background:var(--orange)!important;color:var(--on-orange)!important}
+.ux-contact-rail .rail-whatsapp{background:#25D366!important;color:#fff!important}
+.ux-contact-rail svg{width:21px;height:21px}
+.ux-contact-rail span{right:58px;top:50%;transform:translateY(-50%);border-radius:2px}
+@media(max-width:760px){.ux-contact-rail{top:auto;bottom:calc(92px + env(safe-area-inset-bottom));right:12px;transform:none}.ux-contact-rail span{display:none}}
+@media(prefers-reduced-motion:reduce){.ux-contact-rail a{transition:none}}
+/* Reichweite im Hero: Himmelsrichtung mit Stadt, daneben „Deutschlandweit aktiv“ */
+.hero-reach-cities small{font-size:inherit;letter-spacing:inherit;opacity:.75}
