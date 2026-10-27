@@ -371,7 +371,8 @@ def fee_band():
 
 
 def home():
-    body = (home_hero() + pathways() + valuation_teaser() + collection() + '<div class="personal-approach">' + founder() + process() + '</div>' + contact())
+    # hero-stage: Bühne für das ruhige Öffnen des Heros beim ersten Scrollen (app.js, nur Startseite)
+    body = ('<div class="hero-stage">' + home_hero() + '</div>' + pathways() + valuation_teaser() + collection() + '<div class="personal-approach">' + founder() + process() + '</div>' + contact())
     return shell('home', SITE['home'], body)
 
 

@@ -194,6 +194,18 @@ if (!reduceMotion) {
   });
 }
 
+// Startseite: Der Hero öffnet sich beim ersten Scrollen. Desktop: Bild bleibt kurz stehen, zoomt leicht heraus und dunkelt ab,
+// die Überschrift tritt zurück, der nächste Block schiebt sich darüber. Handy: nur leichter Zoom und Abdunkeln.
+const heroStage = document.querySelector('.hero-stage');
+if (heroStage && !reduceMotion) {
+  heroStage.classList.add('is-opening');
+  const wide = window.matchMedia('(min-width: 761px)');
+  scrollStories.push(vh => {
+    const span = wide.matches ? vh * 0.6 : vh * 0.8;
+    heroStage.style.setProperty('--hp', clamp(window.scrollY / span, 0, 1).toFixed(3));
+  });
+}
+
 if (scrollStories.length) {
   let queued = false;
   const run = () => { queued = false; const vh = window.innerHeight; scrollStories.forEach(story => story(vh)); };

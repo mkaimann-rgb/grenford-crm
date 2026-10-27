@@ -633,3 +633,14 @@
 .memo-timeline.is-staged li.is-reached>span,.method .memo-timeline.is-staged li.is-reached>span{background:var(--blue);color:var(--paper);box-shadow:inset 0 0 0 1px var(--blue),0 0 0 8px var(--tl-bg)}
 .memo-timeline.is-staged li.is-reached:last-child>span,.method .memo-timeline.is-staged li.is-reached:last-child>span{background:var(--orange);color:var(--on-orange);box-shadow:inset 0 0 0 1px var(--orange),0 0 0 8px var(--tl-bg)}
 .memo-timeline:not(.is-staged) li>span{box-shadow:0 0 0 8px var(--tl-bg)}
+
+/* ---------------------------------------------------------------- Startseite: Hero öffnet sich beim ersten Scrollen (app.js setzt --hp 0…1) */
+.hero-stage{--hp:0}
+.hero-stage.is-opening .cover-gallery{transform:scale(calc(1.08 - .08 * var(--hp)));transform-origin:50% 45%;will-change:transform}
+.hero-stage.is-opening .immersive-hero:after{content:"";position:absolute;inset:0;z-index:-1;background:#11131a;opacity:calc(var(--hp) * .45);pointer-events:none}
+@media(min-width:761px){
+ .hero-stage.is-opening{height:calc(max(100svh,760px) + 60vh)}
+ .hero-stage.is-opening>.immersive-hero{position:sticky;top:0}
+ .hero-stage.is-opening h1{transform:translateY(calc(var(--hp) * -6vh)) scale(calc(1 - .14 * var(--hp)));transform-origin:0 100%;opacity:calc(1 - .45 * var(--hp));will-change:transform}
+ .hero-stage.is-opening .hero-bottom,.hero-stage.is-opening .hero-reach{opacity:calc(1 - .7 * var(--hp))}
+ .hero-stage.is-opening+.pathways{position:relative;z-index:2;margin-top:-45vh;box-shadow:0 -24px 60px rgba(10,12,18,.22)}}
