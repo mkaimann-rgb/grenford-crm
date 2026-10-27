@@ -61,10 +61,25 @@ def mega(k):
             f'<a class="button" href="{page(k)}#bewertung-{wid}">{cta} <span aria-hidden="true">↗</span></a></div></div></div>')
 
 
+def mega_grenford(active):
+    """Menüpunkt GRENFORD mit Großmenü wie die drei Bereiche: Marke, Bewertung, Markt, Kontakt."""
+    links = [('Über GRENFORD', page('ueber-grenford'), ''), ('Immobilie bewerten', page('bewerten'), ''), ('Marktperspektiven', page('markt'), ''),
+             ('Kontakt', '#kontakt', ''), ('STAYNAMIC ↗', 'https://www.staynamic.com/', ' target="_blank" rel="noopener"')]
+    items = ''.join(f'<li><a href="{h}"{x}>{E(t)}</a></li>' for t, h, x in links)
+    on = ' aria-current="page"' if active in ('ueber-grenford', 'bewerten', 'markt') else ''
+    return (f'<div class="nav-item nav-grenford"><a href="{page("ueber-grenford")}"{on}>GRENFORD</a>'
+            '<div class="mega"><div class="mega-inner"><figure>' + img('marco-kaimann.jpg', '', '320px', 'loading="lazy"') + '<figcaption>MARCO KAIMANN / GRÜNDER</figcaption></figure>'
+            f'<div class="mega-links"><span class="eyebrow">Boutique Real Estate Advisory · Berlin</span><strong>GRENFORD</strong><ul>{items}</ul></div>'
+            '<div class="mega-memo"><span class="eyebrow">IHRE BEWERTUNG</span><strong>Wert heute und nach der Sanierung</strong>'
+            '<p>Persönlich eingeschätzt, kostenfrei, Antwort innerhalb von 48 Stunden.</p>'
+            f'<a class="button" href="{page("bewerten")}">Immobilie bewerten <span aria-hidden="true">↗</span></a></div></div></div>'
+            f'<ul class="nav-sub">{items}</ul></div>')
+
+
 def header(active):
     current = ' aria-current="page"'
     items = ''.join(f'<div class="nav-item"><a href="{page(k)}"{current if active == k else ""}>{d["label"]}</a>{mega(k)}</div>' for k, d in D.items())
-    items += ''.join(f'<a class="nav-plain" href="{page(k)}"{current if active == k else ""}>{label}</a>' for k, label in EXTRA.items())
+    items += mega_grenford(active)
     return ('<header class="site-header">' + logo() +
             '<button class="menu" type="button" aria-controls="mainnav" aria-expanded="false">Menü <span aria-hidden="true">＋</span></button>'
             f'<nav id="mainnav" aria-label="Hauptnavigation">{items}<a class="nav-contact" href="#kontakt">Kontakt <span aria-hidden="true">↗</span></a></nav></header>')

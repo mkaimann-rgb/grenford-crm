@@ -67,7 +67,7 @@ Typografie, Hero-Karussell, Collection-Karussell und Gestaltung der bestehenden 
 | `/markt/` | Marktperspektiven: Marktüberblick (Filter Standort, Immobilienart, Zeitraum, Datentyp; Leerzustand ohne Daten), Einordnung, Methodik, Fragen, nächster Schritt. Nur im Footer verlinkt. |
 | `/ueber-grenford/` | Gründer, Haltung (vier Grundsätze), drei Geschäftsfelder, „So entsteht ein Memo“ (5 Schritte), Reichweite, Kontakt |
 
-- **Navigation:** Investment, Property, Projects mit Großmenü (Bild, Sprungziele, Memo und Bewertung als nächster Schritt), dazu „Bewerten“ und „Über GRENFORD“. Auf dem Handy das bisherige einfache Menü.
+- **Navigation:** Investment, Property, Projects und GRENFORD, jeweils mit Großmenü. GRENFORD: Gründerporträt, Über GRENFORD, Immobilie bewerten, Marktperspektiven, Kontakt, STAYNAMIC und die Bewertung als nächster Schritt. Auf dem Handy das einfache Menü, unter GRENFORD mit Unterpunkten.
 - **Bewertung und Suchprofile** (`valuation.py`, `wizard.js`): fünf Varianten, je Bereich angepasst. Kontaktdaten erst im letzten Schritt, Pflichtangaben je Schritt geprüft, Zweige (z. B. Hausart nur bei „Haus“, Miete nur bei „Vermietet“). Übertragung über `sendRequest()` an das CRM-Sheet (`subject` investment / property / renovation, Nachricht zeilenweise „Feld: Wert“). Sprungziele `#bewertung-property-search` usw. öffnen den passenden Reiter, auch von anderen Seiten.
 - **Bewertungsleiste:** dezent am unteren Rand nach dem Hero, nicht über Formularen und dem Footer, schließbar (gilt für die Sitzung). Nicht auf `/bewerten/`.
 - **Footer:** Linkspalten je Bereich und GRENFORD, Adresse und Kontakt.
