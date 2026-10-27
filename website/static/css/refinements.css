@@ -51,11 +51,11 @@ noscript p{font-size:12px;margin-top:12px}
 /* Ersatzbild, solange ein Originalbild in static/assets fehlt (siehe README). */
 img[data-missing]{object-fit:contain;background:var(--ivory)}
 
-/* Hero: automatische Überblendung (app.js, alle 7 s) mit langsamem, leichtem Zoom je Bild. */
+/* Hero: automatische Überblendung (app.js, alle 6 s) mit leichtem Zoom je Bild. */
 .immersive-hero .cover-gallery>img{opacity:0;transition:opacity 2s ease;will-change:opacity,transform}
-.immersive-hero .cover-gallery>img.is-active{opacity:1;z-index:1;animation:hero-zoom 10s linear forwards}
+.immersive-hero .cover-gallery>img.is-active{opacity:1;z-index:1;animation:hero-zoom 7s ease-out forwards}
 .immersive-hero .cover-gallery>img.is-leaving{opacity:0;z-index:0}
-@keyframes hero-zoom{from{transform:scale(1)}to{transform:scale(1.06)}}
+@keyframes hero-zoom{from{transform:scale(1)}to{transform:scale(1.07)}}
 @media(prefers-reduced-motion:reduce){.immersive-hero .cover-gallery>img.is-active{animation:none}}
 
 /* Hero: Lesbarkeit auf hellen und unruhigen Motiven.

@@ -26,9 +26,9 @@ if (menu && nav) {
   });
 }
 
-// Hero-Galerie: wechselt automatisch alle 7 Sekunden in einer Schleife, jedes Bild mit leichtem Zoom (CSS).
+// Hero-Galerie: wechselt automatisch alle 6 Sekunden in einer Schleife, jedes Bild mit leichtem Zoom (CSS).
 // Pausiert, solange der Hero nicht sichtbar oder der Tab im Hintergrund ist. Bei reduzierter Bewegung bleibt das erste Bild stehen.
-const HERO_INTERVAL = 7000;
+const HERO_INTERVAL = 6000;
 document.querySelectorAll('[data-cover]').forEach(gallery => {
   const images = [...gallery.querySelectorAll('[data-cover-image]')];
   if (images.length < 2 || reduceMotion) return;

@@ -86,6 +86,6 @@ Geprüft mit dem Originalquelltext (`build.py`, `ux_refinement.py`, `collection.
 - Schriften als WOFF2 (19 statt 47 KB je Schnitt) mit TTF-Fallback und `preload`; ungenutzter SemiBold-Schnitt entfernt.
 - Ein Stylesheet (`site.css`) statt drei.
 - `srcset` mit 800/1280 px-Varianten (Pillow), `width`/`height` an allen Bildern.
-- Hero-Galerie wechselt automatisch alle 7 Sekunden in einer Schleife (Überblendung mit langsamem, leichtem Zoom, ohne Bedienelemente). Pausiert, wenn der Hero nicht sichtbar oder der Tab im Hintergrund ist; bei „reduzierte Bewegung“ bleibt das erste Bild stehen. Intervall: `HERO_INTERVAL` in `static/js/app.js`.
+- Hero-Galerie wechselt automatisch alle 6 Sekunden in einer Schleife (Überblendung mit leichtem Zoom, ohne Bedienelemente). Pausiert, wenn der Hero nicht sichtbar oder der Tab im Hintergrund ist; bei „reduzierte Bewegung“ bleibt das erste Bild stehen. Intervall: `HERO_INTERVAL` in `static/js/app.js`.
 
 **Bewusst nicht geändert:** Gestaltung, Texte und Bildsprache der Seiten, die Graustufen-Darstellung der Hero-Bilder und die drei Basis-Stylesheets (alle Korrekturen stehen in `refinements.css`).

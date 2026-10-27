@@ -93,5 +93,5 @@
   }
  },
  "galleryNote": "gallery = Originaldateien in static/assets. Fehlt eine Datei, wird sie übersprungen; fehlen alle, nutzt der Build previewGallery.",
- "heroRotationNote": "Hero-Galerien wechseln automatisch alle 7 Sekunden mit langsamem, leichtem Zoom (static/js/app.js, HERO_INTERVAL)."
+ "heroRotationNote": "Hero-Galerien wechseln automatisch alle 6 Sekunden mit leichtem Zoom (static/js/app.js, HERO_INTERVAL)."
 }
