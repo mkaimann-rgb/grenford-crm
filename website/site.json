@@ -43,7 +43,16 @@
    "hero-berlin.webp",
    "hero-koeln.webp",
    "hero-hamburg.webp"
-  ]
+  ],
+  "reach": [
+   "München",
+   "Frankfurt",
+   "Berlin",
+   "Köln",
+   "Hamburg"
+  ],
+  "reachNote": "Mandate bundesweit. Beratung aus Berlin.",
+  "reachHint": "reach = Städte in derselben Reihenfolge wie gallery; die gerade gezeigte Stadt wird hervorgehoben (app.js)."
  },
  "pages": {
   "investment": {

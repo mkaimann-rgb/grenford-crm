@@ -97,12 +97,22 @@ def gallery(pics):
     return h + '<figcaption><span>GRENFORD / RÄUME MIT PERSPEKTIVE</span></figcaption></figure>'
 
 
+def reach_line():
+    """Reichweite unter dem Hero: Städte der Skyline-Galerie, die gezeigte Stadt hebt app.js hervor."""
+    cities = SITE['home'].get('reach') or []
+    if not cities:
+        return ''
+    names = ''.join(f'<span data-reach-city{" class=\"is-active\"" if i == 0 else ""}>{E(c)}</span>' for i, c in enumerate(cities))
+    return f'<p class="hero-reach"><span class="hero-reach-cities">{names}</span><span>{E(SITE["home"]["reachNote"])}</span></p>'
+
+
 def home_hero():
     routes = ''.join(f'<a href="{page(k)}"><span>{i:02d}</span>{d["label"]}<b aria-hidden="true">↗</b></a>' for i, (k, d) in enumerate(D.items(), 1))
     return ('<section class="immersive-hero">' + gallery(hero_images(SITE['home'])) +
             '<div class="hero-content"><div class="hero-kicker"><span>BOUTIQUE REAL ESTATE ADVISORY</span><span class="hero-coordinate" aria-hidden="true">G / 01</span></div>'
             '<h1>Der nächste<br><em>Schritt zählt.</em></h1><div class="hero-bottom"><p>Immobilienentscheidungen brauchen einen klaren Blick. Und jemanden, der ihn mit Ihnen teilt.</p>'
-            '<a class="hero-link" href="#perspektiven"><span>Ihre Perspektive wählen</span><span class="arrow-circle" aria-hidden="true">↓</span></a></div></div>'
+            '<a class="hero-link" href="#perspektiven"><span>Ihre Perspektive wählen</span><span class="arrow-circle" aria-hidden="true">↓</span></a></div>'
+            + reach_line() + '</div>'
             f'<nav class="hero-routes" aria-label="Direkt zu Ihrem Bereich">{routes}</nav></section>')
 
 
@@ -173,7 +183,7 @@ def subpage(k):
              + ('<a href="#collection">Immobilien</a>' if k != 'projects' else '<a href="#beforeafter">Vorher & Nachher</a>')
              + f'<a href="#memo">{d["memo"]}</a><a href="#ablauf">Der Ablauf</a><a href="#fragen">Fragen</a><a href="#anfrage">Projektanfrage</a></nav>')
     intros = {
-        'investment': ('Sie haben ein Asset.<br>Oder ein <em>Anlageziel.</em>', 'Ich unterstütze Eigentümer bei der Positionierung und Ansprache passender Investoren – und suche im Kundenauftrag nach passenden Anlageimmobilien.',
+        'investment': ('Sie haben ein Asset.<br>Oder ein <em>Anlageziel.</em>', 'GRENFORD unterstützt Eigentümer bei der Positionierung und Ansprache passender Investoren – und sucht im Kundenauftrag nach passenden Anlageimmobilien.',
                        'Verkaufen', 'Objekt und Ziele einordnen, diskret positionieren und passende Investoren ansprechen. Off-Market oder als Verkauf eines Gesamtobjekts beziehungsweise Portfolios.',
                        'Gezielt suchen', 'Assetklasse, Region, Budget und Ihre Anforderungen bilden die Grundlage Ihres Suchprofils.'),
         'property': ('Eine Immobilie.<br>Viele persönliche <em>Gründe.</em>', 'Ob Verkauf oder Kauf: Ihre Situation gibt die Richtung vor. Eine verständliche Präsentation und persönliche Begleitung schaffen Orientierung.',

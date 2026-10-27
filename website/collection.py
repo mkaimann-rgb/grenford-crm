@@ -10,7 +10,7 @@ E = html.escape
 # Überschriften je Ansicht: Startseite zeigt beide Collections, Unterseiten nur ihre eigene.
 HEADINGS = {
     None: ('AUSGEWÄHLTE IMMOBILIEN & MANDATE', 'Räume mit<br><em>Perspektive.</em>',
-           'Ausgewählte Investmentmandate und private Immobilien. Entdecken Sie passende Möglichkeiten – und sprechen Sie mit mir über die Details.'),
+           'Ausgewählte Investmentmandate und private Immobilien. Entdecken Sie passende Möglichkeiten. Die Details erhalten Sie im persönlichen Gespräch.'),
     'investment': ('GRENFORD INVESTMENT COLLECTION', 'Ausgewählte Mandate.',
                    'Investmentthemen und ausgewählte Mandate. Weitere Informationen erhalten Sie im persönlichen Gespräch.'),
     'property': ('GRENFORD PROPERTY COLLECTION', 'Ausgewählte Immobilien.',

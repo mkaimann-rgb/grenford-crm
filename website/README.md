@@ -49,9 +49,12 @@ Geprüft mit dem Originalquelltext (`build.py`, `ux_refinement.py`, `collection.
 - `style.css`, `art.css`, `immersive.css`, `app.js`, `ux.js` und `assets/` erzeugt der Original-Build **nicht**. Sie existierten nur in `dist/` und blieben beim Neugenerieren nur deshalb erhalten, weil `build.py` sie nicht anfasst. In diesem Projekt liegen sie jetzt als Quelle in `static/`.
 - `checks/transport.mjs` besteht gegen das veröffentlichte `ux.js`.
 
-## Akzentfarbe (Vergleich in der Vorschau)
+## Akzentfarbe und Markenstimme
 
-Alle Orange-Töne hängen an Variablen in `static/css/refinements.css` bzw. `immersive.css` (`--orange`, `--orange-hover`, `--orange-ink`, `--orange-light`, `--orange-tint`, `--rust`, dazu `--on-orange` für Schrift auf oranger Fläche). Nur der Vorschau-Build (`--preview`) enthält einen Farbumschalter (`static/preview/palette.css`, `palette.js`) mit „Aktuell“, „Cognac“, „Terrakotta“, „Tannengrün“, „Nachtblau“, „Bordeaux“ und „Bronze“; `dist/` bleibt davon unberührt. Ist eine Farbe gewählt, deren Werte aus `palette.css` in `:root` von `refinements.css` übernehmen und den Umschalter wieder entfernen.
+- **Akzentfarbe Patina `#2e6b62`** (oxidiertes Kupfer, wie auf Berliner Kuppeln). Ersetzt das bisherige Orange `#ff7900`, das im Farbton identisch mit einem Wettbewerber war. Werte am Ende von `static/css/refinements.css`; die Variablennamen `--orange*` sind aus Kompatibilitätsgründen geblieben. Schrift auf der Farbfläche ist weiß (`--on-orange`).
+- Nur im Vorschau-Build (`--preview`): Farbumschalter (`static/preview/palette.css`, `palette.js`) mit Patina, Bauhaus-Rot, Kobalt, Ocker, Cognac, Terrakotta und dem bisherigen Orange. `dist/` bleibt davon unberührt.
+- **Markenstimme:** Leistungen und Abläufe sprechen als „GRENFORD“, Gründerporträt und Bestätigungsmeldungen bleiben in der Ich-Form von Marco Kaimann.
+- **Reichweite im Startseiten-Hero:** `site.json` → `home.reach` (Städte in Reihenfolge der Galerie) und `home.reachNote`. Die gerade gezeigte Stadt wird hervorgehoben (`static/js/app.js`).
 
 ## Was gegenüber dem bisherigen Stand geändert wurde
 

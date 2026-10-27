@@ -94,7 +94,7 @@ def inquiry(k):
             '<label>Zeitrahmen (optional)<select name="Zeitrahmen" id="inquiry-timing"><option value="">Noch offen</option><option>So bald wie möglich</option><option>In 3–6 Monaten</option><option>In 6–12 Monaten</option><option>Langfristige Planung</option></select></label>'
             '<label>Fläche / Größe (optional)<input name="Groesse" id="inquiry-size" maxlength="100" placeholder="z. B. 120 m² oder 25 Zimmer"></label>'
             '<label class="ux-full">Was sollten wir noch wissen? (optional)<textarea name="Beschreibung" id="inquiry-notes" rows="3" maxlength="2000" placeholder="Ihre Ziele, Wünsche oder eine konkrete Immobilie"></textarea></label></div></fieldset>'
-            '<fieldset data-inquiry-step="5" hidden><legend tabindex="-1">05 / Ihre Kontaktdaten</legend><p>Damit ich persönlich auf Ihre Anfrage zurückkommen kann.</p>'
+            '<fieldset data-inquiry-step="5" hidden><legend tabindex="-1">05 / Ihre Kontaktdaten</legend><p>Damit GRENFORD persönlich auf Ihre Anfrage zurückkommen kann.</p>'
             '<div class="ux-form-grid"><label>Vollständiger Name *<input name="Name" id="inquiry-name" required autocomplete="name" maxlength="150"></label>'
             '<label>E-Mail-Adresse *<input name="Email" id="inquiry-email" type="email" required autocomplete="email" maxlength="200"></label>'
             '<label>Telefonnummer (optional)<input name="Telefon" id="inquiry-phone" type="tel" autocomplete="tel" maxlength="60"></label>'
@@ -138,7 +138,7 @@ def contact(subject=None, collapsible=False):
         form_block = f'<div class="ux-contact-form"><h3>Eine kurze Nachricht.</h3>{form}</div>'
     mail = E(SITE['email'])
     return ('<section class="ux-contact" id="kontakt"><div class="ux-contact-head"><span class="eyebrow">KONTAKT / GRENFORD BERLIN</span>'
-            '<h2>Nehmen Sie<br><span>Kontakt auf.</span></h2><p>Besprechen Sie Ihre Immobilie, Ihre Transaktion oder Ihr Sanierungsvorhaben mit mir.</p>'
+            '<h2>Nehmen Sie<br><span>Kontakt auf.</span></h2><p>Besprechen Sie Ihre Immobilie, Ihre Transaktion oder Ihr Sanierungsvorhaben persönlich mit GRENFORD.</p>'
             '<strong>Strategisch. Diskret. Professionell.</strong></div><div class="ux-contact-grid"><div class="ux-contact-direct"><h3>Ihr direkter Draht.</h3>'
             f'<a class="ux-email" href="mailto:{mail}">{mail} <span aria-hidden="true">↗</span></a><a href="tel:{E(SITE["phoneHref"])}">{E(SITE["phone"])}</a>'
             f'<p><span class="eyebrow">BÜRO</span><br>{E(a["street"])}<br>{E(a["zip"])} {E(a["city"])}</p>'

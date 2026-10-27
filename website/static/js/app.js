@@ -33,12 +33,14 @@ document.querySelectorAll('[data-cover]').forEach(gallery => {
   const images = [...gallery.querySelectorAll('[data-cover-image]')];
   if (images.length < 2 || reduceMotion) return;
   let current = 0, timer = null, visible = true;
+  const cities = [...(gallery.closest('section')?.querySelectorAll('[data-reach-city]') || [])];  // Reichweiten-Zeile der Startseite
   const show = index => {
     const previous = images[current];
     previous.style.transform = getComputedStyle(previous).transform;  // aktuelle Zoomstufe festhalten
     previous.classList.replace('is-active', 'is-leaving');            // blendet aus, ohne zu springen
     setTimeout(() => { previous.classList.remove('is-leaving'); previous.style.transform = ''; }, 2100);
     current = index;
+    cities.forEach((city, i) => city.classList.toggle('is-active', i === current));
     const image = images[current];
     image.classList.remove('is-active'); void image.offsetWidth;  // Zoom-Animation neu starten
     image.classList.add('is-active');

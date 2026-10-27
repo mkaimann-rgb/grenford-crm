@@ -4,7 +4,7 @@
    Formular-Zustände. Das Design der drei Basis-Stylesheets bleibt unverändert. */
 
 /* Kontrast: Akzent für kleinen Text auf Papier (5,4:1) und Elfenbein (4,8:1). */
-:root{--orange-ink:#a84700}
+:root{--orange-ink:#a84700}  /* wird unten durch die Patina-Palette ersetzt */
 .mandate-region,.sub-label,.service-story article>span,.collection-toolbar button[aria-pressed=true],.project-gateway summary small,.inquiry-intro>.eyebrow,.comparison-result>.eyebrow,.perspective-panel>div>.eyebrow,.practice-index span{color:var(--orange-ink)}
 .collection-toolbar button[aria-pressed=true]{border-color:var(--orange-ink)}
 
@@ -90,3 +90,19 @@ img[data-missing]{object-fit:contain;background:var(--ivory)}
 .mandate-card:focus-within *,.property-card:focus-within .property-card-body *{color:var(--on-orange)}
 .mandate-card:focus-within .mandate-region,.property-card:focus-within .property-card-body>.eyebrow{color:var(--on-orange-accent)}
 .mandate-card:focus-within .mandate-status i{background:var(--on-orange-accent)}
+
+/* Akzentfarbe Patina (ersetzt das Orange, Abstand zu Wettbewerbern): oxidiertes Kupfer wie auf Berliner Kuppeln und Dächern.
+   Passt zum dunkelblauen Logo und zu Projects (Bestand, Sanierung). Schrift auf der Farbfläche ist weiß. */
+:root{--orange:#2e6b62;--orange-hover:#3a7a70;--orange-ink:#2e6b62;--orange-light:#8fc7bb;--rust:#2e6b62;--orange-tint:#dcebe7;
+      --on-orange:#fff;--on-orange-accent:#fff;--on-orange-line:rgba(255,255,255,.4)}
+.site-footer .brand{color:var(--orange-light)}
+.memo-paper--investment{--edition-mark:var(--orange-light)}
+
+/* Reichweite unter dem Startseiten-Hero: gezeigte Stadt hervorgehoben */
+.hero-reach{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px;margin:22px 0 0;max-width:1280px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,245,238,.62)}
+.hero-reach-cities{display:flex;flex-wrap:wrap;gap:4px 14px}
+.hero-reach-cities span{transition:color .8s ease}
+.hero-reach-cities span+span:before{content:'·';margin-right:14px;color:rgba(245,245,238,.4)}
+.hero-reach-cities .is-active{color:var(--paper)}
+.hero-reach>span:last-child{color:var(--orange-light)}
+@media(max-width:760px){.hero-reach{margin-top:16px;font-size:10px;gap:4px 14px}.hero-reach-cities{gap:2px 10px}.hero-reach-cities span+span:before{margin-right:10px}}
