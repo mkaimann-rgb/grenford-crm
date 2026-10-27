@@ -602,3 +602,4 @@
 .pathway{display:flex;flex-direction:column}
 .pathway-body{flex:1;display:flex;flex-direction:column}
 .pathway-body p{flex:1}
+.pathway-result strong{display:block;margin-top:2px}
