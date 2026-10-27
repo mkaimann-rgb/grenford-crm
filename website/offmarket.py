@@ -43,48 +43,57 @@ def _property_card(d):
             'Property Brief anfragen <span aria-hidden="true">↗</span></button></div></article>')
 
 
-def _om_block(with_filter=True):
-    objs = DATA['objekte']
-    kinds = sorted({o['assetklasse'] for o in objs})
-    chips = ('<div class="om-filter" role="group" aria-label="Nach Assetklasse filtern">'
-             '<button type="button" aria-pressed="true" data-om-filter="">Alle</button>'
-             + ''.join(f'<button type="button" aria-pressed="false" data-om-filter="{E(k, quote=True)}">{E(k)}</button>' for k in kinds) + '</div>') if with_filter else ''
-    sample = ('<p class="om-sample">Konzeptansicht mit erfundenen Musterobjekten. Die echten Steckbriefe folgen nach Freigabe.</p>'
-              if DATA.get('muster') else '')
-    return (sample + chips + '<div class="om-grid">' + ''.join(_card(o) for o in objs) + '</div>'
-            '<ol class="om-steps"><li><b>Anfrage</b> Unterlagen zum Objekt anfordern</li><li><b>Prüfung</b> Ich melde mich innerhalb von 48 Stunden</li>'
-            '<li><b>Vertraulichkeit</b> Sie unterzeichnen die Vereinbarung</li><li><b>Unterlagen</b> Exposé, Mieterliste, Kennzahlen</li></ol>')
+STEPS = ('<ol class="om-steps"><li><b>Anfrage</b> Unterlagen zum Objekt anfordern</li><li><b>Prüfung</b> Ich melde mich innerhalb von 48 Stunden</li>'
+         '<li><b>Vertraulichkeit</b> Sie unterzeichnen die Vereinbarung</li><li><b>Unterlagen</b> Exposé, Mieterliste, Kennzahlen</li></ol>')
 
 
-def _property_block():
-    return ('<div class="om-grid">' + ''.join(_property_card(d) for d in PROPS) + '</div>'
-            '<p class="om-note">Visualisierungen. Grundriss, Unterlagen und Besichtigungstermin erhalten Sie mit dem Property Brief.</p>')
+def _carousel(key, label, context, cards, hidden=False):
+    """Gleitendes Karussell (app.js: Geschwindigkeit, Pfeile, Zähler) mit den Karten im Steckbrief-Stil."""
+    return (f'<div class="collection-panel om-carousel" data-collection-panel="{key}"{" hidden" if hidden else ""}><div class="collection-context"><span>{E(context)}</span>'
+            f'<div class="collection-navigation"><button type="button" data-prev aria-label="Vorherige {label}-Objekte">←</button>'
+            f'<span data-counter aria-live="polite">1 / {len(cards)}</span>'
+            f'<button type="button" data-next aria-label="Nächste {label}-Objekte">→</button></div></div>'
+            f'<div class="collection-viewport" tabindex="0" role="region" aria-roledescription="Karussell" aria-label="{label}-Angebote">'
+            '<div class="collection-track">' + ''.join(cards) + '</div></div></div>')
+
+
+def _sample():
+    return ('<p class="om-sample">Konzeptansicht mit erfundenen Musterobjekten. Die echten Steckbriefe folgen nach Freigabe.</p>'
+            if DATA.get('muster') else '')
+
+
+def _om_carousel(hidden=False):
+    return _carousel('investment', 'Investment', 'Off-Market · anonym', [_card(o) for o in DATA['objekte']], hidden)
+
+
+def _property_carousel(hidden=False):
+    return _carousel('property', 'Property', 'Öffentlich · mit Preis', [_property_card(d) for d in PROPS], hidden)
 
 
 def offmarket():
-    """Investment-Seite: Off-Market-Steckbriefe."""
+    """Investment-Seite: Off-Market-Steckbriefe im Karussell."""
     return ('<section class="offmarket" id="collection"><div class="section-head"><h2>Off-Market-Angebote</h2>'
             '<p>Diese Objekte werden nicht öffentlich angeboten. Hier sehen Sie Region, Assetklasse und Größenordnung. '
             'Kennzahlen, Adresse und Unterlagen erhalten geprüfte Investoren nach einer Vertraulichkeitsvereinbarung.</p></div>'
-            + _om_block() + dialog() + '</section>')
+            + _sample() + _om_carousel() + STEPS + dialog() + '</section>')
 
 
 def properties():
-    """Property-Seite: öffentliche Angebote im selben Kartenstil."""
+    """Property-Seite: öffentliche Angebote im selben Stil, im Karussell."""
     return ('<section class="offmarket" id="collection"><div class="section-head"><h2>Wohnungen und Häuser im Angebot</h2>'
-            '<p>Zu jeder Immobilie gibt es einen Property Brief mit Grundriss, Zahlen und Lage.</p></div>' + _property_block() + '</section>')
+            '<p>Zu jeder Immobilie gibt es einen Property Brief mit Grundriss, Zahlen und Lage.</p></div>' + _property_carousel()
+            + '<p class="om-note">Visualisierungen. Grundriss, Unterlagen und Besichtigungstermin erhalten Sie mit dem Property Brief.</p></section>')
 
 
 def home_offers():
-    """Startseite: Umschalter Investment (Off-Market) und Property (öffentlich), Karten wie auf den Bereichsseiten."""
-    tabs = ('<div class="om-tabs" role="group" aria-label="Angebote auswählen">'
-            f'<button type="button" aria-pressed="true" data-om-tab="investment">Investment <span>{len(DATA["objekte"])}</span></button>'
-            f'<button type="button" aria-pressed="false" data-om-tab="property">Property <span>{len(PROPS)}</span></button></div>')
+    """Startseite: Umschalter Investment (Off-Market) und Property (öffentlich), beide als gleitendes Karussell."""
+    tabs = ('<div class="collection-toolbar"><div role="group" aria-label="Angebote auswählen">'
+            f'<button type="button" data-collection-tab="investment" aria-pressed="true">Investment <span>{len(DATA["objekte"])}</span></button>'
+            f'<button type="button" data-collection-tab="property" aria-pressed="false">Property <span>{len(PROPS)}</span></button></div></div>')
     return ('<section class="offmarket" id="collection"><div class="section-head"><h2>Aktuelle Mandate und Immobilien</h2>'
             '<p>Investment-Objekte zeigen wir nur anonym; Unterlagen gibt es nach einer Vertraulichkeitsvereinbarung. '
-            'Wohnungen und Häuser sind öffentlich mit Preis und Eckdaten zu sehen.</p></div>' + tabs
-            + '<div data-om-panel="investment">' + _om_block() + '</div>'
-            + '<div data-om-panel="property" hidden>' + _property_block() + '</div>' + dialog() + '</section>')
+            'Wohnungen und Häuser sind öffentlich mit Preis und Eckdaten zu sehen.</p></div>' + tabs + _sample()
+            + _om_carousel() + _property_carousel(hidden=True) + dialog() + '</section>')
 
 
 def dialog():

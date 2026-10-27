@@ -779,3 +779,12 @@
  .om-filter::-webkit-scrollbar{display:none}
  .om-filter button{flex:none}}
 .skip:focus:not(:focus-visible){top:-100px}
+/* Steckbrief-Karten im gleitenden Karussell */
+.om-carousel{margin-top:26px}
+.om-carousel .collection-context{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:12px;color:var(--muted)}
+.om-carousel .collection-track{gap:24px;padding:6px 0 26px}
+.om-carousel .collection-track>.om-card{flex:0 0 calc((100% - 48px) / 3);min-width:0}
+.om-carousel .om-card:hover{transform:none}
+.offmarket .collection-toolbar{margin-top:30px}
+@media(max-width:1100px){.om-carousel .collection-track>.om-card{flex-basis:calc((100% - 24px) / 2)}}
+@media(max-width:760px){.om-carousel .collection-track{gap:14px}.om-carousel .collection-track>.om-card{flex-basis:84%}}
