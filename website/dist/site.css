@@ -908,3 +908,16 @@ body{background:var(--paper)}
 @media(max-width:760px){
  .memo-timeline li:not(:last-child):after,.method .memo-timeline li:not(:last-child):after{top:52px;bottom:-22px;left:22px;right:auto;width:1px;height:auto}
  .method .memo-timeline li:not(:last-child):after{top:56px;left:24px}}
+/* Zeitlinie über die volle Blockbreite: 01 bündig links, 05 bündig rechts */
+@media(min-width:761px){
+ .method ol.memo-timeline,ol.memo-timeline{grid-template-columns:repeat(4,minmax(0,1fr)) minmax(150px,200px)}
+ .method .memo-timeline li:last-child,.memo-timeline li:last-child{padding-right:0}}
+/* Abschnittsleiste unter dem Hero: über die volle Blockbreite verteilt */
+@media(min-width:900px){.section-nav{justify-content:space-between;gap:20px;font-size:12px}}
+@media(min-width:761px){
+ .method ol.memo-timeline,ol.memo-timeline{grid-template-columns:repeat(5,minmax(0,1fr))}
+ .memo-timeline li:last-child,.method .memo-timeline li:last-child{text-align:right;justify-items:end}
+ .memo-timeline li:last-child>span,.method .memo-timeline li:last-child>span{justify-self:end}
+ .memo-timeline li:nth-last-child(2):after{right:calc(-100% + 52px)}
+ .method .memo-timeline li:nth-last-child(2):after{right:calc(-100% + 56px)}
+ .memo-timeline li:last-child p{margin-left:auto;max-width:220px}}
