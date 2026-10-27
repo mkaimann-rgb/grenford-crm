@@ -90,6 +90,28 @@
     "projects-badsanierung.webp",
     "dachgeschoss-after.webp"
    ]
+  },
+  "bewerten": {
+   "title": "Immobilie bewerten | GRENFORD – Wert heute und nach der Sanierung",
+   "description": "Was ist Ihre Immobilie wert, heute und nach einer Sanierung? Persönliche Einschätzung für Wohnungen, Häuser, Mehrfamilienhäuser und Anlageobjekte. Kostenfrei und unverbindlich.",
+   "gallery": [
+    "hero-prop-altbauwohnung.webp",
+    "hero-inv-eckhaus.webp",
+    "dachgeschoss-after.webp",
+    "hero-prop-einfamilienhaus.webp",
+    "hero-inv-wohnhaus.webp"
+   ]
+  },
+  "ueber-grenford": {
+   "title": "Über GRENFORD | Marco Kaimann – Boutique Real Estate Advisory Berlin",
+   "description": "GRENFORD ist die Boutique-Immobilienberatung von Marco Kaimann aus Berlin: Investment, Property und Projects mit einer Haltung – Immobilienentscheidungen strukturieren.",
+   "gallery": [
+    "hero-berlin.webp",
+    "hero-hamburg.webp",
+    "hero-muenchen.webp",
+    "hero-frankfurt.webp",
+    "hero-koeln.webp"
+   ]
   }
  },
  "galleryNote": "gallery = Originaldateien in static/assets. Fehlt eine Datei, wird sie übersprungen; fehlen alle, nutzt der Build previewGallery.",

@@ -54,7 +54,15 @@ for page in pages:
     assert m.forms_without_post == 0, (page, 'Formular ohne method="post"')
     for ref in m.files:
         assert resolve(page, ref).is_file(), (page, 'Datei fehlt', ref)
-    assert s.count('data-inquiry-step=') == 6
+    if 'id="strategic-form"' in s:
+        assert s.count('data-inquiry-step=') == 6
+    else:
+        assert page.parent.name in ('bewerten', 'ueber-grenford'), (page, 'Projektanfrage fehlt')
+    # Bewertung/Suchprofile: jedes Formular hat Schritte, einen Kontaktschritt mit Einwilligung und eine Ergebniszone
+    for wid in re.findall(r'<form class="wizard" id="wz-([a-z-]+)"', s):
+        block = s.split(f'id="wz-{wid}"', 1)[1].split('</form>', 1)[0]
+        assert block.count('data-step') >= 3 and 'data-contact' in block and 'name="Einwilligung"' in block, (page, 'Formular unvollständig', wid)
+        assert f'id="wz-{wid}-result"' in block and 'name="gf_hp"' in block, (page, 'Ergebnis/Honeypot fehlt', wid)
     assert 'id="ablauf"' in s
     assert '<meta name="description"' in s and '<link rel="canonical"' in s
     print(page.relative_to(ROOT), 'verified')

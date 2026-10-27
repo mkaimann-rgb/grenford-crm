@@ -7,7 +7,7 @@ Rekonstruiert aus dem dist-Stand (Original-Quelle lag nicht vor) und ergänzt um
 - Social-Icons nur für hinterlegte Profile
 """
 import html
-from paths import SITE
+from paths import SITE, page
 
 E = html.escape
 LABELS = {'investment': 'Investment', 'property': 'Property', 'projects': 'Projects'}
@@ -116,11 +116,13 @@ def socials():
     return f'<div class="social-links" role="group" aria-label="GRENFORD online">{out}</div>'
 
 
-def contact(subject=None, collapsible=False):
+def contact(subject=None, collapsible=False, hint='inquiry'):
     a = SITE['address']
     subjects = [('general', 'Allgemeine Anfrage'), ('investment', 'Investment Memo anfragen'), ('property', 'Property Brief anfragen'), ('renovation', 'Renovation Memo anfragen')]
     options = ''.join(f'<option value="{v}"{" selected" if v == subject else ""}>{label}</option>' for v, label in subjects)
-    form = (f'<p>Für ein konkretes Vorhaben können Sie auch die <a href="#anfrage">Projektanfrage in sechs Schritten</a> nutzen.</p>'
+    hints = {'inquiry': '<p>Für ein konkretes Vorhaben können Sie auch die <a href="#anfrage">Projektanfrage in sechs Schritten</a> nutzen.</p>',
+             'valuation': f'<p>Für eine Einschätzung Ihrer Immobilie nutzen Sie die <a href="{page("bewerten")}#bewertung">Bewertung in wenigen Schritten</a>.</p>'}
+    form = (hints[hint] +
             f'<form {_form_attrs("quick-contact")} aria-label="Kurze Nachricht"><div class="ux-form-grid">'
             '<label>Vollständiger Name *<input name="name" id="contact-name" required autocomplete="name" maxlength="150"></label>'
             '<label>E-Mail-Adresse *<input name="email" id="contact-email" type="email" required autocomplete="email" maxlength="200"></label>'

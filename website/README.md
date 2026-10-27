@@ -21,11 +21,12 @@ node tests/transport.mjs      # Formular-Übertragung (ohne echten Request)
 | `collection.py` | Investment-Mandate und Property-Karten |
 | `projects_comparison.py` | Vorher-Nachher-Vergleiche |
 | `ux_refinement.py` | Projektanfrage (6 Schritte), Kontaktbereich, Kontaktleiste |
+| `valuation.py` | Bewertung und Suchprofile: fünf mehrstufige Formulare (Kacheln, Regler), Symbole |
 | `site.json` | Kontaktdaten, Formular-Endpunkt, Seitentitel/-beschreibungen, Hero-Galerien, Social-Profile |
 | `content.json` | Texte der drei Bereiche (Fokus, Memo-Kapitel, Ablauf, FAQ) |
 | `investment-collection.json`, `property-collection.json` | Objekte |
-| `static/css/` | `style.css` → `art.css` → `immersive.css` → `refinements.css`, beim Build zu `site.css` zusammengefasst |
-| `static/js/` | `app.js` (Menü, Galerie, Karussell, Regler), `ux.js` (Formulare) |
+| `static/css/` | `style.css` → `art.css` → `immersive.css` → `refinements.css` → `structure.css`, beim Build zu `site.css` zusammengefasst |
+| `static/js/` | `app.js` (Menü, Galerie, Karussell, Regler), `ux.js` (Formulare, Übertragung), `wizard.js` (Bewertung/Suchprofile, Reiter, Bewertungsleiste, Ablauf-Slides) |
 | `static/assets/` | Bilder, Schriften (`fonts/`), `placeholder.svg` |
 | `tests/` | `markup.py`, `transport.mjs` |
 
@@ -48,10 +49,29 @@ Geprüft mit dem Originalquelltext (`build.py`, `ux_refinement.py`, `collection.
 - `style.css`, `art.css`, `immersive.css`, `app.js`, `ux.js` und `assets/` erzeugt der Original-Build **nicht**. Sie existierten nur in `dist/` und blieben beim Neugenerieren nur deshalb erhalten, weil `build.py` sie nicht anfasst. In diesem Projekt liegen sie jetzt als Quelle in `static/`.
 - `checks/transport.mjs` besteht gegen das veröffentlichte `ux.js`.
 
+## Seitenstruktur (Konzept „Struktur der Großen, Marke GRENFORD“)
+
+Typografie, Hero-Karussell, Collection-Karussell und Gestaltung der bestehenden Seite bleiben; ergänzt wurde die Struktur, mit der große Maklerhäuser Anfragen erzeugen, in der GRENFORD-Sprache und mit Marco Kaimann als Gesicht der Marke.
+
+| Seite | Inhalt |
+|---|---|
+| Startseite | Hero (Skylines, Reichweite), drei Bereiche, **Bewertungs-Teaser** (Kacheln → `/bewerten/`), Collection, Gründer, Ablauf, Projektanfrage |
+| Investment (B2B) | Hero-Aktionen „Asset einordnen“ / „Ankaufsprofil hinterlegen“, Abschnitt `#bewertung` mit zwei Reitern |
+| Property (B2C) | „Immobilie bewerten“ / „Suchprofil hinterlegen“, Abschnitt `#bewertung` mit zwei Reitern |
+| Projects | „Wert nach Sanierung ermitteln“, Abschnitt **Vergütung** (`#verguetung`: für Eigentümer kostenfrei, vergütet durch das beauftragte Bauunternehmen) |
+| `/bewerten/` | Bewertung mit Reitern Property / Projects / Investment, drei Wege (digital, Video, vor Ort), Ablauf 01/04, Fragen, Kontakt |
+| `/ueber-grenford/` | Gründer, Haltung (vier Grundsätze), drei Geschäftsfelder, „So entsteht ein Memo“ (5 Schritte), Reichweite, Kontakt |
+
+- **Navigation:** Investment, Property, Projects mit Großmenü (Bild, Sprungziele, Memo und Bewertung als nächster Schritt), dazu „Bewerten“ und „Über GRENFORD“. Auf dem Handy das bisherige einfache Menü.
+- **Bewertung und Suchprofile** (`valuation.py`, `wizard.js`): fünf Varianten, je Bereich angepasst. Kontaktdaten erst im letzten Schritt, Pflichtangaben je Schritt geprüft, Zweige (z. B. Hausart nur bei „Haus“, Miete nur bei „Vermietet“). Übertragung über das bestehende HubSpot-Formular (`subject` investment / property / renovation, Nachricht zeilenweise „Feld: Wert“). Sprungziele `#bewertung-property-search` usw. öffnen den passenden Reiter, auch von anderen Seiten.
+- **Bewertungsleiste:** dezent am unteren Rand nach dem Hero, nicht über Formularen und dem Footer, schließbar (gilt für die Sitzung). Nicht auf `/bewerten/`.
+- **Footer:** Linkspalten je Bereich und GRENFORD, Adresse und Kontakt.
+- **Offen:** Antwortzeit für die Ersteinschätzung (z. B. „innerhalb von 48 Stunden“) bewusst nicht zugesagt, bis sie feststeht. Newsletter „Das GRENFORD Memo“ noch nicht eingebaut (braucht Double-Opt-in in HubSpot).
+
 ## Akzentfarbe und Markenstimme
 
 - **Akzentfarbe Patina `#2e6b62`** (oxidiertes Kupfer, wie auf Berliner Kuppeln). Ersetzt das bisherige Orange `#ff7900`, das im Farbton identisch mit einem Wettbewerber war. Werte am Ende von `static/css/refinements.css`; die Variablennamen `--orange*` sind aus Kompatibilitätsgründen geblieben. Schrift auf der Farbfläche ist weiß (`--on-orange`).
-- Nur im Vorschau-Build (`--preview`): Farbumschalter (`static/preview/palette.css`, `palette.js`) mit Patina, Bauhaus-Rot, Kobalt, Ocker, Cognac, Terrakotta und dem bisherigen Orange. `dist/` bleibt davon unberührt.
+- Nur im Vorschau-Build (`--preview`): Farbumschalter (`static/preview/palette.css`, `palette.js`) mit Patina, Memo-CI (Navy/Bronze wie in den PDFs), Bauhaus-Rot, Kobalt, Ocker, Cognac, Terrakotta und dem bisherigen Orange. `dist/` bleibt davon unberührt.
 - **Markenstimme:** Leistungen und Abläufe sprechen als „GRENFORD“, Gründerporträt und Bestätigungsmeldungen bleiben in der Ich-Form von Marco Kaimann.
 - **Reichweite im Startseiten-Hero:** `site.json` → `home.reach` (Städte in Reihenfolge der Galerie) und `home.reachNote`. Die gerade gezeigte Stadt wird hervorgehoben (`static/js/app.js`).
 
