@@ -17,23 +17,7 @@
  "vatId": "DE362752159",
  "imprint": "https://www.grenford.de/imprint",
  "privacy": "https://www.grenford.de/privacy",
- "socials": [
-  {
-   "label": "Marco Kaimann auf LinkedIn",
-   "icon": "linkedin",
-   "url": "https://de.linkedin.com/in/marco-kaimann-0512b884"
-  },
-  {
-   "label": "GRENFORD auf Instagram",
-   "icon": "instagram",
-   "url": null
-  },
-  {
-   "label": "GRENFORD auf Facebook",
-   "icon": "facebook",
-   "url": null
-  }
- ],
+ "socials": [{"label": "Marco Kaimann auf LinkedIn", "icon": "linkedin", "url": "https://de.linkedin.com/in/marco-kaimann-0512b884"}, {"label": "GRENFORD auf Instagram", "icon": "instagram", "url": null}, {"label": "GRENFORD auf Facebook", "icon": "facebook", "url": null}, {"label": "GRENFORD auf TikTok", "icon": "tiktok", "url": null}],
  "home": {
   "title": "GRENFORD | Investment, Property und Projects mit Marco Kaimann",
   "description": "Immobilienberatung von Marco Kaimann: Off-Market-Transaktionen, Verkauf und Kauf privater Immobilien sowie vergleichbare Bauangebote für Ihre Sanierung. Mit Marco Kaimann.",

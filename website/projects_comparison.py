@@ -17,7 +17,7 @@ SIZES = '(max-width:760px) 88vw, 45vw'
 
 def comparisons():
     h = ('<section class="project-comparisons" id="beforeafter"><div class="comparison-heading"><div>'
-         '<span class="eyebrow">Vorher und nachher</span><h2>Derselbe Raum, vor und nach der Sanierung</h2></div>'
+         '<h2>Derselbe Raum, vor und nach der Sanierung</h2></div>'
          '<p>Schieben Sie den Regler zur Seite. Links der Bestand, rechts das Zielbild.</p></div>'
          '<div class="comparison-grid">')
     for i, (title, meta, slug, start, desc, scope, work, weeks, result) in enumerate(PROJECTS, 1):

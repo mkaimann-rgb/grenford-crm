@@ -30,6 +30,7 @@ TOPICS = {
 ICONS = {
     'linkedin': '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.1M11 17v-7h3v1c2-2 4-1 4 2v4"/>',
     'instagram': '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
+    'tiktok': '<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.2 4.4 5 4.6"/>',
     'facebook': '<path d="M14 21v-8h3l.5-4H14V7c0-1 1-2 2-2h2V2h-3c-3 0-5 2-5 5v2H7v4h3v8"/>',
     'whatsapp': '<path d="M4 17a9 9 0 1 1 3 3l-5 2z"/><path d="M8 7c0 5 4 9 9 9l1-3-3-1-1 1c-2-1-3-2-3-3l1-1-2-3z"/>',
     'calendar': '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 10h18M7 14h3M14 14h3"/>',
@@ -110,8 +111,9 @@ def inquiry(k):
 
 
 def socials():
-    links = [s for s in SITE['socials'] if s.get('url')]
-    out = ''.join(f'<a href="{E(s["url"])}" target="_blank" rel="noopener noreferrer" aria-label="{E(s["label"])}">{icon(s["icon"])}</a>' for s in links)
+    # Profile ohne hinterlegte Adresse (site.json → socials.url) erscheinen als Icon ohne Link, bis die Adresse eingetragen ist.
+    out = ''.join(f'<a href="{E(s["url"])}" target="_blank" rel="noopener noreferrer" aria-label="{E(s["label"])}">{icon(s["icon"])}</a>' if s.get('url')
+                  else f'<span class="social-pending" title="{E(s["label"])}: Profil folgt">{icon(s["icon"])}</span>' for s in SITE['socials'])
     out += f'<a href="{E(SITE["whatsapp"])}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">{icon("whatsapp")}</a>'
     return f'<div class="social-links" role="group" aria-label="GRENFORD online">{out}</div>'
 
@@ -164,7 +166,7 @@ def contact(subject=None, company=False, lead=None):
                 f'<a href="{E(SITE["calendar"])}" target="_blank" rel="noopener noreferrer"><small>Termin</small><strong>30 Minuten, online buchbar</strong><span aria-hidden="true">↗</span></a>')
     return ('<section class="ux-contact contact" id="kontakt"><div class="contact-person">'
             '<div class="contact-head">' + img('marco-kaimann.jpg', 'Marco Kaimann', '120px', 'loading="lazy" class="contact-portrait"') +
-            '<div><span class="eyebrow">Kontakt</span><h2>So erreichen Sie mich</h2></div></div>'
+            '<div><h2>So erreichen Sie mich</h2></div></div>'
             f'<p class="contact-lead">{E(lead)}</p><nav class="contact-channels" aria-label="Direkte Kontaktwege">{channels}</nav>'
             '<figure class="ux-map">' + MAP_SKETCH + f'<figcaption><span>{E(a["street"])}, {E(a["zip"])} {E(a["city"])} · Nähe Adenauerplatz (U7)</span>'
             f'<a class="small" href="https://www.google.com/maps/search/?api=1&amp;query={SITE["mapsQuery"]}" target="_blank" rel="noopener noreferrer">In Google Maps öffnen ↗</a>'

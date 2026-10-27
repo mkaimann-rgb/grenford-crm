@@ -539,3 +539,13 @@
 .site-header .brand--property:before{mask-image:url('/assets/logo-property.webp');-webkit-mask-image:url('/assets/logo-property.webp')}
 .site-header .brand--projects:before{mask-image:url('/assets/logo-projects.webp');-webkit-mask-image:url('/assets/logo-projects.webp')}
 @media(max-width:760px){.site-header .brand-header{width:150px;height:66px}.site-header .brand-header.brand--investment,.site-header .brand-header.brand--property,.site-header .brand-header.brand--projects{width:130px}}
+/* Social-Icons: Profile ohne Adresse sehen gleich aus, sind aber (noch) nicht anklickbar */
+.social-links .social-pending{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;color:var(--blue)}
+.social-links .social-pending svg,.social-links a svg{width:18px;height:18px}
+.social-links a:hover{color:var(--orange-ink);border-color:var(--orange-ink)}
+/* Kopfzeilen-Logos: alle gleich breit, damit der GRENFORD-Schriftzug überall gleich groß ist */
+.site-header .brand-header,.site-header .brand-header.brand--investment,.site-header .brand-header.brand--property,.site-header .brand-header.brand--projects{width:176px;height:84px}
+@media(max-width:760px){.site-header .brand-header,.site-header .brand-header.brand--investment,.site-header .brand-header.brand--property,.site-header .brand-header.brand--projects{width:138px;height:66px}}
+.site-header .brand-header,.site-header .brand-header.brand--investment,.site-header .brand-header.brand--property,.site-header .brand-header.brand--projects{height:90px}
+.site-header .brand-header:before{mask-position:left top;-webkit-mask-position:left top;top:3px}
+@media(max-width:760px){.site-header .brand-header,.site-header .brand-header.brand--investment,.site-header .brand-header.brand--property,.site-header .brand-header.brand--projects{height:70px}}

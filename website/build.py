@@ -69,8 +69,8 @@ def mega(k):
     links = ''.join(f'<li><a href="{page(k)}{h}">{E(t)}</a></li>' for t, h in MEGA[k])
     cta, wid = VALUE_CTA[k]
     return (f'<div class="mega"><div class="mega-inner"><figure>' + img(pic, '', '320px', 'loading="lazy"') + f'<figcaption>GRENFORD / {d["label"].upper()}</figcaption></figure>'
-            f'<div class="mega-links"><span class="eyebrow">{E(AUDIENCE[k])}</span><strong>{d["label"]}</strong><ul>{links}</ul></div>'
-            f'<div class="mega-memo"><span class="eyebrow">Am Ende erhalten Sie</span><strong>{E(d["memo"])}</strong><p>{E(d["memoLead"])}</p>'
+            f'<div class="mega-links"><strong>{d["label"]}</strong><ul>{links}</ul></div>'
+            f'<div class="mega-memo"><strong>{E(d["memo"])}</strong><p>{E(d["memoLead"])}</p>'
             f'<a class="button" href="{page(k)}#bewertung-{wid}">{cta} <span aria-hidden="true">↗</span></a></div></div></div>')
 
 
@@ -82,8 +82,8 @@ def mega_grenford(active):
     on = ' aria-current="page"' if active in ('ueber-grenford', 'bewerten', 'markt') else ''
     return (f'<div class="nav-item nav-grenford"><a href="{page("ueber-grenford")}"{on}>GRENFORD</a>'
             '<div class="mega"><div class="mega-inner"><figure>' + img('marco-kaimann.jpg', '', '320px', 'loading="lazy"') + '<figcaption>MARCO KAIMANN / GRÜNDER</figcaption></figure>'
-            f'<div class="mega-links"><span class="eyebrow">Marco Kaimann, Gründer</span><strong>GRENFORD</strong><ul>{items}</ul></div>'
-            '<div class="mega-memo"><span class="eyebrow">Bewertung</span><strong>Wert heute und nach der Sanierung</strong>'
+            f'<div class="mega-links"><strong>GRENFORD</strong><ul>{items}</ul></div>'
+            '<div class="mega-memo"><strong>Wert heute und nach der Sanierung</strong>'
             '<p>Persönlich eingeschätzt, kostenfrei, Antwort innerhalb von 48 Stunden.</p>'
             f'<a class="button" href="{page("bewerten")}">Immobilie bewerten <span aria-hidden="true">↗</span></a></div></div></div>'
             f'<ul class="nav-sub">{items}</ul></div>')
@@ -244,7 +244,7 @@ def process(k=None):
                                      ('Analysieren', 'Informationen und Unterschiede verständlich machen.'), ('Entscheiden', 'Eine fundierte Richtung und die nächsten Schritte festlegen.'),
                                      ('Begleiten', 'Bis zum Notartermin oder zur Fertigstellung, im vereinbarten Umfang.')]
     items = ''.join(f'<li><span>{i:02d}</span><h3>{E(a)}</h3><p>{E(b)}</p></li>' for i, (a, b) in enumerate(steps, 1))
-    return ('<section class="method" id="ablauf"><div class="section-head"><span class="eyebrow">So arbeitet GRENFORD</span><h2>Der GRENFORD 5-Point Process</h2>'
+    return ('<section class="method" id="ablauf"><div class="section-head"><h2>Der GRENFORD 5-Point Process</h2>'
             f'<p>Jedes Mandat läuft in derselben Reihenfolge ab. Wie viel davon Sie brauchen, entscheiden Sie.</p></div><ol class="memo-timeline">{items}</ol></section>')
 
 
@@ -295,7 +295,7 @@ def subpage(k):
         second += ('<a class="hero-aside-link" href="#bewertung-property-search" data-wz-open="property-search">'
                    'Auf der Suche? Suchprofil hinterlegen <span aria-hidden="true">↓</span></a>')
     body = ('<section class="immersive-hero immersive-sub">' + gallery(hero_images(SITE['pages'][k])) +
-            f'<div class="hero-content"><div class="hero-kicker"><a href="{page("home")}">GRENFORD {d["label"]}</a></div>'
+            f'<div class="hero-content">'
             f'<h1>{titles[k]}</h1><div class="hero-bottom"><p>{d["intro"]}</p><div class="hero-actions">' + primary + second + '</div></div></div></section>')
     body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#leistung">Leistung</a><a href="#bewertung">'
              + {'investment': 'Asset einordnen', 'property': 'Bewertung & Suchprofil', 'projects': 'Wert nach Sanierung'}[k] + '</a>'
@@ -376,7 +376,7 @@ def home():
 
 def sub_hero(key, kicker, n, title, lead, actions):
     return ('<section class="immersive-hero immersive-sub">' + gallery(hero_images(SITE['pages'][key])) +
-            f'<div class="hero-content"><div class="hero-kicker"><a href="{page("home")}">{kicker}</a></div>'
+            f'<div class="hero-content">'
             f'<h1>{title}</h1><div class="hero-bottom"><p>{lead}</p><div class="hero-actions">{actions}</div></div></div></section>')
 
 
@@ -452,14 +452,14 @@ def ueber():
     fields = [('investment', 'Anlageimmobilien kaufen und verkaufen', 'Ausgewählte Off-Market-Transaktionen, Projektentwicklungen und Wohnimmobilieninvestments, mit Analyse, Positionierung und diskreter Vermarktung.'),
               ('property', 'Wohnungen und Häuser', 'Beratung für Eigentümer, Käufer und Verkäufer von Wohn-, Ferien- und Gewerbeimmobilien, von der Einordnung bis zur Vermarktung.'),
               ('projects', 'Sanierung vorbereiten', 'Wünsche, Maßnahmen und Baupartner zusammenführen: Beratung für Sanierung, Modernisierung und Repositionierung.')]
-    rows = ''.join(f'<a class="field-row" href="{page(k)}"><span class="eyebrow">{D[k]["label"].upper()} · {E(AUDIENCE[k])}</span><h3>{t}</h3><p>{E(x)}</p>'
+    rows = ''.join(f'<a class="field-row" href="{page(k)}"><h3>{t}</h3><p>{E(x)}</p>'
                    f'<span class="field-memo">{E(D[k]["memo"])} <span aria-hidden="true">↗</span></span></a>' for k, t, x in fields)
     body += ('<section class="fields" id="felder"><div class="section-head"><h2>Drei Geschäftsfelder</h2>'
              f'<p>Jedes Feld endet mit einem eigenen Memo.</p></div><div class="field-rows">{rows}</div></section>')
     steps = [('Aufnehmen', 'Wünsche, Bestand und Ziele erfassen.'), ('Vergleichen', 'Zahlen, Angebote und Optionen gegenüberstellen.'),
              ('Besprechen', 'Unterschiede erläutern, offene Punkte klären.'), ('Kennenlernen', 'Partner und Objekte vor Ort erleben.'),
              ('Entscheiden', 'Mit dem Memo als Grundlage den nächsten Schritt festlegen.')]
-    body += ('<section class="memo-line" id="ablauf"><div class="section-head"><span class="eyebrow">So entsteht ein Memo</span><h2 class="serif">Erst der Vergleich.<br>Dann die Entscheidung.</h2>'
+    body += ('<section class="memo-line" id="ablauf"><div class="section-head"><h2 class="serif">Erst der Vergleich.<br>Dann die Entscheidung.</h2>'
              '<p>Derselbe Weg, ob Renovation Memo, Property Brief oder Investment Memo.</p></div><ol class="memo-timeline">'
              + ''.join(f'<li><span>{i:02d}</span><h3>{a}</h3><p>{b}</p></li>' for i, (a, b) in enumerate(steps, 1)) + '</ol></section>')
     body += contact()
@@ -481,13 +481,13 @@ def markt():
 
 def not_found():
     """404-Seite: absolute Pfade, weil der Server sie unter beliebigen Adressen ausliefert."""
-    links = ''.join(f'<a class="field-row" href="{page(k)}"><span class="eyebrow">{D[k]["label"].upper()}</span><h3>{t}</h3><p>{x}</p>'
+    links = ''.join(f'<a class="field-row" href="{page(k)}"><h3>{t}</h3><p>{x}</p>'
                     f'<span class="field-memo">Zur Seite <span aria-hidden="true">↗</span></span></a>' for k, t, x in (
                         ('investment', 'Anlageimmobilien', 'Off-Market, Globalverkauf, Ankaufsprofil.'),
                         ('property', 'Wohnungen und Häuser', 'Verkaufen, kaufen, bewerten.'),
                         ('projects', 'Sanierung', 'Sanierung planen, Angebote vergleichen.')))
     body = ('<section class="immersive-hero immersive-sub not-found-hero">' + gallery(['hero-berlin.webp']) +
-            f'<div class="hero-content"><div class="hero-kicker"><a href="{page("home")}">Fehler 404</a></div>'
+            f'<div class="hero-content">'
             '<h1>Diese Seite gibt es nicht <em>(mehr)</em></h1><div class="hero-bottom"><p>Vielleicht wurde sie verschoben oder die Adresse ist unvollständig. '
             'Hier geht es weiter.</p><div class="hero-actions">'
             f'<a class="button" href="{page("home")}">Zur Startseite<span aria-hidden="true">↗</span></a><a class="text-link" href="{page("bewerten")}">Immobilie bewerten ↗</a></div></div></div></section>'
@@ -521,7 +521,7 @@ def invest_services(focus):
     """Investment: Leistungen als aufklappbare Liste (eine offen), angelehnt an den Aufbau großer Transaktionshäuser, in GRENFORD-Sprache."""
     rows = ''.join(f'<details class="svc" name="invest-services"{" open" if i == 0 else ""}><summary><span><strong>{E(t)}</strong><em>{E(q)}</em></span>'
                    f'<b aria-hidden="true">＋</b></summary><p>{E(x)}</p></details>' for i, (t, q, x) in enumerate(INVEST_SERVICES))
-    return ('<section class="services" id="leistung"><div class="services-intro"><span class="eyebrow">Strategische Off-Market-Transaktionen</span>'
+    return ('<section class="services" id="leistung"><div class="services-intro">'
             '<h2>Für Eigentümer, die verkaufen, und Investoren, die kaufen wollen, ohne dass es der Markt erfährt</h2>'
             '<p>GRENFORD begleitet Verkäufe und Ankäufe von Wohn- und Geschäftshäusern, Boutique-Hotels, Grundstücken und Projektentwicklungen. '
             'Auf der einen Seite stehen Eigentümer, Erbengemeinschaften und Bauträger, auf der anderen private Investoren, Family Offices und Projektentwickler. '
