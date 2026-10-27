@@ -54,7 +54,8 @@ document.querySelectorAll('[data-cover]').forEach(gallery => {
   start();
 });
 
-// Collection-Karussell
+// Collection-Karussell (Startseite, Investment, Property: identisches Verhalten)
+const COLLECTION_INTERVAL = 5000;
 const collectionTabs = [...document.querySelectorAll('[data-collection-tab]')], collectionPanels = [...document.querySelectorAll('[data-collection-panel]')], carouselUpdates = [];
 collectionPanels.forEach(panel => {
   const viewport = panel.querySelector('.collection-viewport'), track = panel.querySelector('.collection-track'), cards = [...track.children];
@@ -73,13 +74,40 @@ collectionPanels.forEach(panel => {
   let settle;
   const scheduleUpdate = () => { clearTimeout(settle); settle = setTimeout(update, 120); };  // erst nach dem Scrollen ansagen
   const move = sign => viewport.scrollBy({ left: sign * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
-  previous.addEventListener('click', () => move(-1)); next.addEventListener('click', () => move(1));
+
+  // Automatischer Lauf: alle COLLECTION_INTERVAL ms eine Karte weiter, am Ende zurück zum Anfang.
+  // Ein Klick auf eine Karte hält das Karussell dauerhaft an; die Pfeile bleiben nutzbar.
+  // Pausiert außerdem bei Tastaturfokus im Karussell, außerhalb des Sichtbereichs und im Hintergrund-Tab.
+  let auto = null, stopped = reduceMotion, visible = false, focused = false;
+  const advance = () => {
+    const max = viewport.scrollWidth - viewport.clientWidth;
+    if (viewport.scrollLeft >= max - 3) viewport.scrollTo({ left: 0, behavior: 'smooth' });
+    else move(1);
+  };
+  const pause = () => { clearInterval(auto); auto = null; };
+  const play = () => {
+    if (!auto && !stopped && !panel.hidden && visible && !focused && !document.hidden) auto = setInterval(advance, COLLECTION_INTERVAL);
+  };
+  const restart = () => { pause(); play(); };
+  track.addEventListener('click', () => { stopped = true; pause(); panel.classList.add('is-stopped'); });
+  previous.addEventListener('click', () => { move(-1); restart(); });
+  next.addEventListener('click', () => { move(1); restart(); });
+  viewport.addEventListener('touchstart', restart, { passive: true });  // nach eigenem Wischen neu takten
+  viewport.addEventListener('focusin', () => { focused = true; pause(); });
+  viewport.addEventListener('focusout', event => { if (!viewport.contains(event.relatedTarget)) { focused = false; play(); } });
+  document.addEventListener('visibilitychange', () => document.hidden ? pause() : play());
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => { visible = entries[0].isIntersecting; visible ? play() : pause(); }, { threshold: 0.3 }).observe(viewport);
+  }
+
   viewport.addEventListener('scroll', scheduleUpdate, { passive: true });
   viewport.addEventListener('keydown', event => {
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1); }
     if (event.key === 'Home' || event.key === 'End') { event.preventDefault(); viewport.scrollTo({ left: event.key === 'Home' ? 0 : viewport.scrollWidth, behavior: reduceMotion ? 'auto' : 'smooth' }); }
   });
-  window.addEventListener('resize', scheduleUpdate); carouselUpdates.push(update); update();
+  window.addEventListener('resize', scheduleUpdate);
+  carouselUpdates.push(() => { update(); panel.hidden ? pause() : play(); });
+  update();
 });
 collectionTabs.forEach(button => button.addEventListener('click', () => {
   collectionTabs.forEach(b => b.setAttribute('aria-pressed', String(b === button)));

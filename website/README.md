@@ -87,5 +87,6 @@ Geprüft mit dem Originalquelltext (`build.py`, `ux_refinement.py`, `collection.
 - Ein Stylesheet (`site.css`) statt drei.
 - `srcset` mit 800/1280 px-Varianten (Pillow), `width`/`height` an allen Bildern.
 - Hero-Galerie wechselt automatisch alle 6 Sekunden in einer Schleife (Überblendung mit leichtem Zoom, ohne Bedienelemente). Pausiert, wenn der Hero nicht sichtbar oder der Tab im Hintergrund ist; bei „reduzierte Bewegung“ bleibt das erste Bild stehen. Intervall: `HERO_INTERVAL` in `static/js/app.js`.
+- Collection-Karussell (Startseite, Investment, Property, überall identisch) läuft automatisch alle 5 Sekunden eine Karte weiter und springt am Ende sanft zum Anfang. Ein Klick auf eine Karte hält es dauerhaft an; die Pfeile bleiben nutzbar und starten den Takt neu. Pausiert bei Tastaturfokus, außerhalb des Sichtbereichs, im Hintergrund-Tab und bei „reduzierte Bewegung“. Intervall: `COLLECTION_INTERVAL` in `static/js/app.js`.
 
 **Bewusst nicht geändert:** Gestaltung, Texte und Bildsprache der Seiten, die Graustufen-Darstellung der Hero-Bilder und die drei Basis-Stylesheets (alle Korrekturen stehen in `refinements.css`).
