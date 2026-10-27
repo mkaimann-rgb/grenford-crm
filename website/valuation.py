@@ -237,6 +237,18 @@ TAB_LABELS_BEWERTEN = {'property-value': ('Property', 'Immobilie bewerten'), 'pr
 
 # --------------------------------------------------------------------- Ausgabe
 
+# Weiche Trennstellen für lange Wörter in schmalen Kacheln (nur Anzeige; der gesendete Wert bleibt unverändert)
+SOFT = {'Mehrfamilienhaus': 'Mehrfamilien&shy;haus', 'Gewerbeeinheit': 'Gewerbe&shy;einheit', 'Projektentwicklung': 'Projekt&shy;entwicklung',
+        'Geschäftshaus': 'Geschäfts&shy;haus', 'Einfamilienhaus': 'Einfamilien&shy;haus', 'Neubau-Innenausbau': 'Neubau-&shy;Innenausbau',
+        'Ferienimmobilie': 'Ferien&shy;immobilie', 'Dachgeschoss': 'Dach&shy;geschoss'}
+
+
+def soft(text):
+    for word, hyph in SOFT.items():
+        text = text.replace(word, hyph)
+    return text
+
+
 def svg(name, cls='wz-icon'):
     return f'<svg class="{cls}" viewBox="0 0 40 40" aria-hidden="true" focusable="false">{ICONS[name]}</svg>'
 
@@ -255,7 +267,7 @@ def _control(wid, c, n):
         opts = ''
         for opt in c['options']:
             text, icon = (opt if isinstance(opt, tuple) else (opt, None))
-            inner = (svg(icon) if icon else '') + f'<span>{E(text)}</span>'
+            inner = (svg(icon) if icon else '') + f'<span>{soft(E(text))}</span>'
             opts += (f'<label class="wz-option"><input type="{kind}" name="{E(c["label"])}" value="{E(text)}">'
                      f'<span class="wz-box">{inner}</span></label>')
         head = '' if n == 0 and c['kind'] == 'tiles' else f'<span class="wz-label" id="{fid}-l">{E(label)}</span>'

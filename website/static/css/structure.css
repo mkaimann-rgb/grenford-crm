@@ -603,3 +603,14 @@
 .pathway-body{flex:1;display:flex;flex-direction:column}
 .pathway-body p{flex:1}
 .pathway-result strong{display:block;margin-top:2px}
+/* Bewertungs-Kacheln: immer eine Reihe, flache Rechtecke (Desktop); Handy drei pro Reihe */
+@media(min-width:761px){
+ .wz-tiles{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px}
+ .wz-tiles .wz-box{min-height:96px;padding:14px 12px 12px;gap:12px;font-size:13px;line-height:1.3;hyphens:auto;overflow-wrap:anywhere}
+ .wz-tiles .wz-box svg{width:26px;height:26px}}
+@media(max-width:760px){
+ .wz-tiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .wz-tiles .wz-box{min-height:84px;padding:10px 8px;gap:8px;font-size:12px;hyphens:auto;overflow-wrap:anywhere}
+ .wz-tiles .wz-box svg{width:22px;height:22px}}
+@media(max-width:760px){.wz-tiles .wz-box{hyphens:manual;overflow-wrap:normal;word-break:normal;font-size:11.5px;padding:10px 7px}}
+@media(min-width:761px){.wz-tiles .wz-box{hyphens:manual;overflow-wrap:normal}}
