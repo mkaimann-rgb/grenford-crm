@@ -25,21 +25,66 @@ def _card(o):
             'Unterlagen anfordern <span aria-hidden="true">↗</span></button></div></article>')
 
 
-def offmarket():
+PROPS = json.loads((Path(__file__).parent / 'property-collection.json').read_text(encoding='utf-8'))
+
+
+def _property_card(d):
+    """Öffentliche Immobilie im selben Kartenstil: echtes Foto, Preis, Eckdaten, Property Brief anfragen."""
+    facts = ''.join(f'<li>{E(x[1])}</li>' for x in d['facts'][:3])
+    price, per_m2 = (d['priceStr'].split(' · ') + [''])[:2]
+    return (f'<article class="om-card om-public"><figure>'
+            + img(d['localImage'], d['title'] + ', Visualisierung', '(max-width:760px) 88vw, 30vw', 'loading="lazy"')
+            + '<span class="om-status">Verfügbar</span></figure>'
+            f'<div class="om-body"><small>{E(d["location"])}</small><h3>{E(d["title"])}</h3>'
+            f'<p class="om-volume"><span>Kaufpreis</span>{E(price)}</p><ul class="om-facts">{facts}</ul>'
+            f'<p class="om-desc">{E(d["desc"])}</p>'
+            + (f'<p class="om-per">{E(per_m2)}</p>' if per_m2 else '') +
+            f'<button class="button" type="button" data-enquire="property-buy" data-object="{E(d["title"], quote=True)}">'
+            'Property Brief anfragen <span aria-hidden="true">↗</span></button></div></article>')
+
+
+def _om_block(with_filter=True):
     objs = DATA['objekte']
     kinds = sorted({o['assetklasse'] for o in objs})
     chips = ('<div class="om-filter" role="group" aria-label="Nach Assetklasse filtern">'
              '<button type="button" aria-pressed="true" data-om-filter="">Alle</button>'
-             + ''.join(f'<button type="button" aria-pressed="false" data-om-filter="{E(k, quote=True)}">{E(k)}</button>' for k in kinds) + '</div>')
+             + ''.join(f'<button type="button" aria-pressed="false" data-om-filter="{E(k, quote=True)}">{E(k)}</button>' for k in kinds) + '</div>') if with_filter else ''
     sample = ('<p class="om-sample">Konzeptansicht mit erfundenen Musterobjekten. Die echten Steckbriefe folgen nach Freigabe.</p>'
               if DATA.get('muster') else '')
+    return (sample + chips + '<div class="om-grid">' + ''.join(_card(o) for o in objs) + '</div>'
+            '<ol class="om-steps"><li><b>Anfrage</b> Unterlagen zum Objekt anfordern</li><li><b>Prüfung</b> Ich melde mich innerhalb von 48 Stunden</li>'
+            '<li><b>Vertraulichkeit</b> Sie unterzeichnen die Vereinbarung</li><li><b>Unterlagen</b> Exposé, Mieterliste, Kennzahlen</li></ol>')
+
+
+def _property_block():
+    return ('<div class="om-grid">' + ''.join(_property_card(d) for d in PROPS) + '</div>'
+            '<p class="om-note">Visualisierungen. Grundriss, Unterlagen und Besichtigungstermin erhalten Sie mit dem Property Brief.</p>')
+
+
+def offmarket():
+    """Investment-Seite: Off-Market-Steckbriefe."""
     return ('<section class="offmarket" id="collection"><div class="section-head"><h2>Off-Market-Angebote</h2>'
             '<p>Diese Objekte werden nicht öffentlich angeboten. Hier sehen Sie Region, Assetklasse und Größenordnung. '
             'Kennzahlen, Adresse und Unterlagen erhalten geprüfte Investoren nach einer Vertraulichkeitsvereinbarung.</p></div>'
-            + sample + chips + '<div class="om-grid">' + ''.join(_card(o) for o in objs) + '</div>'
-            '<ol class="om-steps"><li><b>Anfrage</b> Unterlagen zum Objekt anfordern</li><li><b>Prüfung</b> Ich melde mich innerhalb von 48 Stunden</li>'
-            '<li><b>Vertraulichkeit</b> Sie unterzeichnen die Vereinbarung</li><li><b>Unterlagen</b> Exposé, Mieterliste, Kennzahlen</li></ol>'
-            + dialog() + '</section>')
+            + _om_block() + dialog() + '</section>')
+
+
+def properties():
+    """Property-Seite: öffentliche Angebote im selben Kartenstil."""
+    return ('<section class="offmarket" id="collection"><div class="section-head"><h2>Wohnungen und Häuser im Angebot</h2>'
+            '<p>Zu jeder Immobilie gibt es einen Property Brief mit Grundriss, Zahlen und Lage.</p></div>' + _property_block() + '</section>')
+
+
+def home_offers():
+    """Startseite: Umschalter Investment (Off-Market) und Property (öffentlich), Karten wie auf den Bereichsseiten."""
+    tabs = ('<div class="om-tabs" role="group" aria-label="Angebote auswählen">'
+            f'<button type="button" aria-pressed="true" data-om-tab="investment">Investment <span>{len(DATA["objekte"])}</span></button>'
+            f'<button type="button" aria-pressed="false" data-om-tab="property">Property <span>{len(PROPS)}</span></button></div>')
+    return ('<section class="offmarket" id="collection"><div class="section-head"><h2>Aktuelle Mandate und Immobilien</h2>'
+            '<p>Investment-Objekte zeigen wir nur anonym; Unterlagen gibt es nach einer Vertraulichkeitsvereinbarung. '
+            'Wohnungen und Häuser sind öffentlich mit Preis und Eckdaten zu sehen.</p></div>' + tabs
+            + '<div data-om-panel="investment">' + _om_block() + '</div>'
+            + '<div data-om-panel="property" hidden>' + _property_block() + '</div>' + dialog() + '</section>')
 
 
 def dialog():

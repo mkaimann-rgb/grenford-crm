@@ -63,7 +63,9 @@ document.querySelectorAll('[data-cover]').forEach(gallery => {
 const COLLECTION_SPEED = 28;  // Pixel pro Sekunde
 const collectionTabs = [...document.querySelectorAll('[data-collection-tab]')], collectionPanels = [...document.querySelectorAll('[data-collection-panel]')], carouselUpdates = [];
 collectionPanels.forEach(panel => {
-  const viewport = panel.querySelector('.collection-viewport'), track = panel.querySelector('.collection-track'), cards = [...track.children];
+  const viewport = panel.querySelector('.collection-viewport'), track = panel.querySelector('.collection-track');
+  if (!track) return;
+  const cards = [...track.children];
   const previous = panel.querySelector('[data-prev]'), next = panel.querySelector('[data-next]'), counter = panel.querySelector('[data-counter]');
   const looping = !reduceMotion && cards.length > 1;
   if (looping) cards.forEach(card => {

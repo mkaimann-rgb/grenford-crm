@@ -1090,3 +1090,26 @@ body{background:var(--paper)}
 @media(max-width:760px){.offmarket{padding:56px 6%}.offmarket .section-head{display:block}.offmarket .section-head p{margin-top:12px}.om-grid{grid-template-columns:1fr}.om-steps{grid-template-columns:1fr 1fr}
  .om-dialog form{padding:26px 20px 22px}.om-dialog .ux-form-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.om-card,.om-card figure img{transition:none}.om-card:hover{transform:none}}
+/* Angebote: Umschalter (Startseite) und öffentliche Property-Karten */
+.om-tabs{display:flex;gap:28px;margin:30px 0 0;border-bottom:1px solid var(--line)}
+.om-tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 0 12px;margin-bottom:-1px;font:inherit;font-size:16px;color:var(--muted);cursor:pointer}
+.om-tabs button span{font-size:12px;margin-left:4px;color:var(--orange-ink,var(--orange))}
+.om-tabs button[aria-pressed=true]{color:var(--blue);border-color:var(--blue)}
+.om-public figure img{filter:none;transform:scale(1.01)}
+.om-public:hover figure img{filter:none;transform:scale(1.05)}
+.om-public .om-desc{margin:14px 0 0;font-size:14px;line-height:1.55;color:var(--muted);flex:1}
+.om-public .om-per{margin:10px 0 18px;font-size:12px;color:var(--muted)}
+.om-public .button{align-self:flex-start}
+.om-note{margin:22px 0 0;font-size:12px;color:var(--muted)}
+[data-om-panel] .om-filter{margin-top:26px}
+[data-om-panel=property] .om-grid{margin-top:30px}
+/* Handy: Karten als wischbare Reihe, Filter seitlich scrollbar */
+@media(max-width:760px){
+ .om-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -6%;padding:4px 6% 18px;scrollbar-width:none}
+ .om-grid::-webkit-scrollbar{display:none}
+ .om-card{flex:0 0 84%;scroll-snap-align:start}
+ .om-card:hover{transform:none}
+ .om-filter{flex-wrap:nowrap;overflow-x:auto;margin-left:-6%;margin-right:-6%;padding:0 6%;scrollbar-width:none}
+ .om-filter::-webkit-scrollbar{display:none}
+ .om-filter button{flex:none}}
+.skip:focus:not(:focus-visible){top:-100px}

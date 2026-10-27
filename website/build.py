@@ -12,7 +12,7 @@ import argparse, html, json, re, shutil, sys
 import paths
 from paths import SITE, page, asset, img, absolute, root
 from collection import collection
-from offmarket import offmarket
+from offmarket import offmarket, properties, home_offers
 from projects_comparison import comparisons
 from ux_refinement import inquiry, contact, rail
 from valuation import wizard_tabs, svg, TAB_LABELS_BEWERTEN
@@ -339,7 +339,7 @@ def subpage(k):
              f'<div><article><h3>{a}</h3><p>{aa}</p></article><article><h3>{b}</h3><p>{bb}</p></article></div>'
              f'<div class="service-focus"><span class="eyebrow">Typische Objekte</span><p>{focus}</p></div></section>')
     body += valuation_section(k)
-    body += {'investment': offmarket, 'property': lambda: collection('property'), 'projects': lambda: fee_band() + comparisons()}[k]()
+    body += {'investment': offmarket, 'property': properties, 'projects': lambda: fee_band() + comparisons()}[k]()
     body += memos(k) + process(k)
     faq = ''.join(f'<details><summary>{E(q)}<span aria-hidden="true">＋</span></summary><p>{E(a)}</p></details>' for q, a in d['faq'])
     body += (f'<section class="questions" id="fragen"><div><h2>Häufige Fragen</h2></div><div>{faq}</div></section>'
@@ -388,7 +388,7 @@ def fee_band():
 
 def home():
     # hero-stage: Bühne für das ruhige Öffnen des Heros beim ersten Scrollen (app.js, nur Startseite)
-    body = ('<div class="hero-stage">' + home_hero() + '</div>' + pathways() + valuation_teaser() + collection() + '<div class="personal-approach">' + founder() + process() + '</div>' + contact())
+    body = ('<div class="hero-stage">' + home_hero() + '</div>' + pathways() + valuation_teaser() + home_offers() + '<div class="personal-approach">' + founder() + process() + '</div>' + contact())
     return shell('home', SITE['home'], body)
 
 

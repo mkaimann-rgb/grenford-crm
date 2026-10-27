@@ -269,10 +269,14 @@ openTarget(location.hash);
 // ---------------------------------------------------------------- Off-Market: Filter und „Unterlagen anfordern“
 
 const omDialog = document.getElementById('om-dialog');
+document.querySelectorAll('[data-om-tab]').forEach(tab => tab.addEventListener('click', () => {
+  document.querySelectorAll('[data-om-tab]').forEach(t => t.setAttribute('aria-pressed', String(t === tab)));
+  document.querySelectorAll('[data-om-panel]').forEach(panel => { panel.hidden = panel.dataset.omPanel !== tab.dataset.omTab; });
+}));
 document.querySelectorAll('[data-om-filter]').forEach(chip => chip.addEventListener('click', () => {
   const kind = chip.dataset.omFilter;
   document.querySelectorAll('[data-om-filter]').forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
-  document.querySelectorAll('.om-card').forEach(card => { card.hidden = Boolean(kind) && card.dataset.asset !== kind; });
+  document.querySelectorAll('.om-card[data-asset]').forEach(card => { card.hidden = Boolean(kind) && card.dataset.asset !== kind; });
 }));
 if (omDialog) {
   const form = document.getElementById('om-form');
