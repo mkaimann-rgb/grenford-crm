@@ -32,7 +32,7 @@ node tests/transport.mjs      # Formular-Übertragung (ohne echten Request)
 ## Vor dem Livegang erledigen
 
 1. **Originalbilder aus dem ZIP** (`dist/assets/` des veröffentlichten Stands) nach `static/assets/` kopieren. Der Build listet fehlende Dateien auf; bis dahin erscheinen „Bild folgt“ bzw. die Vorschau-Bilder:
-   - `penthouse-before.webp`, `penthouse-after.webp`, `soemmering-wohnzimmer.webp`, `soemmering-schlafzimmer.webp`, `soemmering-bad.webp`
+   - `penthouse-before.webp`, `penthouse-after.webp`
    - für die Unterseiten die `hero-*.webp` aus `site.json` → `gallery`. Sind sie vorhanden, nutzt der Build automatisch sie statt `previewGallery`. Die Startseite zeigt bereits die fünf Skylines (München, Frankfurt, Berlin, Köln, Hamburg).
    - Nicht mehr benötigt: `hero-home-*.webp`, `house.webp`, `investment.webp`, `projects.webp`, `property.webp`, `dm-sans-600.ttf`.
 2. **CRM-Eingang einmal echt prüfen:** `formEndpoint` ist das HubSpot-Formular aus dem veröffentlichten Stand; Schema und Nachrichtentext sind unverändert (geprüft mit `tests/transport.mjs` und einem Browsertest mit simuliertem HubSpot). Ein echter Test-Lead wurde bewusst nicht gesendet. Nach dem Deployment eine Testanfrage absenden und in HubSpot kontrollieren.

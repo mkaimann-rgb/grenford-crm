@@ -3,7 +3,24 @@
     "tag": "Residential Apartment",
     "title": "Schlosspark Penthouse",
     "location": "Berlin · Charlottenburg",
-    "facts": [["area", "196 m²"], ["rooms", "5 Zimmer"], ["loggia", "2 Loggien"], ["terrace", "Dachterrasse"]],
+    "facts": [
+      [
+        "area",
+        "196 m²"
+      ],
+      [
+        "rooms",
+        "5 Zimmer"
+      ],
+      [
+        "loggia",
+        "2 Loggien"
+      ],
+      [
+        "terrace",
+        "Dachterrasse"
+      ]
+    ],
     "desc": "Zwischen Schlosspark Charlottenburg und der Spree verbindet diese Penthouse-Residenz großzügige Architektur mit einer individuell wählbaren Ausstattungslinie ohne Aufpreis.",
     "priceStr": "1.810.000 € · 9.215 €/m²",
     "img": "/images/drive/soemmering-wohnzimmer.webp",
@@ -13,20 +30,50 @@
     "tag": "Residential Apartment",
     "title": "Mierendorff Residence",
     "location": "Berlin · Charlottenburg",
-    "facts": [["area", "171 m²"], ["rooms", "4 Zimmer"], ["loggia", "2 Loggien"], ["terrace", "Dachterrasse"]],
+    "facts": [
+      [
+        "area",
+        "171 m²"
+      ],
+      [
+        "rooms",
+        "4 Zimmer"
+      ],
+      [
+        "loggia",
+        "2 Loggien"
+      ],
+      [
+        "terrace",
+        "Dachterrasse"
+      ]
+    ],
     "desc": "Private Dachterrassen mit Blick über die Berliner Skyline verbinden die ruhige Atmosphäre der Mierendorff-Insel mit Cafés, der Spree und der City West nur wenige Minuten entfernt.",
     "priceStr": "1.623.000 € · 9.509 €/m²",
-    "img": "/images/drive/soemmering-schlafzimmer.webp",
-    "localImage": "soemmering-schlafzimmer.webp"
+    "img": "/images/drive/soemmering-bad.webp",
+    "localImage": "soemmering-bad.webp"
   },
   {
     "tag": "Residential Apartment",
     "title": "Spree Corner Penthouse",
     "location": "Berlin · Charlottenburg",
-    "facts": [["area", "184 m²"], ["rooms", "5 Zimmer"], ["corner", "Ecklage"]],
+    "facts": [
+      [
+        "area",
+        "184 m²"
+      ],
+      [
+        "rooms",
+        "5 Zimmer"
+      ],
+      [
+        "corner",
+        "Ecklage"
+      ]
+    ],
     "desc": "Eine frei wählbare Ausstattungslinie – von klassischem Fischgrätparkett bis zum Kamin – ermöglicht es, diesem Penthouse eine ganz persönliche Handschrift zu verleihen.",
     "priceStr": "1.726.000 € · 9.394 €/m²",
-    "img": "/images/drive/soemmering-bad.webp",
-    "localImage": "soemmering-bad.webp"
+    "img": "/images/drive/soemmering-schlafzimmer.webp",
+    "localImage": "soemmering-schlafzimmer.webp"
   }
 ]
