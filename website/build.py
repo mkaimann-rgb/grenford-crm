@@ -17,6 +17,9 @@ from ux_refinement import inquiry, contact, rail
 from valuation import wizard_tabs, svg, TAB_LABELS_BEWERTEN
 import market
 
+# Marktseite erst veröffentlichen, wenn market.json geprüfte Datensätze enthält (bis dahin kein Link, keine Seite, kein Sitemap-Eintrag)
+MARKET_LIVE = bool(market.M['marketData'])
+
 ROOT = Path(__file__).parent
 STATIC = ROOT / 'static'
 D = json.loads((ROOT / 'content.json').read_text(encoding='utf-8'))
@@ -63,7 +66,7 @@ def mega(k):
 
 def mega_grenford(active):
     """Menüpunkt GRENFORD mit Großmenü wie die drei Bereiche: Marke, Bewertung, Markt, Kontakt."""
-    links = [('Über GRENFORD', page('ueber-grenford'), ''), ('Immobilie bewerten', page('bewerten'), ''), ('Marktperspektiven', page('markt'), ''),
+    links = [('Über GRENFORD', page('ueber-grenford'), ''), ('Immobilie bewerten', page('bewerten'), '')] + ([('Marktperspektiven', page('markt'), '')] if MARKET_LIVE else []) + [
              ('Kontakt', '#kontakt', ''), ('STAYNAMIC ↗', 'https://www.staynamic.com/', ' target="_blank" rel="noopener"')]
     items = ''.join(f'<li><a href="{h}"{x}>{E(t)}</a></li>' for t, h, x in links)
     on = ' aria-current="page"' if active in ('ueber-grenford', 'bewerten', 'markt') else ''
@@ -94,7 +97,7 @@ def footer():
     }
     columns = ''.join(f'<div><strong>{D[k]["label"]}</strong>' + ''.join(f'<a href="{page(k)}{h}">{t}</a>' for t, h in links) + '</div>' for k, links in cols.items())
     columns += (f'<div><strong>GRENFORD</strong><a href="{page("ueber-grenford")}">Über GRENFORD</a><a href="{page("bewerten")}">Immobilie bewerten</a>'
-                f'<a href="{page("markt")}">Marktperspektiven</a>'
+                + (f'<a href="{page("markt")}">Marktperspektiven</a>' if MARKET_LIVE else '') +
                 '<a href="#kontakt">Kontakt</a><a href="https://www.staynamic.com/" target="_blank" rel="noopener">STAYNAMIC ↗</a></div>')
     return ('<footer class="site-footer"><div class="footer-main">' + logo() +
             f'<p>Wir strukturieren<br><em>Immobilienentscheidungen.</em></p><address>GRENFORD · Marco Kaimann<br>{E(a["street"])} · {E(a["zip"])} {E(a["city"])}<br>'
@@ -260,12 +263,20 @@ def subpage(k):
     d = D[k]
     titles = {'investment': 'Werte erkennen.<br><em>Chancen einordnen.</em>', 'property': 'Räume entdecken.<br><em>Menschen verbinden.</em>', 'projects': 'Angebote verstehen.<br><em>Baupartner finden.</em>'}
     actions = {'investment': (('Asset einordnen', 'investment-value'), ('Ankaufsprofil hinterlegen', 'investment-search')),
-               'property': (('Immobilie bewerten', 'property-value'), ('Suchprofil hinterlegen', 'property-search')),
+               'property': (('Immobilie bewerten', 'property-value'), ('Immobilien ansehen', '#collection')),
                'projects': (('Wert nach Sanierung ermitteln', 'projects-value'), None)}
     (p_label, p_key), sec = actions[k]
     primary = f'<a class="button" href="#bewertung-{p_key}" data-wz-open="{p_key}">{p_label}<span aria-hidden="true">↓</span></a>'
-    second = (f'<a class="text-link" href="#memo">{d["memo"]} ↓</a>' if not sec else
-              f'<a class="text-link" href="#bewertung-{sec[1]}" data-wz-open="{sec[1]}">{sec[0]} <span aria-hidden="true">↓</span></a>')
+    if not sec:
+        second = f'<a class="text-link" href="#memo">{d["memo"]} ↓</a>'
+    elif sec[1].startswith('#'):  # einfacher Sprung, z. B. Property → ausgewählte Immobilien
+        second = f'<a class="text-link" href="{sec[1]}">{sec[0]} <span aria-hidden="true">↓</span></a>'
+    else:
+        second = f'<a class="text-link" href="#bewertung-{sec[1]}" data-wz-open="{sec[1]}">{sec[0]} <span aria-hidden="true">↓</span></a>'
+    # Property: Käufer-Suchwunsch als kleiner ergänzender Link unter den beiden Buttons
+    if k == 'property':
+        second += ('<a class="hero-aside-link" href="#bewertung-property-search" data-wz-open="property-search">'
+                   'Auf der Suche? Suchprofil hinterlegen <span aria-hidden="true">↓</span></a>')
     body = ('<section class="immersive-hero immersive-sub">' + gallery(hero_images(SITE['pages'][k])) +
             f'<div class="hero-content"><div class="hero-kicker"><a href="{page("home")}">GRENFORD / {d["label"].upper()}</a><span class="hero-coordinate" aria-hidden="true">G / {d["n"]}</span></div>'
             f'<h1>{titles[k]}</h1><div class="hero-bottom"><p>{d["intro"]}</p><div class="hero-actions">' + primary + second + '</div></div></div></section>')
@@ -504,7 +515,7 @@ def responsive_variants(out):
 
 
 def seo_files(out):
-    urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + ['markt']]
+    urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + (['markt'] if MARKET_LIVE else [])]
     (out / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                      + ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
     (out / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {absolute("sitemap.xml")}\n', encoding='utf-8')
@@ -534,7 +545,8 @@ def main():
         pages[f'{k}/index.html'] = (1, lambda k=k: subpage(k))
     pages['bewerten/index.html'] = (1, bewerten)
     pages['ueber-grenford/index.html'] = (1, ueber)
-    pages['markt/index.html'] = (1, markt)
+    if MARKET_LIVE:
+        pages['markt/index.html'] = (1, markt)
     for target, (depth, render) in pages.items():
         paths.set_page(depth)
         (out / target).parent.mkdir(parents=True, exist_ok=True)

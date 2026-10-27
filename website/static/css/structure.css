@@ -326,3 +326,8 @@
   .nav-sub{display:grid;list-style:none;margin:0 0 10px;padding:0 0 0 14px;border-left:1px solid #f5f5ee40}
   .nav-sub a{display:flex;align-items:center;min-height:40px;font-size:15px;color:#e4e5dc}
 }
+
+/* Property-Hero: Suchprofil als kleiner ergänzender Link unter den Buttons */
+.hero-actions{flex-wrap:wrap}
+.hero-aside-link{flex-basis:100%;display:inline-flex;gap:8px;align-items:center;min-height:36px;font-size:12px;color:#e4e5dc;text-decoration:underline;text-underline-offset:3px}
+.hero-aside-link:hover,.hero-aside-link:focus-visible{color:var(--orange-light)}

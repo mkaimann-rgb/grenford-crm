@@ -61,10 +61,10 @@ Typografie, Hero-Karussell, Collection-Karussell und Gestaltung der bestehenden 
 |---|---|
 | Startseite | Hero (Skylines, Reichweite), drei Bereiche, **Bewertungs-Teaser** (Kacheln → `/bewerten/`), Collection, Gründer, Ablauf, Projektanfrage |
 | Investment (B2B) | Hero-Aktionen „Asset einordnen“ / „Ankaufsprofil hinterlegen“, Abschnitt `#bewertung` mit zwei Reitern |
-| Property (B2C) | „Immobilie bewerten“ / „Suchprofil hinterlegen“, Abschnitt `#bewertung` mit zwei Reitern |
+| Property (B2C) | Hero: „Immobilie bewerten“ (Hauptbutton) / „Immobilien ansehen“, Suchprofil als kleiner Link darunter; Abschnitt `#bewertung` mit zwei Reitern |
 | Projects | „Wert nach Sanierung ermitteln“, Abschnitt **Vergütung** (`#verguetung`: für Eigentümer kostenfrei, vergütet durch das beauftragte Bauunternehmen) |
 | `/bewerten/` | Bewertung mit Reitern Property / Projects / Investment, drei Wege (digital, Video, vor Ort), Ablauf 01/04, Fragen, Kontakt |
-| `/markt/` | Marktperspektiven: Marktüberblick (Filter Standort, Immobilienart, Zeitraum, Datentyp; Leerzustand ohne Daten), Einordnung, Methodik, Fragen, nächster Schritt. Nur im Footer verlinkt. |
+| `/markt/` | **Ausgeblendet**, bis `market.json` geprüfte Datensätze enthält (dann automatisch mit Footer-Link, GRENFORD-Menü und Sitemap). Marktperspektiven: Marktüberblick (Filter Standort, Immobilienart, Zeitraum, Datentyp; Leerzustand ohne Daten), Einordnung, Methodik, Fragen, nächster Schritt. Nur im Footer verlinkt. |
 | `/ueber-grenford/` | Gründer, Haltung (vier Grundsätze), drei Geschäftsfelder, „So entsteht ein Memo“ (5 Schritte), Reichweite, Kontakt |
 
 - **Navigation:** Investment, Property, Projects und GRENFORD, jeweils mit Großmenü. GRENFORD: Gründerporträt, Über GRENFORD, Immobilie bewerten, Marktperspektiven, Kontakt, STAYNAMIC und die Bewertung als nächster Schritt. Auf dem Handy das einfache Menü, unter GRENFORD mit Unterpunkten.
