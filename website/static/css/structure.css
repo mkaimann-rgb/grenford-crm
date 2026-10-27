@@ -653,3 +653,9 @@
  .hero-stage.is-opening .immersive-sub .hero-actions{opacity:calc(1 - .7 * var(--hp))}}
 /* Abschnitte ohne eigenen Hintergrund decken das stehende Hero-Bild ab (Spezifität 0: eigene Hintergründe gewinnen) */
 :where(.hero-stage.is-opening ~ *){background-color:var(--paper)}
+
+/* CTA-Buttons: halbrund (Pillenform) auf allen Seiten */
+.button,a.button,button.button,.wizard-next,.site-header .nav-contact,.value-bar .button,.value-bar a[href]{border-radius:999px}
+.button,.wizard-next{padding-left:26px;padding-right:24px}
+.button:focus-visible,.site-header .nav-contact:focus-visible{outline-offset:3px}
+.value-bar-close{border-radius:50%}
