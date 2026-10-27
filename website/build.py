@@ -200,10 +200,21 @@ def reach_line():
     return f'<p class="hero-reach"><span class="hero-reach-cities">{names}</span><span>{E(SITE["home"]["reachNote"])}</span></p>'
 
 
+INTENTS = [('Wert ermitteln', 'bewerten', '#bewertung'), ('Verkaufen', 'property', '#bewertung-property-value'), ('Kaufen', 'property', '#bewertung-property-search'),
+           ('Investieren', 'investment', '#bewertung-investment-search'), ('Sanieren', 'projects', '#bewertung-projects-value')]
+
+
+def intents():
+    """Einstieg nach Kundenabsicht: führt direkt ins passende Formular, ergänzt die drei Bereiche."""
+    links = ''.join(f'<a href="{page(k)}{h}">{E(t)}</a>' for t, k, h in INTENTS)
+    return f'<nav class="hero-intents" aria-label="Was möchten Sie tun?"><span>Ich möchte</span>{links}</nav>'
+
+
 def home_hero():
     return ('<section class="immersive-hero home-hero">' + gallery(hero_images(SITE['home'])) +
             '<div class="hero-content">'
-            '<h1>Der nächste<br><em>Schritt zählt.</em></h1><div class="hero-bottom"><p>GRENFORD berät Eigentümer, Käufer und Investoren beim Verkauf, beim Ankauf und vor einer Sanierung.</p>'
+            '<h1>Der nächste<br><em>Schritt zählt.</em></h1><div class="hero-bottom"><div class="hero-lead"><p>GRENFORD berät Eigentümer, Käufer und Investoren beim Verkauf, beim Ankauf und vor einer Sanierung.</p>'
+            + intents() + '</div>'
             '<a class="hero-link" href="#perspektiven"><span>Worum geht es bei Ihnen?</span><span class="arrow-circle" aria-hidden="true">↓</span></a></div>'
             + reach_line() + '</div></section>')
 
@@ -241,10 +252,14 @@ def memos(k):
 
 
 def process(k=None):
-    steps = D[k]['steps'] if k else [('Verstehen', 'Ihr Vorhaben, Ihre Wünsche und Ihre Ziele kennenlernen.'), ('Einordnen', 'Rahmen, Unterlagen und Möglichkeiten zusammenbringen.'),
-                                     ('Analysieren', 'Informationen und Unterschiede verständlich machen.'), ('Entscheiden', 'Eine fundierte Richtung und die nächsten Schritte festlegen.'),
-                                     ('Begleiten', 'Bis zum Notartermin oder zur Fertigstellung, im vereinbarten Umfang.')]
-    items = ''.join(f'<li><span>{i:02d}</span><h3>{E(a)}</h3><p>{E(b)}</p></li>' for i, (a, b) in enumerate(steps, 1))
+    # Je Schritt: Titel, Beschreibung, was Sie in diesem Schritt konkret erhalten
+    steps = D[k]['steps'] if k else [('Verstehen', 'Ihr Vorhaben, Ihre Wünsche und Ihre Ziele kennenlernen.', 'Ein Erstgespräch, kostenfrei'),
+                                     ('Einordnen', 'Rahmen, Unterlagen und Möglichkeiten zusammenbringen.', 'Eine erste Einschätzung und die Liste fehlender Unterlagen'),
+                                     ('Analysieren', 'Informationen und Unterschiede verständlich machen.', 'Ihr Memo: Investment Memo, Property Brief oder Renovation Memo'),
+                                     ('Entscheiden', 'Eine fundierte Richtung und die nächsten Schritte festlegen.', 'Ihre Entscheidung, schriftlich festgehalten'),
+                                     ('Begleiten', 'Bis zum Notartermin oder zur Fertigstellung, im vereinbarten Umfang.', 'Einen Ansprechpartner bis zum Abschluss')]
+    items = ''.join(f'<li><span>{i:02d}</span><h3>{E(a)}</h3><p>{E(b)}</p><p class="step-gets"><small>Sie erhalten</small>{E(c)}</p></li>'
+                    for i, (a, b, c) in enumerate(steps, 1))
     return ('<section class="method" id="ablauf"><div class="section-head"><h2>Der GRENFORD 5-Point Process</h2>'
             f'<p>Jedes Mandat läuft in derselben Reihenfolge ab. Wie viel davon Sie brauchen, entscheiden Sie.</p></div><ol class="memo-timeline">{items}</ol></section>')
 
@@ -338,7 +353,7 @@ def valuation_teaser():
     return ('<section class="valuation-teaser" id="bewertung"><div class="section-head">'
             '<h2>Was ist Ihre Immobilie wert, und was wäre sie nach einer Sanierung wert?</h2>'
             '<p>Sie bekommen zwei Zahlen statt einer. Beide schätze ich selbst ein, kein Rechner im Hintergrund.</p></div>'
-            f'<div class="teaser-tiles">{links}</div><div class="teaser-foot"><p class="wz-note">Kostenfrei, ohne Verpflichtung. Antwort innerhalb von 48 Stunden.</p><a class="button" href="{page("bewerten")}">Bewertung starten <span aria-hidden="true">↗</span></a></div>' + gateway('home') + '</section>')
+            f'<div class="teaser-tiles">{links}</div><div class="teaser-foot"><p class="wz-note">Kostenfrei, ohne Verpflichtung. Antwort innerhalb von 48 Stunden. <a href="{page("bewerten")}#ergebnis">So sieht das Ergebnis aus ↗</a></p><a class="button" href="{page("bewerten")}">Bewertung starten <span aria-hidden="true">↗</span></a></div>' + gateway('home') + '</section>')
 
 
 def valuation_section(k):
@@ -382,6 +397,25 @@ def sub_hero(key, kicker, n, title, lead, actions):
             f'<h1>{title}</h1><div class="hero-bottom"><p>{lead}</p><div class="hero-actions">{actions}</div></div></div></section></div>')
 
 
+def result_example():
+    """So sieht das Ergebnis einer Bewertung aus. Ausdrücklich fiktive Musterwerte, keine Marktdaten."""
+    def bar(label, lo, hi, a, b, cls=''):
+        return (f'<div class="rx-row{cls}"><span class="rx-label">{label}</span><div class="rx-track" aria-hidden="true">'
+                f'<i style="left:{a}%;width:{b - a}%"></i></div><strong>{lo} – {hi} €</strong></div>')
+    return ('<section class="result-example" id="ergebnis"><div class="section-head"><h2>So sieht Ihr Ergebnis aus</h2>'
+            '<p>Sie erhalten keine einzelne Zahl aus einem Rechner, sondern zwei Wertspannen mit Begründung. '
+            'Die Werte unten sind ein erfundenes Beispiel, damit Sie sehen, was Sie erwartet.</p></div>'
+            '<div class="rx-card"><div class="rx-head"><span class="rx-stamp">Fiktives Beispiel</span>'
+            '<div><small>Ersteinschätzung</small><h3>3-Zimmer-Altbauwohnung, 85 m², Baujahr um 1905</h3></div></div>'
+            + bar('Wert heute', '410.000', '450.000', 18, 46)
+            + bar('Wert nach Sanierung', '495.000', '540.000', 52, 82, ' rx-after')
+            + '<dl class="rx-facts"><div><dt>Grober Kostenrahmen der Sanierung</dt><dd>45.000 – 60.000 €</dd></div>'
+            '<div><dt>Was die Spanne bestimmt</dt><dd>Lage, Zustand von Bad und Elektrik, Stockwerk, vergleichbare Verkäufe</dd></div>'
+            '<div><dt>Empfehlung</dt><dd>Sanierung vor dem Verkauf prüfen: Mehrwert liegt über den Kosten</dd></div></dl>'
+            '<p class="rx-note">Alle Zahlen sind erfunden und gelten für kein reales Objekt. Ihre Einschätzung erstelle ich selbst, '
+            'anhand Ihrer Angaben, der Lage und vergleichbarer Verkäufe.</p></div></section>')
+
+
 def ways():
     items = [('Digital, Antwort in 48 Stunden', 'Ersteinschätzung', 'Sie beschreiben Ihre Immobilie in wenigen Schritten und erhalten eine Wertspanne mit kurzer Begründung.',
               '<a class="button" href="#bewertung">Bewertung starten <span aria-hidden="true">↑</span></a>'),
@@ -417,9 +451,9 @@ def bewerten():
     body = sub_hero('bewerten', 'Immobilie bewerten', '', 'Was ist Ihre Immobilie wert, <em>heute und nach einer Sanierung?</em>',
                     'Ich schätze beides selbst ein, anhand Ihrer Angaben, der Lage und vergleichbarer Verkäufe. Kostenfrei, ohne Verpflichtung, Antwort innerhalb von 48 Stunden.',
                     '<a class="button" href="#bewertung">Bewertung starten<span aria-hidden="true">↓</span></a><a class="text-link" href="#ablauf">So läuft es ab ↓</a>')
-    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#bewertung">Bewertung</a><a href="#wege">Wege</a><a href="#ablauf">Der Ablauf</a>'
+    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#bewertung">Bewertung</a><a href="#ergebnis">Beispiel-Ergebnis</a><a href="#wege">Wege</a><a href="#ablauf">Der Ablauf</a>'
              '<a href="#fragen">Fragen</a><a href="#kontakt">Kontakt</a></nav>')
-    body += valuation_section('bewerten') + ways() + value_steps()
+    body += valuation_section('bewerten') + result_example() + ways() + value_steps()
     faqs = [
         ('Was kostet die Bewertung?', 'Die Ersteinschätzung ist kostenfrei und unverbindlich. Ein Auftrag entsteht dadurch nicht.'),
         ('Wie schnell erhalte ich eine Rückmeldung?', 'Innerhalb von 48 Stunden meldet sich Marco Kaimann persönlich, auf dem Weg, den Sie im letzten Schritt gewählt haben: per E-Mail, Telefon oder im Video-Termin.'),
