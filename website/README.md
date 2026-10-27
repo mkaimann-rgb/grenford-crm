@@ -7,6 +7,7 @@ cd website
 python3 build.py              # erzeugt dist/  (Produktion)
 python3 build.py --preview    # erzeugt preview/ (Links mit index.html, zum Öffnen ohne Webserver)
 python3 tests/markup.py       # Struktur, Sprungziele, Dateien, Formulare
+python3 tests/market.py       # Marktseite mit Musterdaten (nur Test), Pflichtfelder, Leerzustand
 node tests/transport.mjs      # Formular-Übertragung (ohne echten Request)
 ```
 
@@ -21,6 +22,7 @@ node tests/transport.mjs      # Formular-Übertragung (ohne echten Request)
 | `collection.py` | Investment-Mandate und Property-Karten |
 | `projects_comparison.py` | Vorher-Nachher-Vergleiche |
 | `ux_refinement.py` | Projektanfrage (6 Schritte), Kontaktbereich, Kontaktleiste |
+| `market.py`, `market.json` | Marktseite `/markt/`: Überblick mit Filtern, Einordnung, Methodik; Daten nur aus geprüften Quellen (`markt/DATENQUELLEN.md`) |
 | `valuation.py` | Bewertung und Suchprofile: fünf mehrstufige Formulare (Kacheln, Regler), Symbole |
 | `site.json` | Kontaktdaten, Formular-Endpunkt, Seitentitel/-beschreibungen, Hero-Galerien, Social-Profile |
 | `content.json` | Texte der drei Bereiche (Fokus, Memo-Kapitel, Ablauf, FAQ) |
@@ -62,6 +64,7 @@ Typografie, Hero-Karussell, Collection-Karussell und Gestaltung der bestehenden 
 | Property (B2C) | „Immobilie bewerten“ / „Suchprofil hinterlegen“, Abschnitt `#bewertung` mit zwei Reitern |
 | Projects | „Wert nach Sanierung ermitteln“, Abschnitt **Vergütung** (`#verguetung`: für Eigentümer kostenfrei, vergütet durch das beauftragte Bauunternehmen) |
 | `/bewerten/` | Bewertung mit Reitern Property / Projects / Investment, drei Wege (digital, Video, vor Ort), Ablauf 01/04, Fragen, Kontakt |
+| `/markt/` | Marktperspektiven: Marktüberblick (Filter Standort, Immobilienart, Zeitraum, Datentyp; Leerzustand ohne Daten), Einordnung, Methodik, Fragen, nächster Schritt. Nur im Footer verlinkt. |
 | `/ueber-grenford/` | Gründer, Haltung (vier Grundsätze), drei Geschäftsfelder, „So entsteht ein Memo“ (5 Schritte), Reichweite, Kontakt |
 
 - **Navigation:** Investment, Property, Projects mit Großmenü (Bild, Sprungziele, Memo und Bewertung als nächster Schritt), dazu „Bewerten“ und „Über GRENFORD“. Auf dem Handy das bisherige einfache Menü.

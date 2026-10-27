@@ -64,13 +64,20 @@ for page in pages:
     if 'id="strategic-form"' in s:
         assert s.count('data-inquiry-step=') == 6
     else:
-        assert page.parent.name in ('bewerten', 'ueber-grenford'), (page, 'Projektanfrage fehlt')
+        assert page.parent.name in ('bewerten', 'ueber-grenford', 'markt'), (page, 'Projektanfrage fehlt')
     # Bewertung/Suchprofile: jedes Formular hat Schritte, einen Kontaktschritt mit Einwilligung und eine Ergebniszone
     for wid in re.findall(r'<form class="wizard" id="wz-([a-z-]+)"', s):
         block = s.split(f'id="wz-{wid}"', 1)[1].split('</form>', 1)[0]
         assert block.count('data-step') >= 3 and 'data-contact' in block and 'name="Einwilligung"' in block, (page, 'Formular unvollständig', wid)
         assert f'id="wz-{wid}-result"' in block and 'name="gf_hp"' in block, (page, 'Ergebnis/Honeypot fehlt', wid)
-    assert 'id="ablauf"' in s
+    if page.parent.name == 'markt':
+        # Marktseite: Leerzustand ohne Daten; jede Kennzahl mit Datentyp, Zeitraum, Quelle und Prüfdatum
+        cards = s.count('class="mk-card"')
+        assert 'data-mk-empty' in s and 'id="marktueberblick"' in s, (page, 'Marktüberblick oder Leerzustand fehlt')
+        assert cards == 0 or (s.count('class="mk-type ') >= cards + 2 and s.count('geprüft am') == cards), (page, 'Kennzahl ohne Datentyp/Quelle')
+        assert s.count('<label class="mk-filter"') == 4, (page, 'Filter ohne Label')
+    else:
+        assert 'id="ablauf"' in s
     assert '<meta name="description"' in s and '<link rel="canonical"' in s
     print(page.relative_to(ROOT), 'verified')
 

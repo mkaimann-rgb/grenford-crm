@@ -15,6 +15,7 @@ from collection import collection
 from projects_comparison import comparisons
 from ux_refinement import inquiry, contact, rail
 from valuation import wizard_tabs, svg, TAB_LABELS_BEWERTEN
+import market
 
 ROOT = Path(__file__).parent
 STATIC = ROOT / 'static'
@@ -78,6 +79,7 @@ def footer():
     }
     columns = ''.join(f'<div><strong>{D[k]["label"]}</strong>' + ''.join(f'<a href="{page(k)}{h}">{t}</a>' for t, h in links) + '</div>' for k, links in cols.items())
     columns += (f'<div><strong>GRENFORD</strong><a href="{page("ueber-grenford")}">Über GRENFORD</a><a href="{page("bewerten")}">Immobilie bewerten</a>'
+                f'<a href="{page("markt")}">Marktperspektiven</a>'
                 '<a href="#kontakt">Kontakt</a><a href="https://www.staynamic.com/" target="_blank" rel="noopener">STAYNAMIC ↗</a></div>')
     return ('<footer class="site-footer"><div class="footer-main">' + logo() +
             f'<p>Wir strukturieren<br><em>Immobilienentscheidungen.</em></p><address>GRENFORD · Marco Kaimann<br>{E(a["street"])} · {E(a["zip"])} {E(a["city"])}<br>'
@@ -136,7 +138,7 @@ def shell(active, meta, body, ld=()):
             f'<meta name="grenford-form-endpoint" content="{E(SITE["formEndpoint"], quote=True)}"><meta name="grenford-email" content="{E(SITE["email"])}">'
             f'<link rel="icon" type="image/png" sizes="32x32" href="{asset("favicon-32.png")}"><link rel="icon" type="image/png" sizes="192x192" href="{asset("favicon-192.png")}">'
             f'<link rel="apple-touch-icon" href="{asset("apple-touch-icon.png")}">{fonts}'
-            f'<link rel="stylesheet" href="{root("site.css")}"><script defer src="{root("app.js")}"></script><script defer src="{root("ux.js")}"></script><script defer src="{root("wizard.js")}"></script>{PREVIEW_HEAD.replace("{root}", root(""))}'
+            f'<link rel="stylesheet" href="{root("site.css")}"><script defer src="{root("app.js")}"></script><script defer src="{root("ux.js")}"></script><script defer src="{root("wizard.js")}"></script>{f'<script defer src="{root("market.js")}"></script>' if active == 'markt' else ''}{PREVIEW_HEAD.replace("{root}", root(""))}'
             + (structured_data() if active == 'home' else '') + ''.join(ld_json(x) for x in ld) +
             f'</head><body class="page-{active}"><a class="skip" href="#main">Zum Inhalt</a>' + header(active) +
             '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail() + ('' if active in ('bewerten', '404') else value_bar()) + '</body></html>')
@@ -420,6 +422,19 @@ def ueber():
     return shell('ueber-grenford', SITE['pages']['ueber-grenford'], body, ld=(crumbs('ueber-grenford', 'Über GRENFORD'),))
 
 
+def markt():
+    """Marktseite: ergänzende Orientierung, keine Leistungsseite und keine automatische Objektbewertung."""
+    body = sub_hero('markt', 'MARKTPERSPEKTIVEN', 'M', 'Zahlen verstehen.<br><em>Klarer entscheiden.</em>',
+                    'Ein Marktwert entsteht im Zusammenspiel von Lage, Zustand, Nutzung und Nachfrage. Marktdaten geben Orientierung. '
+                    'Entscheidend ist, was sie für Ihre Immobilie bedeuten.',
+                    '<a class="button" href="#kontakt">Vorhaben besprechen<span aria-hidden="true">↓</span></a><a class="text-link" href="#marktueberblick">Zur Marktübersicht ↓</a>')
+    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#marktueberblick">Marktüberblick</a><a href="#einordnung">Einordnung</a>'
+             '<a href="#methodik">Methodik</a><a href="#fragen">Fragen</a><a href="#kontakt">Kontakt</a></nav>')
+    body += market.overview('#kontakt') + market.interpretation(page) + market.methodology()
+    body += faq_section(market.FAQ, 'Häufige<br><em>Fragen.</em>') + market.next_step('#kontakt') + contact(hint='valuation')
+    return shell('markt', SITE['pages']['markt'], body, ld=(faq_data(market.FAQ), crumbs('markt', 'Marktperspektiven')))
+
+
 def not_found():
     """404-Seite: absolute Pfade, weil der Server sie unter beliebigen Adressen ausliefert."""
     links = ''.join(f'<a class="field-row" href="{page(k)}"><span class="eyebrow">{D[k]["label"].upper()}</span><h3>{t}</h3><p>{x}</p>'
@@ -449,6 +464,7 @@ def copy_static(out):
     shutil.copy(STATIC / 'js' / 'app.js', out / 'app.js')
     shutil.copy(STATIC / 'js' / 'ux.js', out / 'ux.js')
     shutil.copy(STATIC / 'js' / 'wizard.js', out / 'wizard.js')
+    shutil.copy(STATIC / 'js' / 'market.js', out / 'market.js')
     css = '\n'.join(f'/* ---- {name} ---- */\n' + (STATIC / 'css' / name).read_text(encoding='utf-8') for name in CSS_ORDER)
     # site.css liegt im Wurzelordner: absolute /assets/-Pfade werden relativ, damit dist/ überall läuft.
     (out / 'site.css').write_text(css.replace("url('/assets/", "url('assets/"), encoding='utf-8')
@@ -473,7 +489,7 @@ def responsive_variants(out):
 
 
 def seo_files(out):
-    urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA)]
+    urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + ['markt']]
     (out / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                      + ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
     (out / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {absolute("sitemap.xml")}\n', encoding='utf-8')
@@ -503,6 +519,7 @@ def main():
         pages[f'{k}/index.html'] = (1, lambda k=k: subpage(k))
     pages['bewerten/index.html'] = (1, bewerten)
     pages['ueber-grenford/index.html'] = (1, ueber)
+    pages['markt/index.html'] = (1, markt)
     for target, (depth, render) in pages.items():
         paths.set_page(depth)
         (out / target).parent.mkdir(parents=True, exist_ok=True)

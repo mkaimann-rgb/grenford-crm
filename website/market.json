@@ -1,0 +1,25 @@
+{
+ "note": "Marktdaten für /markt/. Nur geprüfte Datensätze aus dokumentierten Quellen eintragen; keine Schätzungen, keine Muster. Der Build prüft Pflichtfelder und bricht bei unvollständigen Datensätzen ab. Quellenvorschläge: markt/DATENQUELLEN.md",
+ "filters": {
+  "city": ["Berlin", "Berlin-Charlottenburg", "Berlin-Wilmersdorf", "Berlin-Steglitz-Zehlendorf", "Potsdam"],
+  "assetType": {"apartment": "Eigentumswohnungen", "house": "Ein- und Zweifamilienhäuser", "other": "Weitere Objektarten"},
+  "dataType": {"transaction": "Transaktionspreise (tatsächlich vereinbart)", "asking": "Angebotspreise (inseriert)"}
+ },
+ "marketData": [],
+ "dataSchema": {
+  "city": "string",
+  "assetType": "apartment | house | other",
+  "period": "string",
+  "dataType": "asking | transaction",
+  "metric": "string",
+  "statistic": "median | mean | other",
+  "value": "number | null",
+  "unit": "string",
+  "sampleSize": "number | null",
+  "sourceName": "string",
+  "sourceUrl": "string",
+  "usageRightsNote": "string",
+  "checkedAt": "YYYY-MM-DD",
+  "methodologyNote": "string"
+ }
+}

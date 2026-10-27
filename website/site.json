@@ -112,6 +112,17 @@
     "hero-frankfurt.webp",
     "hero-koeln.webp"
    ]
+  },
+  "markt": {
+   "title": "Immobilienmarkt verstehen | GRENFORD",
+   "description": "Marktdaten einordnen und Immobilienentscheidungen vorbereiten. GRENFORD verbindet Marktübersicht mit persönlicher Beratung.",
+   "gallery": [
+    "hero-berlin.webp",
+    "hero-frankfurt.webp",
+    "hero-muenchen.webp",
+    "hero-koeln.webp",
+    "hero-hamburg.webp"
+   ]
   }
  },
  "galleryNote": "gallery = Originaldateien in static/assets. Fehlt eine Datei, wird sie übersprungen; fehlen alle, nutzt der Build previewGallery.",
