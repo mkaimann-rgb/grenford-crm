@@ -106,8 +106,8 @@ NO_PLOT = 'Objektart!=Grundstück'
 WIZARDS = {
     'property-value': {
         'subject': 'property', 'title': 'Bewertungsanfrage · Property', 'submit': 'Einschätzung anfordern',
-        'eyebrow': 'PROPERTY · IMMOBILIE BEWERTEN', 'tab': ('Verkaufen', 'Immobilie bewerten'),
-        'success': 'Vielen Dank. Ihre Angaben sind angekommen. Innerhalb von 48 Stunden melde ich mich persönlich mit Ihrer Einschätzung. – Marco Kaimann',
+        'eyebrow': 'Immobilie bewerten', 'tab': ('Verkaufen', 'Immobilie bewerten'),
+        'success': 'Vielen Dank. Ihre Angaben sind angekommen. Innerhalb von 48 Stunden melde ich mich persönlich mit Ihrer Einschätzung.\nMarco Kaimann',
         'steps': [
             step('Ihre Immobilie', 'Welche Immobilie möchten Sie bewerten lassen?',
                  tiles('Objektart', [('Wohnung', 'wohnung'), ('Haus', 'haus'), ('Mehrfamilienhaus', 'mfh'), ('Grundstück', 'grundstueck'), ('Gewerbeeinheit', 'gewerbe')])),
@@ -138,8 +138,8 @@ WIZARDS = {
     },
     'property-search': {
         'subject': 'property', 'title': 'Suchprofil · Property', 'submit': 'Suchprofil hinterlegen',
-        'eyebrow': 'PROPERTY · SUCHPROFIL', 'tab': ('Kaufen', 'Suchprofil hinterlegen'),
-        'success': 'Vielen Dank. Ihr Suchprofil ist angekommen. Passende Angebote, auch diskrete, stelle ich Ihnen persönlich vor. – Marco Kaimann',
+        'eyebrow': 'Suchprofil', 'tab': ('Kaufen', 'Suchprofil hinterlegen'),
+        'success': 'Vielen Dank. Ihr Suchprofil ist angekommen. Passende Angebote, auch diskrete, stelle ich Ihnen persönlich vor.\nMarco Kaimann',
         'steps': [
             step('Ihre Suche', 'Was suchen Sie?',
                  tiles('Gesucht', [('Wohnung', 'wohnung'), ('Haus', 'haus'), ('Kapitalanlage', 'anlage'), ('Sanierungsobjekt', 'sanierung'), ('Grundstück', 'grundstueck')])),
@@ -160,8 +160,8 @@ WIZARDS = {
     },
     'projects-value': {
         'subject': 'renovation', 'title': 'Sanierungsanfrage · Wert heute und nach Sanierung', 'submit': 'Einschätzung anfordern',
-        'eyebrow': 'PROJECTS · WERT HEUTE UND SANIERT', 'tab': ('Sanieren', 'Wert nach Sanierung'),
-        'success': 'Vielen Dank. Ihr Vorhaben ist angekommen. Innerhalb von 48 Stunden melde ich mich persönlich und wir besprechen den nächsten Schritt. Für Sie als Eigentümer bleibt die Beratung kostenfrei. – Marco Kaimann',
+        'eyebrow': 'Wert heute und nach Sanierung', 'tab': ('Sanieren', 'Wert nach Sanierung'),
+        'success': 'Vielen Dank. Ihr Vorhaben ist angekommen. Innerhalb von 48 Stunden melde ich mich persönlich und wir besprechen den nächsten Schritt. Für Sie als Eigentümer bleibt die Beratung kostenfrei.\nMarco Kaimann',
         'steps': [
             step('Ihre Immobilie', 'Was möchten Sie sanieren oder umbauen?',
                  tiles('Objektart', [('Wohnung', 'wohnung'), ('Haus', 'haus'), ('Mehrfamilienhaus', 'mfh'), ('Dachgeschoss / Rohbau', 'dach'), ('Gewerbeeinheit', 'gewerbe')])),
@@ -184,8 +184,8 @@ WIZARDS = {
     },
     'investment-value': {
         'subject': 'investment', 'title': 'Asset-Einordnung · Investment', 'submit': 'Einordnung anfragen',
-        'eyebrow': 'INVESTMENT · ASSET EINORDNEN', 'tab': ('Verkaufen', 'Asset einordnen'), 'company': True,
-        'success': 'Vielen Dank. Ihre Angaben sind angekommen. Innerhalb von 48 Stunden melde ich mich persönlich und vertraulich bei Ihnen. – Marco Kaimann',
+        'eyebrow': 'Objekt einordnen', 'tab': ('Verkaufen', 'Asset einordnen'), 'company': True,
+        'success': 'Vielen Dank. Ihre Angaben sind angekommen. Innerhalb von 48 Stunden melde ich mich persönlich und vertraulich bei Ihnen.\nMarco Kaimann',
         'steps': [
             step('Die Assetklasse', 'Um welches Objekt geht es?',
                  tiles('Assetklasse', [('Wohn- und Geschäftshaus', 'mfh'), ('Portfolio', 'portfolio'), ('Hotel / Serviced', 'hotel'), ('Büro / Gewerbe', 'gewerbe'),
@@ -206,8 +206,8 @@ WIZARDS = {
     },
     'investment-search': {
         'subject': 'investment', 'title': 'Ankaufsprofil · Investment', 'submit': 'Ankaufsprofil hinterlegen',
-        'eyebrow': 'INVESTMENT · ANKAUFSPROFIL', 'tab': ('Ankaufen', 'Ankaufsprofil'), 'company': True,
-        'success': 'Vielen Dank. Ihr Ankaufsprofil ist angekommen. Passende Off-Market-Gelegenheiten stelle ich Ihnen vertraulich vor. – Marco Kaimann',
+        'eyebrow': 'Ankaufsprofil', 'tab': ('Ankaufen', 'Ankaufsprofil'), 'company': True,
+        'success': 'Vielen Dank. Ihr Ankaufsprofil ist angekommen. Passende Off-Market-Gelegenheiten stelle ich Ihnen vertraulich vor.\nMarco Kaimann',
         'steps': [
             step('Die Assetklassen', 'Was suchen Sie? Mehrfachauswahl möglich.',
                  tiles('Assetklassen', [('Wohn- und Geschäftshaus', 'mfh'), ('Portfolio', 'portfolio'), ('Hotel / Serviced', 'hotel'), ('Büro / Gewerbe', 'gewerbe'),
@@ -308,7 +308,7 @@ def _contact_step(wid, w, total):
             f'<label class="wz-consent w4" for="wz-{wid}-ok"><input id="wz-{wid}-ok" type="checkbox" name="Einwilligung" value="ja" required>'
             '<span>Ich bin einverstanden, dass GRENFORD meine Angaben zur Bearbeitung dieser Anfrage verwendet. Die Einwilligung kann ich jederzeit widerrufen. *</span></label>'
             '</div><aside class="wz-person">' + img('marco-kaimann.jpg', '', '96px', 'loading="lazy"') +
-            '<p><strong>Marco Kaimann</strong><span>Founder &amp; Strategic Advisor</span>Ihre Angaben lese ich persönlich. Innerhalb von 48 Stunden erhalten Sie eine Einschätzung von mir, keinen automatisch errechneten Wert.</p></aside></div></fieldset>')
+            '<p><strong>Marco Kaimann</strong><span>Gründer von GRENFORD</span>Ihre Angaben lese ich selbst. Innerhalb von 48 Stunden erhalten Sie eine Einschätzung von mir, keinen automatisch errechneten Wert.</p></aside></div></fieldset>')
 
 
 def wizard(wid):

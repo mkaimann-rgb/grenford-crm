@@ -70,36 +70,36 @@ def _group(kind, name, data, active):
 def inquiry(k):
     active = k if k in LABELS else ''
     section_id = 'projektanfrage'  # Sprungziel #anfrage liegt auf dem umgebenden <details>
-    title = f'{MEMO[active]} anfragen.' if active else 'Ihr Vorhaben anfragen.'
+    title = f'{MEMO[active]} anfragen' if active else 'Ihr Vorhaben beschreiben'
     options = (('' if active else '<option value="" selected>Bereich wählen</option>')
                + ''.join(f'<option value="{key}"{" selected" if key == active else ""}>{label}</option>' for key, label in LABELS.items()))
     return (f'<section class="strategic-inquiry" id="{section_id}" data-inquiry-context="{active}">'
-            '<div class="inquiry-intro"><span class="eyebrow">STRATEGISCHE PROJEKTANFRAGE</span>'
-            f'<h2 id="inquiry-title">{title}</h2><p id="inquiry-lead">In sechs Schritten zu Ihrem Vorhaben. Das strategische Erstgespräch ist kostenfrei.</p>'
+            '<div class="inquiry-intro">'
+            f'<h2 id="inquiry-title">{title}</h2><p id="inquiry-lead">Sechs kurze Fragen, damit ich mich vorbereiten kann. Das erste Gespräch kostet nichts.</p>'
             '<a class="text-link" href="#kontakt">Nur eine kurze Frage? Direkt zum Kontakt ↓</a></div>'
             f'<div class="inquiry-card"><form {_form_attrs("strategic-form")} aria-labelledby="inquiry-title">'
             f'<label class="inquiry-context">Ihr Bereich<select name="Bereich" id="inquiry-context" required>{options}</select></label>'
             '<div class="inquiry-progress"><span id="inquiry-step-label" aria-live="polite">Schritt 1 von 6</span><span id="inquiry-percent" aria-hidden="true">17 %</span></div>'
             '<progress id="inquiry-progress" value="1" max="6" aria-label="Fortschritt Ihrer Projektanfrage">1 von 6</progress>'
-            '<fieldset data-inquiry-step="1"><legend tabindex="-1">01 / <span data-asset-legend>Asset-Klasse</span></legend>'
+            '<fieldset data-inquiry-step="1"><legend tabindex="-1"><span data-asset-legend>Asset-Klasse</span></legend>'
             '<p data-asset-question>Um welche Art von Immobilie handelt es sich bei der geplanten Transaktion?</p>'
             + _group('radio', 'Objektart', ASSETS, active) + '</fieldset>'
-            '<fieldset data-inquiry-step="2" hidden><legend tabindex="-1">02 / Ihr Anliegen</legend><p>Wobei darf GRENFORD Sie unterstützen?</p>'
+            '<fieldset data-inquiry-step="2" hidden><legend tabindex="-1">Ihr Anliegen</legend><p>Wobei darf GRENFORD Sie unterstützen?</p>'
             + _group('radio', 'Anliegen', INTENTS, active) + '</fieldset>'
-            '<fieldset data-inquiry-step="3" hidden><legend tabindex="-1">03 / Was ist Ihnen wichtig?</legend><p>Mehrfachauswahl möglich. Dieser Schritt ist optional.</p>'
+            '<fieldset data-inquiry-step="3" hidden><legend tabindex="-1">Was ist Ihnen wichtig?</legend><p>Mehrfachauswahl möglich. Dieser Schritt ist optional.</p>'
             + _group('checkbox', 'Themen', TOPICS, active) + '</fieldset>'
-            '<fieldset data-inquiry-step="4" hidden><legend tabindex="-1">04 / Ihr Vorhaben</legend><p>Eine erste Einordnung reicht. Was noch offen ist, klären wir im Gespräch.</p>'
+            '<fieldset data-inquiry-step="4" hidden><legend tabindex="-1">Ihr Vorhaben</legend><p>Eine erste Einordnung reicht. Was noch offen ist, klären wir im Gespräch.</p>'
             '<div class="ux-form-grid"><label>Standort / Suchregion *<input name="Region" id="inquiry-region" autocomplete="address-level2" required maxlength="180" placeholder="z. B. Berlin und Brandenburg"></label>'
             '<label><span data-budget-label>Budget / Preisrahmen (optional)</span><input name="Rahmen" id="inquiry-budget" maxlength="140" placeholder="z. B. bis 2 Mio. € oder noch offen"></label>'
             '<label>Zeitrahmen (optional)<select name="Zeitrahmen" id="inquiry-timing"><option value="">Noch offen</option><option>So bald wie möglich</option><option>In 3–6 Monaten</option><option>In 6–12 Monaten</option><option>Langfristige Planung</option></select></label>'
             '<label>Fläche / Größe (optional)<input name="Groesse" id="inquiry-size" maxlength="100" placeholder="z. B. 120 m² oder 25 Zimmer"></label>'
             '<label class="ux-full">Was sollten wir noch wissen? (optional)<textarea name="Beschreibung" id="inquiry-notes" rows="3" maxlength="2000" placeholder="Ihre Ziele, Wünsche oder eine konkrete Immobilie"></textarea></label></div></fieldset>'
-            '<fieldset data-inquiry-step="5" hidden><legend tabindex="-1">05 / Ihre Kontaktdaten</legend><p>Damit GRENFORD persönlich auf Ihre Anfrage zurückkommen kann.</p>'
+            '<fieldset data-inquiry-step="5" hidden><legend tabindex="-1">Ihre Kontaktdaten</legend><p>Damit ich mich bei Ihnen melden kann.</p>'
             '<div class="ux-form-grid"><label>Vollständiger Name *<input name="Name" id="inquiry-name" required autocomplete="name" maxlength="150"></label>'
             '<label>E-Mail-Adresse *<input name="Email" id="inquiry-email" type="email" required autocomplete="email" maxlength="200"></label>'
             '<label>Telefonnummer (optional)<input name="Telefon" id="inquiry-phone" type="tel" autocomplete="tel" maxlength="60"></label>'
             '<label>Unternehmen (optional)<input name="Unternehmen" id="inquiry-company" autocomplete="organization" maxlength="180"></label></div></fieldset>'
-            '<fieldset data-inquiry-step="6" hidden><legend tabindex="-1">06 / Prüfen & anfragen</legend><p>Bitte prüfen Sie Ihre Angaben. Über „Zurück“ können Sie alles bearbeiten.</p>'
+            '<fieldset data-inquiry-step="6" hidden><legend tabindex="-1">Prüfen und absenden</legend><p>Bitte prüfen Sie Ihre Angaben. Über „Zurück“ können Sie alles bearbeiten.</p>'
             '<dl id="inquiry-review"></dl><label>Bevorzugter Kontakt (optional)<select name="Kontaktweg" id="inquiry-channel"><option>E-Mail</option><option>Telefon, sofern angegeben</option><option>Videogespräch abstimmen</option></select></label>'
             f'<p class="ux-privacy">Ihre Angaben dienen der Bearbeitung Ihrer Anfrage. Das Erstgespräch ist kostenfrei; ein Mandat wird gesondert vereinbart. <a href="{E(SITE["privacy"])}" target="_blank" rel="noopener">Datenschutz</a></p></fieldset>'
             + _spam_trap() +
@@ -135,15 +135,15 @@ def contact(subject=None, collapsible=False, hint='inquiry'):
             '<div id="contact-result" role="status" tabindex="-1"></div>' + _noscript() + '</form>')
     if collapsible:
         form_block = ('<details class="ux-contact-form quick-message"><summary>Eine Nachricht schreiben <span aria-hidden="true">↗</span></summary>'
-                      f'<div class="quick-message-content"><h3>Eine kurze Nachricht.</h3>{form}</div></details>')
+                      f'<div class="quick-message-content"><h3>Oder eine kurze Nachricht</h3>{form}</div></details>')
     else:
-        form_block = f'<div class="ux-contact-form"><h3>Eine kurze Nachricht.</h3>{form}</div>'
+        form_block = f'<div class="ux-contact-form"><h3>Oder eine kurze Nachricht</h3>{form}</div>'
     mail = E(SITE['email'])
-    return ('<section class="ux-contact" id="kontakt"><div class="ux-contact-head"><span class="eyebrow">KONTAKT / GRENFORD BERLIN</span>'
-            '<h2>Nehmen Sie<br><span>Kontakt auf.</span></h2><p>Besprechen Sie Ihre Immobilie, Ihre Transaktion oder Ihr Sanierungsvorhaben persönlich mit GRENFORD.</p>'
-            '<strong>Strategisch. Diskret. Professionell.</strong></div><div class="ux-contact-grid"><div class="ux-contact-direct"><h3>Ihr direkter Draht.</h3>'
+    return ('<section class="ux-contact" id="kontakt"><div class="ux-contact-head"><span class="eyebrow">Kontakt</span>'
+            '<h2>So erreichen Sie mich</h2><p>Am schnellsten per E-Mail oder WhatsApp. Wenn Sie lieber sprechen, buchen Sie direkt einen Termin.</p>'
+            '</div><div class="ux-contact-grid"><div class="ux-contact-direct"><h3>Direkt</h3>'
             f'<a class="ux-email" href="mailto:{mail}">{mail} <span aria-hidden="true">↗</span></a><a href="tel:{E(SITE["phoneHref"])}">{E(SITE["phone"])}</a>'
-            f'<p><span class="eyebrow">BÜRO</span><br>{E(a["street"])}<br>{E(a["zip"])} {E(a["city"])}</p>'
+            f'<p><small>Büro</small>{E(a["street"])}<br>{E(a["zip"])} {E(a["city"])}</p>'
             f'<div class="ux-contact-links"><a href="{E(SITE["calendar"])}" target="_blank" rel="noopener noreferrer">{icon("calendar")}<span><b>Termin buchen ↗</b><small>Google Kalender · 30 Minuten</small></span></a>'
             f'<a href="{E(SITE["whatsapp"])}" target="_blank" rel="noopener noreferrer">{icon("whatsapp")}<span><b>WhatsApp ↗</b><small>Direktnachricht</small></span></a></div>'
             + socials() +

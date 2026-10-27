@@ -131,3 +131,12 @@ Typografie, Hero-Karussell, Collection-Karussell und Gestaltung der bestehenden 
 - Collection-Karten (Investment und Property): beim Überfahren mit der Maus bzw. bei Tastaturfokus orange Fläche (`--orange`), vorher orange Schrift (Region, Ort, Status-Punkt) wird weiß. Auf Touch-Geräten kein Hover. CSS am Ende von `static/css/refinements.css`.
 
 **Bewusst nicht geändert:** Gestaltung, Texte und Bildsprache der Seiten, die Graustufen-Darstellung der Hero-Bilder und die drei Basis-Stylesheets (alle Korrekturen stehen in `refinements.css`).
+
+## Schreibregeln gegen den „KI-Look“ (Stand 27.10.2026)
+
+- Die Formel „X.<br><em>Y.</em>“ nur im Startseiten-Hero („Der nächste Schritt zählt.“). Alle anderen Überschriften sind normale, unterschiedlich gebaute Sätze.
+- Keine Dreiklänge („Strategisch. Diskret. Professionell.“), keine Paar-Formeln („Werte erkennen. Chancen einordnen.“).
+- Etiketten (`.eyebrow`) nur, wo sie etwas Neues sagen; Nummern nur für echte Reihenfolgen (Ablauf, Schritte).
+- Ich-Form, wenn Marco Kaimann spricht („Ich melde mich innerhalb von 48 Stunden“); konkret statt „persönlich“, „strukturiert“, „fundiert“.
+- Gedankenstriche im Fließtext vermeiden; lieber zwei Sätze.
+- `.serif` (Palatino-Stack wie in den Memos) für einzelne ruhige Überschriften, nicht für alle.

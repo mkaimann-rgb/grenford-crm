@@ -51,7 +51,7 @@
    "Köln",
    "Hamburg"
   ],
-  "reachNote": "Mandate bundesweit. Beratung aus Berlin.",
+  "reachNote": "Beratung aus Berlin, Mandate in ganz Deutschland",
   "reachHint": "reach = Städte in derselben Reihenfolge wie gallery; die gerade gezeigte Stadt wird hervorgehoben (app.js)."
  },
  "pages": {
@@ -104,7 +104,7 @@
   },
   "ueber-grenford": {
    "title": "Über GRENFORD | Marco Kaimann – Boutique Real Estate Advisory Berlin",
-   "description": "GRENFORD ist die Boutique-Immobilienberatung von Marco Kaimann aus Berlin: Investment, Property und Projects mit einer Haltung – Immobilienentscheidungen strukturieren.",
+   "description": "GRENFORD ist die Boutique-Immobilienberatung von Marco Kaimann aus Berlin. Verkauf und Ankauf von Anlage- und Wohnimmobilien, vergleichbare Bauangebote vor der Sanierung.",
    "gallery": [
     "hero-berlin.webp",
     "hero-hamburg.webp",
