@@ -195,7 +195,7 @@ def reach_line():
     cities = SITE['home'].get('reach') or []
     if not cities:
         return ''
-    names = ''.join(f'<span data-reach-city{" class=\"is-active\"" if i == 0 else ""}>{E(region)} <small>({E(city)})</small></span>'
+    names = ''.join(f'<span data-reach-city{" class=\"is-active\"" if i == 0 else ""}>{E(region)}</span>'
                     for i, (region, city) in enumerate(cities))
     return f'<p class="hero-reach"><span class="hero-reach-cities">{names}</span><span>{E(SITE["home"]["reachNote"])}</span></p>'
 
