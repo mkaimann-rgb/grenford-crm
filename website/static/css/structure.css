@@ -595,3 +595,10 @@
  .memo-timeline li:last-child p{margin:0 auto;max-width:none}
  .memo-timeline li:not(:last-child):after,.memo-timeline li:nth-last-child(2):after{left:calc(50% + 30px);right:calc(-50% + 30px)}
  .method .memo-timeline li:not(:last-child):after,.method .memo-timeline li:nth-last-child(2):after{left:calc(50% + 32px);right:calc(-50% + 32px)}}
+/* Drei Bereiche: abgerundete Bildkacheln, Texte auf gleicher Höhe */
+.pathway-media{border-radius:14px}
+.pathway-arrow{border-radius:50%}
+@media(min-width:761px){.pathway-body p{min-height:3em}}
+.pathway{display:flex;flex-direction:column}
+.pathway-body{flex:1;display:flex;flex-direction:column}
+.pathway-body p{flex:1}

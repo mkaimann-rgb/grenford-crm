@@ -211,7 +211,7 @@ def home_hero():
 def pathways():
     copy = {'investment': ('Anlageobjekte verkaufen und ankaufen, oft ohne öffentliches Inserat.', 'Für Eigentümer & Investoren'),
             'property': ('Wohnungen und Häuser verkaufen oder das passende Zuhause finden.', 'Für private Eigentümer & Käufer'),
-            'projects': ('Bauangebote vergleichen und den richtigen Baupartner wählen, bevor Sie sanieren.', 'Für Bauherren & Eigentümer')}
+            'projects': ('Bauangebote vergleichen und den passenden Baupartner finden.', 'Für Bauherren & Eigentümer')}
     h = ('<section class="pathways" id="perspektiven"><div class="section-head">'
          '<h2>Worum geht es bei Ihnen?</h2><p>Die meisten Anfragen betreffen eines von drei Themen. Wählen Sie Ihres, der Rest ergibt sich im Gespräch.</p></div><div class="pathway-grid">')
     pics = {'investment': 'hero-inv-wohnhaus.webp', 'property': 'hero-prop-altbauwohnung.webp', 'projects': 'dachgeschoss-after.webp'}
