@@ -35,8 +35,8 @@
   }
  ],
  "home": {
-  "title": "GRENFORD | Immobilienberatung Berlin für Investment, Property und Projects",
-  "description": "Persönliche Immobilienberatung aus Berlin: Off-Market-Investments, Verkauf und Kauf privater Immobilien sowie vergleichbare Bauangebote für Ihre Sanierung. Mit Marco Kaimann.",
+  "title": "GRENFORD | Investment, Property und Projects mit Marco Kaimann",
+  "description": "Immobilienberatung von Marco Kaimann: Off-Market-Transaktionen, Verkauf und Kauf privater Immobilien sowie vergleichbare Bauangebote für Ihre Sanierung. Mit Marco Kaimann.",
   "gallery": [
    "hero-muenchen.webp",
    "hero-frankfurt.webp",
@@ -51,12 +51,12 @@
    "Köln",
    "Hamburg"
   ],
-  "reachNote": "Beratung aus Berlin, Mandate in ganz Deutschland",
+  "reachNote": "",
   "reachHint": "reach = Städte in derselben Reihenfolge wie gallery; die gerade gezeigte Stadt wird hervorgehoben (app.js)."
  },
  "pages": {
   "investment": {
-   "title": "Investment | GRENFORD – Off-Market, Globalverkauf, Suchauftrag",
+   "title": "Investment | GRENFORD – Strategische Off-Market-Transaktionen",
    "description": "Off-Market-Transaktionen, Globalverkäufe und gezielte Objektsuche im Kundenauftrag. GRENFORD bringt Anlageziele und passende Immobilien zusammen.",
    "gallery": [
     "hero-inv-wohnhaus.webp",
@@ -67,7 +67,7 @@
    ]
   },
   "property": {
-   "title": "Property | GRENFORD – Immobilie verkaufen oder kaufen in Berlin",
+   "title": "Property | GRENFORD – Wohnung oder Haus verkaufen oder kaufen",
    "description": "Wohnungen, Häuser und kleine Gewerbeeinheiten persönlich positioniert, verständlich präsentiert und passend vermarktet. Für private Eigentümer und Käufer.",
    "gallery": [
     "hero-prop-reetdach.webp",
@@ -103,8 +103,8 @@
    ]
   },
   "ueber-grenford": {
-   "title": "Über GRENFORD | Marco Kaimann – Boutique Real Estate Advisory Berlin",
-   "description": "GRENFORD ist die Boutique-Immobilienberatung von Marco Kaimann aus Berlin. Verkauf und Ankauf von Anlage- und Wohnimmobilien, vergleichbare Bauangebote vor der Sanierung.",
+   "title": "Über GRENFORD | Marco Kaimann",
+   "description": "GRENFORD ist die inhabergeführte Immobilienberatung von Marco Kaimann. Verkauf und Ankauf von Anlage- und Wohnimmobilien, vergleichbare Bauangebote vor der Sanierung.",
    "gallery": [
     "hero-berlin.webp",
     "hero-hamburg.webp",

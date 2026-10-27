@@ -140,3 +140,6 @@ Typografie, Hero-Karussell, Collection-Karussell und Gestaltung der bestehenden 
 - Ich-Form, wenn Marco Kaimann spricht („Ich melde mich innerhalb von 48 Stunden“); konkret statt „persönlich“, „strukturiert“, „fundiert“.
 - Gedankenstriche im Fließtext vermeiden; lieber zwei Sätze.
 - `.serif` (Palatino-Stack wie in den Memos) für einzelne ruhige Überschriften, nicht für alle.
+- Kein Berlin-Bezug in Texten („aus Berlin“, „von Berlin aus“); die Adresse steht nur im Kontakt und im Footer.
+- Ein Einstieg pro Seite: Bewertung, darunter eingeklappt „Oder beschreiben Sie Ihr Vorhaben“ (`gateway(k)` in build.py). Kein zweiter Anfrage-Block.
+- Kontakt ist auf allen Seiten derselbe Block (`contact()` in ux_refinement.py); Investment nutzt `contact_for('investment')` mit Firmenfeld und eigener Einleitung.

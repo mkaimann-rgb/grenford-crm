@@ -44,12 +44,12 @@ if (endpointMeta) FORM_ENDPOINT = endpointMeta.content.trim();
 const MAIL = (document.querySelector('meta[name="grenford-email"]') || {}).content || 'kontakt@grenford.de';
 
 // Texte wie auf der veröffentlichten Seite.
-const TITLES = { investment: 'Investment Memo anfragen.', property: 'Property Brief anfragen.', projects: 'Renovation Memo anfragen.' };
+const TITLES = { investment: 'Investment Memo anfragen', property: 'Property Brief anfragen', projects: 'Renovation Memo anfragen' };
 const LEADS = {
-  '': 'Investment, Property oder Projects: Wählen Sie Ihren Bereich und stellen Sie Ihr Vorhaben vor. Das strategische Erstgespräch ist kostenfrei.',
-  investment: 'Strukturierte Qualifikation für Ihr Transaktionsmandat oder Suchprofil. Das strategische Erstgespräch ist kostenfrei.',
-  property: 'Eine erste Einordnung für Ihren Verkauf oder Ihr Kaufinteresse. Das strategische Erstgespräch ist kostenfrei.',
-  projects: 'Ihre Wünsche, Ihr Bestand und der Weg zum passenden Baupartner. Das strategische Erstgespräch ist kostenfrei.'
+  '': 'Sechs kurze Fragen. Das erste Gespräch ist kostenfrei.',
+  investment: 'Sechs kurze Fragen zu Ihrem Objekt oder Ankaufsprofil, vertraulich behandelt.',
+  property: 'Sechs kurze Fragen zu Ihrem Verkauf oder Kaufwunsch.',
+  projects: 'Sechs kurze Fragen zu Ihrem Bestand und Ihrem Vorhaben.'
 };
 const LEGEND = { '': 'Bereich & Objektart', investment: 'Asset-Klasse', property: 'Objektart', projects: 'Objektart' };
 const QUESTION = {
@@ -171,7 +171,7 @@ if (strategic) {
   function changeContext() {
     const c = context.value;
     section.dataset.inquiryContext = c;
-    title.textContent = TITLES[c] || 'Ihr Vorhaben anfragen.';
+    title.textContent = TITLES[c] || 'Ihr Vorhaben beschreiben';
     lead.textContent = LEADS[c] || LEADS[''];
     strategic.querySelectorAll('[data-context-assets],[data-context-intents],[data-context-topics]').forEach(block => {
       block.hidden = (block.dataset.contextAssets || block.dataset.contextIntents || block.dataset.contextTopics) !== c;
@@ -206,7 +206,7 @@ if (strategic) {
     const rows = review();
     const data = {
       name: val('Name'), email: val('Email'), phone: val('Telefon'), subject: SUBJECT[context.value],
-      message: 'Strategische Projektanfrage · ' + TITLES[context.value] + '\n\n' + rows.map(([a, b]) => a + ': ' + b).join('\n') + '\nBevorzugter Kontakt: ' + val('Kontaktweg')
+      message: 'Projektanfrage · ' + TITLES[context.value] + '\n\n' + rows.map(([a, b]) => a + ': ' + b).join('\n') + '\nBevorzugter Kontakt: ' + val('Kontaktweg')
     };
     const finish = () => {
       inquirySent = true;
@@ -279,7 +279,9 @@ if (quick) {
     const invalid = firstInvalid(quick);
     if (invalid) return fail(invalid, error, invalidMessage(invalid));
     const fd = new FormData(quick);
-    const data = { name: fd.get('name').trim(), email: fd.get('email').trim(), phone: fd.get('phone').trim(), subject: fd.get('subject'), message: fd.get('message').trim() };
+    const company = (fd.get('company') || '').trim();
+    const data = { name: fd.get('name').trim(), email: fd.get('email').trim(), phone: fd.get('phone').trim(), subject: fd.get('subject'),
+      message: (company ? 'Unternehmen: ' + company + '\n\n' : '') + fd.get('message').trim() };
     const finish = () => {
       showSuccess(result, 'Vielen Dank. Ihre Nachricht wurde übermittelt. Ich melde mich persönlich bei Ihnen.');
       button.hidden = true;

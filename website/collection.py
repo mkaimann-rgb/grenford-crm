@@ -46,7 +46,7 @@ def collection(selected=None):
         h += ('<div class="collection-toolbar"><div role="group" aria-label="Collection auswählen">'
               f'<button type="button" data-collection-tab="investment" aria-pressed="true">Investment <span>{len(I)}</span></button>'
               f'<button type="button" data-collection-tab="property" aria-pressed="false">Property <span>{len(P)}</span></button>'
-              '</div><a class="collection-shortcut" href="#kontakt">Ihr Vorhaben besprechen ↗</a></div>')
+              '</div></div>')
     for key, items, card in (('investment', I, _mandate), ('property', P, _property)):
         if selected and key != selected:
             continue

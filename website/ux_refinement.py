@@ -7,7 +7,7 @@ Rekonstruiert aus dem dist-Stand (Original-Quelle lag nicht vor) und ergänzt um
 - Social-Icons nur für hinterlegte Profile
 """
 import html
-from paths import SITE, page
+from paths import SITE, page, img
 
 E = html.escape
 LABELS = {'investment': 'Investment', 'property': 'Property', 'projects': 'Projects'}
@@ -74,9 +74,9 @@ def inquiry(k):
     options = (('' if active else '<option value="" selected>Bereich wählen</option>')
                + ''.join(f'<option value="{key}"{" selected" if key == active else ""}>{label}</option>' for key, label in LABELS.items()))
     return (f'<section class="strategic-inquiry" id="{section_id}" data-inquiry-context="{active}">'
-            '<div class="inquiry-intro">'
-            f'<h2 id="inquiry-title">{title}</h2><p id="inquiry-lead">Sechs kurze Fragen, damit ich mich vorbereiten kann. Das erste Gespräch kostet nichts.</p>'
-            '<a class="text-link" href="#kontakt">Nur eine kurze Frage? Direkt zum Kontakt ↓</a></div>'
+            # Überschrift und Einleitung stehen schon in der Zeile zum Aufklappen; hier nur für Screenreader
+            '<div class="inquiry-intro sr-only">'
+            f'<h2 id="inquiry-title">{title}</h2><p id="inquiry-lead">Sechs kurze Fragen. Das erste Gespräch ist kostenfrei.</p></div>'
             f'<div class="inquiry-card"><form {_form_attrs("strategic-form")} aria-labelledby="inquiry-title">'
             f'<label class="inquiry-context">Ihr Bereich<select name="Bereich" id="inquiry-context" required>{options}</select></label>'
             '<div class="inquiry-progress"><span id="inquiry-step-label" aria-live="polite">Schritt 1 von 6</span><span id="inquiry-percent" aria-hidden="true">17 %</span></div>'
@@ -139,42 +139,39 @@ MAP_SKETCH = (
     '</svg>')
 
 
-def contact(subject=None, collapsible=False, hint='inquiry'):
+def contact(subject=None, company=False, lead=None):
+    """Kontakt: auf jeder Seite derselbe Block. Links Person und direkte Wege samt Lageskizze, rechts die kurze Nachricht."""
     a = SITE['address']
     subjects = [('general', 'Allgemeine Anfrage'), ('investment', 'Investment Memo anfragen'), ('property', 'Property Brief anfragen'), ('renovation', 'Renovation Memo anfragen')]
     options = ''.join(f'<option value="{v}"{" selected" if v == subject else ""}>{label}</option>' for v, label in subjects)
-    hints = {'inquiry': '<p>Für ein konkretes Vorhaben können Sie auch die <a href="#anfrage">Projektanfrage in sechs Schritten</a> nutzen.</p>',
-             'valuation': f'<p>Für eine Einschätzung Ihrer Immobilie nutzen Sie die <a href="{page("bewerten")}#bewertung">Bewertung in wenigen Schritten</a>.</p>'}
-    form = (hints[hint] +
-            f'<form {_form_attrs("quick-contact")} aria-label="Kurze Nachricht"><div class="ux-form-grid">'
+    firm = ('<label class="ux-full">Unternehmen (optional)<input name="company" id="contact-company" autocomplete="organization" maxlength="180"></label>'
+            if company else '')
+    form = (f'<form {_form_attrs("quick-contact")} aria-label="Kurze Nachricht"><div class="ux-form-grid">'
             '<label>Vollständiger Name *<input name="name" id="contact-name" required autocomplete="name" maxlength="150"></label>'
             '<label>E-Mail-Adresse *<input name="email" id="contact-email" type="email" required autocomplete="email" maxlength="200"></label>'
             '<label>Telefonnummer (optional)<input name="phone" id="contact-phone" type="tel" autocomplete="tel" maxlength="60"></label>'
-            f'<label>Betreff<select name="subject" id="contact-subject">{options}</select></label>'
-            '<label class="ux-full">Nachricht *<textarea name="message" id="contact-message" required rows="4" maxlength="4000"></textarea></label></div>'
+            f'<label>Betreff<select name="subject" id="contact-subject">{options}</select></label>' + firm +
+            '<label class="ux-full">Nachricht *<textarea name="message" id="contact-message" required rows="5" maxlength="4000"></textarea></label></div>'
             + _spam_trap() +
             f'<p class="ux-privacy">Ihre Daten werden vertraulich zur Bearbeitung Ihrer Anfrage verarbeitet. <a href="{E(SITE["privacy"])}" target="_blank" rel="noopener">Datenschutz</a></p>'
             '<p class="ux-form-error" id="contact-error" role="alert"></p><button class="button" type="submit">Nachricht senden ↗</button>'
             '<div id="contact-result" role="status" tabindex="-1"></div>' + _noscript() + '</form>')
-    if collapsible:
-        form_block = ('<details class="ux-contact-form quick-message"><summary>Eine Nachricht schreiben <span aria-hidden="true">↗</span></summary>'
-                      f'<div class="quick-message-content"><h3>Oder eine kurze Nachricht</h3>{form}</div></details>')
-    else:
-        form_block = f'<div class="ux-contact-form"><h3>Oder eine kurze Nachricht</h3>{form}</div>'
     mail = E(SITE['email'])
-    return ('<section class="ux-contact" id="kontakt"><div class="ux-contact-head"><span class="eyebrow">Kontakt</span>'
-            '<h2>So erreichen Sie mich</h2><p>Am schnellsten per E-Mail oder WhatsApp. Wenn Sie lieber sprechen, buchen Sie direkt einen Termin.</p>'
-            '</div><div class="ux-contact-grid"><div class="ux-contact-direct"><h3>Direkt</h3>'
-            f'<a class="ux-email" href="mailto:{mail}">{mail} <span aria-hidden="true">↗</span></a><a href="tel:{E(SITE["phoneHref"])}">{E(SITE["phone"])}</a>'
-            f'<p><small>Büro</small>{E(a["street"])}<br>{E(a["zip"])} {E(a["city"])}</p>'
-            f'<div class="ux-contact-links"><a href="{E(SITE["calendar"])}" target="_blank" rel="noopener noreferrer">{icon("calendar")}<span><b>Termin buchen ↗</b><small>Google Kalender · 30 Minuten</small></span></a>'
-            f'<a href="{E(SITE["whatsapp"])}" target="_blank" rel="noopener noreferrer">{icon("whatsapp")}<span><b>WhatsApp ↗</b><small>Direktnachricht</small></span></a></div>'
-            + socials() +
-            '<figure class="ux-map">' + MAP_SKETCH + '<figcaption><span>Kurfürstendamm 96 · Nähe Adenauerplatz (U7)</span>'
+    lead = lead or 'Am schnellsten per E-Mail oder WhatsApp. Wenn Sie lieber sprechen, buchen Sie direkt einen Termin.'
+    channels = (f'<a href="mailto:{mail}"><small>E-Mail</small><strong>{mail}</strong><span aria-hidden="true">↗</span></a>'
+                f'<a href="tel:{E(SITE["phoneHref"])}"><small>Telefon</small><strong>{E(SITE["phone"])}</strong><span aria-hidden="true">↗</span></a>'
+                f'<a href="{E(SITE["whatsapp"])}" target="_blank" rel="noopener noreferrer"><small>WhatsApp</small><strong>Direktnachricht</strong><span aria-hidden="true">↗</span></a>'
+                f'<a href="{E(SITE["calendar"])}" target="_blank" rel="noopener noreferrer"><small>Termin</small><strong>30 Minuten, online buchbar</strong><span aria-hidden="true">↗</span></a>')
+    return ('<section class="ux-contact contact" id="kontakt"><div class="contact-person">'
+            '<div class="contact-head">' + img('marco-kaimann.jpg', 'Marco Kaimann', '120px', 'loading="lazy" class="contact-portrait"') +
+            '<div><span class="eyebrow">Kontakt</span><h2>So erreichen Sie mich</h2></div></div>'
+            f'<p class="contact-lead">{E(lead)}</p><nav class="contact-channels" aria-label="Direkte Kontaktwege">{channels}</nav>'
+            '<figure class="ux-map">' + MAP_SKETCH + f'<figcaption><span>{E(a["street"])}, {E(a["zip"])} {E(a["city"])} · Nähe Adenauerplatz (U7)</span>'
             f'<a class="small" href="https://www.google.com/maps/search/?api=1&amp;query={SITE["mapsQuery"]}" target="_blank" rel="noopener noreferrer">In Google Maps öffnen ↗</a>'
             '<button type="button" class="text-button" data-load-map>Interaktive Karte laden</button></figcaption>'
-            '<div data-map-host></div><small class="ux-map-note">Lageskizze, nicht maßstabsgetreu. Die Google-Karte wird erst nach Ihrem Klick geladen.</small></figure></div>'
-            + form_block + '</div></section>')
+            '<div data-map-host></div><small class="ux-map-note">Lageskizze, nicht maßstabsgetreu. Die Google-Karte wird erst nach Ihrem Klick geladen.</small></figure>'
+            + socials() + '</div>'
+            f'<div class="contact-card"><h3>Kurze Nachricht</h3><p>Ich lese jede Nachricht selbst und antworte innerhalb von 48 Stunden.</p>{form}</div></section>')
 
 
 def rail():
