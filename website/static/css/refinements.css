@@ -1,0 +1,52 @@
+/* GRENFORD / Refinements 2026-10
+   Wird vom Build als letzte Datei an site.css angehängt. Enthält nur Korrekturen
+   aus dem technischen Prüfbericht: Kontrast, Mindestschriftgrößen, Tippflächen,
+   Formular-Zustände. Das Design der drei Basis-Stylesheets bleibt unverändert. */
+
+/* Kontrast: Akzent für kleinen Text auf Papier (5,4:1) und Elfenbein (4,8:1). */
+:root{--orange-ink:#a84700}
+.mandate-region,.sub-label,.service-story article>span,.collection-toolbar button[aria-pressed=true],.project-gateway summary small,.inquiry-intro>.eyebrow,.comparison-result>.eyebrow,.perspective-panel>div>.eyebrow,.practice-index span{color:var(--orange-ink)}
+.collection-toolbar button[aria-pressed=true]{border-color:var(--orange-ink)}
+
+/* Mindestschriftgröße 10 px (vorher teils 5–8 px). */
+.pathway-memo small{font-size:9px!important;letter-spacing:.08em}
+.immersive-hero .cover-gallery figcaption,.immersive-hero .cover-gallery figcaption>span{font-size:10px}
+.immersive-hero .cover-gallery [data-cover-count]{font-size:11px}
+.hero-kicker{font-size:11px}
+.hero-routes a>span{font-size:10px}
+.mandate-top,.collection-context,.property-card figure>span,.founder figcaption,.perspective-panel figcaption{font-size:10px}
+.project-gateway summary small{font-size:10px}
+.ux-contact-links small,.social-note,.ux-required,.collection-note{font-size:11px}
+.comparison-hint{font-size:10px}
+.paper-top,.paper-caption,.paper-bottom{font-size:9px}
+.footer-bottom{font-size:11px}
+@media(max-width:760px){
+ .hero-kicker{font-size:10px}
+ .hero-routes a>span{font-size:9px}
+ .immersive-hero .cover-gallery figcaption>span{font-size:9px;max-width:150px}
+ .collection-context{font-size:9px}
+ .page-home .ux-contact-links small{font-size:10px}
+ .paper-top,.paper-caption,.paper-bottom{font-size:8px}
+ .footer-bottom{font-size:11px}
+}
+
+/* Tippflächen mindestens 24 px hoch (WCAG 2.5.8). */
+.footer-main>div a,.footer-bottom a{display:inline-flex;align-items:center;min-height:32px}
+.ux-map>a.small,.quick-message-content>p>a{display:inline-flex;align-items:center;min-height:32px}
+
+/* Social: nur echte Profile, keine Platzhalter mehr. */
+.social-links{flex-wrap:wrap}
+
+/* Formulare */
+.hp-field{position:absolute!important;left:-10000px!important;width:1px;height:1px;overflow:hidden}
+.form-fallback{margin-top:16px;display:grid;gap:12px}
+.form-fallback textarea{width:100%;min-height:140px;font:inherit;font-size:12px;padding:11px;border:1px solid #9daeb7;background:white;resize:vertical}
+.form-fallback .fallback-actions{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center}
+.form-fallback .fallback-address{font-size:13px;user-select:all}
+#inquiry-result:focus,#contact-result:focus{outline:none}
+#inquiry-result:empty,#contact-result:empty{padding:0!important;margin:0!important;background:none!important}
+button[aria-busy=true]{opacity:.6;cursor:progress}
+noscript p{font-size:12px;margin-top:12px}
+
+/* Ersatzbild, solange ein Originalbild in static/assets fehlt (siehe README). */
+img[data-missing]{object-fit:contain;background:var(--ivory)}

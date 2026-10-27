@@ -1,0 +1,42 @@
+{
+ "siteUrl": "https://www.grenford.de",
+ "formEndpoint": "",
+ "formEndpointNote": "Hier den Endpunkt aus der bisherigen dist/ux.js eintragen (z. B. https://api.hsforms.com/submissions/v3/integration/submit/<portalId>/<formGuid>). Leer = Formulare bieten den Versand per E-Mail an.",
+ "email": "kontakt@grenford.de",
+ "phone": "+49 172 425 9087",
+ "phoneHref": "+491724259087",
+ "whatsapp": "https://wa.me/491724259087",
+ "calendar": "https://calendar.app.google/QCTQ3PActJhp8pYf8",
+ "address": {"street": "Kurfürstendamm 96", "zip": "10709", "city": "Berlin", "country": "DE"},
+ "mapsQuery": "Kurf%C3%BCrstendamm+96+10709+Berlin",
+ "vatId": "DE362752159",
+ "imprint": "https://www.grenford.de/imprint",
+ "privacy": "https://www.grenford.de/privacy",
+ "socials": [
+  {"label": "Marco Kaimann auf LinkedIn", "icon": "linkedin", "url": "https://de.linkedin.com/in/marco-kaimann-0512b884"},
+  {"label": "GRENFORD auf Instagram", "icon": "instagram", "url": null},
+  {"label": "GRENFORD auf Facebook", "icon": "facebook", "url": null}
+ ],
+ "home": {
+  "title": "GRENFORD | Immobilienberatung Berlin für Investment, Property und Projects",
+  "description": "Persönliche Immobilienberatung aus Berlin: Off-Market-Investments, Verkauf und Kauf privater Immobilien sowie vergleichbare Bauangebote für Ihre Sanierung. Mit Marco Kaimann.",
+  "gallery": ["skyline-frankfurt.webp", "altbau-berlin.webp", "skyline-muenchen.webp", "wohnraum-visualisierung.webp"]
+ },
+ "pages": {
+  "investment": {
+   "title": "Investment | GRENFORD – Off-Market, Globalverkauf, Suchauftrag",
+   "description": "Off-Market-Transaktionen, Globalverkäufe und gezielte Objektsuche im Kundenauftrag. GRENFORD bringt Anlageziele und passende Immobilien zusammen.",
+   "gallery": ["skyline-frankfurt.webp", "skyline-muenchen.webp", "altbau-berlin.webp"]
+  },
+  "property": {
+   "title": "Property | GRENFORD – Immobilie verkaufen oder kaufen in Berlin",
+   "description": "Wohnungen, Häuser und kleine Gewerbeeinheiten persönlich positioniert, verständlich präsentiert und passend vermarktet. Für private Eigentümer und Käufer.",
+   "gallery": ["wohnraum-visualisierung.webp", "altbau-berlin.webp", "ferienhaus-usedom.webp"]
+  },
+  "projects": {
+   "title": "Projects | GRENFORD – Sanierung planen, Bauangebote vergleichen",
+   "description": "Originalangebote vergleichbar machen und den passenden Baupartner wählen: Das Renovation Memo stellt Leistungen, Kosten und offene Punkte gegenüber.",
+   "gallery": ["projects-bauplan.webp", "projects-badsanierung.webp", "dachgeschoss-after.webp"]
+  }
+ }
+}

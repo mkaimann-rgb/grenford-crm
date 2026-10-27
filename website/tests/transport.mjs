@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const source=fs.readFileSync(path.join(root,process.argv[2]||'dist','ux.js'),'utf8').split('const strategic=')[0];
+let calls=[];
+const context=vm.createContext({AbortController,setTimeout,clearTimeout,location:{href:'https://example.test/investment/#anfrage'},document:{title:'GRENFORD Investment'},fetch:async(url,options)=>{calls.push({url,...options});return {ok:true};}});
+vm.runInContext(source,context);
+assert.equal(calls.length,0,'No transmission before explicit submit');
+await context.sendRequest({name:'UX Test Person',email:'preview@example.com',phone:'',subject:'investment',message:'Region: Berlin\nThemen: Objektsuche'});
+assert.equal(calls.length,1);const payload=JSON.parse(calls[0].body),fields=Object.fromEntries(payload.fields.map(x=>[x.name,x.value]));
+assert.equal(fields.firstname,'UX');assert.equal(fields.lastname,'Test Person');assert.equal(fields.subject,'investment');assert.equal(fields.brand,'grenford');assert.equal(fields.message,'Region: Berlin\nThemen: Objektsuche');assert.equal(payload.context.pageUri,'https://example.test/investment/');
+context.fetch=async()=>({ok:false});await assert.rejects(context.sendRequest({name:'Test',email:'preview@example.com',subject:'general',message:'Test'}));
+context.fetch=async()=>{throw new Error('network unavailable')};await assert.rejects(context.sendRequest({name:'Test',email:'preview@example.com',subject:'general',message:'Test'}));
+console.log('CRM transport checks passed: explicit submit, original schema, failed responses and network failures. No live request sent.');

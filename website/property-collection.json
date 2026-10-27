@@ -1,0 +1,73 @@
+[
+  {
+    "localImage": "soemmering-wohnzimmer.webp",
+    "location": "Berlin · Charlottenburg",
+    "title": "Schlosspark Penthouse",
+    "facts": [
+      [
+        "Wohnfläche",
+        "196 m²"
+      ],
+      [
+        "Zimmer",
+        "5 Zimmer"
+      ],
+      [
+        "Loggien",
+        "2 Loggien"
+      ],
+      [
+        "Außenfläche",
+        "Dachterrasse"
+      ]
+    ],
+    "desc": "Zwischen Schlosspark Charlottenburg und der Spree verbindet diese Penthouse-Residenz großzügige Architektur mit einer individuell wählbaren Ausstattungslinie ohne Aufpreis.",
+    "priceStr": "1.810.000 €"
+  },
+  {
+    "localImage": "soemmering-schlafzimmer.webp",
+    "location": "Berlin · Charlottenburg",
+    "title": "Mierendorff Residence",
+    "facts": [
+      [
+        "Wohnfläche",
+        "171 m²"
+      ],
+      [
+        "Zimmer",
+        "4 Zimmer"
+      ],
+      [
+        "Loggien",
+        "2 Loggien"
+      ],
+      [
+        "Außenfläche",
+        "Dachterrasse"
+      ]
+    ],
+    "desc": "Private Dachterrassen mit Blick über die Berliner Skyline verbinden die ruhige Atmosphäre der Mierendorff-Insel mit Cafés, der Spree und der City West nur wenige Minuten entfernt.",
+    "priceStr": "1.623.000 €"
+  },
+  {
+    "localImage": "soemmering-bad.webp",
+    "location": "Berlin · Charlottenburg",
+    "title": "Spree Corner Penthouse",
+    "facts": [
+      [
+        "Wohnfläche",
+        "184 m²"
+      ],
+      [
+        "Zimmer",
+        "5 Zimmer"
+      ],
+      [
+        "Lage",
+        "Ecklage"
+      ]
+    ],
+    "desc": "Eine frei wählbare Ausstattungslinie – von klassischem Fischgrätparkett bis zum Kamin – ermöglicht es, diesem Penthouse eine ganz persönliche Handschrift zu verleihen.",
+    "priceStr": "1.726.000 €"
+  }
+]

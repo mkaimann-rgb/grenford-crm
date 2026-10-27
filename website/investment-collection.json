@@ -1,0 +1,32 @@
+[
+  {
+    "region": "Residential · Berlin-Schöneberg",
+    "title": "Wohninvestment mit Entwicklungspotenzial",
+    "desc": "Wohninvestment in Berlin-Schöneberg. Im Fokus stehen die bestehende Vermietung, mögliche Ertragsentwicklung und eine langfristige Bestandsstrategie.",
+    "status": "Due-Diligence-Phase"
+  },
+  {
+    "region": "Mixed-Use · Bodenseeregion",
+    "title": "MonteSana · Mixed-Use-Entwicklung",
+    "desc": "Entwicklungskonzept in der Bodenseeregion mit Hospitality, Serviced Living, Co-Working und ergänzenden Wellnessangeboten.",
+    "status": "Investorengespräche"
+  },
+  {
+    "region": "Gewerbe · Raum Paderborn",
+    "title": "Fachmarktimmobilie · Off-Market",
+    "desc": "Off-Market-Mandat in etablierter Handelslage im Raum Paderborn. Im Fokus stehen Ankermieter, laufende Erträge und die Objektperspektive.",
+    "status": "Selektive Investorenansprache"
+  },
+  {
+    "region": "Hospitality · Rügen",
+    "title": "Ferienwohnprojekt auf Rügen",
+    "desc": "Genehmigtes Projekt auf einem historischen Dreiseitenhof: 31 Ferienwohnungen, eine Gewerbeeinheit und optional ein Betreiber- und Möblierungskonzept.",
+    "status": "Strukturierte Investorenansprache"
+  },
+  {
+    "region": "Wohnentwicklung · Raum Rostock",
+    "title": "Wohnentwicklung im Raum Rostock",
+    "desc": "Großvolumiges Wohnentwicklungsprojekt im Metropolraum Rostock. GRENFORD begleitet die strukturierte Investorenansprache.",
+    "status": "Aktive Investorenansprache"
+  }
+]
