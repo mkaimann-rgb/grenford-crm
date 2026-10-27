@@ -295,9 +295,9 @@ def subpage(k):
     if k == 'property':
         second += ('<a class="hero-aside-link" href="#bewertung-property-search" data-wz-open="property-search">'
                    'Auf der Suche? Suchprofil hinterlegen <span aria-hidden="true">↓</span></a>')
-    body = ('<section class="immersive-hero immersive-sub">' + gallery(hero_images(SITE['pages'][k])) +
+    body = ('<div class="hero-stage"><section class="immersive-hero immersive-sub">' + gallery(hero_images(SITE['pages'][k])) +
             f'<div class="hero-content">'
-            f'<h1>{titles[k]}</h1><div class="hero-bottom"><p>{d["intro"]}</p><div class="hero-actions">' + primary + second + '</div></div></div></section>')
+            f'<h1>{titles[k]}</h1><div class="hero-bottom"><p>{d["intro"]}</p><div class="hero-actions">' + primary + second + '</div></div></div></section></div>')
     body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#leistung">Leistung</a><a href="#bewertung">'
              + {'investment': 'Asset einordnen', 'property': 'Bewertung & Suchprofil', 'projects': 'Wert nach Sanierung'}[k] + '</a>'
              + ('<a href="#verguetung">Vergütung</a>' if k == 'projects' else '')
@@ -377,9 +377,9 @@ def home():
 
 
 def sub_hero(key, kicker, n, title, lead, actions):
-    return ('<section class="immersive-hero immersive-sub">' + gallery(hero_images(SITE['pages'][key])) +
+    return ('<div class="hero-stage"><section class="immersive-hero immersive-sub">' + gallery(hero_images(SITE['pages'][key])) +
             f'<div class="hero-content">'
-            f'<h1>{title}</h1><div class="hero-bottom"><p>{lead}</p><div class="hero-actions">{actions}</div></div></div></section>')
+            f'<h1>{title}</h1><div class="hero-bottom"><p>{lead}</p><div class="hero-actions">{actions}</div></div></div></section></div>')
 
 
 def ways():

@@ -978,3 +978,12 @@ body{background:var(--paper)}
  .hero-stage.is-opening h1{transform:translateY(calc(var(--hp) * -6vh)) scale(calc(1 - .14 * var(--hp)));transform-origin:0 100%;opacity:calc(1 - .45 * var(--hp));will-change:transform}
  .hero-stage.is-opening .hero-bottom,.hero-stage.is-opening .hero-reach{opacity:calc(1 - .7 * var(--hp))}
  .hero-stage.is-opening+.pathways{position:relative;z-index:2;margin-top:-45vh;box-shadow:0 -24px 60px rgba(10,12,18,.22)}}
+/* Hero-Öffnen auf allen Seiten: alles nach der Bühne gleitet über das stehende Bild */
+@media(min-width:761px){
+ .hero-stage.is-opening ~ *{position:relative;z-index:1}
+ .hero-stage.is-opening + *{margin-top:-45vh;box-shadow:0 -24px 60px rgba(10,12,18,.22)}
+ .hero-stage.is-opening + .section-nav{position:relative;z-index:2}
+ .immersive-sub .hero-content{will-change:auto}
+ .hero-stage.is-opening .immersive-sub .hero-actions{opacity:calc(1 - .7 * var(--hp))}}
+/* Abschnitte ohne eigenen Hintergrund decken das stehende Hero-Bild ab (Spezifität 0: eigene Hintergründe gewinnen) */
+:where(.hero-stage.is-opening ~ *){background-color:var(--paper)}
