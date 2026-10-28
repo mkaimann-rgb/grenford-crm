@@ -151,3 +151,9 @@ Steckbriefe eintragen und `muster` auf `false` setzen. Öffentlich nur Region, A
 `gesperrt` nennt nur die Feldnamen. „Unterlagen anfordern“ öffnet ein Fenster (Investorentyp, Ticketgröße, Bereitschaft zur
 Vertraulichkeitsvereinbarung) und sendet wie alle Formulare ans CRM-Sheet (Betreff `investment`, Text beginnt mit „Off-Market · Unterlagen anfordern“).
 Es gibt keinen Login: Prüfung, Vertraulichkeitsvereinbarung und Versand der Unterlagen laufen manuell.
+
+## Ratgeber
+
+`ratgeber.json` → `artikel`. Solange die Liste leer ist, zeigt `/ratgeber/` einen Hinweis und ist ausgeblendet (`noindex`, nicht in der Sitemap).
+Sobald ein Beitrag eingetragen ist, wird die Seite automatisch indexierbar und in die Sitemap aufgenommen. Felder siehe `hinweis` in der Datei.
+Menü GRENFORD: Über GRENFORD · Wertermittlung · Ratgeber · STAYNAMIC.

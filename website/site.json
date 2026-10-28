@@ -85,6 +85,11 @@
     "hero-koeln.webp"
    ]
   },
+  "ratgeber": {
+   "title": "Ratgeber | GRENFORD",
+   "description": "Ratgeber für Eigentümer, Käufer und Investoren: verständliche Beiträge zu Verkauf, Kauf, Investment und Sanierung von GRENFORD.",
+   "gallery": ["hero-berlin.webp"]
+  },
   "markt": {
    "title": "Immobilienmarkt verstehen | GRENFORD",
    "description": "Marktdaten einordnen und Immobilienentscheidungen vorbereiten. GRENFORD verbindet Marktübersicht mit persönlicher Beratung.",

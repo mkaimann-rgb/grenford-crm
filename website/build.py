@@ -62,6 +62,7 @@ AUDIENCE = {'investment': 'Für Eigentümer, Investoren und Bauträger', 'proper
 VALUE_CTA = {'investment': ('Asset einordnen', 'investment-value'), 'property': ('Immobilie bewerten', 'property-value'),
              'projects': ('Wert nach Sanierung', 'projects-value')}
 EXTRA = {'bewerten': 'Bewerten', 'ueber-grenford': 'Über GRENFORD'}
+RATGEBER = json.loads((ROOT / 'ratgeber.json').read_text(encoding='utf-8')) if (ROOT / 'ratgeber.json').exists() else {'artikel': []}
 
 
 def mega(k):
@@ -77,16 +78,16 @@ def mega(k):
 
 def mega_grenford(active):
     """Menüpunkt GRENFORD mit Großmenü wie die drei Bereiche: Marke, Bewertung, Markt, Kontakt."""
-    links = [('Über GRENFORD', page('ueber-grenford'), ''), ('Immobilie bewerten', page('bewerten'), '')] + ([('Marktperspektiven', page('markt'), '')] if MARKET_LIVE else []) + [
+    links = [('Über GRENFORD', page('ueber-grenford'), ''), ('Wertermittlung', page('bewerten'), ''), ('Ratgeber', page('ratgeber'), '')] + ([('Marktperspektiven', page('markt'), '')] if MARKET_LIVE else []) + [
              ('STAYNAMIC ↗', 'https://www.staynamic.com/', ' target="_blank" rel="noopener"')]
     items = ''.join(f'<li><a href="{h}"{x}>{E(t)}</a></li>' for t, h, x in links)
-    on = ' aria-current="page"' if active in ('ueber-grenford', 'bewerten', 'markt') else ''
+    on = ' aria-current="page"' if active in ('ueber-grenford', 'bewerten', 'ratgeber', 'markt') else ''
     return (f'<div class="nav-item nav-grenford"><a href="{page("ueber-grenford")}"{on}>GRENFORD</a>'
             '<div class="mega"><div class="mega-inner"><figure>' + img('marco-kaimann.jpg', '', '320px', 'loading="lazy"') + '<figcaption>MARCO KAIMANN / GRÜNDER</figcaption></figure>'
             f'<div class="mega-links"><strong>GRENFORD</strong><ul>{items}</ul></div>'
             '<div class="mega-memo"><strong>Wert heute und nach der Sanierung</strong>'
             '<p>Persönlich eingeschätzt, kostenfrei, Antwort innerhalb von 48 Stunden.</p>'
-            f'<a class="button" href="{page("bewerten")}">Immobilie bewerten <span aria-hidden="true">↗</span></a></div></div></div>'
+            f'<a class="button" href="{page("bewerten")}">Wertermittlung starten <span aria-hidden="true">↗</span></a></div></div></div>'
             f'<ul class="nav-sub">{items}</ul></div>')
 
 
@@ -107,7 +108,7 @@ def footer():
         'projects': [('Wert nach Sanierung', '#bewertung'), ('Vergütung', '#verguetung'), ('Vorher & Nachher', '#beforeafter'), ('Renovation Memo', '#memo')],
     }
     columns = ''.join(f'<div><strong>{D[k]["label"]}</strong>' + ''.join(f'<a href="{page(k)}{h}">{t}</a>' for t, h in links) + '</div>' for k, links in cols.items())
-    columns += (f'<div><strong>GRENFORD</strong><a href="{page("ueber-grenford")}">Über GRENFORD</a><a href="{page("bewerten")}">Immobilie bewerten</a>'
+    columns += (f'<div><strong>GRENFORD</strong><a href="{page("ueber-grenford")}">Über GRENFORD</a><a href="{page("bewerten")}">Wertermittlung</a><a href="{page("ratgeber")}">Ratgeber</a>'
                 + (f'<a href="{page("markt")}">Marktperspektiven</a>' if MARKET_LIVE else '') +
                 '<a href="#kontakt">Kontakt</a><a href="https://www.staynamic.com/" target="_blank" rel="noopener">STAYNAMIC ↗</a></div>')
     return ('<footer class="site-footer"><div class="footer-main">' + logo() +
@@ -160,7 +161,8 @@ def shell(active, meta, body, ld=()):
               f'<meta property="og:title" content="{E(meta["title"])}"><meta property="og:description" content="{E(meta["description"])}">'
               f'<meta property="og:url" content="{absolute(path)}"><meta property="og:image" content="{absolute("assets/og-grenford.jpg")}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
               f'<meta property="og:image:alt" content="GRENFORD – Der nächste Schritt zählt."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{absolute("assets/og-grenford.jpg")}">')
-    meta_robots = '<meta name="robots" content="noindex">' if active == '404' else f'<link rel="canonical" href="{absolute(path)}">'
+    hidden = active == '404' or (active == 'ratgeber' and not RATGEBER['artikel'])  # leerer Ratgeber nicht indexieren
+    meta_robots = '<meta name="robots" content="noindex">' if hidden else f'<link rel="canonical" href="{absolute(path)}">'
     return ('<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{E(meta["title"])}</title><meta name="description" content="{E(meta["description"])}">'
             f'{meta_robots}{social}<meta name="theme-color" content="#222e41">'
@@ -506,6 +508,28 @@ def ueber():
     return shell('ueber-grenford', SITE['pages']['ueber-grenford'], body, ld=(crumbs('ueber-grenford', 'Über GRENFORD'),))
 
 
+def ratgeber():
+    """Ratgeber: Beiträge aus ratgeber.json. Ohne Beiträge ein ehrlicher Hinweis (Seite dann noindex, nicht in der Sitemap)."""
+    labels = {'investment': 'Investment', 'property': 'Property', 'projects': 'Projects', 'allgemein': 'Allgemein'}
+    body = sub_hero('ratgeber', 'Ratgeber', '', 'Ratgeber für Eigentümer, <em>Käufer und Investoren</em>',
+                    'Verständliche Beiträge zu Verkauf, Kauf, Investment und Sanierung. Aus der Praxis, ohne Fachchinesisch.',
+                    '<a class="button" href="#beitraege">Zu den Beiträgen<span aria-hidden="true">↓</span></a><a class="text-link" href="#kontakt">Frage stellen ↓</a>')
+    arts = RATGEBER['artikel']
+    if arts:
+        cards = ''.join(
+            f'<article class="rg-card"><small>{E(labels.get(a.get("bereich", "allgemein"), "Allgemein"))} · {E(a.get("lesezeit", ""))}</small>'
+            f'<h3>{E(a["titel"])}</h3><p>{E(a.get("teaser", ""))}</p>'
+            + (f'<details><summary>Weiterlesen <span aria-hidden="true">＋</span></summary>' + ''.join(f'<p>{E(x)}</p>' for x in a.get('absaetze', [])) + '</details>' if a.get('absaetze') else '')
+            + '</article>' for a in arts)
+        inner = f'<div class="rg-grid">{cards}</div>'
+    else:
+        inner = ('<div class="rg-empty"><p>Die ersten Beiträge erscheinen in Kürze. Themen aus allen drei Bereichen: Investment, Property und Projects.</p>'
+                 '<p>Bis dahin beantworte ich Ihre Fragen gern direkt.</p></div>')
+    body += f'<section class="ratgeber" id="beitraege"><div class="section-head"><h2>Beiträge</h2></div>{inner}</section>'
+    body += contact()
+    return shell('ratgeber', SITE['pages']['ratgeber'], body, ld=(crumbs('ratgeber', 'Ratgeber'),))
+
+
 def markt():
     """Marktseite: ergänzende Orientierung, keine Leistungsseite und keine automatische Objektbewertung."""
     body = sub_hero('markt', 'Marktperspektiven', '', 'Was Marktdaten über <em>Ihre Immobilie sagen</em>',
@@ -606,7 +630,7 @@ def responsive_variants(out):
 
 
 def seo_files(out):
-    urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + (['markt'] if MARKET_LIVE else [])]
+    urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + (['markt'] if MARKET_LIVE else []) + (['ratgeber'] if RATGEBER['artikel'] else [])]
     (out / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                      + ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
     (out / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {absolute("sitemap.xml")}\n', encoding='utf-8')
@@ -636,6 +660,7 @@ def main():
         pages[f'{k}/index.html'] = (1, lambda k=k: subpage(k))
     pages['bewerten/index.html'] = (1, bewerten)
     pages['ueber-grenford/index.html'] = (1, ueber)
+    pages['ratgeber/index.html'] = (1, ratgeber)
     if MARKET_LIVE:
         pages['markt/index.html'] = (1, markt)
     for target, (depth, render) in pages.items():

@@ -1,0 +1,4 @@
+{
+ "hinweis": "Ratgeber-Beiträge. Solange 'artikel' leer ist, zeigt die Seite einen Hinweis und ist für Suchmaschinen ausgeblendet (noindex, nicht in der Sitemap). Felder je Beitrag: titel, bereich (investment | property | projects | allgemein), teaser, lesezeit (z. B. '5 Min.'), datum (JJJJ-MM-TT), bild (Dateiname in static/assets, optional), absaetze (Liste von Absätzen).",
+ "artikel": []
+}
