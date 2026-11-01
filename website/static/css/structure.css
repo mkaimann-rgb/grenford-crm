@@ -878,3 +878,24 @@ main section[id],main [id^=bewertung],main details[id]{scroll-margin-top:72px}
 .rg-empty p:last-child{margin:0;color:var(--muted)}
 @media(max-width:1000px){.rg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.ratgeber{padding:56px 6%}.rg-grid{grid-template-columns:1fr}}
+
+/* ================================================================ Bereichsfarben
+   Jeder Geschäftsbereich hat seinen eigenen Akzent, derselbe wie in seinem Memo bzw. Brief.
+   Gilt auf der Bereichsseite und überall, wo der Bereich auftaucht (Menü-Fenster, Karte auf der Startseite, Karussell).
+   Dachmarke GRENFORD (Startseite, Über, Wertermittlung, Ratgeber): Bronze aus der Memo-CI (refinements.css). */
+body.page-investment,.area-investment,.pathway-investment,[data-collection-panel=investment],.memo-paper--investment{
+ --orange:#2e6b62;--orange-hover:#3a7a70;--orange-ink:#2e6b62;--orange-light:#8fc7bb;--rust:#2e6b62;--orange-tint:#dcebe7}
+body.page-property,.area-property,.pathway-property,[data-collection-panel=property],.memo-paper--property{
+ --orange:#b5452b;--orange-hover:#c55a40;--orange-ink:#b5452b;--orange-light:#ee9f88;--rust:#b5452b;--orange-tint:#f5ddd6}
+body.page-projects,.area-projects,.pathway-projects,.memo-paper--projects{
+ --orange:#9a6b1f;--orange-hover:#ab7c30;--orange-ink:#9a6b1f;--orange-light:#e0bd7a;--rust:#9a6b1f;--orange-tint:#f1e6d0}
+/* Investment Memo: Grau-Schwarz aus dem Memo für die Memo-Vorschau */
+.memo-paper--investment{background:#3a3d41}
+/* Menü: Bereich beim Darüberfahren in seiner Farbe (helle Variante auf dem dunklen Hero) */
+.site-header nav .nav-item.area-investment:hover>a,.site-header nav .nav-item.area-investment:focus-within>a,
+.site-header nav .nav-item.area-property:hover>a,.site-header nav .nav-item.area-property:focus-within>a,
+.site-header nav .nav-item.area-projects:hover>a,.site-header nav .nav-item.area-projects:focus-within>a{color:var(--orange-light);border-color:var(--orange-light)}
+.site-header nav .nav-item[class*=area-]>a[aria-current=page]{border-color:var(--orange-light)}
+/* Startseite: jede Bereichskarte zeigt ihre Farbe dezent als Linie unter dem Bild */
+.pathway-media:after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--orange)}
+.pathway .pathway-result{border-top-color:var(--orange-tint)}

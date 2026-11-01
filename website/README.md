@@ -157,3 +157,15 @@ Es gibt keinen Login: Prüfung, Vertraulichkeitsvereinbarung und Versand der Unt
 `ratgeber.json` → `artikel`. Solange die Liste leer ist, zeigt `/ratgeber/` einen Hinweis und ist ausgeblendet (`noindex`, nicht in der Sitemap).
 Sobald ein Beitrag eingetragen ist, wird die Seite automatisch indexierbar und in die Sitemap aufgenommen. Felder siehe `hinweis` in der Datei.
 Menü GRENFORD: Über GRENFORD · Wertermittlung · Ratgeber · STAYNAMIC.
+
+## Bereichsfarben (Akzent je Geschäftsfeld, identisch mit Memo bzw. Brief)
+
+| Bereich | Akzent | hell (auf dunklem Grund) |
+|---|---|---|
+| Investment (Investment Memo) | Patina #2E6B62 | #8FC7BB |
+| Property (Property Brief) | Terrakotta #B5452B | #EE9F88 |
+| Projects (Renovation Memo) | Ocker #9A6B1F | #E0BD7A |
+| Dachmarke GRENFORD | Bronze #7A6A52 | #C9B48F |
+
+Definiert am Ende von `static/css/structure.css` („Bereichsfarben“). Gilt auf der Bereichsseite, im Menü-Fenster, auf der Startseiten-Karte,
+im Karussell und in der Memo-Vorschau. Gemeinsame Töne: Ivory #FAF6F2, Sand #EFE9E1, Sand dunkel #CFC8BC, Navy #222E41, Weiß.

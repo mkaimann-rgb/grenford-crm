@@ -93,7 +93,7 @@ def mega_grenford(active):
 
 def header(active):
     current = ' aria-current="page"'
-    items = ''.join(f'<div class="nav-item"><a href="{page(k)}"{current if active == k else ""}>{d["label"]}</a>{mega(k)}</div>' for k, d in D.items())
+    items = ''.join(f'<div class="nav-item area-{k}"><a href="{page(k)}"{current if active == k else ""}>{d["label"]}</a>{mega(k)}</div>' for k, d in D.items())
     items += mega_grenford(active)
     return ('<header class="site-header">' + header_logo(active) +
             '<button class="menu" type="button" aria-controls="mainnav" aria-expanded="false">Menü <span aria-hidden="true">＋</span></button>'
