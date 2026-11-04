@@ -163,8 +163,8 @@ Menü GRENFORD: Über GRENFORD · Wertermittlung · Ratgeber · STAYNAMIC.
 | Bereich | Akzent | hell (auf dunklem Grund) |
 |---|---|---|
 | Investment (Investment Memo) | Patina #2E6B62 | #8FC7BB |
-| Property (Property Brief) | Terrakotta #B5452B | #EE9F88 |
-| Projects (Renovation Memo) | Ocker #9A6B1F | #E0BD7A |
+| Property (Property Brief) | Memo-Blau (Navy) #222E41, nur als Akzent | #A9B8CF |
+| Projects (Renovation Memo) | Orange #FF7900 (Text auf Hell: #A84700, Schrift auf Orange: Navy) | #FFAD59 |
 | Dachmarke GRENFORD | Bronze #7A6A52 | #C9B48F |
 
 Definiert am Ende von `static/css/structure.css` („Bereichsfarben“). Gilt auf der Bereichsseite, im Menü-Fenster, auf der Startseiten-Karte,

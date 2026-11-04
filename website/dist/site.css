@@ -1219,10 +1219,15 @@ main section[id],main [id^=bewertung],main details[id]{scroll-margin-top:72px}
    Dachmarke GRENFORD (Startseite, Über, Wertermittlung, Ratgeber): Bronze aus der Memo-CI (refinements.css). */
 body.page-investment,.area-investment,.pathway-investment,[data-collection-panel=investment],.memo-paper--investment{
  --orange:#2e6b62;--orange-hover:#3a7a70;--orange-ink:#2e6b62;--orange-light:#8fc7bb;--rust:#2e6b62;--orange-tint:#dcebe7}
+/* Property: Blau der Memo-CI (Navy) nur als Akzent; auf dunklem Grund das helle Memo-Blau */
 body.page-property,.area-property,.pathway-property,[data-collection-panel=property],.memo-paper--property{
- --orange:#b5452b;--orange-hover:#c55a40;--orange-ink:#b5452b;--orange-light:#ee9f88;--rust:#b5452b;--orange-tint:#f5ddd6}
+ --orange:#222e41;--orange-hover:#33415a;--orange-ink:#222e41;--orange-light:#a9b8cf;--rust:#222e41;--orange-tint:#dfe4ec;--on-orange:#fff;--on-orange-line:rgba(255,255,255,.4)}
+body.page-property .immersive-hero,body.page-property .memo-studio,body.page-property .value-bar,body.page-property .site-footer{
+ --orange:#a9b8cf;--orange-hover:#bcc8da;--on-orange:#222e41;--on-orange-line:rgba(34,46,65,.35)}
+/* Projects: das bisherige GRENFORD-Orange; dunkle Schrift auf Orange, dunkleres Orange für Text auf hellem Grund */
 body.page-projects,.area-projects,.pathway-projects,.memo-paper--projects{
- --orange:#9a6b1f;--orange-hover:#ab7c30;--orange-ink:#9a6b1f;--orange-light:#e0bd7a;--rust:#9a6b1f;--orange-tint:#f1e6d0}
+ --orange:#ff7900;--orange-hover:#ff982f;--orange-ink:#a84700;--orange-light:#ffad59;--rust:#d95f00;--orange-tint:#ffebd8;
+ --on-orange:#222e41;--on-orange-accent:#222e41;--on-orange-line:rgba(34,46,65,.35)}
 /* Investment Memo: Grau-Schwarz aus dem Memo für die Memo-Vorschau */
 .memo-paper--investment{background:#3a3d41}
 /* Menü: Bereich beim Darüberfahren in seiner Farbe (helle Variante auf dem dunklen Hero) */
