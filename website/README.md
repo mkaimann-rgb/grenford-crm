@@ -154,9 +154,15 @@ Es gibt keinen Login: Prüfung, Vertraulichkeitsvereinbarung und Versand der Unt
 
 ## Ratgeber
 
-`ratgeber.json` → `artikel`. Solange die Liste leer ist, zeigt `/ratgeber/` einen Hinweis und ist ausgeblendet (`noindex`, nicht in der Sitemap).
-Sobald ein Beitrag eingetragen ist, wird die Seite automatisch indexierbar und in die Sitemap aufgenommen. Felder siehe `hinweis` in der Datei.
-Menü GRENFORD: Über GRENFORD · Wertermittlung · Ratgeber · STAYNAMIC.
+Inhalte, Bausteine und Seiten: `ratgeber.py`. Übersicht `/ratgeber/`, Beiträge `/ratgeber/<slug>/`.
+
+- **Status je Beitrag:** `entwurf` erscheint nur im Vorschau-Build (`python3 build.py --preview`), mit Entwurfs-Hinweis, Prüfpunkten (`review`) und `noindex`.
+  `freigegeben` wird veröffentlicht, auf der Übersicht verlinkt und in die Sitemap aufgenommen. Ohne freigegebene Beiträge ist die Übersicht `noindex`.
+- **Bausteine** (`blocks`): `h2`, `p`, `list`, `checklist`, `table` (auf dem Handy als Karten), `flow` (Ablauf), `plan` (SVG mit HTML-Legende), `example` (fiktiv, gekennzeichnet).
+- **Verweise** im Text: `[[slug|Linktext]]`. Erscheint der Ziel-Beitrag in der Fassung nicht, bleibt nur der Text stehen.
+- **Pflicht je Beitrag:** Bereich, Titel, Meta-Titel, Beschreibung, Einleitung, drei Kernpunkte, Veröffentlichungsdatum, nächster Schritt. `updated` nur bei echter Überarbeitung setzen.
+- **Fiktive Inhalte** sind als „Fiktives Beispiel“ bzw. „Schematisches Beispiel“ gekennzeichnet; `tests/markup.py preview` prüft das.
+- Geplant: „Kaufangebote vergleichen“ (`PLANNED`). Presse, Glossar und CRM-Anbindung für Checklisten-Downloads sind spätere Ausbaustufen.
 
 ## Bereichsfarben (Akzent je Geschäftsfeld, identisch mit Memo bzw. Brief)
 

@@ -62,7 +62,7 @@ AUDIENCE = {'investment': 'Für Eigentümer, Investoren und Bauträger', 'proper
 VALUE_CTA = {'investment': ('Asset einordnen', 'investment-value'), 'property': ('Immobilie bewerten', 'property-value'),
              'projects': ('Wert nach Sanierung', 'projects-value')}
 EXTRA = {'bewerten': 'Bewerten', 'ueber-grenford': 'Über GRENFORD'}
-RATGEBER = json.loads((ROOT / 'ratgeber.json').read_text(encoding='utf-8')) if (ROOT / 'ratgeber.json').exists() else {'artikel': []}
+import ratgeber as RG  # Ratgeber: Inhalte, Bausteine, Entwurfsstatus
 
 
 def mega(k):
@@ -154,14 +154,15 @@ def crumbs(active, label):
         {'@type': 'ListItem', 'position': 2, 'name': label, 'item': absolute(active + '/')}]}
 
 
-def shell(active, meta, body, ld=()):
-    path = '' if active == 'home' else active + '/'
+def shell(active, meta, body, ld=(), path=None, noindex=False):
+    path = path if path is not None else ('' if active == 'home' else active + '/')
     fonts = ''.join(f'<link rel="preload" href="{asset(f"fonts/dm-sans-{w}.woff2")}" as="font" type="font/woff2" crossorigin>' for w in (400, 500))
     social = (f'<meta property="og:type" content="website"><meta property="og:locale" content="de_DE"><meta property="og:site_name" content="GRENFORD">'
               f'<meta property="og:title" content="{E(meta["title"])}"><meta property="og:description" content="{E(meta["description"])}">'
               f'<meta property="og:url" content="{absolute(path)}"><meta property="og:image" content="{absolute("assets/og-grenford.jpg")}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
               f'<meta property="og:image:alt" content="GRENFORD – Der nächste Schritt zählt."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{absolute("assets/og-grenford.jpg")}">')
-    hidden = active == '404' or (active == 'ratgeber' and not RATGEBER['artikel'])  # leerer Ratgeber nicht indexieren
+    # 404, Entwürfe und ein Ratgeber ohne freigegebene Beiträge werden nicht indexiert
+    hidden = noindex or active == '404' or (active == 'ratgeber' and path == 'ratgeber/' and not RG.published())
     meta_robots = '<meta name="robots" content="noindex">' if hidden else f'<link rel="canonical" href="{absolute(path)}">'
     return ('<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{E(meta["title"])}</title><meta name="description" content="{E(meta["description"])}">'
@@ -520,25 +521,29 @@ def ueber():
 
 
 def ratgeber():
-    """Ratgeber: Beiträge aus ratgeber.json. Ohne Beiträge ein ehrlicher Hinweis (Seite dann noindex, nicht in der Sitemap)."""
-    labels = {'investment': 'Investment', 'property': 'Property', 'projects': 'Projects', 'allgemein': 'Allgemein'}
-    body = sub_hero('ratgeber', 'Ratgeber', '', 'Ratgeber für Eigentümer, <em>Käufer und Investoren</em>',
-                    'Verständliche Beiträge zu Verkauf, Kauf, Investment und Sanierung. Aus der Praxis, ohne Fachchinesisch.',
-                    '<a class="button" href="#beitraege">Zu den Beiträgen<span aria-hidden="true">↓</span></a><a class="text-link" href="#kontakt">Frage stellen ↓</a>')
-    arts = RATGEBER['artikel']
-    if arts:
-        cards = ''.join(
-            f'<article class="rg-card"><small>{E(labels.get(a.get("bereich", "allgemein"), "Allgemein"))} · {E(a.get("lesezeit", ""))}</small>'
-            f'<h3>{E(a["titel"])}</h3><p>{E(a.get("teaser", ""))}</p>'
-            + (f'<details><summary>Weiterlesen <span aria-hidden="true">＋</span></summary>' + ''.join(f'<p>{E(x)}</p>' for x in a.get('absaetze', [])) + '</details>' if a.get('absaetze') else '')
-            + '</article>' for a in arts)
-        inner = f'<div class="rg-grid">{cards}</div>'
-    else:
-        inner = ('<div class="rg-empty"><p>Die ersten Beiträge erscheinen in Kürze. Themen aus allen drei Bereichen: Investment, Property und Projects.</p>'
-                 '<p>Bis dahin beantworte ich Ihre Fragen gern direkt.</p></div>')
-    body += f'<section class="ratgeber" id="beitraege"><div class="section-head"><h2>Beiträge</h2></div>{inner}</section>'
-    body += contact()
-    return shell('ratgeber', SITE['pages']['ratgeber'], body, ld=(crumbs('ratgeber', 'Ratgeber'),))
+    """Ratgeber-Übersicht: Einstieg, drei Themenfragen, hervorgehobener Beitrag, Beiträge nach Bereichen (ratgeber.py)."""
+    hero = img('hero-inv-altbau.webp', '', '(max-width:760px) 88vw, 46vw', 'fetchpriority="high"')
+    body = RG.overview_body(hero) + contact()
+    meta = {'title': 'GRENFORD Ratgeber | Immobilienentscheidungen vorbereiten',
+            'description': 'Leitfäden und Checklisten für Verkauf, Kauf, Transaktion und Sanierung: Was Sie vor einer Immobilienentscheidung klären sollten.'}
+    return shell('ratgeber', meta, body, ld=(crumbs('ratgeber', 'Ratgeber'),), path='ratgeber/')
+
+
+def ratgeber_article(a):
+    """Beitrag unter /ratgeber/<slug>/. Entwürfe nur im Vorschau-Build, dort mit Hinweis und noindex."""
+    author = img('marco-kaimann.jpg', 'Marco Kaimann', '64px', 'class="rg-author" loading="lazy"')
+    path = f'ratgeber/{a["slug"]}/'
+    crumb = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': 1, 'name': 'GRENFORD', 'item': absolute()},
+        {'@type': 'ListItem', 'position': 2, 'name': 'Ratgeber', 'item': absolute('ratgeber/')},
+        {'@type': 'ListItem', 'position': 3, 'name': a['title'], 'item': absolute(path)}]}
+    art = {'@context': 'https://schema.org', '@type': 'Article', 'headline': a['title'], 'description': a['description'],
+           'datePublished': a['published'], 'dateModified': a.get('updated') or a['published'],
+           'author': {'@type': 'Person', 'name': 'Marco Kaimann', 'jobTitle': 'Gründer von GRENFORD'},
+           'publisher': {'@type': 'Organization', 'name': 'GRENFORD'}, 'mainEntityOfPage': absolute(path)}
+    body = RG.article_body(a, author) + contact()
+    return shell('ratgeber', {'title': a['meta_title'], 'description': a['description']}, body, ld=(crumb, art), path=path,
+                 noindex=a['status'] != 'freigegeben')
 
 
 def markt():
@@ -641,7 +646,7 @@ def responsive_variants(out):
 
 
 def seo_files(out):
-    urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + (['markt'] if MARKET_LIVE else []) + (['ratgeber'] if RATGEBER['artikel'] else [])]
+    urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + (['markt'] if MARKET_LIVE else []) + (['ratgeber'] if RG.published() else [])] + [absolute(f'ratgeber/{a["slug"]}/') for a in RG.published()]
     (out / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                      + ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
     (out / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {absolute("sitemap.xml")}\n', encoding='utf-8')
@@ -652,6 +657,7 @@ def main():
     parser.add_argument('--preview', action='store_true', help='Links mit index.html, Ausgabe nach preview/')
     args = parser.parse_args()
     paths.pretty = not args.preview
+    RG.SHOW_DRAFTS = args.preview
     if args.preview:
         SITE['formEndpoint'] = ''  # Vorschau: keine Übermittlung ins CRM
         global PREVIEW_HEAD
@@ -672,6 +678,8 @@ def main():
     pages['bewerten/index.html'] = (1, bewerten)
     pages['ueber-grenford/index.html'] = (1, ueber)
     pages['ratgeber/index.html'] = (1, ratgeber)
+    for a in RG.visible():  # Entwürfe nur in der Vorschau
+        pages[f'ratgeber/{a["slug"]}/index.html'] = (2, lambda a=a: ratgeber_article(a))
     if MARKET_LIVE:
         pages['markt/index.html'] = (1, markt)
     for target, (depth, render) in pages.items():

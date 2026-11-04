@@ -61,6 +61,20 @@ for page in pages:
         assert 'noindex' in s, (page, '404 ohne noindex')
         print(page.relative_to(ROOT), 'verified')
         continue
+    in_ratgeber = 'ratgeber' in page.relative_to(OUT).parts
+    if in_ratgeber and page.parent.name != 'ratgeber':
+        # Ratgeber-Beitrag: Rücklink, Autor, Datum, Kernpunkte, nächster Schritt; Entwurf nur mit noindex und Hinweis
+        for needle, msg in (('class="rg-back"', 'Rücklink'), ('Marco Kaimann', 'Autor'), ('<time datetime=', 'Datum'),
+                            ('Das Wichtigste in Kürze', 'Kernpunkte'), ('class="rg-next', 'nächster Schritt')):
+            assert needle in s, (page, 'Ratgeber-Beitrag ohne ' + msg)
+        if 'class="rg-draft"' in s:
+            assert 'noindex' in s and OUT.name == 'preview', (page, 'Entwurf öffentlich oder ohne noindex')
+        else:
+            assert '<link rel="canonical"' in s and page.parent.name + '/' in (OUT / 'sitemap.xml').read_text(encoding='utf-8'), (page, 'Beitrag nicht in Sitemap')
+        assert 'Schematisches Beispiel' in s or 'class="rg-plan' not in s, (page, 'Plan ohne Kennzeichnung')
+        assert s.count('class="rg-example"') == s.count('Fiktives Beispiel</span><h3>'), (page, 'Beispiel ohne Kennzeichnung')
+        print(page.relative_to(ROOT), 'verified')
+        continue
     if 'id="strategic-form"' in s:
         assert s.count('data-inquiry-step=') == 6
     else:
