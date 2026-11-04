@@ -1263,3 +1263,9 @@ body.page-projects,.area-projects,.pathway-projects,.memo-paper--projects{
  .site-header nav .nav-item>a{position:relative;border-bottom-color:transparent!important}
  .site-header nav .nav-item>a[aria-current=page]:after{content:"";position:absolute;left:14px;right:14px;bottom:3px;height:1px;background:var(--orange-light)}
  .site-header nav .nav-item:hover>a[aria-current=page]:after,.site-header nav .nav-item:focus-within>a[aria-current=page]:after{background:currentColor;opacity:.5}}
+/* Memo-Vorschau („Was Sie am Ende in der Hand haben“): vollflächig in der Bereichsfarbe, wie das jeweilige Memo bzw. der Brief */
+.memo-paper--investment,.memo-paper--property{background:var(--orange)!important;--edition-ink:#fff;--edition-mark:var(--orange-light);--edition-line:rgba(255,255,255,.35)}
+.memo-paper--investment .paper-center h3,.memo-paper--property .paper-center h3{color:#fff}
+.memo-paper--investment:before,.memo-paper--property:before{opacity:.1}
+.memo-paper--projects{--edition-ink:#1c1d20;--edition-mark:#1c1d20;--edition-line:rgba(28,29,32,.3)}
+.memo-paper--projects .paper-center h3{color:#1c1d20}
