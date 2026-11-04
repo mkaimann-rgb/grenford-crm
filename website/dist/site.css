@@ -1292,5 +1292,9 @@ body.page-projects,.area-projects,.pathway-projects,.memo-paper--projects{
 body.page-property .immersive-hero .hero-actions .button:hover,body.page-property .immersive-hero .hero-actions .button:focus-visible{background:#222e41!important;border-color:#222e41!important;color:#fff!important}
 body.page-property .immersive-hero .hero-actions .button:hover *{color:#fff!important}
 /* Property: Schritt 05 im 5-Point Process hellblau, damit er sich vom Blau der anderen Schritte abhebt */
-body.page-property .memo-timeline li:last-child>span,body.page-property .method .memo-timeline li:last-child>span,
+body.page-property .memo-timeline:not(.is-staged) li:last-child>span,
 body.page-property .memo-timeline.is-staged li.is-reached:last-child>span,body.page-property .method .memo-timeline.is-staged li.is-reached:last-child>span{background:#a9b8cf!important;color:#222e41!important;box-shadow:inset 0 0 0 1px #a9b8cf,0 0 0 8px var(--tl-bg,var(--white))!important}
+
+/* Property: Buttons im dunklen Memo-Abschnitt hellblau, beim Darüberfahren das dunkle Property-Blau (wie im Hero) */
+body.page-property .memo-studio .button:hover,body.page-property .memo-studio .button:focus-visible{background:#222e41!important;border-color:#222e41!important;color:#fff!important}
+body.page-property .memo-studio .button:hover *{color:#fff!important}

@@ -205,25 +205,12 @@ document.querySelectorAll('.comparison-stage input[type="range"]').forEach(range
 });
 
 // ---------------------------------------------------------------- Erzählen beim Scrollen (ruhig, nur scrollgesteuert)
-// Vorher-Nachher: Beim Scrollen wandelt sich der Raum vom Bestand zum Zielbild. Sobald jemand den Regler selbst bewegt,
-// übernimmt er. Zeitstrahl: Die Linie füllt sich von 01 bis 05, erreichte Schritte werden hervorgehoben.
+// Vorher-Nachher bleibt stehen, bis der Nutzer selbst am Regler zieht. Zeitstrahl: Die Linie füllt sich von 01 bis 05, erreichte Schritte werden hervorgehoben.
 // Ohne JavaScript oder mit „Bewegung reduzieren“ bleibt alles im Ausgangszustand vollständig sichtbar.
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 const scrollStories = [];
 
 if (!reduceMotion) {
-  document.querySelectorAll('.comparison-stage input[type="range"]').forEach(range => {
-    const stage = range.parentElement;
-    scrollStories.push(vh => {
-      if (range.dataset.manual) return;
-      const r = stage.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > vh) return;
-      const p = clamp((vh * 0.85 - r.top) / (vh * 0.55), 0, 1);
-      range.value = Math.round(90 - p * 80);  // 90 % Bestand → 10 % Bestand
-      range.dispatchEvent(new Event('input'));
-    });
-  });
-
   document.querySelectorAll('.memo-timeline').forEach(line => {
     const steps = [...line.children];
     if (steps.length < 2) return;
