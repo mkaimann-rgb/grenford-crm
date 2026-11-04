@@ -279,6 +279,24 @@ def founder():
             '<div class="founder-sign"><strong>Marco Kaimann</strong><span>Gründer von GRENFORD</span></div></div></section>')
 
 
+def founder_bio():
+    """Über GRENFORD: Werdegang von Marco Kaimann neben dem Portrait."""
+    paras = [
+        'Marco Kaimann begann seine Laufbahn bei einem der damals größten Maklerhäuser Berlins. Er beriet private Käufer zu Wohnimmobilien im Bestand, '
+        'darunter Rohlingprojekte und sanierungsbedürftige Dachgeschosse, und begleitete den Verkauf von Neubauwohnungen. Diese Erfahrung fließt heute in seine '
+        'Kauf-, Verkaufs- und Sanierungsberatung sowie in die Vermittlung geeigneter Baupartner ein.',
+        'Für einen führenden deutsch-amerikanischen Anbieter von Immobilienmarktdaten baute er das B2B-Geschäft in Nord- und Ostdeutschland auf. Parallel vermittelte er '
+        'selbstständig den Verkauf eines Mehrfamilienhauses und eines Boutiquehotels. Später begleitete er Transaktionen für private und institutionelle Investoren und '
+        'baute Kooperationen für größere Mixed-Use-Projekte auf.',
+        'Mit GRENFORD gründete Marco Kaimann eine unabhängige Immobilienberatung mit Sitz in Berlin. In den Bereichen <strong>Property und Investment</strong> führt GRENFORD '
+        'Immobilienverkäufe von der Vorbereitung und Vermarktung über die notarielle Beurkundung bis zum Closing. Im Bereich <strong>Projects</strong> vergleicht GRENFORD '
+        'Bauangebote nach Leistungsumfang, Kosten und Terminen, unterstützt Bauherren bei der Wahl geeigneter Baupartner und begleitet sie bis zur Fertigstellung der Sanierung.']
+    return ('<section class="founder founder-bio" id="marco"><figure>' + img('marco-kaimann.jpg', 'Marco Kaimann, Gründer von GRENFORD', '(max-width:760px) 88vw, 350px', 'loading="lazy"') +
+            '</figure><div><h2 class="serif">Marco Kaimann</h2><p class="founder-role">Gründer von GRENFORD</p>'
+            + ''.join(f'<p>{p}</p>' for p in paras) +
+            '<a class="text-link" href="#kontakt">Lernen wir uns kennen <span aria-hidden="true">↗</span></a></div></section>')
+
+
 def gateway(k):
     """Zweiter Weg im Einstiegs-Block: die Projektanfrage in sechs Schritten, eingeklappt unter der Bewertung.
     So gibt es pro Seite einen Einstieg statt zwei konkurrierender Blöcke. #anfrage und die „… anfragen“-Buttons öffnen sie."""
@@ -495,7 +513,7 @@ def ueber():
                     '<a class="button" href="#kontakt">Lernen wir uns kennen<span aria-hidden="true">↓</span></a><a class="text-link" href="#haltung">Wofür GRENFORD steht ↓</a>')
     body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#marco">Der Gründer</a><a href="#video">Video</a><a href="#haltung">Zusagen</a><a href="#felder">Geschäftsfelder</a>'
              f'<a href="#ablauf">So entsteht ein Memo</a><a href="{page("bewerten")}">Wertermittlung ↗</a><a href="{page("ratgeber")}">Ratgeber ↗</a><a href="#kontakt">Kontakt</a></nav>')
-    body += '<div class="personal-approach">' + founder() + '</div>' + founder_video()
+    body += '<div class="personal-approach">' + founder_bio() + '</div>' + founder_video()
     values = [('Schriftlich statt aus dem Bauch', 'Jede Empfehlung steht in einem Memo, mit Zahlen und Optionen. Sie können sie nachlesen und weitergeben.'),
               ('Offene Vergütung', 'Woher die Zahlen stammen, welche Rolle GRENFORD hat und wie die Vergütung geregelt ist, steht offen im Memo.'),
               ('Diskretion', 'Off-Market-Mandate, Angebote der Baufirmen und Ihre Ziele verlassen das Haus nicht.'),

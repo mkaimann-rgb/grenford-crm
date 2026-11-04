@@ -1256,3 +1256,10 @@ body.page-property .memo-studio .button:hover *{color:#fff!important}
 .rg-split-legend i{margin-top:4px}
 .rg-split-legend b{display:block;white-space:nowrap}
 .grenford-more{background:var(--white)}
+/* Über GRENFORD: Werdegang neben dem Portrait */
+.founder-bio{align-items:start}
+.founder-bio h2{margin-bottom:4px}
+.founder-bio .founder-role{margin:0 0 22px;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--orange-ink)}
+.founder-bio p{max-width:620px;font-size:16px;line-height:1.7}
+.founder-bio p strong{font-weight:500}
+@media(min-width:761px){.founder-bio figure{position:sticky;top:90px}}
