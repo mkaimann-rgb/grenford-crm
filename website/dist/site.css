@@ -1248,3 +1248,5 @@ body.page-projects,.area-projects,.pathway-projects,.memo-paper--projects{
 .wz-tiles .wz-option:hover input[type=checkbox]+.wz-box:after{border-color:var(--on-orange);background:transparent}
 .wz-tiles .wz-box{transition:background-color .25s ease,border-color .25s ease,color .25s ease}
 @media(prefers-reduced-motion:reduce){.wz-tiles .wz-box{transition:none}}
+/* Menüpunkt GRENFORD (Dachmarke): immer Mokka/Bronze, auch auf den Bereichsseiten */
+.nav-item.nav-grenford{--orange:#7a6a52;--orange-hover:#8b7a60;--orange-ink:#7a6a52;--orange-light:#c9b48f;--rust:#7a6a52;--orange-tint:#efe8dc;--on-orange:#fff;--on-orange-line:rgba(255,255,255,.4)}
