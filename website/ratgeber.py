@@ -581,6 +581,13 @@ PLAN_BAULUECKE = (
     + _marker(230, 300, 'A') + _marker(230, 100, 'B') + _marker(420, 215, 'C') +
     '</svg>')
 
+BM_PAGE = 'https://www.berlin.de/sen/bauen/neubau/berliner-modell/'
+BM_LEITLINIE = 'https://www.berlin.de/sen/bauen/_assets/neubau/modell_baulandentwicklung.pdf'
+BM_ANGEMESSEN = 'https://www.berlin.de/sen/stadtentwicklung/_assets/planung/bebauungsplanverfahren/dv_9-83ve_anl_04_250407_angemessenheit.pdf'
+BM_DISPENS = 'https://www.berlin.de/sen/bauen/_assets/neubau/2025-12-08_handreichung_dispensvertraege.pdf'
+BM_TURBO = 'https://www.berlin.de/sen/stadtentwicklung/_assets/planung/bebauungsplanverfahren/202603_berliner_leitfaden_wohnungsbau-turbo.pdf'
+BM_AENDERUNG = 'https://www.berlin.de/ba-charlottenburg-wilmersdorf/aktuelles/pressemitteilungen/2026/pressemitteilung.1717144.php'
+
 PILL_DECIDED = "<span class='rg-pill is-ok'>beschieden</span>"
 PILL_NONE = "<span class='rg-pill is-assume'>kein Baurecht</span>"
 
@@ -599,7 +606,9 @@ ARTICLES += [
   'review': ['Alle rechtlichen Aussagen sind allgemein gehalten und vor Veröffentlichung juristisch zu prüfen, insbesondere § 34 Abs. 3b und § 246e BauGB (in Kraft seit 30.10.2025) am amtlichen Wortlaut einschließlich der Rolle der Gemeinde.',
              'Geltungsdauer und Verlängerung des Vorbescheids nach § 75 BauO Bln am aktuellen Gesetzestext prüfen (Quellen widersprechen sich).',
              'Berliner Verfahrensschritte (§§ 69, 71, 72, 75 BauO Bln) und Zuständigkeit der Bezirke bestätigen.',
-             'Plan, Flächen und Fall sind fiktiv.'],
+             'Plan, Flächen und Fall sind fiktiv.',
+             'Berliner Modell: aktuelle Leitlinie einschließlich aller Änderungen (zuletzt Schreiben vom 14.09.2026), Bindungsanteil 30 %, Bagatellgrenze, Kostenkennwerte ab 01.04.2025 und Angemessenheitsprüfung am Original prüfen.',
+             'Handreichung Dispensverträge (08.12.2025) und Leitfaden Wohnungsbau-Turbo (März 2026): Anwendungsbereich und Vertragsinhalte am Original prüfen.'],
   'blocks': [
    ('h2', 'grundlagen', 'Drei Grundlagen für Baurecht'),
    ('p', 'Ob und was gebaut werden darf, regelt zuerst das Bauplanungsrecht des Bundes im Baugesetzbuch. Es unterscheidet drei Lagen: das Gebiet eines Bebauungsplans, den im Zusammenhang bebauten Innenbereich und den Außenbereich.'),
@@ -612,6 +621,32 @@ ARTICLES += [
     'Vereinfachte Übersicht. Maßgeblich ist der amtliche Gesetzestext.'),
    ('h2', 'bebauungsplan', 'Qualifizierter und einfacher Bebauungsplan'),
    ('p', 'Ein Bebauungsplan ist qualifiziert, wenn er mindestens Art und Maß der baulichen Nutzung, die überbaubaren Grundstücksflächen und die örtlichen Verkehrsflächen festsetzt (' + _src('§ 30 Abs. 1 BauGB', GII + '__30.html') + '). Ein Vorhaben ist dort zulässig, wenn es den Festsetzungen nicht widerspricht und die Erschließung gesichert ist. Fehlt eine dieser Festsetzungen, ist der Plan einfach: Er gilt für das, was er regelt; im Übrigen richtet sich die Zulässigkeit nach § 34 oder § 35 (§ 30 Abs. 3).'),
+   ('h2', 'berliner-modell', 'Berliner Modell der kooperativen Baulandentwicklung'),
+   ('p', 'Entsteht in Berlin neues Wohnbaurecht durch einen Bebauungsplan, beteiligt sich der Vorhabenträger nach der Leitlinie des Senats an den Folgen der Planung. Grundlage ist ein städtebaulicher Vertrag nach ' + _src('§ 11 BauGB', GII + '__11.html') + ' zwischen Land beziehungsweise Bezirk und Vorhabenträger. Er wird geschlossen, bevor der Plan festgesetzt wird, und ist damit Teil der Grundstückskalkulation, nicht erst der Baukalkulation.'),
+   ('list', ['<strong>Städtebaulicher Vertrag:</strong> regelt Bindungen, Beiträge, Fristen und Sicherheiten; ohne Vertrag in der Regel kein neues Baurecht',
+             '<strong>Mietpreis- und Belegungsbindungen:</strong> ein Anteil der Geschossfläche Wohnen wird als geförderter, mietpreis- und belegungsgebundener Wohnraum errichtet; die Leitlinie nennt 30 %, unterhalb einer Bagatellgrenze entfällt die Pflicht',
+             '<strong>Projektbezogene Infrastrukturbeiträge:</strong> Beiträge zu Kita- und Grundschulplätzen sowie weiteren Folgeeinrichtungen, soweit das Vorhaben sie auslöst, berechnet nach den vom Senat fortgeschriebenen Kostenkennwerten',
+             '<strong>Angemessenheit:</strong> die Belastungen dürfen den planungsbedingten Bodenwertzuwachs nicht übersteigen; dafür gibt es ein eigenes Prüfschema']),
+   ('table', 'Wann das Berliner Modell greift', ['', 'Neues Wohnbaurecht durch Bebauungsplan', 'Regulär nach § 34 BauGB', 'Sonderwege mit Dispensvertrag'], [
+     ['Baurecht entsteht durch', 'Aufstellung oder Änderung des Bebauungsplans', 'Einfügen in die nähere Umgebung', 'Befreiung oder Abweichung, etwa § 31 Abs. 3, § 34 Abs. 3a und 3b, § 246e BauGB'],
+     ['Berliner Modell', 'ja, nach der Leitlinie', 'in der Regel nicht: Besteht ein Anspruch auf Genehmigung, kann er nicht an Beiträge geknüpft werden', 'Vertragsinhalte angelehnt an das Berliner Modell, verhandelt mit dem Bezirk'],
+     ['Bindungen und Beiträge', 'Bindungsanteil und Infrastrukturbeiträge', 'keine aus dem Modell', 'nach Handreichung, im Einzelfall'],
+     ['Planungssicherheit', 'erst mit Festsetzung des Plans', 'mit Vorbescheid oder Genehmigung', 'erst mit Zustimmung und Vertrag'],
+     ['Amtliche Grundlage', _src('Leitlinie', BM_LEITLINIE), _src('§ 34 BauGB', GII + '__34.html'), _src('Handreichung Dispensverträge', BM_DISPENS)]],
+    'Vereinfachte Übersicht. Maßgeblich sind die Leitlinie in ihrer aktuellen Fassung, die Handreichung und der Einzelfall.'),
+   ('split', 'Fiktives Beispiel: 8.000 m² Geschossfläche Wohnen', [('gebunden', 2400, 'mietpreis- und belegungsgebunden', '2.400 m² · 30 %'), ('frei', 5600, 'übrige Wohnflächen', '5.600 m² · 70 %')],
+    'Annahme: Bindungsanteil 30 % der Geschossfläche Wohnen. Alle Werte fiktiv.'),
+   ('h2', 'kalkulation-modell', 'Wie das Modell in die Grundstückskalkulation eingeht'),
+   ('flow', [('Bindungen', 'Die 2.400 m² gebundene Fläche erzielt über die Bindungsdauer nur die zulässige Anfangsmiete und ist an berechtigte Mieter gebunden. Ihr Wert ist deutlich niedriger als der der 5.600 m² übrigen Fläche und wird getrennt gerechnet.'),
+             ('Förderannahmen', 'Ob und in welcher Höhe Wohnungsbauförderung für die gebundene Fläche fließt, ist bis zur Bewilligung eine Annahme. In der Kalkulation steht sie getrennt und mit Szenario ohne Förderung.'),
+             ('Folgekosten', 'Infrastrukturbeiträge, öffentliche Grün- und Erschließungsflächen sowie Planungs- und Gutachterkosten mindern den Wert, den der Käufer für das Grundstück zahlen kann.'),
+             ('Fälligkeiten', 'Wann Beiträge fällig werden und welche Sicherheiten, etwa Bürgschaften, verlangt sind, bestimmt der Vertrag. Frühe Fälligkeit bindet Kapital und erhöht die Finanzierungskosten.')]),
+   ('p', 'Aus Erlösen der freien und der gebundenen Flächen abzüglich Baukosten, Folgekosten, Finanzierung und Gewinn ergibt sich der tragfähige Grundstückswert. Ein Kaufpreis, der auf Baurecht ohne Bindungen kalkuliert ist, überschätzt den Wert, wenn das Baurecht erst über einen Bebauungsplan mit Berliner Modell entsteht.'),
+   ('note', 'Prüfstand 4. November 2026, über Websuche ermittelt; die Dokumente wurden nicht direkt geöffnet: '
+            + _src('Leitlinie Berliner Modell', BM_LEITLINIE) + ' mit Änderungen, zuletzt laut ' + _src('Pressemitteilung des Bezirks Charlottenburg-Wilmersdorf', BM_AENDERUNG) + ' per Schreiben vom 14.09.2026 (Spielplätze); '
+            + _src('Angemessenheitsprüfung, Version 7.0 vom 01.04.2025', BM_ANGEMESSEN) + '; '
+            + _src('Handreichung Dispensverträge vom 08.12.2025', BM_DISPENS) + '; '
+            + _src('Berliner Leitfaden Wohnungsbau-Turbo, 2. Auflage März 2026', BM_TURBO) + '. Übersicht: ' + _src('Berliner Modell, berlin.de', BM_PAGE) + '.'),
    ('h2', 'innenbereich', 'Innenbereich: die vier Einfügungskriterien'),
    ('p', 'Nach ' + _src('§ 34 Abs. 1 BauGB', GII + '__34.html') + ' muss sich ein Vorhaben in die Eigenart der näheren Umgebung einfügen, und zwar nach vier Kriterien:'),
    ('list', ['<strong>Art der baulichen Nutzung:</strong> etwa Wohnen, Gewerbe, gemischte Nutzung',
@@ -775,6 +810,18 @@ def _calc(stamp, rows, result, note):
             f'<p>{E(note)}</p></div>')
 
 
+def _split(title, parts, note):
+    """Geteilter Balken für Flächenanteile, Segmentbreite proportional."""
+    total = sum(p[1] for p in parts)
+    segs = ''.join(f'<span class="rg-split-seg is-{k}" style="flex:{v}"><b>{E(lab)}</b><small>{E(val)}</small></span>' for k, v, lab, val in parts)
+    label = E(title + ': ' + ', '.join(f'{p[3]} {p[2]}' for p in parts), quote=True)
+    return (f'<figure class="rg-split"><span class="rg-stamp">Fiktives Beispiel</span><figcaption>{E(title)}</figcaption>'
+            f'<div class="rg-split-bar" role="img" aria-label="{label}">{segs}</div>'
+            f'<p class="rg-split-total">Summe {total:,} m² Geschossfläche Wohnen</p>'.replace(f'{total:,}', f'{total:,}'.replace(',', '.'))
+            + '<ul class="rg-split-legend">' + ''.join(f'<li><i class="is-{k}"></i><span><b>{E(val)}</b>{E(lab)}</span></li>' for k, v, lab, val in parts) + '</ul>'
+            + f'<p class="rg-split-note">{E(note)}</p></figure>')
+
+
 def render_blocks(blocks):
     out = ''
     for b in blocks:
@@ -795,6 +842,8 @@ def render_blocks(blocks):
             out += _plan(*b[1:])
         elif kind == 'example':
             out += _example(b[1], b[2])
+        elif kind == 'split':
+            out += _split(*b[1:])
         elif kind == 'note':
             out += f'<aside class="rg-note"><span class="rg-stamp">Hinweis</span><p>{b[1]}</p></aside>'
         elif kind == 'bars':
