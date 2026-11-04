@@ -439,13 +439,12 @@ def value_steps():
              ('Besichtigung vor Ort', 'Lage, Substanz, Ausstattung und Unterlagen. Dazu der Blick darauf, was eine Sanierung verändern würde.', 'dachgeschoss-before.webp'),
              ('Wertermittlung', 'Der Wert heute und der Wert nach einer Sanierung, mit grobem Kostenrahmen und vergleichbaren Objekten eingeordnet.', 'projects-bauplan.webp'),
              ('Ergebnis im Gespräch', 'Persönliche Vorstellung der Ergebnisse. Auf Wunsch als Property Brief, die Grundlage für Ihre Entscheidung: verkaufen, sanieren oder halten.', 'soemmering-wohnzimmer.webp')]
-    slides = ''.join(f'<article class="slide" data-slide><div><span class="eyebrow">Schritt {i} von 4</span><h3>{E(a)}</h3><p>{E(b)}</p></div>'
-                     + img(pic, '', '(max-width:760px) 88vw, 45vw', 'loading="lazy"') + '</article>' for i, (a, b, pic) in enumerate(steps, 1))
+    # Vier Stationen nebeneinander (kein Schieber): Bild, Kreis mit Verbindungslinie, Titel, Text
+    items = ''.join(f'<li><figure>' + img(pic, '', '(max-width:760px) 80vw, 24vw', 'loading="lazy"') + '</figure>'
+                    f'<div class="vp-row"><span class="vp-num">{i:02d}</span></div><h3>{E(a)}</h3><p>{E(b)}</p></li>' for i, (a, b, pic) in enumerate(steps, 1))
     return ('<section class="value-steps" id="ablauf"><div class="section-head"><h2>So läuft die Bewertung ab</h2>'
             '<p>Vom ersten Kontakt bis zum Ergebnis sprechen Sie mit derselben Person.</p></div>'
-            '<div class="slides" data-slides><div class="slides-count"><span class="slides-num"><span data-slide-num>01</span><small>/04</small></span>'
-            '<span class="slides-nav"><button type="button" data-slide-prev aria-label="Vorheriger Schritt">←</button><button type="button" data-slide-next aria-label="Nächster Schritt">→</button></span></div>'
-            f'<div class="slides-track" aria-live="polite">{slides}</div></div></section>')
+            f'<ol class="value-path">{items}</ol></section>')
 
 
 def faq_section(items, title='Häufige Fragen'):

@@ -1269,3 +1269,28 @@ body.page-projects,.area-projects,.pathway-projects,.memo-paper--projects{
 .memo-paper--investment:before,.memo-paper--property:before{opacity:.1}
 .memo-paper--projects{--edition-ink:#1c1d20;--edition-mark:#1c1d20;--edition-line:rgba(28,29,32,.3)}
 .memo-paper--projects .paper-center h3{color:#1c1d20}
+
+/* Wertermittlung „So läuft die Bewertung ab“: vier Stationen nebeneinander */
+.value-path{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.value-path li{position:relative;display:flex;flex-direction:column}
+.value-path figure{margin:0 0 22px;aspect-ratio:4/5;overflow:hidden;border-radius:14px;background:var(--ivory)}
+.value-path img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .6s ease,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.value-path li:hover img{filter:grayscale(0);transform:scale(1.05)}
+.vp-num{position:relative;z-index:1;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--blue);color:var(--paper);font-size:13px;box-shadow:0 0 0 8px var(--white)}
+.value-path li:last-child .vp-num{background:var(--orange);color:var(--on-orange)}
+.vp-row{position:relative}
+.value-path li:not(:last-child) .vp-row:after{content:"";position:absolute;left:56px;right:-24px;top:22px;height:1px;background:var(--blue)}
+.value-path h3{margin:16px 0 8px;font-size:21px;font-weight:500;letter-spacing:-.03em}
+.value-path p{margin:0;font-size:14px;line-height:1.6;color:var(--muted)}
+.value-steps{background:var(--white)}
+@media(max-width:1000px){.value-path{grid-template-columns:repeat(2,minmax(0,1fr))}.value-path li .vp-row:after{display:none}}
+@media(max-width:760px){.value-path{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin:30px -6% 0;padding:0 6% 10px;scrollbar-width:none}
+ .value-path::-webkit-scrollbar{display:none}.value-path li{flex:0 0 78%;scroll-snap-align:start}.value-path figure{aspect-ratio:4/3}}
+@media(prefers-reduced-motion:reduce){.value-path img{transition:none}}
+
+/* Property: Hero-Button hellblau, beim Darüberfahren das dunkle Property-Blau */
+body.page-property .immersive-hero .hero-actions .button:hover,body.page-property .immersive-hero .hero-actions .button:focus-visible{background:#222e41!important;border-color:#222e41!important;color:#fff!important}
+body.page-property .immersive-hero .hero-actions .button:hover *{color:#fff!important}
+/* Property: Schritt 05 im 5-Point Process hellblau, damit er sich vom Blau der anderen Schritte abhebt */
+body.page-property .memo-timeline li:last-child>span,body.page-property .method .memo-timeline li:last-child>span,
+body.page-property .memo-timeline.is-staged li.is-reached:last-child>span,body.page-property .method .memo-timeline.is-staged li.is-reached:last-child>span{background:#a9b8cf!important;color:#222e41!important;box-shadow:inset 0 0 0 1px #a9b8cf,0 0 0 8px var(--tl-bg,var(--white))!important}
