@@ -494,7 +494,7 @@ def ueber():
                     'GRENFORD ist eine kleine, inhabergeführte Immobilienberatung. Sie hilft beim Verkauf und Ankauf von Immobilien und bereitet Sanierungen so vor, dass Angebote vergleichbar werden.',
                     '<a class="button" href="#kontakt">Lernen wir uns kennen<span aria-hidden="true">↓</span></a><a class="text-link" href="#haltung">Wofür GRENFORD steht ↓</a>')
     body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#marco">Der Gründer</a><a href="#video">Video</a><a href="#haltung">Zusagen</a><a href="#felder">Geschäftsfelder</a>'
-             '<a href="#ablauf">So entsteht ein Memo</a><a href="#kontakt">Kontakt</a></nav>')
+             f'<a href="#ablauf">So entsteht ein Memo</a><a href="{page("bewerten")}">Wertermittlung ↗</a><a href="{page("ratgeber")}">Ratgeber ↗</a><a href="#kontakt">Kontakt</a></nav>')
     body += '<div class="personal-approach">' + founder() + '</div>' + founder_video()
     values = [('Schriftlich statt aus dem Bauch', 'Jede Empfehlung steht in einem Memo, mit Zahlen und Optionen. Sie können sie nachlesen und weitergeben.'),
               ('Offene Vergütung', 'Woher die Zahlen stammen, welche Rolle GRENFORD hat und wie die Vergütung geregelt ist, steht offen im Memo.'),
@@ -516,6 +516,12 @@ def ueber():
     body += ('<section class="memo-line" id="ablauf"><div class="section-head"><h2 class="serif">Erst der Vergleich.<br>Dann die Entscheidung.</h2>'
              '<p>Derselbe Weg, ob Renovation Memo, Property Brief oder Investment Memo.</p></div><ol class="memo-timeline">'
              + ''.join(f'<li><span>{i:02d}</span><h3>{a}</h3><p>{b}</p></li>' for i, (a, b) in enumerate(steps, 1)) + '</ol></section>')
+    more = [(page('bewerten'), 'Wertermittlung', 'Was ist Ihre Immobilie wert, heute und nach einer Sanierung? Persönlich eingeschätzt, Antwort innerhalb von 48 Stunden.', 'Wertermittlung starten'),
+            (page('ratgeber'), 'Ratgeber', 'Leitfäden und Checklisten für Verkauf, Kauf, Transaktion und Sanierung.', 'Zum Ratgeber')]
+    body += ('<section class="fields grenford-more" id="angebote"><div class="section-head"><h2>Mehr von GRENFORD</h2>'
+             '<p>Zwei Angebote, die allen drei Geschäftsfeldern dienen.</p></div><div class="field-rows">'
+             + ''.join(f'<a class="field-row" href="{h}"><h3>{t}</h3><p>{x}</p><span class="field-memo">{c} <span aria-hidden="true">↗</span></span></a>' for h, t, x, c in more)
+             + '</div></section>')
     body += contact()
     return shell('ueber-grenford', SITE['pages']['ueber-grenford'], body, ld=(crumbs('ueber-grenford', 'Über GRENFORD'),))
 
