@@ -1298,3 +1298,17 @@ body.page-property .memo-timeline.is-staged li.is-reached:last-child>span,body.p
 /* Property: Buttons im dunklen Memo-Abschnitt hellblau, beim Darüberfahren das dunkle Property-Blau (wie im Hero) */
 body.page-property .memo-studio .button:hover,body.page-property .memo-studio .button:focus-visible{background:#222e41!important;border-color:#222e41!important;color:#fff!important}
 body.page-property .memo-studio .button:hover *{color:#fff!important}
+
+/* Über GRENFORD: Vorstellungsvideo */
+.founder-video{padding:80px 6%;background:var(--white)}
+.founder-video .section-head{display:grid;grid-template-columns:1fr 1fr;gap:16px 8%;align-items:end}
+.founder-video .section-head p{margin:0;color:var(--muted);max-width:520px}
+.fv-frame{position:relative;margin-top:36px;border-radius:14px;overflow:hidden;background:var(--blue);aspect-ratio:2/1;box-shadow:0 18px 50px rgba(20,24,34,.12)}
+.fv-video{display:block;width:100%;height:100%;object-fit:cover;background:var(--blue)}
+.fv-play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:0;background:linear-gradient(0deg,rgba(17,19,26,.45),rgba(17,19,26,.1));color:#fff;cursor:pointer;font:inherit}
+.fv-play span{display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:var(--orange);color:var(--on-orange);font-size:24px;padding-left:5px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .25s ease}
+.fv-play:hover span,.fv-play:focus-visible span{transform:scale(1.07)}
+.fv-play small{font-size:14px;letter-spacing:.04em;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.fv-play[hidden]{display:none}
+@media(max-width:760px){.founder-video{padding:56px 6%}.founder-video .section-head{display:block}.founder-video .section-head p{margin-top:12px}.fv-play span{width:64px;height:64px;font-size:20px}}
+.founder-video{padding-bottom:90px}

@@ -274,3 +274,13 @@ if (sectionNav) {
   window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
   update();
 }
+
+// Vorstellungsvideo (Über GRENFORD): großer Abspielknopf über dem Vorschaubild; danach die normalen Steuerelemente.
+document.querySelectorAll('[data-video-play]').forEach(button => {
+  const video = button.parentElement.querySelector('video');
+  if (!video) return;
+  video.controls = false;  // ohne JavaScript bleiben die Steuerelemente sichtbar
+  const start = () => { button.hidden = true; video.controls = true; };
+  button.addEventListener('click', () => { start(); video.play().catch(() => { button.hidden = false; }); video.focus(); });
+  video.addEventListener('play', start);
+});

@@ -476,13 +476,25 @@ def bewerten():
     return shell('bewerten', SITE['pages']['bewerten'], body, ld=(faq_data(faqs), service, crumbs('bewerten', 'Immobilie bewerten')))
 
 
+def founder_video():
+    """Über GRENFORD: Vorstellungsvideo. Startet nur auf Klick (preload=none), Vorschaubild statt Vorladen."""
+    return ('<section class="founder-video" id="video"><div class="section-head"><h2>Marco Kaimann im Video</h2>'
+            '<p>In einer Minute: wer hinter GRENFORD steht, wie ich arbeite und was die drei Bereiche Investment, Property und Projects verbindet.</p></div>'
+            '<div class="fv-frame"><video class="fv-video" controls preload="none" playsinline width="848" height="424" '
+            f'poster="{asset("video/grenford-marco-kaimann-poster.jpg")}" aria-label="Video: Marco Kaimann stellt GRENFORD vor (1 Minute, mit Ton)">'
+            f'<source src="{asset("video/grenford-marco-kaimann.mp4")}" type="video/mp4">'
+            f'Ihr Browser kann das Video nicht abspielen. <a href="{asset("video/grenford-marco-kaimann.mp4")}">Video herunterladen</a></video>'
+            '<button type="button" class="fv-play" data-video-play aria-label="Video abspielen"><span aria-hidden="true">▶</span><small>Video ansehen · 1 Min.</small></button></div>'
+            '</section>')
+
+
 def ueber():
     body = sub_hero('ueber-grenford', 'Über GRENFORD', '', 'Hinter GRENFORD <em>steht Marco Kaimann</em>',
                     'GRENFORD ist eine kleine, inhabergeführte Immobilienberatung. Sie hilft beim Verkauf und Ankauf von Immobilien und bereitet Sanierungen so vor, dass Angebote vergleichbar werden.',
                     '<a class="button" href="#kontakt">Lernen wir uns kennen<span aria-hidden="true">↓</span></a><a class="text-link" href="#haltung">Wofür GRENFORD steht ↓</a>')
-    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#marco">Der Gründer</a><a href="#haltung">Zusagen</a><a href="#felder">Geschäftsfelder</a>'
+    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#marco">Der Gründer</a><a href="#video">Video</a><a href="#haltung">Zusagen</a><a href="#felder">Geschäftsfelder</a>'
              '<a href="#ablauf">So entsteht ein Memo</a><a href="#kontakt">Kontakt</a></nav>')
-    body += '<div class="personal-approach">' + founder() + '</div>'
+    body += '<div class="personal-approach">' + founder() + '</div>' + founder_video()
     values = [('Schriftlich statt aus dem Bauch', 'Jede Empfehlung steht in einem Memo, mit Zahlen und Optionen. Sie können sie nachlesen und weitergeben.'),
               ('Offene Vergütung', 'Woher die Zahlen stammen, welche Rolle GRENFORD hat und wie die Vergütung geregelt ist, steht offen im Memo.'),
               ('Diskretion', 'Off-Market-Mandate, Angebote der Baufirmen und Ihre Ziele verlassen das Haus nicht.'),
