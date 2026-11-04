@@ -1551,3 +1551,8 @@ body.page-property .memo-studio .button:hover *{color:#fff!important}
 .rg-pill.is-open{background:#efe8de;color:#7a5a00}
 .rg-pill.is-risk{background:#f3e0dd;color:#9b3b33}
 .rg-table td .rg-pill{justify-self:start;align-self:start}
+.page-ratgeber .immersive-sub h1{max-width:none}
+.page-ratgeber .immersive-sub h1 em{display:inline}
+.rg-entries{scroll-margin-top:72px}
+.page-ratgeber .immersive-sub h1{font-size:clamp(34px,8.4vw,120px);hyphens:manual}
+@media(min-width:761px){.page-ratgeber .immersive-sub h1{font-size:clamp(56px,7.4vw,118px)}}

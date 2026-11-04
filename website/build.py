@@ -522,8 +522,12 @@ def ueber():
 
 def ratgeber():
     """Ratgeber-Übersicht: Einstieg, drei Themenfragen, hervorgehobener Beitrag, Beiträge nach Bereichen (ratgeber.py)."""
-    hero = img('hero-inv-altbau.webp', '', '(max-width:760px) 88vw, 46vw', 'fetchpriority="high"')
-    body = RG.overview_body(hero) + contact()
+    # Hero wie auf den anderen Seiten: Architekturmotiv über die volle Breite, Text darauf
+    body = sub_hero('ratgeber', 'Ratgeber', '', 'Immobilien&shy;entscheidungen <em>vorbereiten</em>',
+                    'Was sollten Sie vor einem Immobilienverkauf klären? Welche Unterlagen braucht eine erste Ankaufprüfung? '
+                    'Wie lassen sich Bauangebote sinnvoll vergleichen? Im GRENFORD Ratgeber finden Sie Leitfäden und Checklisten für diese Entscheidungen.',
+                    '<a class="button" href="#themen">Zu den Themen<span aria-hidden="true">↓</span></a>')
+    body += RG.overview_body() + contact()
     meta = {'title': 'GRENFORD Ratgeber | Immobilienentscheidungen vorbereiten',
             'description': 'Leitfäden und Checklisten für Verkauf, Kauf, Transaktion und Sanierung: Was Sie vor einer Immobilienentscheidung klären sollten.'}
     return shell('ratgeber', meta, body, ld=(crumbs('ratgeber', 'Ratgeber'),), path='ratgeber/')

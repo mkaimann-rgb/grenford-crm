@@ -24,7 +24,7 @@ AREAS = {
                  'text': 'Maßnahmen ordnen, Bauangebote vergleichbar machen und Kosten realistisch einschätzen, bevor Sie beauftragen.'},
 }
 AREAS['markt'] = {'label': 'Markt', 'topic': 'Marktanalyse', 'question': '', 'text': ''}
-AREA_ORDER = ('property', 'investment', 'projects')
+AREA_ORDER = ('investment', 'property', 'projects')
 RESEARCH = '04.11.2026'  # Recherchestand der Marktzahlen
 GD = 'Gutachterausschuss für Grundstückswerte in Berlin'
 FEATURED = 'bauangebote-vergleichen'
@@ -713,15 +713,10 @@ def _featured_visual():
             '<span class="rg-stamp">Fiktives Beispiel</span></div>')
 
 
-def overview_body(hero_img):
+def overview_body():
     arts = visible()
     by_area = {k: [a for a in arts if k in a['areas']] for k in AREA_ORDER}
-    intro = ('<section class="rg-intro"><div class="rg-intro-text"><p class="rg-kicker">GRENFORD Ratgeber</p>'
-             '<h1>Immobilien&shy;entscheidungen vorbereiten</h1>'
-             '<p>Was sollten Sie vor einem Immobilienverkauf klären? Welche Unterlagen braucht eine erste Ankaufprüfung? '
-             'Wie lassen sich Bauangebote sinnvoll vergleichen? Im GRENFORD Ratgeber finden Sie Leitfäden und Checklisten für diese Entscheidungen.</p></div>'
-             f'<figure class="rg-intro-img">{hero_img}</figure></section>')
-    entries = '<nav class="rg-entries" aria-label="Themenbereiche">' + ''.join(
+    entries = '<nav class="rg-entries" id="themen" aria-label="Themenbereiche">' + ''.join(
         f'<a class="rg-entry area-{k}" href="#{k}"><span class="rg-label area-{k}">{AREAS[k]["label"]}</span>'
         f'<h2>{E(AREAS[k]["question"])}</h2><p>{E(AREAS[k]["text"])}</p>'
         f'<span class="rg-entry-more">{len(by_area[k])} {"Beitrag" if len(by_area[k]) == 1 else "Beiträge"} ↓</span></a>' for k in AREA_ORDER) + '</nav>'
@@ -753,7 +748,7 @@ def overview_body(hero_img):
                      f'<div class="rg-grid">{_card(m)}{_card(BY_SLUG["bodenrichtwert-verstehen"]) if BY_SLUG["bodenrichtwert-verstehen"] in arts else ""}</div></section>')
     note = ('<p class="rg-preview-note">Vorschau: Alle Beiträge sind Entwürfe und erscheinen erst nach Freigabe auf der Website.</p>'
             if SHOW_DRAFTS and any(a['status'] != 'freigegeben' for a in arts) else '')
-    return intro + entries + note + feat + sections
+    return entries + note + feat + sections
 
 
 def article_body(a, author_img):
