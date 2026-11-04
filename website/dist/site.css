@@ -1544,3 +1544,10 @@ body.page-property .memo-studio .button:hover *{color:#fff!important}
 .rg-plan .brw-label text{font-size:26px}
 .rg-plan .brw-label text.s{font-size:18px}
 @media(max-width:760px){.rg-calc .rg-calc-r{flex-wrap:wrap}.rg-calc .rg-calc-r dt{width:100%}}
+/* Prüfmatrix: Status wie im Investment Memo */
+.rg-pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;letter-spacing:.02em;white-space:nowrap}
+.rg-pill.is-ok{background:#e1eae2;color:#4d6b4f}
+.rg-pill.is-assume{background:#ebedf0;color:#5b6170}
+.rg-pill.is-open{background:#efe8de;color:#7a5a00}
+.rg-pill.is-risk{background:#f3e0dd;color:#9b3b33}
+.rg-table td .rg-pill{justify-self:start;align-self:start}

@@ -28,7 +28,8 @@ AREA_ORDER = ('property', 'investment', 'projects')
 RESEARCH = '04.11.2026'  # Recherchestand der Marktzahlen
 GD = 'Gutachterausschuss für Grundstückswerte in Berlin'
 FEATURED = 'bauangebote-vergleichen'
-PLANNED = [('property', 'Kaufangebote vergleichen: Preis, Bedingungen und Sicherheit der Finanzierung')]
+PLANNED = [('property', 'Kaufangebote vergleichen: Preis, Bedingungen und Sicherheit der Finanzierung'),
+           ('investment', 'Ankaufunterlagen: Was eine erste Ankaufprüfung braucht')]
 
 
 # ---------------------------------------------------------------- Schematische Pläne (SVG). Kurze Marker im Plan, Erklärung als HTML-Legende.
@@ -483,6 +484,76 @@ ARTICLES += [
 
 BY_SLUG = {a['slug']: a for a in ARTICLES}
 
+
+PILL_OK = "<span class='rg-pill is-ok'>belegt</span>"
+PILL_ASSUME = "<span class='rg-pill is-assume'>Annahme</span>"
+PILL_OPEN = "<span class='rg-pill is-open'>offen</span>"
+PILL_RISK = "<span class='rg-pill is-risk'>Risiko</span>"
+
+ARTICLES += [
+ {
+  'slug': 'kaufpreisfaktor-mehrfamilienhaus', 'areas': ['investment'], 'status': 'entwurf', 'published': '2026-11-04', 'updated': None,
+  'title': 'Mehrfamilienhaus kaufen: Was der Kaufpreisfaktor allein nicht zeigt',
+  'meta_title': 'Mehrfamilienhaus kaufen: Was der Kaufpreisfaktor nicht zeigt | GRENFORD Ratgeber',
+  'description': 'Für Käufer, Transaktions- und Asset Manager: belastbare Ist-Miete, zusätzlicher Kapitalbedarf und offene Prüfpunkte mit Einfluss auf das Kaufangebot. Mit fiktivem Vergleich zweier Objekte und Prüfmatrix.',
+  'lead': 'Zwei Mehrfamilienhäuser, gleicher Kaufpreis, gleiche Miete, Faktor 20. Auf dem Papier sind sie gleich teuer. Ob sie es sind, entscheiden drei Fragen: Wie belastbar ist die Miete, wie viel Kapital braucht das Objekt nach dem Kauf, und welche Punkte sind noch offen.',
+  'key': ['Der Faktor bezieht sich auf die angesetzte Miete; prüfen Sie, wie viel davon belegt ist.',
+          'Investitionsbedarf der ersten Jahre gehört in den Einstandspreis, nicht in die Zukunft.',
+          'Offene Prüfpunkte gehören als Vorbehalt oder Abschlag ins Kaufangebot.'],
+  'next': ('Transaktion besprechen', 'investment', '#bewertung-investment-search', 'Ankaufsprofil hinterlegen oder ein konkretes Objekt vertraulich einordnen lassen. Die Prüfung fasse ich im Investment Memo zusammen.'),
+  'related': ['off-market-oder-oeffentlich', 'markt', 'bodenrichtwert-verstehen'],
+  'review': ['Rechenbeispiel fiktiv; Darstellung der Kennzahlen (Faktor, Bruttoanfangsrendite) fachlich prüfen',
+             'Hinweise zu Grunderwerbsteuer Berlin, sozialen Erhaltungsgebieten, Vorkaufsrecht und Mietrecht vor Veröffentlichung juristisch bzw. steuerlich prüfen lassen'],
+  'blocks': [
+   ('h2', 'faktor', 'Was der Faktor misst und was nicht'),
+   ('p', 'Der Kaufpreisfaktor teilt den Kaufpreis durch die Jahresnettokaltmiete. Er ist schnell gerechnet und gut vergleichbar, aber nur so belastbar wie die Miete, auf die er sich stützt. Kosten nach dem Kauf, Erwerbsnebenkosten und Risiken aus Vertrag, Recht und Bausubstanz enthält er nicht.'),
+   ('list', ['<strong>Belegte Einnahmen:</strong> durch Mietverträge und Zahlungseingänge nachgewiesene Ist-Miete',
+             '<strong>Annahmen:</strong> angesetzte Marktmiete für Leerstand, erwartete Indexanpassungen, geschätzte Kosten',
+             '<strong>Mögliche Mehrerträge:</strong> Potenzial nach Investition oder Neuvermietung, rechtlich und zeitlich unsicher']),
+   ('p', 'Ein Kaufangebot sollte auf belegten Einnahmen beruhen. Annahmen gehören offen ausgewiesen daneben, Mehrerträge in eine eigene Rechnung.'),
+   ('h2', 'istmiete', 'Belastbare Ist-Miete'),
+   ('checklist', 'Miete belegen', [
+     'Mieterliste mit Fläche, Miete, Vertragsbeginn, Staffel oder Index je Einheit',
+     'Mietverträge stichprobenweise oder vollständig gegen die Mieterliste abgeglichen',
+     'Zahlungseingänge der letzten 12 Monate; Rückstände und Minderungen benannt',
+     'Leerstand mit Angabe, ob die Miete dafür angesetzt oder tatsächlich erzielt ist',
+     'Gewerbeeinheiten: Laufzeit, Optionen, Bonität des Mieters',
+     'Mietrechtliche Grenzen für Erhöhungen und Neuvermietung geprüft']),
+   ('h2', 'kapital', 'Zusätzlicher Kapitalbedarf'),
+   ('p', 'Was in den ersten Jahren investiert werden muss, gehört gedanklich zum Kaufpreis: Dach, Fassade, Heizung, Leitungen, leerstehende Wohnungen. Maßgeblich ist, was technisch oder rechtlich nötig ist, nicht was wünschenswert wäre.'),
+   ('table', 'Fiktives Beispiel: zwei Mehrfamilienhäuser mit Faktor 20', ['', 'Objekt A', 'Objekt B'], [
+     ['Kaufpreis', '3.000.000 €', '3.000.000 €'],
+     ['Jahresnettokaltmiete, belegt', '150.000 €', '150.000 €'],
+     ['Kaufpreisfaktor', '20,0', '20,0'],
+     ['Investitionsbedarf in den ersten zwei Jahren', '100.000 €', '400.000 €'],
+     ['Kaufpreis plus Investition', '3.100.000 €', '3.400.000 €'],
+     ['Faktor auf diese Summe', '20,7', '22,7'],
+     ['Miete im Verhältnis zur Summe (Bruttoanfangsrendite)', '4,8 %', '4,4 %']],
+    'Vereinfachtes Beispiel, alle Zahlen erfunden. Nicht enthalten: Erwerbsnebenkosten (Grunderwerbsteuer, Notar, Grundbuch, gegebenenfalls Provision), nicht umlagefähige Bewirtschaftungskosten, Mietausfall und Leerstand während der Arbeiten, Finanzierungskosten, Steuern sowie Mietsteigerungen.'),
+   ('example', 'Mögliche Mehrerträge getrennt rechnen',
+    '<p>Angenommen, Objekt B ließe sich nach der Investition um 30.000 € Jahresmiete besser vermieten. Dann läge die Miete bei 180.000 € und der Faktor auf 3,4 Mio. € bei 18,9.</p>'
+    '<p>Diese Rechnung beruht auf einer Annahme: Ob, wann und in welcher Höhe die Mehrmiete rechtlich und am Markt erzielbar ist, muss gesondert belegt werden. Sie gehört deshalb nicht in die Grundlage des Kaufangebots, sondern in eine eigene Szenariorechnung.</p>'),
+   ('h2', 'pruefpunkte', 'Offene Prüfpunkte mit Einfluss auf das Angebot'),
+   ('p', 'Was vor Abgabe des Angebots nicht geklärt ist, gehört als Vorbehalt, Abschlag oder Bedingung in das Angebot. Die Prüfmatrix zeigt, wie das im Investment Memo zusammengefasst wird.'),
+   ('table', 'Prüfmatrix im Stil des GRENFORD Investment Memo', ['Prüfpunkt', 'Grundlage', 'Status', 'Wirkung auf das Angebot'], [
+     ['Ist-Miete', 'Mieterliste, Verträge, Kontoauszüge', PILL_OK, 'Basis des Angebots'],
+     ['Leerstand und Marktmiete', 'Annahme aus Vergleichsmieten', PILL_ASSUME, 'getrennt ausweisen, nicht voll ansetzen'],
+     ['Instandhaltungsbedarf', 'Begehung, Kostenschätzung Fachplaner', PILL_ASSUME, 'vom Angebot abziehen'],
+     ['Heizung und Energie', 'Energieausweis, Alter der Anlage', PILL_OPEN, 'Vorbehalt bis zur Prüfung'],
+     ['Grundbuch, Baulasten', 'Grundbuchauszug, Baulastenverzeichnis', PILL_OK, 'keine Wirkung, wenn lastenfrei'],
+     ['Erhaltungsgebiet, Vorkaufsrecht', 'Auskunft Bezirk', PILL_OPEN, 'Bedingung im Kaufvertrag'],
+     ['Gewerbemietverträge', 'Verträge, Laufzeiten, Bonität', PILL_RISK, 'Abschlag oder Garantie des Verkäufers']],
+    'Schematische Darstellung. Status: belegt, Annahme, offen, Risiko.'),
+   ('h2', 'naechste', 'Vom Faktor zum Angebot'),
+   ('flow', [('Ist-Miete belegen', 'Nur nachgewiesene Einnahmen bilden die Grundlage.'),
+             ('Kapitalbedarf ansetzen', 'Investitionen der ersten Jahre zum Kaufpreis addieren.'),
+             ('Offene Punkte bepreisen', 'Abschlag, Vorbehalt oder Bedingung je Prüfpunkt festlegen.'),
+             ('Angebot formulieren', 'Preis, Bedingungen und Fristen schriftlich, mit Verweis auf die Prüfung.')]),
+   ('p', 'Welche Unterlagen Sie für die erste Prüfung anfordern sollten, zeigt der geplante Beitrag [[ankaufunterlagen|Ankaufunterlagen: Was eine erste Ankaufprüfung braucht]]. Wie sich Preise und Umsätze bundesweit und in Berlin entwickeln, steht im [[markt|Marktüberblick Deutschland und Berlin]].'),
+  ],
+ },
+]
+BY_SLUG = {a['slug']: a for a in ARTICLES}
 
 def visible():
     return [a for a in ARTICLES if a['status'] == 'freigegeben' or SHOW_DRAFTS]
