@@ -893,7 +893,7 @@ body.page-property .immersive-hero,body.page-property .memo-studio,body.page-pro
 /* Projects: das bisherige GRENFORD-Orange; dunkle Schrift auf Orange, dunkleres Orange für Text auf hellem Grund */
 body.page-projects,.area-projects,.pathway-projects,.memo-paper--projects{
  --orange:#ff7900;--orange-hover:#ff982f;--orange-ink:#a84700;--orange-light:#ffad59;--rust:#d95f00;--orange-tint:#ffebd8;
- --on-orange:#222e41;--on-orange-accent:#222e41;--on-orange-line:rgba(34,46,65,.35)}
+ --on-orange:#3a3d41;--on-orange-accent:#3a3d41;--on-orange-line:rgba(58,61,65,.35)}
 /* Investment Memo: Grau-Schwarz aus dem Memo für die Memo-Vorschau */
 .memo-paper--investment{background:#3a3d41}
 /* Menü: Bereich beim Darüberfahren in seiner Farbe (helle Variante auf dem dunklen Hero) */
@@ -904,3 +904,13 @@ body.page-projects,.area-projects,.pathway-projects,.memo-paper--projects{
 /* Startseite: jede Bereichskarte zeigt ihre Farbe dezent als Linie unter dem Bild */
 .pathway-media:after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--orange)}
 .pathway .pathway-result{border-top-color:var(--orange-tint)}
+
+/* Grundton: Schwarz-Grau #3A3D41 aus dem Investment Memo (refinements.css: --blue) für dunkle Flächen und Überschriften.
+   Memo-Blau #222E41 nur noch als Akzent auf Property. */
+
+/* Bewertungskacheln: beim Darüberfahren vollflächig in der Akzentfarbe des Bereichs (wie die Kacheln auf der Startseite) */
+.wz-tiles .wz-option:hover .wz-box,.wz-tiles .wz-option:focus-within .wz-box{background:var(--orange);border-color:var(--orange);color:var(--on-orange)}
+.wz-tiles .wz-option:hover .wz-box svg,.wz-tiles .wz-option:hover .wz-box span{color:var(--on-orange)}
+.wz-tiles .wz-option:hover input[type=checkbox]+.wz-box:after{border-color:var(--on-orange);background:transparent}
+.wz-tiles .wz-box{transition:background-color .25s ease,border-color .25s ease,color .25s ease}
+@media(prefers-reduced-motion:reduce){.wz-tiles .wz-box{transition:none}}

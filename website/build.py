@@ -165,7 +165,7 @@ def shell(active, meta, body, ld=()):
     meta_robots = '<meta name="robots" content="noindex">' if hidden else f'<link rel="canonical" href="{absolute(path)}">'
     return ('<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{E(meta["title"])}</title><meta name="description" content="{E(meta["description"])}">'
-            f'{meta_robots}{social}<meta name="theme-color" content="#222e41">'
+            f'{meta_robots}{social}<meta name="theme-color" content="#3a3d41">'
             f'<meta name="grenford-form-endpoint" content="{E(SITE["formEndpoint"], quote=True)}"><meta name="grenford-email" content="{E(SITE["email"])}">'
             f'<link rel="icon" type="image/png" sizes="32x32" href="{asset("favicon-32.png")}"><link rel="icon" type="image/png" sizes="192x192" href="{asset("favicon-192.png")}">'
             f'<link rel="apple-touch-icon" href="{asset("apple-touch-icon.png")}">{fonts}'

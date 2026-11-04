@@ -168,4 +168,4 @@ Menü GRENFORD: Über GRENFORD · Wertermittlung · Ratgeber · STAYNAMIC.
 | Dachmarke GRENFORD | Bronze #7A6A52 | #C9B48F |
 
 Definiert am Ende von `static/css/structure.css` („Bereichsfarben“). Gilt auf der Bereichsseite, im Menü-Fenster, auf der Startseiten-Karte,
-im Karussell und in der Memo-Vorschau. Gemeinsame Töne: Ivory #FAF6F2, Sand #EFE9E1, Sand dunkel #CFC8BC, Navy #222E41, Weiß.
+im Karussell und in der Memo-Vorschau. Gemeinsame Töne: Schwarz-Grau #3A3D41 (dunkle Flächen, Footer, Überschriften; aus dem Investment Memo), Ivory #FAF6F2, Sand #EFE9E1, Sand dunkel #CFC8BC, Weiß. Navy #222E41 nur als Property-Akzent.

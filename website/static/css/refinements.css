@@ -109,6 +109,6 @@ img[data-missing]{object-fit:contain;background:var(--ivory)}
 
 /* GRENFORD Memo-CI (Standard): Navy, Bronze und Elfenbein wie in Property Brief und Renovation Memo.
    Ersetzt Graphit und Patina; eine Marke von der Website bis zum Memo. Bronze für kleine Schrift leicht dunkler (#7a6a52, 4,9:1 auf Elfenbein). */
-:root{--blue:#222e41;--paper:#faf6f2;--ivory:#efe9e1;--line:#cfc8bc;--muted:#5f6470;
+:root{--blue:#3a3d41;--paper:#faf6f2;--ivory:#efe9e1;--line:#cfc8bc;--muted:#5f6470;
       --orange:#7a6a52;--orange-hover:#8b7a60;--orange-ink:#7a6a52;--orange-light:#c9b48f;--rust:#7a6a52;--orange-tint:#efe8dc}
 body{background:var(--paper)}
