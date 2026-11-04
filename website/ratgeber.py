@@ -555,6 +555,118 @@ ARTICLES += [
 ]
 BY_SLUG = {a['slug']: a for a in ARTICLES}
 
+GII = 'https://www.gesetze-im-internet.de/bbaug/'
+BLN_VORBESCHEID = 'https://www.berlin.de/ba-marzahn-hellersdorf/politik-und-verwaltung/aemter/stadtentwicklungsamt/bauaufsicht-wohnungsaufsicht-denkmalschutz/artikel.187786.php'
+BLN_BAUANTRAG = 'https://www.berlin.de/sen/stadt/service/formularcenter/bereich-bauen/bauaufsicht/bauantrag-und-baudurchfuehrung/'
+
+
+def _src(label, url):
+    return f'<a href="{url}" target="_blank" rel="noopener">{label} ↗</a>'
+
+
+PLAN_BAULUECKE = (
+    '<svg class="rg-plan" viewBox="0 0 640 460" role="img" aria-labelledby="plan-bl-t">'
+    '<title id="plan-bl-t">Schematische Berliner Baulücke zwischen zwei Brandwänden: Variante A Straßenbaukörper, Variante B zusätzlich Hinterhaus</title>'
+    '<rect x="20" y="20" width="600" height="360" class="pl-ground"/>'
+    '<rect x="20" y="60" width="150" height="320" class="bl-nb"/><rect x="470" y="60" width="150" height="320" class="bl-nb"/>'
+    '<text class="pl-room" x="95" y="230" text-anchor="middle">Nachbar</text><text class="pl-room" x="545" y="230" text-anchor="middle">Nachbar</text>'
+    '<rect x="170" y="60" width="300" height="320" class="bl-lot"/>'
+    '<rect x="170" y="270" width="300" height="110" class="bl-a"/>'
+    '<rect x="170" y="70" width="300" height="80" class="bl-b"/>'
+    '<text class="pl-room" x="320" y="332" text-anchor="middle">Vorderhaus</text>'
+    '<text class="pl-room" x="320" y="118" text-anchor="middle">Hinterhaus</text>'
+    '<text class="pl-room" x="320" y="215" text-anchor="middle">Hof</text>'
+    '<rect x="20" y="385" width="600" height="55" class="bl-street"/>'
+    '<text class="pl-room bl-street-t" x="320" y="420" text-anchor="middle">Straße</text>'
+    + _marker(230, 300, 'A') + _marker(230, 100, 'B') + _marker(420, 215, 'C') +
+    '</svg>')
+
+PILL_DECIDED = "<span class='rg-pill is-ok'>beschieden</span>"
+PILL_NONE = "<span class='rg-pill is-assume'>kein Baurecht</span>"
+
+ARTICLES += [
+ {
+  'slug': 'grundstueck-kaufen-und-bauen', 'areas': ['investment'], 'status': 'entwurf', 'published': '2026-11-04', 'updated': None,
+  'title': 'Grundstück kaufen und bauen: Vom Bebauungsplan bis zum Baubeginn',
+  'meta_title': 'Grundstück kaufen und bauen: Baurecht prüfen, vom Bebauungsplan bis zum Baubeginn | GRENFORD Ratgeber',
+  'description': 'Für Käufer und Projektentwickler: wie belastbar das Baurecht ist, das im Grundstückspreis steckt. § 30, § 34 und § 35 BauGB im Vergleich, das Berliner Verfahren vom Vorbescheid bis zum Baubeginn und ein fiktiver Fall einer Baulücke.',
+  'lead': 'Wer ein Grundstück kauft, bezahlt meist nicht den Boden, sondern das, was darauf gebaut werden darf. Die Leitfrage jeder Ankaufprüfung lautet deshalb: Wie belastbar ist das Baurecht, das im Kaufpreis bereits eingerechnet ist?',
+  'key': ['Wo ein qualifizierter Bebauungsplan gilt, ist das Baurecht am klarsten; nach § 34 und § 35 BauGB hängt es vom Einzelfall ab.',
+          'Ein Vorbescheid bindet nur für die Fragen, die gestellt wurden.',
+          'Bezahlen Sie nur das Baurecht, das belegt ist; alles Weitere gehört in Option oder Nachzahlung.'],
+  'next': ('Entwicklungspotenzial besprechen', 'investment', '#bewertung-investment-value', 'Sie nennen Grundstück und vorhandene Unterlagen. Ich ordne ein, welches Baurecht belegt ist und wie es sich im Kaufpreis abbilden lässt.'),
+  'related': ['bodenrichtwert-verstehen', 'kaufpreisfaktor-mehrfamilienhaus', 'markt'],
+  'review': ['Alle rechtlichen Aussagen sind allgemein gehalten und vor Veröffentlichung juristisch zu prüfen, insbesondere § 34 Abs. 3b und § 246e BauGB (in Kraft seit 30.10.2025) am amtlichen Wortlaut einschließlich der Rolle der Gemeinde.',
+             'Geltungsdauer und Verlängerung des Vorbescheids nach § 75 BauO Bln am aktuellen Gesetzestext prüfen (Quellen widersprechen sich).',
+             'Berliner Verfahrensschritte (§§ 69, 71, 72, 75 BauO Bln) und Zuständigkeit der Bezirke bestätigen.',
+             'Plan, Flächen und Fall sind fiktiv.'],
+  'blocks': [
+   ('h2', 'grundlagen', 'Drei Grundlagen für Baurecht'),
+   ('p', 'Ob und was gebaut werden darf, regelt zuerst das Bauplanungsrecht des Bundes im Baugesetzbuch. Es unterscheidet drei Lagen: das Gebiet eines Bebauungsplans, den im Zusammenhang bebauten Innenbereich und den Außenbereich.'),
+   ('table', 'Vergleich der Zulässigkeit nach BauGB', ['', '§ 30 Bebauungsplan', '§ 34 Innenbereich', '§ 35 Außenbereich'], [
+     ['Wo', 'Geltungsbereich eines Bebauungsplans', 'im Zusammenhang bebauter Ortsteil ohne qualifizierten Plan', 'alles außerhalb dieser Gebiete'],
+     ['Maßstab', 'Festsetzungen des Plans', 'Einfügen in die nähere Umgebung', 'grundsätzlich freizuhalten'],
+     ['Belastbarkeit für Käufer', 'hoch, wenn qualifiziert', 'mittel, Auslegung im Einzelfall', 'gering, außer bei privilegierten Vorhaben'],
+     ['Typische Prüfung', 'Plan, Begründung, Änderungsverfahren', 'Umgebungsbebauung, Vorbescheid', 'Privilegierung, öffentliche Belange'],
+     ['Gesetzestext', _src('§ 30 BauGB', GII + '__30.html'), _src('§ 34 BauGB', GII + '__34.html'), _src('§ 35 BauGB', GII + '__35.html')]],
+    'Vereinfachte Übersicht. Maßgeblich ist der amtliche Gesetzestext.'),
+   ('h2', 'bebauungsplan', 'Qualifizierter und einfacher Bebauungsplan'),
+   ('p', 'Ein Bebauungsplan ist qualifiziert, wenn er mindestens Art und Maß der baulichen Nutzung, die überbaubaren Grundstücksflächen und die örtlichen Verkehrsflächen festsetzt (' + _src('§ 30 Abs. 1 BauGB', GII + '__30.html') + '). Ein Vorhaben ist dort zulässig, wenn es den Festsetzungen nicht widerspricht und die Erschließung gesichert ist. Fehlt eine dieser Festsetzungen, ist der Plan einfach: Er gilt für das, was er regelt; im Übrigen richtet sich die Zulässigkeit nach § 34 oder § 35 (§ 30 Abs. 3).'),
+   ('h2', 'innenbereich', 'Innenbereich: die vier Einfügungskriterien'),
+   ('p', 'Nach ' + _src('§ 34 Abs. 1 BauGB', GII + '__34.html') + ' muss sich ein Vorhaben in die Eigenart der näheren Umgebung einfügen, und zwar nach vier Kriterien:'),
+   ('list', ['<strong>Art der baulichen Nutzung:</strong> etwa Wohnen, Gewerbe, gemischte Nutzung',
+             '<strong>Maß der baulichen Nutzung:</strong> Höhe, Geschosszahl, Grundfläche im Vergleich zur Umgebung',
+             '<strong>Bauweise:</strong> offen oder geschlossen, in Berlin oft geschlossene Blockrandbebauung',
+             '<strong>Überbaubare Grundstücksfläche:</strong> wo auf dem Grundstück gebaut wird, etwa Vorderhaus oder auch Hinterhaus']),
+   ('p', 'Zusätzlich muss die Erschließung gesichert sein, gesunde Wohn- und Arbeitsverhältnisse müssen gewahrt bleiben, und das Ortsbild darf nicht beeinträchtigt werden. Gerade bei Hinterhäusern entscheidet die überbaubare Grundstücksfläche: Gibt es in der näheren Umgebung vergleichbare Hinterbebauung?'),
+   ('h2', 'aussenbereich', 'Außenbereich: privilegierte und sonstige Vorhaben'),
+   ('p', 'Im Außenbereich nach ' + _src('§ 35 BauGB', GII + '__35.html') + ' sind privilegierte Vorhaben nach Absatz 1 zulässig, wenn öffentliche Belange nicht entgegenstehen und die Erschließung gesichert ist, zum Beispiel land- oder forstwirtschaftliche Betriebe. Sonstige Vorhaben nach Absatz 2 können nur im Einzelfall zugelassen werden, wenn öffentliche Belange nicht beeinträchtigt werden. Für Wohnungsbau ist das in der Praxis die Ausnahme.'),
+   ('note', 'Stand 4. November 2026: Seit dem 30. Oktober 2025 gelten mit dem Gesetz zur Beschleunigung des Wohnungsbaus und zur Wohnraumsicherung zusätzliche Möglichkeiten. '
+            + _src('§ 34 Abs. 3b BauGB', GII + '__34.html') + ' lockert das Einfügungsgebot für bestimmte Wohnbauvorhaben, '
+            + _src('§ 246e BauGB', GII + '__246e.html') + ' erlaubt befristet bis zum 31. Dezember 2030 Abweichungen von Vorschriften des Baugesetzbuchs zugunsten des Wohnungsbaus. '
+            'Beide setzen eine Entscheidung im Einzelfall voraus; ein Anspruch des Käufers folgt daraus nicht. Voraussetzungen und Beteiligung der Gemeinde am amtlichen Wortlaut prüfen.'),
+   ('h2', 'ebenen', 'Bundesplanungsrecht und Berliner Bauordnungsrecht'),
+   ('table', 'Zwei Ebenen, zwei Prüfungen', ['', 'Bauplanungsrecht', 'Bauordnungsrecht'], [
+     ['Frage', 'Ob und was gebaut werden darf', 'Wie gebaut werden muss'],
+     ['Rechtsgrundlage', 'Baugesetzbuch (Bund)', 'Bauordnung für Berlin (BauO Bln)'],
+     ['Beispiele', 'Nutzungsart, Maß, Bauweise, überbaubare Fläche', 'Abstandsflächen, Brandschutz, Standsicherheit, Barrierefreiheit'],
+     ['Zuständig in Berlin', 'Bezirk (Stadtentwicklungsamt), teils Senat', 'Bauaufsicht des Bezirks']], ''),
+   ('h2', 'verfahren', 'Das Berliner Verfahren: was geklärt ist und was offen bleibt'),
+   ('flow', [('Bauvorbescheid (§ 75 BauO Bln)', 'Geklärt: nur die Fragen, die im Antrag gestellt wurden, zum Beispiel die planungsrechtliche Zulässigkeit einer bestimmten Kubatur. Er bindet für einen späteren Bauantrag, solange er gilt. Offen: alle nicht gestellten Fragen, das Bauordnungsrecht, Statik und Nachbarrechte.'),
+             ('Bauantrag (§ 69 BauO Bln)', 'Geklärt: das konkrete Vorhaben liegt mit vollständigen Bauvorlagen einer bauvorlageberechtigten Person bei der Bauaufsicht. Offen: das Ergebnis der Prüfung, Nachforderungen und Stellungnahmen anderer Stellen.'),
+             ('Baugenehmigung (§ 71 BauO Bln)', 'Geklärt: das Vorhaben entspricht im Prüfumfang den öffentlich-rechtlichen Vorschriften. Offen: private Rechte Dritter, ein möglicher Widerspruch von Nachbarn und die bautechnischen Nachweise, sofern sie noch nicht geprüft sind.'),
+             ('Baubeginn (§ 72 BauO Bln)', 'Geklärt: Bauen darf beginnen, wenn die Genehmigung zugegangen ist, die bautechnischen Nachweise und gegebenenfalls das Prüfergebnis vorliegen und die Baubeginnanzeige mindestens eine Woche vorher eingegangen ist. Offen: Ausführung, Bauüberwachung und Abnahmen.')]),
+   ('p', 'Amtliche Informationen: ' + _src('Vorbescheid und planungsrechtlicher Bescheid, berlin.de', BLN_VORBESCHEID) + ' · ' + _src('Bauantrag und Baudurchführung, Formularcenter Berlin', BLN_BAUANTRAG)),
+   ('h2', 'fall', 'Fiktiver Fall: Baulücke mit zwei Varianten'),
+   ('plan', PLAN_BAULUECKE, [('A', 'Variante A: Straßenbaukörper (Vorderhaus), Gegenstand des Vorbescheids'),
+                             ('B', 'Variante B: zusätzliches Hinterhaus, nicht Gegenstand des Vorbescheids'),
+                             ('C', 'Hof, nach Variante A unbebaut')],
+    'Schematisches Beispiel einer Berliner Baulücke zwischen zwei Brandwänden. Flächen und Bescheid sind fiktiv.'),
+   ('example', 'Der Vorbescheid gilt nur für Variante A',
+    '<p>Der Verkäufer bietet das Grundstück mit rund 3.100 m² Bruttogrundfläche an: 2.200 m² im Vorderhaus und 900 m² in einem Hinterhaus. '
+    'Der vorliegende Vorbescheid bestätigt ausdrücklich nur das Vorderhaus nach Art und Maß. Zum Hinterhaus wurde keine Frage gestellt.</p>'
+    '<p>Für den Käufer ist damit nur Variante A belegt. Ob sich ein Hinterhaus nach § 34 BauGB einfügt, hängt von der Hinterbebauung in der näheren Umgebung ab und ist offen.</p>'),
+   ('table', 'Prüfmatrix: Flächen in der Kalkulation des Käufers', ['Fläche', 'Grundlage', 'Status', 'Behandlung in der Kalkulation'], [
+     ['Vorderhaus, 2.200 m² BGF', 'Vorbescheid zu Variante A', PILL_DECIDED, 'voll im Kaufpreis ansetzen, Geltungsdauer beachten'],
+     ['Vorderhaus, Bauordnungsrecht', 'Entwurf, Abstandsflächen, Brandschutz', PILL_OPEN, 'Risikopuffer in Kosten und Zeit'],
+     ['Hinterhaus, 900 m² BGF', 'keine; Umgebung nicht geprüft', PILL_OPEN, 'nicht im Kaufpreis; Nachzahlung bei Genehmigung vereinbaren'],
+     ['Hof', 'unbebaut nach Variante A', PILL_NONE, 'Freifläche, kein Baurecht ansetzen'],
+     ['Erschließung', 'Straßenland, Leitungen', PILL_ASSUME, 'mit Versorgern klären, Kosten schätzen']],
+    'Fiktives Beispiel. Status: beschieden, offen, Annahme, kein Baurecht.'),
+   ('h2', 'pruefliste', 'Prüfliste vor dem Kaufangebot'),
+   ('checklist', 'Baurecht belegen', [
+     'Planungsrechtliche Lage bestimmt: § 30, § 34 oder § 35 BauGB, bei Bebauungsplan qualifiziert oder einfach.',
+     'Bebauungsplan, Begründung und laufende Änderungsverfahren eingesehen.',
+     'Vorbescheid gelesen: Welche Fragen wurden gestellt, für welche Variante gilt er, wie lange gilt er?',
+     'Bauordnungsrechtliche Machbarkeit grob geprüft: Abstandsflächen, Brandschutz, Rettungswege.',
+     'Erschließung, Baulasten und Leitungsrechte geklärt.',
+     'Kaufpreis nur auf belegtes Baurecht gestützt; weiteres Potenzial über Nachzahlung oder Bedingung geregelt.']),
+   ('p', 'Wie der Bodenwert ohne gesichertes Mehr an Baurecht einzuordnen ist, erklärt [[bodenrichtwert-verstehen|Bodenrichtwert verstehen]]. Wie Sie belegte Einnahmen, Annahmen und Potenzial in der Ankaufprüfung trennen, zeigt [[kaufpreisfaktor-mehrfamilienhaus|Mehrfamilienhaus kaufen: Was der Kaufpreisfaktor allein nicht zeigt]]; die Unterlagen für die erste Prüfung behandelt der geplante Beitrag [[ankaufunterlagen|Ankaufunterlagen]].'),
+  ],
+ },
+]
+BY_SLUG = {a['slug']: a for a in ARTICLES}
+
 def visible():
     return [a for a in ARTICLES if a['status'] == 'freigegeben' or SHOW_DRAFTS]
 
@@ -683,6 +795,8 @@ def render_blocks(blocks):
             out += _plan(*b[1:])
         elif kind == 'example':
             out += _example(b[1], b[2])
+        elif kind == 'note':
+            out += f'<aside class="rg-note"><span class="rg-stamp">Hinweis</span><p>{b[1]}</p></aside>'
         elif kind == 'bars':
             out += _bars(*b[1:])
         elif kind == 'kpis':

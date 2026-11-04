@@ -1556,3 +1556,14 @@ body.page-property .memo-studio .button:hover *{color:#fff!important}
 .rg-entries{scroll-margin-top:72px}
 .page-ratgeber .immersive-sub h1{font-size:clamp(34px,8.4vw,120px);hyphens:manual}
 @media(min-width:761px){.page-ratgeber .immersive-sub h1{font-size:clamp(56px,7.4vw,118px)}}
+/* Ratgeber: datierter Hinweis, Baulücke */
+.rg-note{position:relative;margin:24px 0 28px;padding:24px 24px 18px;background:var(--ivory);border-radius:12px;border-left:4px solid var(--blue)}
+.rg-note .rg-stamp{position:absolute;top:-12px;left:20px}
+.rg-note p{margin:6px 0 0;font-size:15px;line-height:1.6}
+.rg-note a,.rg-table a{color:var(--orange-ink);text-decoration:underline;text-underline-offset:3px}
+.rg-plan .bl-nb{fill:#d9d6d0;stroke:var(--blue);stroke-width:2}
+.rg-plan .bl-lot{fill:#fbf8f4;stroke:var(--blue);stroke-width:3;stroke-dasharray:10 7}
+.rg-plan .bl-a{fill:#dcebe7;stroke:#2e6b62;stroke-width:4}
+.rg-plan .bl-b{fill:none;stroke:#b5452b;stroke-width:4;stroke-dasharray:12 8}
+.rg-plan .bl-street{fill:var(--blue)}
+.rg-plan .bl-street-t{fill:var(--paper)}
