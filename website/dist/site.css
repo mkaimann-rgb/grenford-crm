@@ -1484,3 +1484,63 @@ body.page-property .memo-studio .button:hover *{color:#fff!important}
  .rg-next{padding:26px 22px}}
 @media(prefers-reduced-motion:reduce){.rg-entry{transition:none}}
 @media(max-width:760px){.rg-intro h1{font-size:clamp(32px,9vw,40px)}.rg-matrix{padding:18px 12px 14px}.rg-matrix th,.rg-matrix td{padding:9px 4px;font-size:13px}.rg-intro,.rg-entries,.rg-featured,.rg-area{min-width:0}}
+
+/* Ratgeber: Marktbausteine (Balken, Kennzahlen mit Quelle, Szenarien) und Rechenkarte */
+.rg-bars{margin:24px 0 18px;padding:24px 26px 18px;background:var(--white);border-radius:12px;border:1px solid var(--line)}
+.rg-bars-t{font-size:15px;font-weight:500;margin-bottom:16px}
+.rg-bars ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.rg-bars li{display:grid;grid-template-columns:minmax(120px,30%) 1fr auto;grid-template-rows:auto auto;gap:4px 14px;align-items:center}
+.rg-bar-l{font-size:14px}
+.rg-bar-t{height:14px;background:var(--ivory);border-radius:999px;overflow:hidden}
+.rg-bar-t i{display:block;height:100%;background:var(--blue);border-radius:999px}
+.rg-bars li:last-child .rg-bar-t i{background:var(--orange)}
+.rg-bars strong{font-weight:500;font-size:16px;text-align:right}
+.rg-bars small{grid-column:2/-1;font-size:12px;color:var(--muted)}
+.rg-src{margin:16px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:12px;line-height:1.5;color:var(--muted)}
+.rg-src a{color:var(--muted)}
+.rg-kpis{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0 28px}
+.rg-kpi{padding:20px 22px;background:var(--white);border-radius:12px;border-top:3px solid var(--orange)}
+.rg-kpi p{margin:0}
+.rg-kpi-l{font-size:13px;color:var(--muted)}
+.rg-kpi-v{margin:6px 0 2px!important;font-size:32px;font-weight:500;letter-spacing:-.04em;line-height:1.1}
+.rg-kpi-v span{font-size:14px;font-weight:400;letter-spacing:0;color:var(--muted)}
+.rg-kpi-c{font-size:14px}
+.rg-kpi dl{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);display:grid;gap:6px}
+.rg-kpi dl div{display:grid;grid-template-columns:72px 1fr;gap:8px;font-size:12px;line-height:1.45}
+.rg-kpi dt{color:var(--muted)}.rg-kpi dd{margin:0}
+.rg-kpi a{color:var(--blue)}
+.rg-scns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0 28px}
+.rg-scn{padding:20px 20px 18px;background:var(--white);border-radius:12px;border-top:3px solid var(--blue)}
+.rg-scn.is-up{border-top-color:#4d6b4f}.rg-scn.is-down{border-top-color:#9b3b33}
+.rg-scn h3{margin:0 0 8px;font-size:17px;font-weight:500}
+.rg-scn p{margin:0;font-size:14px;line-height:1.6;color:var(--muted)}
+.rg-calc{position:relative;margin:24px 0 28px;padding:30px 28px 22px;background:var(--blue);color:var(--paper);border-radius:14px;max-width:480px}
+.rg-calc .rg-stamp{position:absolute;top:-12px;left:22px}
+.rg-calc dl{margin:0;display:grid;gap:0}
+.rg-calc dl div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid rgba(250,246,242,.2);font-size:17px}
+.rg-calc dt{color:rgba(250,246,242,.75)}.rg-calc dd{margin:0;font-weight:500}
+.rg-calc .rg-calc-r{border-bottom:0;padding-top:16px}
+.rg-calc .rg-calc-r dd{font-size:30px;letter-spacing:-.03em;color:var(--orange-light)}
+.rg-calc p{margin:10px 0 0;font-size:13px;line-height:1.55;color:rgba(250,246,242,.75)}
+.rg-plan .brw-z1{fill:#eef1ea}.rg-plan .brw-z2{fill:#e7e1d5}.rg-plan .brw-z3{fill:#f6f3ee}
+.rg-plan .brw-road{fill:none;stroke:#fff;stroke-width:16}
+.rg-plan .brw-border{fill:none;stroke:var(--blue);stroke-width:3;stroke-dasharray:10 7}
+.rg-plan .brw-lot rect{fill:none;stroke:#b5452b;stroke-width:5}
+.rg-plan .brw-label rect{fill:#fff;stroke:var(--blue);stroke-width:2}
+.rg-plan .brw-label text{font:600 22px DM,Arial,sans-serif;fill:var(--blue)}
+.rg-plan .brw-label text.s{font-weight:400;font-size:15px}
+.rg-market .rg-label{color:var(--orange-ink)}
+@media(max-width:760px){
+ .rg-kpis,.rg-scns{grid-template-columns:1fr}
+ .rg-bars{padding:20px 16px 14px}
+ .rg-bars li{grid-template-columns:1fr auto}
+ .rg-bar-l{grid-column:1/-1}
+ .rg-bar-t{grid-column:1}
+ .rg-bars small{grid-column:1/-1}
+ .rg-calc{padding:28px 20px 20px}
+ .rg-calc .rg-calc-r dd{font-size:26px}}
+.rg-calc dd{white-space:nowrap}
+.rg-calc dt{min-width:0}
+.rg-plan .brw-label text{font-size:26px}
+.rg-plan .brw-label text.s{font-size:18px}
+@media(max-width:760px){.rg-calc .rg-calc-r{flex-wrap:wrap}.rg-calc .rg-calc-r dt{width:100%}}

@@ -23,7 +23,10 @@ AREAS = {
     'projects': {'label': 'Projects', 'topic': 'Sanierungen und Umbauten vorbereiten', 'question': 'Wie bereite ich einen Umbau vor?',
                  'text': 'Maßnahmen ordnen, Bauangebote vergleichbar machen und Kosten realistisch einschätzen, bevor Sie beauftragen.'},
 }
+AREAS['markt'] = {'label': 'Markt', 'topic': 'Marktanalyse', 'question': '', 'text': ''}
 AREA_ORDER = ('property', 'investment', 'projects')
+RESEARCH = '04.11.2026'  # Recherchestand der Marktzahlen
+GD = 'Gutachterausschuss für Grundstückswerte in Berlin'
 FEATURED = 'bauangebote-vergleichen'
 PLANNED = [('property', 'Kaufangebote vergleichen: Preis, Bedingungen und Sicherheit der Finanzierung')]
 
@@ -66,6 +69,23 @@ PLAN_SNR = (
     + ''.join(f'<rect x="{460 + (i % 2) * 70}" y="{40 + (i // 2) * 75}" width="60" height="65" class="pl-park{" pl-check-fill" if i == 2 else ""}"/>'
               f'<text class="pl-room pl-small" x="{490 + (i % 2) * 70}" y="{80 + (i // 2) * 75}" text-anchor="middle">S{i + 1}</text>' for i in range(4))
     + _marker(165, 295, 'A') + _marker(475, 295, 'B') + _marker(110, 115, 'C') + _marker(490, 160, '!', ' is-check') +
+    '</svg>')
+
+
+PLAN_BRW = (
+    '<svg class="rg-plan" viewBox="0 0 640 440" role="img" aria-labelledby="plan-brw-t">'
+    '<title id="plan-brw-t">Schematische Bodenrichtwertkarte mit drei Zonen, Straßen und einem markierten Grundstück</title>'
+    '<rect x="20" y="20" width="600" height="400" class="pl-ground"/>'
+    '<path class="brw-z1" d="M20 20H360L300 240H20Z"/>'
+    '<path class="brw-z2" d="M360 20H620V300H300L300 240Z"/>'
+    '<path class="brw-z3" d="M20 240H300V300H620V420H20Z"/>'
+    '<path class="brw-road" d="M20 248H630M330 20L270 430"/>'
+    '<path class="brw-border" d="M360 20L300 240H20M300 240V300H620"/>'
+    '<g class="brw-lot"><rect x="120" y="120" width="96" height="70"/></g>'
+    '<g class="brw-label" transform="translate(150 70)"><rect x="-70" y="-32" width="140" height="64" rx="6"/><text y="-5" text-anchor="middle">850</text><text class="s" y="21" text-anchor="middle">W · GFZ 1,2</text></g>'
+    '<g class="brw-label" transform="translate(480 150)"><rect x="-70" y="-32" width="140" height="64" rx="6"/><text y="-5" text-anchor="middle">1.400</text><text class="s" y="21" text-anchor="middle">M · GFZ 2,5</text></g>'
+    '<g class="brw-label" transform="translate(160 350)"><rect x="-70" y="-32" width="140" height="64" rx="6"/><text y="-5" text-anchor="middle">620</text><text class="s" y="21" text-anchor="middle">W · GFZ 0,4</text></g>'
+    + _marker(168, 155, '!', ' is-check') +
     '</svg>')
 
 
@@ -350,6 +370,117 @@ ARTICLES = [
  },
 ]
 
+ARTICLES += [
+ {
+  'slug': 'markt', 'path': 'markt', 'areas': ['markt'], 'status': 'entwurf', 'published': '2026-11-04', 'updated': None,
+  'title': 'Immobilienmarkt Deutschland und Berlin',
+  'meta_title': 'Immobilienmarkt Deutschland und Berlin: Preise, Kauffälle, Umsatz | GRENFORD',
+  'description': 'Bundesweiter Wohnimmobilienpreisindex und Berliner Kauffälle getrennt dargestellt, Geldumsatz als eigene Kennzahl, Teilmärkte eingeordnet. Mit datierter GRENFORD-Einschätzung für 6 bis 12 Monate.',
+  'lead': 'Bundesweit steigen die Preise für Wohnimmobilien wieder leicht, in Berlin wurden 2025 deutlich mehr Immobilien verkauft als im Vorjahr. Was die amtlichen Zahlen zeigen, was sie nicht zeigen und was das für Verkauf und Kauf in den nächsten Monaten bedeutet.',
+  'key': ['Bundesweit: Preise im 2. Quartal 2026 nur noch leicht über dem Vorjahr, Werte vorläufig.',
+          'Berlin 2025: mehr Kauffälle und höherer Geldumsatz; 2026 ruhiger.',
+          'Teilmärkte entwickeln sich unterschiedlich: Wohnungen, Mietwohnhäuser und Bauland getrennt betrachten.'],
+  'next': ('Wert Ihrer Immobilie einordnen lassen', 'bewerten', '#bewertung', 'Marktzahlen sind Durchschnitte. Was sie für Ihre Immobilie bedeuten, ordne ich persönlich ein, heute und nach einer Sanierung.'),
+  'related': ['off-market-oder-oeffentlich', 'vor-dem-verkauf-sanieren', 'bodenrichtwert-verstehen'],
+  'review': [f'Alle Kennzahlen stammen aus Suchergebnissen mit Recherchestand {RESEARCH}, die amtliche Veröffentlichungen zitieren. Vor Freigabe jede Zahl am Original (Destatis-Pressemitteilung, Immobilienmarktbericht Berlin) prüfen.',
+             'Vor Freigabe prüfen, ob neuere Datenstände vorliegen (Destatis 3. Quartal 2026, Berlin Jahresbericht 2026).',
+             'Teilmarktzahlen Berlin (Wohnungseigentum, bebaute und unbebaute Grundstücke) nur aus Zweitquellen; Abgrenzung im Bericht klären.',
+             'GRENFORD-Einschätzung ist eine Meinung, keine Prognose; Formulierung freigeben.'],
+  'blocks': [
+   ('h2', 'deutschland', 'Deutschland: Preise für Wohnimmobilien'),
+   ('p', 'Das Statistische Bundesamt misst mit dem Häuserpreisindex, wie sich die Preise für Wohnimmobilien entwickeln, auf Grundlage notariell beurkundeter Kaufverträge. Seit Juni 2026 ist das Basisjahr 2025. Die Werte ab dem 1. Quartal 2026 sind vorläufig und werden mit der nächsten Veröffentlichung oft noch korrigiert.'),
+   ('bars', 'Häuserpreisindex Deutschland: Veränderung zum Vorjahresquartal', [
+     ('4. Quartal 2025', 2.6, '+2,6 %', 'revidiert'), ('1. Quartal 2026', 1.2, '+1,2 %', 'revidiert, vorläufig'), ('2. Quartal 2026', 0.6, '+0,6 %', 'vorläufig')],
+    'Statistisches Bundesamt (Destatis), Häuserpreisindex, Pressemitteilungen Nr. 101, 219 und 336/2026',
+    'https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/09/PD26_336_61262.html'),
+   ('kpis', [
+     {'label': 'Häuserpreisindex Deutschland', 'value': '100,6', 'unit': 'Index, 2025 = 100', 'period': '2. Quartal 2026', 'change': '+0,6 % zum Vorjahresquartal, +0,3 % zum Vorquartal',
+      'source': 'Destatis, Pressemitteilung Nr. 336 vom 24.09.2026', 'url': 'https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/09/PD26_336_61262.html', 'status': 'vorläufig'},
+     {'label': 'Eigentumswohnungen in den 7 größten Metropolen', 'value': '−0,4 %', 'unit': 'Veränderung zum Vorjahresquartal', 'period': '2. Quartal 2026', 'change': 'Ein- und Zweifamilienhäuser dort: +0,7 %',
+      'source': 'Destatis, Pressemitteilung Nr. 336 vom 24.09.2026', 'url': 'https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/09/PD26_336_61262.html', 'status': 'vorläufig'}]),
+   ('h2', 'berlin', 'Berlin: Kauffälle und Geldumsatz'),
+   ('p', 'Der Gutachterausschuss für Grundstückswerte in Berlin wertet alle notariell beurkundeten Kaufverträge aus. Die Anzahl der Kauffälle zeigt, wie viel gehandelt wird; der Geldumsatz zeigt, wie viel Geld dabei bewegt wird. Beides ist kein Preisindex: Werden mehr teure Objekte verkauft, steigt der Umsatz, auch wenn die Preise gleich bleiben.'),
+   ('bars', 'Berlin 2025: Kauffälle nach Teilmarkt', [
+     ('Wohnungs- und Teileigentum', 18303, '18.303', '+10 %'), ('Bebaute Grundstücke', 3754, '3.754', '+11 %'), ('Unbebaute Grundstücke', 855, '855', '+9 %')],
+    f'{GD}, Immobilienmarktbericht Berlin 2025/2026; Teilmarktzahlen aus Zweitquellen',
+    'https://www.berlin.de/gutachterausschuss/_assets/amarktinformationen/amarktanalyse/04-03-010-2500.pdf'),
+   ('kpis', [
+     {'label': 'Kauffälle Berlin, alle Teilmärkte', 'value': '22.912', 'unit': 'Kauffälle', 'period': 'Kalenderjahr 2025', 'change': 'rund +10 % zum Vorjahr',
+      'source': f'{GD}, Immobilienmarktbericht 2025/2026', 'url': 'https://www.berlin.de/gutachterausschuss/_assets/amarktinformationen/amarktanalyse/04-03-010-2500.pdf', 'status': 'endgültig; vorläufiger Wert war 22.696'},
+     {'label': 'Geldumsatz Berlin, alle Teilmärkte', 'value': 'rund 16,1', 'unit': 'Mrd. €', 'period': 'Kalenderjahr 2025', 'change': 'rund +8 % zum Vorjahr',
+      'source': f'{GD}, Immobilienmarktbericht 2025/2026', 'url': 'https://www.berlin.de/gutachterausschuss/_assets/amarktinformationen/amarktanalyse/04-03-010-2500.pdf', 'status': 'endgültig; vorläufiger Wert war 15,86 Mrd. €'}]),
+   ('h2', 'teilmaerkte', 'Teilmärkte in Berlin'),
+   ('table', 'Einordnung nach Objektart', ['Teilmarkt', 'Kennzahl', 'Zeitraum', 'Quelle und Stand'], [
+     ['Eigentumswohnungen', 'mittlerer Kaufpreis 5.511 €/m² Wohnfläche; Anzahl der Verkäufe 1. Halbjahr 2026: −3 % zum Vorjahreszeitraum', '2025; 1. Hj. 2026',
+      'Gutachterausschuss Berlin, Marktbericht 2025/2026 und Halbjahresbericht 2026; Halbjahr vorläufig'],
+     ['Mehrfamilienhäuser (Mietwohnhäuser)', 'Mietwohnhäuser mit Gewerbeanteil 2025: Verkäufe +16 %, Geldumsatz −11 %; reine Mietwohnhäuser 1. Hj. 2026: Verkäufe −12 %, Geldumsatz −4 %', '2025; 1. Hj. 2026',
+      'Gutachterausschuss Berlin; 2025 aus vorläufiger Fassung, Halbjahr vorläufig'],
+     ['Baugrundstücke (unbebaut)', '855 Kauffälle, Geldumsatz rund 1,5 Mrd. €', '2025',
+      'Zweitquelle zum Marktbericht 2025/2026; widersprüchliche Angaben, Abgrenzung prüfen']],
+    f'Recherchestand {RESEARCH}. Werte aus Suchergebnissen, die die amtlichen Berichte zitieren; vor Freigabe am Original prüfen. Der Umsatz eines Teilmarkts hängt stark davon ab, welche Objekte verkauft wurden.'),
+   ('h2', 'einschaetzung', 'GRENFORD-Einschätzung für die nächsten 6 bis 12 Monate'),
+   ('p', 'Stand 4. November 2026. Diese Einschätzung ist eine Meinung von Marco Kaimann auf Grundlage der Zahlen oben und der eigenen Mandate, keine Prognose. Sie wird überprüft, sobald neue amtliche Daten vorliegen.'),
+   ('scenarios', [
+     ('base', 'Basisszenario', 'Preise im Durchschnitt seitwärts bis leicht steigend, mit deutlichen Unterschieden nach Lage und Zustand. Gut gepflegte, energetisch ordentliche Objekte verkaufen sich weiter zügig; Objekte mit Sanierungsbedarf brauchen eine klare Kostenaussage, um nicht mit hohen Abschlägen gehandelt zu werden.'),
+     ('up', 'Positive Treiber', 'Sinkende oder stabile Finanzierungszinsen; anhaltend knappes Angebot an Wohnungen in Berlin; Investoren, die nach einer Phase der Zurückhaltung wieder Mietwohnhäuser kaufen.'),
+     ('down', 'Negative Treiber', 'Steigende Zinsen; schwächere Konjunktur und Unsicherheit bei Einkommen; Kosten und Vorgaben für energetische Sanierung, die Käufer bei älteren Gebäuden einpreisen.')]),
+   ('h2', 'bedeutung', 'Was das für Ihren Verkauf bedeutet'),
+   ('p', 'In einem ruhigeren Markt zählt der Weg zum Käufer mehr als der Zeitpunkt. Wann eine diskrete Ansprache sinnvoll ist, zeigt [[off-market-oder-oeffentlich|Off-Market oder öffentlich verkaufen?]]. Ob sich eine Maßnahme vorher rechnet, klärt [[vor-dem-verkauf-sanieren|Vor dem Verkauf sanieren?]]. Wie der Grundstückswert in die Bewertung einfließt, erklärt [[bodenrichtwert-verstehen|Bodenrichtwert verstehen]].'),
+  ],
+ },
+ {
+  'slug': 'bodenrichtwert-verstehen', 'areas': ['property'], 'status': 'entwurf', 'published': '2026-11-04', 'updated': None,
+  'title': 'Bodenrichtwert verstehen',
+  'meta_title': 'Bodenrichtwert verstehen: Ermittlung, BORIS Berlin, Rechnung | GRENFORD Ratgeber',
+  'description': 'Wie der Bodenrichtwert amtlich ermittelt wird, wie Sie ihn in BORIS Berlin abfragen, wie die einfache Rechnung funktioniert und welche Merkmale den Wert verändern. Mit schematischer Zonenkarte und Rechenbeispiel.',
+  'lead': 'Der Bodenrichtwert ist der Ausgangspunkt für den Wert eines Grundstücks. Er ist schnell abgefragt und schnell gerechnet. Ob das Ergebnis zu Ihrem Grundstück passt, hängt aber davon ab, wie sehr es vom typischen Grundstück der Zone abweicht.',
+  'key': ['Der Bodenrichtwert ist ein amtlicher Durchschnittswert je m² für eine Zone, ermittelt aus tatsächlichen Verkäufen.',
+          'Bodenrichtwert × Grundstücksfläche ergibt einen ersten Ausgangswert, keinen Verkehrswert.',
+          'Abweichungen bei Größe, Bebaubarkeit oder Erschließung verändern den Wert.'],
+  'next': ('Wert Ihrer Immobilie ermitteln lassen', 'bewerten', '#bewertung', 'Ich ordne Bodenwert und Gebäude gemeinsam ein und erläutere, wie sich beide auf Ihren Verkaufspreis auswirken.'),
+  'related': ['markt', 'grundbuchauszug-anfordern', 'teilungserklaerung-pruefen'],
+  'review': ['Darstellung der Ermittlung (§ 196 BauGB, Immobilienwertermittlungsverordnung) fachlich prüfen',
+             'Bedienschritte in BORIS Berlin am aktuellen Portal prüfen; Stichtag 01.01.2026 bestätigen',
+             'Zonenkarte und alle Werte sind schematisch bzw. fiktiv'],
+  'blocks': [
+   ('h2', 'ermittlung', 'Wie der Bodenrichtwert ermittelt wird'),
+   ('p', 'Die Gutachterausschüsse werten alle Kaufverträge über Grundstücke aus. Daraus leiten sie für Zonen mit ähnlichen Grundstücken einen durchschnittlichen Wert je Quadratmeter ab, bezogen auf ein unbebautes Grundstück mit typischen Merkmalen: Nutzungsart, Maß der Bebauung, Erschließung. In Berlin werden die Werte jährlich zum Stichtag 1. Januar festgelegt.'),
+   ('h2', 'karte', 'Die Zonenkarte lesen'),
+   ('plan', PLAN_BRW, [('W', 'Wohnbaufläche'), ('M', 'gemischte Baufläche'), ('GFZ', 'Geschossflächenzahl: zulässige Geschossfläche je m² Grundstück'),
+                       ('!', 'Ihr Grundstück: liegt in der Zone mit 850 €/m², W, GFZ 1,2')],
+    'Schematisches Beispiel. Bodenrichtwerte in €/m², Stichtag 01.01.2026 (fiktiv). Gestrichelte Linien: Zonengrenzen.'),
+   ('h2', 'boris', 'Abfrage in BORIS Berlin'),
+   ('flow', [('Portal öffnen', 'BORIS Berlin über die Seiten des Gutachterausschusses aufrufen; die Abfrage ist kostenfrei.'),
+             ('Stichtag wählen', 'Den aktuellen Stichtag einstellen, derzeit 1. Januar 2026, für ältere Vergleiche frühere Jahrgänge.'),
+             ('Adresse suchen', 'Straße und Hausnummer eingeben; die Karte zoomt auf das Grundstück.'),
+             ('Zone ablesen', 'Bodenrichtwert in €/m², Nutzungsart und weitere Merkmale wie die Geschossflächenzahl notieren.'),
+             ('Erläuterungen lesen', 'Die Zeichenerklärung zeigt, welche Merkmale das typische Grundstück der Zone hat.')]),
+   ('p', 'Zur Abfrage: <a href="https://www.berlin.de/gutachterausschuss/service/informationen-zu-den-bodenrichtwerten/" target="_blank" rel="noopener">Informationen zu den Bodenrichtwerten und BORIS Berlin beim Gutachterausschuss ↗</a>'),
+   ('h2', 'rechnung', 'Die einfache Rechnung'),
+   ('calc', 'Fiktives Beispiel', [('Bodenrichtwert', '850 €/m²'), ('× Grundstücksfläche', '600 m²')], ('= Ausgangswert Boden', '510.000 €'),
+    'Ein erster Anhaltspunkt. Weicht Ihr Grundstück vom typischen Grundstück der Zone ab, verändert sich der Wert.'),
+   ('h2', 'merkmale', 'Was den Ausgangswert verändert'),
+   ('table', 'Typische Abweichungen', ['Merkmal', 'Wirkung', 'Beispiel'], [
+     ['Maß der Bebauung (GFZ)', 'mehr zulässige Geschossfläche erhöht den Wert, weniger senkt ihn', 'Zone GFZ 1,2, Grundstück darf nur 0,8'],
+     ['Größe und Zuschnitt', 'sehr große, schmale oder verwinkelte Grundstücke sind je m² oft weniger wert', 'Hinterlandgrundstück mit langer Zufahrt'],
+     ['Erschließung', 'fehlende Erschließung oder offene Beiträge mindern den Wert', 'Straße noch nicht endgültig hergestellt'],
+     ['Lasten und Rechte', 'Wegerechte, Leitungsrechte oder Baulasten schränken die Nutzung ein', 'Leitungstrasse quer über das Grundstück'],
+     ['Boden', 'Altlasten oder schwieriger Baugrund kosten Geld', 'frühere gewerbliche Nutzung']], ''),
+   ('h2', 'bebaut', 'Wenn das Grundstück bebaut ist'),
+   ('p', 'Bei Häusern und Mietwohnhäusern ist der Bodenwert nur ein Teil. Im Sachwertverfahren, etwa beim Einfamilienhaus, werden Bodenwert und Wert des Gebäudes addiert und an den Markt angepasst. Im Ertragswertverfahren, etwa beim Mietwohnhaus, zählt vor allem die Miete; der Bodenwert geht ein, weil der Boden dauerhaft bleibt, während das Gebäude altert. Je älter das Gebäude, desto größer der Anteil des Bodenwerts am Gesamtwert.'),
+   ('h2', 'pruefliste', 'Prüfliste'),
+   ('checklist', 'Bevor Sie mit dem Bodenrichtwert rechnen', [
+     'Aktuellen Stichtag in BORIS Berlin gewählt.',
+     'Grundstück liegt eindeutig in einer Zone, nicht auf der Grenze.',
+     'Nutzungsart und GFZ der Zone mit Ihrem Grundstück verglichen.',
+     'Grundstücksfläche aus Grundbuch oder Kataster übernommen.',
+     'Lasten, Rechte und Erschließung geprüft.',
+     'Bei bebauten Grundstücken: Gebäude gesondert bewerten lassen.']),
+   ('p', 'Wie sich der Markt insgesamt entwickelt, zeigt die Marktanalyse [[markt|Immobilienmarkt Deutschland und Berlin]]. Die Grundstücksfläche finden Sie im Bestandsverzeichnis des Grundbuchs: [[grundbuchauszug-anfordern|Grundbuchauszug anfordern]].'),
+  ],
+ },
+]
+
 BY_SLUG = {a['slug']: a for a in ARTICLES}
 
 
@@ -361,8 +492,12 @@ def published():
     return [a for a in ARTICLES if a['status'] == 'freigegeben']
 
 
+def article_path(a):
+    return a.get('path', 'ratgeber/' + a['slug'])
+
+
 def article_url(slug):
-    return page('ratgeber/' + slug)
+    return page(article_path(BY_SLUG[slug]) if slug in BY_SLUG else 'ratgeber/' + slug)
 
 
 def _is_visible(slug):
@@ -430,6 +565,33 @@ def _example(title, body):
     return f'<aside class="rg-example"><span class="rg-stamp">Fiktives Beispiel</span><h3>{E(title)}</h3>{body}</aside>'
 
 
+def _bars(title, rows, source, url):
+    top = max(v for _, v, _, _ in rows)
+    items = ''.join(f'<li><span class="rg-bar-l">{E(l)}</span><span class="rg-bar-t"><i style="width:{v / top * 100:.1f}%"></i></span>'
+                    f'<strong>{E(d)}</strong><small>{E(n)}</small></li>' for l, v, d, n in rows)
+    return (f'<figure class="rg-bars"><figcaption class="rg-bars-t">{E(title)}</figcaption><ul>{items}</ul>'
+            f'<p class="rg-src">Quelle: <a href="{E(url, quote=True)}" target="_blank" rel="noopener">{E(source)} ↗</a> · Recherchestand {RESEARCH}, am Original prüfen</p></figure>')
+
+
+def _kpis(items):
+    cards = ''.join(
+        f'<div class="rg-kpi"><p class="rg-kpi-l">{E(k["label"])}</p><p class="rg-kpi-v">{E(k["value"])} <span>{E(k["unit"])}</span></p>'
+        f'<p class="rg-kpi-c">{E(k["change"])}</p><dl><div><dt>Zeitraum</dt><dd>{E(k["period"])}</dd></div><div><dt>Stand</dt><dd>{E(k["status"])}</dd></div>'
+        f'<div><dt>Quelle</dt><dd><a href="{E(k["url"], quote=True)}" target="_blank" rel="noopener">{E(k["source"])} ↗</a></dd></div></dl></div>' for k in items)
+    return f'<div class="rg-kpis">{cards}</div>'
+
+
+def _scenarios(items):
+    cards = ''.join(f'<div class="rg-scn is-{c}"><h3>{E(t)}</h3><p>{E(x)}</p></div>' for c, t, x in items)
+    return f'<div class="rg-scns">{cards}</div>'
+
+
+def _calc(stamp, rows, result, note):
+    lines = ''.join(f'<div><dt>{E(a)}</dt><dd>{E(b)}</dd></div>' for a, b in rows)
+    return (f'<div class="rg-calc"><span class="rg-stamp">{E(stamp)}</span><dl>{lines}<div class="rg-calc-r"><dt>{E(result[0])}</dt><dd>{E(result[1])}</dd></div></dl>'
+            f'<p>{E(note)}</p></div>')
+
+
 def render_blocks(blocks):
     out = ''
     for b in blocks:
@@ -450,6 +612,14 @@ def render_blocks(blocks):
             out += _plan(*b[1:])
         elif kind == 'example':
             out += _example(b[1], b[2])
+        elif kind == 'bars':
+            out += _bars(*b[1:])
+        elif kind == 'kpis':
+            out += _kpis(b[1])
+        elif kind == 'scenarios':
+            out += _scenarios(b[1])
+        elif kind == 'calc':
+            out += _calc(*b[1:])
     return out
 
 
@@ -505,6 +675,11 @@ def overview_body(hero_img):
         sections += (f'<section class="rg-area area-{k}" id="{k}"><div class="rg-area-head"><span class="rg-label area-{k}">{AREAS[k]["label"]}</span>'
                      f'<h2>{AREAS[k]["label"]} <span>— {E(AREAS[k]["topic"])}</span></h2><p>{E(AREAS[k]["text"])}</p></div>'
                      f'<div class="rg-grid">{cards}</div></section>')
+    m = BY_SLUG['markt']
+    if m in arts:
+        sections += (f'<section class="rg-area rg-market" id="markt"><div class="rg-area-head"><span class="rg-label">Markt</span>'
+                     f'<h2>Marktanalyse <span>— Deutschland und Berlin</span></h2><p>Preise, Kauffälle und Geldumsatz aus amtlichen Quellen, mit Stand und Quelle an jeder Zahl.</p></div>'
+                     f'<div class="rg-grid">{_card(m)}{_card(BY_SLUG["bodenrichtwert-verstehen"]) if BY_SLUG["bodenrichtwert-verstehen"] in arts else ""}</div></section>')
     note = ('<p class="rg-preview-note">Vorschau: Alle Beiträge sind Entwürfe und erscheinen erst nach Freigabe auf der Website.</p>'
             if SHOW_DRAFTS and any(a['status'] != 'freigegeben' for a in arts) else '')
     return intro + entries + note + feat + sections

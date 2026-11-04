@@ -162,6 +162,10 @@ Inhalte, Bausteine und Seiten: `ratgeber.py`. Übersicht `/ratgeber/`, Beiträge
 - **Verweise** im Text: `[[slug|Linktext]]`. Erscheint der Ziel-Beitrag in der Fassung nicht, bleibt nur der Text stehen.
 - **Pflicht je Beitrag:** Bereich, Titel, Meta-Titel, Beschreibung, Einleitung, drei Kernpunkte, Veröffentlichungsdatum, nächster Schritt. `updated` nur bei echter Überarbeitung setzen.
 - **Fiktive Inhalte** sind als „Fiktives Beispiel“ bzw. „Schematisches Beispiel“ gekennzeichnet; `tests/markup.py preview` prüft das.
+- **Marktanalyse `/markt/`** ist ein Beitrag in `ratgeber.py` (`'path': 'markt'`), solange die Datenseite `market.py` ausgeschaltet ist (`MARKET_LIVE`).
+  Bausteine `kpis` (Wert, Einheit, Zeitraum, Stand, Quelle mit Link), `bars` (Balkengrafik mit Quellenzeile), `scenarios`; `RESEARCH` = Recherchestand.
+  Jede Zahl vor Freigabe am Original prüfen und auf neuere Datenstände kontrollieren.
+- **Bodenrichtwert** nutzt zusätzlich `calc` (Rechenkarte) und die schematische Zonenkarte `PLAN_BRW`.
 - Geplant: „Kaufangebote vergleichen“ (`PLANNED`). Presse, Glossar und CRM-Anbindung für Checklisten-Downloads sind spätere Ausbaustufen.
 
 ## Bereichsfarben (Akzent je Geschäftsfeld, identisch mit Memo bzw. Brief)

@@ -532,7 +532,7 @@ def ratgeber():
 def ratgeber_article(a):
     """Beitrag unter /ratgeber/<slug>/. Entwürfe nur im Vorschau-Build, dort mit Hinweis und noindex."""
     author = img('marco-kaimann.jpg', 'Marco Kaimann', '64px', 'class="rg-author" loading="lazy"')
-    path = f'ratgeber/{a["slug"]}/'
+    path = RG.article_path(a) + '/'
     crumb = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
         {'@type': 'ListItem', 'position': 1, 'name': 'GRENFORD', 'item': absolute()},
         {'@type': 'ListItem', 'position': 2, 'name': 'Ratgeber', 'item': absolute('ratgeber/')},
@@ -646,7 +646,7 @@ def responsive_variants(out):
 
 
 def seo_files(out):
-    urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + (['markt'] if MARKET_LIVE else []) + (['ratgeber'] if RG.published() else [])] + [absolute(f'ratgeber/{a["slug"]}/') for a in RG.published()]
+    urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + (['markt'] if MARKET_LIVE else []) + (['ratgeber'] if RG.published() else [])] + [absolute(RG.article_path(a) + '/') for a in RG.published() if not (MARKET_LIVE and RG.article_path(a) == 'markt')]
     (out / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                      + ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
     (out / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {absolute("sitemap.xml")}\n', encoding='utf-8')
@@ -678,8 +678,11 @@ def main():
     pages['bewerten/index.html'] = (1, bewerten)
     pages['ueber-grenford/index.html'] = (1, ueber)
     pages['ratgeber/index.html'] = (1, ratgeber)
-    for a in RG.visible():  # Entwürfe nur in der Vorschau
-        pages[f'ratgeber/{a["slug"]}/index.html'] = (2, lambda a=a: ratgeber_article(a))
+    for a in RG.visible():  # Entwürfe nur in der Vorschau; /markt/ als Beitrag nur, solange die Datenseite (market.py) aus ist
+        p = RG.article_path(a)
+        if p == 'markt' and MARKET_LIVE:
+            continue
+        pages[f'{p}/index.html'] = (p.count('/') + 1, lambda a=a: ratgeber_article(a))
     if MARKET_LIVE:
         pages['markt/index.html'] = (1, markt)
     for target, (depth, render) in pages.items():
