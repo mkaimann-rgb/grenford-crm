@@ -12,7 +12,7 @@ HEADINGS = {
     None: ('', 'Aktuelle Mandate und Immobilien',
            'Ein Teil der Mandate wird nicht öffentlich angeboten. Hier sehen Sie, was gerade gezeigt werden darf; Unterlagen gibt es auf Anfrage.'),
     'investment': ('', 'Laufende Mandate',
-                   'Region, Größe und Status. Adresse und Zahlen nenne ich erst nach einer Vertraulichkeitsvereinbarung.'),
+                   'Region, Größe und Status. Adresse und Zahlen gibt es erst nach einer Vertraulichkeitsvereinbarung.'),
     'property': ('', 'Wohnungen und Häuser im Angebot',
                  'Zu jeder Immobilie gibt es einen Property Brief mit Grundriss, Zahlen und Lage.'),
 }

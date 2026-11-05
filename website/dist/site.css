@@ -1597,3 +1597,23 @@ body.page-property .memo-studio .button:hover *{color:#fff!important}
 .founder-bio p{max-width:620px;font-size:16px;line-height:1.7}
 .founder-bio p strong{font-weight:500}
 @media(min-width:761px){.founder-bio figure{position:sticky;top:90px}}
+/* Über GRENFORD: Die Idee; Zusagen dreispaltig */
+.idea{background:var(--white)}
+.idea-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 5%;margin-top:40px}
+.idea-grid article{border-top:2px solid var(--orange);padding-top:22px}
+.idea-grid h3{margin:0 0 10px;font-size:22px;font-weight:500;letter-spacing:-.03em}
+.idea-grid p{margin:0;font-size:16px;line-height:1.65;color:var(--muted)}
+.values-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* Wertermittlung: drei Wege unter dem Ablauf */
+.vp-ways{display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px;margin:40px 0 0;padding-top:26px;border-top:1px solid var(--line)}
+.vp-ways .button{display:inline-flex;gap:16px;padding:14px 24px}
+@media(max-width:760px){.idea-grid,.values-grid{grid-template-columns:1fr;gap:26px}}
+/* Projects: vier Vergütungsregeln als 2×2-Raster */
+.fee-band{align-items:center}
+.fee-band .fee-facts{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:0}
+.fee-band .fee-facts>div,.fee-band .fee-facts>div+div{padding:22px 24px 22px 0;margin:0;border-left:0;border-top:1px solid rgba(245,245,238,.25)}
+.fee-band .fee-facts>div:nth-child(even){padding-left:24px;border-left:1px solid rgba(245,245,238,.25)}
+.fee-band .fee-facts strong{display:block;font-size:22px;line-height:1.2;font-weight:500;letter-spacing:-.02em;margin-bottom:8px}
+.fee-band .fee-facts p{font-size:14px;line-height:1.55;margin:0}
+@media(max-width:760px){.fee-band .fee-facts{grid-template-columns:1fr}.fee-band .fee-facts>div:nth-child(even){padding-left:0;border-left:0}}
+.rg-legal{margin:40px 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:13px!important;line-height:1.55;color:var(--muted)}

@@ -50,16 +50,16 @@ def request(intent, label, kind='button'):
 
 # Großmenü je Bereich: Bild, Sprungziele der Seite, rechts das Memo als nächster Schritt
 MEGA = {
-    'investment': (['Leistung', '#leistung'], ['Asset einordnen', '#bewertung'], ['Ankaufsprofil', '#bewertung-investment-search'],
+    'investment': (['Leistung', '#leistung'], ['Objekt einordnen', '#bewertung'], ['Ankaufsprofil', '#bewertung-investment-search'],
                    ['Off-Market-Angebote', '#collection'], ['Investment Memo', '#memo'], ['Fragen', '#fragen']),
     'property': (['Leistung', '#leistung'], ['Immobilie bewerten', '#bewertung'], ['Suchprofil hinterlegen', '#bewertung-property-search'],
-                 ['Ausgewählte Immobilien', '#collection'], ['Property Brief', '#memo'], ['Fragen', '#fragen']),
+                 ['Immobilien im Angebot', '#collection'], ['Property Brief', '#memo'], ['Fragen', '#fragen']),
     'projects': (['Leistung', '#leistung'], ['Wert nach Sanierung', '#bewertung'], ['Vergütung', '#verguetung'],
                  ['Vorher & Nachher', '#beforeafter'], ['Renovation Memo', '#memo'], ['Fragen', '#fragen']),
 }
 AUDIENCE = {'investment': 'Für Eigentümer, Investoren und Bauträger', 'property': 'Für Eigentümer, Käufer und private Kapitalanleger',
             'projects': 'Für Eigentümer vor einer Sanierung'}
-VALUE_CTA = {'investment': ('Asset einordnen', 'investment-value'), 'property': ('Immobilie bewerten', 'property-value'),
+VALUE_CTA = {'investment': ('Objekt einordnen', 'investment-value'), 'property': ('Immobilie bewerten', 'property-value'),
              'projects': ('Wert nach Sanierung', 'projects-value')}
 EXTRA = {'bewerten': 'Bewerten', 'ueber-grenford': 'Über GRENFORD'}
 import ratgeber as RG  # Ratgeber: Inhalte, Bausteine, Entwurfsstatus
@@ -86,7 +86,7 @@ def mega_grenford(active):
             '<div class="mega"><div class="mega-inner"><figure>' + img('marco-kaimann.jpg', '', '320px', 'loading="lazy"') + '<figcaption>MARCO KAIMANN / GRÜNDER</figcaption></figure>'
             f'<div class="mega-links"><strong>GRENFORD</strong><ul>{items}</ul></div>'
             '<div class="mega-memo"><strong>Wert heute und nach der Sanierung</strong>'
-            '<p>Persönlich eingeschätzt, kostenfrei, Antwort innerhalb von 48 Stunden.</p>'
+            '<p>Persönlich eingeschätzt und kostenfrei.</p>'
             f'<a class="button" href="{page("bewerten")}">Wertermittlung starten <span aria-hidden="true">↗</span></a></div></div></div>'
             f'<ul class="nav-sub">{items}</ul></div>')
 
@@ -103,8 +103,8 @@ def header(active):
 def footer():
     a = SITE['address']
     cols = {
-        'investment': [('Leistung', '#leistung'), ('Asset einordnen', '#bewertung'), ('Ankaufsprofil', '#bewertung-investment-search'), ('Investment Memo', '#memo')],
-        'property': [('Immobilie bewerten', '#bewertung'), ('Suchprofil', '#bewertung-property-search'), ('Ausgewählte Immobilien', '#collection'), ('Property Brief', '#memo')],
+        'investment': [('Leistung', '#leistung'), ('Objekt einordnen', '#bewertung'), ('Ankaufsprofil', '#bewertung-investment-search'), ('Investment Memo', '#memo')],
+        'property': [('Immobilie bewerten', '#bewertung'), ('Suchprofil', '#bewertung-property-search'), ('Immobilien im Angebot', '#collection'), ('Property Brief', '#memo')],
         'projects': [('Wert nach Sanierung', '#bewertung'), ('Vergütung', '#verguetung'), ('Vorher & Nachher', '#beforeafter'), ('Renovation Memo', '#memo')],
     }
     columns = ''.join(f'<div><strong>{D[k]["label"]}</strong>' + ''.join(f'<a href="{page(k)}{h}">{t}</a>' for t, h in links) + '</div>' for k, links in cols.items())
@@ -119,10 +119,17 @@ def footer():
             f'<a href="{E(SITE["imprint"])}">Impressum</a><a href="{E(SITE["privacy"])}">Datenschutz</a></div></footer>')
 
 
-def value_bar():
-    return ('<aside class="value-bar" data-value-bar hidden aria-label="Immobilienbewertung"><p><strong>Was ist Ihre Immobilie wert?</strong>'
-            '<span>Heute und nach der Sanierung. Persönlich eingeschätzt, Antwort innerhalb von 48 Stunden.</span></p>'
-            f'<a class="button" href="{page("bewerten")}">Bewertung starten <span aria-hidden="true">↗</span></a>'
+# Leiste am unteren Rand: je Bereich der passende Einstieg
+BAR = {'investment': ('Objekt verkaufen oder ankaufen?', 'Vertraulich einordnen lassen, ohne öffentliche Vermarktung.', 'Objekt einordnen', '#bewertung-investment-value'),
+       'projects': ('Drei Angebote, drei Preise?', 'GRENFORD macht Bauangebote vergleichbar, für Eigentümer kostenfrei.', 'Angebote vergleichen lassen', '#anfrage')}
+
+
+def value_bar(active='home'):
+    title, text, cta, href = BAR.get(active, ('Was ist Ihre Immobilie wert?', 'Heute und nach der Sanierung, persönlich eingeschätzt.', 'Wertermittlung starten', None))
+    href = href or page('bewerten')
+    return (f'<aside class="value-bar" data-value-bar hidden aria-label="{E(cta)}"><p><strong>{E(title)}</strong>'
+            f'<span>{E(text)}</span></p>'
+            f'<a class="button" href="{href}">{E(cta)} <span aria-hidden="true">↗</span></a>'
             '<button type="button" class="value-bar-close" data-value-bar-close aria-label="Hinweis schließen">×</button></aside>')
 
 
@@ -173,7 +180,7 @@ def shell(active, meta, body, ld=(), path=None, noindex=False):
             f'<link rel="stylesheet" href="{root("site.css")}"><script defer src="{root("app.js")}"></script><script defer src="{root("ux.js")}"></script><script defer src="{root("wizard.js")}"></script>{f'<script defer src="{root("market.js")}"></script>' if active == 'markt' else ''}{PREVIEW_HEAD.replace("{root}", root(""))}'
             + (structured_data() if active == 'home' else '') + ''.join(ld_json(x) for x in ld) +
             f'</head><body class="page-{active}"><a class="skip" href="#main">Zum Inhalt</a>' + header(active) +
-            '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail() + ('' if active in ('bewerten', '404') else value_bar()) + '</body></html>')
+            '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail(active) + ('' if active in ('bewerten', '404') else value_bar(active)) + '</body></html>')
 
 
 def hero_images(meta):
@@ -207,7 +214,8 @@ def reach_line():
     return f'<p class="hero-reach"><span class="hero-reach-cities">{names}</span><span>{E(SITE["home"]["reachNote"])}</span></p>'
 
 
-INTENTS = [('Wert ermitteln', 'bewerten', '#bewertung'), ('Verkaufen', 'property', '#bewertung-property-value'), ('Kaufen', 'property', '#bewertung-property-search'),
+INTENTS = [('Wert ermitteln', 'bewerten', '#bewertung'), ('Wohnung oder Haus verkaufen', 'property', '#bewertung-property-value'),
+           ('Anlageobjekt verkaufen', 'investment', '#bewertung-investment-value'), ('Kaufen', 'property', '#bewertung-property-search'),
            ('Investieren', 'investment', '#bewertung-investment-search'), ('Sanieren', 'projects', '#bewertung-projects-value')]
 
 
@@ -222,7 +230,7 @@ def home_hero():
             '<div class="hero-content">'
             '<h1>Der nächste<br><em>Schritt zählt.</em></h1><div class="hero-bottom"><div class="hero-lead"><p>GRENFORD berät Eigentümer, Käufer und Investoren beim Verkauf, beim Ankauf und vor einer Sanierung.</p>'
             + intents() + '</div>'
-            '<a class="hero-link" href="#perspektiven"><span>Worum geht es bei Ihnen?</span><span class="arrow-circle" aria-hidden="true">↓</span></a></div>'
+            '</div>'
             + reach_line() + '</div></section>')
 
 
@@ -258,6 +266,12 @@ def memos(k):
             + chapters + request(d['intent'], d['memo'] + ' besprechen') + '<small>Umfang und Inhalte werden individuell vereinbart. Schematische Produktvorschau.</small></div></div></section>')
 
 
+PROCESS_INTRO = {None: 'Jedes Mandat läuft in derselben Reihenfolge ab. Wie viel davon Sie brauchen, entscheiden Sie.',
+                 'investment': 'Vom vertraulichen Erstgespräch bis zur Beurkundung, mit dem Investment Memo als Grundlage.',
+                 'property': 'Vom ersten Gespräch bis zum Notartermin, mit dem Property Brief als Grundlage.',
+                 'projects': 'Von der Leistungsbeschreibung bis zur Fertigstellung, mit dem Renovation Memo als Grundlage.'}
+
+
 def process(k=None):
     # Je Schritt: Titel, Beschreibung, was Sie in diesem Schritt konkret erhalten
     steps = D[k]['steps'] if k else [('Verstehen', 'Ihr Vorhaben, Ihre Wünsche und Ihre Ziele kennenlernen.', 'Ein Erstgespräch, kostenfrei'),
@@ -268,29 +282,45 @@ def process(k=None):
     items = ''.join(f'<li><span>{i:02d}</span><h3>{E(a)}</h3><p>{E(b)}</p><p class="step-gets"><small>Sie erhalten</small>{E(c)}</p></li>'
                     for i, (a, b, c) in enumerate(steps, 1))
     return ('<section class="method" id="ablauf"><div class="section-head"><h2>Der GRENFORD 5-Point Process</h2>'
-            f'<p>Jedes Mandat läuft in derselben Reihenfolge ab. Wie viel davon Sie brauchen, entscheiden Sie.</p></div><ol class="memo-timeline">{items}</ol></section>')
+            f'<p>{PROCESS_INTRO.get(k, PROCESS_INTRO[None])}</p></div><ol class="memo-timeline">{items}</ol></section>')
 
 
 def founder():
     return ('<section class="founder" id="marco"><figure>' + img('marco-kaimann.jpg', 'Marco Kaimann, Gründer von GRENFORD', '(max-width:760px) 88vw, 350px', 'loading="lazy"') +
-            '</figure><div><h2 class="serif">Sie sprechen mit mir, nicht mit einer Zentrale.</h2>'
-            '<p>Ich bin Marco Kaimann und habe GRENFORD gegründet. Ihre Anfrage lese ich selbst, und ich bleibe Ihr Ansprechpartner, bis die Sache erledigt ist. '
-            'Wo Fachwissen gefragt ist, das ich nicht habe, ziehe ich Partner hinzu, die ich kenne: Gutachter, Architekten, Baufirmen, Finanzierer.</p><a class="text-link" href="#kontakt">Lernen wir uns kennen <span aria-hidden="true">↗</span></a>'
+            '</figure><div><h2 class="serif">Ein Ansprechpartner, vom ersten Gespräch bis zum Abschluss.</h2>'
+            '<p>GRENFORD wird von seinem Gründer Marco Kaimann geführt. Jede Anfrage wird von ihm gelesen, und er bleibt Ihr Ansprechpartner, bis die Sache erledigt ist. '
+            'Wo Fachwissen gefragt ist, zieht GRENFORD Partner hinzu, mit denen es regelmäßig arbeitet: Gutachter, Architekten, Baufirmen, Finanzierer.</p>'
+            f'<a class="text-link" href="{page("ueber-grenford")}">Warum es GRENFORD gibt <span aria-hidden="true">↗</span></a>'
             '<div class="founder-sign"><strong>Marco Kaimann</strong><span>Gründer von GRENFORD</span></div></div></section>')
 
 
+def idea():
+    """Über GRENFORD: warum es GRENFORD gibt und was es anders macht."""
+    cols = [('Das Problem', 'Exposés sollen verkaufen, Bauangebote sollen den Auftrag gewinnen, Kennzahlen stehen ohne Zusammenhang. Wer entscheiden muss, '
+             'bekommt viele Unterlagen, aber selten ein vollständiges Bild.'),
+            ('Die Antwort', 'GRENFORD bereitet jede Entscheidung schriftlich vor: im Investment Memo, im Property Brief oder im Renovation Memo. Zahlen, Optionen und '
+             'offene Punkte stehen nebeneinander, auch die, die gegen einen schnellen Abschluss sprechen.'),
+            ('Der Unterschied', 'Auch GRENFORD wird bei Abschluss vergütet. Bevor abgeschlossen wird, liegt aber eine Grundlage vor, die Sie prüfen, weitergeben '
+             'und mit Bank, Familie oder Steuerberater besprechen können. Die Entscheidung bleibt bei Ihnen.')]
+    items = ''.join(f'<article><h3>{E(t)}</h3><p>{E(x)}</p></article>' for t, x in cols)
+    return ('<section class="values idea" id="idee"><div class="section-head"><h2 class="serif">Die Idee hinter GRENFORD</h2>'
+            '<p>Warum GRENFORD gegründet wurde und was es von einem klassischen Makler unterscheidet.</p></div>'
+            f'<div class="idea-grid">{items}</div></section>')
+
+
 def founder_bio():
-    """Über GRENFORD: Werdegang von Marco Kaimann neben dem Portrait."""
+    """Über GRENFORD: Werdegang von Marco Kaimann neben dem Portrait, in der dritten Person."""
     paras = [
         'Marco Kaimann begann seine Laufbahn bei einem der damals größten Maklerhäuser Berlins. Er beriet private Käufer zu Wohnimmobilien im Bestand, '
-        'darunter Rohlingprojekte und sanierungsbedürftige Dachgeschosse, und begleitete den Verkauf von Neubauwohnungen. Diese Erfahrung fließt heute in seine '
-        'Kauf-, Verkaufs- und Sanierungsberatung sowie in die Vermittlung geeigneter Baupartner ein.',
+        'darunter Rohlingprojekte und sanierungsbedürftige Dachgeschosse, und begleitete den Verkauf von Neubauwohnungen.',
         'Für einen führenden deutsch-amerikanischen Anbieter von Immobilienmarktdaten baute er das B2B-Geschäft in Nord- und Ostdeutschland auf. Parallel vermittelte er '
         'selbstständig den Verkauf eines Mehrfamilienhauses und eines Boutiquehotels. Später begleitete er Transaktionen für private und institutionelle Investoren und '
         'baute Kooperationen für größere Mixed-Use-Projekte auf.',
-        'Mit GRENFORD gründete Marco Kaimann eine unabhängige Immobilienberatung mit Sitz in Berlin. In den Bereichen <strong>Property und Investment</strong> führt GRENFORD '
-        'Immobilienverkäufe von der Vorbereitung und Vermarktung über die notarielle Beurkundung bis zum Closing. Im Bereich <strong>Projects</strong> vergleicht GRENFORD '
-        'Bauangebote nach Leistungsumfang, Kosten und Terminen, unterstützt Bauherren bei der Wahl geeigneter Baupartner und begleitet sie bis zur Fertigstellung der Sanierung.']
+        'In jeder dieser Stationen sah er dasselbe: Eigentümer, Käufer und Investoren treffen Entscheidungen über viel Geld mit Unterlagen, die jeweils nur eine Seite zeigen. '
+        'Daraus entstand GRENFORD, mit dem Anspruch, jede Entscheidung schriftlich und vergleichbar vorzubereiten.',
+        'In den Bereichen <strong>Property und Investment</strong> führt GRENFORD Immobilienverkäufe von der Vorbereitung und Vermarktung über die notarielle Beurkundung '
+        'bis zum Closing. Im Bereich <strong>Projects</strong> vergleicht GRENFORD Bauangebote nach Leistungsumfang, Kosten und Terminen, unterstützt Bauherren bei der Wahl '
+        'geeigneter Baupartner und begleitet sie bis zur Fertigstellung der Sanierung.']
     return ('<section class="founder founder-bio" id="marco"><figure>' + img('marco-kaimann.jpg', 'Marco Kaimann, Gründer von GRENFORD', '(max-width:760px) 88vw, 350px', 'loading="lazy"') +
             '</figure><div><h2 class="serif">Marco Kaimann</h2><p class="founder-role">Gründer von GRENFORD</p>'
             + ''.join(f'<p>{p}</p>' for p in paras) +
@@ -301,9 +331,9 @@ def gateway(k):
     """Zweiter Weg im Einstiegs-Block: die Projektanfrage in sechs Schritten, eingeklappt unter der Bewertung.
     So gibt es pro Seite einen Einstieg statt zwei konkurrierender Blöcke. #anfrage und die „… anfragen“-Buttons öffnen sie."""
     lead = {'investment': 'Objekt verkaufen oder Ankaufsprofil besprechen? Sechs kurze Fragen, vertraulich behandelt.',
-            'property': 'Verkauf, Kauf oder ein anderes Anliegen? Sechs kurze Fragen, danach melde ich mich.',
+            'property': 'Verkauf, Kauf oder ein anderes Anliegen? Sechs kurze Fragen, danach meldet sich GRENFORD bei Ihnen.',
             'projects': 'Sie wissen schon, was gemacht werden soll? Sechs kurze Fragen zu Ihrem Vorhaben.'}.get(
-        k, 'Etwas anderes als eine Bewertung? Sechs kurze Fragen, danach melde ich mich.')
+        k, 'Etwas anderes als eine Wertermittlung? Sechs kurze Fragen, danach meldet sich GRENFORD bei Ihnen.')
     return ('<details class="project-gateway entry-alt" id="anfrage"><summary><span>'
             f'<strong>Oder beschreiben Sie Ihr Vorhaben</strong><em>{lead}</em></span><b aria-hidden="true">＋</b></summary>' + inquiry(k) + '</details>')
 
@@ -312,7 +342,7 @@ def contact_for(k):
     """Kontakt ist auf allen Seiten derselbe Block; Investment spricht Eigentümer und Investoren gezielt an."""
     if k == 'investment':
         return contact(subject='investment', company=True,
-                       lead='Sprechen Sie mich vertraulich zu Ihrem Objekt oder Ankaufsprofil an. Eine Vertraulichkeitsvereinbarung vor dem ersten Austausch ist selbstverständlich möglich.')
+                       lead='Sprechen Sie GRENFORD vertraulich zu Ihrem Objekt oder Ankaufsprofil an. Eine Vertraulichkeitsvereinbarung vor dem ersten Austausch ist selbstverständlich möglich.')
     return contact(subject={'property': 'property', 'projects': 'renovation'}.get(k))
 
 
@@ -320,11 +350,12 @@ def subpage(k):
     d = D[k]
     titles = {'investment': 'Strategische Off-Market-Transaktionen, <em>diskret begleitet</em>', 'property': 'Wohnungen und Häuser <em>verkaufen oder finden</em>',
               'projects': 'Sanieren mit Angeboten, <em>die Sie wirklich verstehen</em>'}
-    actions = {'investment': (('Asset einordnen', 'investment-value'), ('Ankaufsprofil hinterlegen', 'investment-search')),
+    actions = {'investment': (('Objekt einordnen', 'investment-value'), ('Ankaufsprofil hinterlegen', 'investment-search')),
                'property': (('Immobilie bewerten', 'property-value'), ('Immobilien ansehen', '#collection')),
-               'projects': (('Wert nach Sanierung ermitteln', 'projects-value'), None)}
+               'projects': (('Angebote vergleichen lassen', '#anfrage'), ('Wert nach Sanierung ermitteln', 'projects-value'))}
     (p_label, p_key), sec = actions[k]
-    primary = f'<a class="button" href="#bewertung-{p_key}" data-wz-open="{p_key}">{p_label}<span aria-hidden="true">↓</span></a>'
+    primary = (f'<a class="button" href="{p_key}">{p_label}<span aria-hidden="true">↓</span></a>' if p_key.startswith('#') else
+               f'<a class="button" href="#bewertung-{p_key}" data-wz-open="{p_key}">{p_label}<span aria-hidden="true">↓</span></a>')
     if not sec:
         second = f'<a class="text-link" href="#memo">{d["memo"]} ↓</a>'
     elif sec[1].startswith('#'):  # einfacher Sprung, z. B. Property → ausgewählte Immobilien
@@ -339,7 +370,7 @@ def subpage(k):
             f'<div class="hero-content">'
             f'<h1>{titles[k]}</h1><div class="hero-bottom"><p>{d["intro"]}</p><div class="hero-actions">' + primary + second + '</div></div></div></section></div>')
     body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#leistung">Leistung</a><a href="#bewertung">'
-             + {'investment': 'Asset einordnen', 'property': 'Bewertung & Suchprofil', 'projects': 'Wert nach Sanierung'}[k] + '</a>'
+             + {'investment': 'Objekt einordnen', 'property': 'Bewertung & Suchprofil', 'projects': 'Wert nach Sanierung'}[k] + '</a>'
              + ('<a href="#verguetung">Vergütung</a>' if k == 'projects' else '')
              + {'investment': '<a href="#collection">Off-Market</a>', 'property': '<a href="#collection">Immobilien</a>', 'projects': '<a href="#beforeafter">Vorher & Nachher</a>'}[k]
              + f'<a href="#memo">{d["memo"]}</a><a href="#ablauf">5-Point Process</a><a href="#fragen">Fragen</a><a href="#kontakt">Kontakt</a></nav>')
@@ -377,8 +408,8 @@ def valuation_teaser():
     links = ''.join(f'<a class="teaser-tile" href="{page("bewerten")}#bewertung-{w}">{svg(icon)}<span>{t}</span></a>' for t, icon, w in tiles)
     return ('<section class="valuation-teaser" id="bewertung"><div class="section-head">'
             '<h2>Was ist Ihre Immobilie wert, und was wäre sie nach einer Sanierung wert?</h2>'
-            '<p>Sie bekommen zwei Zahlen statt einer. Beide schätze ich selbst ein, kein Rechner im Hintergrund.</p></div>'
-            f'<div class="teaser-tiles">{links}</div><div class="teaser-foot"><p class="wz-note">Kostenfrei, ohne Verpflichtung. Antwort innerhalb von 48 Stunden. <a href="{page("bewerten")}#ergebnis">So sieht das Ergebnis aus ↗</a></p><a class="button" href="{page("bewerten")}">Bewertung starten <span aria-hidden="true">↗</span></a></div>' + gateway('home') + '</section>')
+            '<p>Sie bekommen zwei Zahlen statt einer. Beide werden persönlich eingeschätzt, kein Rechner im Hintergrund.</p></div>'
+            f'<div class="teaser-tiles">{links}</div><div class="teaser-foot"><p class="wz-note">Kostenfrei, ohne Verpflichtung. <a href="{page("bewerten")}#ergebnis">So sieht das Ergebnis aus ↗</a></p><a class="button" href="{page("bewerten")}">Wertermittlung starten <span aria-hidden="true">↗</span></a></div>' + gateway('home') + '</section>')
 
 
 def valuation_section(k):
@@ -396,17 +427,19 @@ def valuation_section(k):
     eyebrow = f'<span class="eyebrow">{eyebrow}</span>' if eyebrow else ''
     return (f'<section class="valuation" id="bewertung"><div class="section-head">{eyebrow}<h2>{title}</h2><p>{lead}</p></div>'
             f'<div class="valuation-frame">{wizard_tabs(k, TAB_LABELS_BEWERTEN if k == "bewerten" else None)}</div>'
-            '<p class="wz-note">Kostenfrei und vertraulich. Ich melde mich innerhalb von 48 Stunden.</p>' + (gateway(k) if k in D else '') + '</section>')
+            '<p class="wz-note">Kostenfrei und vertraulich. Rückmeldung innerhalb von 48 Stunden.</p>' + (gateway(k) if k in D else '') + '</section>')
 
 
 def fee_band():
-    facts = [('0 €', 'Honorar für Sie als Eigentümer, auch nach Ihrer Entscheidung.'), ('Direkt', 'Sie beauftragen die Baufirma selbst. Zahlungen laufen nur zwischen Ihnen und ihr.'),
-             ('Bis zum Ende', 'Beratende Begleitung bis zur Fertigstellung.')]
+    facts = [('Gleich für alle', 'Die Vergütung steht vor der Angebotsrunde fest und ist für jede beteiligte Firma gleich. Der Vergleich bleibt fair.'),
+             ('Aus eingesparten Kosten', 'Die Firmen erhalten eine fertige Leistungsbeschreibung und einen entscheidungsbereiten Bauherrn. Akquise, Vorab-Termine und Angebote ins Blaue entfallen.'),
+             ('Wettbewerb', 'Mindestens drei Angebote auf derselben Grundlage. Eine Firma, die einen Aufschlag einrechnet, verliert den Vergleich.'),
+             ('Offen im Memo', 'Die Höhe der Vergütung steht im Renovation Memo. Sie beauftragen die Firma selbst, Zahlungen laufen nur zwischen Ihnen und ihr.')]
     items = ''.join(f'<div><strong>{a}</strong><p>{b}</p></div>' for a, b in facts)
     return ('<section class="fee-band" id="verguetung"><div><h2 class="serif">Wer bezahlt die Beratung?</h2>'
             '<p class="fee-answer">Nicht Sie.</p>'
-            '<p>GRENFORD wird für die Vermittlung vom beauftragten Bauunternehmen vergütet. Die Entscheidung, ob und wen Sie beauftragen, treffen allein Sie. '
-            'So steht es auch in jedem Renovation Memo.</p></div>'
+            '<p>GRENFORD wird vom Bauunternehmen vergütet, das Sie am Ende beauftragen. Damit diese Vergütung nicht einfach auf Ihren Preis aufgeschlagen wird, '
+            'gelten vier Regeln. Ob und wen Sie beauftragen, entscheiden allein Sie.</p></div>'
             f'<div class="fee-facts">{items}</div></section>')
 
 
@@ -437,20 +470,8 @@ def result_example():
             + '<dl class="rx-facts"><div><dt>Grober Kostenrahmen der Sanierung</dt><dd>45.000 – 60.000 €</dd></div>'
             '<div><dt>Was die Spanne bestimmt</dt><dd>Lage, Zustand von Bad und Elektrik, Stockwerk, vergleichbare Verkäufe</dd></div>'
             '<div><dt>Empfehlung</dt><dd>Sanierung vor dem Verkauf prüfen: Mehrwert liegt über den Kosten</dd></div></dl>'
-            '<p class="rx-note">Alle Zahlen sind erfunden und gelten für kein reales Objekt. Ihre Einschätzung erstelle ich selbst, '
+            '<p class="rx-note">Alle Zahlen sind erfunden und gelten für kein reales Objekt. Ihre Einschätzung wird persönlich erstellt, '
             'anhand Ihrer Angaben, der Lage und vergleichbarer Verkäufe.</p></div></section>')
-
-
-def ways():
-    items = [('Digital, Antwort in 48 Stunden', 'Ersteinschätzung', 'Sie beschreiben Ihre Immobilie in wenigen Schritten und erhalten eine Wertspanne mit kurzer Begründung.',
-              '<a class="button" href="#bewertung">Bewertung starten <span aria-hidden="true">↑</span></a>'),
-             ('30 Minuten per Video', 'Video-Termin', 'Gemeinsam Unterlagen, Fotos und Ihre Fragen durchgehen. Direkt im Kalender buchbar.',
-              f'<a class="text-link" href="{E(SITE["calendar"])}" target="_blank" rel="noopener noreferrer">Termin buchen <span aria-hidden="true">↗</span></a>'),
-             ('Vor Ort', 'Besichtigung', 'Ich komme vorbei und sehe mir Lage, Substanz, Ausstattung und das Potenzial einer Sanierung an.',
-              '<a class="text-link" href="#kontakt">Besichtigung anfragen <span aria-hidden="true">↓</span></a>')]
-    cols = ''.join(f'<article><small>{a}</small><h3>{b}</h3><p>{c}</p>{d}</article>' for a, b, c, d in items)
-    return ('<section class="ways" id="wege"><div class="section-head"><h2>Digital, per Video oder vor Ort</h2>'
-            f'<p>Alle drei Wege sind kostenfrei. Viele beginnen digital und vereinbaren danach einen Termin.</p></div><div class="ways-grid">{cols}</div></section>')
 
 
 def value_steps():
@@ -461,9 +482,12 @@ def value_steps():
     # Vier Stationen nebeneinander (kein Schieber): Bild, Kreis mit Verbindungslinie, Titel, Text
     items = ''.join(f'<li><figure>' + img(pic, '', '(max-width:760px) 80vw, 24vw', 'loading="lazy"') + '</figure>'
                     f'<div class="vp-row"><span class="vp-num">{i:02d}</span></div><h3>{E(a)}</h3><p>{E(b)}</p></li>' for i, (a, b, pic) in enumerate(steps, 1))
-    return ('<section class="value-steps" id="ablauf"><div class="section-head"><h2>So läuft die Bewertung ab</h2>'
-            '<p>Vom ersten Kontakt bis zum Ergebnis sprechen Sie mit derselben Person.</p></div>'
-            f'<ol class="value-path">{items}</ol></section>')
+    return ('<section class="value-steps" id="ablauf"><div class="section-head"><h2>So läuft die Wertermittlung ab</h2>'
+            '<p>Vom ersten Kontakt bis zum Ergebnis sprechen Sie mit derselben Person. Sie können digital beginnen, per Video oder mit einer Besichtigung vor Ort.</p></div>'
+            f'<ol class="value-path">{items}</ol>'
+            '<p class="vp-ways"><a class="button" href="#bewertung">Digital starten <span aria-hidden="true">↑</span></a>'
+            f'<a class="text-link" href="{E(SITE["calendar"])}" target="_blank" rel="noopener noreferrer">Video-Termin buchen <span aria-hidden="true">↗</span></a>'
+            '<a class="text-link" href="#kontakt">Besichtigung anfragen <span aria-hidden="true">↓</span></a></p></section>')
 
 
 def faq_section(items, title='Häufige Fragen'):
@@ -472,12 +496,12 @@ def faq_section(items, title='Häufige Fragen'):
 
 
 def bewerten():
-    body = sub_hero('bewerten', 'Immobilie bewerten', '', 'Was ist Ihre Immobilie wert, <em>heute und nach einer Sanierung?</em>',
-                    'Ich schätze beides selbst ein, anhand Ihrer Angaben, der Lage und vergleichbarer Verkäufe. Kostenfrei, ohne Verpflichtung, Antwort innerhalb von 48 Stunden.',
-                    '<a class="button" href="#bewertung">Bewertung starten<span aria-hidden="true">↓</span></a><a class="text-link" href="#ablauf">So läuft es ab ↓</a>')
-    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#bewertung">Bewertung</a><a href="#ergebnis">Beispiel-Ergebnis</a><a href="#wege">Wege</a><a href="#ablauf">Der Ablauf</a>'
+    body = sub_hero('bewerten', 'Wertermittlung', '', 'Was ist Ihre Immobilie wert, <em>heute und nach einer Sanierung?</em>',
+                    'GRENFORD schätzt beides persönlich ein, anhand Ihrer Angaben, der Lage und vergleichbarer Verkäufe. Kostenfrei, ohne Verpflichtung, Antwort innerhalb von 48 Stunden.',
+                    '<a class="button" href="#bewertung">Wertermittlung starten<span aria-hidden="true">↓</span></a><a class="text-link" href="#ablauf">So läuft es ab ↓</a>')
+    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#bewertung">Wertermittlung</a><a href="#ergebnis">Beispiel-Ergebnis</a><a href="#ablauf">Der Ablauf</a>'
              '<a href="#fragen">Fragen</a><a href="#kontakt">Kontakt</a></nav>')
-    body += valuation_section('bewerten') + result_example() + ways() + value_steps()
+    body += valuation_section('bewerten') + result_example() + value_steps()
     faqs = [
         ('Was kostet die Bewertung?', 'Die Ersteinschätzung ist kostenfrei und unverbindlich. Ein Auftrag entsteht dadurch nicht.'),
         ('Wie schnell erhalte ich eine Rückmeldung?', 'Innerhalb von 48 Stunden meldet sich Marco Kaimann persönlich, auf dem Weg, den Sie im letzten Schritt gewählt haben: per E-Mail, Telefon oder im Video-Termin.'),
@@ -492,13 +516,13 @@ def bewerten():
                'description': SITE['pages']['bewerten']['description'], 'areaServed': {'@type': 'City', 'name': 'Berlin'},
                'provider': {'@type': 'RealEstateAgent', 'name': 'GRENFORD', 'url': absolute()},
                'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'EUR', 'description': 'Kostenfreie Ersteinschätzung, Antwort innerhalb von 48 Stunden'}}
-    return shell('bewerten', SITE['pages']['bewerten'], body, ld=(faq_data(faqs), service, crumbs('bewerten', 'Immobilie bewerten')))
+    return shell('bewerten', SITE['pages']['bewerten'], body, ld=(faq_data(faqs), service, crumbs('bewerten', 'Wertermittlung')))
 
 
 def founder_video():
     """Über GRENFORD: Vorstellungsvideo. Startet nur auf Klick (preload=none), Vorschaubild statt Vorladen."""
     return ('<section class="founder-video" id="video"><div class="section-head"><h2>Marco Kaimann im Video</h2>'
-            '<p>In einer Minute: wer hinter GRENFORD steht, wie ich arbeite und was die drei Bereiche Investment, Property und Projects verbindet.</p></div>'
+            '<p>In einer Minute: wer hinter GRENFORD steht, wie GRENFORD arbeitet und was die drei Bereiche Investment, Property und Projects verbindet.</p></div>'
             '<div class="fv-frame"><video class="fv-video" controls preload="none" playsinline width="848" height="424" '
             f'poster="{asset("video/grenford-marco-kaimann-poster.jpg")}" aria-label="Video: Marco Kaimann stellt GRENFORD vor (1 Minute, mit Ton)">'
             f'<source src="{asset("video/grenford-marco-kaimann.mp4")}" type="video/mp4">'
@@ -508,18 +532,18 @@ def founder_video():
 
 
 def ueber():
-    body = sub_hero('ueber-grenford', 'Über GRENFORD', '', 'Hinter GRENFORD <em>steht Marco Kaimann</em>',
-                    'GRENFORD ist eine kleine, inhabergeführte Immobilienberatung. Sie hilft beim Verkauf und Ankauf von Immobilien und bereitet Sanierungen so vor, dass Angebote vergleichbar werden.',
-                    '<a class="button" href="#kontakt">Lernen wir uns kennen<span aria-hidden="true">↓</span></a><a class="text-link" href="#haltung">Wofür GRENFORD steht ↓</a>')
-    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#marco">Der Gründer</a><a href="#video">Video</a><a href="#haltung">Zusagen</a><a href="#felder">Geschäftsfelder</a>'
-             f'<a href="#ablauf">So entsteht ein Memo</a><a href="{page("bewerten")}">Wertermittlung ↗</a><a href="{page("ratgeber")}">Ratgeber ↗</a><a href="#kontakt">Kontakt</a></nav>')
-    body += '<div class="personal-approach">' + founder_bio() + '</div>' + founder_video()
+    body = sub_hero('ueber-grenford', 'Über GRENFORD', '', 'Entscheiden mit <em>vollständigem Bild</em>',
+                    'Wer eine Immobilie verkauft, kauft oder saniert, entscheidet über viel Geld, oft auf Grundlage von Unterlagen, die jeweils nur eine Seite zeigen. '
+                    'GRENFORD legt die Informationen nebeneinander, bevor entschieden wird.',
+                    '<a class="button" href="#idee">Die Idee hinter GRENFORD<span aria-hidden="true">↓</span></a><a class="text-link" href="#marco">Der Gründer ↓</a>')
+    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#idee">Die Idee</a><a href="#marco">Der Gründer</a><a href="#video">Video</a><a href="#haltung">Zusagen</a><a href="#felder">Geschäftsfelder</a>'
+             f'<a href="#ablauf">5-Point Process</a><a href="{page("bewerten")}">Wertermittlung ↗</a><a href="{page("ratgeber")}">Ratgeber ↗</a><a href="#kontakt">Kontakt</a></nav>')
+    body += idea() + '<div class="personal-approach">' + founder_bio() + '</div>' + founder_video()
     values = [('Schriftlich statt aus dem Bauch', 'Jede Empfehlung steht in einem Memo, mit Zahlen und Optionen. Sie können sie nachlesen und weitergeben.'),
               ('Offene Vergütung', 'Woher die Zahlen stammen, welche Rolle GRENFORD hat und wie die Vergütung geregelt ist, steht offen im Memo.'),
-              ('Diskretion', 'Off-Market-Mandate, Angebote der Baufirmen und Ihre Ziele verlassen das Haus nicht.'),
-              ('Eine Person', 'Ein Ansprechpartner vom ersten Gespräch bis zum Notartermin oder zur Fertigstellung.')]
+              ('Diskretion', 'Off-Market-Mandate, Angebote der Baufirmen und Ihre Ziele verlassen das Haus nicht.')]
     body += ('<section class="values" id="haltung"><div class="section-head"><h2 class="serif">Woran Sie GRENFORD messen können</h2>'
-             '<p>Vier Zusagen, die für jedes Mandat gelten.</p></div><div class="values-grid">'
+             '<p>Drei Zusagen, die für jedes Mandat gelten.</p></div><div class="values-grid">'
              + ''.join(f'<article><h3>{a}</h3><p>{b}</p></article>' for a, b in values) + '</div></section>')
     fields = [('investment', 'Anlageimmobilien kaufen und verkaufen', 'Ausgewählte Off-Market-Transaktionen, Projektentwicklungen und Wohnimmobilieninvestments, mit Analyse, Positionierung und diskreter Vermarktung.'),
               ('property', 'Wohnungen und Häuser', 'Beratung für Eigentümer, Käufer und Verkäufer von Wohn-, Ferien- und Gewerbeimmobilien, von der Einordnung bis zur Vermarktung.'),
@@ -528,13 +552,8 @@ def ueber():
                    f'<span class="field-memo">{E(D[k]["memo"])} <span aria-hidden="true">↗</span></span></a>' for k, t, x in fields)
     body += ('<section class="fields" id="felder"><div class="section-head"><h2>Drei Geschäftsfelder</h2>'
              f'<p>Jedes Feld endet mit einem eigenen Memo.</p></div><div class="field-rows">{rows}</div></section>')
-    steps = [('Aufnehmen', 'Wünsche, Bestand und Ziele erfassen.'), ('Vergleichen', 'Zahlen, Angebote und Optionen gegenüberstellen.'),
-             ('Besprechen', 'Unterschiede erläutern, offene Punkte klären.'), ('Kennenlernen', 'Partner und Objekte vor Ort erleben.'),
-             ('Entscheiden', 'Mit dem Memo als Grundlage den nächsten Schritt festlegen.')]
-    body += ('<section class="memo-line" id="ablauf"><div class="section-head"><h2 class="serif">Erst der Vergleich.<br>Dann die Entscheidung.</h2>'
-             '<p>Derselbe Weg, ob Renovation Memo, Property Brief oder Investment Memo.</p></div><ol class="memo-timeline">'
-             + ''.join(f'<li><span>{i:02d}</span><h3>{a}</h3><p>{b}</p></li>' for i, (a, b) in enumerate(steps, 1)) + '</ol></section>')
-    more = [(page('bewerten'), 'Wertermittlung', 'Was ist Ihre Immobilie wert, heute und nach einer Sanierung? Persönlich eingeschätzt, Antwort innerhalb von 48 Stunden.', 'Wertermittlung starten'),
+    body += process()
+    more = [(page('bewerten'), 'Wertermittlung', 'Was ist Ihre Immobilie wert, heute und nach einer Sanierung? Persönlich eingeschätzt, nicht automatisch errechnet.', 'Wertermittlung starten'),
             (page('ratgeber'), 'Ratgeber', 'Leitfäden und Checklisten für Verkauf, Kauf, Transaktion und Sanierung.', 'Zum Ratgeber')]
     body += ('<section class="fields grenford-more" id="angebote"><div class="section-head"><h2>Mehr von GRENFORD</h2>'
              '<p>Zwei Angebote, die allen drei Geschäftsfeldern dienen.</p></div><div class="field-rows">'
@@ -608,20 +627,20 @@ def not_found():
 INVEST_SERVICES = [
     ('Objekt- und Transaktionsanalyse', 'Was ist das Objekt wert, und für wen ist es interessant?',
      'Mieten, Leerstand, Bewirtschaftungskosten, Zustand und Lage ergeben zusammen den Wert, den ein Investor tatsächlich zahlt. '
-     'Ich rechne das Objekt so, wie ein Käufer es rechnen würde, und zeige, wo Reserven liegen: Mietanpassungen, Ausbau, Aufteilung oder eine andere Nutzung. '
+     'GRENFORD rechnet das Objekt so, wie ein Käufer es rechnen würde, und zeige, wo Reserven liegen: Mietanpassungen, Ausbau, Aufteilung oder eine andere Nutzung. '
      'Das Ergebnis steht im Investment Memo und ist die Grundlage für Preis und Käuferkreis.'),
     ('Grundstücks- und Projektanalyse', 'Was darf gebaut werden, und rechnet sich das?',
-     'Bei Grundstücken und Projektentwicklungen beginnt der Wert beim Planungsrecht. Zusammen mit Architekten und Gutachtern, mit denen ich regelmäßig arbeite, '
-     'prüfe ich mögliche Nutzung, Baumasse und eine erste Kosten- und Erlösrechnung. So wissen Sie, mit welchen Argumenten Sie in Gespräche mit Bauträgern gehen.'),
+     'Bei Grundstücken und Projektentwicklungen beginnt der Wert beim Planungsrecht. Zusammen mit Architekten und Gutachtern, mit denen GRENFORD regelmäßig arbeitet, '
+     'prüft GRENFORD mögliche Nutzung, Baumasse und eine erste Kosten- und Erlösrechnung. So wissen Sie, mit welchen Argumenten Sie in Gespräche mit Bauträgern gehen.'),
     ('Diskrete Vermarktung', 'Verkaufen, ohne dass der Markt davon erfährt',
      'Ihr Objekt erscheint auf keinem Portal. Ausgewählte Investoren, Family Offices und Bauträger erhalten zuerst einen anonymen Steckbrief. '
      'Adresse, Mieterliste und Unterlagen gibt es erst nach einer Vertraulichkeitsvereinbarung und nach Ihrer Freigabe, über einen geordneten Datenraum.'),
     ('Ankauf im Kundenauftrag', 'Objekte finden, die nie inseriert werden',
-     'Investoren hinterlegen ein Ankaufsprofil: Assetklasse, Region, Volumen, Rendite- und Zustandsanforderungen. Ich suche gezielt, spreche Eigentümer direkt an '
-     'und lege Ihnen nur Objekte vor, die ich vorher geprüft habe.'),
+     'Investoren hinterlegen ein Ankaufsprofil: Assetklasse, Region, Volumen, Rendite- und Zustandsanforderungen. GRENFORD sucht gezielt, spricht Eigentümer direkt an '
+     'und legt Ihnen nur Objekte vor, die vorher geprüft wurden.'),
     ('Begleitung bis zum Notartermin', 'Prüfung, Verhandlung, Abschluss',
-     'Ich koordiniere die Prüfung der Unterlagen, führe die Preisverhandlung und stimme den Kaufvertragsentwurf mit Notar, Finanzierern und den Beratern beider Seiten ab, '
-     'bis zur Beurkundung. Rechts- und Steuerberatung übernehmen Ihre Anwälte und Steuerberater; ich sorge dafür, dass alle zur richtigen Zeit am Tisch sitzen.'),
+     'GRENFORD koordiniert die Prüfung der Unterlagen, führt die Preisverhandlung und stimmt den Kaufvertragsentwurf mit Notar, Finanzierern und den Beratern beider Seiten ab, '
+     'bis zur Beurkundung. Rechts- und Steuerberatung übernehmen Ihre Anwälte und Steuerberater; GRENFORD sorgt dafür, dass alle zur richtigen Zeit am Tisch sitzen.'),
 ]
 
 
@@ -630,7 +649,7 @@ def invest_services(focus):
     rows = ''.join(f'<details class="svc" name="invest-services"{" open" if i == 0 else ""}><summary><span><strong>{E(t)}</strong><em>{E(q)}</em></span>'
                    f'<b aria-hidden="true">＋</b></summary><p>{E(x)}</p></details>' for i, (t, q, x) in enumerate(INVEST_SERVICES))
     return ('<section class="services" id="leistung"><div class="services-intro">'
-            '<h2>Für Eigentümer, die verkaufen, und Investoren, die kaufen wollen, ohne dass es der Markt erfährt</h2>'
+            '<h2>Fünf Leistungen von der Analyse bis zum Notartermin</h2>'
             '<p>GRENFORD begleitet Verkäufe und Ankäufe von Wohn- und Geschäftshäusern, Boutique-Hotels, Grundstücken und Projektentwicklungen. '
             'Auf der einen Seite stehen Eigentümer, Erbengemeinschaften und Bauträger, auf der anderen private Investoren, Family Offices und Projektentwickler. '
             'Sie haben einen Ansprechpartner vom ersten Gespräch bis zum Notartermin.</p>'

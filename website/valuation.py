@@ -107,7 +107,7 @@ WIZARDS = {
     'property-value': {
         'subject': 'property', 'title': 'Bewertungsanfrage · Property', 'submit': 'Einschätzung anfordern',
         'eyebrow': 'Immobilie bewerten', 'tab': ('Verkaufen', 'Immobilie bewerten'),
-        'success': 'Vielen Dank. Ihre Angaben sind angekommen. Innerhalb von 48 Stunden melde ich mich persönlich mit Ihrer Einschätzung.\nMarco Kaimann',
+        'success': 'Vielen Dank. Ihre Angaben sind angekommen. GRENFORD meldet sich innerhalb von 48 Stunden mit Ihrer Einschätzung.\nGRENFORD · Marco Kaimann',
         'steps': [
             step('Ihre Immobilie', 'Welche Immobilie möchten Sie bewerten lassen?',
                  tiles('Objektart', [('Wohnung', 'wohnung'), ('Haus', 'haus'), ('Mehrfamilienhaus', 'mfh'), ('Grundstück', 'grundstueck'), ('Gewerbeeinheit', 'gewerbe')])),
@@ -139,7 +139,7 @@ WIZARDS = {
     'property-search': {
         'subject': 'property', 'title': 'Suchprofil · Property', 'submit': 'Suchprofil hinterlegen',
         'eyebrow': 'Suchprofil', 'tab': ('Kaufen', 'Suchprofil hinterlegen'),
-        'success': 'Vielen Dank. Ihr Suchprofil ist angekommen. Passende Angebote, auch diskrete, stelle ich Ihnen persönlich vor.\nMarco Kaimann',
+        'success': 'Vielen Dank. Ihr Suchprofil ist angekommen. Passende Angebote, auch diskrete, stellt GRENFORD Ihnen persönlich vor.\nGRENFORD · Marco Kaimann',
         'steps': [
             step('Ihre Suche', 'Was suchen Sie?',
                  tiles('Gesucht', [('Wohnung', 'wohnung'), ('Haus', 'haus'), ('Kapitalanlage', 'anlage'), ('Sanierungsobjekt', 'sanierung'), ('Grundstück', 'grundstueck')])),
@@ -161,7 +161,7 @@ WIZARDS = {
     'projects-value': {
         'subject': 'renovation', 'title': 'Sanierungsanfrage · Wert heute und nach Sanierung', 'submit': 'Einschätzung anfordern',
         'eyebrow': 'Wert heute und nach Sanierung', 'tab': ('Sanieren', 'Wert nach Sanierung'),
-        'success': 'Vielen Dank. Ihr Vorhaben ist angekommen. Innerhalb von 48 Stunden melde ich mich persönlich und wir besprechen den nächsten Schritt. Für Sie als Eigentümer bleibt die Beratung kostenfrei.\nMarco Kaimann',
+        'success': 'Vielen Dank. Ihr Vorhaben ist angekommen. GRENFORD meldet sich innerhalb von 48 Stunden, um den nächsten Schritt zu besprechen. Für Sie als Eigentümer bleibt die Beratung kostenfrei.\nGRENFORD · Marco Kaimann',
         'steps': [
             step('Ihre Immobilie', 'Was möchten Sie sanieren oder umbauen?',
                  tiles('Objektart', [('Wohnung', 'wohnung'), ('Haus', 'haus'), ('Mehrfamilienhaus', 'mfh'), ('Dachgeschoss / Rohbau', 'dach'), ('Gewerbeeinheit', 'gewerbe')])),
@@ -184,8 +184,8 @@ WIZARDS = {
     },
     'investment-value': {
         'subject': 'investment', 'title': 'Asset-Einordnung · Investment', 'submit': 'Einordnung anfragen',
-        'eyebrow': 'Objekt einordnen', 'tab': ('Verkaufen', 'Asset einordnen'), 'company': True,
-        'success': 'Vielen Dank. Ihre Angaben sind angekommen. Innerhalb von 48 Stunden melde ich mich persönlich und vertraulich bei Ihnen.\nMarco Kaimann',
+        'eyebrow': 'Objekt einordnen', 'tab': ('Verkaufen', 'Objekt einordnen'), 'company': True,
+        'success': 'Vielen Dank. Ihre Angaben sind angekommen. GRENFORD meldet sich innerhalb von 48 Stunden vertraulich bei Ihnen.\nGRENFORD · Marco Kaimann',
         'steps': [
             step('Die Assetklasse', 'Um welches Objekt geht es?',
                  tiles('Assetklasse', [('Wohn- und Geschäftshaus', 'mfh'), ('Portfolio', 'portfolio'), ('Hotel / Serviced', 'hotel'), ('Büro / Gewerbe', 'gewerbe'),
@@ -207,7 +207,7 @@ WIZARDS = {
     'investment-search': {
         'subject': 'investment', 'title': 'Ankaufsprofil · Investment', 'submit': 'Ankaufsprofil hinterlegen',
         'eyebrow': 'Ankaufsprofil', 'tab': ('Ankaufen', 'Ankaufsprofil'), 'company': True,
-        'success': 'Vielen Dank. Ihr Ankaufsprofil ist angekommen. Passende Off-Market-Gelegenheiten stelle ich Ihnen vertraulich vor.\nMarco Kaimann',
+        'success': 'Vielen Dank. Ihr Ankaufsprofil ist angekommen. Passende Off-Market-Gelegenheiten stellt GRENFORD Ihnen vertraulich vor.\nGRENFORD · Marco Kaimann',
         'steps': [
             step('Die Assetklassen', 'Was suchen Sie? Mehrfachauswahl möglich.',
                  tiles('Assetklassen', [('Wohn- und Geschäftshaus', 'mfh'), ('Portfolio', 'portfolio'), ('Hotel / Serviced', 'hotel'), ('Büro / Gewerbe', 'gewerbe'),
@@ -233,7 +233,7 @@ TAB_SETS = {
     'bewerten': ['property-value', 'projects-value', 'investment-value'],
 }
 TAB_LABELS_BEWERTEN = {'property-value': ('Property', 'Immobilie bewerten'), 'projects-value': ('Projects', 'Wert nach Sanierung'),
-                       'investment-value': ('Investment', 'Asset einordnen')}
+                       'investment-value': ('Investment', 'Objekt einordnen')}
 
 # --------------------------------------------------------------------- Ausgabe
 
@@ -307,7 +307,7 @@ def _contact_step(wid, w, total):
                    f'<div class="wz-group w2" data-row="Rolle"><span class="wz-label" id="wz-{wid}-rolle-l">Ihre Rolle</span><div class="wz-chips" role="group" aria-labelledby="wz-{wid}-rolle-l">'
                    + ''.join(f'<label class="wz-option"><input type="radio" name="Rolle" value="{r}"><span class="wz-box"><span>{r}</span></span></label>'
                              for r in ('Eigentümer', 'Bauträger / Entwickler', 'Investor / Family Office', 'Berater / Bank')) + '</div></div>')
-    return (f'<fieldset class="wizard-step" data-step data-contact hidden><legend tabindex="-1"><span>Fast geschafft</span><small>Wohin darf ich Ihre persönliche Rückmeldung senden?</small></legend>'
+    return (f'<fieldset class="wizard-step" data-step data-contact hidden><legend tabindex="-1"><span>Fast geschafft</span><small>Wohin soll GRENFORD Ihre Rückmeldung senden?</small></legend>'
             '<div class="wizard-body"><div class="wz-fields wz-contact">'
             f'<label class="wz-field w2" for="wz-{wid}-name"><span>Name *</span><input id="wz-{wid}-name" type="text" name="Name" autocomplete="name" required></label>'
             f'<label class="wz-field w2" for="wz-{wid}-email"><span>E-Mail *</span><input id="wz-{wid}-email" type="email" name="Email" autocomplete="email" required></label>'
@@ -320,7 +320,7 @@ def _contact_step(wid, w, total):
             f'<label class="wz-consent w4" for="wz-{wid}-ok"><input id="wz-{wid}-ok" type="checkbox" name="Einwilligung" value="ja" required>'
             '<span>Ich bin einverstanden, dass GRENFORD meine Angaben zur Bearbeitung dieser Anfrage verwendet. Die Einwilligung kann ich jederzeit widerrufen. *</span></label>'
             '</div><aside class="wz-person">' + img('marco-kaimann.jpg', '', '96px', 'loading="lazy"') +
-            '<p><strong>Marco Kaimann</strong><span>Gründer von GRENFORD</span>Ihre Angaben lese ich selbst. Innerhalb von 48 Stunden erhalten Sie eine Einschätzung von mir, keinen automatisch errechneten Wert.</p></aside></div></fieldset>')
+            '<p><strong>Marco Kaimann</strong><span>Gründer von GRENFORD</span>Ihre Angaben werden persönlich gelesen. Sie erhalten eine Einschätzung, keinen automatisch errechneten Wert.</p></aside></div></fieldset>')
 
 
 def wizard(wid):

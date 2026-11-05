@@ -102,7 +102,7 @@ ARTICLES = [
   'key': ['Vergleichen Sie Positionen, nicht Endsummen: Was fehlt, wird später teuer.',
           'Eine gemeinsame Leistungsbeschreibung macht Angebote überhaupt erst vergleichbar.',
           'Rechnen Sie fehlende Leistungen in jedes Angebot ein, bevor Sie entscheiden.'],
-  'next': ('Angebote vergleichen lassen', 'projects', '#memo', 'Im Renovation Memo stelle ich Ihre Originalangebote anonymisiert als A, B und C gegenüber.'),
+  'next': ('Angebote vergleichen lassen', 'projects', '#memo', 'Im Renovation Memo stellt GRENFORD Ihre Originalangebote anonymisiert als A, B und C gegenüber.'),
   'related': ['renovieren-modernisieren-sanieren', 'vor-dem-verkauf-sanieren'],
   'review': ['Hinweis auf DIN 18534 (Abdichtung von Innenräumen) fachlich bestätigen', 'Aussagen zu Gewährleistung allgemein halten oder juristisch prüfen lassen'],
   'blocks': [
@@ -301,7 +301,7 @@ ARTICLES = [
   'key': ['Off-Market schützt Mieter und Ruf, erreicht aber weniger Käufer.',
           'Öffentliche Vermarktung zeigt den Marktpreis, kostet aber Diskretion.',
           'Ein gestufter Prozess verbindet beides: erst gezielt, dann bei Bedarf breiter.'],
-  'next': ('Objekt vertraulich einordnen lassen', 'investment', '#bewertung-investment-value', 'Sie geben die Eckdaten Ihres Objekts an. Ich schlage Ihnen den passenden Vermarktungsweg vor.'),
+  'next': ('Objekt vertraulich einordnen lassen', 'investment', '#bewertung-investment-value', 'Sie geben die Eckdaten Ihres Objekts an. GRENFORD schlägt Ihnen den passenden Vermarktungsweg vor.'),
   'related': ['vor-dem-verkauf-sanieren'],
   'review': ['Einschätzungen in der Matrix sind qualitativ; vor Veröffentlichung mit Praxisbeispielen abgleichen'],
   'blocks': [
@@ -381,7 +381,7 @@ ARTICLES += [
   'key': ['Bundesweit: Preise im 2. Quartal 2026 nur noch leicht über dem Vorjahr, Werte vorläufig.',
           'Berlin 2025: mehr Kauffälle und höherer Geldumsatz; 2026 ruhiger.',
           'Teilmärkte entwickeln sich unterschiedlich: Wohnungen, Mietwohnhäuser und Bauland getrennt betrachten.'],
-  'next': ('Wert Ihrer Immobilie einordnen lassen', 'bewerten', '#bewertung', 'Marktzahlen sind Durchschnitte. Was sie für Ihre Immobilie bedeuten, ordne ich persönlich ein, heute und nach einer Sanierung.'),
+  'next': ('Wert Ihrer Immobilie einordnen lassen', 'bewerten', '#bewertung', 'Marktzahlen sind Durchschnitte. Was sie für Ihre Immobilie bedeuten, ordnet GRENFORD persönlich ein, heute und nach einer Sanierung.'),
   'related': ['off-market-oder-oeffentlich', 'vor-dem-verkauf-sanieren', 'bodenrichtwert-verstehen'],
   'review': [f'Alle Kennzahlen stammen aus Suchergebnissen mit Recherchestand {RESEARCH}, die amtliche Veröffentlichungen zitieren. Vor Freigabe jede Zahl am Original (Destatis-Pressemitteilung, Immobilienmarktbericht Berlin) prüfen.',
              'Vor Freigabe prüfen, ob neuere Datenstände vorliegen (Destatis 3. Quartal 2026, Berlin Jahresbericht 2026).',
@@ -438,7 +438,7 @@ ARTICLES += [
   'key': ['Der Bodenrichtwert ist ein amtlicher Durchschnittswert je m² für eine Zone, ermittelt aus tatsächlichen Verkäufen.',
           'Bodenrichtwert × Grundstücksfläche ergibt einen ersten Ausgangswert, keinen Verkehrswert.',
           'Abweichungen bei Größe, Bebaubarkeit oder Erschließung verändern den Wert.'],
-  'next': ('Wert Ihrer Immobilie ermitteln lassen', 'bewerten', '#bewertung', 'Ich ordne Bodenwert und Gebäude gemeinsam ein und erläutere, wie sich beide auf Ihren Verkaufspreis auswirken.'),
+  'next': ('Wert Ihrer Immobilie ermitteln lassen', 'bewerten', '#bewertung', 'GRENFORD ordnet Bodenwert und Gebäude gemeinsam ein und erläutert, wie sich beide auf Ihren Verkaufspreis auswirken.'),
   'related': ['markt', 'grundbuchauszug-anfordern', 'teilungserklaerung-pruefen'],
   'review': ['Darstellung der Ermittlung (§ 196 BauGB, Immobilienwertermittlungsverordnung) fachlich prüfen',
              'Bedienschritte in BORIS Berlin am aktuellen Portal prüfen; Stichtag 01.01.2026 bestätigen',
@@ -500,7 +500,7 @@ ARTICLES += [
   'key': ['Der Faktor bezieht sich auf die angesetzte Miete; prüfen Sie, wie viel davon belegt ist.',
           'Investitionsbedarf der ersten Jahre gehört in den Einstandspreis, nicht in die Zukunft.',
           'Offene Prüfpunkte gehören als Vorbehalt oder Abschlag ins Kaufangebot.'],
-  'next': ('Transaktion besprechen', 'investment', '#bewertung-investment-search', 'Ankaufsprofil hinterlegen oder ein konkretes Objekt vertraulich einordnen lassen. Die Prüfung fasse ich im Investment Memo zusammen.'),
+  'next': ('Transaktion besprechen', 'investment', '#bewertung-investment-search', 'Ankaufsprofil hinterlegen oder ein konkretes Objekt vertraulich einordnen lassen. Die Prüfung fasst GRENFORD im Investment Memo zusammen.'),
   'related': ['off-market-oder-oeffentlich', 'markt', 'bodenrichtwert-verstehen'],
   'review': ['Rechenbeispiel fiktiv; Darstellung der Kennzahlen (Faktor, Bruttoanfangsrendite) fachlich prüfen',
              'Hinweise zu Grunderwerbsteuer Berlin, sozialen Erhaltungsgebieten, Vorkaufsrecht und Mietrecht vor Veröffentlichung juristisch bzw. steuerlich prüfen lassen'],
@@ -601,7 +601,7 @@ ARTICLES += [
   'key': ['Wo ein qualifizierter Bebauungsplan gilt, ist das Baurecht am klarsten; nach § 34 und § 35 BauGB hängt es vom Einzelfall ab.',
           'Ein Vorbescheid bindet nur für die Fragen, die gestellt wurden.',
           'Bezahlen Sie nur das Baurecht, das belegt ist; alles Weitere gehört in Option oder Nachzahlung.'],
-  'next': ('Entwicklungspotenzial besprechen', 'investment', '#bewertung-investment-value', 'Sie nennen Grundstück und vorhandene Unterlagen. Ich ordne ein, welches Baurecht belegt ist und wie es sich im Kaufpreis abbilden lässt.'),
+  'next': ('Entwicklungspotenzial besprechen', 'investment', '#bewertung-investment-value', 'Sie nennen Grundstück und vorhandene Unterlagen. GRENFORD ordnet ein, welches Baurecht belegt ist und wie es sich im Kaufpreis abbilden lässt.'),
   'related': ['bodenrichtwert-verstehen', 'kaufpreisfaktor-mehrfamilienhaus', 'markt'],
   'review': ['Alle rechtlichen Aussagen sind allgemein gehalten und vor Veröffentlichung juristisch zu prüfen, insbesondere § 34 Abs. 3b und § 246e BauGB (in Kraft seit 30.10.2025) am amtlichen Wortlaut einschließlich der Rolle der Gemeinde.',
              'Geltungsdauer und Verlängerung des Vorbescheids nach § 75 BauO Bln am aktuellen Gesetzestext prüfen (Quellen widersprechen sich).',
@@ -937,5 +937,8 @@ def article_body(a, author_img):
            f'<a class="button" href="{page(k)}{hash_}">{E(label)} <span aria-hidden="true">↗</span></a></section>')
     rel = [BY_SLUG[s] for s in a.get('related', []) if _is_visible(s)]
     related = ('<section class="rg-related"><h2>Weiterlesen</h2><div class="rg-grid">' + ''.join(_card(r) for r in rel) + '</div></section>') if rel else ''
-    body = f'<div class="rg-article-body">{toc}<div class="rg-prose">{draft}{key}{render_blocks(a["blocks"])}{nxt}</div></div>'
+    stand = _date(a.get('updated') or a['published'])
+    legal = (f'<p class="rg-legal">Stand: {stand}. Dieser Beitrag dient der allgemeinen Information und ersetzt keine Rechts-, Steuer- oder Finanzierungsberatung im Einzelfall. '
+             'Gesetze, Verwaltungsvorschriften und Marktdaten können sich ändern; maßgeblich sind die verlinkten amtlichen Quellen.</p>')
+    body = f'<div class="rg-article-body">{toc}<div class="rg-prose">{draft}{key}{render_blocks(a["blocks"])}{legal}{nxt}</div></div>'
     return f'<article class="rg-article area-{a["areas"][0]}">{head}{body}{related}</article>'

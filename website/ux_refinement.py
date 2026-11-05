@@ -95,7 +95,7 @@ def inquiry(k):
             '<label>Zeitrahmen (optional)<select name="Zeitrahmen" id="inquiry-timing"><option value="">Noch offen</option><option>So bald wie möglich</option><option>In 3–6 Monaten</option><option>In 6–12 Monaten</option><option>Langfristige Planung</option></select></label>'
             '<label>Fläche / Größe (optional)<input name="Groesse" id="inquiry-size" maxlength="100" placeholder="z. B. 120 m² oder 25 Zimmer"></label>'
             '<label class="ux-full">Was sollten wir noch wissen? (optional)<textarea name="Beschreibung" id="inquiry-notes" rows="3" maxlength="2000" placeholder="Ihre Ziele, Wünsche oder eine konkrete Immobilie"></textarea></label></div></fieldset>'
-            '<fieldset data-inquiry-step="5" hidden><legend tabindex="-1">Ihre Kontaktdaten</legend><p>Damit ich mich bei Ihnen melden kann.</p>'
+            '<fieldset data-inquiry-step="5" hidden><legend tabindex="-1">Ihre Kontaktdaten</legend><p>Damit GRENFORD sich bei Ihnen melden kann.</p>'
             '<div class="ux-form-grid"><label>Vollständiger Name *<input name="Name" id="inquiry-name" required autocomplete="name" maxlength="150"></label>'
             '<label>E-Mail-Adresse *<input name="Email" id="inquiry-email" type="email" required autocomplete="email" maxlength="200"></label>'
             '<label>Telefonnummer (optional)<input name="Telefon" id="inquiry-phone" type="tel" autocomplete="tel" maxlength="60"></label>'
@@ -166,20 +166,24 @@ def contact(subject=None, company=False, lead=None):
                 f'<a href="{E(SITE["calendar"])}" target="_blank" rel="noopener noreferrer"><small>Termin</small><strong>30 Minuten, online buchbar</strong><span aria-hidden="true">↗</span></a>')
     return ('<section class="ux-contact contact" id="kontakt"><div class="contact-person">'
             '<div class="contact-head">' + img('marco-kaimann.jpg', 'Marco Kaimann', '120px', 'loading="lazy" class="contact-portrait"') +
-            '<div><h2>So erreichen Sie mich</h2></div></div>'
+            '<div><h2>So erreichen Sie GRENFORD</h2></div></div>'
             f'<p class="contact-lead">{E(lead)}</p><nav class="contact-channels" aria-label="Direkte Kontaktwege">{channels}</nav>'
             '<figure class="ux-map">' + MAP_SKETCH + f'<figcaption><span>{E(a["street"])}, {E(a["zip"])} {E(a["city"])} · Nähe Adenauerplatz (U7)</span>'
             f'<a class="small" href="https://www.google.com/maps/search/?api=1&amp;query={SITE["mapsQuery"]}" target="_blank" rel="noopener noreferrer">In Google Maps öffnen ↗</a>'
             '<button type="button" class="text-button" data-load-map>Interaktive Karte laden</button></figcaption>'
             '<div data-map-host></div><small class="ux-map-note">Lageskizze, nicht maßstabsgetreu. Die Google-Karte wird erst nach Ihrem Klick geladen.</small></figure>'
             + socials() + '</div>'
-            f'<div class="contact-card"><h3>Kurze Nachricht</h3><p>Ich lese jede Nachricht selbst und antworte innerhalb von 48 Stunden.</p>{form}</div></section>')
+            f'<div class="contact-card"><h3>Kurze Nachricht</h3><p>Jede Nachricht wird persönlich gelesen und innerhalb von 48 Stunden beantwortet.</p>{form}</div></section>')
 
 
-def rail():
+RAIL = {'investment': ('Objekt einordnen', '#bewertung-investment-value'), 'projects': ('Angebote vergleichen', '#anfrage')}
+
+
+def rail(active='home'):
     # Läuft auf jeder Seite dauerhaft mit: Termin buchen (Akzentfarbe) und WhatsApp (WhatsApp-Grün).
-    # Auf dem Handy wird daraus eine Leiste am unteren Rand mit „Bewertung starten“ (ersetzt dort die Bewertungsleiste).
+    # Auf dem Handy wird daraus eine Leiste am unteren Rand mit dem passenden Einstieg des Bereichs.
+    label, href = RAIL.get(active, ('Wertermittlung', page('bewerten')))
     return ('<aside class="ux-contact-rail" aria-label="Direktkontakt">'
-            f'<a class="rail-value" href="{page("bewerten")}">Bewertung starten <span aria-hidden="true">↗</span></a>'
+            f'<a class="rail-value" href="{href}">{label} <span aria-hidden="true">↗</span></a>'
             f'<a class="rail-termin" href="{E(SITE["calendar"])}" target="_blank" rel="noopener noreferrer" aria-label="Termin buchen">{icon("calendar")}<span aria-hidden="true">Termin buchen</span></a>'
             f'<a class="rail-whatsapp" href="{E(SITE["whatsapp"])}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">{icon("whatsapp")}<span aria-hidden="true">WhatsApp</span></a></aside>')

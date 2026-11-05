@@ -43,7 +43,7 @@ def _property_card(d):
             'Property Brief anfragen <span aria-hidden="true">↗</span></button></div></article>')
 
 
-STEPS = ('<ol class="om-steps"><li><b>Anfrage</b> Unterlagen zum Objekt anfordern</li><li><b>Prüfung</b> Ich melde mich innerhalb von 48 Stunden</li>'
+STEPS = ('<ol class="om-steps"><li><b>Anfrage</b> Unterlagen zum Objekt anfordern</li><li><b>Prüfung</b> Rückmeldung innerhalb von 48 Stunden</li>'
          '<li><b>Vertraulichkeit</b> Sie unterzeichnen die Vereinbarung</li><li><b>Unterlagen</b> Exposé, Mieterliste, Kennzahlen</li></ol>')
 
 

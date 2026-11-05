@@ -210,7 +210,7 @@ if (strategic) {
     };
     const finish = () => {
       inquirySent = true;
-      showSuccess(result, 'Vielen Dank. Ihre Anfrage wurde übermittelt. Ich melde mich persönlich bei Ihnen. – Marco Kaimann');
+      showSuccess(result, 'Vielen Dank. Ihre Anfrage wurde übermittelt. GRENFORD meldet sich innerhalb von 48 Stunden bei Ihnen.');
       next.hidden = true; back.hidden = true; context.disabled = true; panels.forEach(panel => panel.hidden = true);
     };
     if (looksAutomated(strategic)) { finish(); return; }
@@ -310,7 +310,7 @@ if (omDialog) {
       message: 'Off-Market · Unterlagen anfordern\n\n' + rows.map(([a, b]) => a + ': ' + b).join('\n') };
     const finish = () => {
       sent = true; button.hidden = true;
-      showSuccess(result, 'Vielen Dank. Ich prüfe Ihre Anfrage und melde mich innerhalb von 48 Stunden mit der Vertraulichkeitsvereinbarung.\nMarco Kaimann');
+      showSuccess(result, 'Vielen Dank. GRENFORD prüft Ihre Anfrage und meldet sich innerhalb von 48 Stunden mit der Vertraulichkeitsvereinbarung.\nMarco Kaimann');
       form.querySelectorAll('input,select').forEach(field => field.disabled = true);
     };
     if (looksAutomated(form)) { finish(); return; }
@@ -338,7 +338,7 @@ if (quick) {
     const data = { name: fd.get('name').trim(), email: fd.get('email').trim(), phone: fd.get('phone').trim(), subject: fd.get('subject'),
       message: (company ? 'Unternehmen: ' + company + '\n\n' : '') + fd.get('message').trim() };
     const finish = () => {
-      showSuccess(result, 'Vielen Dank. Ihre Nachricht wurde übermittelt. Ich melde mich persönlich bei Ihnen.');
+      showSuccess(result, 'Vielen Dank. Ihre Nachricht wurde übermittelt. GRENFORD meldet sich innerhalb von 48 Stunden bei Ihnen.');
       button.hidden = true;
       quick.querySelectorAll('input,textarea,select').forEach(field => field.disabled = true);
     };
