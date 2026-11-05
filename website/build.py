@@ -10,7 +10,8 @@ from pathlib import Path
 import argparse, html, json, re, shutil, sys
 
 import paths
-from paths import SITE, page, asset, img, absolute, root
+from paths import SITE, page, asset, img, absolute, root, at
+import i18n
 from collection import collection
 from offmarket import offmarket, properties, home_offers
 from projects_comparison import comparisons
@@ -162,8 +163,24 @@ def crumbs(active, label):
         {'@type': 'ListItem', 'position': 2, 'name': label, 'item': absolute(active + '/')}]}
 
 
+def js(name):
+    """Skripte: die englische Fassung lädt die übersetzten Kopien aus en/."""
+    return root(('en/' if paths.lang == 'en' else '') + name)
+
+
+def lang_switch(de_path, has_en):
+    """Umschalter DE | EN oben rechts. Seiten ohne englische Fassung (Ratgeber) führen auf die englische Startseite."""
+    en_path = 'en/' + (de_path if has_en else '')
+    cur = ' aria-current="true"'
+    de, en = (cur, '') if paths.lang == 'de' else ('', cur)
+    return (f'<div class="lang-switch" role="group" aria-label="Sprache / Language"><a href="{at(de_path)}" hreflang="de" lang="de"{de}>DE</a>'
+            f'<span aria-hidden="true">|</span><a href="{at(en_path)}" hreflang="en" lang="en"{en}>EN</a></div>')
+
+
 def shell(active, meta, body, ld=(), path=None, noindex=False):
     path = path if path is not None else ('' if active == 'home' else active + '/')
+    if paths.lang == 'en':
+        path = 'en/' + path
     fonts = ''.join(f'<link rel="preload" href="{asset(f"fonts/dm-sans-{w}.woff2")}" as="font" type="font/woff2" crossorigin>' for w in (400, 500))
     social = (f'<meta property="og:type" content="website"><meta property="og:locale" content="de_DE"><meta property="og:site_name" content="GRENFORD">'
               f'<meta property="og:title" content="{E(meta["title"])}"><meta property="og:description" content="{E(meta["description"])}">'
@@ -171,16 +188,22 @@ def shell(active, meta, body, ld=(), path=None, noindex=False):
               f'<meta property="og:image:alt" content="GRENFORD – Der nächste Schritt zählt."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{absolute("assets/og-grenford.jpg")}">')
     # 404, Entwürfe und ein Ratgeber ohne freigegebene Beiträge werden nicht indexiert
     hidden = noindex or active == '404' or (active == 'ratgeber' and path == 'ratgeber/' and not RG.published())
-    meta_robots = '<meta name="robots" content="noindex">' if hidden else f'<link rel="canonical" href="{absolute(path)}">'
+    de_path = path[3:] if paths.lang == 'en' else path
+    has_en = de_path.rstrip('/') in ('',) or de_path.rstrip('/') in paths.EN_KEYS
+    own = ('en/' + de_path) if paths.lang == 'en' else de_path
+    meta_robots = '<meta name="robots" content="noindex">' if hidden else f'<link rel="canonical" href="{absolute(own)}">'
+    alternates = (f'<link rel="alternate" hreflang="de" href="{absolute(de_path)}"><link rel="alternate" hreflang="en" href="{absolute("en/" + de_path)}">'
+                  f'<link rel="alternate" hreflang="x-default" href="{absolute(de_path)}">') if has_en and not hidden else ''
+    switch = lang_switch('' if active == '404' else de_path, has_en)
     return ('<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{E(meta["title"])}</title><meta name="description" content="{E(meta["description"])}">'
             f'{meta_robots}{social}<meta name="theme-color" content="#3a3d41">'
             f'<meta name="grenford-form-endpoint" content="{E(SITE["formEndpoint"], quote=True)}"><meta name="grenford-email" content="{E(SITE["email"])}">'
             f'<link rel="icon" type="image/png" sizes="32x32" href="{asset("favicon-32.png")}"><link rel="icon" type="image/png" sizes="192x192" href="{asset("favicon-192.png")}">'
             f'<link rel="apple-touch-icon" href="{asset("apple-touch-icon.png")}">{fonts}'
-            f'<link rel="stylesheet" href="{root("site.css")}"><script defer src="{root("app.js")}"></script><script defer src="{root("ux.js")}"></script><script defer src="{root("wizard.js")}"></script>{f'<script defer src="{root("market.js")}"></script>' if active == 'markt' else ''}{f'<script defer src="{root("calc.js")}"></script>' if active == 'bewerten' and CALC.SHOW else ''}{PREVIEW_HEAD.replace("{root}", root(""))}'
+            f'<link rel="stylesheet" href="{root("site.css")}">{alternates}<script defer src="{js("app.js")}"></script><script defer src="{js("ux.js")}"></script><script defer src="{js("wizard.js")}"></script>{f'<script defer src="{js("market.js")}"></script>' if active == 'markt' else ''}{f'<script defer src="{js("calc.js")}"></script>' if active == 'bewerten' and CALC.SHOW else ''}{PREVIEW_HEAD.replace("{root}", root(""))}'
             + (structured_data() if active == 'home' else '') + ''.join(ld_json(x) for x in ld) +
-            f'</head><body class="page-{active}"><a class="skip" href="#main">Zum Inhalt</a>' + header(active) +
+            f'</head><body class="page-{active}"><a class="skip" href="#main">Zum Inhalt</a>' + header(active).replace('</header>', switch + '</header>') +
             '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail(active) + ('' if active in ('bewerten', '404') else value_bar(active)) + '</body></html>')
 
 
@@ -296,32 +319,39 @@ def founder():
 
 
 def idea():
-    """Über GRENFORD: warum es GRENFORD gibt und was es anders macht."""
-    cols = [('Das Problem', 'Exposés sollen verkaufen, Bauangebote sollen den Auftrag gewinnen, Kennzahlen stehen ohne Zusammenhang. Wer entscheiden muss, '
-             'bekommt viele Unterlagen, aber selten ein vollständiges Bild.'),
-            ('Die Antwort', 'GRENFORD bereitet jede Entscheidung schriftlich vor: im Investment Memo, im Property Brief oder im Renovation Memo. Zahlen, Optionen und '
-             'offene Punkte stehen nebeneinander, auch die, die gegen einen schnellen Abschluss sprechen.'),
-            ('Der Unterschied', 'Auch GRENFORD wird bei Abschluss vergütet. Bevor abgeschlossen wird, liegt aber eine Grundlage vor, die Sie prüfen, weitergeben '
-             'und mit Bank, Familie oder Steuerberater besprechen können. Die Entscheidung bleibt bei Ihnen.')]
-    items = ''.join(f'<article><h3>{E(t)}</h3><p>{E(x)}</p></article>' for t, x in cols)
-    return ('<section class="values idea" id="idee"><div class="section-head"><h2 class="serif">Die Idee hinter GRENFORD</h2>'
-            '<p>Warum GRENFORD gegründet wurde und was es von einem klassischen Makler unterscheidet.</p></div>'
-            f'<div class="idea-grid">{items}</div></section>')
+    """Über GRENFORD: was GRENFORD heute für Kunden tut. Vier Bausteine, die sich je nach Vorhaben kombinieren lassen."""
+    blocks = [('grenford', 'Wertermittlung', 'Wert heute und nach einer Sanierung, persönlich eingeschätzt.', page('bewerten')),
+              ('investment', 'Investment Memo', 'Anlageobjekt, Ertrag und Transaktionsstrategie.', page('investment') + '#memo'),
+              ('property', 'Property Brief', 'Wohnung oder Haus: Objekt, Preis und Käuferansprache.', page('property') + '#memo'),
+              ('projects', 'Renovation Memo', 'Leistungsbeschreibung, Angebotsvergleich und Partnerwahl.', page('projects') + '#memo')]
+    cards = ''.join(f'<a class="idea-block area-{k}" href="{u}"><h3>{E(t)}</h3><p>{E(x)}</p></a>' for k, t, x, u in blocks)
+    combos = [('Fix & Flip: kaufen, sanieren, verkaufen', [('grenford', 'Wertermittlung'), ('projects', 'Renovation Memo'), ('property', 'Property Brief')],
+               'Was ist das Objekt heute wert, was kostet die Sanierung, und zu welchem Preis lässt es sich danach verkaufen?'),
+              ('Anlageobjekt mit Sanierungsbedarf', [('investment', 'Investment Memo'), ('projects', 'Renovation Memo')],
+               'Kaufpreis und Investitionsbedarf auf Grundlage belastbarer Angebote statt grober Schätzungen.'),
+              ('Geerbte Wohnung verkaufen', [('grenford', 'Wertermittlung'), ('property', 'Property Brief')],
+               'Verkauf im heutigen Zustand oder vorher auffrischen? Beide Wege mit Zahlen nebeneinander.')]
+    rows = ''.join('<li><strong>' + E(t) + '</strong><span class="idea-chips">'
+                   + '<i aria-hidden="true">+</i>'.join(f'<b class="area-{k}">{E(n)}</b>' for k, n in chips)
+                   + f'</span><p>{E(x)}</p></li>' for t, chips, x in combos)
+    return ('<section class="values idea" id="idee"><div class="section-head"><h2 class="serif">Was GRENFORD für Sie tut</h2>'
+            '<p>Jede Immobilienentscheidung bekommt eine schriftliche Grundlage: Zahlen, Optionen und offene Punkte nebeneinander, auch die, '
+            'die gegen einen schnellen Abschluss sprechen. Je nach Vorhaben besteht sie aus einem Baustein oder aus mehreren.</p></div>'
+            f'<div class="idea-blocks">{cards}</div>'
+            '<h3 class="idea-sub">Bausteine kombinieren</h3>'
+            f'<ul class="idea-combos">{rows}</ul>'
+            '<p class="idea-foot">Welche Bausteine Sie brauchen, klärt das kostenfreie Erstgespräch. Die Entscheidung bleibt bei Ihnen.</p></section>')
 
 
 def founder_bio():
-    """Über GRENFORD: Werdegang von Marco Kaimann neben dem Portrait, in der dritten Person."""
+    """Über GRENFORD: Marco Kaimann neben dem Portrait, kompakt und auf heute bezogen, in der dritten Person."""
     paras = [
-        'Marco Kaimann begann seine Laufbahn bei einem der damals größten Maklerhäuser Berlins. Er beriet private Käufer zu Wohnimmobilien im Bestand, '
-        'darunter Rohlingprojekte und sanierungsbedürftige Dachgeschosse, und begleitete den Verkauf von Neubauwohnungen.',
-        'Für einen führenden deutsch-amerikanischen Anbieter von Immobilienmarktdaten baute er das B2B-Geschäft in Nord- und Ostdeutschland auf. Parallel vermittelte er '
-        'selbstständig den Verkauf eines Mehrfamilienhauses und eines Boutiquehotels. Später begleitete er Transaktionen für private und institutionelle Investoren und '
-        'baute Kooperationen für größere Mixed-Use-Projekte auf.',
-        'In jeder dieser Stationen sah er dasselbe: Eigentümer, Käufer und Investoren treffen Entscheidungen über viel Geld mit Unterlagen, die jeweils nur eine Seite zeigen. '
-        'Daraus entstand GRENFORD, mit dem Anspruch, jede Entscheidung schriftlich und vergleichbar vorzubereiten.',
-        'In den Bereichen <strong>Property und Investment</strong> führt GRENFORD Immobilienverkäufe von der Vorbereitung und Vermarktung über die notarielle Beurkundung '
-        'bis zum Closing. Im Bereich <strong>Projects</strong> vergleicht GRENFORD Bauangebote nach Leistungsumfang, Kosten und Terminen, unterstützt Bauherren bei der Wahl '
-        'geeigneter Baupartner und begleitet sie bis zur Fertigstellung der Sanierung.']
+        'Marco Kaimann führt GRENFORD und ist Ihr Ansprechpartner vom ersten Gespräch bis zum Abschluss. Den Markt kennt er aus mehreren Blickwinkeln: '
+        'aus der Beratung privater Käufer bei einem großen Berliner Maklerhaus, aus dem Aufbau des B2B-Geschäfts für einen deutsch-amerikanischen Anbieter von '
+        'Immobilienmarktdaten und aus Transaktionen für private und institutionelle Investoren, vom Mehrfamilienhaus bis zum Boutique-Hotel.',
+        'Heute bündelt GRENFORD diese Erfahrung in drei Bereichen: <strong>Investment</strong> für Verkauf und Ankauf von Anlageimmobilien, <strong>Property</strong> '
+        'für Wohnungen und Häuser, <strong>Projects</strong> für Sanierungen mit vergleichbaren Angeboten. Wo Spezialwissen gefragt ist, zieht GRENFORD '
+        'Sachverständige, Architekten und Finanzierer hinzu.']
     return ('<section class="founder founder-bio" id="marco"><figure>' + img('marco-kaimann.jpg', 'Marco Kaimann, Gründer von GRENFORD', '(max-width:760px) 88vw, 350px', 'loading="lazy"') +
             '</figure><div><h2 class="serif">Marco Kaimann</h2><p class="founder-role">Gründer von GRENFORD</p>'
             + ''.join(f'<p>{p}</p>' for p in paras) +
@@ -541,8 +571,8 @@ def ueber():
     body = sub_hero('ueber-grenford', 'Über GRENFORD', '', 'Entscheiden mit <em>vollständigem Bild</em>',
                     'Wer eine Immobilie verkauft, kauft oder saniert, entscheidet über viel Geld, oft auf Grundlage von Unterlagen, die jeweils nur eine Seite zeigen. '
                     'GRENFORD legt die Informationen nebeneinander, bevor entschieden wird.',
-                    '<a class="button" href="#idee">Die Idee hinter GRENFORD<span aria-hidden="true">↓</span></a><a class="text-link" href="#marco">Der Gründer ↓</a>')
-    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#idee">Die Idee</a><a href="#marco">Der Gründer</a><a href="#video">Video</a><a href="#haltung">Zusagen</a><a href="#felder">Geschäftsfelder</a>'
+                    '<a class="button" href="#idee">Was GRENFORD für Sie tut<span aria-hidden="true">↓</span></a><a class="text-link" href="#marco">Ihr Ansprechpartner ↓</a>')
+    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#idee">Leistung</a><a href="#marco">Ansprechpartner</a><a href="#video">Video</a><a href="#haltung">Zusagen</a><a href="#felder">Geschäftsfelder</a>'
              f'<a href="#ablauf">5-Point Process</a><a href="{page("bewerten")}">Wertermittlung ↗</a><a href="{page("ratgeber")}">Ratgeber ↗</a><a href="#kontakt">Kontakt</a></nav>')
     body += idea() + '<div class="personal-approach">' + founder_bio() + '</div>' + founder_video()
     values = [('Schriftlich statt aus dem Bauch', 'Jede Empfehlung steht in einem Memo, mit Zahlen und Optionen. Sie können sie nachlesen und weitergeben.'),
@@ -701,6 +731,7 @@ def responsive_variants(out):
 
 def seo_files(out):
     urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + (['markt'] if MARKET_LIVE else []) + (['ratgeber'] if RG.published() else [])] + [absolute(RG.article_path(a) + '/') for a in RG.published() if not (MARKET_LIVE and RG.article_path(a) == 'markt')]
+    urls += [absolute('en/')] + [absolute('en/' + k + '/') for k in sorted(paths.EN_KEYS - {'home'})]  # englische Fassung
     (out / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                      + ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
     (out / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {absolute("sitemap.xml")}\n', encoding='utf-8')
@@ -744,6 +775,16 @@ def main():
         paths.set_page(depth)
         (out / target).parent.mkdir(parents=True, exist_ok=True)
         (out / target).write_text(render(), encoding='utf-8')
+    # Englische Fassung unter en/: dieselben Seiten eine Ebene tiefer gebaut und anhand von i18n/en.json übersetzt
+    paths.lang = 'en'
+    en_pages = {t: v for t, v in pages.items() if t == 'index.html' or t.split('/')[0] in paths.EN_KEYS}
+    for target, (depth, render) in en_pages.items():
+        paths.set_page(depth + 1)
+        (out / 'en' / target).parent.mkdir(parents=True, exist_ok=True)
+        (out / 'en' / target).write_text(i18n.page(render(), 'en/' + target), encoding='utf-8')
+    for name in ('app.js', 'ux.js', 'wizard.js', 'market.js', 'calc.js'):
+        (out / 'en' / name).write_text(i18n.script((STATIC / 'js' / name).read_text(encoding='utf-8'), 'en/' + name), encoding='utf-8')
+    paths.lang = 'de'
     if not args.preview:
         paths.set_root_absolute()
         (out / '404.html').write_text(not_found(), encoding='utf-8')
@@ -759,6 +800,11 @@ def main():
         print('Hero-Bilder fehlen (Vorschau-Auswahl bzw. übersprungen), bitte nach static/assets/ kopieren:')
         for name in sorted(paths.skipped_heroes):
             print('  -', name)
+    if i18n.missing:
+        print(f'Englisch: {len(i18n.missing)} Texte ohne Übersetzung (deutsch belassen), Liste in i18n/missing.json')
+        (ROOT / 'i18n' / 'missing.json').write_text(json.dumps(i18n.missing, ensure_ascii=False, indent=1), encoding='utf-8')
+    else:
+        (ROOT / 'i18n' / 'missing.json').unlink(missing_ok=True)
     if not SITE['formEndpoint']:
         print('Hinweis: site.json "formEndpoint" ist leer. Formulare bieten den Versand per E-Mail an.')
 

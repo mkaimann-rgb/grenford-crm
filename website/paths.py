@@ -16,6 +16,8 @@ pretty = True          # False = Links mit index.html (für Vorschau ohne Verzei
 missing = set()        # Bilder, die in static/assets fehlen
 used = set()           # Bilder, die tatsächlich eingebunden werden
 skipped_heroes = set() # Hero-Originale, die in static/assets fehlen
+lang = 'de'            # 'en' beim Bau der englischen Fassung unter en/
+EN_KEYS = {'home', 'investment', 'property', 'projects', 'bewerten', 'ueber-grenford'}  # Seiten mit englischer Fassung
 
 
 def set_page(depth):
@@ -32,8 +34,18 @@ def set_root_absolute():
 def page(key):
     """Link auf eine Seite: 'home', 'investment', 'property', 'projects'."""
     target = '' if key == 'home' else key + '/'
+    if lang == 'en' and key in EN_KEYS:
+        target = 'en/' + target
     url = _prefix + target
     if not pretty:
+        url += 'index.html'
+    return url or './'
+
+
+def at(path):
+    """Link auf einen Pfad ab der Wurzel der Ausgabe ('' = Startseite, 'en/investment/')."""
+    url = _prefix + path
+    if not pretty and (not path or path.endswith('/')):
         url += 'index.html'
     return url or './'
 
