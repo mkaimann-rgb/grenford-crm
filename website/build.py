@@ -311,10 +311,9 @@ def process(k=None):
 
 def founder():
     return ('<section class="founder" id="marco"><figure>' + img('marco-kaimann.jpg', 'Marco Kaimann, Gründer von GRENFORD', '(max-width:760px) 88vw, 350px', 'loading="lazy"') +
-            '</figure><div><h2 class="serif">Ein Ansprechpartner, vom ersten Gespräch bis zum Abschluss.</h2>'
-            '<p>GRENFORD wird von seinem Gründer Marco Kaimann geführt. Jede Anfrage wird von ihm gelesen, und er bleibt Ihr Ansprechpartner, bis die Sache erledigt ist. '
-            'Wo Fachwissen gefragt ist, zieht GRENFORD Partner hinzu, mit denen es regelmäßig arbeitet: Gutachter, Architekten, Baufirmen, Finanzierer.</p>'
-            f'<a class="text-link" href="{page("ueber-grenford")}">Warum es GRENFORD gibt <span aria-hidden="true">↗</span></a>'
+            '</figure><div><h2 class="serif">Drei Bereiche, ein Ansprechpartner.</h2>'
+            '<p>GRENFORD verbindet Investment, Property und Projects. Berührt ein Vorhaben mehr als einen Bereich, etwa Kauf, Sanierung und Verkauf bei einem Fix-&amp;-Flip-Objekt, greifen Wertermittlung, Renovation Memo und Property Brief ineinander, betreut von einem festen Ansprechpartner. Für Spezialfragen arbeitet GRENFORD mit einem eingespielten Netzwerk aus Sachverständigen, Architekten, Baufirmen und Finanzierern.</p>'
+            f'<a class="text-link" href="{page("ueber-grenford")}#marco">Zur Geschäftsidee <span aria-hidden="true">↗</span></a>'
             '<div class="founder-sign"><strong>Marco Kaimann</strong><span>Gründer von GRENFORD</span></div></div></section>')
 
 
@@ -342,9 +341,9 @@ def founder_bio():
         'Renovation Memo und Property Brief zusammen Einkaufswert, Sanierungskosten und erzielbaren Verkaufspreis. Ein Anlageobjekt mit Sanierungsbedarf stützt sich mit '
         'Investment Memo und Renovation Memo auf belastbare Angebote statt auf Schätzungen. Und wer eine geerbte Wohnung verkauft, sieht mit Wertermittlung und '
         'Property Brief, ob sich eine Auffrischung vor dem Verkauf lohnt.',
-        'Dabei bleibt es bei einem Ansprechpartner. Marco Kaimann begleitet jedes Mandat persönlich, mit Erfahrung aus einem großen Berliner Maklerhaus, aus '
-        'Immobilienmarktdaten und aus Transaktionen für private und institutionelle Investoren. Wo Spezialwissen gefragt ist, zieht GRENFORD Sachverständige, '
-        'Architekten und Finanzierer hinzu. Vertrauliches bleibt vertraulich: Off-Market-Mandate, Angebote der Baufirmen und Ihre Ziele verlassen GRENFORD nicht.']
+        'Dabei haben Sie einen festen Ansprechpartner. Geführt wird GRENFORD von Marco Kaimann, mit Erfahrung aus einem großen Berliner Maklerhaus, aus '
+        'Immobilienmarktdaten und aus Transaktionen für private und institutionelle Investoren. Für Spezialfragen arbeitet GRENFORD mit Sachverständigen, '
+        'Architekten und Finanzierern zusammen. Vertrauliches bleibt vertraulich: Off-Market-Mandate, Angebote der Baufirmen und Ihre Ziele verlassen GRENFORD nicht.']
     return ('<section class="founder founder-bio" id="marco"><figure>' + img('marco-kaimann.jpg', 'Marco Kaimann, Gründer von GRENFORD', '(max-width:760px) 88vw, 350px', 'loading="lazy"') +
             '</figure><div><h2 class="serif">Die Geschäftsidee</h2><p class="founder-role">Marco Kaimann, Gründer von GRENFORD</p>'
             + ''.join(f'<p>{p}</p>' for p in paras) +
@@ -530,8 +529,8 @@ def bewerten():
     body += valuation_section('bewerten') + CALC.section() + result_example() + value_steps()
     faqs = [
         ('Was kostet die Bewertung?', 'Die Ersteinschätzung ist kostenfrei und unverbindlich. Ein Auftrag entsteht dadurch nicht.'),
-        ('Wie schnell erhalte ich eine Rückmeldung?', 'Innerhalb von 48 Stunden meldet sich Marco Kaimann persönlich, auf dem Weg, den Sie im letzten Schritt gewählt haben: per E-Mail, Telefon oder im Video-Termin.'),
-        ('Ist das ein automatisch berechneter Wert?', 'Nein. Ihre Angaben liest Marco Kaimann persönlich und ordnet sie mit Lage, Zustand und vergleichbaren Objekten ein. Sie erhalten eine Wertspanne und eine Erläuterung.'),
+        ('Wie schnell erhalte ich eine Rückmeldung?', 'Innerhalb von 48 Stunden meldet sich GRENFORD persönlich, auf dem Weg, den Sie im letzten Schritt gewählt haben: per E-Mail, Telefon oder im Video-Termin.'),
+        ('Ist das ein automatisch berechneter Wert?', 'Nein. GRENFORD liest Ihre Angaben persönlich und ordnet sie mit Lage, Zustand und vergleichbaren Objekten ein. Sie erhalten eine Wertspanne und eine Erläuterung.'),
         ('Was bedeutet „Wert nach der Sanierung“?', 'Neben dem heutigen Wert zeigt die Einschätzung, wie sich eine sinnvolle Sanierung auf den Wert auswirken kann, mit einem groben Kostenrahmen. So sehen Sie, ob sich ein Vorhaben lohnt, bevor Sie Angebote einholen.'),
         ('Ist die Wertermittlung ein Gutachten?', 'Nein. GRENFORD erstellt eine marktorientierte Einschätzung als Grundlage für Verkauf, Kauf oder Sanierung. '
          'Für Finanzamt, Gericht oder eine Erbauseinandersetzung wird meist ein Verkehrswertgutachten nach § 194 BauGB verlangt. Dafür zieht GRENFORD auf Wunsch einen Sachverständigen hinzu.'),
