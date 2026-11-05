@@ -274,8 +274,9 @@ def _control(wid, c, n):
         aria = f' aria-labelledby="{fid}-l"' if head else ''
         return f'<div class="wz-group" data-row="{E(label)}"{req}>{head}<div class="{cls}" role="group"{aria}>{opts}</div></div>'
     if c['kind'] == 'range':
-        lo_note = ('< ' if c['min_note'] else '') + f'{c["lo"]:,}'.replace(',', '.')
-        hi_note = ('> ' if c['max_note'] else '') + f'{c["hi"]:,}'.replace(',', '.')
+        grp = (lambda n: str(n)) if c['label'] == 'Baujahr' else (lambda n: f'{n:,}'.replace(',', '.'))
+        lo_note = ('< ' if c['min_note'] else '') + grp(c['lo'])
+        hi_note = ('> ' if c['max_note'] else '') + grp(c['hi'])
         return (f'<div class="wz-range" data-row="{E(label)}" data-unit="{E(c["unit"])}"><label class="wz-label" for="{fid}">{E(label)}</label>'
                 f'<input type="range" min="{c["lo"]}" max="{c["hi"]}" step="{c["step"]}" value="{c["value"]}" data-sync="{fid}" aria-hidden="true" tabindex="-1">'
                 f'<div class="wz-scale" aria-hidden="true"><span>{lo_note}</span><span>{hi_note}</span></div>'

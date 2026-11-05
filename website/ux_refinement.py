@@ -55,7 +55,7 @@ def _spam_trap():
 
 def _noscript():
     mail = E(SITE['email'])
-    return f'<noscript><p>Das Formular benötigt JavaScript. Schreiben Sie uns alternativ direkt an <a href="mailto:{mail}">{mail}</a>.</p></noscript>'
+    return f'<noscript><p>Das Formular benötigt JavaScript. Schreiben Sie alternativ direkt an <a href="mailto:{mail}">{mail}</a>.</p></noscript>'
 
 
 def _group(kind, name, data, active):
@@ -89,12 +89,12 @@ def inquiry(k):
             + _group('radio', 'Anliegen', INTENTS, active) + '</fieldset>'
             '<fieldset data-inquiry-step="3" hidden><legend tabindex="-1">Was ist Ihnen wichtig?</legend><p>Mehrfachauswahl möglich. Dieser Schritt ist optional.</p>'
             + _group('checkbox', 'Themen', TOPICS, active) + '</fieldset>'
-            '<fieldset data-inquiry-step="4" hidden><legend tabindex="-1">Ihr Vorhaben</legend><p>Eine erste Einordnung reicht. Was noch offen ist, klären wir im Gespräch.</p>'
+            '<fieldset data-inquiry-step="4" hidden><legend tabindex="-1">Ihr Vorhaben</legend><p>Eine erste Einordnung reicht. Was noch offen ist, wird im Gespräch geklärt.</p>'
             '<div class="ux-form-grid"><label>Standort / Suchregion *<input name="Region" id="inquiry-region" autocomplete="address-level2" required maxlength="180" placeholder="z. B. Berlin und Brandenburg"></label>'
             '<label><span data-budget-label>Budget / Preisrahmen (optional)</span><input name="Rahmen" id="inquiry-budget" maxlength="140" placeholder="z. B. bis 2 Mio. € oder noch offen"></label>'
             '<label>Zeitrahmen (optional)<select name="Zeitrahmen" id="inquiry-timing"><option value="">Noch offen</option><option>So bald wie möglich</option><option>In 3–6 Monaten</option><option>In 6–12 Monaten</option><option>Langfristige Planung</option></select></label>'
             '<label>Fläche / Größe (optional)<input name="Groesse" id="inquiry-size" maxlength="100" placeholder="z. B. 120 m² oder 25 Zimmer"></label>'
-            '<label class="ux-full">Was sollten wir noch wissen? (optional)<textarea name="Beschreibung" id="inquiry-notes" rows="3" maxlength="2000" placeholder="Ihre Ziele, Wünsche oder eine konkrete Immobilie"></textarea></label></div></fieldset>'
+            '<label class="ux-full">Was sollte GRENFORD noch wissen? (optional)<textarea name="Beschreibung" id="inquiry-notes" rows="3" maxlength="2000" placeholder="Ihre Ziele, Wünsche oder eine konkrete Immobilie"></textarea></label></div></fieldset>'
             '<fieldset data-inquiry-step="5" hidden><legend tabindex="-1">Ihre Kontaktdaten</legend><p>Damit GRENFORD sich bei Ihnen melden kann.</p>'
             '<div class="ux-form-grid"><label>Vollständiger Name *<input name="Name" id="inquiry-name" required autocomplete="name" maxlength="150"></label>'
             '<label>E-Mail-Adresse *<input name="Email" id="inquiry-email" type="email" required autocomplete="email" maxlength="200"></label>'

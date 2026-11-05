@@ -91,7 +91,7 @@ def home_offers():
             f'<button type="button" data-collection-tab="investment" aria-pressed="true">Investment <span>{len(DATA["objekte"])}</span></button>'
             f'<button type="button" data-collection-tab="property" aria-pressed="false">Property <span>{len(PROPS)}</span></button></div></div>')
     return ('<section class="offmarket" id="collection"><div class="section-head"><h2>Aktuelle Mandate und Immobilien</h2>'
-            '<p>Investment-Objekte zeigen wir nur anonym; Unterlagen gibt es nach einer Vertraulichkeitsvereinbarung. '
+            '<p>Investment-Objekte zeigt GRENFORD nur anonym; Unterlagen gibt es nach einer Vertraulichkeitsvereinbarung. '
             'Wohnungen und Häuser sind öffentlich mit Preis und Eckdaten zu sehen.</p></div>' + tabs + _sample()
             + _om_carousel() + _property_carousel(hidden=True) + dialog() + '</section>')
 

@@ -16,7 +16,7 @@ E = html.escape
 SHOW_DRAFTS = False  # build.py setzt True im Vorschau-Build
 
 AREAS = {
-    'property': {'label': 'Property', 'topic': 'Wohnimmobilien kaufen und verkaufen', 'question': 'Wie bereite ich einen Immobilienverkauf vor?',
+    'property': {'label': 'Property', 'topic': 'Wohnimmobilien kaufen und verkaufen', 'question': 'Wie bereite ich Kauf oder Verkauf einer Wohnung vor?',
                  'text': 'Unterlagen, Rechte und Zustand einer Wohnung oder eines Hauses verstehen, bevor Sie verkaufen oder kaufen.'},
     'investment': {'label': 'Investment', 'topic': 'Transaktionen vorbereiten', 'question': 'Wie bereite ich eine Transaktion vor?',
                    'text': 'Vermarktungsweg, Käuferkreis und Unterlagen für Anlageimmobilien festlegen, bevor der erste Investor anfragt.'},
@@ -237,7 +237,7 @@ ARTICLES = [
    ('h2', 'ablauf', 'Von der Vorbereitung bis zum Erhalt'),
    ('flow', [('Berechtigung klären', 'Eigentümer, Bevollmächtigter oder Notar. Bei Vollmacht diese schriftlich beilegen.'),
              ('Angaben zusammenstellen', 'Adresse, Name des Eigentümers, möglichst Grundbuchbezirk und Blattnummer sowie Flur und Flurstück.'),
-             ('Antrag stellen', 'Beim Grundbuchamt des zuständigen Amtsgerichts, schriftlich oder persönlich; in einigen Ländern auch online.'),
+             ('Antrag stellen', 'Beim Grundbuchamt des zuständigen Amtsgerichts, schriftlich oder persönlich, teils über ein Online-Formular. Den direkten Online-Abruf nutzen nur Notare, Banken und Behörden.'),
              ('Gebühr zahlen', 'Für einfache und beglaubigte Ausdrucke fallen geringe Gebühren an.'),
              ('Auszug erhalten', 'Per Post oder bei Abholung. Für Behörden oder Banken wird oft ein beglaubigter Ausdruck verlangt.')]),
    ('h2', 'angaben', 'Diese Angaben helfen'),
@@ -263,7 +263,7 @@ ARTICLES = [
   'meta_title': 'Sondernutzungsrecht an Garten und Stellplatz prüfen | GRENFORD Ratgeber',
   'description': 'Was ein Sondernutzungsrecht ist, wie es sich von Sondereigentum unterscheidet und wo Sie prüfen, ob Garten oder Stellplatz wirklich zur Wohnung gehören. Mit schematischem Lageplan.',
   'lead': 'Die Wohnung mit eigenem Garten, der Stellplatz direkt vor dem Haus: Oft gehören diese Flächen nicht der Wohnung, sondern der Gemeinschaft, und die Wohnung hat nur das Recht, sie allein zu nutzen. Ob dieses Recht wirklich besteht, steht in Unterlagen, nicht im Exposé.',
-  'key': ['Ein Sondernutzungsrecht erlaubt die alleinige Nutzung, Eigentümer bleibt die Gemeinschaft.',
+  'key': ['Ein Sondernutzungsrecht erlaubt die alleinige Nutzung; die Fläche bleibt Gemeinschaftseigentum aller Eigentümer.',
           'Maßgeblich sind Teilungserklärung und Grundbuch, nicht die tatsächliche Nutzung.',
           'Klären Sie, wer Pflege und Kosten der Fläche trägt.'],
   'next': ('Property Brief anfragen', 'property', '#memo', 'Im Property Brief stehen Rechte an Garten und Stellplatz mit den Fundstellen in den Unterlagen.'),
@@ -271,7 +271,7 @@ ARTICLES = [
   'review': ['Aussagen zu Sondereigentum an Stellplätzen und Freiflächen (§ 3 WEG seit 2020) juristisch prüfen lassen'],
   'blocks': [
    ('h2', 'was', 'Was ein Sondernutzungsrecht ist'),
-   ('p', 'Ein Sondernutzungsrecht erlaubt einem Eigentümer, einen Teil des Gemeinschaftseigentums allein zu nutzen, zum Beispiel eine Gartenfläche oder einen Stellplatz. Die Fläche selbst bleibt Gemeinschaftseigentum. Begründet wird das Recht in der Teilungserklärung beziehungsweise Gemeinschaftsordnung, damit es auch gegenüber späteren Eigentümern wirkt, wird es im Grundbuch vermerkt.'),
+   ('p', 'Ein Sondernutzungsrecht erlaubt einem Eigentümer, einen Teil des Gemeinschaftseigentums allein zu nutzen, zum Beispiel eine Gartenfläche oder einen Stellplatz. Die Fläche selbst bleibt Gemeinschaftseigentum. Seit der WEG-Reform 2020 können Stellplätze und Flächen außerhalb des Gebäudes auch als Sondereigentum zugeordnet sein (§ 3 Abs. 1 und 2 WEG); welche Variante vorliegt, zeigt die Teilungserklärung. Begründet wird das Recht in der Teilungserklärung beziehungsweise Gemeinschaftsordnung; damit es auch gegenüber späteren Eigentümern wirkt, wird es im Grundbuch vermerkt.'),
    ('h2', 'lageplan', 'Den Lageplan lesen'),
    ('plan', PLAN_SNR, [('A', 'Garten mit Sondernutzungsrecht für Wohnung 1'), ('B', 'Garten mit Sondernutzungsrecht für Wohnung 2'), ('C', 'Hof und Weg, Gemeinschaftseigentum'),
                         ('!', 'Prüfstelle: Stellplatz S3 wird genutzt, ist in der Teilungserklärung aber keiner Wohnung zugeordnet')],
