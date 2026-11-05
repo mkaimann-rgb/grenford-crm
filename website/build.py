@@ -319,41 +319,36 @@ def founder():
 
 
 def idea():
-    """Über GRENFORD: was GRENFORD heute für Kunden tut. Vier Bausteine, die sich je nach Vorhaben kombinieren lassen."""
-    blocks = [('grenford', 'Wertermittlung', 'Wert heute und nach einer Sanierung, persönlich eingeschätzt.', page('bewerten')),
-              ('investment', 'Investment Memo', 'Anlageobjekt, Ertrag und Transaktionsstrategie.', page('investment') + '#memo'),
-              ('property', 'Property Brief', 'Wohnung oder Haus: Objekt, Preis und Käuferansprache.', page('property') + '#memo'),
-              ('projects', 'Renovation Memo', 'Leistungsbeschreibung, Angebotsvergleich und Partnerwahl.', page('projects') + '#memo')]
-    cards = ''.join(f'<a class="idea-block area-{k}" href="{u}"><h3>{E(t)}</h3><p>{E(x)}</p></a>' for k, t, x, u in blocks)
-    combos = [('Fix & Flip: kaufen, sanieren, verkaufen', [('grenford', 'Wertermittlung'), ('projects', 'Renovation Memo'), ('property', 'Property Brief')],
-               'Was ist das Objekt heute wert, was kostet die Sanierung, und zu welchem Preis lässt es sich danach verkaufen?'),
-              ('Anlageobjekt mit Sanierungsbedarf', [('investment', 'Investment Memo'), ('projects', 'Renovation Memo')],
-               'Kaufpreis und Investitionsbedarf auf Grundlage belastbarer Angebote statt grober Schätzungen.'),
-              ('Geerbte Wohnung verkaufen', [('grenford', 'Wertermittlung'), ('property', 'Property Brief')],
-               'Verkauf im heutigen Zustand oder vorher auffrischen? Beide Wege mit Zahlen nebeneinander.')]
-    rows = ''.join('<li><strong>' + E(t) + '</strong><span class="idea-chips">'
-                   + '<i aria-hidden="true">+</i>'.join(f'<b class="area-{k}">{E(n)}</b>' for k, n in chips)
-                   + f'</span><p>{E(x)}</p></li>' for t, chips, x in combos)
-    return ('<section class="values idea" id="idee"><div class="section-head"><h2 class="serif">Was GRENFORD für Sie tut</h2>'
-            '<p>Jede Immobilienentscheidung bekommt eine schriftliche Grundlage: Zahlen, Optionen und offene Punkte nebeneinander, auch die, '
-            'die gegen einen schnellen Abschluss sprechen. Je nach Vorhaben besteht sie aus einem Baustein oder aus mehreren.</p></div>'
-            f'<div class="idea-blocks">{cards}</div>'
-            '<h3 class="idea-sub">Bausteine kombinieren</h3>'
-            f'<ul class="idea-combos">{rows}</ul>'
-            '<p class="idea-foot">Welche Bausteine Sie brauchen, klärt das kostenfreie Erstgespräch. Die Entscheidung bleibt bei Ihnen.</p></section>')
+    """Über GRENFORD: warum es GRENFORD gibt und was es anders macht."""
+    cols = [('Das Problem', 'Exposés sollen verkaufen, Bauangebote sollen den Auftrag gewinnen, Kennzahlen stehen ohne Zusammenhang. Wer entscheiden muss, '
+             'bekommt viele Unterlagen, aber selten ein vollständiges Bild.'),
+            ('Die Antwort', 'GRENFORD bereitet jede Entscheidung schriftlich vor: im Investment Memo, im Property Brief oder im Renovation Memo. Zahlen, Optionen und '
+             'offene Punkte stehen nebeneinander, auch die, die gegen einen schnellen Abschluss sprechen.'),
+            ('Der Unterschied', 'Auch GRENFORD wird bei Abschluss vergütet. Bevor abgeschlossen wird, liegt aber eine Grundlage vor, die Sie prüfen, weitergeben '
+             'und mit Bank, Familie oder Steuerberater besprechen können. Die Entscheidung bleibt bei Ihnen.')]
+    items = ''.join(f'<article><h3>{E(t)}</h3><p>{E(x)}</p></article>' for t, x in cols)
+    return ('<section class="values idea" id="idee"><div class="section-head"><h2 class="serif">Die Idee hinter GRENFORD</h2>'
+            '<p>Warum GRENFORD gegründet wurde und was es von einem klassischen Makler unterscheidet.</p></div>'
+            f'<div class="idea-grid">{items}</div></section>')
 
 
 def founder_bio():
-    """Über GRENFORD: Marco Kaimann neben dem Portrait, kompakt und auf heute bezogen, in der dritten Person."""
+    """Über GRENFORD: neben dem Portrait die Geschäftsidee als Fließtext, wie die Bereiche aufgebaut sind und sich verbinden lassen."""
     paras = [
-        'Marco Kaimann führt GRENFORD und ist Ihr Ansprechpartner vom ersten Gespräch bis zum Abschluss. Den Markt kennt er aus mehreren Blickwinkeln: '
-        'aus der Beratung privater Käufer bei einem großen Berliner Maklerhaus, aus dem Aufbau des B2B-Geschäfts für einen deutsch-amerikanischen Anbieter von '
-        'Immobilienmarktdaten und aus Transaktionen für private und institutionelle Investoren, vom Mehrfamilienhaus bis zum Boutique-Hotel.',
-        'Heute bündelt GRENFORD diese Erfahrung in drei Bereichen: <strong>Investment</strong> für Verkauf und Ankauf von Anlageimmobilien, <strong>Property</strong> '
-        'für Wohnungen und Häuser, <strong>Projects</strong> für Sanierungen mit vergleichbaren Angeboten. Wo Spezialwissen gefragt ist, zieht GRENFORD '
-        'Sachverständige, Architekten und Finanzierer hinzu.']
+        'GRENFORD ist so aufgebaut, dass jede Immobilienentscheidung eine schriftliche Grundlage bekommt, und zwar dort, wo sie fällt. '
+        'Die Bereiche funktionieren jeder für sich, ihre eigentliche Stärke zeigen sie aber im Zusammenspiel.',
+        'Drei Geschäftsbereiche bilden das Fundament: <strong>Investment</strong> für Verkauf und Ankauf von Anlageimmobilien mit dem Investment Memo, '
+        '<strong>Property</strong> für Wohnungen und Häuser mit dem Property Brief und <strong>Projects</strong> für Sanierungen mit dem Renovation Memo, das Bauangebote '
+        'vergleichbar macht. Die <strong>Wertermittlung</strong> verbindet alle drei: Sie zeigt den Wert heute und nach einer Sanierung.',
+        'Der eigentliche Gedanke liegt in der Verbindung. Je nach Vorhaben greifen die Bausteine ineinander: Bei einem Fix-&amp;-Flip-Geschäft ergeben Wertermittlung, '
+        'Renovation Memo und Property Brief zusammen Einkaufswert, Sanierungskosten und erzielbaren Verkaufspreis. Ein Anlageobjekt mit Sanierungsbedarf stützt sich mit '
+        'Investment Memo und Renovation Memo auf belastbare Angebote statt auf Schätzungen. Und wer eine geerbte Wohnung verkauft, sieht mit Wertermittlung und '
+        'Property Brief, ob sich eine Auffrischung vor dem Verkauf lohnt.',
+        'Dabei bleibt es bei einem Ansprechpartner. Marco Kaimann begleitet jedes Mandat persönlich, mit Erfahrung aus einem großen Berliner Maklerhaus, aus '
+        'Immobilienmarktdaten und aus Transaktionen für private und institutionelle Investoren. Wo Spezialwissen gefragt ist, zieht GRENFORD Sachverständige, '
+        'Architekten und Finanzierer hinzu.']
     return ('<section class="founder founder-bio" id="marco"><figure>' + img('marco-kaimann.jpg', 'Marco Kaimann, Gründer von GRENFORD', '(max-width:760px) 88vw, 350px', 'loading="lazy"') +
-            '</figure><div><h2 class="serif">Marco Kaimann</h2><p class="founder-role">Gründer von GRENFORD</p>'
+            '</figure><div><h2 class="serif">Die Geschäftsidee</h2><p class="founder-role">Marco Kaimann, Gründer von GRENFORD</p>'
             + ''.join(f'<p>{p}</p>' for p in paras) +
             '<a class="text-link" href="#kontakt">Gespräch vereinbaren <span aria-hidden="true">↗</span></a></div></section>')
 
@@ -571,8 +566,8 @@ def ueber():
     body = sub_hero('ueber-grenford', 'Über GRENFORD', '', 'Entscheiden mit <em>vollständigem Bild</em>',
                     'Wer eine Immobilie verkauft, kauft oder saniert, entscheidet über viel Geld, oft auf Grundlage von Unterlagen, die jeweils nur eine Seite zeigen. '
                     'GRENFORD legt die Informationen nebeneinander, bevor entschieden wird.',
-                    '<a class="button" href="#idee">Was GRENFORD für Sie tut<span aria-hidden="true">↓</span></a><a class="text-link" href="#marco">Ihr Ansprechpartner ↓</a>')
-    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#idee">Leistung</a><a href="#marco">Ansprechpartner</a><a href="#video">Video</a><a href="#haltung">Zusagen</a><a href="#felder">Geschäftsfelder</a>'
+                    '<a class="button" href="#idee">Die Idee hinter GRENFORD<span aria-hidden="true">↓</span></a><a class="text-link" href="#marco">Die Geschäftsidee ↓</a>')
+    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#idee">Die Idee</a><a href="#marco">Geschäftsidee</a><a href="#video">Video</a><a href="#haltung">Zusagen</a><a href="#felder">Geschäftsfelder</a>'
              f'<a href="#ablauf">5-Point Process</a><a href="{page("bewerten")}">Wertermittlung ↗</a><a href="{page("ratgeber")}">Ratgeber ↗</a><a href="#kontakt">Kontakt</a></nav>')
     body += idea() + '<div class="personal-approach">' + founder_bio() + '</div>' + founder_video()
     values = [('Schriftlich statt aus dem Bauch', 'Jede Empfehlung steht in einem Memo, mit Zahlen und Optionen. Sie können sie nachlesen und weitergeben.'),
