@@ -179,3 +179,10 @@ Inhalte, Bausteine und Seiten: `ratgeber.py`. Übersicht `/ratgeber/`, Beiträge
 
 Definiert am Ende von `static/css/structure.css` („Bereichsfarben“). Gilt auf der Bereichsseite, im Menü-Fenster, auf der Startseiten-Karte,
 im Karussell und in der Memo-Vorschau. Gemeinsame Töne: Schwarz-Grau #3A3D41 (dunkle Flächen, Footer, Überschriften; aus dem Investment Memo), Ivory #FAF6F2, Sand #EFE9E1, Sand dunkel #CFC8BC, Weiß. Navy #222E41 nur als Property-Akzent.
+
+## Rechner (Wertermittlung)
+
+`calculators.py` (Aufbau und alle Annahmen) und `static/js/calc.js` (Rechnung im Browser, keine Übertragung). Drei Rechner auf `/bewerten/#rechner`:
+Wohnungswert Berlin (Grundpreis aus dem Marktbericht, Zu- und Abschläge als GRENFORD-Annahmen), Sanierungskosten (Kostenansätze je m² und je Stück,
+Standardfaktor, Planung und Puffer), Fix & Flip (Beispielwerte). Direkt-Links: `#rechner-wohnwert`, `#rechner-sanierung`, `#rechner-flip`;
+verlinkt von Property und Projects, bewusst nicht von Investment. `STATUS = 'entwurf'`: nur im Vorschau-Build, bis Grundpreis und Kostenansätze geprüft sind.

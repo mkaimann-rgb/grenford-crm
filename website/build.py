@@ -63,6 +63,7 @@ VALUE_CTA = {'investment': ('Objekt einordnen', 'investment-value'), 'property':
              'projects': ('Wert nach Sanierung', 'projects-value')}
 EXTRA = {'bewerten': 'Bewerten', 'ueber-grenford': 'Über GRENFORD'}
 import ratgeber as RG  # Ratgeber: Inhalte, Bausteine, Entwurfsstatus
+import calculators as CALC  # Rechner Wertermittlung (Entwurf: nur Vorschau)
 
 
 def mega(k):
@@ -177,7 +178,7 @@ def shell(active, meta, body, ld=(), path=None, noindex=False):
             f'<meta name="grenford-form-endpoint" content="{E(SITE["formEndpoint"], quote=True)}"><meta name="grenford-email" content="{E(SITE["email"])}">'
             f'<link rel="icon" type="image/png" sizes="32x32" href="{asset("favicon-32.png")}"><link rel="icon" type="image/png" sizes="192x192" href="{asset("favicon-192.png")}">'
             f'<link rel="apple-touch-icon" href="{asset("apple-touch-icon.png")}">{fonts}'
-            f'<link rel="stylesheet" href="{root("site.css")}"><script defer src="{root("app.js")}"></script><script defer src="{root("ux.js")}"></script><script defer src="{root("wizard.js")}"></script>{f'<script defer src="{root("market.js")}"></script>' if active == 'markt' else ''}{PREVIEW_HEAD.replace("{root}", root(""))}'
+            f'<link rel="stylesheet" href="{root("site.css")}"><script defer src="{root("app.js")}"></script><script defer src="{root("ux.js")}"></script><script defer src="{root("wizard.js")}"></script>{f'<script defer src="{root("market.js")}"></script>' if active == 'markt' else ''}{f'<script defer src="{root("calc.js")}"></script>' if active == 'bewerten' and CALC.SHOW else ''}{PREVIEW_HEAD.replace("{root}", root(""))}'
             + (structured_data() if active == 'home' else '') + ''.join(ld_json(x) for x in ld) +
             f'</head><body class="page-{active}"><a class="skip" href="#main">Zum Inhalt</a>' + header(active) +
             '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail(active) + ('' if active in ('bewerten', '404') else value_bar(active)) + '</body></html>')
@@ -425,6 +426,9 @@ def valuation_section(k):
     }
     eyebrow, title, lead = heads[k]
     eyebrow = f'<span class="eyebrow">{eyebrow}</span>' if eyebrow else ''
+    calc = {'property': ('wohnwert', 'Wohnungswert selbst überschlagen'), 'projects': ('sanierung', 'Sanierungskosten grob selbst rechnen')}.get(k) if CALC.SHOW else None
+    if calc:
+        lead += f' <a class="calc-link" href="{page("bewerten")}#rechner-{calc[0]}">{calc[1]} ↗</a>'
     return (f'<section class="valuation" id="bewertung"><div class="section-head">{eyebrow}<h2>{title}</h2><p>{lead}</p></div>'
             f'<div class="valuation-frame">{wizard_tabs(k, TAB_LABELS_BEWERTEN if k == "bewerten" else None)}</div>'
             '<p class="wz-note">Kostenfrei und vertraulich. Rückmeldung innerhalb von 48 Stunden.</p>' + (gateway(k) if k in D else '') + '</section>')
@@ -499,9 +503,9 @@ def bewerten():
     body = sub_hero('bewerten', 'Wertermittlung', '', 'Was ist Ihre Immobilie wert, <em>heute und nach einer Sanierung?</em>',
                     'GRENFORD schätzt beides persönlich ein, anhand Ihrer Angaben, der Lage und vergleichbarer Verkäufe. Kostenfrei, ohne Verpflichtung, Antwort innerhalb von 48 Stunden.',
                     '<a class="button" href="#bewertung">Wertermittlung starten<span aria-hidden="true">↓</span></a><a class="text-link" href="#ablauf">So läuft es ab ↓</a>')
-    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#bewertung">Wertermittlung</a><a href="#ergebnis">Beispiel-Ergebnis</a><a href="#ablauf">Der Ablauf</a>'
+    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#bewertung">Wertermittlung</a>' + ('<a href="#rechner">Rechner</a>' if CALC.SHOW else '') + '<a href="#ergebnis">Beispiel-Ergebnis</a><a href="#ablauf">Der Ablauf</a>'
              '<a href="#fragen">Fragen</a><a href="#kontakt">Kontakt</a></nav>')
-    body += valuation_section('bewerten') + result_example() + value_steps()
+    body += valuation_section('bewerten') + CALC.section() + result_example() + value_steps()
     faqs = [
         ('Was kostet die Bewertung?', 'Die Ersteinschätzung ist kostenfrei und unverbindlich. Ein Auftrag entsteht dadurch nicht.'),
         ('Wie schnell erhalte ich eine Rückmeldung?', 'Innerhalb von 48 Stunden meldet sich Marco Kaimann persönlich, auf dem Weg, den Sie im letzten Schritt gewählt haben: per E-Mail, Telefon oder im Video-Termin.'),
@@ -669,6 +673,7 @@ def copy_static(out):
     shutil.copy(STATIC / 'js' / 'ux.js', out / 'ux.js')
     shutil.copy(STATIC / 'js' / 'wizard.js', out / 'wizard.js')
     shutil.copy(STATIC / 'js' / 'market.js', out / 'market.js')
+    shutil.copy(STATIC / 'js' / 'calc.js', out / 'calc.js')
     css = '\n'.join(f'/* ---- {name} ---- */\n' + (STATIC / 'css' / name).read_text(encoding='utf-8') for name in CSS_ORDER)
     # site.css liegt im Wurzelordner: absolute /assets/-Pfade werden relativ, damit dist/ überall läuft.
     (out / 'site.css').write_text(css.replace("url('/assets/", "url('assets/"), encoding='utf-8')
@@ -705,6 +710,7 @@ def main():
     args = parser.parse_args()
     paths.pretty = not args.preview
     RG.SHOW_DRAFTS = args.preview
+    CALC.SHOW = args.preview or CALC.STATUS == 'freigegeben'
     if args.preview:
         SITE['formEndpoint'] = ''  # Vorschau: keine Übermittlung ins CRM
         global PREVIEW_HEAD
