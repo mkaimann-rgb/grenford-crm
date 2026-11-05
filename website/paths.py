@@ -17,7 +17,7 @@ missing = set()        # Bilder, die in static/assets fehlen
 used = set()           # Bilder, die tatsächlich eingebunden werden
 skipped_heroes = set() # Hero-Originale, die in static/assets fehlen
 lang = 'de'            # 'en' beim Bau der englischen Fassung unter en/
-EN_KEYS = {'home', 'investment', 'property', 'projects', 'bewerten', 'ueber-grenford'}  # Seiten mit englischer Fassung
+EN_KEYS = {'home', 'investment', 'property', 'projects', 'bewerten', 'ueber-grenford', 'ratgeber', 'markt'}  # Seiten (und Unterseiten) mit englischer Fassung
 
 
 def set_page(depth):
@@ -34,7 +34,7 @@ def set_root_absolute():
 def page(key):
     """Link auf eine Seite: 'home', 'investment', 'property', 'projects'."""
     target = '' if key == 'home' else key + '/'
-    if lang == 'en' and key in EN_KEYS:
+    if lang == 'en' and key.split('/')[0] in EN_KEYS:
         target = 'en/' + target
     url = _prefix + target
     if not pretty:

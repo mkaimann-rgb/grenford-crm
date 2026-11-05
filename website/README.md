@@ -190,7 +190,6 @@ verlinkt von Property und Projects, bewusst nicht von Investment. `STATUS = 'ent
 ## Englische Fassung (DE | EN)
 
 `i18n.py` übersetzt die fertig gebauten Seiten anhand von `i18n/en.json` (deutscher Text → englischer Text) und legt sie unter `en/` ab,
-dazu übersetzte Kopien der Skripte. Englisch gibt es für Startseite, Investment, Property, Projects, Wertermittlung und Über GRENFORD
-(`paths.EN_KEYS`); der Ratgeber bleibt deutsch. Umschalter DE | EN oben rechts, `hreflang` im Kopf, englische Seiten in der Sitemap.
+dazu übersetzte Kopien der Skripte. Englisch gibt es für alle Seiten einschließlich Ratgeber und Marktanalyse (`paths.EN_KEYS`); das Video bleibt deutsch. Umschalter DE | EN oben rechts, `hreflang` im Kopf, englische Seiten in der Sitemap.
 Neue oder geänderte deutsche Texte: Build ausführen, fehlende Übersetzungen stehen in `i18n/missing.json`; dort ergänzen in `i18n/en.json`.
 Zeichenketten, die Skripte mit Formularwerten vergleichen, stehen in `i18n.NO_JS` und bleiben deutsch.

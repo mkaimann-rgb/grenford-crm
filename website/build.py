@@ -187,9 +187,9 @@ def shell(active, meta, body, ld=(), path=None, noindex=False):
               f'<meta property="og:url" content="{absolute(path)}"><meta property="og:image" content="{absolute("assets/og-grenford.jpg")}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
               f'<meta property="og:image:alt" content="GRENFORD – Der nächste Schritt zählt."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{absolute("assets/og-grenford.jpg")}">')
     # 404, Entwürfe und ein Ratgeber ohne freigegebene Beiträge werden nicht indexiert
-    hidden = noindex or active == '404' or (active == 'ratgeber' and path == 'ratgeber/' and not RG.published())
+    hidden = noindex or active == '404' or (active == 'ratgeber' and path.removeprefix('en/') == 'ratgeber/' and not RG.published())
     de_path = path[3:] if paths.lang == 'en' else path
-    has_en = de_path.rstrip('/') in ('',) or de_path.rstrip('/') in paths.EN_KEYS
+    has_en = de_path == '' or de_path.split('/')[0] in paths.EN_KEYS
     own = ('en/' + de_path) if paths.lang == 'en' else de_path
     meta_robots = '<meta name="robots" content="noindex">' if hidden else f'<link rel="canonical" href="{absolute(own)}">'
     alternates = (f'<link rel="alternate" hreflang="de" href="{absolute(de_path)}"><link rel="alternate" hreflang="en" href="{absolute("en/" + de_path)}">'
@@ -549,12 +549,12 @@ def bewerten():
 def founder_video():
     """Über GRENFORD: Vorstellungsvideo. Startet nur auf Klick (preload=none), Vorschaubild statt Vorladen."""
     return ('<section class="founder-video" id="video"><div class="section-head"><h2>Marco Kaimann im Video</h2>'
-            '<p>In einer Minute: wer hinter GRENFORD steht, wie GRENFORD arbeitet und was die drei Bereiche Investment, Property und Projects verbindet.</p></div>'
-            '<div class="fv-frame"><video class="fv-video" controls preload="none" playsinline width="848" height="424" '
-            f'poster="{asset("video/grenford-marco-kaimann-poster.jpg")}" aria-label="Video: Marco Kaimann stellt GRENFORD vor (1 Minute, mit Ton)">'
+            '<p>In unter einer Minute: wer hinter GRENFORD steht, wie GRENFORD arbeitet und was die drei Bereiche Investment, Property und Projects verbindet.</p></div>'
+            '<div class="fv-frame"><video class="fv-video" controls preload="none" playsinline width="1280" height="640" '
+            f'poster="{asset("video/grenford-marco-kaimann-poster.jpg")}" aria-label="Video: Marco Kaimann stellt GRENFORD vor (46 Sekunden, mit Ton)">'
             f'<source src="{asset("video/grenford-marco-kaimann.mp4")}" type="video/mp4">'
             f'Ihr Browser kann das Video nicht abspielen. <a href="{asset("video/grenford-marco-kaimann.mp4")}">Video herunterladen</a></video>'
-            '<button type="button" class="fv-play" data-video-play aria-label="Video abspielen"><span aria-hidden="true">▶</span><small>Video ansehen · 1 Min.</small></button></div>'
+            '<button type="button" class="fv-play" data-video-play aria-label="Video abspielen"><span aria-hidden="true">▶</span><small>Video ansehen · 46 Sek.</small></button></div>'
             '</section>')
 
 
@@ -709,7 +709,8 @@ def responsive_variants(out):
 
 def seo_files(out):
     urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + (['markt'] if MARKET_LIVE else []) + (['ratgeber'] if RG.published() else [])] + [absolute(RG.article_path(a) + '/') for a in RG.published() if not (MARKET_LIVE and RG.article_path(a) == 'markt')]
-    urls += [absolute('en/')] + [absolute('en/' + k + '/') for k in sorted(paths.EN_KEYS - {'home'})]  # englische Fassung
+    base = absolute()
+    urls += [base + 'en/' + u[len(base):] for u in urls if u[len(base):].split('/')[0] in paths.EN_KEYS or u == base]  # englische Fassung
     (out / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                      + ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
     (out / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {absolute("sitemap.xml")}\n', encoding='utf-8')

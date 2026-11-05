@@ -14,7 +14,7 @@ if (marketBox) {
       item.hidden = Object.entries(wanted).some(([key, value]) => value && item.dataset[key] !== value);
     });
     const shown = cards.filter(card => !card.hidden).length;
-    count.textContent = shown + (shown === 1 ? ' Kennzahl' : ' Kennzahlen');
+    count.textContent = shown + (shown === 1 ? 'Indicator' : ' Kennzahlen');
     empty.hidden = shown > 0;
     if (table) table.hidden = shown === 0;
   };
