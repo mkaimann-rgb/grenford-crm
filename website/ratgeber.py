@@ -878,7 +878,9 @@ def _featured_visual():
 
 def overview_body():
     arts = visible()
-    by_area = {k: [a for a in arts if k in a['areas']] for k in AREA_ORDER}
+    # Jeder Beitrag erscheint nur einmal: im ersten seiner Bereiche, der hervorgehobene nur oben
+    listed = [a for a in arts if a['slug'] != FEATURED]
+    by_area = {k: [a for a in listed if a['areas'][0] == k] for k in AREA_ORDER}
     entries = '<nav class="rg-entries" id="themen" aria-label="Themenbereiche">' + ''.join(
         f'<a class="rg-entry area-{k}" href="#{k}"><span class="rg-label area-{k}">{AREAS[k]["label"]}</span>'
         f'<h2>{E(AREAS[k]["question"])}</h2><p>{E(AREAS[k]["text"])}</p>'
@@ -902,13 +904,13 @@ def overview_body():
         if not cards:
             cards = '<p class="rg-empty-note">Beiträge zu diesem Thema erscheinen in Kürze.</p>'
         sections += (f'<section class="rg-area area-{k}" id="{k}"><div class="rg-area-head"><span class="rg-label area-{k}">{AREAS[k]["label"]}</span>'
-                     f'<h2>{AREAS[k]["label"]} <span>— {E(AREAS[k]["topic"])}</span></h2><p>{E(AREAS[k]["text"])}</p></div>'
+                     f'<h2>{AREAS[k]["label"]} <span>— {E(AREAS[k]["topic"])}</span></h2></div>'
                      f'<div class="rg-grid">{cards}</div></section>')
     m = BY_SLUG['markt']
     if m in arts:
         sections += (f'<section class="rg-area rg-market" id="markt"><div class="rg-area-head"><span class="rg-label">Markt</span>'
                      f'<h2>Marktanalyse <span>— Deutschland und Berlin</span></h2><p>Preise, Kauffälle und Geldumsatz aus amtlichen Quellen, mit Stand und Quelle an jeder Zahl.</p></div>'
-                     f'<div class="rg-grid">{_card(m)}{_card(BY_SLUG["bodenrichtwert-verstehen"]) if BY_SLUG["bodenrichtwert-verstehen"] in arts else ""}</div></section>')
+                     f'<div class="rg-grid">{_card(m)}</div></section>')
     note = ('<p class="rg-preview-note">Vorschau: Alle Beiträge sind Entwürfe und erscheinen erst nach Freigabe auf der Website.</p>'
             if SHOW_DRAFTS and any(a['status'] != 'freigegeben' for a in arts) else '')
     return entries + note + feat + sections

@@ -335,18 +335,16 @@ def idea():
 def founder_bio():
     """Über GRENFORD: neben dem Portrait die Geschäftsidee als Fließtext, wie die Bereiche aufgebaut sind und sich verbinden lassen."""
     paras = [
-        'GRENFORD ist so aufgebaut, dass jede Immobilienentscheidung eine schriftliche Grundlage bekommt, und zwar dort, wo sie fällt. '
-        'Die Bereiche funktionieren jeder für sich, ihre eigentliche Stärke zeigen sie aber im Zusammenspiel.',
-        'Drei Geschäftsbereiche bilden das Fundament: <strong>Investment</strong> für Verkauf und Ankauf von Anlageimmobilien mit dem Investment Memo, '
+        'GRENFORD ist in drei Geschäftsbereiche gegliedert: <strong>Investment</strong> für Verkauf und Ankauf von Anlageimmobilien mit dem Investment Memo, '
         '<strong>Property</strong> für Wohnungen und Häuser mit dem Property Brief und <strong>Projects</strong> für Sanierungen mit dem Renovation Memo, das Bauangebote '
         'vergleichbar macht. Die <strong>Wertermittlung</strong> verbindet alle drei: Sie zeigt den Wert heute und nach einer Sanierung.',
-        'Der eigentliche Gedanke liegt in der Verbindung. Je nach Vorhaben greifen die Bausteine ineinander: Bei einem Fix-&amp;-Flip-Geschäft ergeben Wertermittlung, '
+        'Jeder Bereich funktioniert für sich, der eigentliche Gedanke liegt aber in der Verbindung. Je nach Vorhaben greifen die Bausteine ineinander: Bei einem Fix-&amp;-Flip-Geschäft ergeben Wertermittlung, '
         'Renovation Memo und Property Brief zusammen Einkaufswert, Sanierungskosten und erzielbaren Verkaufspreis. Ein Anlageobjekt mit Sanierungsbedarf stützt sich mit '
         'Investment Memo und Renovation Memo auf belastbare Angebote statt auf Schätzungen. Und wer eine geerbte Wohnung verkauft, sieht mit Wertermittlung und '
         'Property Brief, ob sich eine Auffrischung vor dem Verkauf lohnt.',
         'Dabei bleibt es bei einem Ansprechpartner. Marco Kaimann begleitet jedes Mandat persönlich, mit Erfahrung aus einem großen Berliner Maklerhaus, aus '
         'Immobilienmarktdaten und aus Transaktionen für private und institutionelle Investoren. Wo Spezialwissen gefragt ist, zieht GRENFORD Sachverständige, '
-        'Architekten und Finanzierer hinzu.']
+        'Architekten und Finanzierer hinzu. Vertrauliches bleibt vertraulich: Off-Market-Mandate, Angebote der Baufirmen und Ihre Ziele verlassen GRENFORD nicht.']
     return ('<section class="founder founder-bio" id="marco"><figure>' + img('marco-kaimann.jpg', 'Marco Kaimann, Gründer von GRENFORD', '(max-width:760px) 88vw, 350px', 'loading="lazy"') +
             '</figure><div><h2 class="serif">Die Geschäftsidee</h2><p class="founder-role">Marco Kaimann, Gründer von GRENFORD</p>'
             + ''.join(f'<p>{p}</p>' for p in paras) +
@@ -406,10 +404,10 @@ def subpage(k):
                        'Gezielt suchen', 'Assetklasse, Region, Budget und Ihre Anforderungen bilden die Grundlage Ihres Suchprofils.'),
         'property': ('Verkaufen oder kaufen', 'Erbschaft, Umzug, Trennung oder einfach eine neue Lebensphase: Der Anlass bestimmt, wie schnell und wie offen verkauft wird. Darum geht es im ersten Gespräch.',
                      'Mit klarem Profil verkaufen', 'Die Besonderheiten Ihrer Immobilie erkennen, verständlich präsentieren und passende Interessenten erreichen.',
-                     'Das Passende entdecken', 'Wünsche mitteilen, Angebote besprechen und den nächsten Schritt klären. Ein individueller Suchauftrag wird bei Bedarf gesondert vereinbart.'),
+                     'Das Passende entdecken', 'Wünsche mitteilen, passende Angebote besprechen, auch solche, die noch nicht inseriert sind, und den nächsten Schritt klären.'),
         'projects': ('Warum drei Angebote selten vergleichbar sind', 'Meist stecken die Unterschiede in Leistungen, Mengen und Ausstattung, nicht im Preis. Im Renovation Memo werden Originalangebote zunächst anonymisiert als A, B und C verglichen.',
-                     'Vergleichbar machen', 'Auf gemeinsamer Grundlage in der Regel mindestens drei Originalangebote einholen. Leistungen, Kosten und offene Punkte verständlich gegenüberstellen.',
-                     'Persönlich entscheiden', 'Sie wählen zwei Partner für die vertiefende Vor-Ort-Abstimmung. Die Beauftragung erfolgt direkt durch Sie. GRENFORD begleitet bis zur Fertigstellung, ohne technische Bauleitung oder Abnahmevollmacht.'),
+                     'Vergleichbar machen', 'Alle Firmen kalkulieren dieselbe Leistungsbeschreibung. Was fehlt, was unklar ist und was mehr kostet, wird Position für Position sichtbar.',
+                     'Persönlich entscheiden', 'Sie lernen zwei Firmen vor Ort kennen und entscheiden selbst, wen Sie beauftragen. GRENFORD bleibt Ihr Ansprechpartner bis zur Fertigstellung.'),
     }
     title, lead, a, aa, b, bb = intros[k]
     focus = ''.join('<span>' + E(x) + '</span>' for x in d['focus'])
@@ -499,8 +497,7 @@ def result_example():
             + '<dl class="rx-facts"><div><dt>Grober Kostenrahmen der Sanierung</dt><dd>45.000 – 60.000 €</dd></div>'
             '<div><dt>Was die Spanne bestimmt</dt><dd>Lage, Zustand von Bad und Elektrik, Stockwerk, vergleichbare Verkäufe</dd></div>'
             '<div><dt>Empfehlung</dt><dd>Sanierung vor dem Verkauf prüfen: Mehrwert liegt über den Kosten</dd></div></dl>'
-            '<p class="rx-note">Alle Zahlen sind erfunden und gelten für kein reales Objekt. Ihre Einschätzung wird persönlich erstellt, '
-            'anhand Ihrer Angaben, der Lage und vergleichbarer Verkäufe.</p></div></section>')
+            '<p class="rx-note">Alle Zahlen sind erfunden und gelten für kein reales Objekt.</p></div></section>')
 
 
 def value_steps():
@@ -564,31 +561,18 @@ def founder_video():
 
 def ueber():
     body = sub_hero('ueber-grenford', 'Über GRENFORD', '', 'Entscheiden mit <em>vollständigem Bild</em>',
-                    'Wer eine Immobilie verkauft, kauft oder saniert, entscheidet über viel Geld, oft auf Grundlage von Unterlagen, die jeweils nur eine Seite zeigen. '
-                    'GRENFORD legt die Informationen nebeneinander, bevor entschieden wird.',
+                    'Investment, Property und Projects aus einer Hand: für Investoren, Eigentümer, Käufer und Bauherren, mit einem Ansprechpartner vom ersten Gespräch bis zum Abschluss.',
                     '<a class="button" href="#idee">Die Idee hinter GRENFORD<span aria-hidden="true">↓</span></a><a class="text-link" href="#marco">Die Geschäftsidee ↓</a>')
-    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#idee">Die Idee</a><a href="#marco">Geschäftsidee</a><a href="#video">Video</a><a href="#haltung">Zusagen</a><a href="#felder">Geschäftsfelder</a>'
-             f'<a href="#ablauf">5-Point Process</a><a href="{page("bewerten")}">Wertermittlung ↗</a><a href="{page("ratgeber")}">Ratgeber ↗</a><a href="#kontakt">Kontakt</a></nav>')
+    body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#idee">Die Idee</a><a href="#marco">Geschäftsidee</a><a href="#video">Video</a><a href="#felder">Bereiche</a>'
+             f'<a href="{page("bewerten")}">Wertermittlung ↗</a><a href="{page("ratgeber")}">Ratgeber ↗</a><a href="#kontakt">Kontakt</a></nav>')
     body += idea() + '<div class="personal-approach">' + founder_bio() + '</div>' + founder_video()
-    values = [('Schriftlich statt aus dem Bauch', 'Jede Empfehlung steht in einem Memo, mit Zahlen und Optionen. Sie können sie nachlesen und weitergeben.'),
-              ('Offene Vergütung', 'Woher die Zahlen stammen, welche Rolle GRENFORD hat und wie die Vergütung geregelt ist, steht offen im Memo.'),
-              ('Diskretion', 'Off-Market-Mandate, Angebote der Baufirmen und Ihre Ziele verlassen das Haus nicht.')]
-    body += ('<section class="values" id="haltung"><div class="section-head"><h2 class="serif">Woran Sie GRENFORD messen können</h2>'
-             '<p>Drei Zusagen, die für jedes Mandat gelten.</p></div><div class="values-grid">'
-             + ''.join(f'<article><h3>{a}</h3><p>{b}</p></article>' for a, b in values) + '</div></section>')
-    fields = [('investment', 'Anlageimmobilien kaufen und verkaufen', 'Ausgewählte Off-Market-Transaktionen, Projektentwicklungen und Wohnimmobilieninvestments, mit Analyse, Positionierung und diskreter Vermarktung.'),
-              ('property', 'Wohnungen und Häuser', 'Für Eigentümer, Selbstnutzer und private Kapitalanleger: Wohnungen, Häuser und Ferienimmobilien verkaufen oder kaufen, von der Bewertung bis zum Notartermin.'),
-              ('projects', 'Sanierung vorbereiten', 'Wünsche, Maßnahmen und Baupartner zusammenführen: Beratung für Sanierung, Modernisierung und Repositionierung.')]
-    rows = ''.join(f'<a class="field-row" href="{page(k)}"><h3>{t}</h3><p>{E(x)}</p>'
-                   f'<span class="field-memo">{E(D[k]["memo"])} <span aria-hidden="true">↗</span></span></a>' for k, t, x in fields)
-    body += ('<section class="fields" id="felder"><div class="section-head"><h2>Drei Geschäftsfelder</h2>'
-             f'<p>Jedes Feld endet mit einem eigenen Memo.</p></div><div class="field-rows">{rows}</div></section>')
-    body += process()
-    more = [(page('bewerten'), 'Wertermittlung', 'Was ist Ihre Immobilie wert, heute und nach einer Sanierung? Persönlich eingeschätzt, nicht automatisch errechnet.', 'Wertermittlung starten'),
-            (page('ratgeber'), 'Ratgeber', 'Leitfäden und Checklisten für Verkauf, Kauf, Transaktion und Sanierung.', 'Zum Ratgeber')]
-    body += ('<section class="fields grenford-more" id="angebote"><div class="section-head"><h2>Mehr von GRENFORD</h2>'
-             '<p>Zwei Angebote, die allen drei Geschäftsfeldern dienen.</p></div><div class="field-rows">'
-             + ''.join(f'<a class="field-row" href="{h}"><h3>{t}</h3><p>{x}</p><span class="field-memo">{c} <span aria-hidden="true">↗</span></span></a>' for h, t, x, c in more)
+    links = [(page('investment'), 'Investment', 'Für Eigentümer, Investoren und Bauträger', 'Investment Memo'),
+             (page('property'), 'Property', 'Für Eigentümer, Käufer und private Kapitalanleger', 'Property Brief'),
+             (page('projects'), 'Projects', 'Für Eigentümer vor einer Sanierung', 'Renovation Memo'),
+             (page('bewerten'), 'Wertermittlung', 'Persönlich eingeschätzt und kostenfrei', 'Wertermittlung starten'),
+             (page('ratgeber'), 'Ratgeber', 'Leitfäden und Checklisten', 'Zum Ratgeber')]
+    body += ('<section class="fields" id="felder"><div class="section-head"><h2>Direkt zu den Bereichen</h2></div><div class="field-rows">'
+             + ''.join(f'<a class="field-row" href="{h}"><h3>{t}</h3><p>{x}</p><span class="field-memo">{c} <span aria-hidden="true">↗</span></span></a>' for h, t, x, c in links)
              + '</div></section>')
     body += contact()
     return shell('ueber-grenford', SITE['pages']['ueber-grenford'], body, ld=(crumbs('ueber-grenford', 'Über GRENFORD'),))
