@@ -193,3 +193,12 @@ verlinkt von Property und Projects, bewusst nicht von Investment. `STATUS = 'ent
 dazu übersetzte Kopien der Skripte. Englisch gibt es für alle Seiten einschließlich Ratgeber und Marktanalyse (`paths.EN_KEYS`); das Video bleibt deutsch. Umschalter DE | EN oben rechts, `hreflang` im Kopf, englische Seiten in der Sitemap.
 Neue oder geänderte deutsche Texte: Build ausführen, fehlende Übersetzungen stehen in `i18n/missing.json`; dort ergänzen in `i18n/en.json`.
 Zeichenketten, die Skripte mit Formularwerten vergleichen, stehen in `i18n.NO_JS` und bleiben deutsch.
+
+## Rechtliches und Cookie-Einstellungen
+
+Impressum (`/imprint/`), Datenschutz (`/privacy/`) und Bildnachweise (`/photo-credits/`) samt englischer Fassung unter `/en/…`
+stehen in `legal/de/*.html` und `legal/en/*.html`: Texte 1:1 von der bisherigen Live-Website übernommen (Quelle und Datum in
+der ersten Zeile), `legal.py` setzt sie nur ins Layout. Die URLs entsprechen der bisherigen Website. Änderungen am Text dort vornehmen.
+`static/js/consent.js`: Cookie-Einwilligung mit denselben Texten, demselben Speicherschlüssel und derselben Logik wie bisher
+(Google Analytics `site.json` → `gaId`, nur nach „Alle akzeptieren“; Google Maps bei Zustimmung automatisch, sonst auf Klick).
+„Cookie-Einstellungen“ im Footer öffnet den Hinweis erneut. Im Vorschau-Build ist `gaId` leer.

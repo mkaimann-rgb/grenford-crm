@@ -5,7 +5,7 @@ Die Freigabe läuft über das Formular "Unterlagen anfordern" → CRM-Sheet → 
 """
 from pathlib import Path
 import html, json
-from paths import SITE, img
+from paths import SITE, page, img
 from ux_refinement import _form_attrs, _spam_trap, _noscript
 
 E = html.escape
@@ -113,6 +113,6 @@ def dialog():
             f'<label>Ticketgröße (optional)<select name="Ticket"><option value="">Noch offen</option>{opt(tickets)}</select></label></div>'
             '<label class="om-nda"><input type="checkbox" name="NDA" required> Ich bin bereit, vor Erhalt der Unterlagen eine Vertraulichkeitsvereinbarung zu unterzeichnen. *</label>'
             + _spam_trap() +
-            f'<p class="ux-privacy">Ihre Angaben werden vertraulich zur Prüfung Ihrer Anfrage verwendet. <a href="{E(SITE["privacy"])}" target="_blank" rel="noopener">Datenschutz</a></p>'
+            f'<p class="ux-privacy">Ihre Angaben werden vertraulich zur Prüfung Ihrer Anfrage verwendet. <a href="{page("privacy")}">Datenschutz</a></p>'
             '<p class="ux-form-error" id="om-error" role="alert"></p><button class="button" type="submit">Zugang anfragen ↗</button>'
             '<div id="om-result" role="status" tabindex="-1"></div>' + _noscript() + '</form></dialog>')

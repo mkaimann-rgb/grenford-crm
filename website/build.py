@@ -64,7 +64,8 @@ VALUE_CTA = {'investment': ('Objekt einordnen', 'investment-value'), 'property':
              'projects': ('Wert nach Sanierung', 'projects-value')}
 EXTRA = {'bewerten': 'Bewerten', 'ueber-grenford': 'Über GRENFORD'}
 import ratgeber as RG  # Ratgeber: Inhalte, Bausteine, Entwurfsstatus
-import calculators as CALC  # Rechner Wertermittlung (Entwurf: nur Vorschau)
+import calculators as CALC
+import legal as LEGAL  # Impressum, Datenschutz, Bildnachweise (Texte 1:1 von der Live-Website)  # Rechner Wertermittlung (Entwurf: nur Vorschau)
 
 
 def mega(k):
@@ -118,7 +119,8 @@ def footer():
             f'<a href="tel:{E(SITE["phoneHref"])}">{E(SITE["phone"])}</a><br><a href="mailto:{E(SITE["email"])}">{E(SITE["email"])}</a></address></div>'
             f'<nav class="footer-cols" aria-label="Seitenübersicht">{columns}</nav>'
             f'<div class="footer-bottom"><span>© 2026 GRENFORD · Marco Kaimann</span><span>USt-ID: {E(SITE["vatId"])}</span>'
-            f'<a href="{E(SITE["imprint"])}">Impressum</a><a href="{E(SITE["privacy"])}">Datenschutz</a></div></footer>')
+            f'<a href="{page("imprint")}">Impressum</a><a href="{page("privacy")}">Datenschutz</a><a href="{page("photo-credits")}">Bildnachweise</a>'
+            '<button type="button" class="footer-cookie" data-cookie-settings>Cookie-Einstellungen</button></div></footer>')
 
 
 # Leiste am unteren Rand: je Bereich der passende Einstieg
@@ -199,12 +201,13 @@ def shell(active, meta, body, ld=(), path=None, noindex=False):
             f'<title>{E(meta["title"])}</title><meta name="description" content="{E(meta["description"])}">'
             f'{meta_robots}{social}<meta name="theme-color" content="#3a3d41">'
             f'<meta name="grenford-form-endpoint" content="{E(SITE["formEndpoint"], quote=True)}"><meta name="grenford-email" content="{E(SITE["email"])}">'
+            f'<meta name="grenford-ga" content="{E(SITE.get("gaId", ""))}"><meta name="grenford-imprint" content="{page("imprint")}"><meta name="grenford-privacy" content="{page("privacy")}">'
             f'<link rel="icon" type="image/png" sizes="32x32" href="{asset("favicon-32.png")}"><link rel="icon" type="image/png" sizes="192x192" href="{asset("favicon-192.png")}">'
             f'<link rel="apple-touch-icon" href="{asset("apple-touch-icon.png")}">{fonts}'
-            f'<link rel="stylesheet" href="{root("site.css")}">{alternates}<script defer src="{js("app.js")}"></script><script defer src="{js("ux.js")}"></script><script defer src="{js("wizard.js")}"></script>{f'<script defer src="{js("market.js")}"></script>' if active == 'markt' else ''}{f'<script defer src="{js("calc.js")}"></script>' if active == 'bewerten' and CALC.SHOW else ''}{PREVIEW_HEAD.replace("{root}", root(""))}'
+            f'<link rel="stylesheet" href="{root("site.css")}">{alternates}<script defer src="{js("app.js")}"></script><script defer src="{js("ux.js")}"></script><script defer src="{js("wizard.js")}"></script><script defer src="{root("consent.js")}"></script>{f'<script defer src="{js("market.js")}"></script>' if active == 'markt' else ''}{f'<script defer src="{js("calc.js")}"></script>' if active == 'bewerten' and CALC.SHOW else ''}{PREVIEW_HEAD.replace("{root}", root(""))}'
             + (structured_data() if active == 'home' else '') + ''.join(ld_json(x) for x in ld) +
             f'</head><body class="page-{active}"><a class="skip" href="#main">Zum Inhalt</a>' + header(active).replace('</header>', switch + '</header>') +
-            '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail(active) + ('' if active in ('bewerten', '404') else value_bar(active)) + '</body></html>')
+            '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail(active) + ('' if active in ('bewerten', '404') + LEGAL.PAGES else value_bar(active)) + '</body></html>')
 
 
 def hero_images(meta):
@@ -558,6 +561,11 @@ def founder_video():
             '</section>')
 
 
+def legal_page(name):
+    html, meta = LEGAL.body(name)
+    return shell(name, meta, html + contact(), path=name + '/')
+
+
 def ueber():
     body = sub_hero('ueber-grenford', 'Über GRENFORD', '', 'Entscheiden mit <em>vollständigem Bild</em>',
                     'Investment, Property und Projects aus einer Hand: für Investoren, Eigentümer, Käufer und Bauherren, mit einem Ansprechpartner vom ersten Gespräch bis zum Abschluss.',
@@ -684,6 +692,7 @@ def copy_static(out):
     shutil.copy(STATIC / 'js' / 'wizard.js', out / 'wizard.js')
     shutil.copy(STATIC / 'js' / 'market.js', out / 'market.js')
     shutil.copy(STATIC / 'js' / 'calc.js', out / 'calc.js')
+    shutil.copy(STATIC / 'js' / 'consent.js', out / 'consent.js')
     css = '\n'.join(f'/* ---- {name} ---- */\n' + (STATIC / 'css' / name).read_text(encoding='utf-8') for name in CSS_ORDER)
     # site.css liegt im Wurzelordner: absolute /assets/-Pfade werden relativ, damit dist/ überall läuft.
     (out / 'site.css').write_text(css.replace("url('/assets/", "url('assets/"), encoding='utf-8')
@@ -709,6 +718,7 @@ def responsive_variants(out):
 
 def seo_files(out):
     urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + (['markt'] if MARKET_LIVE else []) + (['ratgeber'] if RG.published() else [])] + [absolute(RG.article_path(a) + '/') for a in RG.published() if not (MARKET_LIVE and RG.article_path(a) == 'markt')]
+    urls += [absolute(n + '/') for n in LEGAL.PAGES]  # Impressum, Datenschutz, Bildnachweise
     base = absolute()
     urls += [base + 'en/' + u[len(base):] for u in urls if u[len(base):].split('/')[0] in paths.EN_KEYS or u == base]  # englische Fassung
     (out / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -725,6 +735,7 @@ def main():
     CALC.SHOW = args.preview or CALC.STATUS == 'freigegeben'
     if args.preview:
         SITE['formEndpoint'] = ''  # Vorschau: keine Übermittlung ins CRM
+        SITE['gaId'] = ''  # Vorschau: Google Analytics wird nie geladen
         global PREVIEW_HEAD
         PREVIEW_HEAD = ('<script>try{var f=localStorage.getItem("gf-palette");if(f)document.documentElement.dataset.palette=f}catch(e){}</script>'
                         f'<link rel="stylesheet" href="{{root}}palette.css"><script defer src="{{root}}palette.js"></script>')
@@ -743,6 +754,8 @@ def main():
     pages['bewerten/index.html'] = (1, bewerten)
     pages['ueber-grenford/index.html'] = (1, ueber)
     pages['ratgeber/index.html'] = (1, ratgeber)
+    for name in LEGAL.PAGES:
+        pages[f'{name}/index.html'] = (1, lambda name=name: legal_page(name))
     for a in RG.visible():  # Entwürfe nur in der Vorschau; /markt/ als Beitrag nur, solange die Datenseite (market.py) aus ist
         p = RG.article_path(a)
         if p == 'markt' and MARKET_LIVE:

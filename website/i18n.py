@@ -69,9 +69,9 @@ def page(doc, where):
     doc = _META.sub(lambda m: m.group(1) + html.escape(tr(html.unescape(m.group(2)), where), quote=True) + m.group(3), doc)
     doc = re.sub(r'(<title>)(.*?)(</title>)', lambda m: m.group(1) + html.escape(tr(html.unescape(m.group(2)), where), quote=False) + m.group(3), doc)
 
-    parts = re.split(r'(<script\b.*?</script>|<style\b.*?</style>|<[^>]+>)', doc, flags=re.S)
+    parts = re.split(r'(<!--i18n:off-->.*?<!--i18n:on-->|<script\b.*?</script>|<style\b.*?</style>|<[^>]+>)', doc, flags=re.S)
     for i, part in enumerate(parts):
-        if not part:
+        if not part or part.startswith('<!--i18n:off-->'):  # gesperrter Bereich (z. B. übernommene Rechtstexte)
             continue
         if part.startswith('<'):
             if part.startswith('<script') or part.startswith('<style'):

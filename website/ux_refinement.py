@@ -102,7 +102,7 @@ def inquiry(k):
             '<label>Unternehmen (optional)<input name="Unternehmen" id="inquiry-company" autocomplete="organization" maxlength="180"></label></div></fieldset>'
             '<fieldset data-inquiry-step="6" hidden><legend tabindex="-1">Prüfen und absenden</legend><p>Bitte prüfen Sie Ihre Angaben. Über „Zurück“ können Sie alles bearbeiten.</p>'
             '<dl id="inquiry-review"></dl><label>Bevorzugter Kontakt (optional)<select name="Kontaktweg" id="inquiry-channel"><option>E-Mail</option><option>Telefon, sofern angegeben</option><option>Videogespräch abstimmen</option></select></label>'
-            f'<p class="ux-privacy">Ihre Angaben dienen der Bearbeitung Ihrer Anfrage. Das Erstgespräch ist kostenfrei; ein Mandat wird gesondert vereinbart. <a href="{E(SITE["privacy"])}" target="_blank" rel="noopener">Datenschutz</a></p></fieldset>'
+            f'<p class="ux-privacy">Ihre Angaben dienen der Bearbeitung Ihrer Anfrage. Das Erstgespräch ist kostenfrei; ein Mandat wird gesondert vereinbart. <a href="{page("privacy")}">Datenschutz</a></p></fieldset>'
             + _spam_trap() +
             '<p class="ux-form-error" id="inquiry-error" role="alert"></p>'
             '<div class="inquiry-actions"><button type="button" class="text-button" id="inquiry-back" hidden>← Zurück</button><button type="submit" class="button" id="inquiry-next">Weiter →</button></div>'
@@ -155,7 +155,7 @@ def contact(subject=None, company=False, lead=None):
             f'<label>Betreff<select name="subject" id="contact-subject">{options}</select></label>' + firm +
             '<label class="ux-full">Nachricht *<textarea name="message" id="contact-message" required rows="5" maxlength="4000"></textarea></label></div>'
             + _spam_trap() +
-            f'<p class="ux-privacy">Ihre Daten werden vertraulich zur Bearbeitung Ihrer Anfrage verarbeitet. <a href="{E(SITE["privacy"])}" target="_blank" rel="noopener">Datenschutz</a></p>'
+            f'<p class="ux-privacy">Ihre Daten werden vertraulich zur Bearbeitung Ihrer Anfrage verarbeitet. <a href="{page("privacy")}">Datenschutz</a></p>'
             '<p class="ux-form-error" id="contact-error" role="alert"></p><button class="button" type="submit">Nachricht senden ↗</button>'
             '<div id="contact-result" role="status" tabindex="-1"></div>' + _noscript() + '</form>')
     mail = E(SITE['email'])

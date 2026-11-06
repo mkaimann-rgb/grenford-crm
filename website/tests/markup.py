@@ -82,7 +82,7 @@ for page in pages:
     if 'id="strategic-form"' in s:
         assert s.count('data-inquiry-step=') == 6
     else:
-        assert page.parent.name in ('bewerten', 'ueber-grenford', 'markt', 'ratgeber'), (page, 'Projektanfrage fehlt')
+        assert page.parent.name in ('bewerten', 'ueber-grenford', 'markt', 'ratgeber', 'imprint', 'privacy', 'photo-credits'), (page, 'Projektanfrage fehlt')
     # Bewertung/Suchprofile: jedes Formular hat Schritte, einen Kontaktschritt mit Einwilligung und eine Ergebniszone
     for wid in re.findall(r'<form class="wizard" id="wz-([a-z-]+)"', s):
         block = s.split(f'id="wz-{wid}"', 1)[1].split('</form>', 1)[0]
@@ -94,7 +94,7 @@ for page in pages:
         assert 'data-mk-empty' in s and 'id="marktueberblick"' in s, (page, 'Marktüberblick oder Leerzustand fehlt')
         assert cards == 0 or (s.count('class="mk-type ') >= cards + 2 and s.count('geprüft am') == cards), (page, 'Kennzahl ohne Datentyp/Quelle')
         assert s.count('<label class="mk-filter"') == 4, (page, 'Filter ohne Label')
-    elif page.parent.name not in ('ratgeber', 'ueber-grenford'):  # Über: Prozess steht auf Start- und Bereichsseiten
+    elif page.parent.name not in ('ratgeber', 'ueber-grenford', 'imprint', 'privacy', 'photo-credits'):  # Über: Prozess steht auf Start- und Bereichsseiten
         assert 'id="ablauf"' in s, (page, 'Ablauf fehlt')
     if page.parent.name == 'ratgeber':
         # Ratgeber: ohne Beiträge ausgeblendet (noindex), mit Beiträgen kanonisch und in der Sitemap

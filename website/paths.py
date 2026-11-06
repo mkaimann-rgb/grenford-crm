@@ -17,7 +17,7 @@ missing = set()        # Bilder, die in static/assets fehlen
 used = set()           # Bilder, die tatsächlich eingebunden werden
 skipped_heroes = set() # Hero-Originale, die in static/assets fehlen
 lang = 'de'            # 'en' beim Bau der englischen Fassung unter en/
-EN_KEYS = {'home', 'investment', 'property', 'projects', 'bewerten', 'ueber-grenford', 'ratgeber', 'markt'}  # Seiten (und Unterseiten) mit englischer Fassung
+EN_KEYS = {'home', 'investment', 'property', 'projects', 'bewerten', 'ueber-grenford', 'ratgeber', 'markt', 'imprint', 'privacy', 'photo-credits'}  # Seiten (und Unterseiten) mit englischer Fassung
 
 
 def set_page(depth):
