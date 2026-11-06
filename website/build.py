@@ -204,7 +204,7 @@ def shell(active, meta, body, ld=(), path=None, noindex=False):
             f'<meta name="grenford-ga" content="{E(SITE.get("gaId", ""))}"><meta name="grenford-imprint" content="{page("imprint")}"><meta name="grenford-privacy" content="{page("privacy")}">'
             f'<link rel="icon" type="image/png" sizes="32x32" href="{asset("favicon-32.png")}"><link rel="icon" type="image/png" sizes="192x192" href="{asset("favicon-192.png")}">'
             f'<link rel="apple-touch-icon" href="{asset("apple-touch-icon.png")}">{fonts}'
-            f'<link rel="stylesheet" href="{root("site.css")}">{alternates}<script defer src="{js("app.js")}"></script><script defer src="{js("ux.js")}"></script><script defer src="{js("wizard.js")}"></script><script defer src="{root("consent.js")}"></script>{f'<script defer src="{js("market.js")}"></script>' if active == 'markt' else ''}{f'<script defer src="{js("calc.js")}"></script>' if active == 'bewerten' and CALC.SHOW else ''}{PREVIEW_HEAD.replace("{root}", root(""))}'
+            f'<link rel="stylesheet" href="{root("site.css")}">{alternates}<script defer src="{js("app.js")}"></script><script defer src="{js("ux.js")}"></script><script defer src="{js("wizard.js")}"></script><script defer src="{root("consent.js")}"></script>{f'<script defer src="{js("market.js")}"></script>' if active == 'markt' else ''}{f'<script defer src="{js("calc.js")}"></script>' if active == 'bewerten' and CALC.SHOW else ''}'
             + (structured_data() if active == 'home' else '') + ''.join(ld_json(x) for x in ld) +
             f'</head><body class="page-{active}"><a class="skip" href="#main">Zum Inhalt</a>' + header(active).replace('</header>', switch + '</header>') +
             '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail(active) + ('' if active in ('bewerten', '404') + LEGAL.PAGES else value_bar(active)) + '</body></html>')
@@ -682,7 +682,6 @@ def invest_services(focus):
 # ---------------------------------------------------------------- Ausgabe
 
 # Nur im Vorschau-Build: Farbumschalter zum Vergleich der Akzentfarben (static/preview/).
-PREVIEW_HEAD = ''
 
 
 def copy_static(out):
@@ -736,17 +735,11 @@ def main():
     if args.preview:
         SITE['formEndpoint'] = ''  # Vorschau: keine Übermittlung ins CRM
         SITE['gaId'] = ''  # Vorschau: Google Analytics wird nie geladen
-        global PREVIEW_HEAD
-        PREVIEW_HEAD = ('<script>try{var f=localStorage.getItem("gf-palette");if(f)document.documentElement.dataset.palette=f}catch(e){}</script>'
-                        f'<link rel="stylesheet" href="{{root}}palette.css"><script defer src="{{root}}palette.js"></script>')
     out = ROOT / ('preview' if args.preview else 'dist')
     if out.exists():
         shutil.rmtree(out)
     out.mkdir()
     copy_static(out)
-    if args.preview:
-        for name in ('palette.css', 'palette.js'):
-            shutil.copy(STATIC / 'preview' / name, out / name)
 
     pages = {'index.html': (0, home)}
     for k in D:

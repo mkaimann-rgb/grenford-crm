@@ -85,8 +85,7 @@ Typografie, Hero-Karussell, Collection-Karussell und Gestaltung der bestehenden 
 ## Akzentfarbe und Markenstimme
 
 - **Akzentfarbe Patina `#2e6b62`** (oxidiertes Kupfer, wie auf Berliner Kuppeln). Ersetzt das bisherige Orange `#ff7900`, das im Farbton identisch mit einem Wettbewerber war. Werte am Ende von `static/css/refinements.css`; die Variablennamen `--orange*` sind aus Kompatibilitätsgründen geblieben. Schrift auf der Farbfläche ist weiß (`--on-orange`).
-- Nur im Vorschau-Build (`--preview`): Farbumschalter (`static/preview/palette.css`, `palette.js`) mit Patina, Memo-CI (Navy/Bronze wie in den PDFs), Bauhaus-Rot, Kobalt, Ocker, Cognac, Terrakotta und dem bisherigen Orange. `dist/` bleibt davon unberührt.
-- **Markenstimme:** Leistungen und Abläufe sprechen als „GRENFORD“, Gründerporträt und Bestätigungsmeldungen bleiben in der Ich-Form von Marco Kaimann.
+- **Markenstimme:** Alle Texte sprechen als „GRENFORD“ (Unternehmen), Marco Kaimann wird in der dritten Person genannt; keine Ich-Form.
 - **Reichweite im Startseiten-Hero:** `site.json` → `home.reach` (Städte in Reihenfolge der Galerie) und `home.reachNote`. Die gerade gezeigte Stadt wird hervorgehoben (`static/js/app.js`).
 
 ## Was gegenüber dem bisherigen Stand geändert wurde
