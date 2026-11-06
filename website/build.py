@@ -650,10 +650,13 @@ INVEST_SERVICES = [
     ('Objekt- und Transaktionsanalyse', 'Was ist das Objekt wert, und für wen ist es interessant?',
      'Mieten, Leerstand, Bewirtschaftungskosten, Zustand und Lage ergeben zusammen den Wert, den ein Investor tatsächlich zahlt. '
      'GRENFORD rechnet das Objekt so, wie ein Käufer es rechnen würde, und zeigt, wo Reserven liegen: Mietanpassungen, Ausbau, Aufteilung oder eine andere Nutzung. '
-     'Das Ergebnis steht im Investment Memo und ist die Grundlage für Preis und Käuferkreis.'),
+     'Das Ergebnis steht im Investment Memo und ist die Grundlage für Preis und Käuferkreis. Hat das Objekt Investitionsbedarf, liefert das Renovation Memo '
+     'den Capex aus Originalangeboten von Baufirmen statt aus Pauschalwerten.'),
     ('Grundstücks- und Projektanalyse', 'Was darf gebaut werden, und rechnet sich das?',
      'Bei Grundstücken und Projektentwicklungen beginnt der Wert beim Planungsrecht. Gemeinsam mit Architekten und Gutachtern aus dem Partnernetz '
-     'prüft GRENFORD mögliche Nutzung, Baumasse und eine erste Kosten- und Erlösrechnung. So wissen Sie, mit welchen Argumenten Sie in Gespräche mit Bauträgern gehen.'),
+     'prüft GRENFORD mögliche Nutzung, Baumasse und eine erste Kosten- und Erlösrechnung. So wissen Sie, mit welchen Argumenten Sie in Gespräche mit Bauträgern gehen. '
+     'Für Investoren begleitet GRENFORD auch Forward Deals, also den Ankauf einer Projektentwicklung vor Fertigstellung: mit Prüfung von Baufortschritt, '
+     'Zahlungsplan und Sicherheiten, auf Wunsch mit Finanzierungspartnern und Baufirmen aus dem GRENFORD-Netzwerk.'),
     ('Diskrete Vermarktung', 'Verkaufen, ohne dass der Markt davon erfährt',
      'Ihr Objekt erscheint auf keinem Portal. Ausgewählte Investoren, Family Offices und Bauträger erhalten zuerst einen anonymen Steckbrief. '
      'Adresse, Mieterliste und Unterlagen gibt es erst nach einer Vertraulichkeitsvereinbarung und nach Ihrer Freigabe, über einen geordneten Datenraum.'),

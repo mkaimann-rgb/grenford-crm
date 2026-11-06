@@ -215,7 +215,7 @@ WIZARDS = {
             step('Das Volumen', 'Welche Ticketgröße passt?',
                  fields('Volumen', [('VolumenVon', 'Ab (Mio. €)', 'number', False, '', 2), ('VolumenBis', 'Bis (Mio. €)', 'number', True, '', 2)]), aside='finanz'),
             step('Die Strategie', 'Welches Risikoprofil? Mehrfachauswahl möglich.',
-                 chips('Strategie', ['Core', 'Core+', 'Value-Add', 'Opportunistic', 'Projektentwicklung'], multi=True),
+                 chips('Strategie', ['Core', 'Core+', 'Value-Add', 'Opportunistic', 'Projektentwicklung', 'Forward Deal'], multi=True),
                  fields('Ziel', [('Zielrendite', 'Zielrendite oder Faktor (optional)', 'text', False, '', 4)])),
             step('Die Regionen', 'Wo investieren Sie? Mehrfachauswahl möglich.',
                  chips('Regionen', ['Berlin', 'Potsdam / Umland', 'Top-7-Städte', 'B-Städte', 'Süddeutschland / Bodensee', 'Bundesweit'], multi=True)),
