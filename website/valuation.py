@@ -7,7 +7,7 @@ Fünf Varianten, je Bereich angepasst:
     investment-value   Investment · Asset einordnen (B2B)
     investment-search  Investment · Ankaufsprofil (B2B)
 
-Übertragung wie alle Formulare über sendRequest() aus ux.js an das bestehende HubSpot-Formular
+Übertragung wie alle Formulare über sendRequest() aus ux.js an die Google-Apps-Script-Web-App (CRM-Sheet, site.json formEndpoint)
 (subject: investment / property / renovation). Kein Versand vor ausdrücklichem Absenden.
 """
 import html
