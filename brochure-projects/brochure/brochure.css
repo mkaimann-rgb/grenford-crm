@@ -1,0 +1,120 @@
+/* GRENFORD Projects · Broschüre A4 hoch (210 × 297 mm), 8 Seiten
+   Basis: ../design/tokens.css. Druck: Chromium/Playwright → PDF (siehe render.mjs). */
+@import url("../design/tokens.css");
+
+@page { size: 210mm 297mm; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: var(--font-sans); font-size: 10.5pt; line-height: 1.65; color: var(--gf-muted); background: #d9d4cc;
+       -webkit-print-color-adjust: exact; print-color-adjust: exact; font-kerning: normal; }
+@media print { body { background: none; } }
+
+/* ---------- Seite ---------- */
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; background: var(--gf-paper);
+        padding: 22mm 20mm 20mm; margin: 10mm auto; page-break-after: always; break-after: page; display: flex; flex-direction: column; }
+.page:last-child { page-break-after: auto; break-after: auto; }
+@media print { .page { margin: 0; } }
+.page--dark { background: var(--gf-ink); color: rgba(250, 246, 242, .82); }
+.page--dark h1, .page--dark h2, .page--dark h3, .page--dark strong { color: var(--gf-paper); }
+.page--ivory { background: var(--gf-ivory); }
+
+/* Kopf- und Fußzeile jeder Innenseite */
+.folio { position: absolute; left: 20mm; right: 20mm; bottom: 10mm; display: flex; justify-content: space-between; align-items: center;
+         font-size: 7.5pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--gf-muted); }
+.page--dark .folio { color: rgba(250, 246, 242, .6); }
+.folio b { font-weight: 500; color: var(--pj-orange-ink); }
+.page--dark .folio b { color: var(--pj-orange-light); }
+
+/* ---------- Typografie ---------- */
+h1, h2, h3, h4 { font-family: var(--font-sans); font-weight: 500; color: var(--gf-ink); margin: 0; }
+h1 { font-size: 46pt; line-height: 1.0; letter-spacing: var(--track-display); }
+h2 { font-size: 26pt; line-height: 1.08; letter-spacing: -0.05em; }
+h3 { font-size: 13.5pt; line-height: 1.25; letter-spacing: var(--track-title); }
+h4 { font-size: 11pt; line-height: 1.3; letter-spacing: -0.01em; }
+p { margin: 0 0 3mm; }
+.lead { font-size: 12.5pt; line-height: 1.55; color: var(--gf-ink); max-width: 135mm; }
+.page--dark .lead { color: rgba(250, 246, 242, .9); }
+.eyebrow { font-size: 7.5pt; font-weight: 500; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--pj-orange-ink); margin: 0 0 4mm; }
+.page--dark .eyebrow { color: var(--pj-orange-light); }
+.serif { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.005em; }
+.small { font-size: 8.5pt; line-height: 1.55; }
+.note { font-size: 8pt; line-height: 1.5; color: var(--gf-muted); border-top: var(--rule-thin); padding-top: 3mm; margin-top: auto; }
+.page--dark .note { color: rgba(250, 246, 242, .62); border-top-color: rgba(250, 246, 242, .2); }
+.accent-bar { width: 18mm; height: 2.2mm; background: var(--pj-orange); margin: 0 0 7mm; }
+
+/* ---------- 1 Titel ---------- */
+.cover { padding: 0; }
+.cover-image { height: 168mm; background: center / cover no-repeat; position: relative; }
+.cover-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(58,61,65,.0) 45%, rgba(58,61,65,.85) 100%); }
+.cover-logo { position: absolute; top: 14mm; left: 20mm; width: 52mm; z-index: 2; }
+.cover-body { padding: 12mm 20mm 0; flex: 1; display: flex; flex-direction: column; }
+.cover h1 { color: var(--gf-paper); font-size: 40pt; max-width: 165mm; }
+.cover h1 em { font-style: normal; color: var(--pj-orange-light); }
+.cover .lead { margin-top: 6mm; }
+.cover-foot { margin-top: auto; padding-bottom: 14mm; display: flex; justify-content: space-between; align-items: flex-end;
+              font-size: 8pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: rgba(250,246,242,.65); }
+.cover-foot strong { color: var(--pj-orange-light); font-weight: 500; }
+
+/* ---------- Spalten, Karten ---------- */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
+.grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm 8mm; }
+.card { background: var(--gf-white); border-top: var(--rule-accent); border-radius: var(--radius-card); padding: 6mm 6mm 6.5mm; }
+.card p { margin: 2mm 0 0; font-size: 9.5pt; }
+.page--dark .card { background: rgba(250,246,242,.06); border-top-color: var(--pj-orange); }
+.page--dark .card p { color: rgba(250,246,242,.78); }
+.chips { display: flex; flex-wrap: wrap; gap: 2.2mm; margin-top: 4mm; }
+.chip { border: 1px solid var(--pj-orange); color: var(--gf-ink); border-radius: var(--radius-pill); padding: 1.4mm 4mm; font-size: 8.5pt; font-weight: 500; background: var(--pj-orange-tint); }
+.figure { border-radius: var(--radius-soft); overflow: hidden; background: center / cover no-repeat; }
+.caption { font-size: 7.5pt; letter-spacing: .02em; color: var(--gf-muted); margin-top: 2mm; }
+
+/* ---------- Vergütung ---------- */
+.fee-answer { font-family: var(--font-serif); font-size: 34pt; line-height: 1.05; color: var(--pj-orange-light); margin: 2mm 0 7mm; max-width: 150mm; }
+.fee-num { display: inline-grid; place-items: center; width: 9mm; height: 9mm; border-radius: 50%; background: var(--pj-orange); color: var(--pj-on-orange);
+           font-weight: 500; font-size: 9pt; margin-bottom: 3mm; }
+
+/* ---------- Vorher / Nachher ---------- */
+.ba { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin: 6mm 0 5mm; }
+.ba .figure { height: 92mm; position: relative; }
+.tag { position: absolute; left: 3mm; top: 3mm; background: var(--gf-ink); color: var(--gf-paper); border-radius: var(--radius-pill);
+       font-size: 7pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; padding: 1.2mm 3mm; }
+.tag--after { background: var(--pj-orange); color: var(--pj-on-orange); }
+.ba-details { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6mm; border-top: var(--rule-thin); padding-top: 5mm; }
+.ba-details small { display: block; font-size: 7pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--pj-orange-ink); margin-bottom: 1.5mm; }
+.ba-details p { font-size: 9pt; margin: 1.5mm 0 0; }
+.result-time { font-size: 20pt; font-weight: 500; letter-spacing: -0.04em; color: var(--gf-ink); line-height: 1.1; }
+
+/* ---------- Renovation Memo ---------- */
+.memo-wrap { display: grid; grid-template-columns: 74mm 1fr; gap: 12mm; align-items: start; margin-top: 8mm; }
+.memo-paper { background: var(--pj-orange); color: var(--pj-on-orange); aspect-ratio: 1 / 1.414; padding: 7mm 7mm 6mm; display: flex; flex-direction: column;
+              box-shadow: 0 6mm 14mm rgba(58,61,65,.22); }
+.memo-paper img { width: 30mm; }
+.memo-paper .kicker { margin-top: 10mm; font-size: 6.5pt; letter-spacing: .14em; text-transform: uppercase; }
+.memo-paper .t { font-size: 24pt; font-weight: 500; letter-spacing: -0.05em; line-height: .98; margin-top: 2mm; color: var(--pj-on-orange); }
+.memo-paper .s { font-size: 8pt; margin-top: 3mm; }
+.memo-paper .conf { margin-top: auto; font-size: 6.5pt; letter-spacing: .14em; text-transform: uppercase; border-top: 1px solid rgba(28,29,32,.35); padding-top: 2mm; }
+.chapters { list-style: none; margin: 0; padding: 0; counter-reset: c; }
+.chapters li { border-top: var(--rule-thin); padding: 4.5mm 0 4mm 14mm; position: relative; counter-increment: c; }
+.chapters li::before { content: counter(c, decimal-leading-zero); position: absolute; left: 0; top: 4.6mm; font-size: 10pt; font-weight: 500; color: var(--pj-orange-ink); }
+.chapters p { margin: 1.5mm 0 0; font-size: 9.5pt; }
+
+/* ---------- 5-Point Process ---------- */
+.process { list-style: none; margin: 8mm 0 0; padding: 0; position: relative; }
+.process::before { content: ""; position: absolute; left: 6mm; top: 6mm; bottom: 14mm; width: 1px; background: var(--gf-line); }
+.process li { display: grid; grid-template-columns: 12mm 1fr 52mm; gap: 6mm; padding: 0 0 7mm; position: relative; align-items: start; }
+.process .n { width: 12mm; height: 12mm; border-radius: 50%; background: var(--gf-white); border: 1px solid var(--gf-line); display: grid; place-items: center;
+              font-size: 9pt; font-weight: 500; color: var(--gf-ink); position: relative; z-index: 1; }
+.process li:last-child .n { background: var(--pj-orange); border-color: var(--pj-orange); color: var(--pj-on-orange); }
+.process p { margin: 1.5mm 0 0; font-size: 9.5pt; }
+.process .gets { background: var(--gf-white); border-radius: var(--radius-card); border-top: 2px solid var(--pj-orange); padding: 3mm 4mm; font-size: 8.5pt; color: var(--gf-ink); }
+.process .gets small { display: block; font-size: 6.5pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--pj-orange-ink); }
+
+/* ---------- Rückseite ---------- */
+.faq h4 { color: var(--gf-paper); margin-top: 5mm; }
+.faq p { font-size: 9.5pt; margin-top: 1.5mm; }
+.contact-block { display: grid; grid-template-columns: 34mm 1fr; gap: 7mm; align-items: center; margin-top: 10mm; padding: 6mm; background: rgba(250,246,242,.06); border-radius: var(--radius-soft); }
+.portrait { width: 34mm; height: 38mm; border-radius: 17mm 17mm 4mm 4mm; background: center 20% / cover no-repeat; }
+.contact-block strong { color: var(--gf-paper); font-weight: 500; font-size: 12pt; }
+.contact-lines { font-size: 9.5pt; line-height: 1.7; margin-top: 2mm; }
+.contact-lines b { color: var(--pj-orange-light); font-weight: 500; }
+.cta { display: inline-block; margin-top: 4mm; background: var(--pj-orange); color: var(--pj-on-orange); border-radius: var(--radius-pill); padding: 2.6mm 7mm; font-weight: 500; font-size: 9.5pt; text-decoration: none; }
+.back-logo { width: 46mm; margin-top: auto; }

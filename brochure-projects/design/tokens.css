@@ -1,0 +1,45 @@
+/* GRENFORD Projects · Design-Tokens
+   Werte 1:1 aus der neuen GRENFORD-Website (berechnete Werte der Projects-Seite, Stand 11.11.2026).
+   Für Broschüren, Memos und Präsentationen von GRENFORD Projects. */
+
+@font-face { font-family: "DM Sans"; src: url("../fonts/dm-sans-400.woff2") format("woff2"), url("../fonts/dm-sans-400.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "DM Sans"; src: url("../fonts/dm-sans-500.woff2") format("woff2"), url("../fonts/dm-sans-500.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+/* Serifen-Akzent: Website nutzt Palatino (Systemschrift). Für PDF/Print die freie, formgleiche TeX Gyre Pagella. */
+@font-face { font-family: "GF Serif"; src: url("../fonts/texgyrepagella-regular.otf") format("opentype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "GF Serif"; src: url("../fonts/texgyrepagella-italic.otf") format("opentype"); font-weight: 400; font-style: italic; }
+
+:root {
+  /* ---------- Grundfarben (Dachmarke GRENFORD, für alle Bereiche gleich) ---------- */
+  --gf-ink:        #3A3D41;  /* Schwarz-Grau: dunkle Flächen, Überschriften, Fließtext */
+  --gf-paper:      #FAF6F2;  /* Papier: heller Seitengrund */
+  --gf-ivory:      #EFE9E1;  /* Elfenbein: zweite helle Fläche, Kästen */
+  --gf-line:       #CFC8BC;  /* Linien, Trenner */
+  --gf-muted:      #5F6470;  /* Grau für Fließtext und Bildunterschriften */
+  --gf-white:      #FFFFFF;
+  --gf-mokka:      #7A6A52;  /* Mokka: Dachmarke GRENFORD (nur für Hinweise auf GRENFORD gesamt) */
+
+  /* ---------- Akzent GRENFORD Projects: Orange ---------- */
+  --pj-orange:       #FF7900;  /* Hauptakzent: Flächen, Balken, Buttons, Memo-Titelblatt  · RGB 255/121/0 · CMYK ca. 0/53/100/0 */
+  --pj-orange-hover: #FF982F;  /* Hover / zweite, hellere Stufe */
+  --pj-orange-ink:   #A84700;  /* Orange als SCHRIFT auf hellem Grund (lesbar, Kontrast ≥ 4,5:1) */
+  --pj-orange-light: #FFAD59;  /* Orange auf DUNKLEM Grund (#3A3D41) */
+  --pj-orange-tint:  #FFEBD8;  /* zarte Hinterlegung */
+  --pj-rust:         #D95F00;  /* dunkleres Orange für Linien/Details */
+  --pj-on-orange:    #1C1D20;  /* Schrift AUF Orange: fast Schwarz, nie Weiß */
+
+  /* ---------- Schrift ---------- */
+  --font-sans:  "DM Sans", Arial, sans-serif;                                  /* alles: Überschriften 500, Text 400 */
+  --font-serif: "GF Serif", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;  /* ruhige Zitat-/Akzentzeilen, Gewicht 400 */
+
+  /* Überschriften: eng gesetzt wie auf der Website */
+  --track-display: -0.065em;   /* große Headlines (H1/H2) */
+  --track-title:   -0.02em;    /* kleine Titel (H3/H4) */
+  --track-eyebrow:  0.08em;    /* Dachzeilen, VERSALIEN klein */
+
+  /* ---------- Form ---------- */
+  --radius-pill: 999px;          /* Buttons/Chips: immer halbrund */
+  --radius-card: 0 0 14px 14px;  /* Karten: oben gerade (mit Akzentlinie), unten gerundet */
+  --radius-soft: 14px;
+  --rule-accent: 3px solid var(--pj-orange);  /* Akzentlinie oben an Karten/Abschnitten */
+  --rule-thin:   1px solid var(--gf-line);
+}
