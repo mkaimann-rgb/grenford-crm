@@ -4,693 +4,325 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GRENFORD Projects – Unternehmensprofil</title>
-<meta name="description" content="GRENFORD Projects™ – persönliche Beratung, vergleichbare Angebote und Begleitung bis zur Fertigstellung. Zweiseitige Unternehmensvorstellung für Bauherren.">
+<meta name="description" content="GRENFORD Projects: Angebote verstehen, Baupartner finden. Zweiseitige Unternehmensvorstellung für Eigentümer vor einer Sanierung.">
 <style>
 /* ============================================================
-   GRENFORD Projects™ · Unternehmensprofil · 2 × DIN A4 hoch
-   Typografie & Farben nach den GRENFORD Renovation Memos
+   GRENFORD Projects · Unternehmensprofil · 2 × DIN A4 hoch
+   Gestaltung nach dem Projects-Brand-Kit (brochure-projects/CLAUDE.md):
+   DM Sans, Serifen-Akzent Pagella, Projects-Orange, Papier/Schwarz-Grau.
    ============================================================ */
-
-@font-face { font-family: "Pagella"; font-weight: 400; font-style: normal; src: url("assets/fonts/tex-gyre-pagella-400.woff2") format("woff2"); }
-@font-face { font-family: "Pagella"; font-weight: 400; font-style: italic; src: url("assets/fonts/tex-gyre-pagella-400italic.woff2") format("woff2"); }
-@font-face { font-family: "Pagella"; font-weight: 700; font-style: normal; src: url("assets/fonts/tex-gyre-pagella-700.woff2") format("woff2"); }
-@font-face { font-family: "InterG"; font-weight: 300; src: url("assets/fonts/Inter-Light.otf") format("opentype"); }
-@font-face { font-family: "InterG"; font-weight: 400; src: url("assets/fonts/Inter-Regular.otf") format("opentype"); }
-@font-face { font-family: "InterG"; font-weight: 500; src: url("assets/fonts/Inter-Medium.otf") format("opentype"); }
-@font-face { font-family: "InterG"; font-weight: 600; src: url("assets/fonts/Inter-SemiBold.otf") format("opentype"); }
+@font-face { font-family: "DM Sans"; src: url("assets/kit/dm-sans-400.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "DM Sans"; src: url("assets/kit/dm-sans-500.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "GF Serif"; src: url("assets/kit/texgyrepagella-regular.otf") format("opentype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "GF Serif"; src: url("assets/kit/texgyrepagella-italic.otf") format("opentype"); font-weight: 400; font-style: italic; }
 
 :root {
-  --navy: #222e41;
-  --navy-2: #2f3c54;
-  --paper: #faf6f2;
-  --white: #ffffff;
-  --ink: #222e41;
-  --text: #3a4356;
-  --muted: #6b7180;
-  --bronze: #8a7556;
-  --bronze-light: #d6cab6;
-  --rule: #cdbfa6;
-  --mist: #b3c0d2;
-  --serif: "Pagella", "TeX Gyre Pagella", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-  --sans: "InterG", "Inter", "Helvetica Neue", Arial, sans-serif;
-  --m: 17mm;                 /* Seitenrand links/rechts */
+  --gf-ink: #3A3D41;  --gf-paper: #FAF6F2;  --gf-ivory: #EFE9E1;  --gf-line: #CFC8BC;
+  --gf-muted: #5F6470; --gf-white: #FFFFFF;
+  --pj-orange: #FF7900; --pj-orange-ink: #A84700; --pj-orange-light: #FFAD59;
+  --pj-orange-tint: #FFEBD8; --pj-on-orange: #1C1D20;
+  --sans: "DM Sans", Arial, sans-serif;
+  --serif: "GF Serif", "Palatino Linotype", Palatino, Georgia, serif;
+  --track-display: -0.055em; --track-title: -0.02em; --track-eyebrow: 0.08em;
+  --radius-pill: 999px; --radius-card: 0 0 14px 14px; --radius-soft: 14px;
+  --m: 16mm;
 }
 
-@page { size: A4 portrait; margin: 0; }
-
+@page { size: 210mm 297mm; margin: 0; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-
-body {
-  background: #d9d6d1;
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: 8.7pt;
-  line-height: 1.5;
-  font-feature-settings: "kern", "liga", "tnum" 0;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  hyphens: manual;
-}
-
+body { background: #d9d4cc; font-family: var(--sans); font-size: 8.9pt; line-height: 1.55; color: var(--gf-muted); font-kerning: normal; }
 a { color: inherit; text-decoration: none; }
 
-/* ---------- Seite ---------- */
-.page {
-  position: relative;
-  width: 210mm;
-  height: 297mm;
-  margin: 10mm auto;
-  background: var(--paper);
-  overflow: hidden;
-  box-shadow: 0 2mm 8mm rgba(20, 28, 42, .18);
-  break-after: page;
-  page-break-after: always;
-  break-inside: avoid;
-}
+.page { position: relative; width: 210mm; height: 297mm; margin: 10mm auto; background: var(--gf-paper); overflow: hidden;
+        box-shadow: 0 2mm 8mm rgba(58,61,65,.18); break-after: page; page-break-after: always; }
 .page:last-child { break-after: auto; page-break-after: auto; }
+@media print { body { background: none; } .page { margin: 0; box-shadow: none; } }
+@media screen and (max-width: 230mm) { body { zoom: calc(100vw / 220mm); } }
 
-@media print {
-  body { background: none; }
-  .page { margin: 0; box-shadow: none; }
-}
+h1, h2, h3, h4 { font-family: var(--sans); font-weight: 500; color: var(--gf-ink); }
+h2 { font-size: 20pt; line-height: 1.06; letter-spacing: -0.045em; }
+h3 { font-size: 11.5pt; line-height: 1.22; letter-spacing: var(--track-title); }
+.eyebrow { font-size: 6.9pt; font-weight: 500; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--pj-orange-ink); line-height: 1.3; }
+.bar { width: 12mm; height: 1.5mm; background: var(--pj-orange); margin: 2mm 0 3mm; }
+.serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.005em; }
+.lead { font-size: 10pt; line-height: 1.5; color: var(--gf-ink); }
 
-@media screen and (max-width: 230mm) {
-  body { zoom: calc(100vw / 220mm); }
-}
+.folio { position: absolute; left: var(--m); right: var(--m); bottom: 7.5mm; display: flex; justify-content: space-between;
+         font-size: 6.6pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--gf-muted); }
+.folio b { font-weight: 500; color: var(--pj-orange-ink); }
 
-/* ---------- Typo-Bausteine ---------- */
-.eyebrow {
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: 6.6pt;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--bronze);
-  line-height: 1.3;
-}
-.serif { font-family: var(--serif); }
-h1, h2, h3 { font-family: var(--serif); font-weight: 400; color: var(--ink); letter-spacing: -.005em; }
-h2 { font-size: 19pt; line-height: 1.12; }
-h3 { font-size: 13.5pt; line-height: 1.18; }
-p + p { margin-top: 2.2mm; }
-.lead { font-size: 10pt; line-height: 1.5; color: var(--ink); }
-.small { font-size: 6.9pt; line-height: 1.45; color: var(--muted); }
-.tm { font-size: .55em; vertical-align: .75em; letter-spacing: 0; margin-left: .05em; font-family: var(--sans); font-weight: 400; }
+/* ================= SEITE 1 ================= */
+.hero { position: relative; height: 106mm; background: var(--gf-ink) url("assets/kit/dachgeschoss-after.webp") center 38% / cover no-repeat; }
+.hero::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(58,61,65,.55) 0%, rgba(58,61,65,0) 26%, rgba(58,61,65,0) 38%, rgba(58,61,65,.88) 74%, var(--gf-ink) 100%); }
+.hero > * { position: absolute; z-index: 1; }
+.hero .logo { left: var(--m); top: 11mm; width: 40mm; }
+.hero .tag { right: var(--m); top: 13mm; font-size: 6.5pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--gf-paper);
+             border: 1px solid rgba(250,246,242,.55); border-radius: var(--radius-pill); padding: 1.1mm 3.4mm; }
+.hero .text { left: var(--m); right: var(--m); bottom: 9mm; }
+.hero .eyebrow { color: var(--pj-orange-light); }
+.hero h1 { color: var(--gf-paper); font-size: 29pt; line-height: 1.0; letter-spacing: var(--track-display); margin-top: 3mm; max-width: 165mm; }
+.hero h1 em { font-style: normal; color: var(--pj-orange-light); }
+.hero .sub { margin-top: 4mm; font-size: 9.6pt; color: rgba(250,246,242,.88); }
+.hero .credit { right: var(--m); bottom: 3mm; font-size: 5.6pt; color: rgba(250,246,242,.55); letter-spacing: .02em; }
 
-/* ---------- Lauf-Kopf & Fuß ---------- */
-.run-foot {
-  position: absolute; left: var(--m); right: var(--m); bottom: 8.5mm;
-  display: flex; justify-content: space-between; align-items: baseline;
-  font-size: 6.2pt; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
-}
-.run-foot .no { font-size: 7.5pt; letter-spacing: .04em; font-weight: 500; }
+.why { padding: 7.5mm var(--m) 0; display: grid; grid-template-columns: 1fr 66mm; gap: 10mm; }
+.why h2 { font-size: 17pt; }
+.why .lead { margin-top: 2.8mm; font-size: 9.1pt; line-height: 1.45; }
+.why p.body { margin-top: 1.8mm; font-size: 8.5pt; line-height: 1.5; }
+.why .claim { margin-top: 2.6mm; font-family: var(--serif); font-size: 10.5pt; line-height: 1.3; color: var(--gf-ink); }
+.questions { background: var(--gf-white); border-top: 3px solid var(--pj-orange); border-radius: var(--radius-card); padding: 3.6mm 4.4mm 2.6mm; align-self: start; }
+.questions ol { list-style: none; margin-top: 2mm; }
+.questions li { display: grid; grid-template-columns: 5mm 1fr; padding: 1.35mm 0; border-top: 1px solid var(--gf-line); font-size: 8pt; line-height: 1.32; color: var(--gf-ink); }
+.questions li:first-child { border-top: 0; }
+.questions li span { font-weight: 500; color: var(--pj-orange-ink); }
 
-/* =========================================================
-   SEITE 1
-   ========================================================= */
-.p1 { display: flex; flex-direction: column; }
-.hero {
-  position: relative;
-  flex: 0 0 87mm;
-  background: var(--navy);
-  color: #fff;
-  overflow: hidden;
-}
-.hero-plan {
-  position: absolute; right: -3mm; top: 15mm;
-  width: 96mm; height: 91mm;
-}
-.hero-plan::after { /* sanfter Verlauf zur Textseite */
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(90deg, var(--navy) 0%, rgba(34,46,65,.6) 25%, rgba(34,46,65,0) 55%),
-              linear-gradient(0deg, var(--navy) 0%, rgba(34,46,65,0) 22%);
-}
-.hero-logo { position: absolute; left: var(--m); top: 10mm; width: 31mm; }
-.hero-tag {
-  position: absolute; right: var(--m); top: 8.2mm;
-  color: var(--bronze-light); font-size: 5.8pt;
-}
-.hero-text { position: absolute; left: var(--m); bottom: 10mm; width: 132mm; }
-.hero-text .eyebrow { color: var(--bronze-light); margin-bottom: 3.4mm; }
-.hero h1 {
-  color: #fff;
-  font-size: 26pt;
-  line-height: 1.07;
-  letter-spacing: -.01em;
-}
-.hero .sub {
-  margin-top: 4.4mm;
-  padding-top: 3.2mm;
-  border-top: .3mm solid rgba(214, 202, 182, .55);
-  width: 128mm;
-  font-size: 8.8pt;
-  font-weight: 300;
-  letter-spacing: .01em;
-  color: #e7e3dc;
-}
+.founder { margin: 8mm var(--m) 0; display: grid; grid-template-columns: 46mm 1fr; gap: 8mm; align-items: stretch; }
+.portrait { height: 62mm; border-radius: 23mm 23mm 4mm 4mm; background: #8f8f8f url("assets/marco-kaimann.jpg") center 12% / cover no-repeat; }
+.founder .name { margin-top: 2.2mm; font-size: 7.6pt; line-height: 1.35; color: var(--gf-muted); }
+.founder .name b { display: block; font-weight: 500; color: var(--gf-ink); font-size: 8.4pt; }
+.founder h2 { font-size: 15pt; }
+.founder p { margin-top: 1.8mm; font-size: 8.4pt; line-height: 1.5; }
+.founder .accent { margin-top: 2.6mm; padding-top: 2.2mm; border-top: 1px solid var(--gf-line); font-family: var(--serif); font-size: 11pt; line-height: 1.3; color: var(--gf-ink); }
 
-/* Warum */
-.why {
-  display: grid;
-  grid-template-columns: 1fr 64mm;
-  gap: 10mm;
-  padding: 8.5mm var(--m) 0;
-}
-.why h2 { margin: 1.8mm 0 3mm; font-size: 16.5pt; }
-.why .lead { margin-bottom: 1.8mm; font-size: 9.1pt; line-height: 1.45; }
-.why .claim {
-  margin-top: 3mm;
-  padding-left: 4mm;
-  border-left: .7mm solid var(--bronze);
-  font-family: var(--serif);
-  font-size: 10.2pt;
-  line-height: 1.3;
-  color: var(--ink);
-}
-.questions { padding-top: 0; }
-.questions .eyebrow { margin-bottom: 2.4mm; }
-.questions ol { list-style: none; border-top: .3mm solid var(--rule); }
-.questions li {
-  display: grid; grid-template-columns: 6mm 1fr;
-  padding: 1.9mm 0;
-  border-bottom: .3mm solid var(--rule);
-  font-size: 8.3pt; line-height: 1.36; color: var(--ink);
-}
-.questions li span {
-  font-family: var(--serif); color: var(--bronze); font-size: 10pt; line-height: 1.1;
-}
+.objects { position: absolute; left: var(--m); right: var(--m); bottom: 15mm; display: flex; align-items: center; gap: 1.8mm; flex-wrap: nowrap; }
+.objects .eyebrow { margin-right: 1.5mm; white-space: nowrap; }
+.chip { border: 1px solid var(--pj-orange); background: var(--pj-orange-tint); color: var(--gf-ink); border-radius: var(--radius-pill);
+        padding: .9mm 2.7mm; font-size: 7.3pt; font-weight: 500; white-space: nowrap; line-height: 1.3; }
 
-/* Gründer */
-.founder {
-  margin-top: 7.5mm;
-  display: grid;
-  grid-template-columns: 60mm 1fr;
-  flex: 0 0 83mm;
-}
-.founder-photo {
-  position: relative;
-  height: 100%;
-  overflow: hidden;
-  background: #8f8f8f;
-}
-.founder-photo img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 6%;
-  display: block;
-}
-.founder-photo .cap {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  padding: 8mm 5mm 3.4mm var(--m);
-  background: linear-gradient(0deg, rgba(34,46,65,.75), rgba(34,46,65,0));
-  color: #fff; font-size: 5.8pt; letter-spacing: .14em; text-transform: uppercase;
-}
-.founder-text {
-  padding: 1mm var(--m) 0 9mm;
-  display: flex; flex-direction: column;
-}
-.founder-text h2 { font-size: 15.5pt; margin: 1.8mm 0 3mm; white-space: nowrap; }
-.founder-text .quote { font-size: 8.3pt; line-height: 1.5; color: var(--text); }
-.founder-text .quote p + p { margin-top: 2mm; }
-.founder-text .quote .pledge { font-family: var(--serif); font-style: italic; font-size: 9.9pt; line-height: 1.38; color: var(--ink); }
-.sign {
-  margin-top: auto;
-  display: flex; align-items: flex-end; gap: 6mm;
-}
-.sign img { width: 38mm; display: block; margin-bottom: -.6mm; }
-.sign .who { font-size: 7.4pt; line-height: 1.35; color: var(--muted); padding-bottom: .6mm; }
-.sign .who b { display: block; color: var(--ink); font-weight: 600; font-size: 8.1pt; }
+/* ================= SEITE 2 ================= */
+.p2 .head { display: flex; justify-content: space-between; align-items: center; padding: 9mm var(--m) 0; }
+.p2 .head img { width: 24mm; display: block; }
+.intro { padding: 3.5mm var(--m) 0; display: grid; grid-template-columns: 1fr 64mm; gap: 10mm; align-items: end; }
+.intro h2 { margin-top: 2.2mm; font-size: 19pt; }
+.intro p { font-size: 8.3pt; line-height: 1.45; }
 
-/* Vorhaben */
-.scope {
-  margin: auto var(--m) 15mm;
-  display: grid; grid-template-columns: 27mm repeat(5, 1fr); column-gap: 4mm;
-  align-items: start;
-}
-.scope .eyebrow { padding-top: 2.4mm; border-top: .3mm solid var(--rule); height: 100%; }
-.scope div.item {
-  padding-top: 2mm; border-top: .45mm solid var(--bronze);
-  font-family: var(--serif); font-size: 9.6pt; line-height: 1.2; color: var(--ink);
-}
-.p1 .run-foot { bottom: 7mm; }
+.process { list-style: none; position: relative; margin: 5mm var(--m) 0; }
+.process::before { content: ""; position: absolute; left: 4.5mm; top: 5mm; bottom: 8mm; width: 1px; background: var(--gf-line); }
+.process li { display: grid; grid-template-columns: 9mm 1fr 52mm; column-gap: 6mm; align-items: center; padding: 1.1mm 0; position: relative; }
+.process .n { width: 9mm; height: 9mm; border-radius: 50%; background: var(--gf-white); border: 1px solid var(--gf-line);
+              display: grid; place-items: center; font-size: 7.6pt; font-weight: 500; color: var(--gf-ink); position: relative; z-index: 1; }
+.process li:last-child .n { background: var(--pj-orange); border-color: var(--pj-orange); color: var(--pj-on-orange); }
+.process h3 { font-size: 10.2pt; }
+.process p { margin-top: .3mm; font-size: 8pt; line-height: 1.38; }
+.gets { background: var(--gf-white); border-top: 2px solid var(--pj-orange); border-radius: var(--radius-card); padding: 1.3mm 3mm 1.5mm;
+        font-size: 7.6pt; line-height: 1.28; color: var(--gf-ink); }
+.gets small { display: block; font-size: 5.9pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--pj-orange-ink); }
 
-/* =========================================================
-   SEITE 2
-   ========================================================= */
-.p2 .head {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 8.5mm var(--m) 0;
-}
-.p2 .head img { width: 23mm; display: block; }
+.memo { margin: 5mm var(--m) 0; display: grid; grid-template-columns: 56mm 1fr; gap: 8mm; align-items: center; }
+.memo-art { position: relative; height: 47mm; }
+.sheet { position: absolute; aspect-ratio: 1 / 1.414; box-shadow: 0 1mm 2mm rgba(58,61,65,.12), 0 4mm 9mm rgba(58,61,65,.16); }
+.sheet.cover { left: 0; top: 0; width: 29mm; background: var(--pj-orange); color: var(--pj-on-orange); padding: 3.6mm 3.4mm 3mm; display: flex; flex-direction: column; z-index: 2; }
+.sheet.cover img { width: 13mm; }
+.sheet.cover .k { margin-top: 5mm; font-size: 3.6pt; letter-spacing: .14em; text-transform: uppercase; }
+.sheet.cover .t { margin-top: 1mm; font-size: 10.5pt; font-weight: 500; letter-spacing: -0.05em; line-height: .96; }
+.sheet.cover .s { margin-top: 1.6mm; font-size: 4.4pt; line-height: 1.35; }
+.sheet.cover .c { margin-top: auto; font-size: 3.6pt; letter-spacing: .14em; text-transform: uppercase; border-top: .2mm solid rgba(28,29,32,.35); padding-top: 1mm; }
+.sheet.page2 { left: 21mm; top: 4mm; width: 28mm; background: var(--gf-white); padding: 3.4mm 3mm; z-index: 1; }
+.sheet.page2 .k { font-size: 3.4pt; letter-spacing: .12em; text-transform: uppercase; color: var(--pj-orange-ink); }
+.sheet.page2 .t { margin-top: .8mm; font-size: 6.6pt; font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; color: var(--gf-ink); }
+.sheet.page2 .row { display: grid; grid-template-columns: 3.4mm 1fr; align-items: center; margin-top: 2.6mm; }
+.sheet.page2 .row b { font-size: 6.5pt; font-weight: 500; color: var(--pj-orange-ink); }
+.sheet.page2 .row i { display: block; height: 2.2mm; background: var(--gf-ink); border-radius: 0 1mm 1mm 0; }
+.sheet.page2 .row i.o { background: var(--pj-orange); }
+.sheet.page2 .row i.l { background: var(--gf-line); }
+.sheet.page2 .lines { margin-top: 3mm; }
+.sheet.page2 .lines span { display: block; height: .5mm; background: var(--gf-ivory); margin-top: 1.4mm; }
+.memo-art .caption { position: absolute; left: 0; bottom: 0; width: 20mm; font-size: 5.6pt; line-height: 1.25; color: var(--gf-muted); }
+.memo h2 { font-size: 14pt; margin-top: 1.8mm; }
+.memo p.intro-t { margin-top: 1.6mm; font-size: 8.1pt; line-height: 1.45; }
+.chapters { list-style: none; margin-top: 2.6mm; border-top: 1px solid var(--gf-line); }
+.chapters li { display: grid; grid-template-columns: 7mm 1fr; padding: 1.1mm 0; border-bottom: 1px solid var(--gf-line); font-size: 7.8pt; line-height: 1.32; }
+.chapters li span { font-weight: 500; color: var(--pj-orange-ink); }
+.chapters li b { font-weight: 500; color: var(--gf-ink); }
 
-.intro {
-  display: grid; grid-template-columns: 1fr 68mm; gap: 10mm;
-  align-items: end;
-  padding: 3mm var(--m) 0;
-}
-.intro h2 { font-size: 20pt; line-height: 1.08; margin-top: 2.2mm; }
-.intro p { font-size: 8.3pt; line-height: 1.44; color: var(--text); padding-bottom: .4mm; }
+.fee { margin: 5mm var(--m) 0; background: var(--gf-ivory); border-top: 3px solid var(--pj-orange); border-radius: var(--radius-card);
+       padding: 3.8mm 5mm 4mm; display: grid; grid-template-columns: 52mm 1fr; gap: 7mm; }
+.fee h3 { font-size: 13pt; margin-top: 1.6mm; }
+.fee .answer { font-family: var(--serif); font-size: 16pt; line-height: 1.05; color: var(--pj-orange-ink); margin-top: 1.4mm; }
+.fee .main { font-size: 8.1pt; line-height: 1.48; color: var(--gf-ink); }
+.rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; margin-top: 2.4mm; }
+.rules div { font-size: 7.3pt; line-height: 1.36; }
+.rules .num { display: inline-grid; place-items: center; width: 5.6mm; height: 5.6mm; border-radius: 50%; background: var(--pj-orange); color: var(--pj-on-orange);
+              font-size: 6.6pt; font-weight: 500; margin-bottom: 1.2mm; }
+.fee .feenote { margin-top: 2.4mm; font-size: 6.7pt; line-height: 1.4; }
+.rules b { display: block; font-weight: 500; color: var(--gf-ink); font-size: 8.6pt; letter-spacing: -0.01em; margin-bottom: .4mm; }
 
-/* Prozess */
-.process { padding: 4.6mm var(--m) 0; }
-.steps { border-top: .3mm solid var(--rule); }
-.process-head {
-  display: flex; justify-content: space-between; align-items: baseline;
-  border-bottom: .3mm solid var(--rule); padding-bottom: 1.8mm;
-}
-.process-head .serif { font-size: 11.5pt; color: var(--ink); }
-.process-head .eyebrow { color: var(--muted); font-size: 6pt; }
-.steps { list-style: none; position: relative; }
-.steps::before { /* Prozesslinie */
-  content: ""; position: absolute; left: 3.95mm; top: 6mm; bottom: 9mm;
-  width: .45mm; background: var(--bronze);
-}
-.step {
-  position: relative;
-  display: grid;
-  grid-template-columns: 12.5mm 45mm 1fr;
-  align-items: start;
-  padding: 1.7mm 0 1.6mm;
-  border-bottom: .3mm solid #e6ded0;
-}
-.step:last-child { border-bottom: .3mm solid var(--rule); }
-.dot {
-  position: relative; z-index: 1;
-  width: 8.2mm; height: 8.2mm; border-radius: 50%;
-  background: var(--navy); color: #fff;
-  font-size: 6.6pt; font-weight: 600; letter-spacing: .02em;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 0 0 1mm var(--paper);
-}
-.step:last-child .dot { background: var(--bronze); }
-.step h3 { font-size: 11.4pt; padding: 1.2mm 4mm 0 0; line-height: 1.15; }
-.step .body { padding-top: .5mm; }
-.step .desc { font-size: 8pt; line-height: 1.38; color: var(--text); }
-.step .res { margin-top: .3mm; font-size: 7.7pt; line-height: 1.3; color: var(--ink); }
-.step .res b { font-weight: 600; font-size: 5.9pt; letter-spacing: .14em; text-transform: uppercase; color: var(--bronze); margin-right: 1.6mm; }
-.step .res i { font-family: var(--serif); font-size: 9pt; }
-
-/* Memo */
-.memo {
-  display: grid; grid-template-columns: 66mm 1fr; gap: 9mm;
-  padding: 4.6mm var(--m) 0;
-}
-.memo-visual { position: relative; height: 46mm; }
-.memo-visual .note {
-  position: absolute; left: 0; bottom: 0; width: 100%;
-  font-size: 5.4pt; letter-spacing: .01em; color: var(--muted); line-height: 1.3; white-space: nowrap;
-}
-.memo h3 { font-size: 13.5pt; margin: 1.6mm 0 1.8mm; }
-.memo p { font-size: 8pt; line-height: 1.42; }
-.memo ul {
-  list-style: none; margin-top: 2.2mm;
-  display: grid; grid-template-columns: 1fr 1fr; column-gap: 5mm;
-  border-top: .3mm solid var(--rule);
-}
-.memo li {
-  font-size: 7.2pt; line-height: 1.3; color: var(--ink);
-  padding: .95mm 0 .95mm 3.2mm; border-bottom: .3mm solid #e6ded0; position: relative;
-}
-.memo li::before { content: ""; position: absolute; left: 0; top: 2.35mm; width: 1.3mm; height: .3mm; background: var(--bronze); }
-
-/* Mini-Memo (Abbildung, Beispieldaten) */
-.sheet {
-  position: absolute;
-  width: 160mm; height: 100mm;
-  transform-origin: 0 0;
-  background: var(--paper);
-  box-shadow: 0 .6mm 1.4mm rgba(20,28,42,.16), 0 3mm 7mm rgba(20,28,42,.12);
-  overflow: hidden;
-  font-family: var(--sans);
-  color: var(--ink);
-}
-.sheet.back  { left: 8mm; top: 0; transform: scale(.345); }
-.sheet.front { left: 0; top: 6.3mm; transform: scale(.36); }
-.sheet .s-head { position: absolute; left: 9mm; right: 9mm; top: 6.5mm; display: flex; justify-content: space-between; align-items: center; }
-.sheet .s-head img { width: 15mm; }
-.sheet .s-head span { font-size: 5.6pt; font-weight: 600; letter-spacing: .16em; color: var(--bronze); }
-.sheet .s-left { position: absolute; left: 9mm; top: 20mm; width: 46mm; }
-.sheet .s-left .eyebrow { font-size: 5.2pt; }
-.sheet .s-left h4 { font-family: var(--serif); font-weight: 400; font-size: 21pt; line-height: 1.05; margin: 1.5mm 0 5mm; }
-.sheet .s-left p { font-size: 7.2pt; line-height: 1.45; color: var(--text); }
-.sheet .s-left p.fn { font-size: 5.3pt; color: var(--muted); margin-top: 5mm; }
-.sheet .s-foot { position: absolute; left: 9mm; right: 9mm; bottom: 5.5mm; display: flex; justify-content: space-between; font-size: 4.8pt; letter-spacing: .14em; color: var(--muted); }
-.sheet .stamp {
-  position: absolute; right: 9mm; top: 13mm;
-  font-size: 5.4pt; font-weight: 600; letter-spacing: .16em; color: #b35a3c;
-  border: .35mm solid #b35a3c; padding: .9mm 2mm;
-}
-.sheet table { position: absolute; left: 62mm; width: 89mm; top: 21mm; border-collapse: separate; border-spacing: .7mm; font-size: 6.3pt; }
-.sheet th { font-size: 5pt; letter-spacing: .14em; font-weight: 600; color: var(--bronze); text-align: right; padding: 0 2mm 1mm; }
-.sheet th:first-child { text-align: left; padding-left: 0; }
-.sheet td { padding: 1.85mm 2mm; text-align: right; font-weight: 500; white-space: nowrap; }
-.sheet td:first-child { text-align: left; padding-left: 0; font-weight: 500; }
-.sheet td.l1 { background: #dfe3ea; }
-.sheet td.l2 { background: #9aa2b0; }
-.sheet td.l3 { background: var(--navy); color: #fff; }
-.sheet td.l0 { background: #ebe5da; }
-.sheet tr.sum td { background: var(--navy); color: #fff; font-weight: 600; }
-.sheet tr.sum td:first-child { padding-left: 2mm; }
-.sheet .bars { position: absolute; left: 62mm; right: 9mm; top: 20mm; }
-.sheet .bar-row { display: grid; grid-template-columns: 9mm 1fr; align-items: center; border-top: .3mm solid var(--rule); padding: 3.4mm 0 3mm; }
-.sheet .bar-row b { font-family: var(--serif); font-weight: 400; font-size: 24pt; color: var(--bronze); line-height: 1; }
-.sheet .bar { height: 5.2mm; background: var(--navy); }
-.sheet .bar.light { background: var(--mist); }
-.sheet .bar-row .lbl { font-size: 6.4pt; font-weight: 600; margin-left: 2mm; white-space: nowrap; }
-.sheet .bar-wrap { display: flex; align-items: center; }
-.sheet .bar-row .meta { grid-column: 2; font-size: 5.6pt; color: var(--muted); margin-top: 1.5mm; }
-
-/* Vergütung */
-.fee {
-  margin: 4.4mm var(--m) 0;
-  padding-top: 3.6mm;
-  border-top: .3mm solid var(--rule);
-  display: grid; grid-template-columns: 66mm 1fr; gap: 8mm; align-items: start;
-}
-.fee h3 { font-size: 13.5pt; margin-top: 1.6mm; }
-.fee .legal { margin-top: 2.2mm; font-size: 6.6pt; line-height: 1.45; color: var(--muted); }
-.fee .main { font-size: 8pt; line-height: 1.42; color: var(--ink); }
-.fee .points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; margin-top: 2.4mm; }
-.fee .points div { border-top: .45mm solid var(--bronze); padding-top: 1.4mm; font-size: 7.1pt; line-height: 1.36; color: var(--text); }
-.fee .points b { display: block; font-family: var(--serif); font-weight: 400; font-size: 9.4pt; color: var(--ink); margin-bottom: .4mm; }
-
-/* Kontakt */
-.cta {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 50mm;
-  background: var(--navy); color: #fff;
-  padding: 7mm var(--m) 0;
-  display: grid; grid-template-columns: 1fr 47mm 22mm; gap: 6mm;
-}
-.cta h2 { color: #fff; font-size: 16.5pt; line-height: 1.12; }
-.cta .eyebrow { color: var(--bronze-light); margin-bottom: 2.2mm; }
-.cta p { margin-top: 2.4mm; font-size: 7.9pt; line-height: 1.44; color: #dcdfe5; width: 98mm; }
-.contact { font-size: 7.7pt; line-height: 1.55; color: #e7e9ee; padding-top: .4mm; }
-.contact .name { font-family: var(--serif); font-size: 12pt; color: #fff; line-height: 1.2; }
-.contact .role { font-size: 6.7pt; color: var(--bronze-light); letter-spacing: .02em; margin-bottom: 1.8mm; }
-.contact a { display: block; }
-.contact a:hover { text-decoration: underline; }
-.contact .addr { margin-top: 1.2mm; color: #b9bfcb; }
-.qr { padding-top: .4mm; }
-.qr a { display: block; background: #fff; padding: 1.8mm; width: 22mm; }
+.contact { position: absolute; left: 0; right: 0; bottom: 0; height: 58mm; background: var(--gf-ink); color: rgba(250,246,242,.82);
+           padding: 7.5mm var(--m) 0; display: grid; grid-template-columns: 1fr 50mm 23mm; gap: 7mm; }
+.contact .eyebrow { color: var(--pj-orange-light); }
+.contact h2 { color: var(--gf-paper); font-size: 16pt; margin-top: 2mm; }
+.contact p { margin-top: 2.2mm; font-size: 8pt; line-height: 1.48; }
+.lines a.pill { display: inline-block; color: var(--pj-on-orange); margin-top: 2.6mm; line-height: 1.3; background: var(--pj-orange); color: var(--pj-on-orange); border-radius: var(--radius-pill);
+        padding: 1.8mm 5.4mm; font-weight: 500; font-size: 8.4pt; }
+.lines { font-size: 8.1pt; line-height: 1.62; padding-top: 1mm; }
+.lines .who { color: var(--gf-paper); font-weight: 500; font-size: 10pt; letter-spacing: -0.01em; line-height: 1.25; }
+.lines .role { font-size: 7.4pt; color: rgba(250,246,242,.62); margin-bottom: 2mm; }
+.lines a { display: block; }
+.lines a.tel { color: var(--pj-orange-light); font-weight: 500; }
+.lines .addr { margin-top: 1.4mm; color: rgba(250,246,242,.62); }
+.qr { padding-top: 1mm; }
+.qr a { display: block; width: 23mm; background: var(--gf-paper); padding: 1.8mm; border-radius: 2mm; }
 .qr img { display: block; width: 100%; }
-.qr span { display: block; margin-top: 1.6mm; font-size: 5.6pt; letter-spacing: .12em; text-transform: uppercase; color: var(--bronze-light); line-height: 1.35; }
-.cta .run-foot { color: #9aa3b4; bottom: 5mm; }
-.cta .run-foot .no { color: #fff; }
+.qr span { display: block; margin-top: 1.6mm; font-size: 6pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--pj-orange-light); line-height: 1.35; }
+.contact .note { position: absolute; left: var(--m); right: var(--m); bottom: 13mm; padding-top: 2.4mm; border-top: 1px solid rgba(250,246,242,.2);
+                 font-size: 6.7pt; color: rgba(250,246,242,.6); }
+.contact .folio { color: rgba(250,246,242,.6); }
+.contact .folio b { color: var(--pj-orange-light); }
 </style>
 </head>
 <body>
 
-<!-- =====================================================
-     SEITE 1 · Die Idee hinter GRENFORD Projects
-     ===================================================== -->
+<!-- ============================ SEITE 1 ============================ -->
 <section class="page p1" aria-label="Seite 1">
-
   <header class="hero">
-    <!-- Architekturmotiv: Altbau-Grundriss als Linienzeichnung.
-         Kann durch ein freigegebenes Architekturfoto ersetzt werden
-         (z. B. <img src="assets/hero.jpg"> mit object-fit: cover). -->
-    <div class="hero-plan" aria-hidden="true">
-      <svg viewBox="0 0 120 114" width="100%" height="100%" fill="none" stroke="#c9b99d" stroke-linecap="square">
-        <g stroke-width=".9" opacity=".75">
-          <!-- Außenwände -->
-          <path d="M10 8 H112 V104 H10 Z"/>
-          <path d="M12.2 10.2 H109.8 V101.8 H12.2 Z" stroke-width=".35"/>
-          <!-- Innenwände -->
-          <path d="M52 10.2 V44 M52 52 V70"/>
-          <path d="M12.2 70 H40 M48 70 H76 M84 70 H109.8"/>
-          <path d="M76 70 V101.8"/>
-          <path d="M80 10.2 V30 M80 38 V70"/>
-          <path d="M52 44 H62"/>
-        </g>
-        <g stroke-width=".35" opacity=".7">
-          <!-- Fenster Straßenseite -->
-          <path d="M20 8 V10.2 M30 8 V10.2 M20 9.1 H30"/>
-          <path d="M36 8 V10.2 M46 8 V10.2 M36 9.1 H46"/>
-          <path d="M60 8 V10.2 M72 8 V10.2 M60 9.1 H72"/>
-          <path d="M88 8 V10.2 M98 8 V10.2 M88 9.1 H98"/>
-          <path d="M112 80 H109.8 M112 92 H109.8 M111 80 V92"/>
-          <path d="M10 80 H12.2 M10 92 H12.2 M11 80 V92"/>
-          <!-- Flügeltüren -->
-          <path d="M52 44 A8 8 0 0 1 60 52 M52 52 H60" />
-          <path d="M80 30 A8 8 0 0 0 72 38 M80 38 H72" opacity=".9"/>
-          <path d="M40 70 A8 8 0 0 0 48 78 M48 70 V78" />
-          <path d="M76 70 A8 8 0 0 1 84 78 M84 70 V78" />
-          <!-- Kachelofen & Erker-Andeutung -->
-          <rect x="44" y="12" width="6" height="6"/>
-          <path d="M60 104 V107.5 H72 V104"/>
-          <!-- Dielenrichtung -->
-          <path d="M16 16 H46 M16 22 H46 M16 28 H46 M16 34 H46 M16 40 H46 M16 46 H46 M16 52 H46 M16 58 H46 M16 64 H46" opacity=".35"/>
-          <!-- Treppe -->
-          <path d="M86 76 H106 M86 80 H106 M86 84 H106 M86 88 H106 M86 92 H106 M86 96 H106 M86 76 V98 M106 76 V98" opacity=".7"/>
-          <!-- Bad -->
-          <rect x="16" y="76" width="8" height="18" rx="2.5"/>
-          <circle cx="44" cy="96" r="1.8"/>
-          <rect x="54" y="74" width="16" height="6" rx="1.5"/>
-        </g>
-        <!-- Maßketten -->
-        <g stroke-width=".25" opacity=".55">
-          <path d="M10 3 H112 M10 1.8 V4.2 M52 1.8 V4.2 M80 1.8 V4.2 M112 1.8 V4.2"/>
-          <path d="M116 8 V104 M114.8 8 H117.2 M114.8 70 H117.2 M114.8 104 H117.2"/>
-        </g>
-        <g fill="#c9b99d" stroke="none" font-family="Inter, sans-serif" font-size="2.1" opacity=".65" letter-spacing=".08">
-          <text x="29" y="2.4">4,62</text>
-          <text x="63" y="2.4">3,08</text>
-          <text x="93" y="2.4">3,52</text>
-          <text x="27" y="41" font-size="2.3" letter-spacing=".2">WOHNEN</text>
-          <text x="58" y="30" font-size="2.3" letter-spacing=".2">SALON</text>
-          <text x="89" y="54" font-size="2.3" letter-spacing=".2">SCHLAFEN</text>
-          <text x="54" y="88" font-size="2.3" letter-spacing=".2">KÜCHE</text>
-          <text x="27" y="88" font-size="2.3" letter-spacing=".2">BAD</text>
-        </g>
-      </svg>
-    </div>
-
-    <img class="hero-logo" src="assets/logo-white.png" alt="GRENFORD Projects">
-    <div class="hero-tag eyebrow">Unternehmensprofil</div>
-
-    <div class="hero-text">
-      <div class="eyebrow">GRENFORD Projects · Beratung für Sanierung &amp; Modernisierung</div>
-      <h1>Eine gute Sanierung<br>beginnt mit einer<br>guten Entscheidung.</h1>
+    <img class="logo" src="assets/kit/logo-projects-white.png" alt="GRENFORD Projects">
+    <span class="tag">Für Eigentümer vor einer Sanierung</span>
+    <div class="text">
+      <div class="eyebrow">GRENFORD Projects · Angebote verstehen. Baupartner finden.</div>
+      <h1>Eine gute Sanierung beginnt mit einer <em>guten Entscheidung.</em></h1>
       <p class="sub">Persönliche Beratung. Vergleichbare Angebote. Begleitung bis zur Fertigstellung.</p>
     </div>
+    <span class="credit">Visualisierung auf Grundlage eines realen GRENFORD-Projekts</span>
   </header>
 
   <section class="why">
     <div>
       <div class="eyebrow">Warum GRENFORD Projects?</div>
-      <h2>Drei Angebote sind nicht automatisch drei vergleichbare Leistungen.</h2>
+      <div class="bar"></div>
+      <h2>Warum drei Angebote selten vergleichbar sind</h2>
       <p class="lead">Eine Wohnung modernisieren, ein Haus umbauen, eine Ferienimmobilie sanieren: Für Eigentümer ist das eine bedeutende finanzielle und persönliche Entscheidung.</p>
-      <p>Unterschiedliche Mengen, Materialien, Ausführungsarten und Vertragsbedingungen erschweren die Einordnung. Hier setzt GRENFORD Projects an: Wir bringen Struktur in die Vorbereitung, koordinieren die Angebotseinholung bei geeigneten Bauunternehmen und schaffen eine nachvollziehbare Entscheidungsgrundlage.</p>
-      <p class="claim">Es geht nicht darum, einfach eine Baufirma zu vermitteln – sondern darum, dass Sie die richtige Entscheidung für Ihr Vorhaben treffen.</p>
+      <p class="body">Meist stecken die Unterschiede in Leistungen, Mengen und Ausstattung, nicht im Preis. GRENFORD holt die Angebote auf gemeinsamer Grundlage ein und legt sie Position für Position nebeneinander.</p>
+      <p class="claim">Nicht einfach eine Baufirma vermitteln, sondern die richtige Entscheidung vorbereiten.</p>
     </div>
     <div class="questions">
       <div class="eyebrow">Bevor die Arbeiten beginnen</div>
       <ol>
         <li><span>1</span>Was kostet mein Vorhaben tatsächlich?</li>
         <li><span>2</span>Welches Bauunternehmen passt zu meinen Anforderungen?</li>
-        <li><span>3</span>Sind drei unterschiedliche Angebote überhaupt vergleichbar?</li>
-        <li><span>4</span>Welche Leistungen sind enthalten – und welche fehlen?</li>
+        <li><span>3</span>Sind drei Angebote überhaupt vergleichbar?</li>
+        <li><span>4</span>Welche Leistungen sind enthalten, welche fehlen?</li>
         <li><span>5</span>Wer unterstützt mich bei Abstimmungen und Entscheidungen?</li>
       </ol>
     </div>
   </section>
 
   <section class="founder">
-    <figure class="founder-photo">
-      <img src="assets/marco-kaimann.jpg" alt="Porträt Marco Kaimann, Founder &amp; Strategic Advisor, GRENFORD">
-      <figcaption class="cap">Marco Kaimann · Berlin</figcaption>
-    </figure>
-    <div class="founder-text">
+    <div>
+      <div class="portrait" role="img" aria-label="Porträt Marco Kaimann, Gründer von GRENFORD"></div>
+      <div class="name"><b>Marco Kaimann</b>Gründer von GRENFORD</div>
+    </div>
+    <div>
       <div class="eyebrow">Die Erfahrung hinter dem Konzept</div>
+      <div class="bar"></div>
       <h2>Immobilien verstehen. Die Baupraxis kennen.</h2>
-      <div class="quote">
-        <p>In meiner beruflichen Laufbahn habe ich die Immobilienwirtschaft aus unterschiedlichen Perspektiven kennengelernt. In der Immobilienvermittlung habe ich erlebt, welche Bedeutung Zustand, Ausstattung und Entwicklungsmöglichkeiten einer Immobilie für Eigentümer und Käufer haben. Zugleich habe ich für Bauunternehmen und Generalunternehmer gearbeitet und Sanierungsprojekte begleitet. Ich kenne daher die Abläufe, Kalkulationen und Herausforderungen der ausführenden Seite.</p>
-        <p>Aus diesen Erfahrungen ist GRENFORD Projects entstanden: eine Beratung, die beide Seiten versteht – die Vorstellungen des Eigentümers und die praktischen Anforderungen der Umsetzung.</p>
-        <p class="pledge">Mein Anspruch ist es, Sie persönlich zu begleiten, Angebote verständlich aufzubereiten und Ihre Entscheidung auf eine fundierte Grundlage zu stellen.</p>
-      </div>
-      <div class="sign">
-        <img src="assets/signature.png" alt="Unterschrift Marco Kaimann">
-        <div class="who"><b>Marco Kaimann</b>Founder &amp; Strategic Advisor<br>GRENFORD</div>
-      </div>
+      <p>Marco Kaimann kennt die Immobilienwirtschaft aus mehreren Perspektiven. In der Immobilienvermittlung hat er erlebt, welche Bedeutung Zustand, Ausstattung und Entwicklungsmöglichkeiten einer Immobilie für Eigentümer und Käufer haben. Zugleich hat er für Bauunternehmen und Generalunternehmer gearbeitet und Sanierungsprojekte begleitet: Abläufe, Kalkulationen und Herausforderungen der ausführenden Seite kennt er aus der Praxis.</p>
+      <p>Daraus ist GRENFORD Projects entstanden: eine Beratung, die die Vorstellungen des Eigentümers ebenso versteht wie die Anforderungen der Umsetzung.</p>
+      <p class="accent">Persönlich begleitet. Verständlich aufbereitet. Fundiert entschieden.</p>
     </div>
   </section>
 
-  <section class="scope" aria-label="Für welche Vorhaben?">
-    <div class="eyebrow">Für welche<br>Vorhaben?</div>
-    <div class="item">Bad&shy;sanierungen</div>
-    <div class="item">Wohnungs&shy;sanierungen</div>
-    <div class="item">Haus&shy;modernisierungen</div>
-    <div class="item">Dachgeschoss- &amp; Neubau-Innenausbau</div>
-    <div class="item">Modernisierung von Ferienimmobilien</div>
-  </section>
+  <div class="objects">
+    <span class="eyebrow">Typische Objekte</span>
+    <span class="chip">Komplett-Bäder</span><span class="chip">Wohnungen</span><span class="chip">Häuser</span>
+    <span class="chip">Dachgeschoss- &amp; Neubau-Innenausbau</span><span class="chip">Ferienimmobilien</span>
+  </div>
 
-  <footer class="run-foot">
-    <span>GRENFORD Projects / Unternehmensprofil</span>
-    <span class="no">01</span>
-  </footer>
+  <div class="folio"><span><b>GRENFORD Projects</b> · Unternehmensprofil</span><span>01</span></div>
 </section>
 
-<!-- =====================================================
-     SEITE 2 · So arbeitet GRENFORD Projects
-     ===================================================== -->
+<!-- ============================ SEITE 2 ============================ -->
 <section class="page p2" aria-label="Seite 2">
-
   <div class="head">
-    <img src="assets/logo-navy.png" alt="GRENFORD Projects">
-    <span class="eyebrow">So arbeitet GRENFORD Projects</span>
+    <img src="assets/kit/logo-projects-dark.png" alt="GRENFORD Projects">
+    <span class="eyebrow">So arbeitet GRENFORD</span>
   </div>
 
   <div class="intro">
     <div>
-      <div class="eyebrow">Der GRENFORD 5-Point Process<span class="tm">™</span></div>
-      <h2>Von Ihren Vorstellungen<br>zur fundierten Entscheidung.</h2>
+      <div class="eyebrow">Der GRENFORD 5-Point Process</div>
+      <h2>Von Ihren Vorstellungen zur fundierten Entscheidung.</h2>
     </div>
-    <p>GRENFORD Projects begleitet Eigentümer durch einen klar strukturierten Beratungs- und Auswahlprozess. Im Mittelpunkt stehen eine gemeinsame Leistungsgrundlage, vergleichbare Angebote und Ihre persönliche Entscheidung für den passenden Baupartner.</p>
+    <p>Von der Leistungsbeschreibung bis zur Fertigstellung, mit dem Renovation Memo als Grundlage. Im Mittelpunkt stehen vergleichbare Angebote und Ihre persönliche Entscheidung für den passenden Baupartner.</p>
   </div>
 
-  <section class="process">
-    <ol class="steps">
-      <li class="step">
-        <div class="dot">01</div>
-        <h3>Wünsche verstehen</h3>
-        <div class="body">
-          <p class="desc">Wir lernen Ihre Immobilie, Ihre Vorstellungen, den gewünschten Leistungsumfang und Ihren Budgetrahmen kennen.</p>
-          <p class="res"><b>Ergebnis</b><i>Eine strukturierte Beschreibung Ihres Vorhabens.</i></p>
-        </div>
-      </li>
-      <li class="step">
-        <div class="dot">02</div>
-        <h3>Angebote einholen</h3>
-        <div class="body">
-          <p class="desc">Auf Basis einer gemeinsamen Leistungsbeschreibung fragen wir in der Regel drei geeignete Bauunternehmen oder Generalunternehmer an.</p>
-          <p class="res"><b>Ergebnis</b><i>Originalangebote auf möglichst einheitlicher Grundlage.</i></p>
-        </div>
-      </li>
-      <li class="step">
-        <div class="dot">03</div>
-        <h3>Unterschiede sichtbar machen</h3>
-        <div class="body">
-          <p class="desc">Im Renovation Memo™ stellen wir Leistungen, Preise, Konditionen und offene Punkte zunächst anonymisiert als A, B und C gegenüber.</p>
-          <p class="res"><b>Ergebnis</b><i>Eine nachvollziehbare Entscheidungsgrundlage.</i></p>
-        </div>
-      </li>
-      <li class="step">
-        <div class="dot">04</div>
-        <h3>Baupartner kennenlernen</h3>
-        <div class="body">
-          <p class="desc">Sie wählen in der Regel zwei Unternehmen zur vertiefenden Abstimmung aus; wir koordinieren die Vor-Ort-Termine. Wen Sie direkt beauftragen, entscheiden Sie selbst.</p>
-          <p class="res"><b>Ergebnis</b><i>Eine persönliche und informierte Entscheidung.</i></p>
-        </div>
-      </li>
-      <li class="step">
-        <div class="dot">05</div>
-        <h3>Bis zur Fertigstellung begleiten</h3>
-        <div class="body">
-          <p class="desc">Auch nach der Beauftragung bleiben wir Ihr beratender Ansprechpartner, bündeln Fragen und unterstützen bei Abstimmungen.</p>
-          <p class="res"><b>Ergebnis</b><i>Persönliche Kontinuität während Ihres Vorhabens.</i></p>
-        </div>
-      </li>
-    </ol>
-  </section>
+  <ol class="process">
+    <li><span class="n">01</span><div><h3>Wünsche aufnehmen</h3><p>Bestand, Ziele, gewünschte Ausstattung und Budgetrahmen kennenlernen.</p></div><div class="gets"><small>Sie erhalten</small>Eine gemeinsame Leistungsbeschreibung</div></li>
+    <li><span class="n">02</span><div><h3>Angebote einholen</h3><p>Auf gemeinsamer Grundlage in der Regel mindestens drei Originalangebote einholen.</p></div><div class="gets"><small>Sie erhalten</small>Mindestens drei Originalangebote</div></li>
+    <li><span class="n">03</span><div><h3>Unterschiede erklären</h3><p>Angebote im Renovation Memo zunächst anonym als A, B und C vergleichen.</p></div><div class="gets"><small>Sie erhalten</small>Das Renovation Memo mit Vergleich A, B, C</div></li>
+    <li><span class="n">04</span><div><h3>Zwei Partner kennenlernen</h3><p>Nach Ihrer Auswahl Kontaktdaten freigeben und Vor-Ort-Termine abstimmen. Sie beauftragen direkt.</p></div><div class="gets"><small>Sie erhalten</small>Vor-Ort-Termine mit zwei Baufirmen</div></li>
+    <li><span class="n">05</span><div><h3>Bis zum Ende begleiten</h3><p>Die weitere Abstimmung bis zur Fertigstellung begleiten.</p></div><div class="gets"><small>Sie erhalten</small>Einen Ansprechpartner bis zur Fertigstellung</div></li>
+  </ol>
 
   <section class="memo">
-    <figure class="memo-visual" aria-label="Abbildung: Auszug aus einem Renovation Memo mit Beispieldaten">
-      <!-- Rückseite: Angebotsvergleich -->
-      <div class="sheet back" aria-hidden="true">
-        <div class="s-head"><img src="assets/logo-navy.png" alt=""><span>DIE ANGEBOTE</span></div>
-        <div class="s-left">
-          <div class="eyebrow">Anonymisierter Vergleich · brutto</div>
-          <h4>Drei Angebote im Überblick.</h4>
-          <p>Gleiche Leistungsgrundlage, drei Kalkulationen. Die Unterschiede liegen im Detail.</p>
-        </div>
-        <div class="bars">
-          <div class="bar-row"><b>A</b><div class="bar-wrap"><div class="bar" style="width:62%"></div><span class="lbl">00.000 €</span></div><div class="meta">Festpreis · 5 Jahre Gewährleistung</div></div>
-          <div class="bar-row"><b>B</b><div class="bar-wrap"><div class="bar" style="width:80%"></div><span class="lbl">00.000 €</span></div><div class="meta">Freibleibend · breitester Umfang</div></div>
-          <div class="bar-row"><b>C</b><div class="bar-wrap"><div class="bar light" style="width:70%"></div><span class="lbl">00.000 €</span></div><div class="meta">Festpreis nach Gewerken</div></div>
-        </div>
-        <div class="s-foot"><span>GRENFORD PROJECTS / BEISPIEL</span><span>09</span></div>
+    <figure class="memo-art" aria-label="Schematische Vorschau eines Renovation Memo">
+      <div class="sheet page2" aria-hidden="true">
+        <div class="k">Die Angebote</div>
+        <div class="t">A / B / C im Vergleich</div>
+        <div class="row"><b>A</b><i style="width:68%"></i></div>
+        <div class="row"><b>B</b><i class="o" style="width:92%"></i></div>
+        <div class="row"><b>C</b><i class="l" style="width:78%"></i></div>
+        <div class="lines"><span></span><span style="width:80%"></span><span></span><span style="width:60%"></span></div>
       </div>
-      <!-- Vorderseite: Kostenvergleich -->
-      <div class="sheet front" aria-hidden="true">
-        <div class="s-head"><img src="assets/logo-navy.png" alt=""><span>DER KOSTENVERGLEICH</span></div>
-        <div class="stamp">BEISPIELDATEN</div>
-        <div class="s-left">
-          <div class="eyebrow">Gemeinsame Kostengruppen · netto</div>
-          <h4>Wofür wird kalkuliert?</h4>
-          <p>Gemeinsame Gruppen machen die Kosten lesbar – und zeigen, wo die Angebote auseinandergehen.</p>
-          <p class="fn">Fiktive Werte zur Veranschaulichung. Dunklere Felder = höherer Betrag innerhalb derselben Zeile.</p>
-        </div>
-        <table>
-          <thead><tr><th>LEISTUNGSGRUPPE</th><th>A</th><th>B</th><th>C</th></tr></thead>
-          <tbody>
-            <tr><td>Baustelle &amp; Rückbau</td><td class="l1">4.800 €</td><td class="l2">5.600 €</td><td class="l3">7.900 €</td></tr>
-            <tr><td>Sanitär &amp; Heizung</td><td class="l2">12.400 €</td><td class="l3">14.900 €</td><td class="l1">11.200 €</td></tr>
-            <tr><td>Elektro</td><td class="l1">3.900 €</td><td class="l2">4.300 €</td><td class="l3">5.100 €</td></tr>
-            <tr><td>Fliesen</td><td class="l1">6.200 €</td><td class="l3">8.700 €</td><td class="l2">7.400 €</td></tr>
-            <tr><td>Maler &amp; Lack</td><td class="l2">2.900 €</td><td class="l3">3.600 €</td><td class="l1">2.400 €</td></tr>
-            <tr><td>Planung &amp; PM</td><td class="l0">–</td><td class="l3">4.100 €</td><td class="l0">–</td></tr>
-            <tr class="sum"><td>Summe netto</td><td>30.200 €</td><td>41.200 €</td><td>34.000 €</td></tr>
-          </tbody>
-        </table>
-        <div class="s-foot"><span>GRENFORD PROJECTS / BEISPIEL</span><span>13</span></div>
+      <div class="sheet cover" aria-hidden="true">
+        <img src="assets/kit/logo-projects-dark.png" alt="">
+        <span class="k">Projects · Entscheidungsgrundlage</span>
+        <span class="t">Renovation<br>Memo</span>
+        <span class="s">Bestand, Angebotsvergleich und Partnerwahl.</span>
+        <span class="c">Vertraulich</span>
       </div>
-      <figcaption class="note">Auszug Renovation Memo · Beispieldaten, keine Kundendaten</figcaption>
+      <figcaption class="caption">Schematische Produktvorschau</figcaption>
     </figure>
-
     <div>
-      <div class="eyebrow">Das Renovation Memo<span class="tm">™</span> · der Kern unserer Beratung</div>
-      <h3>Nicht nur Preise vergleichen.<br>Sondern Leistungen verstehen.</h3>
-      <p>Das GRENFORD Renovation Memo™ fasst Ihr Vorhaben in einem schriftlichen Entscheidungsdokument zusammen – auch als Gesprächsgrundlage mit Familie, Finanzierungspartnern oder Beratern. Es dokumentiert:</p>
-      <ul>
-        <li>Vorhaben &amp; gewünschte Ausstattung</li>
-        <li>Anonymisierter Vergleich A/B/C</li>
-        <li>Vorgesehener Leistungsumfang</li>
-        <li>Kosten- &amp; Konditionsunterschiede</li>
-        <li>Originalangebote der Baufirmen</li>
-        <li>Offene Fragen &amp; nächste Schritte</li>
-      </ul>
+      <div class="eyebrow">Was Sie am Ende in der Hand haben</div>
+      <h2>Nicht nur Preise vergleichen. Sondern Leistungen verstehen.</h2>
+      <p class="intro-t">Ein schriftliches Renovation Memo: Zahlen, Optionen und offene Punkte auf wenigen Seiten, sodass Sie es auch mit Familie, Bank oder Steuerberater besprechen können.</p>
+      <ol class="chapters">
+        <li><span>01</span><div><b>Ihr Vorhaben:</b> Wünsche, Bestand und gewünschte Ausstattung.</div></li>
+        <li><span>02</span><div><b>Die Angebote:</b> Leistungen, Kosten und offene Punkte als A / B / C gegenübergestellt.</div></li>
+        <li><span>03</span><div><b>Ihre Auswahl:</b> Zwei Partner für die persönliche Vor-Ort-Abstimmung.</div></li>
+      </ol>
     </div>
   </section>
 
   <section class="fee">
     <div>
-      <div class="eyebrow">Unser Vergütungsmodell</div>
-      <h3>Unsere Beratung. Für Sie<br>ohne gesondertes Honorar.</h3>
-      <p class="legal">GRENFORD übernimmt keine Bauleitung, technische Planung oder Bauabnahme. Der Bauvertrag und sämtliche Zahlungen für Bauleistungen laufen unmittelbar zwischen Ihnen und dem ausführenden Bauunternehmen.</p>
+      <div class="eyebrow">Vergütung</div>
+      <h3>Wer bezahlt die Beratung?</h3>
+      <p class="answer">Nicht Sie.</p>
+      <p class="feenote">GRENFORD erbringt keine Bauausführung, Bauleitung oder technische Abnahme.</p>
     </div>
     <div>
-      <p class="main">Für Beratung und Vermittlung zahlen Sie kein Honorar. GRENFORD wird von dem Bauunternehmen vergütet, das Sie am Ende beauftragen – zu Konditionen, die vor der Angebotsrunde feststehen.</p>
-      <div class="points">
-        <div><b>Gleich für alle</b>Die Konditionen gelten für jede beteiligte Firma gleich. So bleibt der Vergleich fair.</div>
-        <div><b>Im Wettbewerb</b>Alle Firmen kalkulieren auf derselben Leistungsgrundlage und stehen im direkten Vergleich.</div>
-        <div><b>Ihre Wahl</b>Sie entscheiden selbst, ob und welches Unternehmen Sie beauftragen.</div>
+      <p class="main">GRENFORD wird vom Bauunternehmen vergütet, das Sie am Ende beauftragen. Für Eigentümer bleibt die Beratung kostenfrei. Ob und wen Sie beauftragen, entscheiden allein Sie.</p>
+      <div class="rules">
+        <div><span class="num">1</span><b>Gleich für alle</b>Die Konditionen stehen vor der Angebotsrunde fest und sind für jede beteiligte Firma gleich. Der Vergleich bleibt fair.</div>
+        <div><span class="num">2</span><b>Wettbewerb</b>Mindestens drei Angebote auf derselben Grundlage. Eine Firma, die einen Aufschlag einrechnet, verliert den Vergleich.</div>
+        <div><span class="num">3</span><b>Direkt beauftragt</b>Sie beauftragen die Firma selbst. Zahlungen laufen nur zwischen Ihnen und ihr.</div>
       </div>
     </div>
   </section>
 
-  <section class="cta">
+  <section class="contact">
     <div>
-      <div class="eyebrow">Der nächste Schritt</div>
-      <h2>Sie haben ein Vorhaben.<br>Lassen Sie uns darüber sprechen.</h2>
-      <p>Ob einzelne Maßnahme oder umfassende Sanierung: Wir besprechen gemeinsam, wie Ihr Vorhaben strukturiert vorbereitet werden kann.</p>
+      <div class="eyebrow">Der nächste Schritt zählt.</div>
+      <h2>Sie haben ein Vorhaben. Lassen Sie uns darüber sprechen.</h2>
+      <p>Ob einzelne Maßnahme oder umfassende Sanierung: Im kostenfreien Erstgespräch klären wir, wie Ihr Vorhaben strukturiert vorbereitet werden kann.</p>
     </div>
-    <div class="contact">
-      <div class="name">Marco Kaimann</div>
-      <div class="role">Founder &amp; Strategic Advisor · GRENFORD Projects™</div>
-      <a href="tel:+491724259087">Telefon +49 172 425 9087</a>
+    <div class="lines">
+      <div class="who">GRENFORD · Marco Kaimann</div>
+      <div class="role">Gründer von GRENFORD</div>
+      <a class="tel" href="tel:+491724259087">+49 172 425 9087</a>
       <a href="mailto:kontakt@grenford.de">kontakt@grenford.de</a>
-      <a href="https://www.grenford.de">www.grenford.de</a>
+      <a href="https://www.grenford.de/projects">www.grenford.de/projects</a>
       <div class="addr">Kurfürstendamm 96 · 10709 Berlin</div>
+      <a class="pill" href="https://calendar.app.google/QCTQ3PActJhp8pYf8">Termin online buchen ↗</a>
     </div>
     <div class="qr">
-      <a href="https://calendar.app.google/QCTQ3PActJhp8pYf8" aria-label="Termin buchen"><img src="assets/qr-termin.svg" alt="QR-Code zur Terminbuchung"></a>
-      <span>Termin<br>online buchen</span>
+      <a href="https://calendar.app.google/QCTQ3PActJhp8pYf8" aria-label="Termin online buchen"><img src="assets/kit/qr-termin.svg" alt="QR-Code zur Terminbuchung"></a>
+      <span>30 Minuten<br>online buchbar</span>
     </div>
-    <footer class="run-foot">
-      <span>GRENFORD Projects / Unternehmensprofil</span>
-      <span class="no">02</span>
-    </footer>
+    <div class="folio"><span><b>GRENFORD Projects</b> · Unternehmensprofil</span><span>02</span></div>
   </section>
 </section>
 
