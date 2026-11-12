@@ -158,3 +158,24 @@ h3 { font-size: 11pt; line-height: 1.22; letter-spacing: var(--track-title); }
 .checks li b { display: block; font-weight: 500; color: var(--gf-ink); font-size: 8.6pt; }
 .tx { position: absolute; left: var(--m); right: var(--m); bottom: 15mm; display: flex; align-items: center; gap: 1.8mm; border-top: 1px solid var(--gf-line); padding-top: 3mm; }
 .tx .eyebrow { margin-right: 1.5mm; white-space: nowrap; }
+
+/* ---------- Investment: Differenzierung ---------- */
+.vs { margin: 3mm var(--m) 0; border-top: 1px solid var(--gf-line); }
+.vs .r { display: grid; grid-template-columns: 30mm 1fr 1.35fr; column-gap: 5mm; padding: 2.1mm 0; border-bottom: 1px solid var(--gf-line); align-items: start; font-size: 7.9pt; line-height: 1.38; }
+.vs .r.h { padding: 1.6mm 0; font-size: 6.2pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; font-weight: 500; }
+.vs .r.h span:nth-child(2) { color: var(--gf-muted); }
+.vs .r.h span:nth-child(3) { color: var(--acc-ink); }
+.vs .r b { font-weight: 500; color: var(--gf-ink); font-size: 8.3pt; }
+.vs .r .old { color: #8a8f99; }
+.vs .r .new { color: var(--gf-ink); padding-left: 3.4mm; border-left: 2px solid var(--acc); }
+.life { margin: 4mm var(--m) 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.life .s { position: relative; background: var(--gf-white); border-top: 3px solid var(--acc); padding: 3.2mm 4.4mm 3.6mm 4.4mm; }
+.life .s:first-child { border-radius: 0 0 0 14px; }
+.life .s:last-child { border-radius: 0 0 14px 0; }
+.life .s + .s { border-left: 1px solid var(--gf-line); }
+.life .s small { display: block; font-size: 6pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--acc-ink); font-weight: 500; }
+.life .s b { display: block; margin-top: .8mm; font-weight: 500; color: var(--gf-ink); font-size: 9.6pt; }
+.life .s span { display: block; margin-top: 1.2mm; font-size: 7.6pt; line-height: 1.42; }
+.life .s .tool { display: inline-block; margin-top: 2mm; font-size: 6.6pt; font-weight: 500; color: var(--gf-ink); background: var(--acc-tint); border: 1px solid var(--acc); border-radius: var(--radius-pill); padding: .4mm 2.4mm; }
+.fcard { display: grid; grid-template-columns: 20mm 1fr; gap: 3.6mm; align-items: start; }
+.fcard .ph { width: 20mm; height: 24mm; border-radius: 10mm 10mm 3mm 3mm; background: #8f8f8f url("assets/marco-kaimann.jpg") center 12% / cover no-repeat; }
