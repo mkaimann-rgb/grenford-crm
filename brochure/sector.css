@@ -142,3 +142,19 @@ h3 { font-size: 11pt; line-height: 1.22; letter-spacing: var(--track-title); }
 
 /* GRENFORD Projects: Orange laut Brand-Kit – Schrift auf Orange immer dunkel */
 .projects   { --acc: #FF7900; --acc-ink: #A84700; --acc-light: #FFAD59; --acc-tint: #FFEBD8; --acc-on: #1C1D20; }
+
+/* ---------- Investment: Zielgruppen & Memo-Inhalte ---------- */
+.aud { margin: 5mm var(--m) 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3.4mm; }
+.aud .a { background: var(--gf-white); border-top: 3px solid var(--acc); border-radius: var(--radius-card); padding: 3.2mm 3.4mm 3.6mm; }
+.aud small { display: block; font-size: 6pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--acc-ink); font-weight: 500; }
+.aud b { display: block; margin-top: .8mm; font-weight: 500; color: var(--gf-ink); font-size: 9.2pt; line-height: 1.2; letter-spacing: -0.01em; }
+.aud span { display: block; margin-top: 1.2mm; font-size: 7.5pt; line-height: 1.4; }
+.memo-c { margin: 5mm var(--m) 0; display: grid; grid-template-columns: 62mm 1fr; gap: 8mm; align-items: start; }
+.memo-c h2 { font-size: 15pt; margin-top: 2mm; }
+.memo-c p { margin-top: 2mm; font-size: 8.2pt; line-height: 1.5; }
+.checks { list-style: none; display: grid; grid-template-columns: 1fr 1fr; column-gap: 6mm; border-top: 1px solid var(--gf-line); }
+.checks li { padding: 1.9mm 0 1.9mm 5mm; border-bottom: 1px solid var(--gf-line); font-size: 8pt; line-height: 1.38; position: relative; }
+.checks li::before { content: ""; position: absolute; left: 0; top: 2.9mm; width: 2.2mm; height: 1.2mm; border-left: .45mm solid var(--acc); border-bottom: .45mm solid var(--acc); transform: rotate(-45deg); }
+.checks li b { display: block; font-weight: 500; color: var(--gf-ink); font-size: 8.6pt; }
+.tx { position: absolute; left: var(--m); right: var(--m); bottom: 15mm; display: flex; align-items: center; gap: 1.8mm; border-top: 1px solid var(--gf-line); padding-top: 3mm; }
+.tx .eyebrow { margin-right: 1.5mm; white-space: nowrap; }
