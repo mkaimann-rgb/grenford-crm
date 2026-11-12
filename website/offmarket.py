@@ -32,15 +32,17 @@ def _property_card(d):
     """Öffentliche Immobilie im selben Kartenstil: echtes Foto, Preis, Eckdaten, Property Brief anfragen."""
     facts = ''.join(f'<li>{E(x[1])}</li>' for x in d['facts'][:3])
     price, per_m2 = (d['priceStr'].split(' · ') + [''])[:2]
-    return (f'<article class="om-card om-public"><figure>'
+    href = page('property/' + d['slug'])
+    return (f'<article class="om-card om-public"><a class="om-link" href="{href}" tabindex="-1" aria-hidden="true"><figure>'
             + img(d['localImage'], d['title'] + ', Visualisierung', '(max-width:760px) 88vw, 30vw', 'loading="lazy"')
-            + '<span class="om-status">Verfügbar</span></figure>'
-            f'<div class="om-body"><small>{E(d["location"])}</small><h3>{E(d["title"])}</h3>'
+            + '<span class="om-status">Verfügbar</span></figure></a>'
+            f'<div class="om-body"><small>{E(d["location"])}</small><h3><a href="{href}">{E(d["title"])}</a></h3>'
             f'<p class="om-volume"><span>Kaufpreis</span>{E(price)}</p><ul class="om-facts">{facts}</ul>'
             f'<p class="om-desc">{E(d["desc"])}</p>'
             + (f'<p class="om-per">{E(per_m2)}</p>' if per_m2 else '') +
             f'<button class="button" type="button" data-enquire="property-buy" data-object="{E(d["title"], quote=True)}">'
-            'Property Brief anfragen <span aria-hidden="true">↗</span></button></div></article>')
+            'Property Brief anfragen <span aria-hidden="true">↗</span></button>'
+            f'<a class="text-link om-details" href="{href}">Zur Wohnung <span aria-hidden="true">→</span></a></div></article>')
 
 
 STEPS = ('<ol class="om-steps"><li><b>Anfrage</b> Unterlagen zum Objekt anfordern</li><li><b>Prüfung</b> Rückmeldung innerhalb von 48 Stunden</li>'

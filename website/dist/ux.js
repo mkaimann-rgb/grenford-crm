@@ -361,8 +361,8 @@ if (quick) {
 document.querySelectorAll('[data-load-map]').forEach(button => button.addEventListener('click', () => {
   const host = button.closest('.ux-map').querySelector('[data-map-host]');
   host.replaceChildren(el('iframe', {
-    title: 'GRENFORD Büro – Kurfürstendamm 96, Berlin', loading: 'lazy', referrerPolicy: 'no-referrer',
-    src: 'https://www.google.com/maps?q=Kurf%C3%BCrstendamm%2096%2C%2010709%20Berlin&output=embed'
+    title: button.dataset.mapTitle || 'GRENFORD Büro – Kurfürstendamm 96, Berlin', loading: 'lazy', referrerPolicy: 'no-referrer',
+    src: button.dataset.mapSrc || 'https://www.google.com/maps?q=Kurf%C3%BCrstendamm%2096%2C%2010709%20Berlin&output=embed'
   }));
   button.hidden = true;
 }));

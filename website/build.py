@@ -65,7 +65,8 @@ VALUE_CTA = {'investment': ('Objekt einordnen', 'investment-value'), 'property':
 EXTRA = {'bewerten': 'Bewerten', 'ueber-grenford': 'Über GRENFORD'}
 import ratgeber as RG  # Ratgeber: Inhalte, Bausteine, Entwurfsstatus
 import calculators as CALC
-import legal as LEGAL  # Impressum, Datenschutz, Bildnachweise (Texte 1:1 von der Live-Website)  # Rechner Wertermittlung (Entwurf: nur Vorschau)
+import legal as LEGAL
+import listing as LISTING  # eigene Seite je Immobilie (Property)  # Impressum, Datenschutz, Bildnachweise (Texte 1:1 von der Live-Website)  # Rechner Wertermittlung (Entwurf: nur Vorschau)
 
 
 def mega(k):
@@ -583,6 +584,11 @@ def founder_video():
             '</section>')
 
 
+def listing_page(slug):
+    body = LISTING.body(slug) + '<div class="lx-form">' + gateway('property') + '</div>' + contact()  # Formular für „Property Brief anfragen“
+    return shell('property', LISTING.meta(slug), body, ld=(LISTING.structured(slug),), path=f'property/{slug}/')
+
+
 def legal_page(name):
     html, meta = LEGAL.body(name)
     return shell(name, meta, html + contact(), path=name + '/')
@@ -743,6 +749,7 @@ def responsive_variants(out):
 def seo_files(out):
     urls = [absolute()] + [absolute(k + '/') for k in list(D) + list(EXTRA) + (['markt'] if MARKET_LIVE else []) + (['ratgeber'] if RG.published() else [])] + [absolute(RG.article_path(a) + '/') for a in RG.published() if not (MARKET_LIVE and RG.article_path(a) == 'markt')]
     urls += [absolute(n + '/') for n in LEGAL.PAGES]  # Impressum, Datenschutz, Bildnachweise
+    urls += [absolute('property/' + o['slug'] + '/') for o in LISTING.OBJECTS]  # Objektseiten
     base = absolute()
     urls += [base + 'en/' + u[len(base):] for u in urls if u[len(base):].split('/')[0] in paths.EN_KEYS or u == base]  # englische Fassung
     (out / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -774,6 +781,8 @@ def main():
     pages['ratgeber/index.html'] = (1, ratgeber)
     for name in LEGAL.PAGES:
         pages[f'{name}/index.html'] = (1, lambda name=name: legal_page(name))
+    for o in LISTING.OBJECTS:  # Objektseiten: /property/<slug>/
+        pages[f'property/{o["slug"]}/index.html'] = (2, lambda slug=o['slug']: listing_page(slug))
     for a in RG.visible():  # Entwürfe nur in der Vorschau; /markt/ als Beitrag nur, solange die Datenseite (market.py) aus ist
         p = RG.article_path(a)
         if p == 'markt' and MARKET_LIVE:
@@ -810,6 +819,8 @@ def main():
         print('Hero-Bilder fehlen (Vorschau-Auswahl bzw. übersprungen), bitte nach static/assets/ kopieren:')
         for name in sorted(paths.skipped_heroes):
             print('  -', name)
+    if LISTING.missing:
+        print('Objektseiten mit offenen Pflichtangaben:', '; '.join(f'{k}: {", ".join(v)}' for k, v in LISTING.missing.items()))
     if i18n.missing:
         print(f'Englisch: {len(i18n.missing)} Texte ohne Übersetzung (deutsch belassen), Liste in i18n/missing.json')
         (ROOT / 'i18n' / 'missing.json').write_text(json.dumps(i18n.missing, ensure_ascii=False, indent=1), encoding='utf-8')

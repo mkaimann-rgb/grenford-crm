@@ -201,3 +201,12 @@ der ersten Zeile), `legal.py` setzt sie nur ins Layout. Die URLs entsprechen der
 `static/js/consent.js`: Cookie-Einwilligung mit denselben Texten, demselben Speicherschlüssel und derselben Logik wie bisher
 (Google Analytics `site.json` → `gaId`, nur nach „Alle akzeptieren“; Google Maps bei Zustimmung automatisch, sonst auf Klick).
 „Cookie-Einstellungen“ im Footer öffnet den Hinweis erneut. Im Vorschau-Build ist `gaId` leer.
+
+## Objektseiten (Property)
+
+Jede Immobilie aus `property-collection.json` bekommt eine eigene Seite unter `/property/<slug>/` (und `/en/property/<slug>/`),
+gebaut von `listing.py` nach dem Aufbau von beachhouseusedom.de im GRENFORD-Property-Stil: Hero mit Preis, Überblick, Highlights,
+Galerie, Selbst nutzen oder vermieten, Kosten und Energie, Lage (Karte erst nach Klick), weitere Wohnungen, Anfrage.
+Karten im Karussell verlinken auf die Seite. Felder je Objekt: `slug`, `type`, `gallery`, `places`, `lageText`, `mapQuery`,
+`project` (gemeinsames Projekt, sobald bekannt), `energy` (Pflichtangaben § 87 GEG), `costs` (`provision`, `hausgeld`), `rent`.
+Fehlende Pflichtangaben meldet der Build („Objektseiten mit offenen Pflichtangaben“). Neue Objekte: Texte danach in `i18n/en.json` ergänzen.
