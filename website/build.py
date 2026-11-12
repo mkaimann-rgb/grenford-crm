@@ -372,6 +372,28 @@ def contact_for(k):
     return contact(subject={'property': 'property', 'projects': 'renovation'}.get(k))
 
 
+def combinations():
+    """Property: was nach dem Kauf oder vor dem Verkauf dazukommt. Bausteine aus allen Bereichen, Finanzierung über Partner."""
+    rows = [('Kaufen und sanieren', [('property', 'Property Brief'), ('partner', 'Finanzierung über Partner'), ('projects', 'Renovation Memo')],
+             'Kaufpreis, Finanzierung und Sanierungskosten liegen vor der Unterschrift auf dem Tisch, die Kosten aus Originalangeboten statt aus Schätzungen.'),
+            ('Kapitalanlage kaufen', [('property', 'Property Brief'), ('grenford', 'Wertermittlung'), ('partner', 'Finanzierung über Partner')],
+             'Miete, Hausgeld, Rücklage und Finanzierung in einer Rechnung, dazu der Wert heute und nach einer Modernisierung.'),
+            ('Verkaufen', [('grenford', 'Wertermittlung'), ('projects', 'Renovation Memo'), ('property', 'Property Brief')],
+             'Erst den Wert im heutigen Zustand und nach einer Auffrischung kennen, dann den Weg zum Käufer planen.'),
+            ('Nach dem Einzug', [('projects', 'Renovation Memo')],
+             'Bad, Küche oder energetische Sanierung mit vergleichbaren Angeboten von Baufirmen aus dem GRENFORD-Netzwerk.')]
+    items = ''.join('<li><strong>' + E(t) + '</strong><span class="combo-chips">'
+                    + '<i aria-hidden="true">+</i>'.join(f'<b class="combo-{k}">{E(n)}</b>' for k, n in chips)
+                    + f'</span><p>{E(x)}</p></li>' for t, chips, x in rows)
+    return ('<section class="combinations" id="kombination"><div class="section-head"><p class="eyebrow">Nach dem Kauf und vor dem Verkauf</p>'
+            '<h2>Mehr als Kaufen oder Verkaufen</h2>'
+            '<p>Die Bausteine von GRENFORD lassen sich je nach Vorhaben verbinden. Sie haben dabei einen Ansprechpartner, auch wenn mehrere Bereiche beteiligt sind.</p></div>'
+            f'<ul class="combo-list">{items}</ul>'
+            '<div class="combo-notes"><p><strong>Finanzierung:</strong> GRENFORD arbeitet mit unabhängigen Finanzierungsvermittlern und mit Banken zusammen '
+            'und stellt auf Wunsch den Kontakt her. Die Finanzierungsberatung selbst übernehmen diese Partner.</p>'
+            '<p><strong>Partnernetz:</strong> Für Energieberatung, Sachverständige und Baufirmen greift GRENFORD auf Partner zurück, mit denen es regelmäßig arbeitet.</p></div></section>')
+
+
 def subpage(k):
     d = D[k]
     titles = {'investment': 'Strategische Off-Market-Transaktionen, <em>diskret begleitet</em>', 'property': 'Wohnungen und Häuser <em>verkaufen oder finden</em>',
@@ -398,7 +420,7 @@ def subpage(k):
     body += ('<nav class="section-nav" aria-label="Seitenabschnitte"><a href="#leistung">Leistung</a><a href="#bewertung">'
              + {'investment': 'Objekt einordnen', 'property': 'Bewertung & Suchprofil', 'projects': 'Wert nach Sanierung'}[k] + '</a>'
              + ('<a href="#verguetung">Vergütung</a>' if k == 'projects' else '')
-             + {'investment': '<a href="#collection">Off-Market</a>', 'property': '<a href="#collection">Immobilien</a>', 'projects': '<a href="#beforeafter">Vorher & Nachher</a>'}[k]
+             + {'investment': '<a href="#collection">Off-Market</a>', 'property': '<a href="#collection">Immobilien</a><a href="#kombination">Nach dem Kauf</a>', 'projects': '<a href="#beforeafter">Vorher & Nachher</a>'}[k]
              + f'<a href="#memo">{d["memo"]}</a><a href="#ablauf">5-Point Process</a><a href="#fragen">Fragen</a><a href="#kontakt">Kontakt</a></nav>')
     intros = {
         'investment': ('Verkaufen oder ankaufen', 'Eigentümer begleitet GRENFORD beim Verkauf an passende Investoren. Käufer beauftragen GRENFORD, nach Anlageimmobilien zu suchen, die ihrem Profil entsprechen.',
@@ -420,7 +442,7 @@ def subpage(k):
              f'<div><article><h3>{a}</h3><p>{aa}</p></article><article><h3>{b}</h3><p>{bb}</p></article></div>'
              f'<div class="service-focus"><span class="eyebrow">Typische Objekte</span><p>{focus}</p></div></section>')
     body += valuation_section(k)
-    body += {'investment': offmarket, 'property': properties, 'projects': lambda: fee_band() + comparisons()}[k]()
+    body += {'investment': offmarket, 'property': lambda: properties() + combinations(), 'projects': lambda: fee_band() + comparisons()}[k]()
     body += memos(k) + process(k)
     faq = ''.join(f'<details><summary>{E(q)}<span aria-hidden="true">＋</span></summary><p>{E(a)}</p></details>' for q, a in d['faq'])
     body += (f'<section class="questions" id="fragen"><div><h2>Häufige Fragen</h2></div><div>{faq}</div></section>'

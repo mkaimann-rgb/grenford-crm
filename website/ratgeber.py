@@ -944,3 +944,195 @@ def article_body(a, author_img):
              'Gesetze, Verwaltungsvorschriften und Marktdaten können sich ändern; maßgeblich sind die verlinkten amtlichen Quellen.</p>')
     body = f'<div class="rg-article-body">{toc}<div class="rg-prose">{draft}{key}{render_blocks(a["blocks"])}{legal}{nxt}</div></div>'
     return f'<article class="rg-article area-{a["areas"][0]}">{head}{body}{related}</article>'
+
+
+# ---------------------------------------------------------------- Lebenssituationen (Property) und energetische Sanierung (Projects)
+ARTICLES += [
+ {
+  'slug': 'immobilie-geerbt', 'areas': ['property'], 'status': 'entwurf', 'published': '2026-11-12', 'updated': None,
+  'title': 'Immobilie geerbt: behalten, vermieten oder verkaufen?',
+  'meta_title': 'Immobilie geerbt: behalten, vermieten oder verkaufen? | GRENFORD Ratgeber',
+  'description': 'Welche Schritte nach einer Erbschaft zuerst anstehen, wie eine Erbengemeinschaft entscheidet und wie Sie Selbstnutzung, Vermietung und Verkauf mit denselben Zahlen vergleichen. Mit fiktivem Fall und Unterlagenliste.',
+  'lead': 'Mit einer geerbten Wohnung oder einem Haus kommen in kurzer Zeit viele Fragen: Wem gehört die Immobilie jetzt, was ist sie wert, und was kostet es, sie zu behalten? Am Anfang steht deshalb die Klärung, nicht der Verkauf.',
+  'key': ['Erst Erbnachweis und Grundbuch klären, dann entscheiden.',
+          'Eine Erbengemeinschaft kann nur gemeinsam verkaufen.',
+          'Selbstnutzung, Vermietung und Verkauf mit denselben Zahlen vergleichen.'],
+  'next': ('Wert der geerbten Immobilie ermitteln', 'bewerten', '#bewertung', 'Wert heute und nach einer Sanierung, als gemeinsame Grundlage für alle Erben.'),
+  'related': ['vor-dem-verkauf-sanieren', 'grundbuchauszug-anfordern', 'immobilie-trennung-scheidung'],
+  'review': ['Gebührenfreiheit der Grundbuchberichtigung binnen zwei Jahren nach dem Erbfall (GNotKG, KV 14110) am Original prüfen',
+             'Erbschaftsteuer: Freibeträge und Befreiung für das Familienheim (§§ 13, 16 ErbStG) am aktuellen Stand prüfen',
+             'Erbengemeinschaft und Teilungsversteigerung (§§ 2040, 2042 BGB, § 180 ZVG) juristisch prüfen lassen',
+             'Übernahme des Anschaffungszeitpunkts bei Erbschaft (§ 23 EStG) steuerlich bestätigen'],
+  'blocks': [
+   ('h2', 'schritte', 'Die ersten Schritte'),
+   ('flow', [('Erbnachweis klären', 'Ein Erbschein oder ein notarielles Testament mit Eröffnungsprotokoll weist nach, wer erbt. Ohne diesen Nachweis kann das Grundbuch nicht berichtigt werden.'),
+             ('Grundbuch berichtigen', 'Die Erben werden als neue Eigentümer eingetragen. Wird der Antrag innerhalb von zwei Jahren nach dem Erbfall gestellt, fallen dafür in der Regel keine Grundbuchgebühren an.'),
+             ('Laufende Kosten sichern', 'Grundsteuer, Hausgeld oder Nebenkosten, Versicherungen und Kredite laufen weiter. Prüfen Sie, ob Verträge auf die Erben umgeschrieben werden müssen.'),
+             ('Wert einschätzen', 'Der Wert ist die Grundlage für die Einigung unter den Erben und für die Erbschaftsteuer. Für das Finanzamt kann ein Verkehrswertgutachten sinnvoll sein.')]),
+   ('h2', 'wege', 'Drei Wege im Vergleich'),
+   ('table', 'Im Überblick', ['', 'Was passiert', 'Was es braucht', 'Worauf achten'], [
+     ['Selbst nutzen', 'Ein Erbe zieht ein, die anderen werden ausgezahlt', 'Einigung über den Wert, Finanzierung der Auszahlung', 'Sanierungsbedarf vor dem Einzug'],
+     ['Vermieten', 'Laufende Einnahmen, die Immobilie bleibt in der Familie', 'Verwaltung, Rücklagen, Einigung über Ausgaben', 'Mietrecht, Instandhaltung, Abstimmung unter den Erben'],
+     ['Verkaufen', 'Der Erlös wird nach Erbquoten verteilt', 'Zustimmung aller Erben', 'im heutigen Zustand oder nach einer Auffrischung']], ''),
+   ('h2', 'erbengemeinschaft', 'Wenn mehrere erben'),
+   ('p', 'Erben mehrere Personen, gehört ihnen die Immobilie gemeinsam als Erbengemeinschaft. Verkaufen können sie nur gemeinsam. Kommt keine Einigung zustande, kann jeder Miterbe die Teilungsversteigerung beantragen. Das ist meist der teuerste Weg, weil der Erlös oft unter dem Marktwert liegt. Eine gemeinsame, nachvollziehbare Wertermittlung ist deshalb häufig der erste Schritt zur Einigung.'),
+   ('h2', 'steuern', 'Steuern im Blick'),
+   ('list', ['<strong>Erbschaftsteuer:</strong> Maßgeblich ist der Wert der Immobilie am Todestag. Ehepartner und Kinder haben hohe persönliche Freibeträge; für ein Familienheim, das weiter selbst bewohnt wird, gibt es zusätzliche Befreiungen.',
+             '<strong>Späterer Verkauf:</strong> Erben übernehmen den Anschaffungszeitpunkt der verstorbenen Person. Liegt deren Kauf mehr als zehn Jahre zurück, ist ein Gewinn beim Verkauf in der Regel nicht einkommensteuerpflichtig.',
+             'Einzelheiten klären Sie mit Ihrer Steuerberatung, bevor Sie entscheiden.']),
+   ('example', 'Fiktiver Fall: Zwei Geschwister erben eine Wohnung',
+    '<p>3 Zimmer, 78 m², Altbau, seit Jahren selbst bewohnt, Bad und Elektrik im Originalzustand. Die Schwester möchte verkaufen, der Bruder überlegt zu vermieten.</p>'
+    '<ol><li><strong>Wertermittlung:</strong> Wert heute und nach einer Auffrischung, als gemeinsame Zahlengrundlage.</li>'
+    '<li><strong>Vergleich:</strong> Mieteinnahmen abzüglich Kosten und Rücklagen gegen den Verkaufserlös nach Erbquoten.</li>'
+    '<li><strong>Entscheidung:</strong> Die Geschwister verkaufen nach einer kleinen Auffrischung, der Property Brief bereitet den Verkauf vor.</li></ol>'
+    '<p>Gestritten wurde nicht über den Weg, sondern über den Wert. Mit einer gemeinsamen Grundlage fiel die Entscheidung in wenigen Wochen.</p>'),
+   ('h2', 'unterlagen', 'Unterlagen'),
+   ('checklist', 'Für das erste Gespräch bereitlegen', [
+     'Erbschein oder Testament mit Eröffnungsprotokoll',
+     'Grundbuchauszug',
+     'Bei Wohnungen: Teilungserklärung, Protokolle der Eigentümerversammlungen, Hausgeldabrechnung',
+     'Energieausweis',
+     'Mietverträge, falls die Immobilie vermietet ist',
+     'Unterlagen zu Krediten und Grundschulden']),
+   ('p', 'Ob sich vor dem Verkauf eine Auffrischung lohnt, zeigt [[vor-dem-verkauf-sanieren|Vor dem Verkauf sanieren?]]. Den Grundbuchauszug beantragen Sie wie in [[grundbuchauszug-anfordern|Grundbuchauszug anfordern]] beschrieben.'),
+  ],
+ },
+ {
+  'slug': 'immobilie-trennung-scheidung', 'areas': ['property'], 'status': 'entwurf', 'published': '2026-11-12', 'updated': None,
+  'title': 'Trennung und Scheidung: Was mit der gemeinsamen Immobilie geschieht',
+  'meta_title': 'Immobilie bei Trennung und Scheidung: Übernahme, Verkauf oder Vermietung | GRENFORD Ratgeber',
+  'description': 'Was bei einer Trennung zuerst geklärt wird, welche vier Wege es für die gemeinsame Immobilie gibt und warum Grundbuch und Darlehen getrennt betrachtet werden müssen. Mit fiktivem Rechenbeispiel.',
+  'lead': 'Bei einer Trennung ist die gemeinsame Wohnung oder das Haus oft der größte Vermögenswert und zugleich der emotionalste. Eine sachliche Entscheidung braucht zwei Dinge: einen Wert, dem beide vertrauen, und einen Überblick über die Wege.',
+  'key': ['Ein gemeinsam anerkannter Wert entschärft die meisten Konflikte.',
+          'Grundbuch und Darlehensvertrag sind zwei verschiedene Dinge.',
+          'Übernahme, Verkauf und Vermietung mit denselben Zahlen vergleichen.'],
+  'next': ('Gemeinsamen Wert ermitteln', 'bewerten', '#bewertung', 'Eine Wertspanne mit Begründung, die beide Seiten nachvollziehen können.'),
+  'related': ['immobilie-geerbt', 'grundbuchauszug-anfordern', 'vor-dem-verkauf-sanieren'],
+  'review': ['Zugewinnausgleich, Teilungsversteigerung (§ 180 ZVG) und Haftung aus dem Darlehen juristisch prüfen lassen',
+             'Vorfälligkeitsentschädigung (§§ 490, 502 BGB) allgemein halten', 'Rechenbeispiel ist fiktiv'],
+  'blocks': [
+   ('h2', 'klaeren', 'Was zuerst geklärt wird'),
+   ('list', ['<strong>Eigentum:</strong> Wer steht im Grundbuch, und zu welchen Anteilen?',
+             '<strong>Finanzierung:</strong> Wer ist Darlehensnehmer, wie hoch ist die Restschuld, wann endet die Zinsbindung?',
+             '<strong>Wert:</strong> Was ist die Immobilie heute wert? Ohne diese Zahl lassen sich weder Auszahlung noch Verkauf sinnvoll verhandeln.',
+             '<strong>Nutzung:</strong> Wer wohnt bis zur Entscheidung in der Immobilie, und wer trägt in dieser Zeit die Kosten?']),
+   ('h2', 'wege', 'Vier Wege'),
+   ('table', 'Im Überblick', ['', 'Was passiert', 'Voraussetzung', 'Worauf achten'], [
+     ['Übernahme', 'Einer behält die Immobilie und zahlt den anderen aus', 'Finanzierung der Auszahlung, Zustimmung der Bank', 'Entlassung des anderen aus dem Darlehen schriftlich klären'],
+     ['Gemeinsamer Verkauf', 'Der Erlös wird nach Anteilen geteilt, das Darlehen abgelöst', 'Einigung über Preis und Vermarktung', 'Vorfälligkeitsentschädigung bei vorzeitiger Ablösung'],
+     ['Vermietung', 'Beide bleiben Eigentümer, die Miete trägt die Kosten', 'dauerhafte Zusammenarbeit', 'Abstimmung über Ausgaben und Verwaltung'],
+     ['Teilungsversteigerung', 'Das Gericht versteigert auf Antrag eines Eigentümers', 'keine Einigung', 'meist niedrigerer Erlös, lange Dauer']], ''),
+   ('h2', 'darlehen', 'Grundbuch und Darlehen'),
+   ('p', 'Aus dem Grundbuch auszuscheiden heißt nicht, aus dem Kredit entlassen zu sein. Übernimmt einer die Immobilie, muss die Bank zustimmen, dass der andere aus dem Darlehensvertrag ausscheidet. Sonst haftet er weiter, obwohl ihm nichts mehr gehört.'),
+   ('p', 'Wie die Immobilie im Zugewinnausgleich zählt und wie eine Auszahlung steuerlich wirkt, hängt vom Einzelfall ab. Das klären Anwalt und Steuerberatung; GRENFORD liefert dafür den Wert und die Unterlagen.'),
+   ('example', 'Fiktiver Fall: Doppelhaushälfte, beide im Grundbuch',
+    '<p>Wert laut gemeinsamer Einschätzung 520.000 €, Restschuld 220.000 €. Im Haus stecken damit 300.000 € Eigenkapital, je Hälfte 150.000 €.</p>'
+    '<ul><li><strong>Übernahme:</strong> Er möchte bleiben, müsste 150.000 € auszahlen und die Restschuld allein tragen. Die Bank prüft, ob sein Einkommen für 370.000 € Darlehen reicht.</li>'
+    '<li><strong>Verkauf:</strong> Nach Ablösung der Restschuld bleiben je rund 150.000 €, vor Verkaufskosten und gegebenenfalls Vorfälligkeitsentschädigung.</li></ul>'
+    '<p>Die Zahlen sind für beide gleich. Offen bleibt nur noch die Frage, ob die Übernahme finanzierbar ist.</p>'),
+   ('h2', 'unterlagen', 'Unterlagen'),
+   ('checklist', 'Für das erste Gespräch bereitlegen', [
+     'Grundbuchauszug',
+     'Darlehensverträge und aktuelle Restschuld',
+     'Kaufvertrag und Unterlagen zu Umbauten',
+     'Bei Wohnungen: Teilungserklärung und Hausgeldabrechnung',
+     'Energieausweis']),
+   ('p', 'Wird verkauft, hilft [[vor-dem-verkauf-sanieren|Vor dem Verkauf sanieren?]] bei der Frage, ob sich eine Auffrischung vorher lohnt.'),
+  ],
+ },
+ {
+  'slug': 'wohnen-im-alter', 'areas': ['property'], 'status': 'entwurf', 'published': '2026-11-12', 'updated': None,
+  'title': 'Wohnen im Alter: verkaufen, umbauen oder mit Wohnrecht bleiben?',
+  'meta_title': 'Wohnen im Alter: Immobilie verkaufen, umbauen oder Wohnrecht | GRENFORD Ratgeber',
+  'description': 'Welche Wege es gibt, wenn Haus oder Wohnung im Alter nicht mehr passen: barrierearm umbauen, verkaufen und kleiner wohnen, Verkauf mit Wohnrecht, Leibrente oder Teilverkauf. Mit fiktivem Fall und Checkliste.',
+  'lead': 'Das Haus ist zu groß geworden, die Treppe zu steil, der Garten zu viel Arbeit. Wer im Alter über seine Immobilie nachdenkt, hat mehr Möglichkeiten als Bleiben oder Verkaufen. Entscheidend ist, was Sie in den nächsten Jahren brauchen und wie viel Kapital Sie freisetzen möchten.',
+  'key': ['Erst die Wohnwünsche klären, dann über die Immobilie entscheiden.',
+          'Umbau, Verkauf und Verkauf mit Wohnrecht mit denselben Zahlen vergleichen.',
+          'Leibrente und Teilverkauf über die gesamte Laufzeit durchrechnen lassen.'],
+  'next': ('Wert Ihrer Immobilie einschätzen lassen', 'bewerten', '#bewertung', 'Wert heute und nach einem Umbau, als Grundlage für jede Variante.'),
+  'related': ['renovieren-modernisieren-sanieren', 'bauangebote-vergleichen', 'immobilie-geerbt'],
+  'review': ['Wohnrecht und Nießbrauch (§§ 1030, 1093 BGB), Leibrente und Teilverkauf allgemein gehalten; juristisch und steuerlich prüfen lassen',
+             'Förderung für altersgerechten Umbau am aktuellen Stand prüfen'],
+  'blocks': [
+   ('h2', 'fragen', 'Die Ausgangsfragen'),
+   ('list', ['<strong>Wohnen:</strong> Möchten Sie in der Umgebung bleiben oder näher an Familie und Versorgung ziehen?',
+             '<strong>Größe:</strong> Wie viele Zimmer nutzen Sie tatsächlich?',
+             '<strong>Barrieren:</strong> Sind Treppen, Bad und Eingang auch in zehn Jahren noch gut zu bewältigen?',
+             '<strong>Finanzen:</strong> Brauchen Sie Kapital, etwa für Pflege, Familie oder eine neue Wohnung?']),
+   ('h2', 'wege', 'Vier Wege im Vergleich'),
+   ('table', 'Im Überblick', ['', 'Was passiert', 'Für wen es passt', 'Worauf achten'], [
+     ['Bleiben und umbauen', 'Bad, Eingang und Wege werden barrierearm', 'wer in der Umgebung bleiben möchte', 'Kosten und Bauzeit; Förderung vor dem Auftrag prüfen'],
+     ['Verkaufen und kleiner wohnen', 'Der Erlös finanziert eine passende Wohnung', 'wer bereit ist umzuziehen', 'Verkauf und Umzug zeitlich abstimmen'],
+     ['Verkauf mit Wohnrecht oder Nießbrauch', 'Ein Käufer erwirbt, Sie bleiben wohnen', 'wer Kapital braucht und bleiben möchte', 'Der Kaufpreis sinkt um den Wert des Rechts'],
+     ['Leibrente oder Teilverkauf', 'Rente oder Teilerlös gegen weiteres Nutzungsrecht', 'wer Kapital braucht, ohne auszuziehen', 'laufende Entgelte und Vertragsbedingungen genau prüfen']], ''),
+   ('h2', 'wohnrecht', 'Wohnrecht, Nießbrauch und Teilverkauf'),
+   ('p', 'Wohnrecht und Nießbrauch werden im Grundbuch eingetragen und sichern, dass Sie in der Immobilie bleiben können. Mit einem Wohnrecht dürfen Sie selbst darin wohnen, mit einem Nießbrauch dürfen Sie die Immobilie auch vermieten und die Miete behalten. Für Käufer mindert jedes dieser Rechte den Wert, abhängig von Ihrem Alter und der Dauer.'),
+   ('p', 'Beim Teilverkauf verkaufen Sie einen Anteil und zahlen für die weitere Nutzung des verkauften Teils ein monatliches Entgelt. Lassen Sie sich die Gesamtkosten über die erwartete Dauer berechnen und mit einem Verkauf mit Wohnrecht vergleichen.'),
+   ('example', 'Fiktiver Fall: Einfamilienhaus, 140 m², Ehepaar über 70',
+    '<p>Das Haus ist schuldenfrei, Bad und Schlafzimmer liegen im Obergeschoss. Beide möchten im Ort bleiben.</p>'
+    '<ol><li><strong>Wert heute:</strong> Ausgangspunkt für jede Variante.</li>'
+    '<li><strong>Umbau:</strong> Schlafzimmer und Bad ins Erdgeschoss, Kosten aus vergleichbaren Angeboten statt aus Schätzungen.</li>'
+    '<li><strong>Alternative:</strong> Verkauf und Kauf einer barrierefreien Wohnung im Ort.</li></ol>'
+    '<p>Mit beiden Varianten nebeneinander fiel die Entscheidung für den Umzug: Der Umbau hätte viel gekostet, ohne die Gartenarbeit zu lösen.</p>'),
+   ('h2', 'checkliste', 'Checkliste'),
+   ('checklist', 'Vor der Entscheidung', [
+     'Der Wert heute ist eingeschätzt.',
+     'Umbaukosten beruhen auf Angeboten, nicht auf Schätzungen.',
+     'Förderung für den barrierearmen Umbau ist vor dem Auftrag geprüft.',
+     'Bei Wohnrecht, Leibrente oder Teilverkauf liegt eine unabhängige Berechnung vor.',
+     'Familie und spätere Erben sind in die Entscheidung einbezogen.']),
+   ('p', 'Wer umbaut, findet die richtige Reihenfolge in [[renovieren-modernisieren-sanieren|Renovieren, modernisieren oder sanieren?]] und vergleicht die Angebote wie in [[bauangebote-vergleichen|Drei Bauangebote, drei Preise]] beschrieben.'),
+  ],
+ },
+ {
+  'slug': 'energetisch-sanieren', 'areas': ['projects'], 'status': 'entwurf', 'published': '2026-11-12', 'updated': None,
+  'title': 'Energetisch sanieren: Pflichten, Reihenfolge und Förderung',
+  'meta_title': 'Energetisch sanieren: GEG-Pflichten, Reihenfolge und Förderung | GRENFORD Ratgeber',
+  'description': 'Welche Nachrüstpflichten nach einem Kauf gelten, warum die Gebäudehülle vor der Heizung kommt, was bei der Förderung vor dem Auftrag passieren muss und warum energetische Angebote schwer vergleichbar sind. Mit fiktivem Fall.',
+  'lead': 'Neue Heizung, Dämmung, Fenster: Energetische Maßnahmen sind teuer, gefördert und teilweise Pflicht. Wer die Reihenfolge einhält und die Förderung vor dem Auftrag klärt, spart doppelt. Vergleichbar werden die Angebote aber erst, wenn alle Firmen dieselben technischen Anforderungen kalkulieren.',
+  'key': ['Nach einem Eigentümerwechsel gelten Nachrüstpflichten mit Fristen.',
+          'Erst die Hülle, dann die Heizung: Die Heizlast hängt von der Dämmung ab.',
+          'Förderung immer vor der Beauftragung beantragen.'],
+  'next': ('Angebote vergleichen lassen', 'projects', '#memo', 'Im Renovation Memo kalkulieren alle Firmen dieselbe Leistung, einschließlich der Förderanforderungen.'),
+  'related': ['bauangebote-vergleichen', 'renovieren-modernisieren-sanieren', 'vor-dem-verkauf-sanieren'],
+  'review': ['GEG §§ 47, 71, 72, 73 (Nachrüstpflichten, Eigentümerwechsel, Fristen) am aktuellen Gesetzestext prüfen',
+             'Vorgaben für neue Heizungen und die angekündigte GEG-Reform: Stand vor Freigabe prüfen',
+             'Förderbedingungen (BAFA-Einzelmaßnahmen, KfW-Heizungsförderung, Antrag vor Vorhabenbeginn, Vertrag mit aufschiebender Bedingung) am Original prüfen'],
+  'blocks': [
+   ('h2', 'pflichten', 'Was nach dem Kauf Pflicht ist'),
+   ('p', 'Das Gebäudeenergiegesetz (GEG) schreibt bei bestehenden Gebäuden einige Nachrüstungen vor. In Ein- und Zweifamilienhäusern, die der Eigentümer selbst bewohnt, greifen sie erst nach einem Eigentümerwechsel, mit einer Frist von zwei Jahren.'),
+   ('list', ['<strong>Oberste Geschossdecke:</strong> dämmen, wenn sie ungedämmt ist und den Mindestwärmeschutz nicht erfüllt; alternativ das Dach darüber.',
+             '<strong>Alte Heizkessel:</strong> Öl- und Gaskessel mit konstanter Temperatur, die älter als 30 Jahre sind, müssen in der Regel ersetzt werden. Brennwert- und Niedertemperaturkessel sind ausgenommen.',
+             '<strong>Leitungen:</strong> ungedämmte Heizungs- und Warmwasserleitungen in unbeheizten Räumen dämmen.']),
+   ('note', 'Stand 12. November 2026: Für neu eingebaute Heizungen gelten Vorgaben zum Anteil erneuerbarer Energien, abhängig von der kommunalen Wärmeplanung. Eine Überarbeitung des GEG ist politisch angekündigt. Vor jeder Heizungsentscheidung den aktuellen Gesetzesstand prüfen.'),
+   ('h2', 'reihenfolge', 'Die sinnvolle Reihenfolge'),
+   ('flow', [('Bestand aufnehmen', 'Energieausweis, Verbrauch der letzten Jahre, Zustand von Dach, Fenstern, Fassade und Heizung. Ein individueller Sanierungsfahrplan (iSFP) aus einer Energieberatung ordnet die Maßnahmen.'),
+             ('Hülle vor Technik', 'Dämmung und Fenster senken den Wärmebedarf. Erst danach lässt sich die Heizung richtig auslegen, etwa eine Wärmepumpe.'),
+             ('Heizung und Abgleich', 'Neue Heizung, hydraulischer Abgleich, passende Heizflächen. Wärmepumpen arbeiten am besten mit niedrigen Vorlauftemperaturen.'),
+             ('Nachweise', 'Geförderte Maßnahmen brauchen meist die Bestätigung einer Energieeffizienz-Expertin oder eines Energieeffizienz-Experten.')]),
+   ('h2', 'foerderung', 'Förderung: Was vor dem Auftrag passieren muss'),
+   ('p', 'Bund und Länder fördern Maßnahmen an der Gebäudehülle, den Heizungstausch und die Energieberatung, als Zuschuss oder zinsgünstigen Kredit. Die Programme ändern sich regelmäßig. Zwei Regeln gelten aber fast immer:'),
+   ('list', ['Der Antrag wird vor der Beauftragung gestellt. Ein bereits unterschriebener Auftrag kann die Förderung kosten, wenn er nicht ausdrücklich unter dem Vorbehalt der Förderzusage steht.',
+             'Die Angebote müssen die technischen Mindestanforderungen des Programms erfüllen. Fehlen sie in einem Angebot, ist es billiger, aber nicht förderfähig.']),
+   ('h2', 'angebote', 'Warum energetische Angebote schwer vergleichbar sind'),
+   ('p', 'Bei Heizung und Dämmung unterscheiden sich Angebote nicht nur im Preis, sondern in der Auslegung: mit oder ohne Heizlastberechnung, welche Dämmstärke, Fenster mit welchem Wärmedurchgang, hydraulischer Abgleich enthalten oder nicht. Im Renovation Memo legt GRENFORD fest, was alle Firmen anbieten, einschließlich der Förderanforderungen, und vergleicht erst dann die Preise.'),
+   ('example', 'Fiktiver Fall: Einfamilienhaus von 1978, neu gekauft',
+    '<p>Gaskessel mit konstanter Temperatur von 1992, oberste Geschossdecke ungedämmt, Fenster aus den 1990er-Jahren.</p>'
+    '<ol><li><strong>Pflicht:</strong> Geschossdecke dämmen und Kessel ersetzen, beides innerhalb von zwei Jahren nach dem Kauf.</li>'
+    '<li><strong>Reihenfolge:</strong> erst Geschossdecke und Fenster, dann die Heizlast neu berechnen lassen.</li>'
+    '<li><strong>Angebote:</strong> drei Angebote für eine Wärmepumpe auf derselben Grundlage, mit Heizlastberechnung und hydraulischem Abgleich.</li>'
+    '<li><strong>Förderung:</strong> Antrag mit Energieberatung vor der Unterschrift.</li></ol>'
+    '<p>Die Wärmepumpe fiel kleiner aus als im ersten Angebot, weil die Heizlast nach der Dämmung neu berechnet wurde.</p>'),
+   ('h2', 'checkliste', 'Checkliste'),
+   ('checklist', 'Vor der Beauftragung', [
+     'Energieausweis und Verbrauchswerte liegen vor.',
+     'Nachrüstpflichten und Fristen sind geprüft.',
+     'Die Reihenfolge Hülle vor Heizung ist geklärt.',
+     'Das Förderprogramm ist ausgewählt, der Antrag wird vor dem Auftrag gestellt.',
+     'Alle Angebote erfüllen dieselben technischen Anforderungen.',
+     'Heizlastberechnung und hydraulischer Abgleich sind enthalten.']),
+   ('p', 'Wie Sie Angebote Position für Position vergleichen, zeigt [[bauangebote-vergleichen|Drei Bauangebote, drei Preise]]. Welche Maßnahmen überhaupt sinnvoll sind, ordnet [[renovieren-modernisieren-sanieren|Renovieren, modernisieren oder sanieren?]].'),
+  ],
+ },
+]
+BY_SLUG = {a['slug']: a for a in ARTICLES}

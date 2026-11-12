@@ -1715,3 +1715,22 @@ body.page-property .memo-studio .button:hover *{color:#fff!important}
 .cookie-consent-links a{color:#7d8188;min-height:32px;display:inline-flex;align-items:center}
 @media(prefers-reduced-motion:reduce){.cookie-consent{transition:none}}
 
+
+/* Property: Bausteine kombinieren (Nach dem Kauf / vor dem Verkauf) */
+.combinations{padding:96px 4%;background:var(--white)}
+.combinations .section-head{max-width:760px}
+.combo-list{list-style:none;margin:36px 0 0;padding:0;border-top:1px solid var(--line)}
+.combo-list li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) minmax(0,1.6fr);gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line)}
+.combo-list strong{font-weight:500;font-size:18px;letter-spacing:-.02em;color:var(--blue)}
+.combo-list p{margin:0;font-size:15px;line-height:1.6;color:var(--muted)}
+.combo-chips{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.combo-chips i{font-style:normal;color:var(--muted)}
+.combo-chips b{font-weight:500;font-size:13px;padding:5px 12px;border-radius:999px;border:1px solid}
+.combo-property{color:#222e41;background:#dfe4ec;border-color:#222e41}
+.combo-projects{color:#a84700;background:#ffebd8;border-color:#ff7900}
+.combo-grenford{color:#7a6a52;background:#efe8dc;border-color:#7a6a52}
+.combo-partner{color:var(--blue);background:transparent;border-color:var(--line);border-style:dashed}
+.combo-notes{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:30px}
+.combo-notes p{margin:0;font-size:14px;line-height:1.65;color:var(--muted)}
+.combo-notes strong{color:var(--blue);font-weight:500}
+@media(max-width:900px){.combo-list li{grid-template-columns:1fr;gap:8px}.combo-notes{grid-template-columns:1fr}}
