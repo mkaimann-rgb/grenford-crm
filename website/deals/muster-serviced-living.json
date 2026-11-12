@@ -1,0 +1,64 @@
+{
+ "muster": true,
+ "title": "Musterprojekt.",
+ "eyebrow": "Investment Memo · Asset Deal",
+ "confidential": "Off-Market · nur für professionelle Investoren · streng vertraulich",
+ "claim": "Serviced Living und Coworking in einer Grenzregion",
+ "intro": "Genehmigtes Mixed-Use-Ensemble mit möblierten Apartments und mehreren Ertragsbausteinen. Alle Angaben auf dieser Seite sind erfunden und zeigen nur den Aufbau einer Deal-Seite.",
+ "image": "hero-inv-boutiquehaus.webp",
+ "kpis": [["80", "Serviced Apartments"], ["25 km", "zur Landesgrenze"], ["4.000 m²", "Wohnfläche"], ["2.000 m²", "Gewerbe · 3 Ertragsbausteine"]],
+ "money": [["Grundstück gesamt", "15.000 m²", "zwei Flurstücke"], ["Kaufpreis je m² BGF", "500 €", "Listenpreis 650 €"], ["Kaufpreis netto (Asset Deal)", "5,0 Mio. €", "Listenpreis 6,5 Mio. €"], ["Kaufpreisfaktor", "14,0x", "Listenpreis 18,0x"]],
+ "offer": {
+  "title": "Early-Commit: 5,0 Mio. € statt 6,5 Mio. €",
+  "list": "6,5 Mio. €", "earlyLabel": "Early-Commit-Preis", "early": "5,0 Mio. €",
+  "note": "Vorteil gegenüber dem Listenpreis: 1,5 Mio. €. Ein Letter of Intent ist bis zu einem vereinbarten Datum möglich; Fristen und Bedingungen sind abzustimmen.",
+  "staffel": [["2,0 Mio. €", "Anzahlung bei notariellem Kaufvertragsabschluss"], ["3,0 Mio. €", "verbleibender Kaufpreis nach individuell vereinbartem Zahlungsplan"]],
+  "terms": [["Struktur", "Asset Deal, Grundstücke mit Gebäudebestand, Genehmigungen und Planungsunterlagen"], ["Kaufpreis", "6,5 Mio. € netto; Early-Commit 5,0 Mio. € netto"], ["Zahlungsoption", "indikative Staffelung, vorbehaltlich individueller Vereinbarung"], ["Sicherheiten", "grundpfandrechtliche Absicherung nach Vereinbarung"], ["Erwerbsnebenkosten", "Annahme 6,5 % des Kaufpreises"], ["Maklercourtage", "laut Mandat, fällig mit wirksamem notariellem Kaufvertrag"]],
+  "hint": "Die Kaufpreisstaffelung ist eine indikative Strukturierungsoption und kein verbindliches Angebot. Einzelheiten regelt der notarielle Kaufvertrag."
+ },
+ "facts": {
+  "highlights": [["5,0 Mio. €", "Kaufpreis Early-Commit"], ["14,0x", "Faktor auf Eigentümerertrag"], ["18 %", "IRR 10 Jahre, Basisfall"], ["1,5x", "Multiple auf Eigenkapital"], ["20 Mio. €", "Gesamtwert nach Fertigstellung"]],
+  "blocks": [
+   {"title": "Fläche und Objekt", "head": ["Kennzahl", "Wert"], "rows": [["Grundstücke gesamt", "15.000 m²"], ["BGF (ca.)", "10.000 m²"], ["Wohnfläche Apartments", "4.000 m²"], ["Gewerbe", "2.000 m²"]]},
+   {"title": "Kaufpreis", "head": ["Kennzahl", "Early-Commit", "Listenpreis"], "rows": [["Kaufpreis netto", "5,0 Mio. €", "6,5 Mio. €"], ["je m² BGF", "500 €", "650 €"], ["Faktor", "14,0x", "18,0x"], ["Erwerbsnebenkosten (6,5 %)", "0,33 Mio. €", "0,42 Mio. €"]]},
+   {"title": "Baukosten", "head": ["Kennzahl", "Wert"], "rows": [["Restbudget CapEx netto", "8,0 Mio. €"], ["Planungs- und Nebenkosten (10 %)", "0,8 Mio. €"], ["Möblierung / FF&E", "1,2 Mio. €"], ["Bauzeit", "18 Monate"]]},
+   {"title": "Rendite und Wert (Basisfall)", "head": ["Kennzahl", "Early-Commit", "Listenpreis"], "rows": [["Gesamtinvestition", "15,3 Mio. €", "16,8 Mio. €"], ["Gesamtwert nach Fertigstellung", "20,0 Mio. €", "20,0 Mio. €"], ["IRR 10 Jahre (vor Steuern)", "18 %", "12 %"], ["Spitzenbedarf Kapital", "8,0 Mio. €", "9,5 Mio. €"]]}
+  ],
+  "source": "Musterdaten. Bei realen Deals: Quellen je Kennzahl (Verkäuferunterlagen, Gutachten, GRENFORD-Berechnung) mit Stand."
+ },
+ "location": {
+  "title": "Ruhige Lage, Grenzraum vor der Tür",
+  "text": "Muster: Die Lage verbindet Kurort-Qualität mit einem kaufkräftigen Arbeitsmarkt in Pendeldistanz. Bei realen Deals stehen hier Einordnung, Nachfragegruppen und Quellen.",
+  "distances": [["Landesgrenze", "15 km", "ca. 25 km · 25 min"], ["Großstadt A", "45 km", "ca. 70 km · 1 h"], ["Großstadt B", "50 km", "ca. 85 km · 1 h 15"], ["Flughafen", "80 km", "ca. 110 km · 1 h 30"]],
+  "image": "hero-inv-wohnhaus.webp",
+  "caption": "Musterbild. Bei realen Deals: Luftbild Bestand und Visualisierung der Planung."
+ },
+ "concept": {
+  "title": "Ein Haus, mehrere Ertragssäulen",
+  "uses": [["Coworking", "1.000 m²", "flexible Arbeitsplätze, Business-Lounge"], ["Fitness / Wellness", "600 m²", "Studio, Pool, Sauna"], ["Praxisflächen", "400 m²", "Direktvermietung"]],
+  "units": [["1-Zimmer", "25", "25", "625"], ["2-Zimmer", "35", "45", "1.575"], ["3-/4-Zimmer", "20", "90", "1.800"], ["Summe", "80", "50", "4.000"]]
+ },
+ "timeline": {
+  "title": "Die Genehmigungsphase ist abgeschlossen",
+  "steps": [["2023", "Baugenehmigung", true], ["2025", "Teilungserklärung", true], ["2026", "Baubeginn", true], ["2027", "Inbetriebnahme erster Flächen", false], ["2029", "Stabilisierter Betrieb", false]]
+ },
+ "returns": {
+  "title": "Zehn Jahre, ein Cashflow-Bild",
+  "kpis": [["18 %", "IRR 10 Jahre, Basisfall"], ["1,5x", "Multiple"], ["6,0 Mio. €", "Gesamtüberschuss vor Steuern"], ["8,0 Mio. €", "Spitzenbedarf Kapital"]],
+  "head": ["Szenario", "IRR Early-Commit", "IRR Listenpreis", "Multiple"],
+  "scenarios": [["Vorsichtig", "9 %", "5 %", "1,3x"], ["Basis", "18 %", "12 %", "1,5x"], ["Chance", "22 %", "15 %", "1,6x"]],
+  "note": "Musterwerte. Bei realen Deals: Annahmen je Szenario, Abhängigkeit vom Zahlungsplan, vor Steuern und ohne Fremdfinanzierung."
+ },
+ "check": {
+  "title": "Genehmigungen und Eigentum liegen vor",
+  "rows": [["Grundbuch", {"label": "Gesichtet", "tone": "ok"}, "Eigentümerin eingetragen, lastenfreie Übertragung Zug um Zug"], ["Baugenehmigung", {"label": "Gesichtet", "tone": "ok"}, "Umnutzung genehmigt"], ["Bebauungsplan", {"label": "Im Datenraum", "tone": "room"}, "in Kraft, Sondergebiet"], ["Teilungserklärung", {"label": "Im Datenraum", "tone": "room"}, "Aufteilung vorbereitet"], ["Brandschutz", {"label": "Mit Maßgaben", "tone": "warn"}, "Abweichungen mit Kompensation genehmigt"]],
+  "todo": "aktuelle Grundbuchauszüge, Lastenfreistellung zum Vollzug, unterzeichnete Betreiberverträge."
+ },
+ "matrix": {
+  "strengths": ["Genehmigtes Projekt, Planungsrecht abgeschlossen", "Mehrere Ertragssäulen unter einem Dach", "Einstiegspreis mit Zahlungsoption"],
+  "levers": ["Auslastung über Betreiberverträge absichern", "Finanzierungsstruktur bis zum Signing aufsetzen", "Kostenbasis und Reserve verifizieren"],
+  "chances": ["Wohnen auf Zeit im Grenzraum", "Kein vergleichbares Gesamtkonzept im Umkreis", "Exit über Einzelverkauf, Gesamtverkauf oder Halten"],
+  "risks": ["Zins- und Kapitalmarktumfeld", "Bauablauf und Lieferketten", "Wettbewerb durch Ferienwohnungen"]
+ },
+ "next": [["Gespräch und Letter of Intent", "Investitionskriterien besprechen; mit dem LOI bekunden Sie Ihre Kaufabsicht."], ["Identifizierung und Datenraum", "Nach Identifizierung nach Geldwäschegesetz und Vertraulichkeit erhalten Sie Zugang zu allen Unterlagen."], ["Prüfung und Besichtigung", "Ihre Berater prüfen technisch, rechtlich und steuerlich; GRENFORD begleitet den Termin vor Ort."], ["Notarvertrag", "Erwerb im notariell beurkundeten Asset Deal, Zahlungsplan nach Vereinbarung."]]
+}

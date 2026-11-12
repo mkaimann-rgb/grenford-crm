@@ -4,3 +4,6 @@ GRENFORD-website-fertig.zip
 GRENFORD-website-quelltext.txt
 brochure-projects/GRENFORD-Projects-Broschuere.pdf
 brochure-projects/GRENFORD-Projects-Brandkit.zip
+website/deals/*.json
+!website/deals/muster-serviced-living.json
+website/static/assets/deals/

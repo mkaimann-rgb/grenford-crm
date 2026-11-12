@@ -66,7 +66,8 @@ EXTRA = {'bewerten': 'Bewerten', 'ueber-grenford': 'Über GRENFORD'}
 import ratgeber as RG  # Ratgeber: Inhalte, Bausteine, Entwurfsstatus
 import calculators as CALC
 import legal as LEGAL
-import listing as LISTING  # eigene Seite je Immobilie (Property)  # Impressum, Datenschutz, Bildnachweise (Texte 1:1 von der Live-Website)  # Rechner Wertermittlung (Entwurf: nur Vorschau)
+import listing as LISTING
+import deals as DEALS  # geschützte Investment-Deal-Seiten (nur Vorschau, bis Zugangsschutz steht)  # eigene Seite je Immobilie (Property)  # Impressum, Datenschutz, Bildnachweise (Texte 1:1 von der Live-Website)  # Rechner Wertermittlung (Entwurf: nur Vorschau)
 
 
 def mega(k):
@@ -192,7 +193,7 @@ def shell(active, meta, body, ld=(), path=None, noindex=False):
     # 404, Entwürfe und ein Ratgeber ohne freigegebene Beiträge werden nicht indexiert
     hidden = noindex or active == '404' or (active == 'ratgeber' and path.removeprefix('en/') == 'ratgeber/' and not RG.published())
     de_path = path[3:] if paths.lang == 'en' else path
-    has_en = de_path == '' or de_path.split('/')[0] in paths.EN_KEYS
+    has_en = de_path == '' or de_path.split('/')[0] in paths.EN_KEYS and not de_path.startswith('investment/deals/')
     own = ('en/' + de_path) if paths.lang == 'en' else de_path
     meta_robots = '<meta name="robots" content="noindex">' if hidden else f'<link rel="canonical" href="{absolute(own)}">'
     alternates = (f'<link rel="alternate" hreflang="de" href="{absolute(de_path)}"><link rel="alternate" hreflang="en" href="{absolute("en/" + de_path)}">'
@@ -208,7 +209,7 @@ def shell(active, meta, body, ld=(), path=None, noindex=False):
             f'<link rel="stylesheet" href="{root("site.css")}">{alternates}<script defer src="{js("app.js")}"></script><script defer src="{js("ux.js")}"></script><script defer src="{js("wizard.js")}"></script><script defer src="{root("consent.js")}"></script>{f'<script defer src="{js("market.js")}"></script>' if active == 'markt' else ''}{f'<script defer src="{js("calc.js")}"></script>' if active == 'bewerten' and CALC.SHOW else ''}'
             + (structured_data() if active == 'home' else '') + ''.join(ld_json(x) for x in ld) +
             f'</head><body class="page-{active}"><a class="skip" href="#main">Zum Inhalt</a>' + header(active).replace('</header>', switch + '</header>') +
-            '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail(active) + ('' if active in ('bewerten', '404') + LEGAL.PAGES else value_bar(active)) + '</body></html>')
+            '<main id="main" tabindex="-1">' + body + '</main>' + footer() + rail(active) + ('' if active in ('bewerten', '404') + LEGAL.PAGES or '/deals/' in '/' + path else value_bar(active)) + '</body></html>')
 
 
 def hero_images(meta):
@@ -584,6 +585,12 @@ def founder_video():
             '</section>')
 
 
+def deal_page(slug):
+    body = DEALS.body(slug) + contact()
+    html_ = shell('investment', DEALS.meta(slug), body, path=f'investment/deals/{slug}/', noindex=True)
+    return html_.replace('href="#bewertung-investment-value"', f'href="{page("investment")}#bewertung-investment-value"')  # Leiste: zur Investment-Seite
+
+
 def listing_page(slug):
     body = LISTING.body(slug) + '<div class="lx-form">' + gateway('property') + '</div>' + contact()  # Formular für „Property Brief anfragen“
     return shell('property', LISTING.meta(slug), body, ld=(LISTING.structured(slug),), path=f'property/{slug}/')
@@ -781,6 +788,9 @@ def main():
     pages['ratgeber/index.html'] = (1, ratgeber)
     for name in LEGAL.PAGES:
         pages[f'{name}/index.html'] = (1, lambda name=name: legal_page(name))
+    if args.preview or SITE.get('dealsPublish'):  # Deal-Seiten: nur Vorschau, live erst nach Zugangsschutz (deals/ZUGANG.md)
+        for slug in DEALS.DEALS:
+            pages[f'investment/deals/{slug}/index.html'] = (3, lambda slug=slug: deal_page(slug))
     for o in LISTING.OBJECTS:  # Objektseiten: /property/<slug>/
         pages[f'property/{o["slug"]}/index.html'] = (2, lambda slug=o['slug']: listing_page(slug))
     for a in RG.visible():  # Entwürfe nur in der Vorschau; /markt/ als Beitrag nur, solange die Datenseite (market.py) aus ist
@@ -796,7 +806,7 @@ def main():
         (out / target).write_text(render(), encoding='utf-8')
     # Englische Fassung unter en/: dieselben Seiten eine Ebene tiefer gebaut und anhand von i18n/en.json übersetzt
     paths.lang = 'en'
-    en_pages = {t: v for t, v in pages.items() if t == 'index.html' or t.split('/')[0] in paths.EN_KEYS}
+    en_pages = {t: v for t, v in pages.items() if (t == 'index.html' or t.split('/')[0] in paths.EN_KEYS) and not t.startswith('investment/deals/')}
     for target, (depth, render) in en_pages.items():
         paths.set_page(depth + 1)
         (out / 'en' / target).parent.mkdir(parents=True, exist_ok=True)

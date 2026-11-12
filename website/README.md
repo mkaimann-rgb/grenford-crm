@@ -210,3 +210,11 @@ Galerie, Selbst nutzen oder vermieten, Kosten und Energie, Lage (Karte erst nach
 Karten im Karussell verlinken auf die Seite. Felder je Objekt: `slug`, `type`, `gallery`, `places`, `lageText`, `mapQuery`,
 `project` (gemeinsames Projekt, sobald bekannt), `energy` (Pflichtangaben § 87 GEG), `costs` (`provision`, `hausgeld`), `rent`.
 Fehlende Pflichtangaben meldet der Build („Objektseiten mit offenen Pflichtangaben“). Neue Objekte: Texte danach in `i18n/en.json` ergänzen.
+
+## Deal-Seiten (Investment, geschützt)
+
+`deals.py` baut je Off-Market-Deal eine Seite unter `/investment/deals/<slug>/` nach dem Aufbau des GRENFORD Investment Memo
+(Angebot, Kennzahlen, Lage, Konzept, Zeitplan, Investorenrechnung, Asset Check, Value Matrix, nächster Schritt).
+Daten je Deal: `deals/<slug>.json`; im Repository liegt nur die Vorlage mit Musterdaten. Deal-Seiten entstehen nur im
+Vorschau-Build, live erst mit `site.json` → `"dealsPublish": true` nach eingerichtetem Zugangsschutz. Immer noindex,
+nie in der Sitemap, keine englische Fassung. Zugang und Umgang mit echten Daten: `deals/ZUGANG.md`.

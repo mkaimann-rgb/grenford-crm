@@ -1850,3 +1850,101 @@ body.page-property .memo-studio .button:hover *{color:#fff!important}
 .lx-use .combo-partner{color:var(--paper);border-color:rgba(250,246,242,.5)}
 .lx-location .lx-map{width:100%;max-width:none;margin:0}
 .lx-hero .lx-hero-copy .eyebrow,.lx-back,.lx-vis{text-shadow:0 1px 10px rgba(10,14,22,.75)}
+
+/* ================================================================ Investment: Deal-Seite (geschützt), Aufbau nach dem GRENFORD Investment Memo
+   Patina #2e6b62 als Akzent, Mint #8fc7bb auf dunklem Grund, Schwarz-Grau #3a3d41. */
+.dl-sample{margin:0;padding:12px 6%;background:#dcebe7;color:#2e6b62;font-size:13px;text-align:center}
+.dl-hero{position:relative;min-height:min(86vh,820px);display:flex;align-items:flex-end;background:#3a3d41;color:var(--paper);overflow:hidden}
+.dl-hero-img{position:absolute;inset:0;margin:0}.dl-hero-img img{width:100%;height:100%;object-fit:cover}
+.dl-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,30,33,.86) 0%,rgba(28,30,33,.55) 45%,rgba(28,30,33,.15) 100%)}
+.dl-hero-copy{position:relative;z-index:1;padding:150px 6% 60px;max-width:820px}
+.dl-conf{display:inline-block;margin:0 0 18px;padding:8px 14px;border:1px solid rgba(143,199,187,.5);border-radius:999px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8fc7bb}
+.dl-hero .eyebrow{color:#8fc7bb!important}
+.dl-hero h1{margin:6px 0 0;font-size:clamp(56px,9vw,128px);line-height:.95;letter-spacing:-.06em;font-weight:500}
+.dl-claim{margin:18px 0 0;font-size:clamp(20px,2vw,26px);line-height:1.3;color:var(--paper)}
+.dl-intro{margin:16px 0 0;max-width:600px;font-size:15px;line-height:1.7;color:rgba(250,246,242,.82)}
+.dl-kpis,.dl-money{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.dl-kpis{background:var(--paper);padding:26px 6%}
+.dl-kpis div,.dl-money div{border-left:1px solid #2e6b62;padding:4px 18px}
+.dl-kpis strong{display:block;font-size:clamp(26px,2.8vw,38px);font-weight:500;letter-spacing:-.04em;color:var(--blue)}
+.dl-kpis span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.dl-money{background:#3a3d41;padding:34px 6%;color:var(--paper)}
+.dl-money div{border-left-color:#8fc7bb}
+.dl-money span{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8fc7bb}
+.dl-money strong{display:block;margin:8px 0 4px;font-size:clamp(30px,3.4vw,50px);font-weight:500;letter-spacing:-.04em}
+.dl-money small{font-size:13px;color:rgba(250,246,242,.7)}
+.dl-sec{padding:100px 6%;background:var(--white)}
+.dl-sec--paper{background:var(--paper)}
+.dl-sec--dark{background:#3a3d41;color:rgba(250,246,242,.85)}
+.dl-sec h2{margin:0 0 30px;font-size:clamp(32px,3.8vw,52px);line-height:1.06;letter-spacing:-.05em;font-weight:500;color:var(--blue)}
+.dl-sec--dark h2{color:var(--paper)}
+.dl-sec .eyebrow{color:#2e6b62}
+.dl-sec--dark .eyebrow{color:#8fc7bb}
+.dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:5%;align-items:start}
+.dl-prices{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:18px}
+.dl-prices>div{padding:22px 24px}
+.dl-price-list{border:1px solid var(--line);background:var(--white)}
+.dl-price-early{background:#3a3d41;color:var(--paper)}
+.dl-prices span{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.dl-price-early span{color:#8fc7bb}
+.dl-prices s,.dl-prices strong{display:block;margin-top:10px;font-size:clamp(28px,3vw,42px);font-weight:500;letter-spacing:-.04em}
+.dl-prices s{color:#7d8188}
+.dl-steps{display:grid;grid-template-columns:1fr 1fr}
+.dl-steps div{padding:18px 20px;background:#3a3d41;color:var(--paper)}
+.dl-steps div+div{background:#8fc7bb;color:#1c1d20}
+.dl-steps strong{display:block;font-size:26px;font-weight:500;letter-spacing:-.03em}
+.dl-steps span{font-size:13px}
+.dl-terms{margin:0}
+.dl-terms div,.dl-check td,.dl-check th{font-size:14px}
+.dl-terms div{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.dl-terms dt{color:var(--muted)}.dl-terms dd{margin:0;color:var(--blue)}
+.dl-hint{margin:20px 0 0;padding:14px 18px;border-left:3px solid #2e6b62;background:#efe9e1;font-size:13px;line-height:1.6;color:var(--blue)}
+.dl-sec--dark .dl-hint{background:rgba(250,246,242,.06);border-left-color:#8fc7bb;color:rgba(250,246,242,.85)}
+.dl-hard{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:36px}
+.dl-hard div{background:#3a3d41;color:var(--paper);padding:18px 18px 16px}
+.dl-hard strong{display:block;font-size:clamp(22px,2.2vw,30px);font-weight:500;letter-spacing:-.03em}
+.dl-hard span{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8fc7bb}
+.dl-hard--dark{grid-template-columns:repeat(4,minmax(0,1fr))}
+.dl-hard--dark div{background:transparent;border-top:3px solid #8fc7bb;padding:16px 0 0}
+.dl-block{margin-bottom:28px}
+.dl-block h3{margin:0 0 8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:#2e6b62}
+.dl-table-wrap{overflow-x:auto}
+.dl-table{width:100%;border-collapse:collapse;font-size:14px}
+.dl-table th,.dl-table td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.dl-table thead th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:#2e6b62;border-bottom:1px solid var(--blue)}
+.dl-table tbody th{font-weight:400;color:var(--blue)}
+.dl-table td{color:var(--blue)}
+.dl-table td:not(:first-child),.dl-table thead th:not(:first-child){text-align:right}
+.dl-check td:not(:first-child),.dl-check thead th:not(:first-child){text-align:left}
+.dl-sec--dark .dl-table th,.dl-sec--dark .dl-table td{color:var(--paper);border-bottom-color:rgba(250,246,242,.18)}
+.dl-sec--dark .dl-table thead th{color:#8fc7bb;border-bottom-color:rgba(250,246,242,.6)}
+.dl-src{margin:10px 0 0;font-size:12px;color:var(--muted)}
+.dl-lead{font-size:17px;line-height:1.65;color:var(--blue)}
+.dl-figure{margin:0}.dl-figure img{display:block;width:100%;border-radius:4px}
+.dl-figure figcaption{margin-top:8px;font-size:12px;color:var(--muted)}
+.dl-timeline{list-style:none;margin:20px 0 0;padding:28px 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:2px solid var(--blue);position:relative}
+.dl-timeline li{position:relative;padding:18px 12px 0 0}
+.dl-timeline li::before{content:"";position:absolute;top:-38px;left:0;width:16px;height:16px;border-radius:50%;background:#8fc7bb;border:3px solid var(--white)}
+.dl-timeline li.is-done::before{background:var(--blue)}
+.dl-timeline time{display:block;font-size:20px;font-weight:500;letter-spacing:-.02em;color:var(--blue)}
+.dl-timeline span{font-size:14px;color:var(--muted)}
+.dl-status{display:inline-block;padding:4px 10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#fff}
+.dl-status--ok{background:#46684f}.dl-status--room{background:#7d8188}.dl-status--warn{background:#8a7a4f}
+.dl-matrix{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line)}
+.dl-q{padding:24px 26px;border:1px solid var(--line)}
+.dl-q h3{margin:0 0 12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:#2e6b62}
+.dl-q--risks h3{color:#9b3d2e}
+.dl-q ul{margin:0;padding-left:18px;font-size:14px;line-height:1.7;color:var(--blue)}
+.dl-next{list-style:none;margin:0;padding:0}
+.dl-next li{display:grid;grid-template-columns:54px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--line)}
+.dl-next b{font-size:26px;font-weight:500;color:#2e6b62}
+.dl-next h3{margin:0 0 4px;font-size:18px;font-weight:500;color:var(--blue)}
+.dl-next p{margin:0;font-size:14px;line-height:1.6;color:var(--muted)}
+.dl-contact{background:var(--white);padding:28px;border-top:3px solid #2e6b62}
+.dl-contact strong{font-size:20px;font-weight:500;color:var(--blue)}
+.dl-contact p{color:var(--muted);line-height:1.7}
+.dl-legal{padding:30px 6% 50px;background:var(--paper)}
+.dl-legal p{max-width:900px;margin:0;font-size:12px;line-height:1.6;color:var(--muted)}
+@media(max-width:900px){.dl-grid,.dl-matrix{grid-template-columns:1fr;gap:34px}.dl-kpis,.dl-money{grid-template-columns:1fr 1fr;row-gap:22px}
+ .dl-hard{grid-template-columns:1fr 1fr}.dl-timeline{grid-template-columns:1fr;border-top:0;border-left:2px solid var(--blue);padding:0 0 0 24px}
+ .dl-timeline li::before{top:22px;left:-33px}.dl-conf{position:static;display:inline-block;margin-bottom:14px}.dl-sec{padding:70px 6%}}
