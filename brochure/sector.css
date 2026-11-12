@@ -139,3 +139,6 @@ h3 { font-size: 11pt; line-height: 1.22; letter-spacing: var(--track-title); }
 .qr span { display: block; margin-top: 1.6mm; font-size: 6pt; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--acc-light); line-height: 1.35; }
 .contact .folio { color: rgba(250,246,242,.6); }
 .contact .folio b { color: var(--acc-light); }
+
+/* GRENFORD Projects: Orange laut Brand-Kit – Schrift auf Orange immer dunkel */
+.projects   { --acc: #FF7900; --acc-ink: #A84700; --acc-light: #FFAD59; --acc-tint: #FFEBD8; --acc-on: #1C1D20; }
