@@ -1,0 +1,42 @@
+/* GRENFORD Property · Design-Tokens
+   Werte 1:1 aus der neuen GRENFORD-Website (berechnete Werte der Property-Seite und der Objektseiten, Stand 17.11.2026).
+   Für Property Brief, Handouts, Exposés und Präsentationen von GRENFORD Property. */
+
+@font-face { font-family: "DM Sans"; src: url("../fonts/dm-sans-400.woff2") format("woff2"), url("../fonts/dm-sans-400.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "DM Sans"; src: url("../fonts/dm-sans-500.woff2") format("woff2"), url("../fonts/dm-sans-500.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+/* Serifen-Akzent: Website nutzt Palatino (Systemschrift). Für PDF/Print die freie, formgleiche TeX Gyre Pagella. */
+@font-face { font-family: "GF Serif"; src: url("../fonts/texgyrepagella-regular.otf") format("opentype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "GF Serif"; src: url("../fonts/texgyrepagella-italic.otf") format("opentype"); font-weight: 400; font-style: italic; }
+
+:root {
+  /* ---------- Grundfarben (Dachmarke GRENFORD, für alle Bereiche gleich) ---------- */
+  --gf-ink:   #3A3D41;  /* Schwarz-Grau: Fließtext betont, Überschriften, dunkle Flächen */
+  --gf-paper: #FAF6F2;  /* Papier: heller Seitengrund */
+  --gf-ivory: #EFE9E1;  /* Elfenbein: zweite helle Fläche, Kästen */
+  --gf-line:  #CFC8BC;  /* Linien, Trenner */
+  --gf-muted: #5F6470;  /* Grau für Fließtext und Bildunterschriften */
+  --gf-white: #FFFFFF;
+  --gf-mokka: #7A6A52;  /* Mokka: Dachmarke GRENFORD (z. B. Baustein „Wertermittlung“) */
+
+  /* ---------- Akzent GRENFORD Property: Memo-Blau ---------- */
+  --pr-navy:      #222E41;  /* Hauptakzent: Property-Brief-Titelblatt, dunkle Bänder, Buttons, Zahlen · RGB 34/46/65 */
+  --pr-navy-2:    #33415A;  /* zweite Stufe / Hover */
+  --pr-light:     #A9B8CF;  /* helles Memo-Blau: Akzent AUF dunklem Grund (Dachzeilen, Linien) */
+  --pr-tint:      #DFE4EC;  /* zarte Hinterlegung: Symbolfelder, Chips */
+  --pr-on-navy:   #FFFFFF;  /* Schrift auf Navy */
+
+  /* ---------- Schrift ---------- */
+  --font-sans:  "DM Sans", Arial, sans-serif;
+  --font-serif: "GF Serif", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --track-display: -0.06em;   /* große Objekttitel */
+  --track-title:   -0.02em;   /* kleine Titel */
+  --track-eyebrow:  0.08em;   /* Dachzeilen, VERSALIEN klein */
+
+  /* ---------- Form (wie die Objektseiten) ---------- */
+  --radius-pill: 999px;   /* Buttons und Chips immer halbrund */
+  --radius-img:  20px;    /* Bilder */
+  --radius-card: 18px;    /* Karten */
+  --shadow-soft: 0 10px 30px rgba(34, 46, 65, .06);
+  --shadow-img:  0 18px 40px rgba(34, 46, 65, .14);
+  --rule-thin:   1px solid var(--gf-line);
+}
