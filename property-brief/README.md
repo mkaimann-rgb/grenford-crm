@@ -35,6 +35,12 @@ node render.mjs objekte/<strasse-nr>
 
 Voraussetzungen: Python 3 mit Pillow, Node.js mit Playwright (Chromium).
 
+## Standard: Selbstnutzung und Kapitalanlage
+
+Jeder Property Brief enthält nach den Kosten die Seiten `markt` (Vergleichsangebote, angenommene Mietspanne)
+und `rendite` (Bruttorendite und Kaufpreisfaktor; bei einem Objekt drei Szenarien, bei mehreren Einheiten eine Zeile je Einheit).
+Vergleichsangebote je Objekt neu recherchieren und mit Datum und Quelle angeben; die Mietspanne als „Annahme GRENFORD“ kennzeichnen.
+
 ## Seitenzählung
 
 Titel ohne Zahl · Vorwort und Inhalt römisch (I, II) · Objektteil arabisch (1, 2, …) ·

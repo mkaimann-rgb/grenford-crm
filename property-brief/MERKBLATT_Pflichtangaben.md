@@ -19,25 +19,31 @@ Keine Rechtsberatung – eine Arbeitshilfe. AGB und neue Formulierungen einmal a
 - Visualisierungen als solche kennzeichnen; Fotos „digital bearbeitet“, wenn zutreffend.
 - Keine Platzhalter wie „Angabe folgt“ in Versionen für Interessenten.
 
-## 3. Rechte
+## 3. Mietorientierung (Kapitalanlage)
+
+- Vergleichsangebote mit Quelle und Recherchedatum; als Angebotsmieten, nicht repräsentativ kennzeichnen.
+- Mietspanne als Annahme GRENFORD; keine Miet- oder Renditezusage, keine Nettorendite ausweisen.
+- Mietrecht erwähnen: Mietpreisbremse (Ausnahmen § 556f BGB), bei Vermietung bestehender Mietvertrag.
+
+## 4. Rechte
 
 - Fotos, Grundrisse, Pläne: schriftliche Nutzungsfreigabe des Verkäufers bzw. Rechteinhabers (Fotograf, Architekt) einholen.
 - Keine Grafiken anderer Makler übernehmen. Karte: nur die eigene Berlin-Karte (offene Daten, Quellenangabe steht automatisch darunter).
 - Partnernamen (Banken usw.) nur mit Freigabe nennen.
 
-## 4. Partner und Finanzierung
+## 5. Partner und Finanzierung
 
 - Nur „Kontaktherstellung“ – keine Darlehensvermittlung (sonst Erlaubnis nach § 34i GewO nötig).
 - Vergütung durch Partner ist offengelegt (Seite „Partner & Service“ und AGB § 5) – Text nicht entfernen.
 
-## 5. Zusätzlich bei Eigentumswohnungen
+## 6. Zusätzlich bei Eigentumswohnungen
 
 - Hausgeld (davon nicht umlagefähig), Erhaltungsrücklage, Sonderumlagen
 - Teilungserklärung, Sondernutzungsrechte, Protokolle der letzten drei Eigentümerversammlungen, Wirtschaftsplan
 - Bei Vermietung: Mietvertrag, Kaltmiete, Mietbeginn, Kündigungs-/Mietpreisbeschränkungen
 - Bei Neubau/Bauträger: Baubeschreibung, Fertigstellungstermin im Kaufvertrag, Zahlungsplan
 
-## 6. Gesondert (nicht im Brief)
+## 7. Gesondert (nicht im Brief)
 
 - Maklervertrag in Textform (§ 656a BGB)
 - Widerrufsbelehrung und Muster-Widerrufsformular für Verbraucher

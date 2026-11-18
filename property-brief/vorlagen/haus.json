@@ -1,5 +1,5 @@
 {
- "_anleitung": "VORLAGE HAUS – Ordner nach objekte/<name>/ kopieren, Bilder in assets/ ablegen und alle Texte ersetzen. Aufbau, Reihenfolge und Seitenzahlen ergeben sich aus 'seiten'. Seiten können gelöscht oder umsortiert werden; Verweise wie {seite:projektstand} werden automatisch auf die richtige Seitenzahl gesetzt. Kosten (Grunderwerbsteuer, Courtage, Summe, Preis je m²) werden automatisch berechnet. Pflichtangaben siehe MERKBLATT_Pflichtangaben.md.",
+ "_anleitung": "VORLAGE HAUS – Ordner nach objekte/<name>/ kopieren, Bilder in assets/ ablegen und alle Texte ersetzen. Aufbau, Reihenfolge und Seitenzahlen ergeben sich aus 'seiten'. Seiten können gelöscht oder umsortiert werden; Verweise wie {seite:projektstand} werden automatisch auf die richtige Seitenzahl gesetzt. Kosten (Grunderwerbsteuer, Courtage, Summe, Preis je m²) werden automatisch berechnet. Pflichtangaben siehe MERKBLATT_Pflichtangaben.md. Standard: Selbstnutzung und Kapitalanlage – die Seiten 'markt' und 'rendite' (Mietorientierung) gehören in jeden Brief; Vergleichsangebote, Achsen und Mietspanne je Objekt neu recherchieren.",
  "meta": {
   "titel": "GRENFORD Property Brief – [Adresse]",
   "fusszeile": "GRENFORD PROPERTY / [ADRESSE IN VERSALIEN]",
@@ -21,7 +21,8 @@
    {
     "id": "haus",
     "name": "Doppelhaushälfte Schlierbacher Weg 13a",
-    "preis": 613000
+    "preis": 613000,
+    "innenflaeche": 118
    }
   ],
   "optionen": [
@@ -140,10 +141,11 @@
      ]
     },
     {
-     "titel": "Kaufpreis und Erwerbsnebenkosten",
-     "sub": "Alle Kosten auf einen Blick",
+     "titel": "Kaufpreis und Kapitalanlage",
+     "sub": "Erwerbsnebenkosten und Mietorientierung",
      "seiten": [
-      "kosten"
+      "kosten",
+      "rendite"
      ]
     },
     {
@@ -868,6 +870,84 @@
    "id": "kosten"
   },
   {
+   "modul": "markt",
+   "id": "markt",
+   "kopf": "Markt &amp; Mietorientierung",
+   "dachzeile": "Optionales Modul · GRENFORD Research 18.11.2026",
+   "titel": "Mietorientierung für Kapitalanleger.",
+   "intro": "Für Käufer mit Vermietungsabsicht: aktuelle Mietangebote für Häuser im Berliner Süden (Buckow, Rudow). Angebotsmieten sind keine abgeschlossenen Mietverträge und keine Prognose für dieses Haus.",
+   "achsen": [
+    110,
+    160,
+    14,
+    24,
+    10,
+    2
+   ],
+   "spanne": [
+    16.5,
+    18.5
+   ],
+   "spanne_text": [
+    "Nettokaltmiete pro Monat · Annahme GRENFORD,",
+    "keine belegte Objektmiete."
+   ],
+   "vergleiche": [
+    {
+     "key": "A",
+     "adresse": "Buckow · Haus, Grundstück ca. 250 m²",
+     "flaeche": 120,
+     "miete": 2100
+    },
+    {
+     "key": "B",
+     "adresse": "Buckow · Haus mit Garten",
+     "flaeche": 128,
+     "miete": 3000
+    },
+    {
+     "key": "C",
+     "adresse": "Rudow · Haus",
+     "flaeche": 135,
+     "miete": 2500
+    },
+    {
+     "key": "D",
+     "adresse": "Rudow · Haus",
+     "flaeche": 152,
+     "miete": 2736
+    },
+    {
+     "key": "E",
+     "adresse": "Rudow · Haus",
+     "flaeche": 120,
+     "miete": 1800
+    }
+   ],
+   "quelle": [
+    "Angebotsmieten, nicht repräsentativ; keine abgeschlossenen Mietverträge. Flächen laut Inserat. Marktwerte: ImmoScout24 Ø 16,51 €/m² (Häuser Buckow, Q3 2026),",
+    "immoreport Ø 18,12 €/m² (Doppelhaushälften Buckow, 09/2026). Quelle: ImmoScout24 und Immowelt, Recherche 18.11.2026. Mietspanne: Annahme GRENFORD."
+   ]
+  },
+  {
+   "modul": "rendite",
+   "id": "rendite",
+   "kopf": "Vermietung · Modellrechnung",
+   "dachzeile": "Kapitalanlage Doppelhaushälfte · drei Szenarien",
+   "titel": "Miete, Rendite und Kaufpreisfaktor.",
+   "spanne": [
+    16.5,
+    18.5
+   ],
+   "flaeche_label": "Wohnfläche",
+   "basis": "Rechenbasis: Wohnfläche ca. 118 m² nach Angabe des Verkäufers; Keller (ca. 41 m²) nicht angesetzt. Keine Berechnung nach WoFlV.",
+   "fussnoten": [
+    "¹ Wohnfläche nach Verkäuferangabe, keine Berechnung nach WoFlV; Keller und Garten nicht angesetzt. Die Modellwerte können von einer geprüften Wohnflächenberechnung abweichen.",
+    "² Rein rechnerisches Beispiel, keine Miet- oder Renditezusage. Ohne Erwerbsnebenkosten, Leerstand, Finanzierung und Steuern. Bei einem vermieteten Haus trägt der Eigentümer Instandhaltung, Verwaltung und nicht umlagefähige Kosten selbst; die Nettorendite liegt entsprechend darunter.",
+    "Mietrecht: Für Wohnraum in Berlin gilt bei Neuvermietung die Mietpreisbremse; nach einer umfassenden Modernisierung kann die Ausnahme nach § 556f BGB greifen. Die zulässige Miete ist im Einzelfall zu prüfen."
+   ]
+  },
+  {
    "modul": "partner",
    "id": "partner",
    "bereich": "nach",
@@ -935,7 +1015,7 @@
     ],
     [
      "Quellen und Verantwortlichkeit",
-     "Objekt-, Preis-, Flächen- und Lageangaben beruhen auf Unterlagen des Verkäufers, Stand November 2026; Irrtum und Zwischenverkauf vorbehalten. Eigene Hinweis-, Aufklärungs- und Sorgfaltspflichten von GRENFORD bleiben unberührt. Die Haftung richtet sich nach den wirksam einbezogenen AGB und zwingendem Recht."
+     "Objekt-, Preis-, Flächen- und Lageangaben beruhen auf Unterlagen des Verkäufers, Stand November 2026; Irrtum und Zwischenverkauf vorbehalten. Mietorientierung (Seiten {seite:markt}–{seite:rendite}): GRENFORD-Recherche, keine Miet- oder Renditezusage. Eigene Hinweis-, Aufklärungs- und Sorgfaltspflichten von GRENFORD bleiben unberührt. Die Haftung richtet sich nach den wirksam einbezogenen AGB und zwingendem Recht."
     ]
    ]
   },
