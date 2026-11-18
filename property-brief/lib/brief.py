@@ -79,7 +79,9 @@ CH = 58   # Länge der abgeschrägten Bildecke in pt
 
 
 def design(key):
-    return bool(C.meta.get('design', {}).get(key))
+    # Abgeschrägte Ecken und Linien wurden getestet und verworfen (18.11.2026):
+    # Alle Property Briefs behalten die geraden Bildkanten des Originals.
+    return False
 
 
 def SLANT(seite):
