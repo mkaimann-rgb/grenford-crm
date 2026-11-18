@@ -87,10 +87,10 @@ def SLANT(seite):
     if not design('schraege'): return '', ''
     if seite == 'links':
         clip = f'clip-path:polygon(0 0,100% 0,100% calc(100% - {CH}pt),calc(100% - {CH}pt) 100%,0 100%);'
-        return clip, DIAG(HALF, CH, HALF + 42, CH + 42)
+        return clip, ''
     clip = f'clip-path:polygon(0 0,100% 0,100% 100%,{CH}pt 100%,0 calc(100% - {CH}pt));'
     x0 = 907 - HALF
-    return clip, DIAG(x0, CH, x0 - 42, CH + 42)
+    return clip, ''
 
 
 def DIAG(x1, y1, x2, y2, color=LIGHT, w=.7, a=.9):
@@ -106,7 +106,7 @@ def COLCUT():
 
 
 def COLLINE():
-    return DIAG(COL, CH, COL + 42, CH + 42) if design('spalte') else ''
+    return ''   # keine Linien (Entscheidung GRENFORD 18.11.2026)
 
 
 def IMG(src, x, y, w, h, pos='center', size='cover', extra=''):
