@@ -75,9 +75,40 @@ def VL(x, y1, y2, color, w):
     return f'<div class="t" style="left:{x-w/2}pt;top:{H-y1}pt;width:{w}pt;height:{y1-y2}pt;background:{color}"></div>'
 
 
-def IMG(src, x, y, w, h, pos='center', size='cover'):
+CH = 58   # Länge der abgeschrägten Bildecke in pt
+
+
+def design(key):
+    return bool(C.meta.get('design', {}).get(key))
+
+
+def SLANT(seite):
+    """Abgeschrägte Bildecke zur Seitenmitte (unten innen) inkl. feiner Fortsetzungslinie."""
+    if not design('schraege'): return '', ''
+    if seite == 'links':
+        clip = f'clip-path:polygon(0 0,100% 0,100% calc(100% - {CH}pt),calc(100% - {CH}pt) 100%,0 100%);'
+        return clip, DIAG(HALF, CH, HALF + 42, CH + 42)
+    clip = f'clip-path:polygon(0 0,100% 0,100% 100%,{CH}pt 100%,0 calc(100% - {CH}pt));'
+    x0 = 907 - HALF
+    return clip, DIAG(x0, CH, x0 - 42, CH + 42)
+
+
+def DIAG(x1, y1, x2, y2, color=LIGHT, w=.7, a=.9):
+    """Feine Diagonale von (x1,y1) nach (x2,y2), Ursprung unten links."""
+    L_ = math.hypot(x2 - x1, y2 - y1); ang = math.degrees(math.atan2(-(y2 - y1), x2 - x1))
+    return (f'<div class="t" style="left:{x1}pt;top:{H-y1:.2f}pt;width:{L_:.2f}pt;height:{w}pt;background:{color};opacity:{a};'
+            f'transform-origin:0 0;transform:rotate({ang:.2f}deg)"></div>')
+
+
+def COLDIAG(unten=False):
+    """Leitlinie aus der Ecke der blauen Spalte (Titel, Inhalt, Kontakt, Über GRENFORD; Vorwort unten)."""
+    if not design('diagonale'): return ''
+    return DIAG(COL, 0, COL - 150, 150) if unten else DIAG(COL, 567, COL - 150, 417)
+
+
+def IMG(src, x, y, w, h, pos='center', size='cover', extra=''):
     return (f'<div class="t" style="left:{x}pt;top:{H-y-h:.2f}pt;width:{w}pt;height:{h}pt;'
-            f'background:url({C.a(src)}) {pos}/{size} no-repeat"></div>')
+            f'background:url({C.a(src)}) {pos}/{size} no-repeat;{extra}"></div>')
 
 
 def PIC(src, x, y, w, h):
@@ -177,7 +208,7 @@ def m_titel(d):
     gap = (490 - sum(ws)) / 4; xs = []; x = 390 + gap
     for w in ws: xs.append(round(x, 2)); x += w + gap
     s = (IMG(d['bild'], 0, 0, 907, 567, d.get('bild_pos', 'center'))
-         + R(0, 0, COL, 567, NAVY, .6) + MARK('white', 47, 450.63, .217335)
+         + R(0, 0, COL, 567, NAVY, .6) + COLDIAG() + MARK('white', 47, 450.63, .217335)
          + EB(51, 404, d.get('dachzeile', 'Property Brief'), CREAM, 8.5)
          + T(49, 297 + tl, 'S', round(ts, 2), round(tl, 2), CREAM, br(lines))
          + T(51, 219, 'S', 19, 25, CREAM, br(d['untertitel']))
@@ -190,7 +221,7 @@ def m_titel(d):
 
 
 def m_vorwort(d):
-    return (HEAD('Vorwort') + PN() + IMG('marco-kaimann.jpg', 0, 0, COL, 567, 'center top')
+    return (HEAD('Vorwort') + PN() + IMG('marco-kaimann.jpg', 0, 0, COL, 567, 'center top') + COLDIAG(unten=True)
             + EB(447, 485, d['dachzeile']) + T(447, 440, 'S', 32, 34, INK, d['titel'])
             + T(447, 395, 'S', 14.5, 20.5, INK, d['lead'], w=409)
             + T(447, 305, 'N', 9.8, 14.8, INK, d['links'], w=180) + VL(637, 315, 240, '#a5b1bf', .8)
@@ -203,7 +234,7 @@ def m_vorwort(d):
 
 def m_inhalt(d):
     s = (HEAD('Inhalt') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'))
-         + R(0, 0, COL, 567, NAVY, .4) + MARK('white') + FOOT(CREAM)
+         + R(0, 0, COL, 567, NAVY, .4) + COLDIAG() + MARK('white') + FOOT(CREAM)
          + EB(51, 403, 'Ihr Überblick', CREAM, 8) + T(51, 349, 'S', 32, 37, CREAM, br(d['claim']))
          + L(51, 262, 331, '#aeb5be') + EB(51, 230, d['marke'], CREAM, 9)
          + T(51, 204, 'N', 10, 14.5, CREAM, br(d['text'])) + T(51, 81, 'N', 10, 14.5, CREAM, br(d['adresse'])))
@@ -240,7 +271,8 @@ def m_split(d):
     right = d.get('bild_seite', 'rechts') == 'rechts'
     x0, xr = (51, 407) if right else (TX, 856)
     lw = d.get('label_breite', 100)
-    s = (IMG(d['bild'], 907 - HALF if right else 0, 0, HALF, 567, d.get('bild_pos', 'center'))
+    cl, ln_ = SLANT('rechts' if right else 'links')
+    s = (IMG(d['bild'], 907 - HALF if right else 0, 0, HALF, 567, d.get('bild_pos', 'center'), extra=cl) + ln_
          + chrome(d['kopf']) + EB(x0, 487, d['dachzeile']) + T(x0, 447, 'S', 31, 34, INK, br(d['titel']))
          + T(x0, 372, 'N', 9.8, 14.5, INK, d['intro'], w=356))
     for i, (h, t) in enumerate(d['liste']):
@@ -278,7 +310,8 @@ def m_lage(d):
 
 def m_raumprogramm(d):
     XR = 407
-    s = (MARK() + FOOT() + IMG(d['bild'], 907 - HALF, 0, HALF, 567, d.get('bild_pos', 'center'))
+    cl, ln_ = SLANT('rechts')
+    s = (MARK() + FOOT() + IMG(d['bild'], 907 - HALF, 0, HALF, 567, d.get('bild_pos', 'center'), extra=cl) + ln_
          + HEAD('Das Raumprogramm') + PN(INK)
          + EB(51, 481, d['dachzeile']) + T(51, 446, 'S', 24, 26, INK, br(d['titel']))
          + T(51, 392, 'N', 8.8, 12.6, INK, d['intro'], w=XR - 51)
@@ -331,9 +364,9 @@ def m_grundrisse(d):
 def m_sanierung(d):
     b = d['bilder']
     if len(b) == 1:
-        s = IMG(b[0]['bild'], 0, 0, HALF, 567, b[0].get('pos', 'center'))
+        cl, ln_ = SLANT('links'); s = IMG(b[0]['bild'], 0, 0, HALF, 567, b[0].get('pos', 'center'), extra=cl) + ln_
     else:
-        s = IMG(b[0]['bild'], 0, 291.92, HALF, 275.08, b[0].get('pos', 'center')) + IMG(b[1]['bild'], 0, 0, HALF, 289.92, b[1].get('pos', 'center'))
+        s = IMG(b[0]['bild'], 0, 291.92, HALF, 275.08, b[0].get('pos', 'center')) + IMG(b[1]['bild'], 0, 0, HALF, 289.92, b[1].get('pos', 'center'), extra=SLANT('links')[0]) + SLANT('links')[1]
     s += chrome(d['kopf']) + EB(TX, 481, d['dachzeile']) + T(TX, 446, 'S', 24, 26, INK, br(d['titel']))
     for i, (h, t) in enumerate(d['bloecke']):
         ln = 392 - 108 * i
@@ -468,7 +501,8 @@ def m_vergleich(d, obj):
 def m_einheit(d, obj):
     u = next(x for x in obj['kosten']['einheiten'] if x['id'] == d['einheit'])
     qm = u['preis'] / u['flaeche_num']
-    s = (IMG(d['bild'], 0, 0, HALF, 567, d.get('bild_pos', 'center')) + chrome(d['kopf'])
+    cl, ln_ = SLANT('links')
+    s = (IMG(d['bild'], 0, 0, HALF, 567, d.get('bild_pos', 'center'), extra=cl) + ln_ + chrome(d['kopf'])
          + R(0, 70, 70, 70, NAVY, .6) + T(16, 96, 'S', 30, 34, CREAM, d['nummer'])
          + EB(TX, 487, d['dachzeile']) + T(TX, 452, 'S', 26, 30, INK, u['name'])
          + T(TX, 434, 'N', 8, 11, GREY, d['zuordnung'])
@@ -589,7 +623,7 @@ def m_partner(d, shared):
 
 def m_kontakt(d):
     s = (HEAD('Nächster Schritt &amp; Kontakt') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'))
-         + R(0, 0, COL, 567, NAVY, .4) + MARK('white') + FOOT(CREAM)
+         + R(0, 0, COL, 567, NAVY, .4) + COLDIAG() + MARK('white') + FOOT(CREAM)
          + T(51, 140, 'S', 29, 33, CREAM, br(d['claim'])) + EB(412, 488, d['dachzeile']) + T(412, 448, 'S', 30, 32, INK, br(d['titel'])))
     for i, (h, t) in enumerate(d['schritte']):
         ln = 382 - 64 * i
@@ -604,7 +638,7 @@ def m_kontakt(d):
 
 def m_ueber(d, shared):
     s = (HEAD('Über GRENFORD') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'))
-         + R(0, 0, COL, 567, NAVY, .4) + MARK('white') + FOOT(CREAM)
+         + R(0, 0, COL, 567, NAVY, .4) + COLDIAG() + MARK('white') + FOOT(CREAM)
          + T(51, 121, 'S', 29, 32, CREAM, 'Wir strukturieren<br>Immobilien-<br>entscheidungen.'))
     h = round(95 * 379 / 773, 2)
     for i, (brand, t, desc, lab, logo) in enumerate(shared['geschaeftsfelder']):

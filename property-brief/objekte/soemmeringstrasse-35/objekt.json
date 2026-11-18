@@ -2,10 +2,14 @@
  "meta": {
   "titel": "GRENFORD Property Brief – Sömmeringstraße 35",
   "fusszeile": "GRENFORD PROPERTY / SÖMMERINGSTRASSE 35",
-  "ausgabe": "GRENFORD_Property_Brief_Soemmeringstrasse_35.pdf",
+  "ausgabe": "GRENFORD_Property_Brief_Soemmeringstrasse_35_TEST_Design.pdf",
   "redaktionsstand": "18.11.2026",
   "agb_stand": "18.11.2026",
-  "variante": "wohnung-projekt"
+  "variante": "wohnung-projekt",
+  "design": {
+   "schraege": true,
+   "diagonale": true
+  }
  },
  "kosten": {
   "land": "Berlin",
