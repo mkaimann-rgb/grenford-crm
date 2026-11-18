@@ -62,9 +62,9 @@ def RT(x2, base, f, size, tl, color, text, w=200):
     return T(x2 - w, base, f, size, tl, color, text, w=w, extra='text-align:right')
 
 
-def R(x, y, w, h, color=NAVY, a=1):
+def R(x, y, w, h, color=NAVY, a=1, extra=''):
     rad = f'border-radius:{13.5 if h >= 60 else 7}pt;' if (color == NAVY and a == 1 and C.page >= 2) else ''
-    return f'<div class="t" style="left:{x}pt;top:{H-y-h:.2f}pt;width:{w}pt;height:{h}pt;background:{color};opacity:{a};{rad}"></div>'
+    return f'<div class="t" style="left:{x}pt;top:{H-y-h:.2f}pt;width:{w}pt;height:{h}pt;background:{color};opacity:{a};{rad}{extra}"></div>'
 
 
 def L(x1, y, x2, color=LINE, w=0.5):
@@ -100,10 +100,13 @@ def DIAG(x1, y1, x2, y2, color=LIGHT, w=.7, a=.9):
             f'transform-origin:0 0;transform:rotate({ang:.2f}deg)"></div>')
 
 
-def COLDIAG(unten=False):
-    """Leitlinie aus der Ecke der blauen Spalte (Titel, Inhalt, Kontakt, Über GRENFORD; Vorwort unten)."""
-    if not design('diagonale'): return ''
-    return DIAG(COL, 0, COL - 150, 150) if unten else DIAG(COL, 567, COL - 150, 417)
+def COLCUT():
+    """Abgeschrägte Ecke unten innen an der Bild-/Farbspalte (Titel, Vorspann, Anhang)."""
+    return f'clip-path:polygon(0 0,100% 0,100% calc(100% - {CH}pt),calc(100% - {CH}pt) 100%,0 100%);' if design('spalte') else ''
+
+
+def COLLINE():
+    return DIAG(COL, CH, COL + 42, CH + 42) if design('spalte') else ''
 
 
 def IMG(src, x, y, w, h, pos='center', size='cover', extra=''):
@@ -208,7 +211,7 @@ def m_titel(d):
     gap = (490 - sum(ws)) / 4; xs = []; x = 390 + gap
     for w in ws: xs.append(round(x, 2)); x += w + gap
     s = (IMG(d['bild'], 0, 0, 907, 567, d.get('bild_pos', 'center'))
-         + R(0, 0, COL, 567, NAVY, .6) + COLDIAG() + MARK('white', 47, 450.63, .217335)
+         + R(0, 0, COL, 567, NAVY, .6, extra=COLCUT()) + COLLINE() + MARK('white', 47, 450.63, .217335)
          + EB(51, 404, d.get('dachzeile', 'Property Brief'), CREAM, 8.5)
          + T(49, 297 + tl, 'S', round(ts, 2), round(tl, 2), CREAM, br(lines))
          + T(51, 219, 'S', 19, 25, CREAM, br(d['untertitel']))
@@ -221,7 +224,7 @@ def m_titel(d):
 
 
 def m_vorwort(d):
-    return (HEAD('Vorwort') + PN() + IMG('marco-kaimann.jpg', 0, 0, COL, 567, 'center top') + COLDIAG(unten=True)
+    return (HEAD('Vorwort') + PN() + IMG('marco-kaimann.jpg', 0, 0, COL, 567, 'center top', extra=COLCUT()) + COLLINE()
             + EB(447, 485, d['dachzeile']) + T(447, 440, 'S', 32, 34, INK, d['titel'])
             + T(447, 395, 'S', 14.5, 20.5, INK, d['lead'], w=409)
             + T(447, 305, 'N', 9.8, 14.8, INK, d['links'], w=180) + VL(637, 315, 240, '#a5b1bf', .8)
@@ -233,8 +236,8 @@ def m_vorwort(d):
 
 
 def m_inhalt(d):
-    s = (HEAD('Inhalt') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'))
-         + R(0, 0, COL, 567, NAVY, .4) + COLDIAG() + MARK('white') + FOOT(CREAM)
+    s = (HEAD('Inhalt') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'), extra=COLCUT())
+         + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(CREAM)
          + EB(51, 403, 'Ihr Überblick', CREAM, 8) + T(51, 349, 'S', 32, 37, CREAM, br(d['claim']))
          + L(51, 262, 331, '#aeb5be') + EB(51, 230, d['marke'], CREAM, 9)
          + T(51, 204, 'N', 10, 14.5, CREAM, br(d['text'])) + T(51, 81, 'N', 10, 14.5, CREAM, br(d['adresse'])))
@@ -258,8 +261,9 @@ def m_ueberblick(d):
     s += T(660, 76, 'N', 7, 10, MIST, br(d['kennzahlen_hinweis']))
     lx = d.get('label_x', 186)
     for i, (k, v) in enumerate(d['zeilen']):
-        ln = 331 - 28 * i
-        s += L(51, ln, 596) + T(51, ln - 17, 'N', 8, 11.6, GREY, k) + T(lx, ln - 17, 'N', 9.2, 13, INK, v)
+        st = min(28, 209 / len(d['zeilen'])); ln = 331 - st * i; o_ = round(st * .62, 2)
+        s += L(51, ln, 596) + T(51, ln - o_, 'N', 8, 11.6, GREY, k) + T(lx, ln - o_, 'N', 9.2, 13, INK, v)
+    s += L(51, 331 - min(28, 209 / len(d['zeilen'])) * len(d['zeilen']), 596) if len(d['zeilen']) > 7 else ''
     if d.get('banner'):
         s += (R(51, 54, 545, 64) + EB(65, 100, d['banner']['label'], LIGHT, 6.8)
               + T(65, 82, 'N', 8.8, 12.5, CREAM, br(d['banner']['text'])))
@@ -622,8 +626,8 @@ def m_partner(d, shared):
 
 
 def m_kontakt(d):
-    s = (HEAD('Nächster Schritt &amp; Kontakt') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'))
-         + R(0, 0, COL, 567, NAVY, .4) + COLDIAG() + MARK('white') + FOOT(CREAM)
+    s = (HEAD('Nächster Schritt &amp; Kontakt') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'), extra=COLCUT())
+         + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(CREAM)
          + T(51, 140, 'S', 29, 33, CREAM, br(d['claim'])) + EB(412, 488, d['dachzeile']) + T(412, 448, 'S', 30, 32, INK, br(d['titel'])))
     for i, (h, t) in enumerate(d['schritte']):
         ln = 382 - 64 * i
@@ -637,8 +641,8 @@ def m_kontakt(d):
 
 
 def m_ueber(d, shared):
-    s = (HEAD('Über GRENFORD') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'))
-         + R(0, 0, COL, 567, NAVY, .4) + COLDIAG() + MARK('white') + FOOT(CREAM)
+    s = (HEAD('Über GRENFORD') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'), extra=COLCUT())
+         + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(CREAM)
          + T(51, 121, 'S', 29, 32, CREAM, 'Wir strukturieren<br>Immobilien-<br>entscheidungen.'))
     h = round(95 * 379 / 773, 2)
     for i, (brand, t, desc, lab, logo) in enumerate(shared['geschaeftsfelder']):

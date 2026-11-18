@@ -8,7 +8,7 @@
   "variante": "wohnung-projekt",
   "design": {
    "schraege": true,
-   "diagonale": true
+   "spalte": true
   }
  },
  "kosten": {
@@ -211,6 +211,10 @@
    "intro": "Dachgeschossausbau mit vollständig neuem Dachtragwerk in Holzbauweise. Drei eigenständige Residenzen verbinden individuelle Grundrisse mit privaten Dachterrassen und Loggien.",
    "zeilen": [
     [
+     "Objekt-Nr.",
+     "PROP-2026-001 (Beispiel aus dem CRM-Nummernkreis)"
+    ],
+    [
      "Objektart",
      "Dachgeschossausbau, drei Eigentumswohnungen"
     ],
@@ -237,6 +241,10 @@
     [
      "Genehmigung",
      "Baurechtliche Genehmigungen liegen vor"
+    ],
+    [
+     "Käuferprovision",
+     "3,57 % inkl. MwSt. (3,00 % zzgl. 19 % MwSt.)"
     ]
    ],
    "kennzahlen": [
