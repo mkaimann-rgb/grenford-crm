@@ -108,18 +108,18 @@
    ],
    "kapitel": [
     {
-     "titel": "Das Haus",
-     "sub": "Eckdaten, Wohnkonzept und Wohngefühl",
+     "titel": "Das Haus und der Kaufpreis",
+     "sub": "Eckdaten, Kaufpreis und Erwerbsnebenkosten",
      "seiten": [
       "ueberblick",
-      "wohnkonzept"
+      "kosten"
      ]
     },
     {
-     "titel": "Ausstattung und Lage",
-     "sub": "Materialien und Bäder, Umfeld und Anbindung",
+     "titel": "Wohnen und Lage",
+     "sub": "Wohnkonzept, Ausstattung, Umfeld und Anbindung",
      "seiten": [
-      "ausstattung",
+      "wohnkonzept",
       "lage"
      ]
     },
@@ -140,10 +140,10 @@
      ]
     },
     {
-     "titel": "Kaufpreis und Kapitalanlage",
-     "sub": "Erwerbsnebenkosten und Mietorientierung",
+     "titel": "Kapitalanlage",
+     "sub": "Mietorientierung und Modellrechnung",
      "seiten": [
-      "kosten",
+      "markt",
       "rendite"
      ]
     },
@@ -179,6 +179,10 @@
    "titel": "Das Haus auf einen Blick.",
    "intro": "Eine Doppelhaushälfte aus dem Jahr 1976, nach umfassender Kernsanierung bereit für den Erstbezug – mit Garten, Vollkeller und Platz für eine Familie.",
    "zeilen": [
+    [
+     "Objekt-Nr.",
+     "GPR26-004"
+    ],
     [
      "Objektart",
      "Doppelhaushälfte mit Vollkeller"
@@ -245,6 +249,10 @@
     ]
    },
    "quelle": "Quelle: Angaben des Verkäufers, Stand November 2026."
+  },
+  {
+   "modul": "kosten",
+   "id": "kosten"
   },
   {
    "modul": "split",
@@ -871,10 +879,6 @@
    ],
    "klasse": "A",
    "endenergie": "45,2"
-  },
-  {
-   "modul": "kosten",
-   "id": "kosten"
   },
   {
    "modul": "markt",

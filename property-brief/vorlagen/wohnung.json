@@ -220,6 +220,10 @@
    "quelle": "Quelle: Angaben des Verkäufers, Stand [Monat Jahr]."
   },
   {
+   "modul": "kosten",
+   "id": "kosten"
+  },
+  {
    "modul": "split",
    "id": "ausstattung",
    "kopf": "Ausstattung",
@@ -431,10 +435,6 @@
    ],
    "klasse": "[A–H]",
    "endenergie": "[kWh]"
-  },
-  {
-   "modul": "kosten",
-   "id": "kosten"
   },
   {
    "modul": "markt",

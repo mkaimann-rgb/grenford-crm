@@ -19,7 +19,7 @@
    {
     "id": "we1",
     "name": "Schlosspark Penthouse",
-    "sub": "WE 1 · WHG 52",
+    "sub": "GPR26-001 · WE 1 · WHG 52",
     "preis": 1810000,
     "flaeche": "196,42 m²",
     "flaeche_num": 196.42,
@@ -32,7 +32,7 @@
    {
     "id": "we2",
     "name": "Mierendorff Residence",
-    "sub": "WE 2 · WHG 51",
+    "sub": "GPR26-002 · WE 2 · WHG 51",
     "preis": 1623000,
     "flaeche": "170,68 m²",
     "flaeche_num": 170.68,
@@ -45,7 +45,7 @@
    {
     "id": "we3",
     "name": "Spree Corner Penthouse",
-    "sub": "WE 3 · WHG 50",
+    "sub": "GPR26-003 · WE 3 · WHG 50",
     "preis": 1726000,
     "flaeche": "183,77 m²",
     "flaeche_num": 183.77,
@@ -143,10 +143,18 @@
    ],
    "kapitel": [
     {
-     "titel": "Das Projekt",
-     "sub": "Eckdaten, Wohnkonzept, Ausstattung und Lage",
+     "titel": "Das Projekt und die Kaufpreise",
+     "sub": "Eckdaten, Kaufpreise und Erwerbsnebenkosten",
      "seiten": [
       "ueberblick",
+      "kosten"
+     ]
+    },
+    {
+     "titel": "Wohnen und Lage",
+     "sub": "Wohnkonzept, Ausstattung, Umfeld und Anbindung",
+     "seiten": [
+      "wohnkonzept",
       "lage"
      ]
     },
@@ -159,16 +167,15 @@
      ]
     },
     {
-     "titel": "Projektstand und Kaufpreise",
-     "sub": "Baufortschritt, Erwerbsnebenkosten und Courtage",
+     "titel": "Projektstand",
+     "sub": "Baufortschritt, Termine und Unterlagen",
      "seiten": [
-      "projektstand",
-      "kosten"
+      "projektstand"
      ]
     },
     {
-     "titel": "Mietorientierung",
-     "sub": "Optionales Modul für Kapitalanleger",
+     "titel": "Kapitalanlage",
+     "sub": "Mietorientierung und Modellrechnung",
      "seiten": [
       "markt",
       "rendite"
@@ -208,7 +215,7 @@
    "zeilen": [
     [
      "Objekt-Nr.",
-     "GPR26-001"
+     "GPR26-001 · GPR26-002 · GPR26-003 (je Residenz)"
     ],
     [
      "Objektart",
@@ -272,6 +279,10 @@
     ]
    },
    "quelle": "Quelle: Baubeschreibung, Stand April 2026; Baufortschritt nach Angabe des Verkäufers."
+  },
+  {
+   "modul": "kosten",
+   "id": "kosten"
   },
   {
    "modul": "split",
@@ -423,7 +434,7 @@
    "bild_pos": "40% center",
    "plan": "plan-we1.png",
    "dachzeile": "The Charlottenburg Penthouse Collection",
-   "zuordnung": "WE 1 · WHG 52 · Farbe im Gesamtplan: Rot",
+   "zuordnung": "Objekt-Nr. GPR26-001 · WE 1 · WHG 52 · Farbe im Gesamtplan: Rot",
    "headline": "Großzügigkeit als Mittelpunkt.",
    "text": "Der rund 68,47 m² große Wohn- und Kochbereich bildet das Herz dieser Residenz. Separate Räume ermöglichen unterschiedliche Wohn- und Lebensmodelle. Zwei Loggien und eine private Dachterrasse ergänzen die Innenräume.",
    "flaechen": [
@@ -453,7 +464,7 @@
    "bild_pos": "40% center",
    "plan": "plan-we2.png",
    "dachzeile": "The Charlottenburg Penthouse Collection",
-   "zuordnung": "WE 2 · WHG 51 · Farbe im Gesamtplan: Gelb",
+   "zuordnung": "Objekt-Nr. GPR26-002 · WE 2 · WHG 51 · Farbe im Gesamtplan: Gelb",
    "headline": "Wohnen mit eigener Raumfolge.",
    "text": "Ein eigenständiger Wohnbereich und ein großzügiger Bereich für Essen und Kochen geben der Residenz ihre Struktur. Zwei Loggien und eine private Dachterrasse schaffen insgesamt 32,83 m² ausgewiesene Außenbereiche.",
    "flaechen": [
@@ -483,7 +494,7 @@
    "bild_pos": "35% center",
    "plan": "plan-we3.png",
    "dachzeile": "The Charlottenburg Penthouse Collection",
-   "zuordnung": "WE 3 · WHG 50 · Farbe im Gesamtplan: Blau",
+   "zuordnung": "Objekt-Nr. GPR26-003 · WE 3 · WHG 50 · Farbe im Gesamtplan: Blau",
    "headline": "Offene Räume. Eigenständiger Charakter.",
    "text": "Der rund 76,38 m² große Wohn- und Kochbereich prägt den offenen Charakter dieser Residenz. Eine Eckloggia und die private Dachterrasse verbinden die Innenräume mit zusätzlichen Aufenthaltsmöglichkeiten im Freien.",
    "flaechen": [
@@ -620,10 +631,6 @@
     "Verbindlich sind Baubeschreibung und",
     "notarieller Kaufvertrag."
    ]
-  },
-  {
-   "modul": "kosten",
-   "id": "kosten"
   },
   {
    "modul": "markt",

@@ -244,6 +244,10 @@
    "quelle": "Quelle: Angaben des Verkäufers, Stand November 2026."
   },
   {
+   "modul": "kosten",
+   "id": "kosten"
+  },
+  {
    "modul": "split",
    "id": "wohnkonzept",
    "kopf": "Architektur &amp; Wohnkonzept",
@@ -868,10 +872,6 @@
    ],
    "klasse": "A",
    "endenergie": "45,2"
-  },
-  {
-   "modul": "kosten",
-   "id": "kosten"
   },
   {
    "modul": "markt",
