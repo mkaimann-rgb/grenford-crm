@@ -407,27 +407,42 @@ def m_kosten(d, obj):
               + T(660, 150, 'S', 22, 28, CREAM, 'ca. ' + eur(qm, 0)) + T(660, 132, 'N', 7.8, 11, MIST, f'bezogen auf ca. {str(k["flaeche_qm"]).replace(".", ",")} m² {k["flaeche_art"]}')
               + T(660, 76, 'N', 7, 10, MIST, 'Maßgeblich sind die gesonderte<br>Maklervereinbarung und der<br>notarielle Kaufvertrag.'))
         return s
-    # mehrere Einheiten: Tabelle
-    s += T(51, 398, 'N', 10, 15, INK, 'Grunderwerbsteuer und Käufercourtage rechnerisch auf Basis des unveränderten Kaufpreises. Notar- und Grundbuch-<br>kosten kommen nach GNotKG hinzu und werden nicht pauschal angesetzt.', w=560)
-    s += EB(51, 352, 'Einheit', NAVY, 6.6)
-    for x, t in [(330, 'Kaufpreis'), (420, f'GrESt · {pct(ge, 0)}'), (505, f'Courtage · {pct(co)}'), (596, 'Summe')]:
-        s += RT(x, 352, 'B', 6.6, 9, NAVY, t.upper(), 90)
-    total = 0
-    for i, u in enumerate(units):
-        p = u['preis']; g = p * ge / 100; c = p * co / 100; total += p
-        ln = 340 - 40 * i
-        s += (L(51, ln, 596) + T(51, ln - 18, 'S', 11.5, 15, INK, u['name']) + T(51, ln - 31, 'N', 7.4, 10, GREY, u.get('sub', ''))
-              + RT(330, ln - 18, 'S', 11, 15, NAVY, eur(p, 0), 110) + RT(420, ln - 18, 'N', 8.6, 13, INK, eur(g), 90)
-              + RT(505, ln - 18, 'N', 8.6, 13, INK, eur(c), 90) + RT(596, ln - 18, 'B', 8.6, 13, NAVY, eur(p + g + c), 100))
-    s += L(51, 340 - 40 * len(units), 596)
-    s += cap(51, 60, 'Summe je Einheit: Kaufpreis, Grunderwerbsteuer und Käufercourtage, ohne Notar und Grundbuch.')
-    s += (R(632, 34, 224, 464) + EB(660, 469, 'Kaufpreise', CREAM, 8)
-          + T(660, 422, 'S', 25, 32, CREAM, 'ab ' + eur(min(u['preis'] for u in units), 0))
-          + T(660, 398, 'N', 7.8, 11, MIST, f'{len(units)} Einheiten · Summe der Einzel-<br>kaufpreise {eur(total, 0)}')
+    # mehrere Einheiten: gleiches Layout wie bei einer Einheit, eine Spalte je Einheit
+    s += (T(51, 398, 'N', 10, 15, INK, 'Alle Positionen rechnerisch auf Basis des jeweiligen Kaufpreises. Notar- und Grundbuchkosten hängen vom Vertrag ab<br>und werden nicht pauschal angesetzt.', w=560)
+          + EB(51, 352, 'Position', NAVY, 6.6))
+    xs = [596 - 120 * (len(units) - 1 - j) for j in range(len(units))]
+    for x, u in zip(xs, units):
+        s += RT(x, 356, 'S', 9.6, 12, NAVY, u['name'], 118) + RT(x, 345, 'N', 6.6, 9, GREY, u.get('sub', '').upper(), 118)
+    rows = [('Kaufpreis', lambda p: p, 'S', 11), (f'Grunderwerbsteuer {k["land"]} · {pct(ge, 0)}', lambda p: p * ge / 100, 'N', 9),
+            (f'Käufercourtage · {pct(co)}', lambda p: p * co / 100, 'N', 9)]
+    for i, (t, f, fo, sz) in enumerate(rows):
+        ln = 334 - 30 * i
+        s += L(51, ln, 596) + T(51, ln - 19, 'N', 9.2, 13, INK, t, w=170)
+        for x, u in zip(xs, units):
+            s += RT(x, ln - 19, fo, sz, 15, NAVY if fo == 'S' else INK, eur(f(u['preis']), 0 if fo == 'S' else 2), 118)
+    tots = [u['preis'] * (1 + (ge + co) / 100) for u in units]
+    s += L(51, 244, 596, NAVY, 1.1) + T(51, 225, 'B', 9.4, 13, NAVY, 'Summe ohne Notar und Grundbuch')
+    for x, t in zip(xs, tots):
+        s += RT(x, 224, 'SB', 11, 16, NAVY, eur(t), 118)
+    s += L(51, 214, 596) + T(51, 195, 'N', 9.2, 13, INK, 'Preis je m² ' + k.get('flaeche_art', 'DIN 277 inkl. Außen'))
+    for x, u in zip(xs, units):
+        s += RT(x, 195, 'N', 9, 13, INK, eur(u['preis'] / u['flaeche_num']), 118)
+    s += L(51, 184, 596) + T(51, 165, 'N', 9.2, 13, INK, 'Notar- und Grundbuchkosten') + RT(596, 165, 'N', 9, 13, GREY, 'nach GNotKG, nicht beziffert', 200) + L(51, 154, 596)
+    if k.get('optionen'):
+        s += EB(51, 128, 'Optional · nicht im Kaufpreis enthalten')
+        for i, (t, v, num) in enumerate(k['optionen']):
+            ln = 116 - 28 * i
+            s += L(51, ln, 596) + T(51, ln - 18, 'N', 9.2, 13, INK, t) + RT(596, ln - 18, 'S' if num else 'N', 11 if num else 9, 15, NAVY if num else GREY, v, 200)
+        s += L(51, 116 - 28 * len(k['optionen']), 596)
+    s += cap(51, 40, f'Summe der Einzelkaufpreise: {eur(sum(u["preis"] for u in units), 0)}. Flächen nach {k.get("flaeche_art", "DIN 277")}; keine Wohnfläche nach WoFlV.' if k.get('din277') else f'Summe der Einzelkaufpreise: {eur(sum(u["preis"] for u in units), 0)}.')
+    i_min = min(range(len(units)), key=lambda j: tots[j]); qm_min = min(u['preis'] / u['flaeche_num'] for u in units)
+    s += (R(632, 34, 224, 464) + EB(660, 469, 'Gesamt ab', CREAM, 8) + T(660, 422, 'S', 25, 32, CREAM, eur(tots[i_min]))
+          + T(660, 398, 'N', 7.8, 11, MIST, f'{units[i_min]["name"]}: Kaufpreis, Grund-<br>erwerbsteuer und Käufercourtage,<br>zzgl. Notar und Grundbuch.')
           + L(660, 340, 828, 'rgba(169,184,207,.45)', .6) + EB(660, 318, 'Courtage · hälftige Teilung', LIGHT, 6.8)
           + T(660, 298, 'N', 8.2, 12, MIST, k['courtage_text'], w=170)
-          + L(660, 170, 828, 'rgba(169,184,207,.45)', .6)
-          + T(660, 150, 'N', 7.8, 11.5, MIST, br(k.get('spalte_hinweis', 'Maßgeblich sind die gesonderte Maklervereinbarung und der notarielle Kaufvertrag.')), w=170))
+          + L(660, 200, 828, 'rgba(169,184,207,.45)', .6) + EB(660, 178, 'Preis je m² ab', LIGHT, 6.8)
+          + T(660, 150, 'S', 22, 28, CREAM, 'ca. ' + eur(qm_min, 0)) + T(660, 132, 'N', 7.8, 11, MIST, k.get('qm_hinweis', ''), w=170)
+          + T(660, 76, 'N', 7, 10, MIST, 'Maßgeblich sind die gesonderte<br>Maklervereinbarung und der<br>notarielle Kaufvertrag.'))
     return s
 
 
@@ -489,12 +504,12 @@ def m_markt(d):
     s = chrome(d['kopf']) + head(d['dachzeile'], d['titel']) + T(51, 400, 'N', 9.6, 14, INK, d['intro'], w=545)
     # Streudiagramm
     X0, Y0, Wd, Hd = 80, 110, 500, 230
-    xmin, xmax, ymin, ymax = 50, 260, 20, 32
+    xmin, xmax, ymin, ymax, xs_, ys_ = d.get('achsen', [50, 260, 20, 32, 50, 2])
     s += EB(51, 362, 'Nettokaltmiete im Verhältnis zur Inseratsfläche', NAVY, 6.6)
-    for v in range(ymin, ymax + 1, 2):
+    for v in range(ymin, ymax + 1, ys_):
         y = Y0 + (v - ymin) / (ymax - ymin) * Hd
         s += L(X0, y, X0 + Wd, '#e7e2da', .5) + RT(X0 - 6, y - 3, 'N', 6.6, 9, GREY, str(v), 30)
-    for v in range(50, 251, 50):
+    for v in range(xmin if xmin % xs_ == 0 else xmin + xs_ - xmin % xs_, xmax + 1, xs_):
         x = X0 + (v - xmin) / (xmax - xmin) * Wd
         s += T(x - 10, Y0 - 14, 'N', 6.6, 9, GREY, str(v), w=20, extra='text-align:center')
     avg = sum(c['miete'] / c['flaeche'] for c in comps) / len(comps)
@@ -509,32 +524,46 @@ def m_markt(d):
     s += T(X0, Y0 - 28, 'N', 6.8, 9, GREY, 'Fläche laut Inserat in m² · Nettokaltmiete in €/m² und Monat')
     s += (R(632, 250, 224, 132) + EB(650, 362, 'Angenommene Mietspanne', CREAM, 6.8)
           + T(650, 326, 'S', 22, 28, CREAM, f'{lo:.2f}–{hi:.2f} €/m²'.replace('.', ','))
-          + T(650, 300, 'N', 7.4, 10.5, MIST, 'Nettokaltmiete pro Monat · Szenarioannahme,<br>keine belegte Projektmiete.'))
+          + T(650, 300, 'N', 7.4, 10.5, MIST, br(d.get('spanne_text', ['Nettokaltmiete pro Monat · Szenarioannahme,', 'keine belegte Projektmiete.']))))
     for i, c in enumerate(comps):
-        ln = 236 - 36 * i
+        ln = 236 - (36 if len(comps) <= 4 else 30) * i
         s += (L(632, ln, 856) + T(632, ln - 16, 'B', 8.6, 12, NAVY, c['key']) + T(650, ln - 16, 'N', 8.6, 12, INK, c['adresse'])
               + T(650, ln - 28, 'N', 7, 10, GREY, f"{c['flaeche']:.2f}".replace('.', ',') + f" m² laut Inserat · {eur(c['miete'], 0)} kalt · " + f"{c['miete']/c['flaeche']:.2f}".replace('.', ',') + ' €/m²'))
-    s += L(632, 236 - 36 * len(comps), 856)
+    s += L(632, 236 - (36 if len(comps) <= 4 else 30) * len(comps), 856)
     return s + cap(51, 40, br(d['quelle']), w=805)
+
+
+def _num(v, dmax=3):
+    t = f'{v:.{dmax}f}'.rstrip('0').rstrip('.')
+    if '.' in t and len(t.split('.')[1]) < 2: t = f'{v:.2f}'
+    return t.replace('.', ',')
 
 
 def m_rendite(d, obj):
     lo, hi = d['spanne']; m = (lo + hi) / 2
     units = obj['kosten']['einheiten']
     s = (chrome(d['kopf']) + head(d['dachzeile'], d['titel'])
-         + T(51, 400, 'N', 9.6, 14, INK, f'Beispiel mit dem Mittelwert der Spanne: ({lo:.2f} + {hi:.2f}) ÷ 2 = {m:.3f} €/m² monatlich.'.replace('.', ',') + '<br>' + d['basis'], w=805))
-    xs = [51, 300, 400, 510, 620, 740]; heads = ['Einheit / Kaufpreis', 'Innenfläche¹', 'Miete / Monat²', 'Miete / Jahr²', 'Bruttorendite²', 'Kaufpreisfaktor²']
+         + T(51, 400, 'N', 9.6, 14, INK, f'Mittelwert der angenommenen Spanne: ({_num(lo)} + {_num(hi)}) ÷ 2 = {_num(m)} €/m² monatlich.<br>' + d['basis'], w=805))
+    if len(units) == 1:   # ein Objekt: drei Szenarien (untere, mittlere, obere Annahme)
+        u = units[0]
+        rows = [(f'{nm} · {_num(q)} €/m²', f"{u['name']} · {eur(u['preis'], 0)}", u['innenflaeche'], q, u['preis'])
+                for nm, q in [('Untere Annahme', lo), ('Mittelwert', m), ('Obere Annahme', hi)]]
+        h0 = 'Szenario / Kaufpreis'
+    else:
+        rows = [(u['name'], f"{u.get('sub', '')} · {eur(u['preis'], 0)}", u['innenflaeche'], m, u['preis']) for u in units]
+        h0 = 'Einheit / Kaufpreis'
+    xs = [51, 300, 400, 510, 620, 740]; heads = [h0, d.get('flaeche_label', 'Innenfläche') + '¹', 'Miete / Monat²', 'Miete / Jahr²', 'Bruttorendite²', 'Kaufpreisfaktor²']
     s += R(51, 330, 805, 26)
     for x, t in zip(xs, heads):
         s += EB(x + 12 if x == 51 else x, 340, t, CREAM, 6.4)
-    for i, u in enumerate(units):
-        ln = 330 - 44 * i; a = u['innenflaeche']; mon = a * m; yr = round(mon * 12); r = yr / u['preis'] * 100; f = u['preis'] / yr
+    for i, (n1, n2, a, q, preis) in enumerate(rows):
+        ln = 330 - 44 * i; mon = a * q; yr = round(mon * 12); r = yr / preis * 100; f = preis / yr
         if i % 2 == 0: s += R(51, ln - 44, 805, 44, '#efe9e1')
-        s += (T(63, ln - 18, 'S', 11, 14, INK, u['name']) + T(63, ln - 32, 'N', 7.2, 10, GREY, f"{u.get('sub', '')} · {eur(u['preis'], 0)}")
+        s += (T(63, ln - 18, 'S', 11, 14, INK, n1) + T(63, ln - 32, 'N', 7.2, 10, GREY, n2)
               + T(300, ln - 22, 'N', 9, 12, INK, f'{a:.2f} m²'.replace('.', ',')) + T(400, ln - 22, 'N', 9, 12, INK, eur(mon))
               + T(510, ln - 22, 'N', 9, 12, INK, eur(yr, 0)) + T(620, ln - 22, 'B', 9.6, 12, NAVY, pct(r))
               + T(740, ln - 22, 'B', 9.6, 12, NAVY, f'{f:.1f}-fach'.replace('.', ',')))
-    yb = 330 - 44 * len(units) - 20
+    yb = 330 - 44 * len(rows) - 20
     for i, (t, f) in enumerate([('Jahresnettokaltmiete', 'Monatsmiete × 12'), ('Bruttomietrendite', 'Jahresnettokaltmiete ÷ Kaufpreis × 100'), ('Kaufpreisfaktor', 'Kaufpreis ÷ Jahresnettokaltmiete')]):
         x = 51 + i * 273
         s += R(x, yb - 52, 259, 52) + EB(x + 14, yb - 16, t, CREAM, 6.6) + T(x + 14, yb - 36, 'N', 8.4, 11, MIST, f)

@@ -1,207 +1,1027 @@
 {
-  "meta": {
-    "titel": "GRENFORD Property Brief – Schlierbacher Weg 13a",
-    "fusszeile": "GRENFORD PROPERTY / SCHLIERBACHER WEG 13A",
-    "ausgabe": "GRENFORD_Property_Brief_Schlierbacher_Weg_13a.pdf",
-    "redaktionsstand": "17.11.2026",
-    "agb_stand": "18.11.2026",
-    "variante": "haus"
-  },
-  "kosten": {
-    "land": "Berlin",
-    "grunderwerbsteuer": 6.0,
-    "courtage_brutto": 3.57,
-    "courtage_netto": "3,00 %",
-    "courtage_text": "Käufer und Verkäufer zahlen jeweils 3,00 % zzgl. 19 % MwSt. (§§ 656c, 656d BGB). Fällig nach wirksamem Abschluss des notariellen Kaufvertrags.",
-    "agb_courtage": "Die Käufercourtage für dieses Objekt beträgt 3,00 % des notariellen Kaufpreises zzgl. 19 % MwSt., insgesamt 3,57 %. Der Verkäufer trägt ebenfalls 3,57 % brutto; Gesamtcourtage 7,14 % brutto.",
-    "flaeche_qm": 118,
-    "flaeche_art": "Wohnfläche",
-    "einheiten": [{"id": "haus", "name": "Doppelhaushälfte Schlierbacher Weg 13a", "preis": 613000}],
-    "optionen": [["Photovoltaikanlage (Leerrohre vorbereitet)", "ca. 19.000 €", true],
-                 ["Einbauküche über einen Küchenpartner", "nach Angebot", false]]
-  },
-  "seiten": [
-    {"modul": "titel", "id": "titel",
-     "bild": "garten.jpg", "bild_pos": "center 42%",
-     "titel": ["THE RENEWED", "HOUSE"],
-     "untertitel": ["Buckow", "Family Residence"],
-     "kurz": ["Doppelhaushälfte von 1976.", "Umfassend kernsaniert.", "Bezugsfertig für Ihre Familie."],
-     "adresse": ["Schlierbacher Weg 13a", "12349 Berlin-Buckow"],
-     "kennzahlen": [["4,5", "Zimmer + 2 Hobbyräume"], ["ca. 118 m²", "Wohnfläche · Grundstück ca. 258 m²"], ["613.000 €", "Kaufpreis"]],
-     "hinweis": "Foto digital bearbeitet · Flächen als Circa-Werte nach Verkäuferangabe"},
-
-    {"modul": "vorwort", "id": "vorwort", "bereich": "vor",
-     "dachzeile": "The Renewed House",
-     "titel": "Ein Haus mit neuer Zukunft.",
-     "lead": "Mit diesem Property Brief stellen wir Ihnen eine Doppelhaushälfte in Berlin-Buckow vor, die nach umfassender Kernsanierung zum Erstbezug bereitsteht.",
-     "links": "Bei Bestandsimmobilien entscheidet nicht das Baujahr über die Qualität, sondern der Zustand von Hülle, Technik und Ausbau.",
-     "rechts": "Das Tragwerk von 1976 ist geblieben. Dach, Fassade, Fenster, Heizung, Leitungen und Innenausbau sind neu.",
-     "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."},
-
-    {"modul": "inhalt", "id": "inhalt", "bereich": "vor",
-     "bild": "fassade-eingang-tone.jpg", "bild_pos": "center 35%",
-     "claim": ["Ein Haus.", "Vier Ebenen."], "marke": "The Renewed House",
-     "text": ["Ein Bestandshaus von 1976,", "saniert für eine neue Generation."],
-     "adresse": ["Schlierbacher Weg 13a", "12349 Berlin-Buckow"],
-     "kapitel": [
-       {"titel": "Das Haus", "sub": "Eckdaten, Wohnkonzept und Wohngefühl", "seiten": ["ueberblick", "wohnkonzept"]},
-       {"titel": "Ausstattung und Lage", "sub": "Materialien und Bäder, Umfeld und Anbindung", "seiten": ["ausstattung", "lage"]},
-       {"titel": "Raumprogramm und Grundrisse", "sub": "Alle Räume auf vier Ebenen, mit Flächen und Maßen", "seiten": ["raumprogramm", "grundrisse-2"]},
-       {"titel": "Sanierung, Energie und Projektstand", "sub": "Was erneuert wurde, Energieausweis und Projektstand", "seiten": ["sanierung", "energie"]},
-       {"titel": "Kaufpreis und Erwerbsnebenkosten", "sub": "Alle Kosten auf einen Blick", "seiten": ["kosten"]},
-       {"titel": "Partner und Service", "sub": "Finanzierung, Küche und Innenausbau, Garten", "seiten": ["partner"]},
-       {"titel": "Besichtigung und Kontakt", "sub": "Vom ersten Gespräch bis zum Notartermin", "seiten": ["kontakt"]},
-       {"titel": "GRENFORD und Anhang", "sub": "Unternehmen, rechtliche Hinweise und AGB", "seiten": ["ueber", "agb"]}]},
-
-    {"modul": "ueberblick", "id": "ueberblick",
-     "kopf": "Das Haus auf einen Blick", "dachzeile": "Das Haus", "titel": "Das Haus auf einen Blick.",
-     "intro": "Eine Doppelhaushälfte aus dem Jahr 1976, nach umfassender Kernsanierung bereit für den Erstbezug – mit Garten, Vollkeller und Platz für eine Familie.",
-     "zeilen": [["Objektart", "Doppelhaushälfte mit Vollkeller"],
-                ["Lage", "Schlierbacher Weg 13a, 12349 Berlin-Buckow (Neukölln)"],
-                ["Raumangebot", "4,5 Zimmer auf drei Wohnebenen, 2 Hobbyräume im Keller"],
-                ["Grundstück", "ca. 258 m² mit Garten und Terrasse"],
-                ["Keller", "ca. 41 m² Nutzfläche (keine Wohnfläche)"],
-                ["Baujahr", "1976 · Kernsanierung, Heizungsanlage Baujahr 2026"],
-                ["Energie", "Bedarfsausweis · Effizienzklasse A · Luft-Wärmepumpe"]],
-     "kennzahlen": [{"wert": "613.000 €", "label": "Kaufpreis", "sub": "ca. 5.195 €/m² Wohnfläche"},
-                    {"wert": "ca. 118 m²", "label": "Wohnfläche", "sub": "Erdgeschoss bis Dachgeschoss"},
-                    {"wert": "4,5", "label": "Zimmer", "sub": "zzgl. 2 Hobbyräume im Keller"}],
-     "kennzahlen_hinweis": ["Circa-Werte nach Verkäuferangabe.", "Keine Berechnung nach WoFlV."],
-     "banner": {"label": "Projektstand", "text": ["Innenausbau im Wesentlichen abgeschlossen · Außenanlagen nicht im Leistungsumfang ·", "Übergabe bezugsfertig, Termin nach Vereinbarung (Details auf Seite {seite:projektstand})"]},
-     "quelle": "Quelle: Angaben des Verkäufers, Stand November 2026."},
-
-    {"modul": "split", "id": "wohnkonzept", "kopf": "Architektur &amp; Wohnkonzept",
-     "bild": "wohnen.jpg", "bild_pos": "center 58%", "bild_seite": "rechts",
-     "dachzeile": "Das Wohnkonzept", "titel": ["Hell. Klar.", "Bezugsbereit."],
-     "intro": "Gemeinsam wohnen im Erdgeschoss, Familie im Obergeschoss, Rückzug unter dem Dach, Reserve im Keller.",
-     "label_breite": 100,
-     "liste": [["Erdgeschoss", "Offener Wohn- und Essbereich mit Küche, bodentiefe Fenster zur Terrasse und zum Garten, Gäste-WC."],
-               ["Obergeschoss", "Zwei Zimmer, Familienbad mit Badewanne und separater Dusche, Abstellraum."],
-               ["Dachgeschoss", "Schlafzimmer mit eigenem Duschbad, erreichbar über eine neue Treppe."],
-               ["Keller", "Zwei beheizte Hobbyräume mit Tageslicht, dazu Technik und Hausanschlüsse."]],
-     "caption": ["Wohn- und Essbereich im Erdgeschoss mit Zugang zur Terrasse.", "Fotoaufnahme nach Sanierung."]},
-
-    {"modul": "split", "id": "ausstattung", "kopf": "Ausstattung",
-     "bild": "bad-dg.jpg", "bild_pos": "center 60%", "bild_seite": "links",
-     "dachzeile": "Materialien &amp; Ausstattung", "titel": ["Ausgestattet für", "den Erstbezug."],
-     "intro": "Ein durchgängiges Material- und Farbkonzept auf allen Ebenen: helle Wände, warme Holzoptik, ruhige Natursteintöne in den Bädern.",
-     "label_breite": 72,
-     "liste": [["Böden", "Vinyl-Designboden in Holzoptik in allen Wohnräumen, auf den Treppen und im Keller."],
-               ["Bäder", "Gäste-WC, Familienbad mit Wanne und Dusche, Duschbad im Dachgeschoss – alle mit Fenster. Fliesen in Natursteinoptik, Sanitärtechnik von Geberit."],
-               ["Komfort", "Handtuchheizkörper in Ober- und Dachgeschoss, Waschmaschinenanschluss im Technikraum."],
-               ["Küche", "Nicht im Kaufpreis enthalten. Planung und Einbau auf Wunsch über einen Küchenpartner."]],
-     "caption": ["Duschbad im Dachgeschoss. Fotoaufnahme nach Sanierung.", "Maßgeblich sind Baubeschreibung und notarieller Kaufvertrag."]},
-
-    {"modul": "lage", "id": "lage",
-     "karte": {"lat": 52.4228, "lon": 13.4120, "label": ["Schlierbacher Weg 13a", "12349 Berlin-Buckow"]},
-     "dachzeile": "Schlierbacher Weg 13a · Berlin-Buckow", "titel": ["Grüner Süden.", "Gewachsene Nachbarschaft."],
-     "intro": "Der Schlierbacher Weg liegt im ruhigen Wohnquartier zwischen Grauwackeweg und Sandsteinweg nahe der Marienfelder Chaussee, im Neuköllner Ortsteil Buckow. Schule, Nahversorgung und Bus liegen im Quartier.",
-     "gruppen": [{"titel": "Cafés &amp; Restaurants", "text": "Wilmas Post Café, Schlierbacher Weg 7 · Restaurant Linden-Garten,<br>historisches Gasthaus von 1856 mit Biergarten, Alt-Buckow 15A."},
-                 {"titel": "Schule &amp; Einkauf", "text": "Grundschule am Sandsteinweg im Quartier · nahkauf (REWE-Gruppe), Quarzweg 85 ·<br>ALDI und PENNY, Marienfelder Chaussee · EDEKA, Tauernallee (ca. 1 km)."},
-                 {"titel": "Grün &amp; Kultur", "text": "Britzer Garten · historischer Dorfkern Alt-Buckow mit Dorfkirche."}],
-     "oepnv": [{"titel": "Bus M11 · M76 · X11 · X76", "text": "Haltestelle Grauwackeweg (M11) im Quartier; weitere Linien am Mariendorfer Damm"},
-               {"titel": "S-Bahn S2", "text": "S Buckower Chaussee, per Bus erreichbar"},
-               {"titel": "U-Bahn U6", "text": "U Alt-Mariendorf, per Bus erreichbar"}],
-     "quelle": ["Recherche 17.11.2026: BVG-Haltestelleninfo, Kauperts Straßenverzeichnis, Betreiberangaben.", "Ohne Gewähr; Linien, Öffnungszeiten und Wege vor Ort prüfen."]},
-
-    {"modul": "raumprogramm", "id": "raumprogramm",
-     "bild": "dg-zimmer.jpg", "bild_pos": "center 60%",
-     "dachzeile": "Vier Ebenen · ein Zuhause", "titel": ["Wie das Haus", "funktioniert."],
-     "intro": "Wohnfläche ca. 118 m² auf Erd-, Ober- und Dachgeschoss, dazu ca. 41 m² Kellerfläche. Alle Grundrisse mit Raumflächen und Maßketten finden Sie auf den Seiten {seite:grundrisse-1} und {seite:grundrisse-2}.",
-     "ebenen": [["Erdgeschoss", "Wohnen / Essen · Küche · Flur · Gäste-WC", "Terrasse mit Gartenzugang", "27,70 · 10,32 m²"],
-                ["Obergeschoss", "Zimmer 3 · Zimmer 2 · Bad · Abstellraum", "Bad mit Wanne und Dusche", "16,34 · 10,30 m²"],
-                ["Dachgeschoss", "Schlafzimmer · Duschbad · Flur", "Eigenes Duschbad", "14,20 m²"],
-                ["Kellergeschoss", "Hobbyraum 1 · Hobbyraum 2 · Technik · Hausanschlüsse", "Beheizt, mit Tageslicht", "14,76 · 14,00 m²"]],
-     "flaechen_hinweis": "Einzelflächen gemäß Aufmaß, soweit ausgewiesen. Wohnfläche gesamt ca. 118 m² (EG bis DG); Keller ca. 41 m² zusätzlich, keine Wohnfläche. Circa-Werte nach Verkäuferangabe.",
-     "caption": "Schlafzimmer im Dachgeschoss · Fotoaufnahme nach Sanierung"},
-
-    {"modul": "grundrisse", "id": "grundrisse-1", "dachzeile": "Wohnebenen", "titel": "Erdgeschoss und Obergeschoss.",
-     "plaene": [
-       {"name": "Erdgeschoss", "art": "Wohnebene", "bild": "cplan-eg.png",
-        "raeume": [["01", "Terrasse", "16,0", true, "aussen"], ["02", "Wohnen / Essen", "27,70", false, "wohn"], ["03", "Küche", "10,32", false, "kueche"],
-                   ["04", "Flur", "4,0", true, "weg"], ["05", "Treppe", "6,0", true, "weg"], ["06", "Gäste-WC", "2,0", true, "nass"]],
-        "massketten": [["Oben", "5,97", ""], ["Unten", "5,89", "2,30 / 0,10 / 1,77 / 0,17 / 1,55"], ["Links", "8,48", "7,00 / 0,10 / 1,38"], ["Rechts", "8,48", "3,53 / 0,10 / 3,31 / 0,15 / 1,39"]],
-        "hinweise": ["* Grundfläche aus dem Plan geschätzt; keine Wohnflächenberechnung."]},
-       {"name": "Obergeschoss", "art": "Wohnebene", "bild": "cplan-og.png",
-        "raeume": [["01", "Zimmer 3", "16,34", false, "wohn"], ["02", "Zimmer 2", "10,30", false, "wohn"], ["03", "Bad · Wanne + Dusche", "6,5", true, "nass"],
-                   ["04", "Flur", "5,0", true, "weg"], ["05", "Treppe", "4,0", true, "weg"], ["06", "Abstellraum", "3,5", true, "neben"]],
-        "massketten": [["Oben", "5,98", "3,54 / 0,16 / 2,28"], ["Unten", "5,88", "2,91 / 0,15 / 2,82"], ["Links", "8,49", "4,85 / 0,10 / 3,54"], ["Rechts", "8,42", "3,47 / 0,15 / 3,26 / 0,15 / 1,39"]],
-        "hinweise": ["* Grundfläche aus dem Plan geschätzt; keine Wohnflächenberechnung."]}]},
-
-    {"modul": "grundrisse", "id": "grundrisse-2", "dachzeile": "Rückzug und Reserve", "titel": "Dachgeschoss und Keller.",
-     "plaene": [
-       {"name": "Dachgeschoss", "art": "Wohnebene", "bild": "cplan-dg.png",
-        "raeume": [["01", "Schlafzimmer", "14,20", false, "wohn"], ["02", "Duschbad", "5,0", true, "nass"], ["03", "Flur", "2,5", true, "weg"], ["04", "Treppe", "3,0", true, "weg"]],
-        "massketten": [["Oben", "5,92", "3,36 / 0,11 / 2,45"], ["Unten", "5,93", "3,97 / 0,10 / 1,86"], ["Links", "5,60", ""], ["Rechts", "5,47", "2,36 / 0,12 / 1,11 / 0,10 / 1,78"]],
-        "hinweise": ["* Grundfläche aus dem Plan geschätzt; Dachschrägen ohne Abzug.", "Dachschrägen: 1,00 m / 2,00 m lichte Höhe (LH) laut Plan."]},
-       {"name": "Kellergeschoss", "art": "Nutzfläche · keine Wohnfläche", "bild": "cplan-kg.png",
-        "raeume": [["01", "Hobbyraum 2", "14,00", false, "wohn"], ["02", "Hobbyraum 1", "14,76", false, "wohn"], ["03", "Technik / Anschlussraum", "4,5", true, "neben"],
-                   ["04", "Flur", "7,0", true, "weg"], ["05", "Treppe", "1,5", true, "weg"], ["06", "Hausanschlüsse", "2,0", true, "neben"]],
-        "massketten": [["Oben", "5,97", "4,35 / 0,13 / 1,49"], ["Unten", "5,97", "3,75 / 0,12 / 2,10"], ["Links", "8,05", "3,24 / 0,24 / 4,57"], ["Rechts", "8,05", "3,24 / 0,24 / 3,23 / 0,25 / 1,09"]],
-        "hinweise": ["* Grundfläche aus dem Plan geschätzt; Keller ist keine Wohnfläche."]}]},
-
-    {"modul": "sanierung", "id": "sanierung", "kopf": "Sanierung &amp; Haustechnik",
-     "bilder": [{"bild": "bad-og.jpg", "pos": "center"}, {"bild": "keller.jpg", "pos": "center 55%"}],
-     "dachzeile": "Das Sanierungskonzept", "titel": ["Substanz von 1976.", "Technik von heute."],
-     "bloecke": [["Gebäudehülle", "Dach neu eingedeckt, Zwischen- und Untersparrendämmung, Fassade mit 16 cm Wärmedämmverbundsystem, neue Fenster."],
-                 ["Haustechnik", "Luft-Wärmepumpe für Heizung und Warmwasser, neue Elektroinstallation, neue Wasser- und Heizungsleitungen, neue Heizkörper. Leerrohre für Photovoltaik vorbereitet."],
-                 ["Innenausbau", "Neue Bäder, neue Böden und Oberflächen, neue Treppe vom Ober- ins Dachgeschoss. Erhalten blieb im Wesentlichen das Tragwerk."]],
-     "caption": ["Oben: Familienbad im Obergeschoss, Fotoaufnahme nach Sanierung.", "Unten: Hobbyraum im Keller, Fotoaufnahme nach Sanierung."]},
-
-    {"modul": "projektstand", "id": "projektstand",
-     "dachzeile": "Projektstand", "titel": "Was fertig ist. Was Sie gestalten.",
-     "intro": ["Stand nach Angabe des Verkäufers. Der Verkäufer lässt vor der Übergabe vier Bestandsbäume fällen; die übrige Garten-", "gestaltung liegt beim Käufer. Einen passenden Garten- und Landschaftsbauer vermittelt GRENFORD gern (Seite {seite:partner})."],
-     "bloecke": [
-       {"titel": "Leistung des Verkäufers", "zeilen": [
-         ["Dach, Fassade und Fenster", "Dacheindeckung, Dämmung, Wärmedämmverbundsystem, neue Fenster", "Abgeschlossen", false],
-         ["Haustechnik und Leitungen", "Luft-Wärmepumpe, Elektro-, Wasser- und Heizungsleitungen", "Abgeschlossen", false],
-         ["Innenausbau und Bäder", "Im Wesentlichen abgeschlossen", "Abgeschlossen", false],
-         ["Fällung von vier Bestandsbäumen", "Durch den Verkäufer, vor der Übergabe", "Ausstehend", true]]},
-       {"titel": "Außenanlagen durch den Käufer", "zeilen": [
-         ["Zufahrt und Kfz-Stellplatz", "Fläche für einen Stellplatz ca. 6 × 3 m", "Durch den Käufer", true],
-         ["Terrasse und Eingangspodest", "Erneuerung", "Durch den Käufer", true],
-         ["Gartengestaltung", "Bepflanzung, Wege und Gartenflächen", "Durch den Käufer", true]]}],
-     "quelle": "Quelle: Angaben des Verkäufers, Stand November 2026. Energiekennwerte siehe Seite {seite:energie}.",
-     "spalte_titel": "Übergabe",
-     "spalte": [{"wert": "Bezugsfertig", "label": "Zustand bei Übergabe"},
-                {"wert": "Außenanlagen", "label": "Durch den Käufer", "sub": "Ausgenommen Fällung der Bestandsbäume"},
-                {"wert": "Nach Vereinbarung", "label": "Übergabetermin"}],
-     "spalte_hinweis": ["Mängelansprüche richten sich nach", "dem notariellen Kaufvertrag."]},
-
-    {"modul": "energie", "id": "energie",
-     "bild": "energieausweis-s2.png",
-     "caption": "Abbildung: Seite 2 des Energieausweises. Der vollständige Ausweis liegt den Kaufunterlagen bei.",
-     "titel": "Nachweislich effizient.",
-     "intro": "Gedämmte Hülle, neue Fenster und Luft-Wärmepumpe: Die Kennwerte des Hauses nach der Sanierung, laut Energieausweis.",
-     "zeilen": [["Art des Ausweises", "Bedarfsausweis (Wohngebäude)"], ["Primärenergiebedarf", "81,3 kWh/(m²·a)"],
-                ["Treibhausgasemissionen", "25,3 kg CO₂-Äq./(m²·a)"], ["Heizung", "Luft-Wärmepumpe"],
-                ["Baujahr Gebäude · Anlage", "1976 · 2026"], ["Berechnungsverfahren", "DIN V 18599"], ["Registriernummer", "BE-2026-006439968"]],
-     "klasse": "A", "endenergie": "45,2"},
-
-    {"modul": "kosten", "id": "kosten"},
-
-    {"modul": "partner", "id": "partner", "bereich": "nach",
-     "intro": "Ein Haus zu kaufen bedeutet mehr als den Kaufvertrag. GRENFORD stellt Ihnen auf Wunsch passende Partner zur Seite – für Finanzierung, Einrichtung und Garten."},
-
-    {"modul": "kontakt", "id": "kontakt", "bereich": "nach",
-     "bild": "fassade-eingang-tone.jpg", "bild_pos": "center 35%",
-     "claim": ["Ihre Familie.", "Ihr nächster", "Schritt."],
-     "dachzeile": "Das Haus persönlich erleben", "titel": ["Lernen Sie Ihr neues", "Zuhause kennen."],
-     "schritte": [["Erstgespräch", "Wir klären mit Ihnen, ob Raumangebot, Lage und Zeitplan zu Ihren Vorstellungen passen."],
-                  ["Unterlagen und Finanzierung", "Baubeschreibung, Energieausweis und Pläne für Ihre Finanzierungsprüfung; auf Wunsch Kontakt zu Finanzierungspartnern."],
-                  ["Besichtigung und Notar", "Nach der Besichtigung koordinieren wir den Kaufvertragsentwurf. Verbraucher erhalten ihn in der Regel zwei Wochen vor der Beurkundung."]]},
-
-    {"modul": "ueber", "id": "ueber", "bereich": "nach", "bild": "fassade-eingang-tone.jpg", "bild_pos": "center 35%"},
-
-    {"modul": "recht", "id": "recht", "bereich": "nach",
-     "dachzeile": "The Renewed House · Schlierbacher Weg 13a",
-     "intro": ["Dieser Property Brief dient der ersten Information und ist kein Angebot im rechtlichen Sinne. Maßgeblich sind Baubeschreibung und notarieller", "Kaufvertrag. Verkäufer: wird im Rahmen der Vertragsvorbereitung benannt."],
-     "bloecke": [
-       ["Objekt, Sanierung und Fertigstellung", "Doppelhaushälfte, Baujahr 1976, Kernsanierung von Dach, Fassade, Fenstern, Haustechnik und Innenausbau. Innenausbau im Wesentlichen abgeschlossen. Die Außenanlagen sind nicht Teil der Leistung des Verkäufers; ausgenommen ist die Fällung von vier Bestandsbäumen (Seite {seite:projektstand}). Übergabetermin nach Vereinbarung. Mängelansprüche richten sich nach dem notariellen Kaufvertrag."],
-       ["Flächen, Darstellungen und Ausstattung", "Flächen sind Circa-Werte nach Verkäuferangabe bzw. Aufmaß; mit * gekennzeichnete Raumflächen sind aus dem Plan geschätzt. Wohnfläche ca. 118 m² nach Angabe des Verkäufers; eine Wohnflächenberechnung nach WoFlV liegt nicht vor. Kellerflächen sind keine Wohnfläche. Grundrisse grafisch aufbereitet, nicht zur Maßentnahme geeignet. Fotos teilweise digital bearbeitet; die Rechte an Fotos und Grundrissen liegen beim Verkäufer. Küche und Photovoltaikanlage sind nicht im Kaufpreis enthalten."],
-       ["Grundbuch und Energieausweis", "Grundbuchauszug auf Anfrage; Einzelheiten ergeben sich aus dem Grundbuch. Energieausweis: Bedarfsausweis, Endenergiebedarf 45,2 kWh/(m²·a), Effizienzklasse A, Luft-Wärmepumpe, Baujahr Heizungsanlage 2026. Erlaubnis nach § 34c GewO: Bezirksamt Charlottenburg-Wilmersdorf von Berlin, erteilt am 01.11.2022."],
-       ["Quellen und Verantwortlichkeit", "Objekt-, Preis-, Flächen- und Lageangaben beruhen auf Unterlagen des Verkäufers, Stand November 2026; Irrtum und Zwischenverkauf vorbehalten. Eigene Hinweis-, Aufklärungs- und Sorgfaltspflichten von GRENFORD bleiben unberührt. Die Haftung richtet sich nach den wirksam einbezogenen AGB und zwingendem Recht."]]},
-
-    {"modul": "agb", "id": "agb", "bereich": "nach"}
+ "meta": {
+  "titel": "GRENFORD Property Brief – Schlierbacher Weg 13a",
+  "fusszeile": "GRENFORD PROPERTY / SCHLIERBACHER WEG 13A",
+  "ausgabe": "GRENFORD_Property_Brief_Schlierbacher_Weg_13a.pdf",
+  "redaktionsstand": "17.11.2026",
+  "agb_stand": "18.11.2026",
+  "variante": "haus"
+ },
+ "kosten": {
+  "land": "Berlin",
+  "grunderwerbsteuer": 6.0,
+  "courtage_brutto": 3.57,
+  "courtage_netto": "3,00 %",
+  "courtage_text": "Käufer und Verkäufer zahlen jeweils 3,00 % zzgl. 19 % MwSt. (§§ 656c, 656d BGB). Fällig nach wirksamem Abschluss des notariellen Kaufvertrags.",
+  "agb_courtage": "Die Käufercourtage für dieses Objekt beträgt 3,00 % des notariellen Kaufpreises zzgl. 19 % MwSt., insgesamt 3,57 %. Der Verkäufer trägt ebenfalls 3,57 % brutto; Gesamtcourtage 7,14 % brutto.",
+  "flaeche_qm": 118,
+  "flaeche_art": "Wohnfläche",
+  "einheiten": [
+   {
+    "id": "haus",
+    "name": "Doppelhaushälfte Schlierbacher Weg 13a",
+    "preis": 613000,
+    "innenflaeche": 118
+   }
+  ],
+  "optionen": [
+   [
+    "Photovoltaikanlage (Leerrohre vorbereitet)",
+    "ca. 19.000 €",
+    true
+   ],
+   [
+    "Einbauküche über einen Küchenpartner",
+    "nach Angebot",
+    false
+   ]
   ]
+ },
+ "seiten": [
+  {
+   "modul": "titel",
+   "id": "titel",
+   "bild": "garten.jpg",
+   "bild_pos": "center 42%",
+   "titel": [
+    "THE RENEWED",
+    "HOUSE"
+   ],
+   "untertitel": [
+    "Buckow",
+    "Family Residence"
+   ],
+   "kurz": [
+    "Doppelhaushälfte von 1976.",
+    "Umfassend kernsaniert.",
+    "Bezugsfertig für Ihre Familie."
+   ],
+   "adresse": [
+    "Schlierbacher Weg 13a",
+    "12349 Berlin-Buckow"
+   ],
+   "kennzahlen": [
+    [
+     "4,5",
+     "Zimmer + 2 Hobbyräume"
+    ],
+    [
+     "ca. 118 m²",
+     "Wohnfläche · Grundstück ca. 258 m²"
+    ],
+    [
+     "613.000 €",
+     "Kaufpreis"
+    ]
+   ],
+   "hinweis": "Foto digital bearbeitet · Flächen als Circa-Werte nach Verkäuferangabe"
+  },
+  {
+   "modul": "vorwort",
+   "id": "vorwort",
+   "bereich": "vor",
+   "dachzeile": "The Renewed House",
+   "titel": "Ein Haus mit neuer Zukunft.",
+   "lead": "Mit diesem Property Brief stellen wir Ihnen eine Doppelhaushälfte in Berlin-Buckow vor, die nach umfassender Kernsanierung zum Erstbezug bereitsteht.",
+   "links": "Bei Bestandsimmobilien entscheidet nicht das Baujahr über die Qualität, sondern der Zustand von Hülle, Technik und Ausbau.",
+   "rechts": "Das Tragwerk von 1976 ist geblieben. Dach, Fassade, Fenster, Heizung, Leitungen und Innenausbau sind neu.",
+   "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."
+  },
+  {
+   "modul": "inhalt",
+   "id": "inhalt",
+   "bereich": "vor",
+   "bild": "fassade-eingang-tone.jpg",
+   "bild_pos": "center 35%",
+   "claim": [
+    "Ein Haus.",
+    "Vier Ebenen."
+   ],
+   "marke": "The Renewed House",
+   "text": [
+    "Ein Bestandshaus von 1976,",
+    "saniert für eine neue Generation."
+   ],
+   "adresse": [
+    "Schlierbacher Weg 13a",
+    "12349 Berlin-Buckow"
+   ],
+   "kapitel": [
+    {
+     "titel": "Das Haus",
+     "sub": "Eckdaten, Wohnkonzept und Wohngefühl",
+     "seiten": [
+      "ueberblick",
+      "wohnkonzept"
+     ]
+    },
+    {
+     "titel": "Ausstattung und Lage",
+     "sub": "Materialien und Bäder, Umfeld und Anbindung",
+     "seiten": [
+      "ausstattung",
+      "lage"
+     ]
+    },
+    {
+     "titel": "Raumprogramm und Grundrisse",
+     "sub": "Alle Räume auf vier Ebenen, mit Flächen und Maßen",
+     "seiten": [
+      "raumprogramm",
+      "grundrisse-2"
+     ]
+    },
+    {
+     "titel": "Sanierung, Energie und Projektstand",
+     "sub": "Was erneuert wurde, Energieausweis und Projektstand",
+     "seiten": [
+      "sanierung",
+      "energie"
+     ]
+    },
+    {
+     "titel": "Kaufpreis und Kapitalanlage",
+     "sub": "Erwerbsnebenkosten und Mietorientierung",
+     "seiten": [
+      "kosten",
+      "rendite"
+     ]
+    },
+    {
+     "titel": "Partner und Service",
+     "sub": "Finanzierung, Küche und Innenausbau, Garten",
+     "seiten": [
+      "partner"
+     ]
+    },
+    {
+     "titel": "Besichtigung und Kontakt",
+     "sub": "Vom ersten Gespräch bis zum Notartermin",
+     "seiten": [
+      "kontakt"
+     ]
+    },
+    {
+     "titel": "GRENFORD und Anhang",
+     "sub": "Unternehmen, rechtliche Hinweise und AGB",
+     "seiten": [
+      "ueber",
+      "agb"
+     ]
+    }
+   ]
+  },
+  {
+   "modul": "ueberblick",
+   "id": "ueberblick",
+   "kopf": "Das Haus auf einen Blick",
+   "dachzeile": "Das Haus",
+   "titel": "Das Haus auf einen Blick.",
+   "intro": "Eine Doppelhaushälfte aus dem Jahr 1976, nach umfassender Kernsanierung bereit für den Erstbezug – mit Garten, Vollkeller und Platz für eine Familie.",
+   "zeilen": [
+    [
+     "Objektart",
+     "Doppelhaushälfte mit Vollkeller"
+    ],
+    [
+     "Lage",
+     "Schlierbacher Weg 13a, 12349 Berlin-Buckow (Neukölln)"
+    ],
+    [
+     "Raumangebot",
+     "4,5 Zimmer auf drei Wohnebenen, 2 Hobbyräume im Keller"
+    ],
+    [
+     "Grundstück",
+     "ca. 258 m² mit Garten und Terrasse"
+    ],
+    [
+     "Keller",
+     "ca. 41 m² Nutzfläche (keine Wohnfläche)"
+    ],
+    [
+     "Baujahr",
+     "1976 · Kernsanierung, Heizungsanlage Baujahr 2026"
+    ],
+    [
+     "Energie",
+     "Bedarfsausweis · Effizienzklasse A · Luft-Wärmepumpe"
+    ]
+   ],
+   "kennzahlen": [
+    {
+     "wert": "613.000 €",
+     "label": "Kaufpreis",
+     "sub": "ca. 5.195 €/m² Wohnfläche"
+    },
+    {
+     "wert": "ca. 118 m²",
+     "label": "Wohnfläche",
+     "sub": "Erdgeschoss bis Dachgeschoss"
+    },
+    {
+     "wert": "4,5",
+     "label": "Zimmer",
+     "sub": "zzgl. 2 Hobbyräume im Keller"
+    }
+   ],
+   "kennzahlen_hinweis": [
+    "Circa-Werte nach Verkäuferangabe.",
+    "Keine Berechnung nach WoFlV."
+   ],
+   "banner": {
+    "label": "Projektstand",
+    "text": [
+     "Innenausbau im Wesentlichen abgeschlossen · Außenanlagen nicht im Leistungsumfang ·",
+     "Übergabe bezugsfertig, Termin nach Vereinbarung (Details auf Seite {seite:projektstand})"
+    ]
+   },
+   "quelle": "Quelle: Angaben des Verkäufers, Stand November 2026."
+  },
+  {
+   "modul": "split",
+   "id": "wohnkonzept",
+   "kopf": "Architektur &amp; Wohnkonzept",
+   "bild": "wohnen.jpg",
+   "bild_pos": "center 58%",
+   "bild_seite": "rechts",
+   "dachzeile": "Das Wohnkonzept",
+   "titel": [
+    "Hell. Klar.",
+    "Bezugsbereit."
+   ],
+   "intro": "Gemeinsam wohnen im Erdgeschoss, Familie im Obergeschoss, Rückzug unter dem Dach, Reserve im Keller.",
+   "label_breite": 100,
+   "liste": [
+    [
+     "Erdgeschoss",
+     "Offener Wohn- und Essbereich mit Küche, bodentiefe Fenster zur Terrasse und zum Garten, Gäste-WC."
+    ],
+    [
+     "Obergeschoss",
+     "Zwei Zimmer, Familienbad mit Badewanne und separater Dusche, Abstellraum."
+    ],
+    [
+     "Dachgeschoss",
+     "Schlafzimmer mit eigenem Duschbad, erreichbar über eine neue Treppe."
+    ],
+    [
+     "Keller",
+     "Zwei beheizte Hobbyräume mit Tageslicht, dazu Technik und Hausanschlüsse."
+    ]
+   ],
+   "caption": [
+    "Wohn- und Essbereich im Erdgeschoss mit Zugang zur Terrasse.",
+    "Fotoaufnahme nach Sanierung."
+   ]
+  },
+  {
+   "modul": "split",
+   "id": "ausstattung",
+   "kopf": "Ausstattung",
+   "bild": "bad-dg.jpg",
+   "bild_pos": "center 60%",
+   "bild_seite": "links",
+   "dachzeile": "Materialien &amp; Ausstattung",
+   "titel": [
+    "Ausgestattet für",
+    "den Erstbezug."
+   ],
+   "intro": "Ein durchgängiges Material- und Farbkonzept auf allen Ebenen: helle Wände, warme Holzoptik, ruhige Natursteintöne in den Bädern.",
+   "label_breite": 72,
+   "liste": [
+    [
+     "Böden",
+     "Vinyl-Designboden in Holzoptik in allen Wohnräumen, auf den Treppen und im Keller."
+    ],
+    [
+     "Bäder",
+     "Gäste-WC, Familienbad mit Wanne und Dusche, Duschbad im Dachgeschoss – alle mit Fenster. Fliesen in Natursteinoptik, Sanitärtechnik von Geberit."
+    ],
+    [
+     "Komfort",
+     "Handtuchheizkörper in Ober- und Dachgeschoss, Waschmaschinenanschluss im Technikraum."
+    ],
+    [
+     "Küche",
+     "Nicht im Kaufpreis enthalten. Planung und Einbau auf Wunsch über einen Küchenpartner."
+    ]
+   ],
+   "caption": [
+    "Duschbad im Dachgeschoss. Fotoaufnahme nach Sanierung.",
+    "Maßgeblich sind Baubeschreibung und notarieller Kaufvertrag."
+   ]
+  },
+  {
+   "modul": "lage",
+   "id": "lage",
+   "karte": {
+    "lat": 52.4228,
+    "lon": 13.412,
+    "label": [
+     "Schlierbacher Weg 13a",
+     "12349 Berlin-Buckow"
+    ]
+   },
+   "dachzeile": "Schlierbacher Weg 13a · Berlin-Buckow",
+   "titel": [
+    "Grüner Süden.",
+    "Gewachsene Nachbarschaft."
+   ],
+   "intro": "Der Schlierbacher Weg liegt im ruhigen Wohnquartier zwischen Grauwackeweg und Sandsteinweg nahe der Marienfelder Chaussee, im Neuköllner Ortsteil Buckow. Schule, Nahversorgung und Bus liegen im Quartier.",
+   "gruppen": [
+    {
+     "titel": "Cafés &amp; Restaurants",
+     "text": "Wilmas Post Café, Schlierbacher Weg 7 · Restaurant Linden-Garten,<br>historisches Gasthaus von 1856 mit Biergarten, Alt-Buckow 15A."
+    },
+    {
+     "titel": "Schule &amp; Einkauf",
+     "text": "Grundschule am Sandsteinweg im Quartier · nahkauf (REWE-Gruppe), Quarzweg 85 ·<br>ALDI und PENNY, Marienfelder Chaussee · EDEKA, Tauernallee (ca. 1 km)."
+    },
+    {
+     "titel": "Grün &amp; Kultur",
+     "text": "Britzer Garten · historischer Dorfkern Alt-Buckow mit Dorfkirche."
+    }
+   ],
+   "oepnv": [
+    {
+     "titel": "Bus M11 · M76 · X11 · X76",
+     "text": "Haltestelle Grauwackeweg (M11) im Quartier; weitere Linien am Mariendorfer Damm"
+    },
+    {
+     "titel": "S-Bahn S2",
+     "text": "S Buckower Chaussee, per Bus erreichbar"
+    },
+    {
+     "titel": "U-Bahn U6",
+     "text": "U Alt-Mariendorf, per Bus erreichbar"
+    }
+   ],
+   "quelle": [
+    "Recherche 17.11.2026: BVG-Haltestelleninfo, Kauperts Straßenverzeichnis, Betreiberangaben.",
+    "Ohne Gewähr; Linien, Öffnungszeiten und Wege vor Ort prüfen."
+   ]
+  },
+  {
+   "modul": "raumprogramm",
+   "id": "raumprogramm",
+   "bild": "dg-zimmer.jpg",
+   "bild_pos": "center 60%",
+   "dachzeile": "Vier Ebenen · ein Zuhause",
+   "titel": [
+    "Wie das Haus",
+    "funktioniert."
+   ],
+   "intro": "Wohnfläche ca. 118 m² auf Erd-, Ober- und Dachgeschoss, dazu ca. 41 m² Kellerfläche. Alle Grundrisse mit Raumflächen und Maßketten finden Sie auf den Seiten {seite:grundrisse-1} und {seite:grundrisse-2}.",
+   "ebenen": [
+    [
+     "Erdgeschoss",
+     "Wohnen / Essen · Küche · Flur · Gäste-WC",
+     "Terrasse mit Gartenzugang",
+     "27,70 · 10,32 m²"
+    ],
+    [
+     "Obergeschoss",
+     "Zimmer 3 · Zimmer 2 · Bad · Abstellraum",
+     "Bad mit Wanne und Dusche",
+     "16,34 · 10,30 m²"
+    ],
+    [
+     "Dachgeschoss",
+     "Schlafzimmer · Duschbad · Flur",
+     "Eigenes Duschbad",
+     "14,20 m²"
+    ],
+    [
+     "Kellergeschoss",
+     "Hobbyraum 1 · Hobbyraum 2 · Technik · Hausanschlüsse",
+     "Beheizt, mit Tageslicht",
+     "14,76 · 14,00 m²"
+    ]
+   ],
+   "flaechen_hinweis": "Einzelflächen gemäß Aufmaß, soweit ausgewiesen. Wohnfläche gesamt ca. 118 m² (EG bis DG); Keller ca. 41 m² zusätzlich, keine Wohnfläche. Circa-Werte nach Verkäuferangabe.",
+   "caption": "Schlafzimmer im Dachgeschoss · Fotoaufnahme nach Sanierung"
+  },
+  {
+   "modul": "grundrisse",
+   "id": "grundrisse-1",
+   "dachzeile": "Wohnebenen",
+   "titel": "Erdgeschoss und Obergeschoss.",
+   "plaene": [
+    {
+     "name": "Erdgeschoss",
+     "art": "Wohnebene",
+     "bild": "cplan-eg.png",
+     "raeume": [
+      [
+       "01",
+       "Terrasse",
+       "16,0",
+       true,
+       "aussen"
+      ],
+      [
+       "02",
+       "Wohnen / Essen",
+       "27,70",
+       false,
+       "wohn"
+      ],
+      [
+       "03",
+       "Küche",
+       "10,32",
+       false,
+       "kueche"
+      ],
+      [
+       "04",
+       "Flur",
+       "4,0",
+       true,
+       "weg"
+      ],
+      [
+       "05",
+       "Treppe",
+       "6,0",
+       true,
+       "weg"
+      ],
+      [
+       "06",
+       "Gäste-WC",
+       "2,0",
+       true,
+       "nass"
+      ]
+     ],
+     "massketten": [
+      [
+       "Oben",
+       "5,97",
+       ""
+      ],
+      [
+       "Unten",
+       "5,89",
+       "2,30 / 0,10 / 1,77 / 0,17 / 1,55"
+      ],
+      [
+       "Links",
+       "8,48",
+       "7,00 / 0,10 / 1,38"
+      ],
+      [
+       "Rechts",
+       "8,48",
+       "3,53 / 0,10 / 3,31 / 0,15 / 1,39"
+      ]
+     ],
+     "hinweise": [
+      "* Grundfläche aus dem Plan geschätzt; keine Wohnflächenberechnung."
+     ]
+    },
+    {
+     "name": "Obergeschoss",
+     "art": "Wohnebene",
+     "bild": "cplan-og.png",
+     "raeume": [
+      [
+       "01",
+       "Zimmer 3",
+       "16,34",
+       false,
+       "wohn"
+      ],
+      [
+       "02",
+       "Zimmer 2",
+       "10,30",
+       false,
+       "wohn"
+      ],
+      [
+       "03",
+       "Bad · Wanne + Dusche",
+       "6,5",
+       true,
+       "nass"
+      ],
+      [
+       "04",
+       "Flur",
+       "5,0",
+       true,
+       "weg"
+      ],
+      [
+       "05",
+       "Treppe",
+       "4,0",
+       true,
+       "weg"
+      ],
+      [
+       "06",
+       "Abstellraum",
+       "3,5",
+       true,
+       "neben"
+      ]
+     ],
+     "massketten": [
+      [
+       "Oben",
+       "5,98",
+       "3,54 / 0,16 / 2,28"
+      ],
+      [
+       "Unten",
+       "5,88",
+       "2,91 / 0,15 / 2,82"
+      ],
+      [
+       "Links",
+       "8,49",
+       "4,85 / 0,10 / 3,54"
+      ],
+      [
+       "Rechts",
+       "8,42",
+       "3,47 / 0,15 / 3,26 / 0,15 / 1,39"
+      ]
+     ],
+     "hinweise": [
+      "* Grundfläche aus dem Plan geschätzt; keine Wohnflächenberechnung."
+     ]
+    }
+   ]
+  },
+  {
+   "modul": "grundrisse",
+   "id": "grundrisse-2",
+   "dachzeile": "Rückzug und Reserve",
+   "titel": "Dachgeschoss und Keller.",
+   "plaene": [
+    {
+     "name": "Dachgeschoss",
+     "art": "Wohnebene",
+     "bild": "cplan-dg.png",
+     "raeume": [
+      [
+       "01",
+       "Schlafzimmer",
+       "14,20",
+       false,
+       "wohn"
+      ],
+      [
+       "02",
+       "Duschbad",
+       "5,0",
+       true,
+       "nass"
+      ],
+      [
+       "03",
+       "Flur",
+       "2,5",
+       true,
+       "weg"
+      ],
+      [
+       "04",
+       "Treppe",
+       "3,0",
+       true,
+       "weg"
+      ]
+     ],
+     "massketten": [
+      [
+       "Oben",
+       "5,92",
+       "3,36 / 0,11 / 2,45"
+      ],
+      [
+       "Unten",
+       "5,93",
+       "3,97 / 0,10 / 1,86"
+      ],
+      [
+       "Links",
+       "5,60",
+       ""
+      ],
+      [
+       "Rechts",
+       "5,47",
+       "2,36 / 0,12 / 1,11 / 0,10 / 1,78"
+      ]
+     ],
+     "hinweise": [
+      "* Grundfläche aus dem Plan geschätzt; Dachschrägen ohne Abzug.",
+      "Dachschrägen: 1,00 m / 2,00 m lichte Höhe (LH) laut Plan."
+     ]
+    },
+    {
+     "name": "Kellergeschoss",
+     "art": "Nutzfläche · keine Wohnfläche",
+     "bild": "cplan-kg.png",
+     "raeume": [
+      [
+       "01",
+       "Hobbyraum 2",
+       "14,00",
+       false,
+       "wohn"
+      ],
+      [
+       "02",
+       "Hobbyraum 1",
+       "14,76",
+       false,
+       "wohn"
+      ],
+      [
+       "03",
+       "Technik / Anschlussraum",
+       "4,5",
+       true,
+       "neben"
+      ],
+      [
+       "04",
+       "Flur",
+       "7,0",
+       true,
+       "weg"
+      ],
+      [
+       "05",
+       "Treppe",
+       "1,5",
+       true,
+       "weg"
+      ],
+      [
+       "06",
+       "Hausanschlüsse",
+       "2,0",
+       true,
+       "neben"
+      ]
+     ],
+     "massketten": [
+      [
+       "Oben",
+       "5,97",
+       "4,35 / 0,13 / 1,49"
+      ],
+      [
+       "Unten",
+       "5,97",
+       "3,75 / 0,12 / 2,10"
+      ],
+      [
+       "Links",
+       "8,05",
+       "3,24 / 0,24 / 4,57"
+      ],
+      [
+       "Rechts",
+       "8,05",
+       "3,24 / 0,24 / 3,23 / 0,25 / 1,09"
+      ]
+     ],
+     "hinweise": [
+      "* Grundfläche aus dem Plan geschätzt; Keller ist keine Wohnfläche."
+     ]
+    }
+   ]
+  },
+  {
+   "modul": "sanierung",
+   "id": "sanierung",
+   "kopf": "Sanierung &amp; Haustechnik",
+   "bilder": [
+    {
+     "bild": "bad-og.jpg",
+     "pos": "center"
+    },
+    {
+     "bild": "keller.jpg",
+     "pos": "center 55%"
+    }
+   ],
+   "dachzeile": "Das Sanierungskonzept",
+   "titel": [
+    "Substanz von 1976.",
+    "Technik von heute."
+   ],
+   "bloecke": [
+    [
+     "Gebäudehülle",
+     "Dach neu eingedeckt, Zwischen- und Untersparrendämmung, Fassade mit 16 cm Wärmedämmverbundsystem, neue Fenster."
+    ],
+    [
+     "Haustechnik",
+     "Luft-Wärmepumpe für Heizung und Warmwasser, neue Elektroinstallation, neue Wasser- und Heizungsleitungen, neue Heizkörper. Leerrohre für Photovoltaik vorbereitet."
+    ],
+    [
+     "Innenausbau",
+     "Neue Bäder, neue Böden und Oberflächen, neue Treppe vom Ober- ins Dachgeschoss. Erhalten blieb im Wesentlichen das Tragwerk."
+    ]
+   ],
+   "caption": [
+    "Oben: Familienbad im Obergeschoss, Fotoaufnahme nach Sanierung.",
+    "Unten: Hobbyraum im Keller, Fotoaufnahme nach Sanierung."
+   ]
+  },
+  {
+   "modul": "projektstand",
+   "id": "projektstand",
+   "dachzeile": "Projektstand",
+   "titel": "Was fertig ist. Was Sie gestalten.",
+   "intro": [
+    "Stand nach Angabe des Verkäufers. Der Verkäufer lässt vor der Übergabe vier Bestandsbäume fällen; die übrige Garten-",
+    "gestaltung liegt beim Käufer. Einen passenden Garten- und Landschaftsbauer vermittelt GRENFORD gern (Seite {seite:partner})."
+   ],
+   "bloecke": [
+    {
+     "titel": "Leistung des Verkäufers",
+     "zeilen": [
+      [
+       "Dach, Fassade und Fenster",
+       "Dacheindeckung, Dämmung, Wärmedämmverbundsystem, neue Fenster",
+       "Abgeschlossen",
+       false
+      ],
+      [
+       "Haustechnik und Leitungen",
+       "Luft-Wärmepumpe, Elektro-, Wasser- und Heizungsleitungen",
+       "Abgeschlossen",
+       false
+      ],
+      [
+       "Innenausbau und Bäder",
+       "Im Wesentlichen abgeschlossen",
+       "Abgeschlossen",
+       false
+      ],
+      [
+       "Fällung von vier Bestandsbäumen",
+       "Durch den Verkäufer, vor der Übergabe",
+       "Ausstehend",
+       true
+      ]
+     ]
+    },
+    {
+     "titel": "Außenanlagen durch den Käufer",
+     "zeilen": [
+      [
+       "Zufahrt und Kfz-Stellplatz",
+       "Fläche für einen Stellplatz ca. 6 × 3 m",
+       "Durch den Käufer",
+       true
+      ],
+      [
+       "Terrasse und Eingangspodest",
+       "Erneuerung",
+       "Durch den Käufer",
+       true
+      ],
+      [
+       "Gartengestaltung",
+       "Bepflanzung, Wege und Gartenflächen",
+       "Durch den Käufer",
+       true
+      ]
+     ]
+    }
+   ],
+   "quelle": "Quelle: Angaben des Verkäufers, Stand November 2026. Energiekennwerte siehe Seite {seite:energie}.",
+   "spalte_titel": "Übergabe",
+   "spalte": [
+    {
+     "wert": "Bezugsfertig",
+     "label": "Zustand bei Übergabe"
+    },
+    {
+     "wert": "Außenanlagen",
+     "label": "Durch den Käufer",
+     "sub": "Ausgenommen Fällung der Bestandsbäume"
+    },
+    {
+     "wert": "Nach Vereinbarung",
+     "label": "Übergabetermin"
+    }
+   ],
+   "spalte_hinweis": [
+    "Mängelansprüche richten sich nach",
+    "dem notariellen Kaufvertrag."
+   ]
+  },
+  {
+   "modul": "energie",
+   "id": "energie",
+   "bild": "energieausweis-s2.png",
+   "caption": "Abbildung: Seite 2 des Energieausweises. Der vollständige Ausweis liegt den Kaufunterlagen bei.",
+   "titel": "Nachweislich effizient.",
+   "intro": "Gedämmte Hülle, neue Fenster und Luft-Wärmepumpe: Die Kennwerte des Hauses nach der Sanierung, laut Energieausweis.",
+   "zeilen": [
+    [
+     "Art des Ausweises",
+     "Bedarfsausweis (Wohngebäude)"
+    ],
+    [
+     "Primärenergiebedarf",
+     "81,3 kWh/(m²·a)"
+    ],
+    [
+     "Treibhausgasemissionen",
+     "25,3 kg CO₂-Äq./(m²·a)"
+    ],
+    [
+     "Heizung",
+     "Luft-Wärmepumpe"
+    ],
+    [
+     "Baujahr Gebäude · Anlage",
+     "1976 · 2026"
+    ],
+    [
+     "Berechnungsverfahren",
+     "DIN V 18599"
+    ],
+    [
+     "Registriernummer",
+     "BE-2026-006439968"
+    ]
+   ],
+   "klasse": "A",
+   "endenergie": "45,2"
+  },
+  {
+   "modul": "kosten",
+   "id": "kosten"
+  },
+  {
+   "modul": "markt",
+   "id": "markt",
+   "kopf": "Markt &amp; Mietorientierung",
+   "dachzeile": "Optionales Modul · GRENFORD Research 18.11.2026",
+   "titel": "Mietorientierung für Kapitalanleger.",
+   "intro": "Für Käufer mit Vermietungsabsicht: aktuelle Mietangebote für Häuser im Berliner Süden (Buckow, Rudow). Angebotsmieten sind keine abgeschlossenen Mietverträge und keine Prognose für dieses Haus.",
+   "achsen": [
+    110,
+    160,
+    14,
+    24,
+    10,
+    2
+   ],
+   "spanne": [
+    16.5,
+    18.5
+   ],
+   "spanne_text": [
+    "Nettokaltmiete pro Monat · Annahme GRENFORD,",
+    "keine belegte Objektmiete."
+   ],
+   "vergleiche": [
+    {
+     "key": "A",
+     "adresse": "Buckow · Haus, Grundstück ca. 250 m²",
+     "flaeche": 120,
+     "miete": 2100
+    },
+    {
+     "key": "B",
+     "adresse": "Buckow · Haus mit Garten",
+     "flaeche": 128,
+     "miete": 3000
+    },
+    {
+     "key": "C",
+     "adresse": "Rudow · Haus",
+     "flaeche": 135,
+     "miete": 2500
+    },
+    {
+     "key": "D",
+     "adresse": "Rudow · Haus",
+     "flaeche": 152,
+     "miete": 2736
+    },
+    {
+     "key": "E",
+     "adresse": "Rudow · Haus",
+     "flaeche": 120,
+     "miete": 1800
+    }
+   ],
+   "quelle": [
+    "Angebotsmieten, nicht repräsentativ; keine abgeschlossenen Mietverträge. Flächen laut Inserat. Marktwerte: ImmoScout24 Ø 16,51 €/m² (Häuser Buckow, Q3 2026),",
+    "immoreport Ø 18,12 €/m² (Doppelhaushälften Buckow, 09/2026). Quelle: ImmoScout24 und Immowelt, Recherche 18.11.2026. Mietspanne: Annahme GRENFORD."
+   ]
+  },
+  {
+   "modul": "rendite",
+   "id": "rendite",
+   "kopf": "Vermietung · Modellrechnung",
+   "dachzeile": "Kapitalanlage Doppelhaushälfte · drei Szenarien",
+   "titel": "Miete, Rendite und Kaufpreisfaktor.",
+   "spanne": [
+    16.5,
+    18.5
+   ],
+   "flaeche_label": "Wohnfläche",
+   "basis": "Rechenbasis: Wohnfläche ca. 118 m² nach Angabe des Verkäufers; Keller (ca. 41 m²) nicht angesetzt. Keine Berechnung nach WoFlV.",
+   "fussnoten": [
+    "¹ Wohnfläche nach Verkäuferangabe, keine Berechnung nach WoFlV; Keller und Garten nicht angesetzt. Die Modellwerte können von einer geprüften Wohnflächenberechnung abweichen.",
+    "² Rein rechnerisches Beispiel, keine Miet- oder Renditezusage. Ohne Erwerbsnebenkosten, Leerstand, Finanzierung und Steuern. Bei einem vermieteten Haus trägt der Eigentümer Instandhaltung, Verwaltung und nicht umlagefähige Kosten selbst; die Nettorendite liegt entsprechend darunter.",
+    "Mietrecht: Für Wohnraum in Berlin gilt bei Neuvermietung die Mietpreisbremse; nach einer umfassenden Modernisierung kann die Ausnahme nach § 556f BGB greifen. Die zulässige Miete ist im Einzelfall zu prüfen."
+   ]
+  },
+  {
+   "modul": "partner",
+   "id": "partner",
+   "bereich": "nach",
+   "intro": "Ein Haus zu kaufen bedeutet mehr als den Kaufvertrag. GRENFORD stellt Ihnen auf Wunsch passende Partner zur Seite – für Finanzierung, Einrichtung und Garten."
+  },
+  {
+   "modul": "kontakt",
+   "id": "kontakt",
+   "bereich": "nach",
+   "bild": "fassade-eingang-tone.jpg",
+   "bild_pos": "center 35%",
+   "claim": [
+    "Ihre Familie.",
+    "Ihr nächster",
+    "Schritt."
+   ],
+   "dachzeile": "Das Haus persönlich erleben",
+   "titel": [
+    "Lernen Sie Ihr neues",
+    "Zuhause kennen."
+   ],
+   "schritte": [
+    [
+     "Erstgespräch",
+     "Wir klären mit Ihnen, ob Raumangebot, Lage und Zeitplan zu Ihren Vorstellungen passen."
+    ],
+    [
+     "Unterlagen und Finanzierung",
+     "Baubeschreibung, Energieausweis und Pläne für Ihre Finanzierungsprüfung; auf Wunsch Kontakt zu Finanzierungspartnern."
+    ],
+    [
+     "Besichtigung und Notar",
+     "Nach der Besichtigung koordinieren wir den Kaufvertragsentwurf. Verbraucher erhalten ihn in der Regel zwei Wochen vor der Beurkundung."
+    ]
+   ]
+  },
+  {
+   "modul": "ueber",
+   "id": "ueber",
+   "bereich": "nach",
+   "bild": "fassade-eingang-tone.jpg",
+   "bild_pos": "center 35%"
+  },
+  {
+   "modul": "recht",
+   "id": "recht",
+   "bereich": "nach",
+   "dachzeile": "The Renewed House · Schlierbacher Weg 13a",
+   "intro": [
+    "Dieser Property Brief dient der ersten Information und ist kein Angebot im rechtlichen Sinne. Maßgeblich sind Baubeschreibung und notarieller",
+    "Kaufvertrag. Verkäufer: wird im Rahmen der Vertragsvorbereitung benannt."
+   ],
+   "bloecke": [
+    [
+     "Objekt, Sanierung und Fertigstellung",
+     "Doppelhaushälfte, Baujahr 1976, Kernsanierung von Dach, Fassade, Fenstern, Haustechnik und Innenausbau. Innenausbau im Wesentlichen abgeschlossen. Die Außenanlagen sind nicht Teil der Leistung des Verkäufers; ausgenommen ist die Fällung von vier Bestandsbäumen (Seite {seite:projektstand}). Übergabetermin nach Vereinbarung. Mängelansprüche richten sich nach dem notariellen Kaufvertrag."
+    ],
+    [
+     "Flächen, Darstellungen und Ausstattung",
+     "Flächen sind Circa-Werte nach Verkäuferangabe bzw. Aufmaß; mit * gekennzeichnete Raumflächen sind aus dem Plan geschätzt. Wohnfläche ca. 118 m² nach Angabe des Verkäufers; eine Wohnflächenberechnung nach WoFlV liegt nicht vor. Kellerflächen sind keine Wohnfläche. Grundrisse grafisch aufbereitet, nicht zur Maßentnahme geeignet. Fotos teilweise digital bearbeitet; die Rechte an Fotos und Grundrissen liegen beim Verkäufer. Küche und Photovoltaikanlage sind nicht im Kaufpreis enthalten."
+    ],
+    [
+     "Grundbuch und Energieausweis",
+     "Grundbuchauszug auf Anfrage; Einzelheiten ergeben sich aus dem Grundbuch. Energieausweis: Bedarfsausweis, Endenergiebedarf 45,2 kWh/(m²·a), Effizienzklasse A, Luft-Wärmepumpe, Baujahr Heizungsanlage 2026. Erlaubnis nach § 34c GewO: Bezirksamt Charlottenburg-Wilmersdorf von Berlin, erteilt am 01.11.2022."
+    ],
+    [
+     "Quellen und Verantwortlichkeit",
+     "Objekt-, Preis-, Flächen- und Lageangaben beruhen auf Unterlagen des Verkäufers, Stand November 2026; Irrtum und Zwischenverkauf vorbehalten. Mietorientierung (Seiten {seite:markt}–{seite:rendite}): GRENFORD-Recherche, keine Miet- oder Renditezusage. Eigene Hinweis-, Aufklärungs- und Sorgfaltspflichten von GRENFORD bleiben unberührt. Die Haftung richtet sich nach den wirksam einbezogenen AGB und zwingendem Recht."
+    ]
+   ]
+  },
+  {
+   "modul": "agb",
+   "id": "agb",
+   "bereich": "nach"
+  }
+ ]
 }
