@@ -181,6 +181,10 @@
    "intro": "Eine Doppelhaushälfte aus dem Jahr 1976, nach umfassender Kernsanierung bereit für den Erstbezug – mit Garten, Vollkeller und Platz für eine Familie.",
    "zeilen": [
     [
+     "Objekt-Nr.",
+     "[GPR + Jahr + Nummer aus dem CRM, z. B. GPR26-001]"
+    ],
+    [
      "Objektart",
      "Doppelhaushälfte mit Vollkeller"
     ],

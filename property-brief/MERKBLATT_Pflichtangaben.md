@@ -17,7 +17,8 @@ Keine Rechtsberatung – eine Arbeitshilfe. AGB und neue Formulierungen einmal a
 - Übergabe/Fertigstellung: nur zusagen, was feststeht; sonst „nach Vereinbarung“ bzw. „im Kaufvertrag“.
 - Leistungsumfang klar trennen: Was macht der Verkäufer, was der Käufer (z. B. Außenanlagen).
 - Visualisierungen als solche kennzeichnen; Fotos „digital bearbeitet“, wenn zutreffend.
-- Keine Platzhalter wie „Angabe folgt“ in Versionen für Interessenten.
+- Keine Platzhalter wie „Angabe folgt“ und keine internen Hinweise in Versionen für Interessenten (build.py warnt automatisch).
+- Objekt-Nr. nur als reine ID aus dem CRM, z. B. GPR26-001 – ohne Erläuterung zum Schema.
 
 ## 3. Mietorientierung (Kapitalanlage)
 

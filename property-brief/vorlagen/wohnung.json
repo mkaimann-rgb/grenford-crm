@@ -167,6 +167,10 @@
    "intro": "[Zwei Sätze zur Wohnung.]",
    "zeilen": [
     [
+     "Objekt-Nr.",
+     "[GPR + Jahr + Nummer aus dem CRM, z. B. GPR26-001]"
+    ],
+    [
      "Objektart",
      "Eigentumswohnung, [Etage]"
     ],
