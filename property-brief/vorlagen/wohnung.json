@@ -1,0 +1,105 @@
+{
+  "_anleitung": "VORLAGE EIGENTUMSWOHNUNG – Ordner objekte/<name>/ anlegen, diese Datei als objekt.json hineinkopieren, Bilder in assets/ ablegen und alle Angaben in [eckigen Klammern] ersetzen. Seiten ohne Inhalt löschen. Bei vermieteten Wohnungen die Zeilen zu Mietvertrag ergänzen. Pflichtangaben siehe MERKBLATT_Pflichtangaben.md.",
+  "meta": {
+    "titel": "GRENFORD Property Brief – [Adresse]",
+    "fusszeile": "GRENFORD PROPERTY / [ADRESSE IN VERSALIEN]",
+    "ausgabe": "GRENFORD_Property_Brief_[Adresse].pdf",
+    "redaktionsstand": "[TT.MM.JJJJ]",
+    "agb_stand": "18.11.2026",
+    "variante": "wohnung"
+  },
+  "kosten": {
+    "land": "Berlin",
+    "grunderwerbsteuer": 6.0,
+    "courtage_brutto": 3.57,
+    "courtage_netto": "3,00 %",
+    "courtage_text": "Käufer und Verkäufer zahlen jeweils 3,00 % zzgl. 19 % MwSt. (§§ 656c, 656d BGB). Fällig nach wirksamem Abschluss des notariellen Kaufvertrags.",
+    "agb_courtage": "Die Käufercourtage für dieses Objekt beträgt 3,00 % des notariellen Kaufpreises zzgl. 19 % MwSt., insgesamt 3,57 %. Der Verkäufer trägt ebenfalls 3,57 % brutto; Gesamtcourtage 7,14 % brutto.",
+    "flaeche_qm": 0,
+    "flaeche_art": "Wohnfläche",
+    "einheiten": [{"id": "wohnung", "name": "[Eigentumswohnung, Lage im Haus]", "preis": 0}],
+    "optionen": [["Tiefgaragen- oder Stellplatz", "[Betrag oder entfällt]", false]]
+  },
+  "seiten": [
+    {"modul": "titel", "id": "titel", "bild": "[titelbild.jpg]", "bild_pos": "center",
+     "titel": ["[OBJEKTNAME]", "[ZWEITE ZEILE]"], "untertitel": ["[Ortsteil]", "[Unterzeile]"],
+     "kurz": ["[Kurzbeschreibung Zeile 1.]", "[Zeile 2.]", "[Zeile 3.]"],
+     "adresse": ["[Straße Hausnummer]", "[PLZ Berlin-Ortsteil]"],
+     "kennzahlen": [["[Zimmer]", "Zimmer"], ["ca. [xx] m²", "Wohnfläche"], ["[Preis] €", "Kaufpreis"]],
+     "hinweis": "[Foto- bzw. Visualisierungshinweis] · Flächen als Circa-Werte nach Verkäuferangabe"},
+
+    {"modul": "vorwort", "id": "vorwort", "bereich": "vor", "dachzeile": "[Objektname]", "titel": "[Überschrift Vorwort.]",
+     "lead": "[Einleitungssatz: Was stellen wir vor?]", "links": "[Gedanke links]", "rechts": "[Gedanke rechts]",
+     "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."},
+
+    {"modul": "inhalt", "id": "inhalt", "bereich": "vor", "bild": "[bild.jpg]", "claim": ["[Claim Zeile 1.]", "[Zeile 2.]"],
+     "marke": "[Objektname]", "text": ["[Kurztext Zeile 1]", "[Zeile 2]"], "adresse": ["[Straße Hausnummer]", "[PLZ Berlin-Ortsteil]"],
+     "kapitel": [
+       {"titel": "Die Wohnung", "sub": "Eckdaten, Wohnkonzept und Ausstattung", "seiten": ["ueberblick", "ausstattung"]},
+       {"titel": "Lage und Grundriss", "sub": "Umfeld, Anbindung und Raumaufteilung", "seiten": ["lage", "grundriss"]},
+       {"titel": "Gemeinschaft und Energie", "sub": "Hausgeld, Rücklage, Verwaltung und Energieausweis", "seiten": ["gemeinschaft", "energie"]},
+       {"titel": "Kaufpreis und Erwerbsnebenkosten", "sub": "Alle Kosten auf einen Blick", "seiten": ["kosten"]},
+       {"titel": "Partner und Service", "sub": "Finanzierung, Küche und Innenausbau", "seiten": ["partner"]},
+       {"titel": "Besichtigung und Kontakt", "sub": "Vom ersten Gespräch bis zum Notartermin", "seiten": ["kontakt"]},
+       {"titel": "GRENFORD und Anhang", "sub": "Unternehmen, rechtliche Hinweise und AGB", "seiten": ["ueber", "agb"]}]},
+
+    {"modul": "ueberblick", "id": "ueberblick", "kopf": "Die Wohnung auf einen Blick", "dachzeile": "Die Wohnung", "titel": "Die Wohnung auf einen Blick.",
+     "intro": "[Zwei Sätze zur Wohnung.]",
+     "zeilen": [["Objektart", "Eigentumswohnung, [Etage]"], ["Lage", "[Adresse, Ortsteil]"], ["Raumangebot", "[Zimmer, Bäder, Balkon]"],
+                ["Baujahr", "[Baujahr · Modernisierungen]"], ["Miteigentumsanteil", "[xx/1.000]"], ["Stellplatz", "[ja/nein]"], ["Energie", "[Ausweisart · Klasse · Heizung]"]],
+     "kennzahlen": [{"wert": "[Preis] €", "label": "Kaufpreis", "sub": "ca. [x] €/m² Wohnfläche"}, {"wert": "ca. [xx] m²", "label": "Wohnfläche"}, {"wert": "[x]", "label": "Zimmer"}],
+     "kennzahlen_hinweis": ["Circa-Werte nach Verkäuferangabe."],
+     "quelle": "Quelle: Angaben des Verkäufers, Stand [Monat Jahr]."},
+
+    {"modul": "split", "id": "ausstattung", "kopf": "Ausstattung", "bild": "[bild.jpg]", "bild_seite": "links",
+     "dachzeile": "Materialien &amp; Ausstattung", "titel": ["[Überschrift", "zwei Zeilen.]"], "intro": "[Einleitung Ausstattung]", "label_breite": 72,
+     "liste": [["Böden", "[…]"], ["Bad", "[…]"], ["Küche", "[…]"], ["Extras", "[…]"]],
+     "caption": ["[Bildunterschrift]", "Maßgeblich ist der notarielle Kaufvertrag."]},
+
+    {"modul": "lage", "id": "lage", "karte": {"lat": 52.52, "lon": 13.40, "label": ["[Straße Hausnummer]", "[PLZ Berlin-Ortsteil]"]},
+     "dachzeile": "[Adresse · Ortsteil]", "titel": ["[Lage-Überschrift", "zwei Zeilen.]"], "intro": "[Lagebeschreibung]",
+     "gruppen": [{"titel": "Cafés &amp; Restaurants", "text": "[…]"}, {"titel": "Schule &amp; Einkauf", "text": "[…]"}, {"titel": "Grün &amp; Kultur", "text": "[…]"}],
+     "oepnv": [{"titel": "[U-Bahn]", "text": "[Station · Entfernung]"}, {"titel": "[S-Bahn]", "text": "[…]"}, {"titel": "[Bus / Auto]", "text": "[…]"}],
+     "quelle": ["Recherche [Datum]: BVG, Betreiberangaben.", "Ohne Gewähr; Linien, Öffnungszeiten und Wege vor Ort prüfen."]},
+
+    {"modul": "raumprogramm", "id": "grundriss", "bild": "[bild.jpg]", "dachzeile": "Raumaufteilung", "titel": ["[Überschrift", "zwei Zeilen.]"],
+     "intro": "[Kurzbeschreibung der Raumaufteilung]",
+     "ebenen": [["[Raum]", "[Beschreibung]", "[Besonderheit]", "[xx,xx m²]"]],
+     "flaechen_hinweis": "[Grundlage der Flächen, z. B. Wohnflächenberechnung nach WoFlV vom …]", "caption": "[Bildunterschrift]"},
+
+    {"modul": "projektstand", "id": "gemeinschaft", "kopf": "Gemeinschaft &amp; Verwaltung",
+     "dachzeile": "Gemeinschaftseigentum", "titel": "Gemeinschaft und laufende Kosten.",
+     "intro": ["Angaben nach Wirtschaftsplan, Teilungserklärung und den Protokollen der Eigentümerversammlungen der letzten drei Jahre."],
+     "bloecke": [
+       {"titel": "Laufende Kosten", "zeilen": [["Hausgeld", "davon nicht umlagefähig: [Betrag]", "[Betrag] € / Monat", false],
+                                                ["Erhaltungsrücklage", "Anteil der Wohnung, Stand [Datum]", "[Betrag] €", false],
+                                                ["Sonderumlagen", "beschlossen oder geplant", "[keine / Betrag]", true]]},
+       {"titel": "Verwaltung und Unterlagen", "zeilen": [["Hausverwaltung", "[Name der Verwaltung]", "[…]", false],
+                                                          ["Teilungserklärung", "inkl. Sondernutzungsrechte", "Liegt vor", false],
+                                                          ["Mietverhältnis", "[bezugsfrei / vermietet: Kaltmiete, Mietbeginn]", "[…]", true]]}],
+     "quelle": "Quelle: Unterlagen der Verwaltung und des Verkäufers, Stand [Datum].",
+     "spalte_titel": "Kosten", "spalte": [{"wert": "[Betrag] €", "label": "Hausgeld je Monat"}, {"wert": "[Betrag] €", "label": "Erhaltungsrücklage"}, {"wert": "[bezugsfrei]", "label": "Übergabe"}],
+     "spalte_hinweis": ["Maßgeblich sind Teilungserklärung,", "Wirtschaftsplan und Kaufvertrag."]},
+
+    {"modul": "energie", "id": "energie", "bild": "[energieausweis.png]", "caption": "Abbildung: Energieausweis. Der vollständige Ausweis liegt den Kaufunterlagen bei.",
+     "titel": "[Überschrift Energie.]", "intro": "[Kurzbeschreibung]",
+     "zeilen": [["Art des Ausweises", "[Bedarfs-/Verbrauchsausweis]"], ["Wesentlicher Energieträger", "[…]"], ["Baujahr Gebäude", "[…]"], ["Gültig bis", "[…]"]],
+     "klasse": "[A–H]", "endenergie": "[kWh]"},
+
+    {"modul": "kosten", "id": "kosten"},
+    {"modul": "partner", "id": "partner", "bereich": "nach"},
+    {"modul": "kontakt", "id": "kontakt", "bereich": "nach", "bild": "[bild.jpg]", "claim": ["Ihr Zuhause.", "Ihr nächster", "Schritt."],
+     "dachzeile": "Die Wohnung persönlich erleben", "titel": ["Lernen Sie Ihr neues", "Zuhause kennen."],
+     "schritte": [["Erstgespräch", "Wir klären mit Ihnen, ob Wohnung, Lage und Zeitplan zu Ihren Vorstellungen passen."],
+                  ["Unterlagen und Finanzierung", "Teilungserklärung, Wirtschaftsplan, Protokolle und Energieausweis für Ihre Prüfung; auf Wunsch Kontakt zu Finanzierungspartnern."],
+                  ["Besichtigung und Notar", "Nach der Besichtigung koordinieren wir den Kaufvertragsentwurf. Verbraucher erhalten ihn in der Regel zwei Wochen vor der Beurkundung."]]},
+    {"modul": "ueber", "id": "ueber", "bereich": "nach", "bild": "[bild.jpg]"},
+    {"modul": "recht", "id": "recht", "bereich": "nach", "dachzeile": "[Objektname · Adresse]",
+     "intro": ["Dieser Property Brief dient der ersten Information und ist kein Angebot im rechtlichen Sinne. Maßgeblich ist der notarielle Kaufvertrag.", "Verkäufer: [Name oder: wird im Rahmen der Vertragsvorbereitung benannt]."],
+     "bloecke": [["Objekt und Übergabe", "[Zustand, Übergabetermin, Mietverhältnis]"],
+                 ["Flächen, Darstellungen und Ausstattung", "[Flächengrundlage; Bildrechte; was nicht im Kaufpreis enthalten ist]"],
+                 ["Grundbuch und Energieausweis", "[Grundbuch; Energieausweis-Pflichtangaben]. Erlaubnis nach § 34c GewO: Bezirksamt Charlottenburg-Wilmersdorf von Berlin, erteilt am 01.11.2022."],
+                 ["Quellen und Verantwortlichkeit", "Angaben beruhen auf Unterlagen des Verkäufers und der Verwaltung, Stand [Datum]; Irrtum und Zwischenverkauf vorbehalten. Eigene Hinweis-, Aufklärungs- und Sorgfaltspflichten von GRENFORD bleiben unberührt. Die Haftung richtet sich nach den wirksam einbezogenen AGB und zwingendem Recht."]]},
+    {"modul": "agb", "id": "agb", "bereich": "nach"}
+  ]
+}

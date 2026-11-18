@@ -1,0 +1,30 @@
+{
+  "_hinweis": "Gemeinsame GRENFORD-Inhalte für alle Property Briefs. Pro Objekt können die Partnertexte in objekt.json überschrieben werden.",
+  "partner": {
+    "intro": "Eine Immobilie zu kaufen bedeutet mehr als den Kaufvertrag. GRENFORD stellt Ihnen auf Wunsch passende Partner zur Seite – für Finanzierung, Einrichtung und Außenbereich.",
+    "schritte": [
+      ["Sie nennen uns Ihren Bedarf.", "Im persönlichen Gespräch, telefonisch oder per E-Mail."],
+      ["GRENFORD stellt den Kontakt her.", "Zu einem Partner, der zu Ihrem Vorhaben und Budget passt."],
+      ["Der Partner berät Sie direkt.", "Angebot und Vertrag erhalten Sie unmittelbar vom Partner."]
+    ],
+    "bereiche": [
+      {"titel": "Finanzierung",
+       "text": "Benötigen Sie eine Finanzierung, stellt GRENFORD gern den Kontakt zu einem passenden Partner her. Da Property Brief und Objektunterlagen vollständig vorliegen, wird die Kreditanfrage einfacher und schneller.",
+       "chips": ["Banken und Bausparkassen", "Selbstständige Baufinanzierer", "Kontakt auf Wunsch"]},
+      {"titel": "Küche und Innenausbau",
+       "text": "Für Einbauküche und maßgefertigte Möbel – vom Schrank unter der Dachschräge bis zur Garderobe – kooperiert GRENFORD mit Partnern in unterschiedlichen Preisklassen.",
+       "chips": ["Küchenstudios", "Möbelmanufakturen", "Maßgefertigte Einbauten", "Für jedes Budget"]},
+      {"titel": "Garten und Landschaftsbau",
+       "text": "Für Garten, Terrasse und Außenanlagen stehen zwei enge Kooperationspartner aus dem Garten- und Landschaftsbau bereit – von der Gestaltung bis zur Umsetzung.",
+       "chips": ["Zwei feste Partner", "Gartengestaltung", "Terrassen und Wege", "Pflanzung und Pflege"]}
+    ],
+    "hinweis": ["Die Kontaktherstellung ist für Sie unverbindlich. Beratung, Angebot und Vertrag liegen beim jeweiligen",
+                "Partner; GRENFORD selbst berät nicht zu Finanzierungen und vermittelt keine Darlehen.",
+                "Für die Kontaktherstellung kann GRENFORD vom jeweiligen Partner eine Vergütung erhalten."]
+  },
+  "geschaeftsfelder": [
+    ["GRENFORD Investments", "Transaktionen und Kapital", "Ausgewählte Off-Market-Transaktionen, Projektentwicklungen und<br>Wohnimmobilieninvestments – mit Analyse, Positionierung und diskreter Vermarktung.", "Investment Memo", "mark-investments.png"],
+    ["GRENFORD Property", "Immobilien und Perspektiven", "Beratung für Eigentümer, Käufer und Verkäufer zu Wohn-, Ferien- und<br>Gewerbeimmobilien – von der Einordnung bis zur Vermarktung.", "Property Brief", "mark-navy.png"],
+    ["GRENFORD Projects", "Umbau und Entwicklung", "Wünsche, Maßnahmen und Baupartner zusammenführen – als Beratung für<br>Sanierung, Modernisierung und Repositionierung.", "Renovation Memo", "mark-projects.png"]
+  ]
+}

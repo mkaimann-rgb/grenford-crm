@@ -1,0 +1,5 @@
+Bezirksgrenzen Berlin (berlin_bezirke.geojson)
+Quelle: Amt für Statistik Berlin-Brandenburg, aufbereitet von der Berliner Morgenpost
+(https://github.com/funkeinteraktiv/Berlin-Geodaten), Lizenz: CC BY.
+Pflicht-Quellenangabe unter jeder Karte: "Kartengrundlage: Bezirksgrenzen Berlin,
+Amt für Statistik Berlin-Brandenburg (via Berliner Morgenpost, CC BY)".
