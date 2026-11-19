@@ -341,10 +341,10 @@ S.append({"modul": "raster", "id": "kosten", "kopf": "Bau und Kosten", "dachzeil
      "kategorien": ["2026", "2027", "2028"], "summen": ["1,0", "7,9", "1,9"],
      "serien": [{"name": "CapEx", "farbe": "navy", "werte": [0.87, 6.50, 1.30]}, {"name": "Nebenkosten", "farbe": "mid", "werte": [0.09, 0.65, 0.13]}, {"name": "FF&amp;E", "farbe": "light", "werte": [0, 0.78, 0.52]}]},
     {"typ": "tabelle", "x": 500, "y": "folgt", "abstand": 14, "w": 356, "titel": "Technische Unterlagen", "breiten": [246, 110], "links": [0, 1], "tags": [1], "kopf": ["Unterlage", "Status"], "schrift": 8.2, "zh": 18,
-     "zeilen": [["Kostenberechnung, Bauzeitplan, Angebote", "Gesichtet"], ["Baubeschreibung, Bodengutachten, Statik", "Im Datenraum"],
+     "zeilen": [["Kostenberechnung, Bauzeitplan, Angebote", "Gesichtet"], ["Bodengutachten, Schadstoffgutachten", "Fehlt"],
                 ["Wertgutachten, Marktwertschätzung", "Im Datenraum"], ["Energieausweis-Unterlagen, Nutzflächen", "Im Datenraum"]]},
     {"typ": "text", "x": 500, "y": "folgt", "abstand": 10, "w": 356, "box": True, "schrift": 8,
-     "absaetze": [["Bis zum Signing:", "aktueller Bautenstand, Mengengerüst der Technik, Baunebenkosten und Reserve (in der Rechnung mit 10 % angesetzt) sowie Auswertung der Wertgutachten."]]}],
+     "absaetze": [["Bis zum Signing:", "Schadstoffgutachten HPC mit Sanierungskosten (nicht in der Kostenbasis), Bodengutachten, Bautenstand und Auswertung der Wertgutachten."]]}],
   "quelle": "Quelle: Kostenberechnung Gesamt.xlsx; Bauzeitplan.xlsx; Wertgutachten Az. 202510340; Datenraum MonteSana. Anteile bezogen auf 8,06 Mio. € netto."})
 
 # 18 Cashflow
@@ -427,24 +427,24 @@ S.append({"modul": "raster", "id": "apartment", "kopf": "Apartment-Käufer", "da
      "absaetze": [["Dunkel:", "Verkäufermodell 2027 bis 2031. Hell: Fortschreibung GRENFORD mit Auslastung 71,2 % und Preis +2 % p. a."]]}],
   "quelle": "Quelle: Renditeberechnung Apt. 55 (Verkäufermodell 2027–2031); Fortschreibung GRENFORD (Auslastung konstant 71,2 %, Preis +2 % p. a., Kostenquote 53 %). Objektrendite vor Finanzierung und Steuern, inkl. Umsatzsteuereffekt des Modells; indikativ."})
 
-# 22 Asset Check 1
-S.append({"modul": "raster", "id": "check1", "kopf": "GRENFORD Asset Check", "dachzeile": "Teil 1 von 2 · Recht und Planung", "titel": "Genehmigungen und Eigentum liegen vor",
+# 22 Asset Check 1  (geprüft gegen Datenraum, Stand 19.11.2026)
+S.append({"modul": "raster", "id": "check1", "kopf": "GRENFORD Asset Check", "dachzeile": "Teil 1 von 2 · Recht und Planung", "titel": "Baurecht liegt vor, Gutachten fehlen",
   "bloecke": [
     {"typ": "kpi", "x": L0, "y": 410, "w": FULL, "h": 48, "groesse": 18, "gap": 12,
-     "items": [{"wert": "4 von 7", "label": "Unterlagen von GRENFORD gesichtet"}, {"wert": "3 von 7", "label": "im Datenraum, Auswertung folgt", "stil": "hell"},
-               {"wert": "17 + 1", "label": "Abweichungen und Befreiung erteilt"}, {"wert": "Sondergebiet", "label": "Bebauungsplan seit 04/2023", "stil": "hell"}]},
-    {"typ": "tabelle", "x": L0, "y": "folgt", "abstand": 20, "w": FULL, "breiten": [250, 100, 455], "links": [0, 1, 2], "tags": [1], "bis": 150,
+     "items": [{"wert": "Erteilt", "label": "Gesamtbaufreigabe 12.12.2024"}, {"wert": "17 + 1", "label": "Abweichungen und Befreiung", "stil": "hell"},
+               {"wert": "500 T€", "label": "Grundschuld Abt. III zu löschen"}, {"wert": "3 fehlen", "label": "Gutachten nicht im Datenraum", "stil": "hell"}]},
+    {"typ": "tabelle", "x": L0, "y": "folgt", "abstand": 18, "w": FULL, "breiten": [236, 92, 477], "links": [0, 1, 2], "tags": [1], "bis": 150, "schrift": 8.4,
      "kopf": ["Unterlage", "Status", "Ergebnis"],
-     "zeilen": [["Grundbuch Blatt 1077 (27.03.2025)", "Gesichtet", "ERIKONA GmbH eingetragen seit 2020; lastenfreie Übertragung Zug um Zug zu regeln"],
-                ["Baugenehmigung 12.09.2023", "Gesichtet", "Umnutzung zu Coworking, Wellness, Therapie und Apartments; 17 Abweichungen und eine Befreiung"],
-                ["Bebauungsplan „Im oberen Brühl – Nord“", "Im Datenraum", "In Kraft seit 19.04.2023, Sondergebiet"],
-                ["Bauantragsänderung 20.09.2024, Baufreigabeschein", "Im Datenraum", "Änderungsantrag und Baufreigabe im Datenraum"],
+     "zeilen": [["Grundbuch Blatt 1077 (27.03.2025)", "Gesichtet", "ERIKONA GmbH seit 2020; Abt. II ohne Eintragung; Abt. III: Grundschuld 500.000 € (12 %) vom 27.03.2025, Löschung zum Vollzug"],
+                ["Baugenehmigung 12.09.2023", "Gesichtet", "Umnutzung zu Coworking, Wellness, Therapie und Apartments; 17 Abweichungen (Brandschutz) und eine Befreiung (Abstand B 500)"],
+                ["Änderungsgenehmigung und Gesamtbaufreigabe 12.12.2024", "Gesichtet", "Zwei-Achs-Apartments und Dachterrassen genehmigt; Baufreigabe erteilt; nennt zusätzlich Flst. 220/9 (Zuordnung klären)"],
+                ["Bebauungsplan „Im oberen Brühl – Nord“", "Gesichtet", "Sondergebiet seit 19.04.2023; Umwelt- und Schallgutachten ohne Ausschlussgrund; Satzungstext nicht im Datenraum"],
                 ["Teilungserklärung 14.08.2025, Abgeschlossenheit", "Im Datenraum", "Aufteilung in Wohnungs- und Teileigentum vorbereitet"],
-                ["Flst. 213: Kaufvertrag vom 03.08.2026", "Gesichtet", "6.511 m² Landwirtschaftsfläche, unerschlossen, lastenfrei geschuldet; Kaufpreis 70 T€ (ca. 10,75 €/m²)"],
-                ["Auflagen der Genehmigung", "Gesichtet", "98 Kfz-Stellplätze, Barrierefreiheit, Brandschutz-Schlussabnahme, PV-Nachweis"]]},
-    {"typ": "text", "x": L0, "y": "folgt", "abstand": 16, "w": FULL, "box": True, "schrift": 8.6,
-     "absaetze": [["Bis zum Signing:", "aktuelle Grundbuchauszüge der Einheiten, Lastenfreistellung zum Vollzug und die Vollzugsschritte zu Flst. 213 (Vormerkung, Löschung der Sicherungshypothek, Vorkaufsrechtsverzicht der Gemeinde, Genehmigung nach Grundstückverkehrsrecht). Artenschutz: Fällung von 19 Fichten vom 01.11. bis 28.02. ohne Zusatzgutachten möglich."]]}],
-  "quelle": "Quelle: Grundbuch Blatt 1077; Baugenehmigung Landratsamt Waldshut 12.09.2023. „Gesichtet“: von GRENFORD gelesen. „Im Datenraum“: vorhanden, Detailauswertung folgt. Der Asset Check ist keine Due Diligence im rechtlichen Sinne."})
+                ["Schadstoffuntersuchung HPC AG (2024/25)", "Fehlt", "Arbeiten 2024 wegen gefahrstoffverdächtiger Baustoffe eingestellt; Asbest, PAK und PCB beprobt, Gutachten abgerechnet, liegt nicht vor"],
+                ["Flst. 213: Kaufvertrag vom 03.08.2026", "Gesichtet", "6.511 m² Landwirtschaftsfläche, lastenfrei geschuldet; Kaufpreis 70 T€; Vollzug offen"]]},
+    {"typ": "text", "x": L0, "y": "folgt", "abstand": 14, "w": FULL, "box": True, "schrift": 8.4,
+     "absaetze": [["Bis zum Signing:", "HPC-Gutachten mit Sanierungskosten, Bodengutachten, Brandschutzgutachten Schubert (04.09.2023, Bestandteil der Genehmigung), Löschungsbewilligung der Grundschuld, Klärung Flst. 220/9 sowie Vollzugsschritte zu Flst. 213 (Vormerkung, Vorkaufsrechtsverzicht, Genehmigung nach Grundstückverkehrsrecht)."]]}],
+  "quelle": "Quelle: Grundbuch Blatt 1077 (27.03.2025); Baugenehmigungen Landratsamt Waldshut 12.09.2023 und 12.12.2024; HPC AG Angebot 23.09.2024 und Schlussrechnung 19.03.2025; Datenraum MonteSana, geprüft 19.11.2026. Der Asset Check ist keine Due Diligence im rechtlichen Sinne."})
 
 # 23 Asset Check 2
 S.append({"modul": "raster", "id": "check2", "kopf": "GRENFORD Asset Check", "dachzeile": "Teil 2 von 2 · Wirtschaft und Betrieb", "titel": "Die Ertragsbasis ist dokumentiert",
@@ -465,23 +465,24 @@ S.append({"modul": "raster", "id": "check2", "kopf": "GRENFORD Asset Check", "da
      "absaetze": [["Bis zum Signing:", "unterzeichnete Betreiberverträge mit Mindestpacht, eigene Marktstudie und Verkaufsstand der Apartments."]]}],
   "quelle": "Quelle: Ertragsprognosen MonteSana; Sales Plan; LBS-Schreiben 20.11.2025; Apartments.xlsx; Renditeberechnung Apt. 55."})
 
-# 24 Machbarkeit 1
-S.append({"modul": "raster", "id": "machbar1", "kopf": "Machbarkeitsstudie", "dachzeile": "Teil 1 von 2 · Planung, Technik und Bau", "titel": "Rechtlich und technisch machbar",
+# 24 Machbarkeit 1  (geprüft gegen Datenraum, Stand 19.11.2026)
+S.append({"modul": "raster", "id": "machbar1", "kopf": "Machbarkeitsstudie", "dachzeile": "Teil 1 von 2 · Planung, Technik und Bau", "titel": "Genehmigt, mit offenen Befunden",
   "bloecke": [
     {"typ": "kpi", "x": L0, "y": 410, "w": FULL, "h": 48, "groesse": 18, "gap": 12,
-     "items": [{"wert": "3 × gegeben", "label": "Planungsrecht, Genehmigung, Baugrund"}, {"wert": "3 × mit Maßgaben", "label": "Brandschutz, Energetik, Bauablauf", "stil": "hell"},
-               {"wert": "0", "label": "Ausschlusskriterien"}, {"wert": "KfW 40", "label": "Effizienzhaus geplant", "stil": "hell"}]},
-    {"typ": "tabelle", "x": L0, "y": "folgt", "abstand": 20, "w": FULL, "breiten": [150, 535, 120], "links": [0, 1, 2], "tags": [2], "bis": 150,
+     "items": [{"wert": "2 × gegeben", "label": "Planungsrecht, Genehmigung"}, {"wert": "4 × Maßgaben", "label": "Brandschutz, Energetik, Bau, Schallschutz", "stil": "hell"},
+               {"wert": "2 × offen", "label": "Schadstoffe, Baugrund"}, {"wert": "0", "label": "Versagungsgründe in den Bescheiden", "stil": "hell"}]},
+    {"typ": "tabelle", "x": L0, "y": "folgt", "abstand": 18, "w": FULL, "breiten": [140, 550, 115], "links": [0, 1, 2], "tags": [2], "bis": 150, "schrift": 8.4,
      "kopf": ["Dimension", "Befund", "Machbarkeit"],
-     "zeilen": [["Planungsrecht", "Bebauungsplan 04/2023 in Kraft, Sondergebiet; Nutzung Coworking, Wellness, Therapie und Apartments genehmigt", "Gegeben"],
-                ["Genehmigungsstand", "Baugenehmigung 09/2023, Änderung 09/2024, Baufreigabeschein im Datenraum", "Gegeben"],
-                ["Brandschutz", "17 Abweichungen genehmigt, Kompensation durch Brandmeldeanlage und Rauchwarnmelder; Schlussabnahme vorgesehen", "Mit Maßgaben"],
-                ["Energetik", "KfW-Effizienzhaus 40 geplant, Wärmepumpen-Vorbereitung und PV im Bauzeitplan", "Mit Maßgaben"],
-                ["Bauablauf", "Drei Bauabschnitte 04/2026 bis 10/2027, Höhenlage 1.015 m (Winterfenster beachten)", "Mit Maßgaben"],
-                ["Baugrund / Statik", "Bodengutachten und Tragwerksplanung im Datenraum", "Gegeben"]]},
-    {"typ": "text", "x": L0, "y": "folgt", "abstand": 16, "w": FULL, "box": True, "schrift": 9,
-     "absaetze": [["Ergebnis:", "Die Maßgaben sind Umsetzungsaufgaben, keine Hindernisse: Nachweise zum Brandschutz und zur Energieeffizienz (KfW) sowie ein Winterpuffer im Bauzeitplan."]]}],
-  "quelle": "Quelle: Baugenehmigung 12.09.2023 (Nebenbestimmungen); Bauzeitplan; Exposé; Datenraum MonteSana. Die Machbarkeitsaussagen sind Einschätzungen von GRENFORD auf Basis der Unterlagen, kein Fachgutachten."})
+     "zeilen": [["Planungsrecht", "Bebauungsplan 04/2023, Sondergebiet; Nutzung Coworking, Wellness, Therapie und Apartments genehmigt", "Gegeben"],
+                ["Genehmigungsstand", "Baugenehmigung 09/2023, Änderung und Gesamtbaufreigabe 12/2024", "Gegeben"],
+                ["Brandschutz", "17 Abweichungen mit Kompensation (Brandmeldeanlage, Rauchwarnmelder); Gutachten Schubert nicht im Datenraum", "Mit Maßgaben"],
+                ["Auflagen und Schallschutz", "Barrierefreiheit nach DIN 18040, Kinderspielplatz ≥ 30 m², passiver Schallschutz zur B 500", "Mit Maßgaben"],
+                ["Energetik und Bauablauf", "KfW 40 geplant, PV im Bauzeitplan; drei Abschnitte auf 1.015 m (Winterfenster)", "Mit Maßgaben"],
+                ["Schadstoffe", "Gefahrstoffverdacht 2024 (Asbest, PAK, PCB); Untersuchung erfolgt, Ergebnis und Sanierungskosten nicht im Datenraum", "Offen"],
+                ["Baugrund / Statik", "Statik und Tragwerksplanung (Dagdelen, 2020) vorhanden; kein Bodengutachten im Datenraum", "Offen"]]},
+    {"typ": "text", "x": L0, "y": "folgt", "abstand": 14, "w": FULL, "box": True, "schrift": 8.6,
+     "absaetze": [["Ergebnis:", "Die Bescheide enthalten keinen Versagungsgrund. Ein Ausschluss lässt sich erst nach Vorlage des Schadstoff- und des Bodengutachtens bewerten; bis dahin sind Sanierungskosten nicht in der Kostenbasis abgebildet."]]}],
+  "quelle": "Quelle: Baugenehmigungen 12.09.2023 und 12.12.2024 (Nebenbestimmungen); Schalltechnische Untersuchung und Umweltbelange zum Bebauungsplan; HPC AG (2024/25); Datenraum MonteSana, geprüft 19.11.2026. Einschätzung GRENFORD, kein Fachgutachten."})
 
 # 25 Machbarkeit 2
 S.append({"modul": "raster", "id": "machbar2", "kopf": "Machbarkeitsstudie", "dachzeile": "Teil 2 von 2 · Betrieb und Ergebnis", "titel": "Machbar mit klaren Maßgaben",
@@ -489,10 +490,10 @@ S.append({"modul": "raster", "id": "machbar2", "kopf": "Machbarkeitsstudie", "da
     {"typ": "tabelle", "x": L0, "y": 410, "w": 430, "titel": "Ergebnis der Machbarkeitsprüfung", "breiten": [112, 208, 110], "links": [0, 1, 2], "tags": [2], "bis": 170,
      "kopf": ["Kriterium", "Ergebnis", "Bewertung"],
      "zeilen": [["Planung und Genehmigung", "Alle wesentlichen Genehmigungen liegen vor", "Gegeben"], ["Technik und Bauablauf", "Drei Bauabschnitte, Maßgaben zu Brandschutz und Energetik", "Mit Maßgaben"],
-                ["Kosten", "Restbudget 8,66 Mio. € netto, Nebenkosten ergänzt", "Mit Maßgaben"], ["Markt und Lage", "Grenzgängerpotenzial, Kurortstatus", "Gegeben"],
+                ["Kosten", "Restbudget 8,66 Mio. € netto; Schadstoffsanierung nicht enthalten", "Offen"], ["Markt und Lage", "Grenzgängerpotenzial, Kurortstatus", "Gegeben"],
                 ["Betrieb", "Vier Profit-Center, Verträge zu finalisieren", "Mit Maßgaben"], ["Wirtschaftlichkeit", "IRR 10,6 bis 26,8 % (Szenarien), Break-even 2029", "Gegeben"]]},
     {"typ": "text", "x": L0, "y": "folgt", "abstand": 16, "w": 430, "box": True, "titel": "Gesamtergebnis", "schrift": 9,
-     "absaetze": ["Das Vorhaben ist auf Basis der Unterlagen machbar. Die Maßgaben lassen sich bis zum Signing und in der Bauphase abarbeiten."]},
+     "absaetze": ["Das Vorhaben ist genehmigungsrechtlich machbar. Die abschließende Bewertung setzt das Schadstoff- und das Bodengutachten voraus; die übrigen Maßgaben lassen sich bis zum Signing und in der Bauphase abarbeiten."]},
     {"typ": "saeulen", "x": 520, "y": 410, "w": 336, "h": 220, "titel": "Operatives Ergebnis aller Profit-Center in T€", "gestapelt": True, "max": 731, "breite": .46,
      "kategorien": ["Jahr 2 (≈ 2027)", "Jahr 3 (≈ 2028)", "Jahr 4 (≈ 2029)"], "summen": ["182 T€", "635 T€", "731 T€"],
      "serien": [{"name": "Coworking", "farbe": "navy", "werte": [107, 313, 332]}, {"name": "Fitness", "farbe": "mid", "werte": [10, 183, 237]},
@@ -508,13 +509,13 @@ S.append({"modul": "raster", "id": "matrix", "kopf": "Value Matrix", "dachzeile"
       {"titel": "Stärken", "akzent": True, "punkte": [["Genehmigtes Projekt.", "Baugenehmigung 09/2023, Teilungserklärung 08/2025, Planungsrecht abgeschlossen."], ["Grenzraum-Standort.", "20 km zur Schweizer Grenze, 14.668 Grenzgänger im Kreis Waldshut."],
          ["Vier Ertragssäulen.", "92 Apartments plus vier Profit-Center auf 2.658 m²."], ["Einstiegspreis.", "5,3 statt 7,0 Mio. €; optionale Staffelung; Zusatzgrundstück im Paket."]]},
       {"titel": "Hebel", "punkte": [["Auslastung absichern.", "Planung 52 bis 71 %; Break-even für 4 % Objektrendite bei ca. 45 %."], ["Betreiberverträge.", "Mindestpacht 218 T€ p. a. finalisieren; IWG/Regus in Verhandlung."],
-         ["Finanzierungsstruktur.", "Fremdkapital, KfW-Programme und Sicherheiten bis zum Signing."], ["Kostenbasis.", "Mengengerüst und Reserve (10 %) vor Vergabe verifizieren."]]},
+         ["Finanzierungsstruktur.", "Fremdkapital, KfW-Programme und Sicherheiten bis zum Signing."], ["Kostenbasis.", "Schadstoffbefund und Reserve (10 %) vor Vergabe einpreisen."]]},
       {"titel": "Chancen", "akzent": True, "punkte": [["Grenzgänger und Workation.", "Wohnen auf Zeit und Coworking im Grenzraum."], ["Kombinationsangebot.", "Kein vergleichbares Gesamtkonzept im 50-km-Radius."],
          ["Exit-Optionen.", "Einzelverkauf, Gesamtverkauf oder Halten der Gewerbeflächen; IRR Basisfall 23,1 %."], ["ESG und Fläche.", "KfW 40; Flst. 213 als Flächenreserve, planungsrechtlich zu prüfen."]]},
       {"titel": "Marktrisiken", "punkte": [["Zins- und Kapitalmarkt.", "Wirkt auf Finanzierung und Exit-Rendite (6,5 bis 8,0 %)."], ["Bauablauf auf 1.015 m.", "Winterfenster und Lieferketten: Puffer im Bauzeitplan."],
-         ["Wettbewerb.", "Rund 82 Ferienunterkünfte, 52 bis 110 € je Nacht; Planpreis am oberen Ende."], ["Regulierung.", "Brandschutz- und Energierecht; 17 Abweichungen mit Kompensation."]]}]},
+         ["Wettbewerb.", "Rund 82 Ferienunterkünfte, 52 bis 110 € je Nacht; Planpreis am oberen Ende."], ["Schadstoffe und Baugrund.", "Gutachten fehlen; Sanierungskosten nicht in der Kostenbasis."]]}]},
     {"typ": "text", "x": L0, "y": "folgt", "abstand": 10, "w": FULL, "box": True, "schrift": 8.6,
-     "absaetze": [["Investor Insight:", "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption. Die Maßgaben liegen in Betrieb, Finanzierung und Bauablauf; vertiefte Modelle und Exit-Strategien stellen wir in vertraulichen Gesprächen zur Verfügung."]]}],
+     "absaetze": [["Investor Insight:", "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption. Offen sind Schadstoff- und Bodengutachten; die übrigen Maßgaben liegen in Betrieb, Finanzierung und Bauablauf. Vertiefte Modelle und Exit-Strategien stellen wir in vertraulichen Gesprächen zur Verfügung."]]}],
   "quelle": "Quelle: Einschätzung GRENFORD auf Basis von Verkäuferunterlagen, GRENFORD Research und Investorenrechnung (Seiten {seite:cashflow} bis {seite:sensitivitaet}). Indikativ, keine Zusicherung."})
 
 # IV Kontakt

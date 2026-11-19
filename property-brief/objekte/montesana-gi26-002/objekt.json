@@ -2518,8 +2518,8 @@
        "Gesichtet"
       ],
       [
-       "Baubeschreibung, Bodengutachten, Statik",
-       "Im Datenraum"
+       "Bodengutachten, Schadstoffgutachten",
+       "Fehlt"
       ],
       [
        "Wertgutachten, Marktwertschätzung",
@@ -2542,7 +2542,7 @@
      "absaetze": [
       [
        "Bis zum Signing:",
-       "aktueller Bautenstand, Mengengerüst der Technik, Baunebenkosten und Reserve (in der Rechnung mit 10 % angesetzt) sowie Auswertung der Wertgutachten."
+       "Schadstoffgutachten HPC mit Sanierungskosten (nicht in der Kostenbasis), Bodengutachten, Bautenstand und Auswertung der Wertgutachten."
       ]
      ]
     }
@@ -3397,7 +3397,7 @@
    "id": "check1",
    "kopf": "GRENFORD Asset Check",
    "dachzeile": "Teil 1 von 2 · Recht und Planung",
-   "titel": "Genehmigungen und Eigentum liegen vor",
+   "titel": "Baurecht liegt vor, Gutachten fehlen",
    "bloecke": [
     {
      "typ": "kpi",
@@ -3409,21 +3409,21 @@
      "gap": 12,
      "items": [
       {
-       "wert": "4 von 7",
-       "label": "Unterlagen von GRENFORD gesichtet"
-      },
-      {
-       "wert": "3 von 7",
-       "label": "im Datenraum, Auswertung folgt",
-       "stil": "hell"
+       "wert": "Erteilt",
+       "label": "Gesamtbaufreigabe 12.12.2024"
       },
       {
        "wert": "17 + 1",
-       "label": "Abweichungen und Befreiung erteilt"
+       "label": "Abweichungen und Befreiung",
+       "stil": "hell"
       },
       {
-       "wert": "Sondergebiet",
-       "label": "Bebauungsplan seit 04/2023",
+       "wert": "500 T€",
+       "label": "Grundschuld Abt. III zu löschen"
+      },
+      {
+       "wert": "3 fehlen",
+       "label": "Gutachten nicht im Datenraum",
        "stil": "hell"
       }
      ]
@@ -3432,12 +3432,12 @@
      "typ": "tabelle",
      "x": 51,
      "y": "folgt",
-     "abstand": 20,
+     "abstand": 18,
      "w": 805,
      "breiten": [
-      250,
-      100,
-      455
+      236,
+      92,
+      477
      ],
      "links": [
       0,
@@ -3448,6 +3448,7 @@
       1
      ],
      "bis": 150,
+     "schrift": 8.4,
      "kopf": [
       "Unterlage",
       "Status",
@@ -3457,22 +3458,22 @@
       [
        "Grundbuch Blatt 1077 (27.03.2025)",
        "Gesichtet",
-       "ERIKONA GmbH eingetragen seit 2020; lastenfreie Übertragung Zug um Zug zu regeln"
+       "ERIKONA GmbH seit 2020; Abt. II ohne Eintragung; Abt. III: Grundschuld 500.000 € (12 %) vom 27.03.2025, Löschung zum Vollzug"
       ],
       [
        "Baugenehmigung 12.09.2023",
        "Gesichtet",
-       "Umnutzung zu Coworking, Wellness, Therapie und Apartments; 17 Abweichungen und eine Befreiung"
+       "Umnutzung zu Coworking, Wellness, Therapie und Apartments; 17 Abweichungen (Brandschutz) und eine Befreiung (Abstand B 500)"
+      ],
+      [
+       "Änderungsgenehmigung und Gesamtbaufreigabe 12.12.2024",
+       "Gesichtet",
+       "Zwei-Achs-Apartments und Dachterrassen genehmigt; Baufreigabe erteilt; nennt zusätzlich Flst. 220/9 (Zuordnung klären)"
       ],
       [
        "Bebauungsplan „Im oberen Brühl – Nord“",
-       "Im Datenraum",
-       "In Kraft seit 19.04.2023, Sondergebiet"
-      ],
-      [
-       "Bauantragsänderung 20.09.2024, Baufreigabeschein",
-       "Im Datenraum",
-       "Änderungsantrag und Baufreigabe im Datenraum"
+       "Gesichtet",
+       "Sondergebiet seit 19.04.2023; Umwelt- und Schallgutachten ohne Ausschlussgrund; Satzungstext nicht im Datenraum"
       ],
       [
        "Teilungserklärung 14.08.2025, Abgeschlossenheit",
@@ -3480,14 +3481,14 @@
        "Aufteilung in Wohnungs- und Teileigentum vorbereitet"
       ],
       [
-       "Flst. 213: Kaufvertrag vom 03.08.2026",
-       "Gesichtet",
-       "6.511 m² Landwirtschaftsfläche, unerschlossen, lastenfrei geschuldet; Kaufpreis 70 T€ (ca. 10,75 €/m²)"
+       "Schadstoffuntersuchung HPC AG (2024/25)",
+       "Fehlt",
+       "Arbeiten 2024 wegen gefahrstoffverdächtiger Baustoffe eingestellt; Asbest, PAK und PCB beprobt, Gutachten abgerechnet, liegt nicht vor"
       ],
       [
-       "Auflagen der Genehmigung",
+       "Flst. 213: Kaufvertrag vom 03.08.2026",
        "Gesichtet",
-       "98 Kfz-Stellplätze, Barrierefreiheit, Brandschutz-Schlussabnahme, PV-Nachweis"
+       "6.511 m² Landwirtschaftsfläche, lastenfrei geschuldet; Kaufpreis 70 T€; Vollzug offen"
       ]
      ]
     },
@@ -3495,19 +3496,19 @@
      "typ": "text",
      "x": 51,
      "y": "folgt",
-     "abstand": 16,
+     "abstand": 14,
      "w": 805,
      "box": true,
-     "schrift": 8.6,
+     "schrift": 8.4,
      "absaetze": [
       [
        "Bis zum Signing:",
-       "aktuelle Grundbuchauszüge der Einheiten, Lastenfreistellung zum Vollzug und die Vollzugsschritte zu Flst. 213 (Vormerkung, Löschung der Sicherungshypothek, Vorkaufsrechtsverzicht der Gemeinde, Genehmigung nach Grundstückverkehrsrecht). Artenschutz: Fällung von 19 Fichten vom 01.11. bis 28.02. ohne Zusatzgutachten möglich."
+       "HPC-Gutachten mit Sanierungskosten, Bodengutachten, Brandschutzgutachten Schubert (04.09.2023, Bestandteil der Genehmigung), Löschungsbewilligung der Grundschuld, Klärung Flst. 220/9 sowie Vollzugsschritte zu Flst. 213 (Vormerkung, Vorkaufsrechtsverzicht, Genehmigung nach Grundstückverkehrsrecht)."
       ]
      ]
     }
    ],
-   "quelle": "Quelle: Grundbuch Blatt 1077; Baugenehmigung Landratsamt Waldshut 12.09.2023. „Gesichtet“: von GRENFORD gelesen. „Im Datenraum“: vorhanden, Detailauswertung folgt. Der Asset Check ist keine Due Diligence im rechtlichen Sinne."
+   "quelle": "Quelle: Grundbuch Blatt 1077 (27.03.2025); Baugenehmigungen Landratsamt Waldshut 12.09.2023 und 12.12.2024; HPC AG Angebot 23.09.2024 und Schlussrechnung 19.03.2025; Datenraum MonteSana, geprüft 19.11.2026. Der Asset Check ist keine Due Diligence im rechtlichen Sinne."
   },
   {
    "modul": "raster",
@@ -3664,7 +3665,7 @@
    "id": "machbar1",
    "kopf": "Machbarkeitsstudie",
    "dachzeile": "Teil 1 von 2 · Planung, Technik und Bau",
-   "titel": "Rechtlich und technisch machbar",
+   "titel": "Genehmigt, mit offenen Befunden",
    "bloecke": [
     {
      "typ": "kpi",
@@ -3676,21 +3677,21 @@
      "gap": 12,
      "items": [
       {
-       "wert": "3 × gegeben",
-       "label": "Planungsrecht, Genehmigung, Baugrund"
+       "wert": "2 × gegeben",
+       "label": "Planungsrecht, Genehmigung"
       },
       {
-       "wert": "3 × mit Maßgaben",
-       "label": "Brandschutz, Energetik, Bauablauf",
+       "wert": "4 × Maßgaben",
+       "label": "Brandschutz, Energetik, Bau, Schallschutz",
        "stil": "hell"
       },
       {
-       "wert": "0",
-       "label": "Ausschlusskriterien"
+       "wert": "2 × offen",
+       "label": "Schadstoffe, Baugrund"
       },
       {
-       "wert": "KfW 40",
-       "label": "Effizienzhaus geplant",
+       "wert": "0",
+       "label": "Versagungsgründe in den Bescheiden",
        "stil": "hell"
       }
      ]
@@ -3699,12 +3700,12 @@
      "typ": "tabelle",
      "x": 51,
      "y": "folgt",
-     "abstand": 20,
+     "abstand": 18,
      "w": 805,
      "breiten": [
-      150,
-      535,
-      120
+      140,
+      550,
+      115
      ],
      "links": [
       0,
@@ -3715,6 +3716,7 @@
       2
      ],
      "bis": 150,
+     "schrift": 8.4,
      "kopf": [
       "Dimension",
       "Befund",
@@ -3723,33 +3725,38 @@
      "zeilen": [
       [
        "Planungsrecht",
-       "Bebauungsplan 04/2023 in Kraft, Sondergebiet; Nutzung Coworking, Wellness, Therapie und Apartments genehmigt",
+       "Bebauungsplan 04/2023, Sondergebiet; Nutzung Coworking, Wellness, Therapie und Apartments genehmigt",
        "Gegeben"
       ],
       [
        "Genehmigungsstand",
-       "Baugenehmigung 09/2023, Änderung 09/2024, Baufreigabeschein im Datenraum",
+       "Baugenehmigung 09/2023, Änderung und Gesamtbaufreigabe 12/2024",
        "Gegeben"
       ],
       [
        "Brandschutz",
-       "17 Abweichungen genehmigt, Kompensation durch Brandmeldeanlage und Rauchwarnmelder; Schlussabnahme vorgesehen",
+       "17 Abweichungen mit Kompensation (Brandmeldeanlage, Rauchwarnmelder); Gutachten Schubert nicht im Datenraum",
        "Mit Maßgaben"
       ],
       [
-       "Energetik",
-       "KfW-Effizienzhaus 40 geplant, Wärmepumpen-Vorbereitung und PV im Bauzeitplan",
+       "Auflagen und Schallschutz",
+       "Barrierefreiheit nach DIN 18040, Kinderspielplatz ≥ 30 m², passiver Schallschutz zur B 500",
        "Mit Maßgaben"
       ],
       [
-       "Bauablauf",
-       "Drei Bauabschnitte 04/2026 bis 10/2027, Höhenlage 1.015 m (Winterfenster beachten)",
+       "Energetik und Bauablauf",
+       "KfW 40 geplant, PV im Bauzeitplan; drei Abschnitte auf 1.015 m (Winterfenster)",
        "Mit Maßgaben"
+      ],
+      [
+       "Schadstoffe",
+       "Gefahrstoffverdacht 2024 (Asbest, PAK, PCB); Untersuchung erfolgt, Ergebnis und Sanierungskosten nicht im Datenraum",
+       "Offen"
       ],
       [
        "Baugrund / Statik",
-       "Bodengutachten und Tragwerksplanung im Datenraum",
-       "Gegeben"
+       "Statik und Tragwerksplanung (Dagdelen, 2020) vorhanden; kein Bodengutachten im Datenraum",
+       "Offen"
       ]
      ]
     },
@@ -3757,19 +3764,19 @@
      "typ": "text",
      "x": 51,
      "y": "folgt",
-     "abstand": 16,
+     "abstand": 14,
      "w": 805,
      "box": true,
-     "schrift": 9,
+     "schrift": 8.6,
      "absaetze": [
       [
        "Ergebnis:",
-       "Die Maßgaben sind Umsetzungsaufgaben, keine Hindernisse: Nachweise zum Brandschutz und zur Energieeffizienz (KfW) sowie ein Winterpuffer im Bauzeitplan."
+       "Die Bescheide enthalten keinen Versagungsgrund. Ein Ausschluss lässt sich erst nach Vorlage des Schadstoff- und des Bodengutachtens bewerten; bis dahin sind Sanierungskosten nicht in der Kostenbasis abgebildet."
       ]
      ]
     }
    ],
-   "quelle": "Quelle: Baugenehmigung 12.09.2023 (Nebenbestimmungen); Bauzeitplan; Exposé; Datenraum MonteSana. Die Machbarkeitsaussagen sind Einschätzungen von GRENFORD auf Basis der Unterlagen, kein Fachgutachten."
+   "quelle": "Quelle: Baugenehmigungen 12.09.2023 und 12.12.2024 (Nebenbestimmungen); Schalltechnische Untersuchung und Umweltbelange zum Bebauungsplan; HPC AG (2024/25); Datenraum MonteSana, geprüft 19.11.2026. Einschätzung GRENFORD, kein Fachgutachten."
   },
   {
    "modul": "raster",
@@ -3816,8 +3823,8 @@
       ],
       [
        "Kosten",
-       "Restbudget 8,66 Mio. € netto, Nebenkosten ergänzt",
-       "Mit Maßgaben"
+       "Restbudget 8,66 Mio. € netto; Schadstoffsanierung nicht enthalten",
+       "Offen"
       ],
       [
        "Markt und Lage",
@@ -3846,7 +3853,7 @@
      "titel": "Gesamtergebnis",
      "schrift": 9,
      "absaetze": [
-      "Das Vorhaben ist auf Basis der Unterlagen machbar. Die Maßgaben lassen sich bis zum Signing und in der Bauphase abarbeiten."
+      "Das Vorhaben ist genehmigungsrechtlich machbar. Die abschließende Bewertung setzt das Schadstoff- und das Bodengutachten voraus; die übrigen Maßgaben lassen sich bis zum Signing und in der Bauphase abarbeiten."
      ]
     },
     {
@@ -3985,7 +3992,7 @@
         ],
         [
          "Kostenbasis.",
-         "Mengengerüst und Reserve (10 %) vor Vergabe verifizieren."
+         "Schadstoffbefund und Reserve (10 %) vor Vergabe einpreisen."
         ]
        ]
       },
@@ -4027,8 +4034,8 @@
          "Rund 82 Ferienunterkünfte, 52 bis 110 € je Nacht; Planpreis am oberen Ende."
         ],
         [
-         "Regulierung.",
-         "Brandschutz- und Energierecht; 17 Abweichungen mit Kompensation."
+         "Schadstoffe und Baugrund.",
+         "Gutachten fehlen; Sanierungskosten nicht in der Kostenbasis."
         ]
        ]
       }
@@ -4045,7 +4052,7 @@
      "absaetze": [
       [
        "Investor Insight:",
-       "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption. Die Maßgaben liegen in Betrieb, Finanzierung und Bauablauf; vertiefte Modelle und Exit-Strategien stellen wir in vertraulichen Gesprächen zur Verfügung."
+       "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption. Offen sind Schadstoff- und Bodengutachten; die übrigen Maßgaben liegen in Betrieb, Finanzierung und Bauablauf. Vertiefte Modelle und Exit-Strategien stellen wir in vertraulichen Gesprächen zur Verfügung."
       ]
      ]
     }

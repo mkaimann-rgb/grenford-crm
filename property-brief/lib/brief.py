@@ -932,6 +932,7 @@ def CHIP(x, base, text, gross=False):
     t0 = text.lower().split()[0]
     if t0 in POS or t0 in ('top-potenzial',): st = f'background:{NAVY if t0 == "top-potenzial" else ACC};color:#fff;'
     elif t0 in ('gut', 'stabilität'): st = f'background:{LIGHT};color:{NAVY};'
+    elif t0 in ('fehlt', 'offen'): st = 'background:#9a5a44;color:#fff;'
     else: st = f'border:.7pt solid {ACC};color:{ACC};'
     fs = 7 if gross else 6.5
     return (f'<div class="t" style="left:{x}pt;top:{H-base-8:.2f}pt;{st}font-family:\'DM Mono\',monospace;font-size:{fs}pt;line-height:8pt;'
