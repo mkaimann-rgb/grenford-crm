@@ -250,8 +250,8 @@
    "modul": "split",
    "id": "wohnkonzept",
    "kopf": "Architektur &amp; Wohnkonzept",
-   "bild": "wohnen.jpg",
-   "bild_pos": "center 58%",
+   "bild": "vis-wohnen.jpg",
+   "bild_pos": "center",
    "bild_seite": "rechts",
    "dachzeile": "Das Wohnkonzept",
    "titel": [
@@ -279,16 +279,16 @@
     ]
    ],
    "caption": [
-    "Wohn- und Essbereich im Erdgeschoss mit Zugang zur Terrasse.",
-    "Fotoaufnahme nach Sanierung."
+    "Wohn- und Essbereich im Erdgeschoss. Visualisierung: virtuell möbliert auf Basis",
+    "einer Fotoaufnahme (KI-gestützt). Möbel und Dekoration nicht im Kaufpreis enthalten."
    ]
   },
   {
    "modul": "split",
    "id": "ausstattung",
    "kopf": "Ausstattung",
-   "bild": "bad-dg.jpg",
-   "bild_pos": "center 60%",
+   "bild": "vis-duschbad-dg.jpg",
+   "bild_pos": "center",
    "bild_seite": "links",
    "dachzeile": "Materialien &amp; Ausstattung",
    "titel": [
@@ -316,7 +316,7 @@
     ]
    ],
    "caption": [
-    "Duschbad im Dachgeschoss. Fotoaufnahme nach Sanierung.",
+    "Duschbad im Dachgeschoss. Visualisierung: digital ausgestattet auf Basis einer Fotoaufnahme (KI-gestützt).",
     "Maßgeblich sind Baubeschreibung und notarieller Kaufvertrag."
    ]
   },
@@ -373,8 +373,8 @@
   {
    "modul": "raumprogramm",
    "id": "raumprogramm",
-   "bild": "dg-zimmer.jpg",
-   "bild_pos": "center 60%",
+   "bild": "vis-hobbyraum.jpg",
+   "bild_pos": "center",
    "dachzeile": "Vier Ebenen · ein Zuhause",
    "titel": [
     "Wie das Haus",
@@ -408,7 +408,7 @@
     ]
    ],
    "flaechen_hinweis": "Einzelflächen gemäß Aufmaß, soweit ausgewiesen. Wohnfläche gesamt ca. 118 m² (EG bis DG); Keller ca. 41 m² zusätzlich, keine Wohnfläche. Circa-Werte nach Verkäuferangabe.",
-   "caption": "Schlafzimmer im Dachgeschoss · Fotoaufnahme nach Sanierung"
+   "caption": "Hobbyraum im Keller · Visualisierung, virtuell möbliert (KI-gestützt)"
   },
   {
    "modul": "grundrisse",
@@ -715,12 +715,12 @@
    "kopf": "Sanierung &amp; Haustechnik",
    "bilder": [
     {
-     "bild": "bad-og.jpg",
-     "pos": "center"
+     "bild": "vis-gaeste-wc.jpg",
+     "pos": "center 60%"
     },
     {
-     "bild": "keller.jpg",
-     "pos": "center 55%"
+     "bild": "vis-kueche.jpg",
+     "pos": "center"
     }
    ],
    "dachzeile": "Das Sanierungskonzept",
@@ -743,8 +743,8 @@
     ]
    ],
    "caption": [
-    "Oben: Familienbad im Obergeschoss, Fotoaufnahme nach Sanierung.",
-    "Unten: Hobbyraum im Keller, Fotoaufnahme nach Sanierung."
+    "Oben: Gäste-WC im Erdgeschoss. Unten: Küche – nur Illustration, das Haus wird ohne Küche übergeben.",
+    "Visualisierungen auf Basis von Fotoaufnahmen, virtuell möbliert (KI-gestützt)."
    ]
   },
   {
@@ -1010,7 +1010,7 @@
     ],
     [
      "Flächen, Darstellungen und Ausstattung",
-     "Flächen sind Circa-Werte nach Verkäuferangabe bzw. Aufmaß; mit * gekennzeichnete Raumflächen sind aus dem Plan geschätzt. Wohnfläche ca. 118 m² nach Angabe des Verkäufers; eine Wohnflächenberechnung nach WoFlV liegt nicht vor. Kellerflächen sind keine Wohnfläche. Grundrisse grafisch aufbereitet, nicht zur Maßentnahme geeignet. Fotos teilweise digital bearbeitet; die Rechte an Fotos und Grundrissen liegen beim Verkäufer. Küche und Photovoltaikanlage sind nicht im Kaufpreis enthalten."
+     "Flächen sind Circa-Werte nach Verkäuferangabe bzw. Aufmaß; mit * gekennzeichnete Raumflächen sind aus dem Plan geschätzt. Wohnfläche ca. 118 m² nach Angabe des Verkäufers; keine Wohnflächenberechnung nach WoFlV. Kellerflächen sind keine Wohnfläche. Grundrisse nicht zur Maßentnahme geeignet. Innenaufnahmen sind Visualisierungen von GRENFORD, auf Basis von Fotoaufnahmen digital bearbeitet und virtuell möbliert (KI-gestützt); Möbel, Dekoration, Küche und Photovoltaikanlage sind nicht im Kaufpreis enthalten. Nutzungsrechte an den Visualisierungen: GRENFORD; Rechte an den zugrunde liegenden Fotos und Grundrissen: Verkäufer."
     ],
     [
      "Grundbuch und Energieausweis",
@@ -1020,7 +1020,9 @@
      "Quellen und Verantwortlichkeit",
      "Objekt-, Preis-, Flächen- und Lageangaben beruhen auf Unterlagen des Verkäufers, Stand November 2026; Irrtum und Zwischenverkauf vorbehalten. Mietorientierung (Seiten {seite:markt}–{seite:rendite}): GRENFORD-Recherche, keine Miet- oder Renditezusage. Eigene Hinweis-, Aufklärungs- und Sorgfaltspflichten von GRENFORD bleiben unberührt. Die Haftung richtet sich nach den wirksam einbezogenen AGB und zwingendem Recht."
     ]
-   ]
+   ],
+   "schrift": 8.6,
+   "zeile": 12.2
   },
   {
    "modul": "agb",

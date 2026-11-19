@@ -747,7 +747,7 @@ def m_agb(d, obj):
     k = obj['kosten']
     agb = open(os.path.join(SHARED, 'agb.html')).read().replace('{{courtage_satz}}', k['agb_courtage'])
     p = re.findall(r'<h4>.*?</p>', agb)
-    cols = [''.join(p[0:4]), ''.join(p[4:8]), ''.join(p[8:])]
+    cols = [''.join(p[0:3]), ''.join(p[3:7]), ''.join(p[7:])]
     return (chrome('Anhang · Allgemeine Geschäftsbedingungen') + head('GRENFORD Property · Immobilienvermittlung', 'Allgemeine Geschäftsbedingungen.', 29, 32, 438)
             + T(51, 417, 'N', 8, 11.6, GREY, f'Marco Kaimann, Einzelunternehmer, Geschäftsbezeichnung GRENFORD · Kurfürstendamm 96, 10709 Berlin · mkaimann@grenford.de · Stand: {obj["meta"]["agb_stand"]}')
             + ''.join(f'<div class="t agb" style="left:{x}pt;top:{H-399:.1f}pt;width:255pt">{c}</div>' for x, c in zip((51, 324, 597), cols)))
@@ -815,9 +815,9 @@ def css():
 html,body{{background:{CREAM};-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 .page{{width:907pt;height:567pt;position:relative;overflow:hidden;background:{CREAM};break-after:page}}
 .t{{position:absolute}}
-.agb{{font-family:'DM Sans',sans-serif;color:{INK};font-size:7.0pt;line-height:9.2pt}}
+.agb{{font-family:'DM Sans',sans-serif;color:{INK};font-size:6.8pt;line-height:8.5pt}}
 .agb h4{{font-size:7.9pt;line-height:10.4pt;font-weight:500;margin:0 0 2pt}}
-.agb p{{margin:0 0 7pt}}"""
+.agb p{{margin:0 0 6pt}}"""
 
 
 def build(objdir):
