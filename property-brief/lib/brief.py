@@ -84,7 +84,7 @@ def _map_serif(f, size, color, text, w, extra, x=0):
     """Typosystem ohne Serifen: DM Sans Medium (Titel), DM Sans Light (Einleitungen, große Zahlen), DM Mono (Beträge)."""
     plain = re.sub(r'<[^>]+>', ' ', text).strip()
     strip = lambda t: re.sub(r'\.(\s*</?[^>]*>)*$', '', t)
-    if re.search(r'\d', plain) and NUMERIC.match(plain):
+    if re.search(r'\d', plain) and (NUMERIC.match(plain) or len(plain) <= 20):
         if size >= 18: return 'L', size, text, 'letter-spacing:-.02em;font-variant-numeric:tabular-nums;' + extra
         return 'N', size, text, 'font-variant-numeric:tabular-nums;' + extra
     if size >= 19 and (plain.startswith('Ihr Marco') or (color == CREAM and x >= 600)):   # Name, Werte in blauen Spalten
@@ -119,7 +119,8 @@ def T(x, base, f, size, tl, color, text, w=None, extra=''):
             f'font-size:{size}pt;line-height:{tl}pt;color:{color};{ws}{extra}">{text}</div>')
 
 
-def EB(x, base, text, color=ACC, size=7):
+def EB(x, base, text, color=None, size=7):
+    color = color or ACC
     if sans_only():
         return T(x, base, 'M', round(size * .95, 2), size * 1.45, color, text, extra='letter-spacing:.06em;text-transform:uppercase')
     return T(x, base, 'B', size, size * 1.45, color, text, extra='letter-spacing:.07em;text-transform:uppercase')
@@ -129,7 +130,8 @@ def RT(x2, base, f, size, tl, color, text, w=200):
     return T(x2 - w, base, f, size, tl, color, text, w=w, extra='text-align:right')
 
 
-def R(x, y, w, h, color=NAVY, a=1, extra=''):
+def R(x, y, w, h, color=None, a=1, extra=''):
+    color = color or NAVY
     rad = f'border-radius:{13.5 if h >= 60 else 7}pt;' if (color == NAVY and a == 1 and C.page >= 2) else ''
     return f'<div class="t" style="left:{x}pt;top:{H-y-h:.2f}pt;width:{w}pt;height:{h}pt;background:{color};opacity:{a};{rad}{extra}"></div>'
 
@@ -187,7 +189,14 @@ def PIC(src, x, y, w, h):
     return f'<img class="t" src="{C.a(src)}" style="left:{x}pt;top:{H-y-h:.2f}pt;width:{w}pt;height:{h}pt">'
 
 
+THEMES = {   # Dachmarke GRENFORD: gleiche Typografie und Raster, Akzentfarbe und Logo je Geschäftsbereich
+    'property':   {'NAVY': '#212e40', 'ACC': '#4f6a92', 'LIGHT': '#a9b8cf', 'mark': {'navy': 'navy', 'white': 'white'}},
+    'investment': {'NAVY': '#24534c', 'ACC': '#2e6b62', 'LIGHT': '#8fc7bb', 'mark': {'navy': 'inv-dark', 'white': 'inv-white'}},
+}
+
+
 def MARK(color='navy', x=51, y=516.0142, scale=.068564):
+    color = THEMES[C.meta.get('bereich', 'property')]['mark'].get(color, color) if C else color
     return PIC(f'mark-{color}.png', x, y, round(773 * scale, 3), round(379 * scale, 3))
 
 
@@ -205,7 +214,10 @@ def PN(color=None, img=False):
 
 
 def FOOT(color=GREY, text=None, img=False):
-    if img: return T(51, 10.8, 'N', FS, 10, IMGCOL, text or C.foot, extra='letter-spacing:.05em;' + SHADOW)
+    if img:
+        t = text or C.foot
+        if len(t) > 48: t = t.split(' · ')[0]   # kurze Fassung auf schmalen Bildspalten
+        return T(51, 10.8, 'N', FS, 10, IMGCOL, t, extra='letter-spacing:.05em;' + SHADOW)
     return T(51, 10.8, 'N', FS, 10, color, text or C.foot, extra='letter-spacing:.05em')
 
 
@@ -288,6 +300,7 @@ def m_titel(d):
     s = (IMG(d['bild'], 0, 0, 907, 567, d.get('bild_pos', 'center'))
          + R(0, 0, COL, 567, NAVY, .6, extra=COLCUT()) + COLLINE() + MARK('white', 47, 450.63, .217335)
          + EB(51, 404, d.get('dachzeile', 'Property Brief'), CREAM, 8.5)
+         + (RT(856, 529, 'B', 7, 10, CREAM, br(d['vertraulich']), 400, ) .replace('text-align:right', 'text-align:right;text-transform:uppercase;letter-spacing:.08em;text-shadow:0 0 4pt rgba(20,28,40,.6)') if d.get('vertraulich') else '')
          + T(49, 297 + tl, 'S', round(ts, 2), round(tl, 2), CREAM, br(lines))
          + T(51, 219, 'S', 19, 25, CREAM, br(d['untertitel']))
          + T(51, 156, 'N', 10, 15, MIST, br(d['kurz']))
@@ -818,12 +831,68 @@ def m_ueberblick_kosten(d, obj):
     return s + cap(51, 32, d['quelle'])
 
 
-MODULE = {'titel': m_titel, 'vorwort': m_vorwort, 'inhalt': m_inhalt, 'ueberblick': m_ueberblick, 'ueberblick_kosten': m_ueberblick_kosten, 'split': m_split,
+def m_fakten(d, obj):
+    """B2B-Faktenseite: links Objekt und Kosten, rechts Kaufpreis und Rendite in Varianten-Spalten."""
+    LX, LR, RX, RR = 51, 425, 482, 856
+    s = (chrome(d.get('kopf', 'Hard Facts')) + EB(51, 487, d['dachzeile']) + T(51, 450, 'S', 31, 34, INK, d['titel'])
+         + T(51, 418, 'N', 9.6, 14, INK, d['intro'], w=805) + VL(453.5, 392, 46, LINE, .5))
+    rh = d.get('zeilenhoehe', 15.6)
+    def side(x0, x1, blocks, cols):
+        y = 384; out = ''
+        for blk in blocks:
+            out += EB(x0, y, blk['titel'], NAVY, 7.4)
+            for j, h in enumerate(cols if blk.get('spalten', True) and cols else []):
+                out += RT(x1 - 78 * (len(cols) - 1 - j), y, 'B', 6.6, 9, GREY, h.upper(), 76)
+            y -= 8
+            for r in blk['zeilen']:
+                out += L(x0, y, x1) + T(x0, y - rh * .66, 'N', 7.9, 10.5, INK, r[0])
+                vals = r[1:]
+                if len(vals) == 1 and len(cols) <= 1:
+                    out += RT(x1, y - rh * .66, 'N', 7.9, 10.5, NAVY, vals[0], 220)
+                else:
+                    for j, v in enumerate(vals):
+                        out += RT(x1 - 78 * (len(vals) - 1 - j), y - rh * .66, 'B' if j == 0 and len(vals) > 1 else 'N', 7.9, 10.5, NAVY if j == 0 else GREY, v, 76)
+                y -= rh
+            out += L(x0, y, x1); y -= 20
+        return out
+    s += side(LX, LR, d['links'], []) + side(RX, RR, d['rechts'], d.get('spalten', []))
+    return s + cap(51, 40, br(d['quelle']), w=805)
+
+
+def m_tabelle(d, obj):
+    """Zahlentabelle über die volle Breite (z. B. 10-Jahres-Cashflow) mit Kennzahlenband."""
+    s = chrome(d['kopf']) + EB(51, 487, d['dachzeile']) + T(51, 450, 'S', 31, 34, INK, d['titel'])
+    cols = d['spalten']; lw = d.get('label_breite', 196); cw = (856 - 51 - lw) / len(cols)
+    y = 412
+    s += R(51, y - 8, 805, 22)
+    for j, c in enumerate(cols):
+        s += RT(51 + lw + cw * (j + 1) - 6, y, 'B', 7, 10, '#ffffff', c, cw)
+    y -= 12
+    for i, r in enumerate(d['zeilen']):
+        strong = r[0] in d.get('hervorheben', [])
+        if strong: s += L(51, y, 856, NAVY, 1)
+        elif i: s += L(51, y, 856)
+        s += T(57, y - 12, 'B' if strong else 'N', 7.8, 10.5, NAVY if strong else INK, r[0])
+        for j, v in enumerate(r[1:]):
+            s += RT(51 + lw + cw * (j + 1) - 6, y - 12, 'B' if strong else 'N', 7.8, 10.5, NAVY if strong else INK, v, cw)
+        y -= 17.5
+    s += L(51, y, 856)
+    # Kennzahlenband
+    k = d['kennzahlen']; bw = (805 - 12 * (len(k) - 1)) / len(k); yb = y - 74
+    for j, (v, lab) in enumerate(k):
+        x = 51 + j * (bw + 12)
+        s += R(round(x, 2), yb, round(bw, 2), 58) + T(round(x + 14, 2), yb + 34, 'L', 20, 24, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(round(x + 14, 2), yb + 13, lab, LIGHT, 6.4)
+    if d.get('hinweis'):
+        s += T(51, yb - 20, 'N', 7.8, 11, INK, d['hinweis'], w=805)
+    return s + cap(51, 40, br(d['quelle']), w=805)
+
+
+MODULE = {'titel': m_titel, 'vorwort': m_vorwort, 'inhalt': m_inhalt, 'ueberblick': m_ueberblick, 'fakten': m_fakten, 'tabelle': m_tabelle, 'ueberblick_kosten': m_ueberblick_kosten, 'split': m_split,
           'lage': m_lage, 'raumprogramm': m_raumprogramm, 'grundrisse': m_grundrisse, 'sanierung': m_sanierung,
           'projektstand': m_projektstand, 'energie': m_energie, 'kosten': m_kosten, 'vergleich': m_vergleich,
           'einheit': m_einheit, 'plaene': m_plaene, 'markt': m_markt, 'rendite': m_rendite, 'partner': m_partner,
           'kontakt': m_kontakt, 'ueber': m_ueber, 'recht': m_recht, 'agb': m_agb}
-NEEDS_OBJ = {'kosten', 'ueberblick_kosten', 'vergleich', 'einheit', 'rendite', 'recht', 'agb'}
+NEEDS_OBJ = {'fakten', 'tabelle', 'kosten', 'ueberblick_kosten', 'vergleich', 'einheit', 'rendite', 'recht', 'agb'}
 NEEDS_SHARED = {'partner', 'ueber'}
 
 ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII']
@@ -853,6 +922,8 @@ def build(objdir):
     obj = json.load(open(os.path.join(objdir, 'objekt.json')))
     shared = json.load(open(os.path.join(SHARED, 'grenford.json')))
     C = Ctx(objdir, obj['meta'])
+    global NAVY, ACC, LIGHT
+    th = THEMES[obj['meta'].get('bereich', 'property')]; NAVY, ACC, LIGHT = th['NAVY'], th['ACC'], th['LIGHT']
     # Seitenzählung: Titel ohne Zahl · Vorspann römisch · Objektteil arabisch · Anhang römisch fortlaufend
     labels, ids = {}, {}; rom = 0; arab = 0
     for i, sd in enumerate(obj['seiten'], 1):
@@ -860,6 +931,7 @@ def build(objdir):
         if i == 1: lab = ''
         elif b == 'objekt': arab += 1; lab = str(arab)
         else: lab = ROMAN[rom]; rom += 1
+        lab = sd.get('label', lab)
         labels[i] = lab
         if sd.get('id'): ids[sd['id']] = lab
     C.labels = labels
@@ -867,6 +939,7 @@ def build(objdir):
     for sd in obj['seiten']:
         if sd['modul'] == 'inhalt':
             for k in sd['kapitel']:
+                if 'seiten_text' in k: k['_seiten'] = k['seiten_text']; continue
                 a, z = ids[k['seiten'][0]], ids[k['seiten'][-1]]
                 k['_seiten'] = a if a == z else f'{a}–{z}'
     if any(sd['modul'] == 'lage' for sd in obj['seiten']) and not os.path.exists(os.path.join(SHARED, 'assets', 'berlin-karte.png')):

@@ -1,0 +1,102 @@
+{
+ "meta": {
+  "titel": "GRENFORD Investment Memo – MonteSana (Probe CI)",
+  "fusszeile": "GRENFORD INVESTMENTS / MONTESANA · INVESTMENT MEMO · STRENG VERTRAULICH (C3)",
+  "ausgabe": "GRENFORD_Investment_Memo_MonteSana_PROBE_CI.pdf",
+  "redaktionsstand": "19.11.2026",
+  "agb_stand": "18.11.2026",
+  "bereich": "investment",
+  "typo": "sans"
+ },
+ "kosten": {"einheiten": []},
+ "seiten": [
+  {"modul": "titel", "id": "titel",
+   "bild": "vis-luft.png", "bild_pos": "center 45%",
+   "dachzeile": "Investment Memo · Asset Deal",
+   "vertraulich": ["Off-Market · nur für professionelle Investoren", "Streng vertraulich (C3)"],
+   "titel": ["MONTESANA"],
+   "untertitel": ["Serviced Living", "und Coworking"],
+   "kurz": ["Genehmigtes Mixed-Use-Ensemble", "92 Apartments, vier Profit-Center", "20 km zur Schweizer Grenze"],
+   "adresse": ["Dr.-Bettinger-Weg 1, 3, 5", "79862 Höchenschwand"],
+   "kennzahlen": [["5,30 Mio. €", "Kaufpreis Early-Commit"], ["13,9-fach", "Faktor Eigentümerertrag"], ["23,1 %", "IRR 10 Jahre, Basisfall"]],
+   "hinweis": "Visualisierung: Projektgesellschaft · Stand 11.11.2026"},
+
+  {"modul": "inhalt", "id": "inhalt", "bereich": "vor",
+   "bild": "bestand-luft.png", "bild_pos": "center",
+   "claim": ["Ein Standort,", "ein Angebot"], "marke": "MonteSana · GI26-002",
+   "text": ["Lage, Zahlen und Konzept", "der Investmentchance im Überblick"],
+   "adresse": ["Dr.-Bettinger-Weg 1, 3, 5", "79862 Höchenschwand"],
+   "kapitel": [
+    {"titel": "Vorwort", "sub": "Einordnung durch Marco Kaimann", "seiten": ["vorwort"]},
+    {"titel": "Hard Facts", "sub": "Objekt, Kaufpreis, Rendite und Wert", "seiten": ["fakten"]},
+    {"titel": "Angebot und Standort", "sub": "Early-Commit, Asset, Grenzlage", "seiten_text": "1–4"},
+    {"titel": "GRENFORD Research", "sub": "Wettbewerb, Mieten, Zielgruppen im 50-km-Radius", "seiten_text": "5–8"},
+    {"titel": "Konzept, Nutzung und Pläne", "sub": "Vier Profit-Center, Ansichten, Grundrisse", "seiten_text": "9–12"},
+    {"titel": "Zeitplan und Kostenbasis", "sub": "Meilensteine, Bauabschnitte, CapEx", "seiten_text": "13–16"},
+    {"titel": "10-Jahres-Investorenrechnung", "sub": "Cashflow, Szenarien, Sensitivität, DCF", "seiten": ["cashflow"]},
+    {"titel": "Asset Check und Machbarkeit", "sub": "Recht, Planung, Technik, Betrieb", "seiten_text": "20–23"},
+    {"titel": "Value Matrix", "sub": "Stärken, Hebel, Chancen, Risiken", "seiten_text": "24"},
+    {"titel": "Nächster Schritt, GRENFORD, Anhang", "sub": "LOI, Kontakt, Disclaimer, AGB", "seiten_text": "IV–VII"}]},
+
+  {"modul": "vorwort", "id": "vorwort", "bereich": "vor",
+   "dachzeile": "MonteSana · Investment Memo",
+   "titel": "Ein genehmigtes Ensemble im Grenzraum",
+   "lead": "Dieses Investment Memo stellt MonteSana vor: ein genehmigtes Mixed-Use-Ensemble in Höchenschwand mit 92 Serviced Apartments und vier Profit-Centern.",
+   "links": "Das Projekt: Baugenehmigung seit 09/2023, Teilungserklärung seit 08/2025. Nutzung als Wohnen auf Zeit, Coworking und Gesundheit.",
+   "rechts": "Das Angebot: Asset Deal off-market inkl. Flst. 213. Listenpreis 7,0 Mio. €, Early-Commit 5,3 Mio. € bei LOI bis Ende November 2026.",
+   "schluss": "Das Memo führt von den Hard Facts über Standort und Research zur 10-Jahres-Rechnung und zum Asset Check. Für Rückfragen und den Datenraumzugang steht GRENFORD persönlich zur Verfügung."},
+
+  {"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Facts",
+   "dachzeile": "Zahlen, Daten, Fakten · Objekt-Nr. GI26-002",
+   "titel": "Das Projekt in Kennzahlen",
+   "intro": "Kaufpreis und Renditen in zwei Varianten: Early-Commit (5,3 Mio. €, LOI bis Ende November 2026) und Listenpreis (7,0 Mio. €). Alle Werte netto, vor Steuern und Finanzierung.",
+   "links": [
+    {"titel": "Fläche und Objekt", "zeilen": [
+      ["Grundstück Hauptareal (Flst. 220/7)", "16.174 m²"], ["Zusatzgrundstück (Flst. 213, im Paket)", "6.511 m²"],
+      ["Grundstücke gesamt", "22.685 m²"], ["BGF (ca.)", "9.900 m²"], ["NGF / Wohn- und Nutzfläche", "6.957 m²"],
+      ["davon Apartments (92 Einheiten)", "4.299 m²"], ["davon Gewerbe (4 Profit-Center)", "2.658 m²"]]},
+    {"titel": "Baukosten", "zeilen": [
+      ["Restbudget CapEx netto", "8,66 Mio. €"], ["Planungs- und Nebenkosten (10 %)", "0,87 Mio. €"],
+      ["Möblierung / FF&E", "1,30 Mio. €"], ["Baukosten je m² BGF", "897 €"], ["Bauzeit", "04/2026 bis 10/2027"]]},
+    {"titel": "Erträge und Exit", "zeilen": [
+      ["Verkaufspreis Apartments (Annahme)", "5.000 €/m² brutto"], ["Erlös Apartments netto", "18,1 Mio. €"],
+      ["Eigentümerertrag Gewerbe, stabilisiert", "≈ 381 T€ p. a. ab 2029"], ["Exit-Rendite Gewerbe (Annahme)", "7,0 %"]]}],
+   "spalten": ["Early-Commit", "Listenpreis"],
+   "rechts": [
+    {"titel": "Kaufpreis", "zeilen": [
+      ["Kaufpreis netto (Asset Deal)", "5,30 Mio. €", "7,00 Mio. €"], ["Kaufpreis je m² NGF", "762 €", "1.006 €"],
+      ["Kaufpreis je m² BGF", "535 €", "707 €"], ["Faktor auf Eigentümerertrag 381 T€", "13,9-fach", "18,4-fach"],
+      ["Kaufpreisstaffelung (indikativ)", "2,5 / 2,8 Mio. €", "–"], ["Erwerbsnebenkosten (Annahme 6,5 %)", "0,34 Mio. €", "0,46 Mio. €"],
+      ["Maklercourtage (5,0 % zzgl. MwSt.)", "0,27 Mio. €", "0,35 Mio. €"]]},
+    {"titel": "Rendite und Wert (Basisfall)", "zeilen": [
+      ["Gesamtinvestition netto", "17,4 Mio. €", "19,2 Mio. €"], ["Gesamtwert nach Fertigstellung", "23,2 Mio. €", "23,2 Mio. €"],
+      ["IRR 10 Jahre (vor Steuern)", "23,1 %", "14,1 %"], ["Multiple auf Eigenkapital", "1,62-fach", "1,46-fach"],
+      ["Überschuss nach Wiederverkauf", "10,3 Mio. €", "8,5 Mio. €"], ["Barwert DCF (10 % Diskontsatz)", "3,7 Mio. €", "1,6 Mio. €"],
+      ["Spitzenbedarf Kapital", "8,4 Mio. €", "10,2 Mio. €"]]}],
+   "quelle": ["Quelle: Verkäuferunterlagen (Grundbuch, Baugenehmigung, Kostenberechnung, Bauzeitplan, Ertragsprognose, Sales Plan) und GRENFORD-Berechnung. Renditen vor Steuern und ohne Fremdfinanzierung; indikativ.",
+              "Der Faktor bezieht sich auf den stabilisierten Eigentümerertrag der Gewerbeflächen."]},
+
+  {"modul": "tabelle", "id": "cashflow", "label": "17", "kopf": "10-Jahres-Rechnung",
+   "dachzeile": "Investorenrechnung · Basisfall · Mio. € netto",
+   "titel": "Zehn Jahre, ein Cashflow-Bild",
+   "spalten": ["2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "Σ"],
+   "hervorheben": ["Netto-Cashflow", "Kumuliert"],
+   "zeilen": [
+    ["Kaufpreis (Modellannahme 2,5 / 2,8)", "−2,50", "−2,80", "–", "–", "–", "–", "–", "–", "–", "–", "–", "−5,30"],
+    ["Erwerbsnebenkosten", "−0,34", "–", "–", "–", "–", "–", "–", "–", "–", "–", "–", "−0,34"],
+    ["CapEx (Restbudget, netto)", "−0,87", "−6,50", "−1,30", "–", "–", "–", "–", "–", "–", "–", "–", "−8,66"],
+    ["Planungs- und Nebenkosten 10 %", "−0,09", "−0,65", "−0,13", "–", "–", "–", "–", "–", "–", "–", "–", "−0,87"],
+    ["Möblierung / FF&E", "–", "−0,78", "−0,52", "–", "–", "–", "–", "–", "–", "–", "–", "−1,30"],
+    ["Verkaufserlöse Apartments (netto)", "–", "6,32", "8,13", "3,61", "–", "–", "–", "–", "–", "–", "–", "18,06"],
+    ["Vertriebsprovision 5 %", "–", "−0,32", "−0,41", "−0,18", "–", "–", "–", "–", "–", "–", "–", "−0,90"],
+    ["Eigentümerertrag Gewerbe (nach 5 % Kosten)", "–", "0,16", "0,34", "0,36", "0,37", "0,38", "0,38", "0,39", "0,40", "0,41", "0,42", "3,60"],
+    ["Exit-Wert Gewerbe (7,0 %, 2036)", "–", "–", "–", "–", "–", "–", "–", "–", "–", "–", "5,97", "5,97"],
+    ["Netto-Cashflow", "−3,80", "−4,56", "6,11", "3,79", "0,37", "0,38", "0,38", "0,39", "0,40", "0,41", "6,39", "10,27"],
+    ["Kumuliert", "−3,80", "−8,36", "−2,25", "1,54", "1,91", "2,29", "2,68", "3,07", "3,47", "3,88", "10,27", ""]],
+   "label_breite": 200,
+   "kennzahlen": [["23,1 %", "IRR 10 Jahre, Basis Early-Commit"], ["1,62-fach", "Multiple auf eingesetztes Kapital"], ["10,3 Mio. €", "Gesamtüberschuss vor Steuern"], ["8,4 Mio. €", "Spitzenbedarf Kapital, kumuliert"]],
+   "hinweis": "Sensitivität Zahlungsplan: Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (GRENFORD-Annahme, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss sinkt die IRR im Basisfall auf 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert.",
+   "quelle": ["Quelle: GRENFORD-Berechnung auf Basis von Bauzeitplan (Restbudget 8,66 Mio. € netto), Sales Plan (5.000 €/m²) und Ertragsprognose (Eigentümerertrag 381 T€ ab 2029, +2 % p. a.).",
+              "Alle Werte in Mio. €, netto, vor Steuern und Finanzierung; indikativ."]}
+ ]
+}
