@@ -336,8 +336,8 @@ def m_lage(d):
          + PIC('berlin-karte.png', 27, 170, 400, 323.68) + MARK() + FOOT()
          + f'<div class="t" style="left:{cx-29.25:.2f}pt;top:{cy-29.25:.2f}pt;width:58.5pt;height:58.5pt;border-radius:50%;border:.75pt dashed rgba(33,46,64,.45)"></div>'
          + f'<div class="t" style="left:{cx-12.75:.2f}pt;top:{cy-12.75:.2f}pt;width:25.5pt;height:25.5pt;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:{NAVY};box-shadow:0 0 0 2.25pt rgba(250,246,242,.85)"></div>'
-         + T(round(cx - 12.75, 2), round(H - cy + 3, 2), 'SB', 7.5, 10, CREAM, 'GF', extra='width:25.5pt;text-align:center'))
-    lx = min(cx + 43.7, HALF - 175); lb = H - cy + 21
+         + T(round(cx - 12.75, 2), round(H - cy - 2.6, 2), 'SB', 7.5, 10, CREAM, 'GF', extra='width:25.5pt;text-align:center'))
+    lx = min(cx + 26, HALF - 175); lb = H - cy + 6
     s += (R(round(lx, 2), round(lb, 2), 165, 44) + T(round(lx + 12, 2), round(lb + 28, 2), 'S', 11, 14, CREAM, k['label'][0])
           + T(round(lx + 12, 2), round(lb + 16, 2), 'N', 7, 9, MIST, k['label'][1])
           + T(round(lx + 12, 2), round(lb + 6, 2), 'N', 5.6, 8, LIGHT, 'GRENFORD PROJECT SITE', extra='letter-spacing:.06em')
