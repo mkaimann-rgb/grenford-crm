@@ -70,8 +70,8 @@ def _map_serif(f, size, color, text, w, extra):
     plain = re.sub(r'<[^>]+>', ' ', text).strip()
     strip = lambda t: re.sub(r'\.(\s*</?[^>]*>)*$', '', t)
     if re.search(r'\d', plain) and NUMERIC.match(plain):
-        if size >= 18: return 'L', size, text, 'letter-spacing:-.02em;' + extra
-        return 'M', round(size * .88, 1), text, 'letter-spacing:-.01em;' + extra
+        if size >= 18: return 'L', size, text, 'letter-spacing:-.02em;font-variant-numeric:tabular-nums;' + extra
+        return 'N', size, text, 'font-variant-numeric:tabular-nums;' + extra
     if size >= 19:
         return 'H', round(size * .9, 1) if size >= 22 else size, strip(text), 'letter-spacing:-.035em;' + extra
     if w and len(plain) > 60:
