@@ -22,7 +22,8 @@ FONT = {'B': ("'DM Sans',sans-serif;font-weight:500", .34),
         'SB': ("'GF Serif',serif;font-weight:700", .22),
         'H': ("'DM Sans',sans-serif;font-weight:500", .34),
         'L': ("'DM Sans',sans-serif;font-weight:300", .34),
-        'M': ("'DM Mono',monospace;font-weight:400", .34)}
+        'M': ("'DM Mono',monospace;font-weight:400", .34),
+        'G': ("'GF Logo',serif;font-weight:500", .31)}
 _TTF = {'S': 'texgyrepagella-regular.otf', 'N': 'dm-sans-400.ttf', 'B': 'dm-sans-500.ttf'}
 
 
@@ -65,15 +66,39 @@ def sans_only():
     return C is not None and C.meta.get('typo') == 'sans'
 
 
-def _map_serif(f, size, color, text, w, extra):
+_LOGO = None
+
+
+def _logo_w(t):
+    """Breite einer Zeile in pt bei 1 pt Schriftgröße (Versalien, Sperrung 0,1 em)."""
+    global _LOGO
+    if _LOGO is None:
+        _LOGO = ImageFont.truetype(os.path.join(SHARED, 'fonts', 'cormorant-garamond-var.ttf'), 400)
+        try: _LOGO.set_variation_by_axes([500])
+        except Exception: pass
+    t = t.upper().strip()
+    return _LOGO.getlength(t) / 400 + .1 * len(t)
+
+
+def _map_serif(f, size, color, text, w, extra, x=0):
     """Typosystem ohne Serifen: DM Sans Medium (Titel), DM Sans Light (Einleitungen, große Zahlen), DM Mono (Beträge)."""
     plain = re.sub(r'<[^>]+>', ' ', text).strip()
     strip = lambda t: re.sub(r'\.(\s*</?[^>]*>)*$', '', t)
     if re.search(r'\d', plain) and NUMERIC.match(plain):
         if size >= 18: return 'L', size, text, 'letter-spacing:-.02em;font-variant-numeric:tabular-nums;' + extra
         return 'N', size, text, 'font-variant-numeric:tabular-nums;' + extra
-    if size >= 19:
+    if size >= 19 and (plain.startswith('Ihr Marco') or (color == CREAM and x >= 600)):   # Name, Werte in blauen Spalten
         return 'H', round(size * .9, 1) if size >= 22 else size, strip(text), 'letter-spacing:-.035em;' + extra
+    if size >= 19:   # Hauptüberschriften in der Logo-Typografie: klassische Versalien, weit gesperrt
+        t = strip(text); lines = [re.sub(r'<[^>]+>', '', l) for l in re.split(r'<br\s*/?>', t)]
+        if color == CREAM and x < 100: maxw = 270
+        elif x >= 400: maxw = 856 - x
+        elif len(lines) > 1: maxw = 356
+        else: maxw = 560
+        sz = size * .78
+        need = max(_logo_w(l) for l in lines)
+        sz = round(min(sz, maxw / need), 2)
+        return 'G', sz, t, f'text-transform:uppercase;letter-spacing:.1em;--tl:{sz/size};' + extra
     if w and len(plain) > 60:
         return 'L', size, text, extra
     return 'B', round(size * .94, 1), strip(text), 'letter-spacing:-.01em;' + extra
@@ -81,7 +106,9 @@ def _map_serif(f, size, color, text, w, extra):
 
 def T(x, base, f, size, tl, color, text, w=None, extra=''):
     if f in ('S', 'SB') and sans_only():
-        f, size, text, extra = _map_serif(f, size, color, text, w, extra)
+        f, size2, text, extra = _map_serif(f, size, color, text, w, extra, x)
+        if f == 'G': tl = round(tl * size2 / size * 1.08, 2)
+        size = size2
     elif HEADLINE and f == 'S' and size >= 22 and color == INK:
         f = 'H'; size = round(size * .9, 1); text = re.sub(r'\.$', '', text)
         extra = 'letter-spacing:-.035em;' + extra
@@ -767,6 +794,7 @@ def css():
 @font-face{{font-family:'DM Sans';src:url(../../shared/fonts/dm-sans-500.ttf);font-weight:500}}
 @font-face{{font-family:'DM Sans';src:url(../../shared/fonts/dm-sans-var.ttf);font-weight:300}}
 @font-face{{font-family:'DM Mono';src:url(../../shared/fonts/dm-mono-400.ttf);font-weight:400}}
+@font-face{{font-family:'GF Logo';src:url(../../shared/fonts/cormorant-garamond-var.ttf);font-weight:300 700}}
 @font-face{{font-family:'GF Serif';src:url(../../shared/fonts/texgyrepagella-regular.otf);font-weight:400}}
 @font-face{{font-family:'GF Serif';src:url(../../shared/fonts/texgyrepagella-bold.otf);font-weight:700}}
 @font-face{{font-family:'GF Serif';src:url(../../shared/fonts/texgyrepagella-italic.otf);font-style:italic}}
