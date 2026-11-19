@@ -176,7 +176,10 @@
    "id": "fakten",
    "bereich": "vor",
    "kopf": "Hard Facts",
-   "zeilenhoehe": 14.0,
+   "zeilenhoehe": 13.4,
+   "blockabstand": 14,
+   "start": 356,
+   "quelle_y": 36,
    "kennzahlen": [
     [
      "5,3 Mio. €",
@@ -374,8 +377,7 @@
     }
    ],
    "quelle": [
-    "Quelle: Verkäuferunterlagen (Grundbuch, Baugenehmigung, Kostenberechnung, Bauzeitplan, Ertragsprognose, Sales Plan) und GRENFORD-Berechnung. Renditen vor Steuern und ohne Fremdfinanzierung; indikativ.",
-    "Der Faktor bezieht sich auf den stabilisierten Eigentümerertrag der Gewerbeflächen."
+    "Quelle: Verkäuferunterlagen und GRENFORD-Berechnung. Renditen vor Steuern und ohne Fremdfinanzierung, indikativ; Faktor auf den stabilisierten Eigentümerertrag der Gewerbeflächen."
    ]
   },
   {
@@ -413,20 +415,20 @@
    "kopf": "Lage",
    "dachzeile": "Lage und Erreichbarkeit",
    "titel": "Im Dreiländerraum, abseits der Ballungszentren",
-   "intro": "Basel, Zürich und Freiburg liegen in rund einer bis eineinhalb Stunden Fahrzeit. Der Schweizer Arbeitsmarkt beginnt am Rhein, 20 Kilometer entfernt; Stuttgart und München sind in einer Tagesreise erreichbar.",
+   "intro": "Basel, Zürich und Freiburg liegen in rund einer bis eineinhalb Stunden Fahrzeit, Stuttgart in gut zwei und München in knapp vier Stunden. Der Schweizer Arbeitsmarkt beginnt am Rhein, 20 Kilometer entfernt.",
    "bloecke": [
     {
      "typ": "karte",
      "x": 51,
-     "y": 392,
-     "w": 380,
-     "h": 300,
+     "y": 384,
+     "w": 450,
+     "h": 296,
      "geo": "quelle/geo/region.geojson",
      "bbox": [
-      7.35,
-      47.3,
-      9.0,
-      48.12
+      7.3,
+      47.28,
+      9.05,
+      48.15
      ],
      "strahlen": true,
      "ziel": {
@@ -435,7 +437,7 @@
       "lon": 8.168,
       "lat": 47.733,
       "dx": -40,
-      "dy": 16
+      "dy": 18
      },
      "orte": [
       {
@@ -471,11 +473,25 @@
        "lat": 47.697
       }
      ],
+     "fern": [
+      {
+       "name": "Stuttgart",
+       "sub": "190 km · 2 h 15",
+       "lon": 9.18,
+       "lat": 48.78
+      },
+      {
+       "name": "München",
+       "sub": "330 km · 3 h 45",
+       "lon": 11.58,
+       "lat": 48.14
+      }
+     ],
      "laender": [
       {
        "name": "Deutschland",
-       "lon": 8.45,
-       "lat": 48.05
+       "lon": 8.62,
+       "lat": 47.98
       },
       {
        "name": "Schweiz",
@@ -485,7 +501,7 @@
       },
       {
        "name": "Frankreich",
-       "lon": 7.38,
+       "lon": 7.33,
        "lat": 47.9
       }
      ],
@@ -493,25 +509,29 @@
     },
     {
      "typ": "tabelle",
-     "x": 482,
+     "x": 530,
      "y": 384,
-     "w": 374,
+     "w": 326,
      "titel": "Entfernungen ab MonteSana",
      "breiten": [
-      134,
-      70,
-      80,
-      90
+      118,
+      66,
+      66,
+      76
      ],
+     "zh": 25,
      "kopf": [
       "Ziel",
       "Luftlinie",
-      "Pkw (ca.)",
-      "Fahrzeit (ca.)"
+      "Pkw",
+      "Fahrzeit"
+     ],
+     "hervorheben": [
+      "Schweizer Grenze"
      ],
      "zeilen": [
       [
-       "Schweizer Grenze (Waldshut)",
+       "Schweizer Grenze",
        "14 km",
        "20 km",
        "25 min"
@@ -550,14 +570,15 @@
     },
     {
      "typ": "text",
-     "x": 482,
+     "x": 530,
      "y": "folgt",
-     "abstand": 24,
-     "w": 374,
+     "abstand": 20,
+     "w": 326,
      "box": true,
      "titel": "Einordnung",
+     "h": 0,
      "absaetze": [
-      "Ruhe auf dem Hochplateau, der Grenzraum vor der Tür und Anschluss an drei Metropolregionen: Die Lage verbindet Erholungsqualität mit beruflicher Nachfrage aus der Schweiz."
+      "Ruhe auf dem Hochplateau, der Grenzraum vor der Tür und Anschluss an drei Metropolregionen. Die Lage verbindet Erholungsqualität mit beruflicher Nachfrage aus der Schweiz; Stuttgart und München erreichen Gäste und Eigentümer in einer Tagesreise."
      ]
     }
    ],
@@ -574,9 +595,9 @@
     {
      "typ": "karte",
      "x": 51,
-     "y": 392,
-     "w": 380,
-     "h": 300,
+     "y": 384,
+     "w": 450,
+     "h": 296,
      "geo": "quelle/geo/region.geojson",
      "bbox": [
       7.3,
@@ -630,7 +651,7 @@
       {
        "name": "Deutschland",
        "lon": 8.55,
-       "lat": 48.1
+       "lat": 48.12
       },
       {
        "name": "Schweiz",
@@ -643,13 +664,13 @@
     },
     {
      "typ": "balken",
-     "x": 482,
+     "x": 530,
      "y": 384,
-     "w": 374,
-     "titel": "Grenzgänger aus dem Kreis Waldshut nach Kanton (2024)",
-     "lw": 80,
+     "w": 326,
+     "titel": "Grenzgänger Kreis Waldshut nach Kanton (2024)",
+     "lw": 84,
      "vw": 50,
-     "abstand": 22,
+     "abstand": 25,
      "items": [
       [
        "Aargau",
@@ -676,29 +697,30 @@
     },
     {
      "typ": "kv",
-     "x": 482,
+     "x": 530,
      "y": "folgt",
-     "abstand": 14,
-     "w": 374,
-     "kw": 104,
-     "schrift": 7.9,
+     "abstand": 10,
+     "w": 326,
+     "kw": 92,
      "titel": "Nachfragetreiber",
+     "bis": 88,
+     "schrift": 8.6,
      "zeilen": [
       [
        "Kaufkraft",
-       "14.668 Grenzgänger; Schweizer Einkommen bei deutschen Lebenshaltungskosten."
+       "Schweizer Einkommen bei deutschen Lebenshaltungskosten."
       ],
       [
-       "Drei Nachfragegruppen",
-       "Grenzgänger mit Zweitwohnsitz oder Wochenaufenthalt, Fachkräfte und Expats im Corporate Housing, Schweizer Gäste im Kurzurlaub."
+       "Zielgruppen",
+       "Grenzgänger im Wochenaufenthalt, Fachkräfte und Expats im Corporate Housing, Schweizer Kurzurlauber."
       ],
       [
        "Kurort",
-       "Ganzjahresnachfrage durch Wandern, Wellness, Reha und Wintersport (Feldberg ca. 30 km)."
+       "Ganzjahresnachfrage durch Wandern, Wellness, Reha und Wintersport."
       ],
       [
        "Coworking",
-       "Remote-Arbeitsplätze zwischen Zürich, Basel und Aargau in 20 bis 55 Minuten."
+       "Arbeitsplätze zwischen Zürich, Basel und Aargau in 20 bis 55 Minuten."
       ]
      ]
     }
@@ -715,8 +737,10 @@
     {
      "typ": "kpi",
      "x": 51,
-     "y": 404,
-     "w": 380,
+     "y": 410,
+     "w": 410,
+     "h": 52,
+     "groesse": 22,
      "items": [
       [
        "7,0 Mio. €",
@@ -727,20 +751,19 @@
        "5,3 Mio. €",
        "Early-Commit-Preis netto"
       ]
-     ],
-     "groesse": 22
+     ]
     },
     {
      "typ": "text",
      "x": 51,
      "y": "folgt",
-     "abstand": 14,
-     "w": 380,
-     "schrift": 8.4,
+     "abstand": 12,
+     "w": 410,
+     "schrift": 8.6,
      "absaetze": [
       [
-       "Vorteil gegenüber Listenpreis:",
-       "1,7 Mio. € (−24,3 %). Ein LOI bis Ende November 2026 ist grundsätzlich möglich; Fristen und Bedingungen sind abzustimmen."
+       "Vorteil gegenüber Listenpreis: 1,7 Mio. € (−24,3 %).",
+       "Ein LOI bis Ende November 2026 ist grundsätzlich möglich; Fristen und Bedingungen sind noch abzustimmen."
       ]
      ]
     },
@@ -748,20 +771,22 @@
      "typ": "kpi",
      "x": 51,
      "y": "folgt",
-     "abstand": 16,
-     "w": 380,
-     "h": 50,
+     "abstand": 10,
+     "w": 410,
+     "h": 42,
      "groesse": 18,
      "items": [
-      [
-       "2,5 Mio. €",
-       "Mögliche Anzahlung bei Kaufvertrag"
-      ],
-      [
-       "2,8 Mio. €",
-       "Restkaufpreis nach Zahlungsplan",
-       "hell"
-      ]
+      {
+       "wert": "2,5 Mio. €",
+       "label": "Anzahlung",
+       "text": "Mögliche Anzahlung bei notariellem Kaufvertragsabschluss"
+      },
+      {
+       "wert": "2,8 Mio. €",
+       "label": "Restkaufpreis",
+       "stil": "hell",
+       "text": "Verbleibender Kaufpreis, zahlbar gemäß individuell vereinbartem Zahlungsplan"
+      }
      ]
     },
     {
@@ -769,47 +794,44 @@
      "x": 51,
      "y": "folgt",
      "abstand": 10,
-     "w": 380,
-     "schrift": 8.2,
+     "w": 410,
+     "schrift": 8.4,
      "absaetze": [
-      [
-       "Optionale Kaufpreisstaffelung:",
-       "Anzahl und Fälligkeit der Teilzahlungen, spätester Zahlungstermin und Sicherheiten sind Gegenstand der Vertragsverhandlungen."
-      ]
+      "Der Verkäufer ist grundsätzlich bereit, eine gestaffelte Kaufpreiszahlung zu prüfen. Die Zahlungsstruktur kann abhängig vom Projektfortschritt, dem Nutzungskonzept und der Exit-Strategie des Investors individuell vereinbart werden. Anzahl und Fälligkeit der Teilzahlungen, der späteste Zahlungstermin sowie die erforderlichen Sicherheiten sind Gegenstand der Vertragsverhandlungen."
      ]
     },
     {
      "typ": "schritte",
      "x": 51,
      "y": "folgt",
-     "abstand": 16,
-     "w": 392,
+     "abstand": 4,
+     "w": 424,
      "items": [
       [
        "01 · November 2026",
        "LOI",
-       "Abstimmung der Transaktionsbedingungen"
+       "Abstimmung der Transaktions­bedingungen"
       ],
       [
        "02 · Kaufvertrag",
        "Beurkundung",
-       "Notarieller Vertrag und vereinbarte Anzahlung"
+       "Notarielle Beurkundung und vereinbarte Anzahlung"
       ],
       [
-       "03 · Projektfortschritt",
-       "Restzahlung",
-       "Nach vertraglich festgelegten Fälligkeiten"
+       "03 · Fortschritt / Exit",
+       "Weitere Zahlungen",
+       "Nach vertraglich festgelegten Fälligkeiten und Sicherheiten"
       ]
      ]
     },
     {
      "typ": "kv",
-     "x": 482,
-     "y": 404,
-     "w": 374,
-     "kw": 110,
+     "x": 500,
+     "y": 410,
+     "w": 356,
+     "kw": 96,
      "titel": "Konditionen im Überblick",
-     "schrift": 7.9,
+     "schrift": 8,
      "zeilen": [
       [
        "Struktur",
@@ -817,37 +839,48 @@
       ],
       [
        "Kaufpreis",
-       "7,0 Mio. € netto; Early-Commit 5,3 Mio. € netto"
+       "7,0 Mio. € netto; Early-Commit-Angebot 5,3 Mio. € netto"
       ],
       [
        "Zahlungsoption",
-       "Indikative Staffelung 2,5 / 2,8 Mio. €, vorbehaltlich individueller Vereinbarung"
+       "Indikative Staffelung von 2,5 Mio. € und 2,8 Mio. €, vorbehaltlich individueller Vereinbarung"
       ],
       [
        "Fälligkeiten",
-       "Einmalige Restzahlung oder projektfortschrittsabhängige Teilzahlungen; noch nicht festgelegt"
+       "Einmalige Restzahlung oder mehrere projektfortschrittsabhängige Teilzahlungen möglich; noch nicht festgelegt"
       ],
       [
        "Sicherheiten",
-       "Grundpfandrechtliche Absicherung, gegebenenfalls Teilfreigaben bei Einzelverkäufen; nach Vereinbarung"
+       "Grundpfandrechtliche Absicherung und gegebenenfalls Teilfreigaben bei Einzelverkäufen; Ausgestaltung nach Vereinbarung"
       ],
       [
-       "Erwerbsnebenkosten",
+       "Erwerbsneben­kosten",
        "Annahme GRENFORD: Grunderwerbsteuer Baden-Württemberg 5,0 % plus Notar und Grundbuch ca. 1,5 %; bei 5,3 Mio. € rund 0,34 Mio. €"
       ],
       [
        "Maklercourtage",
        "5,0 % netto zzgl. gesetzlicher MwSt., fällig mit wirksamem notariellen Kaufvertrag"
-      ],
+      ]
+     ]
+    },
+    {
+     "typ": "text",
+     "x": 500,
+     "y": "folgt",
+     "abstand": 10,
+     "w": 356,
+     "box": true,
+     "schrift": 7.9,
+     "absaetze": [
       [
-       "Vollzug",
-       "Einzelheiten im notariellen Kaufvertrag"
+       "Hinweis:",
+       "Die Kaufpreisstaffelung ist eine indikative Strukturierungsoption und kein verbindliches Finanzierungsangebot des Verkäufers. Zahlungsmodalitäten, Fälligkeiten, Laufzeit und Sicherheiten bedürfen einer individuellen Vereinbarung im notariellen Kaufvertrag."
       ]
      ]
     }
    ],
    "quelle": [
-    "Quelle: Angaben der Verkäuferseite (ERIKONA GmbH), Stand 11.11.2026; Erwerbsnebenkosten Annahme GRENFORD. Die Kaufpreisstaffelung ist eine indikative Strukturierungsoption und kein verbindliches Finanzierungsangebot des Verkäufers."
+    "Quelle: Angaben der Verkäuferseite (ERIKONA GmbH), Stand 11.11.2026. Erwerbsnebenkosten: Annahme GRENFORD. Zahlungsstaffelung indikativ und nicht verbindlich vereinbart."
    ]
   },
   {
@@ -861,37 +894,38 @@
      "typ": "bild",
      "x": 51,
      "y": 410,
-     "w": 186,
-     "h": 124,
+     "w": 214,
+     "h": 150,
      "bild": "bestand-luft.png",
      "titel": "Bestand, Luftbild"
     },
     {
      "typ": "bild",
-     "x": 245,
+     "x": 273,
      "y": 410,
-     "w": 186,
-     "h": 124,
+     "w": 214,
+     "h": 150,
      "bild": "vis-luft.png",
      "titel": "Planung, Visualisierung"
     },
     {
      "typ": "bild",
      "x": 51,
-     "y": 256,
-     "w": 380,
-     "h": 124,
+     "y": 232,
+     "w": 436,
+     "h": 150,
      "bild": "vis-wohnhaeuser.png",
      "pos": "60% center",
      "titel": "Ansicht Wohnhäuser, Visualisierung"
     },
     {
      "typ": "kv",
-     "x": 482,
+     "x": 520,
      "y": 410,
-     "w": 374,
-     "kw": 100,
-     "schrift": 7.9,
+     "w": 336,
+     "kw": 98,
+     "bis": 66,
+     "schrift": 8.8,
      "zeilen": [
       [
        "Objekt",
@@ -902,8 +936,8 @@
        "ca. 1,62 ha (Grundbuch 16.174 bis 16.219 m²)"
       ],
       [
-       "Zusatzgrundstück",
-       "Flst. 213 „Kirchacker“, 6.511 m², Landwirtschaftsfläche, unerschlossen; im Paket enthalten, Nutzungsoptionen planungsrechtlich zu prüfen"
+       "Zusatz­grundstück",
+       "Flst. 213 „Kirchacker“, 6.511 m², Landwirtschaftsfläche, unerschlossen; im Paket, Nutzungsoptionen planungsrechtlich zu prüfen"
       ],
       [
        "Gebäude",
@@ -945,32 +979,31 @@
      "typ": "tabelle",
      "x": 51,
      "y": 410,
-     "w": 520,
+     "w": 530,
      "titel": "Angebote im 50-km-Radius nach Leistungsbaustein",
      "breiten": [
-      122,
-      102,
-      120,
-      44,
-      44,
-      44,
-      44
+      130,
+      118,
+      134,
+      37,
+      37,
+      37,
+      37
      ],
      "links": [
       0,
       1,
       2
      ],
-     "schrift": 7.8,
-     "zh": 22,
+     "zh": 21,
      "kopf": [
       "Anbieter",
       "Standort",
       "Angebot",
-      "Serviced",
-      "Cowork.",
-      "Wellness",
-      "Medizin"
+      "Serv.",
+      "Cow.",
+      "Well.",
+      "Med."
      ],
      "hervorheben": [
       "MonteSana"
@@ -1022,7 +1055,7 @@
        "–"
       ],
       [
-       "Heinz Schwitter Coworking",
+       "Heinz Schwitter",
        "Böbikon CH, ca. 30 km",
        "Coworking ab 280 CHF/Monat",
        "–",
@@ -1042,61 +1075,82 @@
      ]
     },
     {
-     "typ": "tabelle",
-     "x": 610,
-     "y": 410,
-     "w": 246,
-     "titel": "Preise je Nacht im Vergleich",
-     "breiten": [
-      120,
-      126
+     "typ": "spanne",
+     "x": 51,
+     "y": "folgt",
+     "abstand": 23,
+     "w": 530,
+     "lw": 200,
+     "titel": "Preis je Nacht im Vergleich",
+     "achse": [
+      50,
+      175,
+      25
      ],
-     "links": [
-      0
-     ],
-     "schrift": 7.5,
-     "zh": 19,
-     "hervorheben": [
-      "MonteSana Planannahme, Ø Erlös"
-     ],
-     "kopf": [
-      "Referenz",
-      "Preis"
-     ],
-     "zeilen": [
+     "items": [
       [
        "Ferienwohnungen Höchenschwand (Holidu)",
-       "52 bis 110 €"
+       52,
+       110,
+       "52–110 €"
       ],
       [
-       "Ferienhäuser Höchenschwand, Durchschnitt",
+       "Ferienhäuser Höchenschwand, Ø",
+       145,
+       145,
        "145 €"
       ],
       [
        "Stuub Schluchsee, Studio bis Maisonette",
-       "75 bis 149 €"
+       75,
+       149,
+       "75–149 €"
       ],
       [
        "MonteSana Planannahme, Ø Erlös",
-       "102 € (2027) bis 110 € (2031)"
+       102,
+       110,
+       "102–110 €",
+       "h"
+      ]
+     ]
+    },
+    {
+     "typ": "dunkel",
+     "x": 612,
+     "y": 410,
+     "w": 244,
+     "h": 214,
+     "titel": "Wettbewerb im Radius",
+     "abstand": 56,
+     "werte": [
+      [
+       "7",
+       "Anbieter mit Teilangebot",
+       26
+      ],
+      [
+       "1",
+       "Haus mit allen vier Bausteinen",
+       26
       ]
      ]
     },
     {
      "typ": "text",
-     "x": 610,
+     "x": 612,
      "y": "folgt",
-     "abstand": 20,
-     "w": 246,
+     "abstand": 14,
+     "w": 244,
      "box": true,
      "titel": "Einordnung",
-     "schrift": 8,
+     "schrift": 8.6,
      "absaetze": [
-      "Im Radius fanden wir kein weiteres Objekt, das Serviced Living, Coworking, Wellness und Medizin in einem Haus bündelt. Die Planannahme liegt am oberen Ende der Ferienwohnungsspanne und verlangt ein klares Qualitätsprofil."
+      "Kein weiteres Objekt im Radius bündelt Serviced Living, Coworking, Wellness und Medizin. Die Planannahme liegt am oberen Ende der Ferienwohnungsspanne und verlangt ein klares Qualitätsprofil."
      ]
     }
    ],
-   "quelle": "Quelle: GRENFORD Research auf Basis öffentlicher Quellen (Holidu 29.10.2026, TUI/Hotelspecials, workin.space, Hotelinformationen), Stand 30.10.2026. Entfernungen ab Höchenschwand geschätzt; die Übersicht ist nicht abschließend."
+   "quelle": "Quelle: GRENFORD Research auf Basis öffentlicher Quellen (Holidu 29.10.2026, TUI/Hotelspecials, workin.space, Hotelinformationen), Stand 30.10.2026. Entfernungen geschätzt; die Übersicht ist nicht abschließend."
   },
   {
    "modul": "raster",
@@ -1109,11 +1163,11 @@
      "typ": "balken",
      "x": 51,
      "y": 410,
-     "w": 380,
+     "w": 410,
      "titel": "Angebotsmieten kalt in €/m² und Monat",
-     "lw": 120,
-     "vw": 50,
-     "abstand": 22,
+     "lw": 140,
+     "vw": 60,
+     "bis": 66,
      "max": 20,
      "items": [
       [
@@ -1172,20 +1226,21 @@
     },
     {
      "typ": "tabelle",
-     "x": 482,
+     "x": 500,
      "y": 410,
-     "w": 374,
+     "w": 356,
      "titel": "Wohnen auf Zeit, Waldshut-Tiengen",
      "breiten": [
-      214,
-      90,
-      70
+      206,
+      86,
+      64
      ],
      "kopf": [
       "Angebot",
       "Miete/Monat",
       "€/m²"
      ],
+     "zh": 20,
      "zeilen": [
       [
        "1,5 Zimmer, 35 m², möbliert",
@@ -1220,27 +1275,40 @@
      ]
     },
     {
-     "typ": "text",
-     "x": 482,
+     "typ": "kpi",
+     "x": 500,
      "y": "folgt",
-     "abstand": 8,
-     "w": 374,
-     "schrift": 7.6,
-     "absaetze": [
-      "Median der sechs Kleinapartments: 38 €/m² und Monat."
+     "abstand": 18,
+     "w": 356,
+     "hell": true,
+     "groesse": 18,
+     "gap": 16,
+     "items": [
+      [
+       "38 €/m²",
+       "Median möbliert"
+      ],
+      [
+       "10,82 €/m²",
+       "Höchenschwand kalt"
+      ],
+      [
+       "35–52 €/m²",
+       "Planerlös brutto"
+      ]
      ]
     },
     {
      "typ": "text",
-     "x": 482,
+     "x": 500,
      "y": "folgt",
-     "abstand": 10,
-     "w": 374,
+     "abstand": 6,
+     "w": 356,
      "box": true,
      "titel": "Einordnung",
-     "schrift": 8,
+     "schrift": 8.4,
      "absaetze": [
-      "Höchenschwand liegt mit 10,8 €/m² rund 27 % unter Waldshut-Tiengen (14,8 €/m²). Das Planerlös-Niveau von MonteSana beträgt brutto 35 € (2027) bis 52 € (2031) je m² und Monat und liegt im Band möblierter Kleinapartments (30 bis 50 €/m²). Brutto-Erlös und Miete sind nur eingeschränkt vergleichbar. Zum Vergleich Kanton Aargau: Ø 291 CHF/m² und Jahr, rund 24 CHF/m² und Monat."
+      "Höchenschwand liegt rund 27 % unter Waldshut-Tiengen. Der Planerlös von MonteSana (brutto 35 € in 2027 bis 52 € in 2031 je m² und Monat) liegt im Band möblierter Kleinapartments; Erlös und Miete sind nur eingeschränkt vergleichbar. Kanton Aargau: Ø rund 24 CHF/m² und Monat."
      ]
     }
    ],
@@ -1257,11 +1325,11 @@
      "typ": "balken",
      "x": 51,
      "y": 410,
-     "w": 380,
-     "titel": "Büro: Angebotsmieten Waldshut-Tiengen in €/m² und Monat",
-     "lw": 140,
-     "vw": 50,
-     "abstand": 22,
+     "w": 410,
+     "titel": "Büro: Angebotsmieten Waldshut-Tiengen, €/m² und Monat",
+     "lw": 160,
+     "vw": 56,
+     "abstand": 26,
      "max": 19,
      "items": [
       [
@@ -1294,6 +1362,12 @@
        8.0,
        "8,00 €",
        "r"
+      ],
+      [
+       "MonteSana: Eigentümerertrag je m²",
+       11.9,
+       "≈ 11,9 €",
+       "h"
       ]
      ]
     },
@@ -1301,17 +1375,18 @@
      "typ": "tabelle",
      "x": 51,
      "y": "folgt",
-     "abstand": 16,
-     "w": 380,
+     "abstand": 14,
+     "w": 410,
      "titel": "Schweiz (Aargau), Inserate",
      "breiten": [
-      280,
-      100
+      290,
+      120
      ],
      "kopf": [
       "Objekt",
       "CHF/m² und Jahr"
      ],
+     "bis": 66,
      "zeilen": [
       [
        "Spreitenbach, Gewerbe",
@@ -1329,25 +1404,26 @@
     },
     {
      "typ": "tabelle",
-     "x": 482,
+     "x": 500,
      "y": 410,
-     "w": 374,
+     "w": 356,
      "titel": "Coworking und Büro-Services",
      "breiten": [
-      234,
-      140
+      220,
+      136
      ],
      "kopf": [
       "Anbieter",
       "Preis"
      ],
+     "zh": 20,
      "zeilen": [
       [
        "Heinz Schwitter, Böbikon (Zurzach)",
        "ab 280 CHF/Monat"
       ],
       [
-       "Tageskarte (günstigste Spaces, Region)",
+       "Tageskarte, günstigste Spaces der Region",
        "ab 15 CHF"
       ],
       [
@@ -1359,22 +1435,46 @@
        "auf Anfrage"
       ],
       [
-       "Referenz Lörrach / Weil am Rhein (&gt; 50 km)",
+       "Lörrach / Weil am Rhein (&gt; 50 km)",
        "220 bis 289 €/Monat"
       ]
      ]
     },
     {
-     "typ": "text",
-     "x": 482,
+     "typ": "kpi",
+     "x": 500,
      "y": "folgt",
-     "abstand": 20,
-     "w": 374,
+     "abstand": 18,
+     "w": 356,
+     "hell": true,
+     "groesse": 18,
+     "gap": 16,
+     "items": [
+      [
+       "≈ 11,9 €/m²",
+       "Eigentümerertrag"
+      ],
+      [
+       "9–19 €/m²",
+       "Büro vor Ort"
+      ],
+      [
+       "≈ 50 €/m²",
+       "Coworking-Umsatz"
+      ]
+     ]
+    },
+    {
+     "typ": "text",
+     "x": 500,
+     "y": "folgt",
+     "abstand": 6,
+     "w": 356,
      "box": true,
      "titel": "Einordnung",
-     "schrift": 8,
+     "schrift": 8.4,
      "absaetze": [
-      "Der stabilisierte Eigentümerertrag von 381 T€ entspricht über 2.658 m² rund 11,9 €/m² und Monat und liegt im Rahmen der Büro- und Gewerbemieten vor Ort (9 bis 19 €/m²). Der geplante Coworking-Umsatz (750 T€ im Jahr 4) entspricht rund 50 €/m² und Monat; er liegt über dem Mietniveau, trägt aber Personal- und Betriebskosten."
+      "Der stabilisierte Eigentümerertrag von 381 T€ entspricht über 2.658 m² rund 11,9 €/m² und Monat und liegt im Rahmen der Büro- und Gewerbemieten vor Ort. Der geplante Coworking-Umsatz (750 T€ im Jahr 4) liegt mit rund 50 €/m² darüber, trägt aber Personal- und Betriebskosten."
      ]
     }
    ],
@@ -1384,113 +1484,107 @@
    "modul": "raster",
    "id": "zielgruppen",
    "kopf": "GRENFORD Research",
-   "dachzeile": "Zielgruppen",
+   "dachzeile": "Zielgruppen · Potenzialmatrix",
    "titel": "Drei Nachfragecluster tragen das Konzept",
    "bloecke": [
     {
      "typ": "matrix",
      "x": 51,
      "y": 410,
-     "w": 805,
-     "h": 150,
-     "gap": 10,
-     "schrift": 7.9,
+     "w": 480,
+     "h": 334,
+     "schrift": 10,
+     "spalten_titel": [
+      "Wohnen auf Zeit",
+      "Arbeiten und Gesundheit"
+     ],
+     "zeilen_titel": [
+      "Beruflich, Grenzraum",
+      "Freizeit, Erholung"
+     ],
      "zellen": [
       {
-       "titel": "Beruflich · Wohnen auf Zeit",
+       "titel": "Grenzgänger und Corporate Housing",
        "tag": "Top-Potenzial",
        "akzent": true,
        "punkte": [
-        [
-         "Grenzgänger und Corporate Housing.",
-         "Wochenaufenthalt, Fachkräfte, Projekteinsätze; Kaufkraft und planbare Aufenthaltsdauer."
-        ]
+        "Wochenaufenthalt, Fachkräfte, Projekteinsätze. Kaufkraft und planbare Aufenthaltsdauer."
        ]
       },
       {
-       "titel": "Beruflich · Arbeiten",
+       "titel": "Remote Worker und Workation",
        "tag": "Gut",
        "punkte": [
-        [
-         "Remote Worker und Workation.",
-         "Coworking und Business-Lounge, Mietbeginn 04/2027."
-        ]
+        "Coworking und Business-Lounge, Mietbeginn 04/2027. Wiederkehrende Nutzer."
        ]
       },
       {
-       "titel": "Freizeit · Erholung",
+       "titel": "Kurzurlauber und Wellnessgäste",
        "tag": "Gut",
        "punkte": [
-        [
-         "Schweizer Kurzurlauber und Wellnessgäste.",
-         "Ganzjahresnachfrage durch Wandern, Wellness und Wintersport."
-        ]
+        "Schweizer Gäste; Ganzjahresnachfrage durch Wandern, Wellness und Wintersport."
        ]
       },
       {
-       "titel": "Freizeit · Gesundheit",
+       "titel": "Prävention, Physio und Praxis",
        "tag": "Ergänzung",
        "punkte": [
-        [
-         "Prävention, Physiotherapie und Praxis.",
-         "Frequenzbringer für das Haus; Arztpraxis per Direktmiete."
-        ]
+        "Frequenzbringer für das Haus; Arztpraxis per Direktmiete."
        ]
       }
      ]
     },
     {
      "typ": "text",
-     "x": 51,
-     "y": 240,
-     "w": 380,
+     "x": 566,
+     "y": 410,
+     "w": 290,
      "titel": "Zielgruppenstrategie",
-     "schrift": 8.2,
+     "schrift": 8.8,
      "absaetze": [
-      "MonteSana adressiert Nachfrage, die Grenzraum und Kurortstatus tragen: Grenzgänger (14.668 im Kreis Waldshut), Fachkräfte im Corporate Housing, Remote Worker und Gäste aus der Schweiz.",
+      "MonteSana adressiert Nachfrage, die Grenzraum und Kurortstatus tragen: 14.668 Grenzgänger im Kreis Waldshut, Fachkräfte im Corporate Housing, Remote Worker und Gäste aus der Schweiz.",
       [
        "Marktlogik:",
-       "Möbliertes Wohnen auf Zeit erzielt in Waldshut-Tiengen 30 bis 50 €/m², unmöbliert liegt das Niveau bei 10,8 bis 14,8 €/m². Die Planerlöse von MonteSana bewegen sich im Band des möblierten Segments."
+       "Möbliertes Wohnen auf Zeit erzielt in Waldshut-Tiengen 30 bis 50 €/m², unmöbliert 10,8 bis 14,8 €/m². Die Planerlöse liegen im Band des möblierten Segments."
       ]
      ]
     },
     {
      "typ": "tabelle",
-     "x": 482,
-     "y": 240,
-     "w": 374,
+     "x": 566,
+     "y": "folgt",
+     "abstand": 16,
+     "w": 290,
      "titel": "Ergebnis auf einen Blick",
      "breiten": [
-      70,
-      120,
-      184
+      86,
+      204
      ],
      "links": [
       0,
-      1,
-      2
+      1
      ],
-     "schrift": 7.5,
+     "tags": [
+      0
+     ],
+     "bis": 66,
+     "schrift": 8.4,
      "kopf": [
       "Priorität",
-      "Segment",
-      "Bewertung"
+      "Segment und Bewertung"
      ],
      "zeilen": [
       [
-       "Top-Invest",
-       "Grenzgänger und Corporate Housing",
-       "Kaufkraft, planbare Aufenthalte, höchste Zahlungsbereitschaft"
+       "Top-Potenzial",
+       "Grenzgänger und Corporate Housing: höchste Zahlungsbereitschaft"
       ],
       [
-       "Stabilität",
-       "Remote Worker und Workation",
-       "Wiederkehrende Nutzer, Auslastung der Coworking-Flächen"
+       "Gut",
+       "Remote Worker und Workation: Auslastung der Coworking-Flächen"
       ],
       [
        "Ergänzung",
-       "Erholungs- und Gesundheitsgäste",
-       "Frequenz und Saisonspitzen, Synergie mit Wellness und Medizin"
+       "Erholungs- und Gesundheitsgäste: Frequenz und Saisonspitzen"
       ]
      ]
     }
@@ -1538,14 +1632,15 @@
      "typ": "donut",
      "x": 51,
      "y": 410,
-     "r": 66,
-     "ring": 20,
-     "lw": 150,
+     "r": 76,
+     "ring": 22,
+     "lw": 170,
      "titel": "Nutzfläche nach Nutzung",
      "mitte": [
       "6.957 m²",
       "Nutzfläche"
      ],
+     "mitte_groesse": 17,
      "items": [
       [
        "Apartments",
@@ -1578,22 +1673,22 @@
      "typ": "bild",
      "x": 51,
      "y": 214,
-     "w": 380,
-     "h": 140,
+     "w": 420,
+     "h": 132,
      "bild": "vis-wohnhaeuser.png",
      "pos": "35% center",
      "titel": "Ansicht Wohnhäuser, Visualisierung"
     },
     {
      "typ": "tabelle",
-     "x": 482,
+     "x": 500,
      "y": 410,
-     "w": 374,
+     "w": 356,
      "titel": "Vier Profit-Center ergänzen 92 Apartments",
      "breiten": [
       104,
-      60,
-      210
+      62,
+      190
      ],
      "links": [
       0,
@@ -1604,11 +1699,12 @@
       "Fläche",
       "Konzept"
      ],
+     "zh": 21,
      "zeilen": [
       [
        "Coworking",
        "1.241 m²",
-       "Flexible Arbeitsplätze, Business-Lounge, Workation"
+       "Arbeitsplätze, Business-Lounge, Workation"
       ],
       [
        "Fitness / Wellness",
@@ -1629,16 +1725,16 @@
     },
     {
      "typ": "tabelle",
-     "x": 482,
+     "x": 500,
      "y": "folgt",
-     "abstand": 22,
-     "w": 374,
+     "abstand": 20,
+     "w": 356,
      "titel": "Apartment-Mix",
      "breiten": [
-      134,
-      80,
-      80,
-      80
+      128,
+      76,
+      76,
+      76
      ],
      "kopf": [
       "Typ",
@@ -1649,6 +1745,7 @@
      "hervorheben": [
       "Summe"
      ],
+     "zh": 21,
      "zeilen": [
       [
        "1-Zimmer",
@@ -1675,6 +1772,30 @@
        "4.289"
       ]
      ]
+    },
+    {
+     "typ": "kpi",
+     "x": 500,
+     "y": "folgt",
+     "abstand": 22,
+     "w": 356,
+     "hell": true,
+     "groesse": 19,
+     "gap": 16,
+     "items": [
+      [
+       "62 %",
+       "Anteil Apartments"
+      ],
+      [
+       "38 %",
+       "Anteil Gewerbe"
+      ],
+      [
+       "Ø 47 m²",
+       "je Apartment"
+      ]
+     ]
     }
    ],
    "quelle": "Quelle: Apartments.xlsx; Ertragsprognosen MonteSana (Flächen Gewerbe); Investment-Teaser. Wohnfläche laut Ertragsprognose 4.299 m² (Apartments.xlsx: 4.289 m²)."
@@ -1690,8 +1811,8 @@
      "typ": "bild",
      "x": 51,
      "y": 410,
-     "w": 560,
-     "h": 160,
+     "w": 590,
+     "h": 168,
      "bild": "plan-ansicht-sued.png",
      "weiss": true,
      "contain": true,
@@ -1701,9 +1822,9 @@
     {
      "typ": "bild",
      "x": 51,
-     "y": 220,
-     "w": 560,
-     "h": 140,
+     "y": 216,
+     "w": 590,
+     "h": 142,
      "bild": "plan-ansicht-nord.png",
      "weiss": true,
      "contain": true,
@@ -1712,40 +1833,45 @@
     },
     {
      "typ": "text",
-     "x": 640,
+     "x": 666,
      "y": 410,
-     "w": 216,
+     "w": 190,
      "titel": "Architektur",
-     "schrift": 8.2,
+     "schrift": 8.8,
      "absaetze": [
-      "Die Ansichten zeigen die genehmigte Planung für Altbau und Bauteil B. Rot markiert sind die Änderungen des Nachtrags zur Baugenehmigung, unter anderem Terrassen im Dachbereich."
+      "Genehmigte Planung für Altbau und Bauteil B. Rot markiert sind die Änderungen des Nachtrags, unter anderem Terrassen im Dachbereich."
      ]
     },
     {
      "typ": "kv",
-     "x": 640,
+     "x": 666,
      "y": "folgt",
-     "abstand": 16,
-     "w": 216,
-     "kw": 74,
-     "schrift": 7.6,
+     "abstand": 14,
+     "w": 190,
+     "kw": 70,
+     "schrift": 8.2,
      "titel": "Planunterlagen",
+     "bis": 66,
      "zeilen": [
       [
-       "Planverfasser",
+       "Verfasser",
        "Klaudia Keilholz Architekten GmbH, Berlin"
       ],
       [
        "Planstand",
-       "Bauantragsänderung vom 10.09.2024, Maßstab 1:100"
+       "Bauantragsänderung 10.09.2024, M 1:100"
       ],
       [
        "Genehmigung",
-       "Baugenehmigung vom 12.09.2023"
+       "Baugenehmigung 12.09.2023"
+      ],
+      [
+       "Gebäude",
+       "Bauteile A, B, C; WH 1 und WH 3"
       ],
       [
        "Hinweis",
-       "Planunterlagen tragen die Projektbezeichnung „Silvasana Höchenschwand“"
+       "Pläne tragen den Projektnamen „Silvasana Höchenschwand“"
       ]
      ]
     }
@@ -1763,8 +1889,8 @@
      "typ": "bild",
      "x": 51,
      "y": 410,
-     "w": 560,
-     "h": 162,
+     "w": 590,
+     "h": 172,
      "bild": "plan-og1.png",
      "weiss": true,
      "contain": true,
@@ -1774,9 +1900,9 @@
     {
      "typ": "bild",
      "x": 51,
-     "y": 220,
-     "w": 560,
-     "h": 140,
+     "y": 212,
+     "w": 590,
+     "h": 138,
      "bild": "plan-dg.png",
      "weiss": true,
      "contain": true,
@@ -1785,36 +1911,41 @@
     },
     {
      "typ": "text",
-     "x": 640,
+     "x": 666,
      "y": 410,
-     "w": 216,
+     "w": 190,
      "titel": "Grundrisse",
-     "schrift": 8.2,
+     "schrift": 8.8,
      "absaetze": [
-      "Das Regelgeschoss gliedert sich in 1- bis 2-Raum- und 2- bis 3-Raum-Apartments mit Balkonen, bei Bedarf kombinierbar. Im Dachgeschoss sind große Apartments mit Terrassen vorgesehen."
+      "Das Regelgeschoss gliedert sich in 1- bis 2-Raum- und 2- bis 3-Raum-Apartments mit Balkonen, bei Bedarf kombinierbar. Im Dachgeschoss liegen große Apartments mit Terrassen."
      ]
     },
     {
      "typ": "kv",
-     "x": 640,
+     "x": 666,
      "y": "folgt",
-     "abstand": 16,
-     "w": 216,
-     "kw": 74,
-     "schrift": 7.6,
+     "abstand": 14,
+     "w": 190,
+     "kw": 70,
+     "schrift": 8.2,
      "titel": "Flächen",
+     "bis": 66,
      "zeilen": [
       [
        "Wohnfläche",
        "4.299 m² in 92 Apartments"
       ],
       [
-       "Gewerbefläche",
+       "Gewerbe",
        "2.658 m² in vier Profit-Centern"
       ],
       [
-       "Detailplanung",
-       "Nutzflächenberechnungen je Apartment und Geschoss im Datenraum"
+       "Typen",
+       "26 × 1-Zi., 43 × 2-Zi., 23 × 3-/4-Zi."
+      ],
+      [
+       "Detail",
+       "Nutzflächen je Apartment und Geschoss im Datenraum"
       ]
      ]
     }
@@ -1832,10 +1963,12 @@
      "typ": "hstack",
      "x": 51,
      "y": 410,
-     "w": 540,
-     "lw": 150,
-     "sw": 64,
+     "w": 560,
+     "lw": 156,
+     "sw": 70,
      "max": 23.2,
+     "bh": 26,
+     "abstand": 44,
      "titel": "Von der Investition zum Gesamtwert, Mio. € netto",
      "zeilen": [
       [
@@ -1902,9 +2035,9 @@
      "typ": "text",
      "x": 51,
      "y": "folgt",
-     "abstand": 10,
-     "w": 540,
-     "schrift": 7.8,
+     "abstand": 8,
+     "w": 560,
+     "schrift": 8.6,
      "absaetze": [
       [
        "Wert Gewerbe:",
@@ -1924,9 +2057,10 @@
      "typ": "kpi",
      "x": 51,
      "y": 150,
-     "w": 540,
+     "w": 560,
      "hell": true,
-     "groesse": 19,
+     "groesse": 24,
+     "gap": 22,
      "items": [
       [
        "17,4 Mio. €",
@@ -1944,19 +2078,22 @@
     },
     {
      "typ": "dunkel",
-     "x": 632,
+     "x": 640,
      "y": 410,
-     "w": 224,
-     "h": 260,
+     "w": 216,
+     "h": 344,
      "titel": "Wertüberschuss bei Early-Commit",
+     "abstand": 86,
      "werte": [
       [
        "+5,9 Mio. €",
-       "Gesamtwert abzüglich Investition"
+       "Gesamtwert abzüglich Investition",
+       32
       ],
       [
        "+34 %",
-       "auf die Gesamtinvestition von 17,4 Mio. €"
+       "auf 17,4 Mio. € Gesamtinvestition",
+       32
       ]
      ],
      "text": "Bei 7,0 Mio. € Kaufpreis: +4,1 Mio. € (+21 %). Rechnung GRENFORD, indikativ, vor Finanzierung und Steuern."
@@ -1970,108 +2107,128 @@
    "kopf": "Zeitstrahl",
    "dachzeile": "Meilensteine",
    "titel": "Die Genehmigungsphase ist abgeschlossen",
+   "intro": "Bebauungsplan, Baugenehmigung und Teilungserklärung liegen vor. Das Genehmigungsrisiko liegt hinter dem Projekt; offen sind Umsetzung, Vermietung und Vertrieb.",
    "bloecke": [
     {
      "typ": "zeitstrahl",
-     "x": 70,
-     "y": 280,
-     "w": 766,
+     "x": 64,
+     "y": 262,
+     "w": 780,
      "von": "2023-01",
      "bis": "2029-12",
      "heute": "2026-11",
+     "phasen": [
+      [
+       "2023-01",
+       "2026-01",
+       "Planung und Genehmigung · abgeschlossen",
+       "navy"
+      ],
+      [
+       "2026-01",
+       "2028-01",
+       "Bau in drei Abschnitten",
+       "mid"
+      ],
+      [
+       "2028-01",
+       "2029-12",
+       "Hochlauf und Betrieb",
+       "light"
+      ]
+     ],
      "punkte": [
       {
        "monat": "2023-04",
        "datum": "19.04.2023",
        "text": "Bebauungsplan in Kraft",
-       "oben": false
+       "oben": false,
+       "h": 40
       },
       {
        "monat": "2023-09",
        "datum": "12.09.2023",
        "text": "Baugenehmigung",
-       "h": 56
+       "h": 66
       },
       {
        "monat": "2024-09",
        "datum": "20.09.2024",
        "text": "Bauantragsänderung",
-       "oben": false
+       "oben": false,
+       "h": 40
       },
       {
        "monat": "2025-08",
        "datum": "14.08.2025",
        "text": "Teilungserklärung",
-       "h": 56
+       "h": 66
       },
       {
        "monat": "2025-12",
        "datum": "12/2025",
-       "text": "Exposé und Marktauftritt",
+       "text": "Exposé, Marktauftritt",
        "oben": false,
-       "h": 58
+       "h": 66
       },
       {
        "monat": "2026-04",
        "datum": "04/2026",
        "text": "Baubeginn Gebäude C",
        "plan": true,
-       "h": 30
-      },
-      {
-       "monat": "2026-11",
-       "datum": "11/2026",
-       "text": "LOI-Abstimmung",
-       "plan": true,
-       "oben": false,
-       "h": 30
+       "h": 94
       },
       {
        "monat": "2027-04",
        "datum": "04/2027",
        "text": "Mietbeginn Coworking",
        "plan": true,
-       "h": 56
+       "h": 66
       },
       {
        "monat": "2027-10",
        "datum": "10/2027",
-       "text": "Abschluss Außenanlagen",
+       "text": "Außenanlagen fertig",
        "plan": true,
-       "oben": false
+       "oben": false,
+       "h": 40
       },
       {
        "monat": "2029-06",
        "datum": "2029",
        "text": "Stabilisierter Betrieb",
-       "plan": true
+       "plan": true,
+       "h": 66
       }
      ]
     },
     {
      "typ": "kpi",
      "x": 51,
-     "y": 150,
+     "y": 140,
      "w": 805,
-     "hell": true,
-     "groesse": 19,
-     "gap": 30,
+     "h": 72,
+     "groesse": 30,
+     "gap": 14,
      "items": [
-      [
-       "2 Jahre",
-       "Genehmigung bis Baubeginn",
-       "09/2023 bis 04/2026; Planungsrecht abgeschlossen"
-      ],
-      [
-       "12 Monate",
-       "Bauzeit Gebäude C",
-       "04/2026 bis Inbetriebnahme 04/2027"
-      ],
-      [
-       "2029",
-       "Stabilisierter Betrieb",
-       "der vier Profit-Center laut Ertragsprognose"
-      ]
+      {
+       "wert": "Erteilt",
+       "label": "Baurecht und Teilung"
+      },
+      {
+       "wert": "2 Jahre",
+       "label": "Genehmigung bis Baubeginn"
+      },
+      {
+       "wert": "12 Monate",
+       "label": "Bauzeit Gebäude C",
+       "stil": "hell"
+      },
+      {
+       "wert": "2029",
+       "label": "Stabilisierter Betrieb",
+       "stil": "hell"
+      }
      ]
     }
    ],
@@ -2087,9 +2244,10 @@
     {
      "typ": "gantt",
      "x": 51,
-     "y": 404,
+     "y": 410,
      "w": 805,
-     "lw": 210,
+     "lw": 240,
+     "zh": 31,
      "von": "2026-04",
      "bis": "2027-12",
      "heute": "2026-11",
@@ -2164,7 +2322,7 @@
       ],
       [
        "Betrieb",
-       "acc"
+       "mid"
       ]
      ]
     }
@@ -2182,11 +2340,11 @@
      "typ": "tabelle",
      "x": 51,
      "y": 410,
-     "w": 380,
+     "w": 410,
      "titel": "Kostenbasis",
      "breiten": [
-      270,
-      110
+      280,
+      130
      ],
      "kopf": [
       "Kennzahl",
@@ -2195,6 +2353,7 @@
      "hervorheben": [
       "Restbudget (netto)"
      ],
+     "zh": 20,
      "zeilen": [
       [
        "Kostenberechnung gesamt (netto)",
@@ -2222,11 +2381,13 @@
      "typ": "balken",
      "x": 51,
      "y": "folgt",
-     "abstand": 15,
-     "w": 380,
+     "abstand": 20,
+     "w": 410,
      "titel": "Anteil je Gewerk",
-     "lw": 90,
-     "vw": 40,
+     "lw": 100,
+     "vw": 50,
+     "bis": 66,
+     "bh": 11,
      "max": 22.3,
      "items": [
       [
@@ -2279,14 +2440,14 @@
     },
     {
      "typ": "saeulen",
-     "x": 482,
+     "x": 500,
      "y": 410,
-     "w": 374,
-     "h": 120,
+     "w": 356,
+     "h": 96,
      "titel": "Mittelabfluss je Jahr, Mio. € netto",
      "gestapelt": true,
      "max": 7.9,
-     "breite": 0.5,
+     "breite": 0.46,
      "kategorien": [
       "2026",
       "2027",
@@ -2329,13 +2490,13 @@
     },
     {
      "typ": "tabelle",
-     "x": 482,
+     "x": 500,
      "y": "folgt",
-     "abstand": 18,
-     "w": 374,
+     "abstand": 14,
+     "w": 356,
      "titel": "Technische Unterlagen",
      "breiten": [
-      264,
+      246,
       110
      ],
      "links": [
@@ -2349,9 +2510,11 @@
       "Unterlage",
       "Status"
      ],
+     "schrift": 8.2,
+     "zh": 18,
      "zeilen": [
       [
-       "Kostenberechnung, Bauzeitplan, Handwerkerangebote",
+       "Kostenberechnung, Bauzeitplan, Angebote",
        "Gesichtet"
       ],
       [
@@ -2359,32 +2522,32 @@
        "Im Datenraum"
       ],
       [
-       "Wertgutachten Az. 202510340, Marktwertschätzung",
+       "Wertgutachten, Marktwertschätzung",
        "Im Datenraum"
       ],
       [
-       "Energieausweis-Unterlagen, Nutzflächenpläne",
+       "Energieausweis-Unterlagen, Nutzflächen",
        "Im Datenraum"
       ]
      ]
     },
     {
      "typ": "text",
-     "x": 482,
+     "x": 500,
      "y": "folgt",
-     "abstand": 14,
-     "w": 374,
+     "abstand": 10,
+     "w": 356,
      "box": true,
-     "schrift": 7.8,
+     "schrift": 8,
      "absaetze": [
       [
        "Bis zum Signing:",
-       "aktueller Bautenstand, Mengengerüst der Technik, Baunebenkosten und Reserve (in der Investorenrechnung mit 10 % angesetzt) sowie Auswertung der Wertgutachten."
+       "aktueller Bautenstand, Mengengerüst der Technik, Baunebenkosten und Reserve (in der Rechnung mit 10 % angesetzt) sowie Auswertung der Wertgutachten."
       ]
      ]
     }
    ],
-   "quelle": "Quelle: Kostenberechnung Gesamt.xlsx; Bauzeitplan.xlsx; Datenraum MonteSana. Anteile bezogen auf 8,06 Mio. € netto."
+   "quelle": "Quelle: Kostenberechnung Gesamt.xlsx; Bauzeitplan.xlsx; Wertgutachten Az. 202510340; Datenraum MonteSana. Anteile bezogen auf 8,06 Mio. € netto."
   },
   {
    "modul": "tabelle",
@@ -2392,6 +2555,8 @@
    "kopf": "10-Jahres-Rechnung",
    "dachzeile": "Investorenrechnung · Basisfall · Mio. € netto",
    "titel": "Zehn Jahre, ein Cashflow-Bild",
+   "zh": 19.6,
+   "schrift": 8.4,
    "spalten": [
     "2026",
     "2027",
@@ -2577,7 +2742,7 @@
      ""
     ]
    ],
-   "label_breite": 200,
+   "label_breite": 214,
    "kennzahlen": [
     [
      "23,1 %",
@@ -2596,10 +2761,9 @@
      "Spitzenbedarf Kapital, kumuliert"
     ]
    ],
-   "hinweis": "Sensitivität Zahlungsplan: Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss sinkt die IRR im Basisfall auf 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert.",
+   "hinweis": "<b style='font-weight:500;color:#24534c'>Abhängigkeit vom Zahlungsplan:</b> Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss sinkt die IRR im Basisfall auf 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert.",
    "quelle": [
-    "Quelle: Berechnung GRENFORD auf Basis von Bauzeitplan (Restbudget 8,66 Mio. € netto), Sales Plan (5.000 €/m²) und Ertragsprognose (Eigentümerertrag 381 T€ ab 2029, +2 % p. a.).",
-    "Alle Werte in Mio. €, netto, vor Steuern und Finanzierung; indikativ."
+    "Quelle: Berechnung GRENFORD auf Basis von Bauzeitplan (Restbudget 8,66 Mio. € netto), Sales Plan (5.000 €/m²) und Ertragsprognose (381 T€ ab 2029, +2 % p. a.). Alle Werte in Mio. €, netto, vor Steuern und Finanzierung; indikativ."
    ]
   },
   {
@@ -2613,13 +2777,13 @@
      "typ": "linie",
      "x": 51,
      "y": 410,
-     "w": 400,
-     "h": 220,
+     "w": 420,
+     "h": 196,
      "titel": "Kumulierter Cashflow in Mio. €",
      "achse": [
-      -10,
-      10,
-      5
+      -12,
+      12,
+      4
      ],
      "kategorien": [
       "2026",
@@ -2639,7 +2803,7 @@
        "name": "Early-Commit 5,3 Mio. €",
        "farbe": "navy",
        "ende": "10,3",
-       "dy": 4,
+       "dy": 5,
        "werte": [
         -3.8,
         -8.36,
@@ -2656,9 +2820,9 @@
       },
       {
        "name": "Listenpreis 7,0 Mio. €",
-       "farbe": "light",
+       "farbe": "mid",
        "ende": "8,5",
-       "dy": -4,
+       "dy": -5,
        "werte": [
         -8.42,
         -10.19,
@@ -2677,10 +2841,10 @@
     },
     {
      "typ": "saeulen",
-     "x": 500,
+     "x": 520,
      "y": 410,
-     "w": 356,
-     "h": 200,
+     "w": 336,
+     "h": 196,
      "titel": "IRR über 10 Jahre nach Szenario",
      "max": 30,
      "kategorien": [
@@ -2720,21 +2884,37 @@
      ]
     },
     {
-     "typ": "text",
+     "typ": "kpi",
      "x": 51,
-     "y": 112,
+     "y": 118,
      "w": 805,
-     "schrift": 8.2,
-     "absaetze": [
-      [
-       "Break-even des kumulierten Cashflows:",
-       "2029 bei Early-Commit, 2030 bei Listenpreis."
-      ]
+     "h": 50,
+     "groesse": 18,
+     "gap": 12,
+     "items": [
+      {
+       "wert": "2029",
+       "label": "Break-even kumuliert, Early-Commit"
+      },
+      {
+       "wert": "2030",
+       "label": "Break-even kumuliert, Listenpreis",
+       "stil": "hell"
+      },
+      {
+       "wert": "+9,0 Pp.",
+       "label": "IRR-Vorteil im Basisfall"
+      },
+      {
+       "wert": "+1,8 Mio. €",
+       "label": "Mehr Überschuss im Basisfall",
+       "stil": "hell"
+      }
      ]
     }
    ],
    "quelle": [
-    "Quelle: Berechnung GRENFORD; Kaufpreisverteilung 2,5 / 2,8 Mio. € als Modellannahme, keine zugesagte Verkäuferkondition. Vorsichtig: 4.500 €/m², Verkauf ein Jahr später, Nebenkosten 15 %, Eigentümerkosten 8 %, Exit 8,0 %.",
+    "Quelle: Berechnung GRENFORD; Kaufpreisverteilung 2,5 / 2,8 Mio. € als Modellannahme. Vorsichtig: 4.500 €/m², Verkauf ein Jahr später, Nebenkosten 15 %, Eigentümerkosten 8 %, Exit 8,0 %.",
     "Basis: 5.000 €/m², Nebenkosten 10 %, Eigentümerkosten 5 %, Exit 7,0 %. Chance: 5.250 €/m², Exit 6,5 %. Vor Steuern, ohne Finanzierung."
    ]
   },
@@ -2754,15 +2934,16 @@
      "breiten": [
       76,
       54,
+      56,
+      48,
       54,
-      50,
-      54,
-      58,
-      54
+      62,
+      50
      ],
      "hervorheben": [
       "Basis"
      ],
+     "zh": 26,
      "kopf": [
       "Szenario",
       "IRR EC",
@@ -2806,7 +2987,7 @@
      "typ": "tabelle",
      "x": 51,
      "y": "folgt",
-     "abstand": 22,
+     "abstand": 24,
      "w": 400,
      "titel": "DCF: Barwert (NPV) nach Diskontsatz, Mio. €",
      "breiten": [
@@ -2818,6 +2999,7 @@
      "hervorheben": [
       "10 %"
      ],
+     "zh": 26,
      "kopf": [
       "Diskontsatz",
       "Early-Commit",
@@ -2857,6 +3039,7 @@
       88,
       88
      ],
+     "zh": 26,
      "kopf": [
       "€/m² brutto",
       "Exit 6,5 %",
@@ -2900,7 +3083,7 @@
      "typ": "tabelle",
      "x": 482,
      "y": "folgt",
-     "abstand": 22,
+     "abstand": 24,
      "w": 374,
      "titel": "NPV Early-Commit: Diskontsatz × Exit-Rendite, Mio. €",
      "breiten": [
@@ -2909,6 +3092,7 @@
       88,
       88
      ],
+     "zh": 26,
      "kopf": [
       "Diskontsatz",
       "Exit 6,5 %",
@@ -2949,16 +3133,47 @@
      ]
     },
     {
-     "typ": "text",
+     "typ": "kpi",
      "x": 51,
      "y": "folgt",
      "abstand": 26,
      "w": 805,
-     "box": true,
-     "titel": "Aussage",
-     "schrift": 8.2,
+     "h": 50,
+     "groesse": 18,
+     "gap": 12,
+     "items": [
+      {
+       "wert": "14,1 → 23,1 %",
+       "label": "IRR Basisfall: Listenpreis → Early-Commit"
+      },
+      {
+       "wert": "−1,8 Mio. €",
+       "label": "Geringerer Kapitalbedarf",
+       "stil": "hell"
+      },
+      {
+       "wert": "1,62 → 3,68",
+       "label": "Barwert bei 10 %, Mio. €"
+      },
+      {
+       "wert": "≥ 20,9 %",
+       "label": "IRR in allen Exit-Varianten",
+       "stil": "hell"
+      }
+     ]
+    },
+    {
+     "typ": "text",
+     "x": 51,
+     "y": "folgt",
+     "abstand": 12,
+     "w": 805,
+     "schrift": 8.8,
      "absaetze": [
-      "Der Early-Commit hebt die IRR im Basisfall von 14,1 % auf 23,1 % und senkt den Kapitalbedarf um 1,8 Mio. €. Der Barwert bei 10 % Diskontsatz steigt von 1,62 auf 3,68 Mio. €. Auch im vorsichtigen Szenario bleibt die IRR bei Early-Commit zweistellig."
+      [
+       "Aussage:",
+       "Selbst bei 4.875 €/m² Verkaufspreis und 8,0 % Exit-Rendite bleibt die IRR bei Early-Commit über 20 %. Der Kaufpreis wirkt stärker auf die Rendite als Verkaufspreis und Exit-Annahme."
+      ]
      ]
     }
    ],
@@ -2978,10 +3193,11 @@
      "typ": "saeulen",
      "x": 51,
      "y": 410,
-     "w": 400,
-     "h": 200,
+     "w": 420,
+     "h": 210,
      "titel": "Apartment 55 (46,1 m²): Objektrendite auf 204.048 €",
      "max": 8,
+     "legende": false,
      "kategorien": [
       "2027",
       "2028",
@@ -2994,7 +3210,6 @@
       "2035",
       "2036"
      ],
-     "legende": false,
      "serien": [
       {
        "name": "Objektrendite",
@@ -3040,21 +3255,26 @@
     {
      "typ": "kpi",
      "x": 51,
-     "y": 150,
-     "w": 400,
-     "hell": true,
-     "groesse": 18,
+     "y": 134,
+     "w": 420,
+     "h": 60,
+     "groesse": 21,
+     "gap": 12,
      "items": [
-      [
-       "129.234 €",
-       "Überschuss in 10 Jahren",
-       "63 % der Anschaffungskosten"
-      ],
-      [
-       "115.409 €",
-       "bei konstant 60 % Auslastung",
-       "Sensitivität"
-      ]
+      {
+       "wert": "129.234 €",
+       "label": "Überschuss in 10 Jahren"
+      },
+      {
+       "wert": "63 %",
+       "label": "der Anschaffungskosten",
+       "stil": "hell"
+      },
+      {
+       "wert": "115.409 €",
+       "label": "bei 60 % Auslastung",
+       "stil": "hell"
+      }
      ]
     },
     {
@@ -3064,20 +3284,23 @@
      "w": 356,
      "titel": "Zahlenreihe",
      "breiten": [
-      50,
-      70,
+      48,
+      72,
       80,
       78,
       78
      ],
-     "schrift": 7.5,
-     "zh": 14.6,
+     "bis": 104,
+     "schrift": 8.4,
      "kopf": [
       "Jahr",
       "Auslastung",
       "Ø Erlös/Nacht",
       "Überschuss",
       "Kumuliert"
+     ],
+     "hervorheben": [
+      "2036"
      ],
      "zeilen": [
       [
@@ -3158,7 +3381,7 @@
      "y": "folgt",
      "abstand": 12,
      "w": 356,
-     "schrift": 7.6,
+     "schrift": 8.2,
      "absaetze": [
       [
        "Dunkel:",
@@ -3177,14 +3400,44 @@
    "titel": "Genehmigungen und Eigentum liegen vor",
    "bloecke": [
     {
-     "typ": "tabelle",
+     "typ": "kpi",
      "x": 51,
      "y": 410,
      "w": 805,
+     "h": 48,
+     "groesse": 18,
+     "gap": 12,
+     "items": [
+      {
+       "wert": "4 von 7",
+       "label": "Unterlagen von GRENFORD gesichtet"
+      },
+      {
+       "wert": "3 von 7",
+       "label": "im Datenraum, Auswertung folgt",
+       "stil": "hell"
+      },
+      {
+       "wert": "17 + 1",
+       "label": "Abweichungen und Befreiung erteilt"
+      },
+      {
+       "wert": "Sondergebiet",
+       "label": "Bebauungsplan seit 04/2023",
+       "stil": "hell"
+      }
+     ]
+    },
+    {
+     "typ": "tabelle",
+     "x": 51,
+     "y": "folgt",
+     "abstand": 20,
+     "w": 805,
      "breiten": [
       250,
-      90,
-      465
+      100,
+      455
      ],
      "links": [
       0,
@@ -3194,8 +3447,7 @@
      "tags": [
       1
      ],
-     "schrift": 8,
-     "zh": 24,
+     "bis": 150,
      "kopf": [
       "Unterlage",
       "Status",
@@ -3210,7 +3462,7 @@
       [
        "Baugenehmigung 12.09.2023",
        "Gesichtet",
-       "Umnutzung zu Coworking, Wellness, Therapie und Apartments; 17 Abweichungen und eine Befreiung erteilt"
+       "Umnutzung zu Coworking, Wellness, Therapie und Apartments; 17 Abweichungen und eine Befreiung"
       ],
       [
        "Bebauungsplan „Im oberen Brühl – Nord“",
@@ -3223,12 +3475,12 @@
        "Änderungsantrag und Baufreigabe im Datenraum"
       ],
       [
-       "Teilungserklärung 14.08.2025, Abgeschlossenheitsbescheinigung",
+       "Teilungserklärung 14.08.2025, Abgeschlossenheit",
        "Im Datenraum",
        "Aufteilung in Wohnungs- und Teileigentum vorbereitet"
       ],
       [
-       "Zusatzgrundstück Flst. 213: Kaufvertrag vom 03.08.2026",
+       "Flst. 213: Kaufvertrag vom 03.08.2026",
        "Gesichtet",
        "6.511 m² Landwirtschaftsfläche, unerschlossen, lastenfrei geschuldet; Kaufpreis 70 T€ (ca. 10,75 €/m²)"
       ],
@@ -3243,18 +3495,14 @@
      "typ": "text",
      "x": 51,
      "y": "folgt",
-     "abstand": 22,
+     "abstand": 16,
      "w": 805,
      "box": true,
-     "schrift": 8,
+     "schrift": 8.6,
      "absaetze": [
       [
        "Bis zum Signing:",
-       "aktuelle Grundbuchauszüge der aufgeteilten Einheiten, Lastenfreistellung zum Vollzug und die Vollzugsschritte zu Flst. 213 (Vormerkung, Löschung der Sicherungshypothek, Vorkaufsrechtsverzicht der Gemeinde, Genehmigung nach Grundstückverkehrsrecht) samt Übertragungsstruktur in das Paket."
-      ],
-      [
-       "Artenschutz:",
-       "Die Fällung von 19 Fichten ist vom 01.11. bis 28.02. ohne zusätzliches Gutachten möglich."
+       "aktuelle Grundbuchauszüge der Einheiten, Lastenfreistellung zum Vollzug und die Vollzugsschritte zu Flst. 213 (Vormerkung, Löschung der Sicherungshypothek, Vorkaufsrechtsverzicht der Gemeinde, Genehmigung nach Grundstückverkehrsrecht). Artenschutz: Fällung von 19 Fichten vom 01.11. bis 28.02. ohne Zusatzgutachten möglich."
       ]
      ]
     }
@@ -3269,28 +3517,42 @@
    "titel": "Die Ertragsbasis ist dokumentiert",
    "bloecke": [
     {
-     "typ": "tabelle",
+     "typ": "kpi",
      "x": 51,
      "y": 410,
-     "w": 400,
+     "w": 410,
+     "h": 56,
+     "groesse": 21,
+     "gap": 12,
+     "items": [
+      {
+       "wert": "≈ 381 T€",
+       "label": "Eigentümerertrag p. a. ab 2029"
+      },
+      {
+       "wert": "218 T€",
+       "label": "davon Mindestpacht",
+       "stil": "hell"
+      }
+     ]
+    },
+    {
+     "typ": "tabelle",
+     "x": 51,
+     "y": "folgt",
+     "abstand": 18,
+     "w": 410,
      "titel": "Ertragsbasis",
      "breiten": [
       270,
-      130
+      140
      ],
      "kopf": [
       "Kennzahl",
       "Wert"
      ],
+     "zh": 21,
      "zeilen": [
-      [
-       "Eigentümerertrag Gewerbe stabilisiert (ab 2029)",
-       "≈ 381 T€ p. a."
-      ],
-      [
-       "davon vertraglich garantiert (Mindestpacht)",
-       "218 T€ p. a."
-      ],
       [
        "Verkaufspreis Apartments, Verkäuferplan",
        "5.000–5.100 €/m²"
@@ -3313,11 +3575,11 @@
      "typ": "tabelle",
      "x": 51,
      "y": "folgt",
-     "abstand": 22,
-     "w": 400,
+     "abstand": 18,
+     "w": 410,
      "breiten": [
-      290,
-      110
+      296,
+      114
      ],
      "links": [
       0,
@@ -3330,13 +3592,15 @@
       "Unterlage",
       "Status"
      ],
+     "bis": 66,
+     "schrift": 8.4,
      "zeilen": [
       [
        "Ertragsprognosen, Rentabilität, Profit-Center (13.02.2026)",
        "Gesichtet"
       ],
       [
-       "Sales Plan, Apartments.xlsx, Renditeberechnung Apt. 55",
+       "Sales Plan, Apartments.xlsx, Renditeberechnung",
        "Gesichtet"
       ],
       [
@@ -3354,9 +3618,10 @@
      "x": 500,
      "y": 410,
      "w": 356,
-     "kw": 82,
+     "kw": 88,
      "titel": "Einordnung",
-     "schrift": 8,
+     "schrift": 8.8,
+     "bis": 150,
      "zeilen": [
       [
        "Zielgruppen",
@@ -3368,11 +3633,11 @@
       ],
       [
        "Auslastung",
-       "Das Verkäufermodell plant 52 % (2027) bis 71 % (2031). Break-even für 4 % Objektrendite bei ca. 45 % Auslastung."
+       "Verkäufermodell 52 % (2027) bis 71 % (2031). Break-even für 4 % Objektrendite bei ca. 45 % Auslastung."
       ],
       [
        "Marktreferenz",
-       "Höchenschwand 33 % Bettenauslastung (2018). Das Konzept mit Coworking und Medizin zielt auf eine höhere Auslastung als klassische Ferienwohnungen."
+       "Höchenschwand 33 % Bettenauslastung (2018). Coworking und Medizin zielen auf eine höhere Auslastung als klassische Ferienwohnungen."
       ]
      ]
     },
@@ -3380,10 +3645,10 @@
      "typ": "text",
      "x": 500,
      "y": "folgt",
-     "abstand": 18,
+     "abstand": 14,
      "w": 356,
      "box": true,
-     "schrift": 8,
+     "schrift": 8.6,
      "absaetze": [
       [
        "Bis zum Signing:",
@@ -3402,14 +3667,44 @@
    "titel": "Rechtlich und technisch machbar",
    "bloecke": [
     {
-     "typ": "tabelle",
+     "typ": "kpi",
      "x": 51,
      "y": 410,
      "w": 805,
+     "h": 48,
+     "groesse": 18,
+     "gap": 12,
+     "items": [
+      {
+       "wert": "3 × gegeben",
+       "label": "Planungsrecht, Genehmigung, Baugrund"
+      },
+      {
+       "wert": "3 × mit Maßgaben",
+       "label": "Brandschutz, Energetik, Bauablauf",
+       "stil": "hell"
+      },
+      {
+       "wert": "0",
+       "label": "Ausschlusskriterien"
+      },
+      {
+       "wert": "KfW 40",
+       "label": "Effizienzhaus geplant",
+       "stil": "hell"
+      }
+     ]
+    },
+    {
+     "typ": "tabelle",
+     "x": 51,
+     "y": "folgt",
+     "abstand": 20,
+     "w": 805,
      "breiten": [
-      140,
-      555,
-      110
+      150,
+      535,
+      120
      ],
      "links": [
       0,
@@ -3419,8 +3714,7 @@
      "tags": [
       2
      ],
-     "schrift": 8,
-     "zh": 26,
+     "bis": 150,
      "kopf": [
       "Dimension",
       "Befund",
@@ -3463,12 +3757,15 @@
      "typ": "text",
      "x": 51,
      "y": "folgt",
-     "abstand": 22,
+     "abstand": 16,
      "w": 805,
      "box": true,
-     "schrift": 8.2,
+     "schrift": 9,
      "absaetze": [
-      "Die Maßgaben sind Umsetzungsaufgaben, keine Hindernisse: Nachweise zum Brandschutz und zur Energieeffizienz (KfW) sowie ein Winterpuffer im Bauzeitplan."
+      [
+       "Ergebnis:",
+       "Die Maßgaben sind Umsetzungsaufgaben, keine Hindernisse: Nachweise zum Brandschutz und zur Energieeffizienz (KfW) sowie ein Winterpuffer im Bauzeitplan."
+      ]
      ]
     }
    ],
@@ -3485,12 +3782,12 @@
      "typ": "tabelle",
      "x": 51,
      "y": 410,
-     "w": 420,
+     "w": 430,
      "titel": "Ergebnis der Machbarkeitsprüfung",
      "breiten": [
-      110,
-      210,
-      100
+      112,
+      208,
+      110
      ],
      "links": [
       0,
@@ -3500,8 +3797,7 @@
      "tags": [
       2
      ],
-     "schrift": 7.7,
-     "zh": 17,
+     "bis": 170,
      "kopf": [
       "Kriterium",
       "Ergebnis",
@@ -3535,7 +3831,7 @@
       ],
       [
        "Wirtschaftlichkeit",
-       "IRR 10,6 bis 26,8 % (Szenarien), Break-even Cashflow 2029",
+       "IRR 10,6 bis 26,8 % (Szenarien), Break-even 2029",
        "Gegeben"
       ]
      ]
@@ -3544,11 +3840,11 @@
      "typ": "text",
      "x": 51,
      "y": "folgt",
-     "abstand": 20,
-     "w": 420,
+     "abstand": 16,
+     "w": 430,
      "box": true,
      "titel": "Gesamtergebnis",
-     "schrift": 8,
+     "schrift": 9,
      "absaetze": [
       "Das Vorhaben ist auf Basis der Unterlagen machbar. Die Maßgaben lassen sich bis zum Signing und in der Bauphase abarbeiten."
      ]
@@ -3558,7 +3854,7 @@
      "x": 520,
      "y": 410,
      "w": 336,
-     "h": 180,
+     "h": 220,
      "titel": "Operatives Ergebnis aller Profit-Center in T€",
      "gestapelt": true,
      "max": 731,
@@ -3584,7 +3880,7 @@
        ]
       },
       {
-       "name": "Fitness / Wellness",
+       "name": "Fitness",
        "farbe": "mid",
        "werte": [
         10,
@@ -3602,7 +3898,7 @@
        ]
       },
       {
-       "name": "Physio / Kosmetik",
+       "name": "Physio",
        "farbe": "light",
        "werte": [
         24,
@@ -3611,7 +3907,7 @@
        ]
       },
       {
-       "name": "Betreiber-SPV",
+       "name": "SPV",
        "farbe": "mist",
        "werte": [
         18,
@@ -3625,15 +3921,15 @@
      "typ": "text",
      "x": 520,
      "y": "folgt",
-     "abstand": 8,
+     "abstand": 6,
      "w": 336,
-     "schrift": 7.8,
+     "schrift": 8.6,
      "absaetze": [
       "Ab Jahr 4 rund 730 T€ operatives Ergebnis; davon fließen stabilisiert rund 381 T€ an die Eigentümerin."
      ]
     }
    ],
-   "quelle": "Quelle: Einschätzung GRENFORD auf Basis der Datenraum-Dokumente; Montesana Rentabilität / Profitcenter 260213 (Jahr 2 ≈ 2027). Keine Zusicherung. Die Machbarkeitsstudie ersetzt weder Gutachten noch Fachplanung."
+   "quelle": "Quelle: Einschätzung GRENFORD auf Basis der Datenraum-Dokumente; Montesana Rentabilität / Profitcenter 260213 (Jahr 2 ≈ 2027), Werte gerundet. Keine Zusicherung. Die Machbarkeitsstudie ersetzt weder Gutachten noch Fachplanung."
   },
   {
    "modul": "raster",
@@ -3647,8 +3943,8 @@
      "x": 51,
      "y": 412,
      "w": 805,
-     "h": 300,
-     "schrift": 7.6,
+     "h": 286,
+     "schrift": 8.8,
      "zellen": [
       {
        "titel": "Stärken",
@@ -3668,7 +3964,7 @@
         ],
         [
          "Einstiegspreis.",
-         "5,3 statt 7,0 Mio. €; optionale Kaufpreisstaffelung; Zusatzgrundstück im Paket."
+         "5,3 statt 7,0 Mio. €; optionale Staffelung; Zusatzgrundstück im Paket."
         ]
        ]
       },
@@ -3677,19 +3973,19 @@
        "punkte": [
         [
          "Auslastung absichern.",
-         "Planung 52 bis 71 %: Betreiberverträge und Marktstudie; Break-even für 4 % Objektrendite bei ca. 45 %."
+         "Planung 52 bis 71 %; Break-even für 4 % Objektrendite bei ca. 45 %."
         ],
         [
          "Betreiberverträge.",
-         "Mindestpacht (218 T€ p. a.) vertraglich finalisieren; Verhandlungen mit IWG/Regus laufen."
+         "Mindestpacht 218 T€ p. a. finalisieren; IWG/Regus in Verhandlung."
         ],
         [
          "Finanzierungsstruktur.",
-         "Fremdkapital, KfW-Programme und Sicherheiten bis zum Signing aufsetzen."
+         "Fremdkapital, KfW-Programme und Sicherheiten bis zum Signing."
         ],
         [
          "Kostenbasis.",
-         "Mengengerüst und Reserve (10 %) vor Vergabe der Gewerke verifizieren."
+         "Mengengerüst und Reserve (10 %) vor Vergabe verifizieren."
         ]
        ]
       },
@@ -3703,15 +3999,15 @@
         ],
         [
          "Kombinationsangebot.",
-         "Kein vergleichbares Gesamtkonzept im 50-km-Radius (GRENFORD Research)."
+         "Kein vergleichbares Gesamtkonzept im 50-km-Radius."
         ],
         [
          "Exit-Optionen.",
-         "Einzelverkauf der Apartments, Gesamtverkauf oder Halten der Gewerbeflächen; IRR im Basisfall 23,1 %."
+         "Einzelverkauf, Gesamtverkauf oder Halten der Gewerbeflächen; IRR Basisfall 23,1 %."
         ],
         [
          "ESG und Fläche.",
-         "KfW-40-Förderfähigkeit; Flst. 213 als Flächenreserve, planungsrechtlich zu prüfen."
+         "KfW 40; Flst. 213 als Flächenreserve, planungsrechtlich zu prüfen."
         ]
        ]
       },
@@ -3720,19 +4016,19 @@
        "punkte": [
         [
          "Zins- und Kapitalmarkt.",
-         "Wirkt auf Finanzierung und Exit-Rendite (Sensitivität 6,5 bis 8,0 %)."
+         "Wirkt auf Finanzierung und Exit-Rendite (6,5 bis 8,0 %)."
         ],
         [
          "Bauablauf auf 1.015 m.",
          "Winterfenster und Lieferketten: Puffer im Bauzeitplan."
         ],
         [
-         "Ferienwohnungs-Wettbewerb.",
-         "Rund 82 Unterkünfte, 52 bis 110 € je Nacht; Planpreis am oberen Ende."
+         "Wettbewerb.",
+         "Rund 82 Ferienunterkünfte, 52 bis 110 € je Nacht; Planpreis am oberen Ende."
         ],
         [
          "Regulierung.",
-         "Brandschutz- und Energierecht; 17 genehmigte Abweichungen mit Kompensation umzusetzen."
+         "Brandschutz- und Energierecht; 17 Abweichungen mit Kompensation."
         ]
        ]
       }
@@ -3742,13 +4038,14 @@
      "typ": "text",
      "x": 51,
      "y": "folgt",
-     "abstand": 14,
+     "abstand": 10,
      "w": 805,
-     "schrift": 8,
+     "box": true,
+     "schrift": 8.6,
      "absaetze": [
       [
        "Investor Insight:",
-       "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption. Die Maßgaben liegen in Betrieb, Finanzierung und Bauablauf. Vertiefte Wirtschaftlichkeitsmodelle und Exit-Strategien stellen wir im Rahmen vertraulicher Gespräche zur Verfügung."
+       "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption. Die Maßgaben liegen in Betrieb, Finanzierung und Bauablauf; vertiefte Modelle und Exit-Strategien stellen wir in vertraulichen Gesprächen zur Verfügung."
       ]
      ]
     }

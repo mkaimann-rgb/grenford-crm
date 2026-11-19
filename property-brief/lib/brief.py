@@ -846,7 +846,7 @@ def m_fakten(d, obj):
         for j, (v, lab) in enumerate(k):
             xx = round(51 + j * (bw + 10), 2)
             s += R(xx, 380, round(bw, 2), 44, extra='border-radius:0') + T(xx + 12, 405, 'L', 17, 20, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(xx + 12, 389, lab, LIGHT, 5.8)
-        top = 360
+        top = d.get('start', 360)
     else:
         s += T(51, 418, 'N', 9.6, 14, INK, d['intro'], w=805)
     s += VL(453.5, top + 8, 46, LINE, .5)
@@ -867,10 +867,10 @@ def m_fakten(d, obj):
                     for j, v in enumerate(vals):
                         out += RT(x1 - 78 * (len(vals) - 1 - j), y - rh * .66, 'B' if j == 0 and len(vals) > 1 else 'N', 7.9, 10.5, NAVY if j == 0 else GREY, v, 76)
                 y -= rh
-            out += L(x0, y, x1); y -= 20
+            out += L(x0, y, x1); y -= d.get('blockabstand', 20)
         return out
     s += side(LX, LR, d['links'], []) + side(RX, RR, d['rechts'], d.get('spalten', []))
-    return s + cap(51, 40, br(d['quelle']), w=805)
+    return s + cap(51, d.get('quelle_y', 40), br(d['quelle']), w=805)
 
 
 def m_tabelle(d, obj):
@@ -878,26 +878,27 @@ def m_tabelle(d, obj):
     s = chrome(d['kopf']) + EB(51, 487, d['dachzeile']) + T(51, 450, 'S', 31, 34, INK, d['titel'])
     cols = d['spalten']; lw = d.get('label_breite', 196); cw = (856 - 51 - lw) / len(cols)
     y = 412
-    s += R(51, y - 8, 805, 22)
+    s += R(51, y - 8, 805, 24, extra='border-radius:0')
     for j, c in enumerate(cols):
-        s += RT(51 + lw + cw * (j + 1) - 6, y, 'B', 7, 10, '#ffffff', c, cw)
+        s += RT(51 + lw + cw * (j + 1) - 6, y + 1, 'B', 8, 10, '#ffffff', c, cw)
     y -= 12
     for i, r in enumerate(d['zeilen']):
         strong = r[0] in d.get('hervorheben', [])
         if strong: s += L(51, y, 856, NAVY, 1)
         elif i: s += L(51, y, 856)
-        s += T(57, y - 12, 'B' if strong else 'N', 7.8, 10.5, NAVY if strong else INK, r[0])
+        zh = d.get('zh', 17.5); fs = d.get('schrift', 7.8)
+        s += T(57, y - zh / 2 - fs * .36, 'B' if strong else 'N', fs, 10.5, NAVY if strong else INK, r[0])
         for j, v in enumerate(r[1:]):
-            s += RT(51 + lw + cw * (j + 1) - 6, y - 12, 'B' if strong else 'N', 7.8, 10.5, NAVY if strong else INK, v, cw)
-        y -= 17.5
+            s += RT(51 + lw + cw * (j + 1) - 6, y - zh / 2 - fs * .36, 'B' if strong else 'N', fs, 10.5, NAVY if strong else INK, v, cw)
+        y -= zh
     s += L(51, y, 856)
     # Kennzahlenband
-    k = d['kennzahlen']; bw = (805 - 12 * (len(k) - 1)) / len(k); yb = y - 74
+    k = d['kennzahlen']; bw = (805 - 12 * (len(k) - 1)) / len(k); yb = y - 82
     for j, (v, lab) in enumerate(k):
         x = 51 + j * (bw + 12)
-        s += R(round(x, 2), yb, round(bw, 2), 58) + T(round(x + 14, 2), yb + 34, 'L', 20, 24, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(round(x + 14, 2), yb + 13, lab, LIGHT, 6.4)
+        s += R(round(x, 2), yb, round(bw, 2), 64, extra='border-radius:0') + T(round(x + 16, 2), yb + 37, 'L', 24, 28, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(round(x + 16, 2), yb + 14, lab, LIGHT, 7)
     if d.get('hinweis'):
-        s += T(51, yb - 20, 'N', 7.8, 11, INK, d['hinweis'], w=805)
+        s += T(51, yb - 22, 'N', 8.8, 12.4, INK, d['hinweis'], w=805)
     return s + cap(51, 40, br(d['quelle']), w=805)
 
 
@@ -927,41 +928,58 @@ def _farbe(k):
 SQ = 'border-radius:0;'
 
 
-def CHIP(x, base, text):
-    pos = text.lower().split()[0] in POS
-    st = (f'background:{ACC};color:#fff;' if pos else f'border:.6pt solid {ACC};color:{ACC};')
-    return (f'<div class="t" style="left:{x}pt;top:{H-base-7.4:.2f}pt;{st}font-family:\'DM Mono\',monospace;font-size:5.9pt;line-height:7pt;'
-            f'letter-spacing:.06em;text-transform:uppercase;padding:1.4pt 4.5pt;white-space:nowrap">{text}</div>')
+def CHIP(x, base, text, gross=False):
+    t0 = text.lower().split()[0]
+    if t0 in POS or t0 in ('top-potenzial',): st = f'background:{NAVY if t0 == "top-potenzial" else ACC};color:#fff;'
+    elif t0 in ('gut', 'stabilität'): st = f'background:{LIGHT};color:{NAVY};'
+    else: st = f'border:.7pt solid {ACC};color:{ACC};'
+    fs = 7 if gross else 6.5
+    return (f'<div class="t" style="left:{x}pt;top:{H-base-8:.2f}pt;{st}font-family:\'DM Mono\',monospace;font-size:{fs}pt;line-height:8pt;'
+            f'letter-spacing:.06em;text-transform:uppercase;padding:1.6pt 5pt;white-space:nowrap">{text}</div>')
+
+
+FT = 8.8      # Grundschrift Tabellen und Listen in Raster-Seiten
+BTS = 8.2     # Blocktitel
+
+
+def BT(x, y, t):
+    return EB(x, y, t, NAVY, BTS)
 
 
 def b_tabelle(b):
     x, y, w = b['x'], b['y'], b['w']; s = ''
-    cols = b['breiten']; fs = b.get('schrift', 7.9); zh = b.get('zh', 15.6); lft = set(b.get('links', [0]))
+    cols = b['breiten']; fs = b.get('schrift', FT); zh = b.get('zh', 21); lft = set(b.get('links', [0]))
     tags = set(b.get('tags', [])); hl = b.get('hervorheben', []); mark = {tuple(m) for m in b.get('markiere', [])}
     xs = [x]; [xs.append(xs[-1] + c) for c in cols]
-    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 14
+    if b.get('titel'): s += BT(x, y, b['titel']); y -= 16
     if b.get('kopf'):
         for j, h in enumerate(b['kopf']):
-            if j in lft or j in tags: s += T(xs[j] + (0 if j == 0 else 6), y, 'B', 6.4, 9, GREY, h.upper(), extra='letter-spacing:.05em')
-            else: s += RT(xs[j + 1], y, 'B', 6.4, 9, GREY, h.upper(), cols[j] - 4)
-        y -= 7
-    for i, r in enumerate(b['zeilen']):
+            if j in lft or j in tags: s += T(xs[j] + (0 if j == 0 else 6), y, 'B', 7, 9, GREY, h.upper(), extra='letter-spacing:.05em')
+            else: s += RT(xs[j + 1], y, 'B', 7, 9, GREY, h.upper(), cols[j] - 4)
+        y -= 8
+    lh = fs * 1.36
+    nls = [max(nlines(c, fs, cols[j] - 8) if (j in lft and j < len(cols)) else 1 for j, c in enumerate(r)) for r in b['zeilen']]
+    rhs = [zh + (n - 1) * lh for n in nls]
+    if b.get('bis') is not None:
+        extra = min(b.get('max_extra', 16), max(0, (y - b['bis'] - sum(rhs)) / len(rhs)))
+        rhs = [r + extra for r in rhs]
+    for i, (r, nl, rh) in enumerate(zip(b['zeilen'], nls, rhs)):
         strong = r[0] in hl
-        nl = max(nlines(c, fs, cols[j] - 8) if (j in lft and j < len(cols)) else 1 for j, c in enumerate(r))
-        rh = zh + (nl - 1) * fs * 1.33
         s += L(x, y, x + w, NAVY if strong else LINE, 1 if strong else .5)
         for j, c in enumerate(r):
-            if (i, j) in mark: s += R(xs[j] + 2, y - rh + 1.5, cols[j] - 2, rh - 3, LIGHT, .35)
+            if (i, j) in mark: s += R(xs[j] + 2, y - rh + 1.5, cols[j] - 2, rh - 3, LIGHT, .35, extra=SQ)
             if b.get('heat') and i in b['heat']['zeilen'] and j in b['heat']['spalten']:
-                vals = [float(str(rr[jj]).replace('.', '').replace(',', '.').replace(' %', '').replace('&nbsp;', '')) for ii, rr in enumerate(b['zeilen']) if ii in b['heat']['zeilen'] for jj in b['heat']['spalten']]
-                v = float(str(c).replace('.', '').replace(',', '.').replace(' %', ''))
+                num = lambda t: float(str(t).replace('.', '').replace(',', '.').replace(' %', '').replace('&nbsp;', ''))
+                vals = [num(rr[jj]) for ii, rr in enumerate(b['zeilen']) if ii in b['heat']['zeilen'] for jj in b['heat']['spalten']]
+                v = num(c)
                 s += R(xs[j] + 2, y - rh + 1.5, cols[j] - 2, rh - 3, ACC, round(.1 + .45 * (v - min(vals)) / (max(vals) - min(vals) or 1), 2), extra=SQ)
             col = NAVY if (strong or (j == b.get('akzent'))) else INK
             f = 'B' if (strong or j == b.get('akzent')) else 'N'
-            yb = y - zh * .66
-            if j in tags and c: s += CHIP(xs[j] + 6, yb + 1, c)
-            elif j in lft: s += T(xs[j] + (0 if j == 0 else 6), yb, f, fs, fs * 1.33, col if j == 0 or strong else INK, c, w=cols[j] - 8)
-            else: s += RT(xs[j + 1] - (4 if (i, j) in mark else 0), yb, f, fs, fs * 1.33, col, c, cols[j] - 4)
+            ncell = nlines(c, fs, cols[j] - 8) if j in lft else 1
+            yb = y - (rh - (ncell - 1) * lh) / 2 - fs * .36
+            if j in tags and c: s += CHIP(xs[j] + 6, y - rh / 2 + 4.4, c)
+            elif j in lft: s += T(xs[j] + (0 if j == 0 else 6), yb, f, fs, lh, col if j == 0 or strong else INK, c, w=cols[j] - 8)
+            else: s += RT(xs[j + 1] - (4 if (i, j) in mark else 0), yb, f, fs, lh, col, c, cols[j] - 4)
         y -= rh
     s += L(x, y, x + w)
     b['_unten'] = y
@@ -969,53 +987,82 @@ def b_tabelle(b):
 
 
 def b_kv(b):
-    x, y, w = b['x'], b['y'], b['w']; kw = b.get('kw', 120); fs = b.get('schrift', 8.2); s = ''
-    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 8
-    for k, v in b['zeilen']:
-        nl = max(nlines(v, fs, w - kw - 4), nlines(k, fs - .4, kw - 8)); rh = 9 + nl * fs * 1.36
-        s += L(x, y, x + w) + T(x, y - 12, 'N', fs - .4, (fs - .4) * 1.36, GREY, k, w=kw - 8) + T(x + kw, y - 12, 'N', fs, fs * 1.36, INK, v, w=w - kw - 4)
+    x, y, w = b['x'], b['y'], b['w']; kw = b.get('kw', 120); fs = b.get('schrift', FT); s = ''
+    if b.get('titel'): s += BT(x, y, b['titel']); y -= 10
+    lh = fs * 1.38
+    hts = [10 + max(nlines(v, fs, w - kw - 4), nlines(k, fs - .6, kw - 8)) * lh for k, v in b['zeilen']]
+    pad = 0
+    if b.get('bis') is not None: pad = min(16, max(0, (y - b['bis'] - sum(hts)) / len(hts)))
+    for (k, v), hgt in zip(b['zeilen'], hts):
+        rh = hgt + pad; top = y - 5 - pad / 2 - fs * .9
+        s += L(x, y, x + w) + T(x, top, 'N', fs - .6, (fs - .6) * 1.38, GREY, k, w=kw - 8) + T(x + kw, top, 'N', fs, lh, INK, v, w=w - kw - 4)
         y -= rh
     b['_unten'] = y
     return s + L(x, y, x + w)
 
 
 def b_text(b):
-    x, y, w = b['x'], b['y'], b['w']; fs = b.get('schrift', 8.6); tl = fs * 1.48; s = ''
-    inner_x, inner_w = (x + 16, w - 30) if b.get('box') else (x, w)
+    x, y, w = b['x'], b['y'], b['w']; fs = b.get('schrift', 9.2); tl = fs * 1.48; s = ''
+    inner_x, inner_w = (x + 18, w - 34) if b.get('box') else (x, w)
     paras = []
     for p in b['absaetze']:
         if isinstance(p, list): paras.append((f'<span style="font-weight:500;color:{NAVY}">{p[0]}</span> {p[1]}', p[0] + ' ' + p[1]))
         else: paras.append((p, p))
     hts = [nlines(pl, fs, inner_w) * tl for _, pl in paras]
-    total = sum(hts) + 7 * (len(paras) - 1) + (16 if b.get('titel') else 0)
+    total = sum(hts) + 8 * (len(paras) - 1) + (18 if b.get('titel') else 0)
+    hbox = max(total + 30, b.get('h', 0))
     if b.get('box'):
-        s += R(x, y - total - 26, w, total + 26, LIGHT, .22) + R(x, y - total - 26, 2.2, total + 26, ACC, extra=SQ)
-        y -= 13
-    if b.get('titel'): s += EB(inner_x, y - 4, b['titel'], NAVY, 7.4); y -= 16
+        s += R(x, y - hbox, w, hbox, LIGHT, .22, extra=SQ) + R(x, y - hbox, 2.4, hbox, ACC, extra=SQ)
+        y -= 15
+    if b.get('titel'): s += BT(inner_x, y - 4, b['titel']); y -= 18
     for (html, _), h in zip(paras, hts):
-        s += T(inner_x, y - fs * .9, 'N', fs, tl, INK, html, w=inner_w); y -= h + 7
-    b['_unten'] = y
+        s += T(inner_x, y - fs * .9, 'N', fs, tl, INK, html, w=inner_w); y -= h + 8
+    b['_unten'] = (b['y'] - hbox) if b.get('box') else y
     return s
 
 
 def b_balken(b):
-    x, y, w = b['x'], b['y'], b['w']; lw = b.get('lw', 130); vw = b.get('vw', 60); mx = b.get('max') or max(i[1] for i in b['items'])
-    st = b.get('abstand', 19); s = ''
-    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 18
+    x, y, w = b['x'], b['y'], b['w']; lw = b.get('lw', 130); vw = b.get('vw', 70); mx = b.get('max') or max(i[1] for i in b['items'])
+    s = ''; bh = b.get('bh', 13); fs = b.get('schrift', 8.6)
+    if b.get('titel'): s += BT(x, y, b['titel']); y -= 20
+    n = len(b['items'])
+    st = b.get('abstand', 22) if b.get('bis') is None else min(40, (y - b['bis']) / n)
     for it in b['items']:
         lab, val, txt = it[0], it[1], it[2]; kind = it[3] if len(it) > 3 else ''
         col = LIGHT if kind == 'h' else ('#b9b4ab' if kind == 'r' else NAVY)
-        bw = max(1.5, (w - lw - vw) * val / mx)
-        s += (T(x, y - 7.5, 'N', 7.8, 10, INK, lab, w=lw - 6) + R(x + lw, y - 11, round(bw, 2), 11, col, extra=SQ)
-              + T(x + lw + bw + 6, y - 7.5, 'B', 7.6, 10, NAVY, txt))
+        bwid = max(1.5, (w - lw - vw) * val / mx)
+        s += (T(x, y - bh / 2 - 2.6, 'B' if kind == 'h' else 'N', fs, fs * 1.2, NAVY if kind == 'h' else INK, lab, w=lw - 6) + R(x + lw, y - bh, round(bwid, 2), bh, col, extra=SQ)
+              + T(x + lw + bwid + 6, y - bh / 2 - 2.6, 'B', fs, fs * 1.2, NAVY, txt))
         y -= st
     b['_unten'] = y
     return s
 
 
+def b_spanne(b):
+    """Preisspannen als Bereichsbalken (von–bis) auf gemeinsamer Achse."""
+    x, y, w = b['x'], b['y'], b['w']; lw = b.get('lw', 190); lo, hi, step = b['achse']; s = ''
+    if b.get('titel'): s += BT(x, y, b['titel']); y -= 22
+    X = lambda v: x + lw + (v - lo) / (hi - lo) * (w - lw - 10)
+    n = len(b['items']); st = b.get('abstand', 26)
+    v = lo
+    while v <= hi:
+        s += VL(X(v), y + 4, y - st * n + 6, '#e7e2da', .5) + T(X(v) - 20, y - st * n - 2, 'N', 7.4, 9, GREY, f'{v} €', w=40, extra='text-align:center')
+        v += step
+    for lab, a, z, txt, *kind in b['items']:
+        h_ = kind and kind[0] == 'h'
+        col = LIGHT if h_ else NAVY
+        s += T(x, y - 9, 'B' if h_ else 'N', 8.6, 10, NAVY if h_ else INK, lab, w=lw - 8)
+        if a == z: s += f'<div class="t" style="left:{X(a)-5:.1f}pt;top:{H-y+3:.1f}pt;width:10pt;height:10pt;border-radius:50%;background:{col}"></div>'
+        else: s += R(round(X(a), 1), y - 13, round(X(z) - X(a), 1), 10, col, extra='border-radius:5pt;')
+        s += T(X(z) + 8, y - 9, 'B', 8.4, 10, NAVY, txt)
+        y -= st
+    b['_unten'] = y - 14
+    return s
+
+
 def b_saeulen(b):
     x, y, w, h = b['x'], b['y'], b['w'], b['h']; s = ''
-    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 22
+    if b.get('titel'): s += BT(x, y, b['titel']); y -= 26
     kat = b['kategorien']; ser = b['serien']; stacked = b.get('gestapelt', False)
     y0 = y - h; n = len(kat); gw = w / n
     mx = b.get('max') or max((sum(sr['werte'][i] for sr in ser) if stacked else max(sr['werte'][i] for sr in ser)) for i in range(n))
@@ -1031,75 +1078,80 @@ def b_saeulen(b):
             else:
                 bx = cx + j * bwid
                 s += R(round(bx + .8, 2), y0, round(bwid - 1.6, 2), round(hh, 2), col, extra=SQ)
-                if sr.get('labels'): s += T(round(bx, 2), y0 + hh + 9, 'B', 7.2, 9, NAVY, sr['labels'][i], w=round(bwid, 2), extra='text-align:center')
-        if stacked and b.get('summen'): s += T(round(cx - 10, 2), acc_y + 9, 'B', 7.4, 9, NAVY, b['summen'][i], w=round(bwid + 20, 2), extra='text-align:center')
-        s += T(round(x + gw * i, 2), y0 - 12, 'N', 7, 9, GREY, k, w=round(gw, 2), extra='text-align:center')
-    ly = y0 - 30
+                if sr.get('labels'): s += T(round(bx - 6, 2), y0 + hh + 10, 'B', 8.4, 10, NAVY, sr['labels'][i], w=round(bwid + 12, 2), extra='text-align:center')
+        if stacked and b.get('summen'): s += T(round(cx - 14, 2), acc_y + 10, 'B', 8.6, 10, NAVY, b['summen'][i], w=round(bwid + 28, 2), extra='text-align:center')
+        s += T(round(x + gw * i, 2), y0 - 14, 'N', 8, 10, GREY, k, w=round(gw, 2), extra='text-align:center')
+    ly = y0 - 34
     if b.get('legende', True):
         lx = x
         for sr in ser:
-            s += R(lx, ly - 2, 7, 7, _farbe(sr.get('farbe', 'navy')), extra=SQ) + T(lx + 11, ly + 1, 'N', 7, 9, GREY, sr['name'])
-            lx += 22 + width(sr['name'], 'N', 7)
+            s += R(lx, ly - 2, 8, 8, _farbe(sr.get('farbe', 'navy')), extra=SQ) + T(lx + 12, ly + 1.5, 'N', 8, 10, GREY, sr['name'])
+            lx += 26 + width(sr['name'], 'N', 8)
     b['_unten'] = ly - 10
     return s
 
 
 def b_linie(b):
     x, y, w, h = b['x'], b['y'], b['w'], b['h']; s = ''
-    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 20
-    lo, hi, step = b['achse']; kat = b['kategorien']; X0 = x + 24; Wd = w - 54; y0 = y - h
+    if b.get('titel'): s += BT(x, y, b['titel']); y -= 22
+    lo, hi, step = b['achse']; kat = b['kategorien']; X0 = x + 26; Wd = w - 60; y0 = y - h
     Y = lambda v: y0 + (v - lo) / (hi - lo) * h
     v = lo
     while v <= hi + 1e-9:
-        s += L(X0, Y(v), X0 + Wd, INK if v == 0 else '#e7e2da', .6 if v == 0 else .5) + RT(X0 - 6, Y(v) - 3, 'N', 6.6, 9, GREY, f'{v:g}'.replace('-', '−'), 30)
+        s += L(X0, Y(v), X0 + Wd, INK if v == 0 else '#e7e2da', .6 if v == 0 else .5) + RT(X0 - 6, Y(v) - 3, 'N', 7.6, 9, GREY, f'{v:g}'.replace('-', '−'), 30)
         v += step
     for i, k in enumerate(kat):
-        s += T(X0 + Wd * i / (len(kat) - 1) - 15, y0 - 13, 'N', 6.6, 9, GREY, k, w=30, extra='text-align:center')
+        s += T(X0 + Wd * i / (len(kat) - 1) - 15, y0 - 14, 'N', 7.6, 9, GREY, k, w=30, extra='text-align:center')
     pts_svg = ''
     for sr in b['serien']:
         col = _farbe(sr.get('farbe', 'navy'))
         pts = [(X0 + Wd * i / (len(kat) - 1), H - Y(val)) for i, val in enumerate(sr['werte'])]
-        pts_svg += f'<polyline fill="none" stroke="{col}" stroke-width="1.6" points="' + ' '.join(f'{px:.1f},{py:.1f}' for px, py in pts) + '"/>'
-        pts_svg += ''.join(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="1.9" fill="{col}"/>' for px, py in pts)
+        pts_svg += f'<polyline fill="none" stroke="{col}" stroke-width="2" points="' + ' '.join(f'{px:.1f},{py:.1f}' for px, py in pts) + '"/>'
+        pts_svg += ''.join(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="2.3" fill="{col}"/>' for px, py in pts)
         lx, ly = pts[-1]
-        s += T(lx + 5, H - ly + sr.get('dy', 0) - 3, 'B', 7.4, 9, col, sr['ende'])
+        s += T(lx + 6, H - ly + sr.get('dy', 0) - 3, 'B', 8.6, 10, col, sr['ende'])
+    if b.get('nulllinie_text'): s += T(X0 + 4, Y(0) + 5, 'N', 7, 9, GREY, b['nulllinie_text'])
     s += f'<svg class="t" style="left:0;top:0;width:907pt;height:567pt;overflow:visible" viewBox="0 0 907 567">{pts_svg}</svg>'
-    lx = X0; ly = y0 - 32
+    lx = X0; ly = y0 - 34
     for sr in b['serien']:
-        s += R(lx, ly - 2, 12, 2.2, _farbe(sr.get('farbe', 'navy')), extra=SQ) + T(lx + 16, ly + 1, 'N', 7, 9, GREY, sr['name'])
-        lx += 30 + width(sr['name'], 'N', 7)
+        s += R(lx, ly - 2, 14, 2.6, _farbe(sr.get('farbe', 'navy')), extra=SQ) + T(lx + 18, ly + 1.5, 'N', 8, 10, GREY, sr['name'])
+        lx += 34 + width(sr['name'], 'N', 8)
     b['_unten'] = ly - 10
     return s
 
 
 def b_kpi(b):
-    x, y, w = b['x'], b['y'], b['w']; k = b['items']; gap = b.get('gap', 12); h = b.get('h', 58)
-    bw = (w - gap * (len(k) - 1)) / len(k); s = ''; vs = b.get('groesse', 20)
-    for j, it in enumerate(k):
-        v, lab = it[0], it[1]; xx = round(x + j * (bw + gap), 2)
+    x, y, w = b['x'], b['y'], b['w']; gap = b.get('gap', 12); h = b.get('h', 62); vs = b.get('groesse', 22); s = ''
+    items = [it if isinstance(it, dict) else {'wert': it[0], 'label': it[1], **({'stil': it[2]} if len(it) > 2 and it[2] in ('durch', 'hell') else {'sub': it[2]} if len(it) > 2 else {})} for it in b['items']]
+    bw = (w - gap * (len(items) - 1)) / len(items); low = y - h
+    for j, it in enumerate(items):
+        xx = round(x + j * (bw + gap), 2); v, lab = it['wert'], it['label']; st = it.get('stil')
         if b.get('hell'):
-            s += L(xx, y, xx + bw, NAVY, 1) + T(xx, y - 26, 'L', vs, vs * 1.2, NAVY, v, extra='font-variant-numeric:tabular-nums;letter-spacing:-.02em') + EB(xx, y - 46, lab, ACC, 6.2)
-            if len(it) > 2: s += T(xx, y - 58, 'N', 7, 9, GREY, it[2])
+            s += L(xx, y, xx + bw, NAVY, 1.2) + T(xx, y - vs * 1.25, 'L', vs, vs * 1.2, NAVY, v, extra='font-variant-numeric:tabular-nums;letter-spacing:-.02em') + EB(xx, y - vs * 1.25 - 20, lab, ACC, 6.8)
+            if it.get('sub'): s += T(xx, y - vs * 1.25 - 34, 'N', 8, 10.5, GREY, it['sub'], w=bw - 6)
+            low = min(low, y - vs * 1.25 - (48 if it.get('sub') else 30))
         else:
-            if len(it) > 2 and it[2] == 'durch':
-                s += R(xx, y - h, round(bw, 2), h, LIGHT, .3, extra=SQ) + T(xx + 14, y - h + 34, 'L', vs, 24, GREY, v, extra='font-variant-numeric:tabular-nums;text-decoration:line-through;text-decoration-thickness:1pt') + EB(xx + 14, y - h + 13, lab, GREY, 6.2)
-            elif len(it) > 2 and it[2] == 'hell':
-                s += R(xx, y - h, round(bw, 2), h, LIGHT, 1, extra=SQ) + T(xx + 14, y - h + 34, 'L', vs, 24, NAVY, v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 13, lab, NAVY, 6.2)
+            if st == 'durch':
+                s += R(xx, y - h, round(bw, 2), h, LIGHT, .3, extra=SQ) + T(xx + 14, y - h + h * .52, 'L', vs, vs * 1.1, GREY, v, extra='font-variant-numeric:tabular-nums;text-decoration:line-through;text-decoration-thickness:1pt') + EB(xx + 14, y - h + 14, lab, GREY, 6.8)
+            elif st == 'hell':
+                s += R(xx, y - h, round(bw, 2), h, LIGHT, 1, extra=SQ) + T(xx + 14, y - h + h * .52, 'L', vs, vs * 1.1, NAVY, v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 14, lab, NAVY, 6.8)
             else:
-                s += R(xx, y - h, round(bw, 2), h) + T(xx + 14, y - h + 34, 'L', vs, 24, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 13, lab, LIGHT, 6.2)
-
-    b['_unten'] = y - h
+                s += R(xx, y - h, round(bw, 2), h, extra=SQ) + T(xx + 14, y - h + h * .52, 'L', vs, vs * 1.1, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 14, lab, LIGHT, 6.8)
+            if it.get('text'):
+                s += T(xx, y - h - 14, 'N', 8.4, 11.4, INK, it['text'], w=bw - 4)
+                low = min(low, y - h - 10 - nlines(it['text'], 8.4, bw - 4) * 11.4)
+    b['_unten'] = low
     return s
 
 
 def b_dunkel(b):
-    x, y, w, h = b['x'], b['y'], b['w'], b['h']; s = R(x, y - h, w, h)
-    yy = y - 24
-    if b.get('titel'): s += EB(x + 20, yy, b['titel'], CREAM, 7); yy -= 34
+    x, y, w, h = b['x'], b['y'], b['w'], b['h']; s = R(x, y - h, w, h, extra=SQ)
+    yy = y - 26
+    if b.get('titel'): s += EB(x + 20, yy, b['titel'], CREAM, 7.6); yy -= 40
     for it in b['werte']:
-        s += T(x + 20, yy, 'L', it[2] if len(it) > 2 else 26, 30, '#ffffff', it[0], extra='font-variant-numeric:tabular-nums;letter-spacing:-.02em') + EB(x + 20, yy - 22, it[1], LIGHT, 6.4)
-        yy -= 62
-    if b.get('text'): s += T(x + 20, y - h + 16 + nlines(b['text'], 7.4, w - 40) * 10.5, 'N', 7.4, 10.5, MIST, b['text'], w=w - 40)
+        s += T(x + 20, yy, 'L', it[2] if len(it) > 2 else 30, 34, '#ffffff', it[0], extra='font-variant-numeric:tabular-nums;letter-spacing:-.02em') + EB(x + 20, yy - 25, it[1], LIGHT, 7)
+        yy -= b.get('abstand', 72)
+    if b.get('text'): s += T(x + 20, y - h + 18 + nlines(b['text'], 8.4, w - 40) * 12, 'N', 8.4, 12, MIST, b['text'], w=w - 40)
     b['_unten'] = y - h
     return s
 
@@ -1109,70 +1161,82 @@ def _monat(t):
 
 
 def b_gantt(b):
-    x, y, w = b['x'], b['y'], b['w']; lw = b.get('lw', 190); s = ''
+    x, y, w = b['x'], b['y'], b['w']; lw = b.get('lw', 210); zh = b.get('zh', 30); s = ''
     a, z = _monat(b['von']), _monat(b['bis']) + 1; n = z - a; mw = (w - lw) / n; X = lambda m: x + lw + (m - a) * mw
     for m in range(a, z):
-        if m % 12 == 0 or m == a: s += T(X(m) + 2, y, 'B', 7.4, 9, NAVY, str(m // 12))
-        s += T(X(m), y - 13, 'N', 6.4, 9, GREY, 'JFMAMJJASOND'[m % 12], w=mw, extra='text-align:center')
-        if m % 12 == 0: s += VL(X(m), y + 4, y - 20 - 22 * len(b['zeilen']), LINE, .6)
-    yy = y - 22
+        if m % 12 == 0 or m == a: s += T(X(m) + 2, y, 'B', 8.6, 10, NAVY, str(m // 12))
+        s += T(X(m), y - 15, 'N', 7.4, 9, GREY, 'JFMAMJJASOND'[m % 12], w=mw, extra='text-align:center')
+        if m % 12 == 0: s += VL(X(m), y + 4, y - 24 - zh * len(b['zeilen']), LINE, .6)
+    yy = y - 24
     for lab, v, bis, typ in b['zeilen']:
-        s += L(x, yy, x + w) + T(x, yy - 13, 'N', 7.8, 10, INK, lab, w=lw - 8)
-        s += R(round(X(_monat(v)), 2), yy - 17, round(max(mw * .6, (_monat(bis) + 1 - _monat(v)) * mw), 2), 9, _farbe({'bau': 'navy', 'vertrieb': 'light', 'betrieb': 'acc', 'aussen': 'grey'}[typ]), extra=SQ)
-        yy -= 22
+        s += L(x, yy, x + w) + T(x, yy - zh / 2 - 3, 'N', 8.8, 11, INK, lab, w=lw - 8)
+        s += R(round(X(_monat(v)), 2), yy - zh / 2 - 6, round(max(mw * .6, (_monat(bis) + 1 - _monat(v)) * mw), 2), 12, _farbe({'bau': 'navy', 'vertrieb': 'light', 'betrieb': 'mid', 'aussen': 'grey'}[typ]), extra=SQ)
+        yy -= zh
     s += L(x, yy, x + w)
     if b.get('heute'):
         hx = X(_monat(b['heute']))
-        s += f'<div class="t" style="left:{hx:.2f}pt;top:{H-y-6:.2f}pt;height:{y+6-yy:.2f}pt;border-left:.8pt dashed {ACC}"></div>' + T(hx - 20, yy - 10, 'B', 6.6, 9, ACC, 'HEUTE', w=40, extra='text-align:center;letter-spacing:.06em')
+        s += f'<div class="t" style="left:{hx:.2f}pt;top:{H-y-6:.2f}pt;height:{y+6-yy:.2f}pt;border-left:1pt dashed {ACC}"></div>' + T(hx - 20, yy - 11, 'B', 7.4, 9, ACC, 'HEUTE', w=40, extra='text-align:center;letter-spacing:.06em')
     lx = x + lw
     for nm, k in b.get('legende', []):
-        s += R(lx, yy - 30, 12, 6, _farbe(k), extra=SQ) + T(lx + 16, yy - 25, 'N', 7, 9, GREY, nm); lx += 34 + width(nm, 'N', 7)
-    b['_unten'] = yy - 36
+        s += R(lx, yy - 32, 14, 8, _farbe(k), extra=SQ) + T(lx + 19, yy - 26, 'N', 8, 10, GREY, nm); lx += 40 + width(nm, 'N', 8)
+    b['_unten'] = yy - 40
     return s
 
 
 def b_zeitstrahl(b):
     x, y, w = b['x'], b['y'], b['w']; s = ''
     a, z = _monat(b['von']), _monat(b['bis']); X = lambda m: x + (m - a) / (z - a) * w
-    s += L(x, y, x + w, INK, 1)
+    s += L(x, y, x + w, INK, 1.4)
     for yr in range(a // 12 + 1, z // 12 + 1):
-        s += VL(X(yr * 12), y + 4, y - 4, INK, .8) + T(X(yr * 12) - 15, y - 14, 'N', 6.8, 9, GREY, str(yr), w=30, extra='text-align:center')
+        s += VL(X(yr * 12), y + 5, y - 5, INK, 1) + T(X(yr * 12) - 15, y - 16, 'B', 8, 10, GREY, str(yr), w=30, extra='text-align:center')
     for p in b['punkte']:
-        px = X(_monat(p['monat'])); up = p.get('oben', True); col = ACC if p.get('plan') else NAVY
-        s += f'<div class="t" style="left:{px-3.6:.2f}pt;top:{H-y-3.6:.2f}pt;width:7.2pt;height:7.2pt;border-radius:50%;background:{col if not p.get("plan") else CREAM};border:1.4pt solid {col}"></div>'
-        hgt = p.get('h', 34)
-        if up: s += VL(px, y + hgt, y + 5, LINE, .7) + T(px - 50, y + hgt + 20, 'B', 7.6, 10, col, p['datum'], w=100, extra='text-align:center') + T(px - 55, y + hgt + 9, 'N', 7.2, 9.4, INK, p['text'], w=110, extra='text-align:center')
-        else: s += VL(px, y - 5, y - hgt, LINE, .7) + T(px - 50, y - hgt - 9, 'B', 7.6, 10, col, p['datum'], w=100, extra='text-align:center') + T(px - 55, y - hgt - 20, 'N', 7.2, 9.4, INK, p['text'], w=110, extra='text-align:center')
+        px = X(_monat(p['monat'])); up = p.get('oben', True); col = ACC if p.get('plan') else NAVY; r = 4.8
+        s += f'<div class="t" style="left:{px-r:.2f}pt;top:{H-y-r:.2f}pt;width:{2*r}pt;height:{2*r}pt;border-radius:50%;background:{CREAM if p.get("plan") else col};border:1.8pt solid {col}"></div>'
+        hgt = p.get('h', 46)
+        if up: s += VL(px, y + hgt, y + 6, LINE, .8) + T(px - 55, y + hgt + 24, 'B', 9, 11, col, p['datum'], w=110, extra='text-align:center') + T(px - 60, y + hgt + 11, 'N', 8.2, 10, INK, p['text'], w=120, extra='text-align:center')
+        else: s += VL(px, y - 6, y - hgt, LINE, .8) + T(px - 55, y - hgt - 11, 'B', 9, 11, col, p['datum'], w=110, extra='text-align:center') + T(px - 60, y - hgt - 24, 'N', 8.2, 10, INK, p['text'], w=120, extra='text-align:center')
+    for p in b.get('phasen', []):   # Phasenbänder über der Achse
+        x1, x2 = X(_monat(p[0])), X(_monat(p[1]))
+        s += R(round(x1, 1), y + 10, round(x2 - x1 - 2, 1), 22, _farbe(p[3]), extra=SQ) + T(round(x1 + 8, 1), y + 18, 'B', 8, 10, '#ffffff' if p[3] in ('navy', 'acc', 'mid') else NAVY, p[2], extra='letter-spacing:.02em')
     if b.get('heute'):
         hx = X(_monat(b['heute']))
-        s += f'<div class="t" style="left:{hx:.2f}pt;top:{H-y-90:.2f}pt;height:180pt;border-left:.8pt dashed {ACC}"></div>' + T(hx + 4, y - 84, 'B', 6.6, 9, ACC, 'HEUTE', extra='letter-spacing:.06em')
-    b['_unten'] = y - 80
+        s += (f'<div class="t" style="left:{hx:.2f}pt;top:{H-y-70:.2f}pt;height:140pt;border-left:1.2pt dashed {ACC}"></div>'
+              + R(round(hx - 26, 1), y - 92, 52, 16, ACC, extra=SQ) + T(round(hx - 26, 1), y - 86, 'B', 7.4, 9, '#ffffff', 'HEUTE', w=52, extra='text-align:center;letter-spacing:.08em'))
+    b['_unten'] = y - 100
     return s
 
 
 def b_matrix(b):
-    x, y, w, h = b['x'], b['y'], b['w'], b['h']; g = b.get('gap', 10); cw = (w - g) / 2; chh = (h - g) / 2; s = ''
+    x, y, w, h = b['x'], b['y'], b['w'], b['h']; g = b.get('gap', 10); s = ''
+    ox = 30 if b.get('zeilen_titel') else 0; oy = 18 if b.get('spalten_titel') else 0
+    cw = (w - ox - g) / 2; chh = (h - oy - g) / 2
+    for i, t in enumerate(b.get('spalten_titel', [])):
+        s += EB(x + ox + i * (cw + g), y - 2, t, ACC, 7.6)
+    for i, t in enumerate(b.get('zeilen_titel', [])):
+        cy_ = y - oy - i * (chh + g) - chh / 2
+        s += (f'<div class="t" style="left:{x-chh/2+10:.1f}pt;top:{H-cy_-6:.1f}pt;width:{chh:.1f}pt;transform:rotate(-90deg);text-align:center;'
+              f'font-family:\'DM Mono\',monospace;font-size:7.2pt;line-height:10pt;letter-spacing:.06em;text-transform:uppercase;color:{ACC}">{t}</div>')
     for i, c in enumerate(b['zellen']):
-        cx = x + (i % 2) * (cw + g); cy = y - (i // 2) * (chh + g)
-        s += R(round(cx, 2), round(cy - chh, 2), round(cw, 2), round(chh, 2), LIGHT, .18) + R(round(cx, 2), round(cy - 2.4, 2), round(cw, 2), 2.4, ACC if c.get('akzent') else NAVY, extra=SQ)
-        s += EB(cx + 14, cy - 18, c['titel'], NAVY, 7.2)
-        if c.get('tag'): s += RT(cx + cw - 14, cy - 18, 'B', 6.4, 9, ACC, c['tag'].upper(), 160, ) 
-        yy = cy - 34; fs = b.get('schrift', 7.8)
+        cx = x + ox + (i % 2) * (cw + g); cy = y - oy - (i // 2) * (chh + g)
+        s += R(round(cx, 2), round(cy - chh, 2), round(cw, 2), round(chh, 2), LIGHT, .18, extra=SQ) + R(round(cx, 2), round(cy - 2.6, 2), round(cw, 2), 2.6, ACC if c.get('akzent') else NAVY, extra=SQ)
+        yy = cy - 20
+        if c.get('tag'): s += CHIP(cx + 16, yy + 4, c['tag'], True); yy -= 18
+        s += EB(cx + 16, yy, c['titel'], NAVY, 7.6); yy -= 18; fs = b.get('schrift', 8.8)
         for p in c['punkte']:
             html = f'<span style="font-weight:500;color:{NAVY}">{p[0]}</span> {p[1]}' if isinstance(p, list) else p
             pl = (p[0] + ' ' + p[1]) if isinstance(p, list) else p
-            s += T(cx + 14, yy, 'N', fs, fs * 1.4, INK, html, w=cw - 28); yy -= nlines(pl, fs, cw - 28) * fs * 1.4 + 5
+            s += T(cx + 16, yy, 'N', fs, fs * 1.42, INK, html, w=cw - 32); yy -= nlines(pl, fs, cw - 32) * fs * 1.42 + 6
     b['_unten'] = y - h
     return s
 
 
 def b_bild(b):
     x, y, w, h = b['x'], b['y'], b['w'], b['h']; s = ''
-    if b.get('weiss'): s += R(x, y - h, w, h, '#ffffff')
+    if b.get('weiss'): s += R(x, y - h, w, h, '#ffffff', extra=SQ)
     pad = b.get('pad', 0)
     s += IMG(b['bild'], x + pad, y - h + pad, w - 2 * pad, h - 2 * pad, b.get('pos', 'center'), 'contain' if b.get('contain') else 'cover')
-    if b.get('titel'): s += EB(x, y - h - 12, b['titel'], GREY, 6.4)
-    b['_unten'] = y - h - 14
+    if b.get('titel'): s += EB(x, y - h - 13, b['titel'], GREY, 7)
+    b['_unten'] = y - h - 16
     return s
 
 
@@ -1180,12 +1244,12 @@ def b_schritte(b):
     x, y, w = b['x'], b['y'], b['w']; s = ''; n = len(b['items']); cw = w / n
     for i, (d_, t1, t2) in enumerate(b['items']):
         cx = x + i * cw
-        s += L(cx, y, cx + cw - 12, NAVY, 1) + EB(cx, y - 14, d_, ACC, 6.8) + T(cx, y - 30, 'B', 8.6, 11, NAVY, t1, w=cw - 16) + T(cx, y - 44, 'N', 7.6, 10.4, INK, t2, w=cw - 16)
-    b['_unten'] = y - 70
+        s += L(cx, y, cx + cw - 14, NAVY, 1.2) + EB(cx, y - 15, d_, ACC, 7.2) + T(cx, y - 33, 'B', 9.4, 12, NAVY, t1, w=cw - 18) + T(cx, y - 49, 'N', 8.4, 11.4, INK, t2, w=cw - 18)
+    b['_unten'] = y - 49 - max(nlines(t2, 8.4, cw - 18) for _, _, t2 in b['items']) * 11.4
     return s
 
 
-BLOECKE = {'tabelle': b_tabelle, 'kv': b_kv, 'text': b_text, 'balken': b_balken, 'saeulen': b_saeulen, 'linie': b_linie,
+BLOECKE = {'tabelle': b_tabelle, 'kv': b_kv, 'text': b_text, 'balken': b_balken, 'saeulen': b_saeulen, 'linie': b_linie, 'spanne': b_spanne,
            'kpi': b_kpi, 'dunkel': b_dunkel, 'gantt': b_gantt, 'zeitstrahl': b_zeitstrahl, 'matrix': b_matrix, 'bild': b_bild, 'schritte': b_schritte}
 
 
@@ -1200,6 +1264,9 @@ def _svg(inner, clip=None):
         cp = f'<defs><clipPath id="{cid}"><rect x="{x}" y="{H-y}" width="{w}" height="{h}"/></clipPath></defs>'
         inner = f'<g clip-path="url(#{cid})">{inner}</g>'
     return f'<svg class="t" style="left:0;top:0;width:907pt;height:567pt;overflow:visible" viewBox="0 0 907 567">{cp}{inner}</svg>'
+
+
+HALO = 'text-shadow:0 0 2pt #fff,0 0 2pt #fff,0 0 1pt #fff;'
 
 
 def b_karte(b):
@@ -1240,11 +1307,23 @@ def b_karte(b):
         dx, dy = o.get('dx', 6), o.get('dy', 2); al = o.get('align', 'left')
         lx = ox + dx if al == 'left' else ox - dx - 140
         st = '' if al == 'left' else 'text-align:right'
-        s += T(round(lx, 1), oy + dy, 'B', 7.6, 10, NAVY, o['name'], w=140, extra=st + ';text-shadow:0 0 2pt #fff,0 0 2pt #fff,0 0 1pt #fff;')
-        if o.get('sub'): s += T(round(lx, 1), oy + dy - 10, 'N', 6.6, 9, GREY, o['sub'], w=140, extra=st + ';text-shadow:0 0 2pt #fff,0 0 2pt #fff,0 0 1pt #fff;')
+        s += T(round(lx, 1), oy + dy, 'B', 8.4, 10, NAVY, o['name'], w=140, extra=st + ';text-shadow:0 0 2pt #fff,0 0 2pt #fff,0 0 1pt #fff;')
+        if o.get('sub'): s += T(round(lx, 1), oy + dy - 10.5, 'N', 7.4, 9, GREY, o['sub'], w=140, extra=st + ';text-shadow:0 0 2pt #fff,0 0 2pt #fff,0 0 1pt #fff;')
     for r in b.get('ringe', []):
         rp = r / 111.2 * k
         s += T(round(zx + rp * .71 + 2, 1), zy - rp * .71 - 2, 'B', 6.6, 9, ACC, f'{r} km', extra='text-shadow:0 0 2pt #fff,0 0 2pt #fff,0 0 1pt #fff;')
+    for f_ in b.get('fern', []):
+        fx, fy = P(f_['lon'], f_['lat']); m = 16; dx_, dy_ = fx - zx, fy - zy
+        ts = [t for t in ((x + w - m - zx) / dx_ if dx_ > 0 else None, (x + m - zx) / dx_ if dx_ < 0 else None,
+                          (y - m - zy) / dy_ if dy_ > 0 else None, (y - h + m - zy) / dy_ if dy_ < 0 else None) if t]
+        t = min(ts); bx_, by_ = zx + dx_ * t, zy + dy_ * t
+        ang = math.degrees(math.atan2(-(by_ - zy), bx_ - zx))
+        sv += f'<line x1="{zx:.1f}" y1="{H-zy:.1f}" x2="{bx_:.1f}" y2="{H-by_:.1f}" stroke="{ACC}" stroke-width=".8" stroke-dasharray="3 2"/>'
+        sv += f'<g transform="translate({bx_:.1f},{H-by_:.1f}) rotate({ang:.1f})"><path d="M0,0 L-7,-3.5 L-7,3.5 Z" fill="{NAVY}"/></g>'
+        right = bx_ > x + w * .6
+        lx2 = bx_ - 150 - 6 if right else bx_ + 8; ly2 = by_ - 14 if by_ > y - 30 else by_ + 16
+        al = 'text-align:right;' if right else ''
+        s += T(round(lx2, 1), ly2, 'B', 8, 10, NAVY, f_['name'] + ' →' if right else f_['name'], w=150, extra=al + HALO) + T(round(lx2, 1), ly2 - 10, 'N', 7, 9, GREY, f_.get('sub', ''), w=150, extra=al + HALO)
     for lab in b.get('laender', []):
         lx_, ly_ = P(lab['lon'], lab['lat'])
         s += EB(round(lx_, 1), ly_, lab['name'], _farbe(lab['farbe']) if lab.get('farbe') else GREY, 7)
@@ -1253,7 +1332,7 @@ def b_karte(b):
     bx = zx + z.get('dx', 12); by = zy + z.get('dy', 10)
     s += R(round(bx, 1), round(by - 6, 1), round(bw, 1), 30, NAVY, extra='border-radius:0') + T(round(bx + 10, 1), by + 13, 'B', 8.4, 11, '#ffffff', z['name']) + T(round(bx + 10, 1), by + 2, 'N', 6.8, 9, MIST, z.get('sub', ''))
     out = _svg(sv, (x, y, w, h)) + f'<div class="t" style="left:{x}pt;top:{H-y}pt;width:{w}pt;height:{h}pt;border:.6pt solid {LINE}"></div>' + s
-    if b.get('nachweis'): out += T(x, y - h - 10, 'N', 6.2, 8, GREY, b['nachweis'])
+    if b.get('nachweis'): out += T(x, y - h - 11, 'N', 7, 9, GREY, b['nachweis'])
     b['_unten'] = y - h - 14
     return out
 
@@ -1261,7 +1340,7 @@ def b_karte(b):
 def b_donut(b):
     x, y = b['x'], b['y']; r = b.get('r', 70); ring = b.get('ring', 22); items = b['items']; tot = sum(i[1] for i in items)
     cx, cy = x + r, y - r - (18 if b.get('titel') else 0); s = ''
-    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4)
+    if b.get('titel'): s += BT(x, y, b['titel'])
     sv = ''; a0 = -90
     for lab, v, col in items:
         a1 = a0 + 360 * v / tot; rm = r - ring / 2
@@ -1269,29 +1348,29 @@ def b_donut(b):
         p1 = (cx + rm * math.cos(math.radians(a1 - .6)), H - cy + rm * math.sin(math.radians(a1 - .6)))
         sv += f'<path d="M{p0[0]:.2f},{p0[1]:.2f} A{rm},{rm} 0 {1 if a1 - a0 > 180 else 0} 1 {p1[0]:.2f},{p1[1]:.2f}" fill="none" stroke="{_farbe(col)}" stroke-width="{ring}"/>'
         a0 = a1
-    s += _svg(sv) + T(cx - 60, cy + 2, 'L', 15, 18, NAVY, b['mitte'][0], w=120, extra='text-align:center;font-variant-numeric:tabular-nums') + T(cx - 60, cy - 16, 'M', 6.4, 9, GREY, b['mitte'][1].upper(), w=120, extra='text-align:center;letter-spacing:.06em')
-    lx = x + 2 * r + 30; ly = cy + 9 * len(items) - 4
+    s += _svg(sv) + T(cx - 60, cy + 2, 'L', b.get('mitte_groesse', 15), 18, NAVY, b['mitte'][0], w=120, extra='text-align:center;font-variant-numeric:tabular-nums') + T(cx - 60, cy - 16, 'M', 6.4, 9, GREY, b['mitte'][1].upper(), w=120, extra='text-align:center;letter-spacing:.06em')
+    lx = x + 2 * r + 30; ly = cy + 10.5 * len(items) - 6
     for lab, v, col in items:
-        s += R(lx, ly - 3, 8, 8, _farbe(col), extra=SQ) + T(lx + 14, ly, 'N', 7.8, 10, INK, lab) + RT(lx + b.get('lw', 190), ly, 'B', 7.8, 10, NAVY, b.get('format', '{:,.0f} m²').format(v).replace(',', '.'), 80)
-        ly -= 18
+        s += R(lx, ly - 3, 9, 9, _farbe(col), extra=SQ) + T(lx + 15, ly, 'N', 8.8, 11, INK, lab) + RT(lx + b.get('lw', 190), ly, 'B', 8.8, 11, NAVY, b.get('format', '{:,.0f} m²').format(v).replace(',', '.'), 80)
+        ly -= 21
     b['_unten'] = cy - r - 10
     return s
 
 
 def b_hstack(b):
-    x, y, w = b['x'], b['y'], b['w']; lw = b.get('lw', 150); sw = b.get('sw', 70); mx = b['max']; s = ''
-    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 18
+    x, y, w = b['x'], b['y'], b['w']; lw = b.get('lw', 150); sw = b.get('sw', 70); mx = b['max']; s = ''; bh = b.get('bh', 24); st = b.get('abstand', 42)
+    if b.get('titel'): s += BT(x, y, b['titel']); y -= 20
     leg = []
     for lab, segs, summe in b['zeilen']:
-        s += T(x, y - 11, 'N', 7.8, 10, INK, lab, w=lw - 8); bx = x + lw
+        s += T(x, y - bh / 2 - 3, 'N', 8.8, 11, INK, lab, w=lw - 8); bx = x + lw
         for v, col, nm in segs:
             sw_ = (w - lw - sw) * v / mx
-            s += R(round(bx, 2), y - 20, round(sw_, 2) - .8, 20, _farbe(col), extra=SQ)
-            if sw_ > 36: s += T(round(bx + 5, 2), y - 11.5, 'B', 6.8, 9, '#ffffff' if col in ('navy', 'acc', 'mid') else NAVY, nm)
+            s += R(round(bx, 2), y - bh, round(sw_, 2) - .8, bh, _farbe(col), extra=SQ)
+            if sw_ > 40: s += T(round(bx + 6, 2), y - bh / 2 - 2.8, 'B', 7.6, 9, '#ffffff' if col in ('navy', 'acc', 'mid') else NAVY, nm)
             if nm not in [l[0] for l in leg]: leg.append((nm, col))
             bx += sw_
-        s += T(round(bx + 6, 2), y - 11, 'B', 8, 10, NAVY, summe)
-        y -= 34
+        s += T(round(bx + 7, 2), y - bh / 2 - 3, 'B', 9.4, 11, NAVY, summe)
+        y -= st
     b['_unten'] = y
     return s
 
