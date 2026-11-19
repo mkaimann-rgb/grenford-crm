@@ -395,7 +395,8 @@ def m_projektstand(d):
     s += cap(51, 40, d['quelle']) + R(632, 34, 224, 464) + EB(660, 469, d['spalte_titel'], CREAM, 8)
     for i, k in enumerate(d['spalte']):
         b = 409 - 117 * i
-        s += T(660, b, 'S', k.get('groesse', 22 if i else 30), 40 if not i else 30, CREAM, k['wert']) + EB(660, b - 26, k['label'], LIGHT, 6.8)
+        gs = min(k.get('groesse', 22 if i else 30), 168 / width(k['wert'], 'S', 1))   # max. 168 pt breit, gleicher Rand links/rechts
+        s += T(660, b, 'S', round(gs, 1), 40 if not i else 30, CREAM, k['wert']) + EB(660, b - 26, k['label'], LIGHT, 6.8)
         if k.get('sub'): s += T(660, b - 41, 'N', 7.5, 10, MIST, k['sub'], w=180)
     return s + T(660, 90, 'N', 7, 10, MIST, br(d['spalte_hinweis']))
 
