@@ -20,7 +20,9 @@ FONT = {'B': ("'DM Sans',sans-serif;font-weight:500", .34),
         'N': ("'DM Sans',sans-serif;font-weight:400", .34),
         'S': ("'GF Serif',serif;font-weight:400", .22),
         'SB': ("'GF Serif',serif;font-weight:700", .22),
-        'H': ("'DM Sans',sans-serif;font-weight:500", .34)}
+        'H': ("'DM Sans',sans-serif;font-weight:500", .34),
+        'L': ("'DM Sans',sans-serif;font-weight:300", .34),
+        'M': ("'DM Mono',monospace;font-weight:400", .34)}
 _TTF = {'S': 'texgyrepagella-regular.otf', 'N': 'dm-sans-400.ttf', 'B': 'dm-sans-500.ttf'}
 
 
@@ -43,6 +45,12 @@ C = None  # wird vom Builder gesetzt
 
 # ------------------------------------------------------------ Grundelemente
 def width(text, f, size, spacing=0.0):
+    if f == 'S' and sans_only():   # Titel in DM Sans Medium, 90 %, Laufweite -0,035 em
+        font = ImageFont.truetype(os.path.join(SHARED, 'fonts', 'dm-sans-var.ttf'), 400)
+        try: font.set_variation_by_axes([14, 500])
+        except Exception: pass
+        t = re.sub(r'<[^>]+>', '', text)
+        return (font.getlength(t) / 400 - .035 * len(t)) * size * .9
     font = ImageFont.truetype(os.path.join(SHARED, 'fonts', _TTF.get(f, _TTF['N'])), 400)
     return font.getlength(re.sub(r'<[^>]+>', '', text)) * size / 400 * 1.0 + spacing * size * len(text)
 
@@ -50,8 +58,31 @@ def width(text, f, size, spacing=0.0):
 HEADLINE = True   # Überschriften in DM Sans Medium, eng gesetzt, ohne Schlusspunkt (wie Website)
 
 
+NUMERIC = re.compile(r'^[\d\s.,–\-+×%€/²()·~]*(ca\.|ab|m²|m|kWh)?[\d\s.,–\-+×%€/²()·m]*$')
+
+
+def sans_only():
+    return C is not None and C.meta.get('typo') == 'sans'
+
+
+def _map_serif(f, size, color, text, w, extra):
+    """Typosystem ohne Serifen: DM Sans Medium (Titel), DM Sans Light (Einleitungen, große Zahlen), DM Mono (Beträge)."""
+    plain = re.sub(r'<[^>]+>', ' ', text).strip()
+    strip = lambda t: re.sub(r'\.(\s*</?[^>]*>)*$', '', t)
+    if re.search(r'\d', plain) and NUMERIC.match(plain):
+        if size >= 18: return 'L', size, text, 'letter-spacing:-.02em;' + extra
+        return 'M', round(size * .88, 1), text, 'letter-spacing:-.01em;' + extra
+    if size >= 19:
+        return 'H', round(size * .9, 1) if size >= 22 else size, strip(text), 'letter-spacing:-.035em;' + extra
+    if w and len(plain) > 60:
+        return 'L', size, text, extra
+    return 'B', round(size * .94, 1), strip(text), 'letter-spacing:-.01em;' + extra
+
+
 def T(x, base, f, size, tl, color, text, w=None, extra=''):
-    if HEADLINE and f == 'S' and size >= 22 and color == INK:
+    if f in ('S', 'SB') and sans_only():
+        f, size, text, extra = _map_serif(f, size, color, text, w, extra)
+    elif HEADLINE and f == 'S' and size >= 22 and color == INK:
         f = 'H'; size = round(size * .9, 1); text = re.sub(r'\.$', '', text)
         extra = 'letter-spacing:-.035em;' + extra
     fam, k = FONT[f]
@@ -62,6 +93,8 @@ def T(x, base, f, size, tl, color, text, w=None, extra=''):
 
 
 def EB(x, base, text, color=ACC, size=7):
+    if sans_only():
+        return T(x, base, 'M', round(size * .95, 2), size * 1.45, color, text, extra='letter-spacing:.06em;text-transform:uppercase')
     return T(x, base, 'B', size, size * 1.45, color, text, extra='letter-spacing:.07em;text-transform:uppercase')
 
 
@@ -620,7 +653,7 @@ def m_rendite(d, obj):
 
 def m_partner(d, shared):
     p = shared['partner']; d = {**p, **(d or {})}
-    s = (chrome('Partner &amp; Service') + EB(51, 477, 'Rund um Ihren Kauf') + T(51, 440, 'S', 31, 34, INK, 'Gut vernetzt.<br>Für jeden Schritt.')
+    s = (chrome('Partner &amp; Service') + EB(51, 477, 'Rund um Ihren Kauf') + T(51, 440, 'S', 31, 34, INK, 'Gut vernetzt<br>für jeden Schritt' if sans_only() else 'Gut vernetzt.<br>Für jeden Schritt.')
          + T(51, 370, 'N', 9.8, 14.5, INK, d['intro'], w=340) + R(51, 40, 356, 268) + EB(71, 286, 'So funktioniert es', LIGHT, 6.8))
     for i, (n, t) in enumerate(d['schritte']):
         b = 252 - 54 * i
@@ -653,7 +686,7 @@ def m_kontakt(d):
 def m_ueber(d, shared):
     s = (HEAD('Über GRENFORD') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'), extra=COLCUT())
          + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(CREAM)
-         + T(51, 121, 'S', 29, 32, CREAM, 'Wir strukturieren<br>Immobilien-<br>entscheidungen.'))
+         + T(51, 121, 'S', 29, 32, CREAM, 'Wir strukturieren<br>Immobilien-<br>entscheidungen' + ('' if sans_only() else '.')))
     h = round(95 * 379 / 773, 2)
     for i, (brand, t, desc, lab, logo) in enumerate(shared['geschaeftsfelder']):
         ln = 500 - 122 * i
@@ -732,6 +765,8 @@ ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII
 def css():
     return f"""@font-face{{font-family:'DM Sans';src:url(../../shared/fonts/dm-sans-400.ttf);font-weight:400}}
 @font-face{{font-family:'DM Sans';src:url(../../shared/fonts/dm-sans-500.ttf);font-weight:500}}
+@font-face{{font-family:'DM Sans';src:url(../../shared/fonts/dm-sans-var.ttf);font-weight:300}}
+@font-face{{font-family:'DM Mono';src:url(../../shared/fonts/dm-mono-400.ttf);font-weight:400}}
 @font-face{{font-family:'GF Serif';src:url(../../shared/fonts/texgyrepagella-regular.otf);font-weight:400}}
 @font-face{{font-family:'GF Serif';src:url(../../shared/fonts/texgyrepagella-bold.otf);font-weight:700}}
 @font-face{{font-family:'GF Serif';src:url(../../shared/fonts/texgyrepagella-italic.otf);font-style:italic}}

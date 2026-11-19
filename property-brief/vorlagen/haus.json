@@ -6,7 +6,8 @@
   "ausgabe": "GRENFORD_Property_Brief_[Adresse].pdf",
   "redaktionsstand": "[TT.MM.JJJJ]",
   "agb_stand": "18.11.2026",
-  "variante": "haus"
+  "variante": "haus",
+  "typo": "sans"
  },
  "kosten": {
   "land": "Berlin",
@@ -53,9 +54,9 @@
     "Family Residence"
    ],
    "kurz": [
-    "Doppelhaushälfte von 1976.",
-    "Umfassend kernsaniert.",
-    "Bezugsfertig für Ihre Familie."
+    "Doppelhaushälfte von 1976",
+    "Umfassend kernsaniert",
+    "Bezugsfertig für Ihre Familie"
    ],
    "adresse": [
     "Schlierbacher Weg 13a",
@@ -84,13 +85,13 @@
    "bild": "fassade-eingang-tone.jpg",
    "bild_pos": "center 35%",
    "claim": [
-    "Ein Haus.",
-    "Vier Ebenen."
+    "Ein Haus auf",
+    "vier Ebenen"
    ],
    "marke": "The Renewed House",
    "text": [
     "Ein Bestandshaus von 1976,",
-    "saniert für eine neue Generation."
+    "saniert für eine neue Generation"
    ],
    "adresse": [
     "Schlierbacher Weg 13a",
@@ -172,7 +173,7 @@
    "id": "vorwort",
    "bereich": "vor",
    "dachzeile": "The Renewed House",
-   "titel": "Ein Haus mit neuer Zukunft.",
+   "titel": "Ein Haus mit neuer Zukunft",
    "lead": "Mit diesem Property Brief stellen wir Ihnen eine Doppelhaushälfte in Berlin-Buckow vor, die nach umfassender Kernsanierung zum Erstbezug bereitsteht.",
    "links": "Bei Bestandsimmobilien entscheidet nicht das Baujahr über die Qualität, sondern der Zustand von Hülle, Technik und Ausbau.",
    "rechts": "Das Tragwerk von 1976 ist geblieben. Dach, Fassade, Fenster, Heizung, Leitungen und Innenausbau sind neu.",
@@ -183,7 +184,7 @@
    "id": "ueberblick",
    "kopf": "Das Haus auf einen Blick",
    "dachzeile": "Das Haus",
-   "titel": "Fakten und Zahlen.",
+   "titel": "Fakten und Zahlen",
    "intro": "Eine Doppelhaushälfte aus dem Jahr 1976, nach umfassender Kernsanierung bereit für den Erstbezug – mit Garten, Vollkeller und Platz für eine Familie.",
    "zeilen": [
     [
@@ -255,8 +256,8 @@
    "bild_seite": "rechts",
    "dachzeile": "Das Wohnkonzept",
    "titel": [
-    "Hell. Klar.",
-    "Bezugsbereit."
+    "Hell, klar und",
+    "bezugsbereit"
    ],
    "intro": "Gemeinsam wohnen im Erdgeschoss, Familie im Obergeschoss, Rückzug unter dem Dach, Reserve im Keller.",
    "label_breite": 100,
@@ -333,8 +334,8 @@
    },
    "dachzeile": "Schlierbacher Weg 13a · Berlin-Buckow",
    "titel": [
-    "Grüner Süden.",
-    "Gewachsene Nachbarschaft."
+    "Grüner Süden,",
+    "gewachsene Nachbarschaft"
    ],
    "intro": "Der Schlierbacher Weg liegt im ruhigen Wohnquartier zwischen Grauwackeweg und Sandsteinweg nahe der Marienfelder Chaussee, im Neuköllner Ortsteil Buckow. Schule, Nahversorgung und Bus liegen im Quartier.",
    "gruppen": [
@@ -378,7 +379,7 @@
    "dachzeile": "Vier Ebenen · ein Zuhause",
    "titel": [
     "Wie das Haus",
-    "funktioniert."
+    "funktioniert"
    ],
    "intro": "Wohnfläche ca. 118 m² auf Erd-, Ober- und Dachgeschoss, dazu ca. 41 m² Kellerfläche. Alle Grundrisse mit Raumflächen und Maßketten finden Sie auf den Seiten {seite:grundrisse-1} und {seite:grundrisse-2}.",
    "ebenen": [
@@ -414,7 +415,7 @@
    "modul": "grundrisse",
    "id": "grundrisse-1",
    "dachzeile": "Wohnebenen",
-   "titel": "Erdgeschoss und Obergeschoss.",
+   "titel": "Erdgeschoss und Obergeschoss",
    "plaene": [
     {
      "name": "Erdgeschoss",
@@ -570,7 +571,7 @@
    "modul": "grundrisse",
    "id": "grundrisse-2",
    "dachzeile": "Rückzug und Reserve",
-   "titel": "Dachgeschoss und Keller.",
+   "titel": "Dachgeschoss und Keller",
    "plaene": [
     {
      "name": "Dachgeschoss",
@@ -725,8 +726,8 @@
    ],
    "dachzeile": "Das Sanierungskonzept",
    "titel": [
-    "Substanz von 1976.",
-    "Technik von heute."
+    "Substanz von 1976,",
+    "Technik von heute"
    ],
    "bloecke": [
     [
@@ -751,7 +752,7 @@
    "modul": "projektstand",
    "id": "projektstand",
    "dachzeile": "Projektstand",
-   "titel": "Was fertig ist. Was Sie gestalten.",
+   "titel": "Was fertig ist und was Sie gestalten",
    "intro": [
     "Stand nach Angabe des Verkäufers. Der Verkäufer lässt vor der Übergabe vier Bestandsbäume fällen; die übrige Garten-",
     "gestaltung liegt beim Käufer. Einen passenden Garten- und Landschaftsbauer vermittelt GRENFORD gern (Seite {seite:partner})."
@@ -837,7 +838,7 @@
    "id": "energie",
    "bild": "energieausweis-s2.png",
    "caption": "Abbildung: Seite 2 des Energieausweises. Der vollständige Ausweis liegt den Kaufunterlagen bei.",
-   "titel": "Nachweislich effizient.",
+   "titel": "Nachweislich effizient",
    "intro": "Gedämmte Hülle, neue Fenster und Luft-Wärmepumpe: Die Kennwerte des Hauses nach der Sanierung, laut Energieausweis.",
    "zeilen": [
     [
@@ -877,7 +878,7 @@
    "id": "markt",
    "kopf": "Markt &amp; Mietorientierung",
    "dachzeile": "Optionales Modul · GRENFORD Research 18.11.2026",
-   "titel": "Mietorientierung für Kapitalanleger.",
+   "titel": "Mietorientierung für Kapitalanleger",
    "intro": "Für Käufer mit Vermietungsabsicht: aktuelle Mietangebote für Häuser im Berliner Süden (Buckow, Rudow). Angebotsmieten sind keine abgeschlossenen Mietverträge und keine Prognose für dieses Haus.",
    "achsen": [
     110,
@@ -937,7 +938,7 @@
    "id": "rendite",
    "kopf": "Vermietung · Modellrechnung",
    "dachzeile": "Kapitalanlage Doppelhaushälfte · drei Szenarien",
-   "titel": "Miete, Rendite und Kaufpreisfaktor.",
+   "titel": "Miete, Rendite und Kaufpreisfaktor",
    "spanne": [
     16.5,
     18.5
@@ -963,9 +964,9 @@
    "bild": "fassade-eingang-tone.jpg",
    "bild_pos": "center 35%",
    "claim": [
-    "Ihre Familie.",
+    "Ihre Familie,",
     "Ihr nächster",
-    "Schritt."
+    "Schritt"
    ],
    "dachzeile": "Das Haus persönlich erleben",
    "titel": [
