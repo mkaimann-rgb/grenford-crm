@@ -466,11 +466,17 @@ def m_projektstand(d):
         s += L(51, y0 - 12 - 31 * len(blk['zeilen']), 596)
         y0 = y0 - 12 - 31 * len(blk['zeilen']) - 36
     s += cap(51, 40, d['quelle']) + R(632, 34, 224, 464) + EB(660, 469, d['spalte_titel'], CREAM, 8)
-    for i, k in enumerate(d['spalte']):
-        b = 409 - 117 * i
-        gs = min(k.get('groesse', 22 if i else 30), 168 / width(k['wert'], 'S', 1))   # max. 168 pt breit, gleicher Rand links/rechts
-        s += T(660, b, 'S', round(gs, 1), 40 if not i else 30, CREAM, k['wert']) + EB(660, b - 26, k['label'], LIGHT, 6.8)
-        if k.get('sub'): s += T(660, b - 41, 'N', 7.5, 10, MIST, k['sub'], w=180)
+    # einheitliche Wertgröße und gleichmäßige Abstände
+    gs = min([22] + [168 / width(k['wert'], 'S', 1) for k in d['spalte']])
+    hts = [gs + 22 + (13 if k.get('sub') else 0) for k in d['spalte']]
+    top, bottom = 432, 150
+    gap = (top - bottom - sum(hts)) / max(1, len(hts) - 1)
+    y = top
+    for k, hgt in zip(d['spalte'], hts):
+        b = y - gs * .8
+        s += T(660, b, 'S', round(gs, 1), round(gs * 1.2, 1), CREAM, k['wert']) + EB(660, b - 20, k['label'], LIGHT, 6.8)
+        if k.get('sub'): s += T(660, b - 33, 'N', 7.5, 10, MIST, k['sub'], w=180)
+        y -= hgt + gap
     return s + T(660, 90, 'N', 7, 10, MIST, br(d['spalte_hinweis']))
 
 
