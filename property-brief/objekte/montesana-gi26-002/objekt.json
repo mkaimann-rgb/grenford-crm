@@ -41,6 +41,10 @@
    ],
    "kennzahlen": [
     [
+     "92",
+     "Serviced Apartments"
+    ],
+    [
      "5,30 Mio. €",
      "Kaufpreis Early-Commit"
     ],
@@ -50,7 +54,7 @@
     ],
     [
      "23,1 %",
-     "IRR 10 Jahre, Basisfall"
+     "IRR 10 Jahre"
     ]
    ],
    "hinweis": "Visualisierung: Projektgesellschaft · Stand 11.11.2026"
@@ -172,7 +176,29 @@
    "id": "fakten",
    "bereich": "vor",
    "kopf": "Hard Facts",
-   "zeilenhoehe": 14.6,
+   "zeilenhoehe": 14.0,
+   "kennzahlen": [
+    [
+     "5,3 Mio. €",
+     "Kaufpreis Early-Commit"
+    ],
+    [
+     "13,9-fach",
+     "Faktor Eigentümerertrag"
+    ],
+    [
+     "23,1 %",
+     "IRR 10 Jahre, Basisfall"
+    ],
+    [
+     "1,62-fach",
+     "Multiple auf Eigenkapital"
+    ],
+    [
+     "23,2 Mio. €",
+     "Gesamtwert nach Fertigstellung"
+    ]
+   ],
    "dachzeile": "Zahlen, Daten, Fakten · Objekt-Nr. GI26-002",
    "titel": "Das Projekt in Kennzahlen",
    "intro": "Kaufpreis und Renditen in zwei Varianten: Early-Commit (5,3 Mio. €, LOI bis Ende November 2026) und Listenpreis (7,0 Mio. €). Alle Werte netto, vor Steuern und Finanzierung.",
@@ -355,9 +381,10 @@
   {
    "modul": "bildseite",
    "id": "standort",
+   "stil": "voll",
    "kopf": "Standort",
    "bild": "bestand-luft.png",
-   "bild_pos": "center",
+   "bild_pos": "center 40%",
    "dachzeile": "Höchenschwand · Südschwarzwald",
    "titel": [
     "Kurort im",
@@ -389,48 +416,80 @@
    "intro": "Basel, Zürich und Freiburg liegen in rund einer bis eineinhalb Stunden Fahrzeit. Der Schweizer Arbeitsmarkt beginnt am Rhein, 20 Kilometer entfernt; Stuttgart und München sind in einer Tagesreise erreichbar.",
    "bloecke": [
     {
-     "typ": "balken",
+     "typ": "karte",
      "x": 51,
-     "y": 384,
+     "y": 392,
      "w": 380,
-     "titel": "Strecke Pkw ab MonteSana in km (ca.)",
-     "lw": 120,
-     "vw": 70,
-     "abstand": 32,
-     "max": 330,
-     "items": [
-      [
-       "Schweizer Grenze (Waldshut)",
-       20,
-       "20 km · 25 min",
-       "h"
-      ],
-      [
-       "Basel",
-       70,
-       "70 km · 1 h"
-      ],
-      [
-       "Freiburg i. Br.",
-       80,
-       "80 km · 1 h 30"
-      ],
-      [
-       "Zürich",
-       85,
-       "85 km · 1 h 15"
-      ],
-      [
-       "Stuttgart",
-       190,
-       "190 km · 2 h 15"
-      ],
-      [
-       "München",
-       330,
-       "330 km · 3 h 45"
-      ]
-     ]
+     "h": 300,
+     "geo": "quelle/geo/region.geojson",
+     "bbox": [
+      7.35,
+      47.3,
+      9.0,
+      48.12
+     ],
+     "strahlen": true,
+     "ziel": {
+      "name": "MonteSana",
+      "sub": "Höchenschwand · 1.015 m",
+      "lon": 8.168,
+      "lat": 47.733,
+      "dx": -40,
+      "dy": 16
+     },
+     "orte": [
+      {
+       "name": "Waldshut-Tiengen",
+       "sub": "Grenze · 20 km · 25 min",
+       "lon": 8.215,
+       "lat": 47.623,
+       "dx": 8,
+       "dy": -8
+      },
+      {
+       "name": "Basel",
+       "sub": "70 km · 1 h",
+       "lon": 7.588,
+       "lat": 47.558
+      },
+      {
+       "name": "Zürich",
+       "sub": "85 km · 1 h 15",
+       "lon": 8.541,
+       "lat": 47.377
+      },
+      {
+       "name": "Freiburg i. Br.",
+       "sub": "80 km · 1 h 30",
+       "lon": 7.842,
+       "lat": 47.999
+      },
+      {
+       "name": "Schaffhausen",
+       "sub": "ca. 45 km",
+       "lon": 8.635,
+       "lat": 47.697
+      }
+     ],
+     "laender": [
+      {
+       "name": "Deutschland",
+       "lon": 8.45,
+       "lat": 48.05
+      },
+      {
+       "name": "Schweiz",
+       "lon": 7.95,
+       "lat": 47.36,
+       "farbe": "acc"
+      },
+      {
+       "name": "Frankreich",
+       "lon": 7.38,
+       "lat": 47.9
+      }
+     ],
+     "nachweis": "Kartendaten: Natural Earth (gemeinfrei) · Strecken und Fahrzeiten Pkw, gerundet"
     },
     {
      "typ": "tabelle",
@@ -513,14 +572,84 @@
    "intro": "14.668 Grenzgänger leben im Landkreis Waldshut und arbeiten in der Schweiz. Schweizer Einkommen treffen auf deutsche Lebenshaltungskosten; daraus entsteht Nachfrage nach Wohnen auf Zeit und Arbeitsplätzen im Grenzraum.",
    "bloecke": [
     {
-     "typ": "balken",
+     "typ": "karte",
      "x": 51,
-     "y": 384,
+     "y": 392,
      "w": 380,
+     "h": 300,
+     "geo": "quelle/geo/region.geojson",
+     "bbox": [
+      7.3,
+      47.2,
+      9.05,
+      48.3
+     ],
+     "ringe": [
+      20,
+      30,
+      60
+     ],
+     "ziel": {
+      "name": "MonteSana",
+      "sub": "Heilklimatischer Kurort · 1.015 m",
+      "lon": 8.168,
+      "lat": 47.733,
+      "dx": 12,
+      "dy": 12
+     },
+     "orte": [
+      {
+       "name": "Basel",
+       "lon": 7.588,
+       "lat": 47.558
+      },
+      {
+       "name": "Zürich",
+       "lon": 8.541,
+       "lat": 47.377
+      },
+      {
+       "name": "Feldberg",
+       "sub": "ca. 30 km",
+       "lon": 8.004,
+       "lat": 47.874,
+       "align": "right"
+      },
+      {
+       "name": "Schaffhausen",
+       "lon": 8.635,
+       "lat": 47.697
+      },
+      {
+       "name": "Kanton Aargau",
+       "lon": 8.1,
+       "lat": 47.42
+      }
+     ],
+     "laender": [
+      {
+       "name": "Deutschland",
+       "lon": 8.55,
+       "lat": 48.1
+      },
+      {
+       "name": "Schweiz",
+       "lon": 7.75,
+       "lat": 47.3,
+       "farbe": "acc"
+      }
+     ],
+     "nachweis": "Kartendaten: Natural Earth (gemeinfrei) · Radien 20, 30 und 60 km um MonteSana"
+    },
+    {
+     "typ": "balken",
+     "x": 482,
+     "y": 384,
+     "w": 374,
      "titel": "Grenzgänger aus dem Kreis Waldshut nach Kanton (2024)",
-     "lw": 90,
+     "lw": 80,
      "vw": 50,
-     "abstand": 26,
+     "abstand": 22,
      "items": [
       [
        "Aargau",
@@ -546,39 +675,18 @@
      ]
     },
     {
-     "typ": "kpi",
-     "x": 51,
-     "y": "folgt",
-     "abstand": 20,
-     "w": 380,
-     "hell": true,
-     "groesse": 19,
-     "items": [
-      [
-       "14.668",
-       "Grenzgänger gesamt"
-      ],
-      [
-       "20–55 min",
-       "Pkw nach Aargau, Zürich, Basel"
-      ],
-      [
-       "ca. 30 km",
-       "zum Feldberg"
-      ]
-     ]
-    },
-    {
      "typ": "kv",
      "x": 482,
-     "y": 384,
+     "y": "folgt",
+     "abstand": 14,
      "w": 374,
-     "kw": 120,
+     "kw": 104,
+     "schrift": 7.9,
      "titel": "Nachfragetreiber",
      "zeilen": [
       [
        "Kaufkraft",
-       "Schweizer Einkommen bei deutschen Lebenshaltungskosten; hohe Zahlungsbereitschaft für möbliertes Wohnen."
+       "14.668 Grenzgänger; Schweizer Einkommen bei deutschen Lebenshaltungskosten."
       ],
       [
        "Drei Nachfragegruppen",
@@ -590,7 +698,7 @@
       ],
       [
        "Coworking",
-       "Remote-Arbeitsplätze zwischen Zürich, Basel und Aargau in 20 bis 55 Minuten Entfernung."
+       "Remote-Arbeitsplätze zwischen Zürich, Basel und Aargau in 20 bis 55 Minuten."
       ]
      ]
     }
@@ -612,7 +720,8 @@
      "items": [
       [
        "7,0 Mio. €",
-       "Listenpreis netto"
+       "Listenpreis netto",
+       "durch"
       ],
       [
        "5,3 Mio. €",
@@ -625,17 +734,47 @@
      "typ": "text",
      "x": 51,
      "y": "folgt",
-     "abstand": 18,
+     "abstand": 14,
      "w": 380,
      "schrift": 8.4,
      "absaetze": [
       [
        "Vorteil gegenüber Listenpreis:",
        "1,7 Mio. € (−24,3 %). Ein LOI bis Ende November 2026 ist grundsätzlich möglich; Fristen und Bedingungen sind abzustimmen."
+      ]
+     ]
+    },
+    {
+     "typ": "kpi",
+     "x": 51,
+     "y": "folgt",
+     "abstand": 16,
+     "w": 380,
+     "h": 50,
+     "groesse": 18,
+     "items": [
+      [
+       "2,5 Mio. €",
+       "Mögliche Anzahlung bei Kaufvertrag"
       ],
       [
+       "2,8 Mio. €",
+       "Restkaufpreis nach Zahlungsplan",
+       "hell"
+      ]
+     ]
+    },
+    {
+     "typ": "text",
+     "x": 51,
+     "y": "folgt",
+     "abstand": 10,
+     "w": 380,
+     "schrift": 8.2,
+     "absaetze": [
+      [
        "Optionale Kaufpreisstaffelung:",
-       "mögliche Anzahlung von 2,5 Mio. € bei notariellem Kaufvertrag, verbleibende 2,8 Mio. € gemäß individuell vereinbartem Zahlungsplan. Anzahl und Fälligkeit der Teilzahlungen, spätester Zahlungstermin und Sicherheiten sind Gegenstand der Vertragsverhandlungen."
+       "Anzahl und Fälligkeit der Teilzahlungen, spätester Zahlungstermin und Sicherheiten sind Gegenstand der Vertragsverhandlungen."
       ]
      ]
     },
@@ -1361,9 +1500,10 @@
   {
    "modul": "bildseite",
    "id": "vision",
+   "stil": "voll",
    "kopf": "Konzept",
    "bild": "vis-luft.png",
-   "bild_pos": "75% center",
+   "bild_pos": "center 60%",
    "dachzeile": "Die Vision",
    "titel": [
     "Wohnen, Arbeiten",
@@ -1395,66 +1535,54 @@
    "titel": "Ein Haus, vier Ertragssäulen",
    "bloecke": [
     {
-     "typ": "balken",
+     "typ": "donut",
      "x": 51,
      "y": 410,
-     "w": 380,
-     "titel": "6.957 m² Nutzfläche nach Nutzung",
-     "lw": 110,
-     "vw": 60,
-     "abstand": 26,
-     "max": 4299,
+     "r": 66,
+     "ring": 20,
+     "lw": 150,
+     "titel": "Nutzfläche nach Nutzung",
+     "mitte": [
+      "6.957 m²",
+      "Nutzfläche"
+     ],
      "items": [
       [
        "Apartments",
        4299,
-       "4.299 m²",
-       "h"
+       "navy"
       ],
       [
        "Coworking",
        1241,
-       "1.241 m²"
+       "light"
       ],
       [
        "Fitness / Wellness",
        704,
-       "704 m²"
+       "mid"
       ],
       [
        "Arztpraxis",
        386,
-       "386 m²"
+       "grey"
       ],
       [
        "Physio / Kosmetik",
        327,
-       "327 m²"
+       "mist"
       ]
      ]
     },
     {
-     "typ": "kpi",
+     "typ": "bild",
      "x": 51,
-     "y": "folgt",
-     "abstand": 18,
+     "y": 214,
      "w": 380,
-     "hell": true,
-     "groesse": 19,
-     "items": [
-      [
-       "6.957 m²",
-       "Nutzfläche gesamt"
-      ],
-      [
-       "62 %",
-       "Anteil Apartments"
-      ],
-      [
-       "38 %",
-       "Anteil Gewerbe"
-      ]
-     ]
+     "h": 140,
+     "bild": "vis-wohnhaeuser.png",
+     "pos": "35% center",
+     "titel": "Ansicht Wohnhäuser, Visualisierung"
     },
     {
      "typ": "tabelle",
@@ -1701,77 +1829,72 @@
    "titel": "Der Kaufpreis ist der größte Hebel",
    "bloecke": [
     {
-     "typ": "tabelle",
+     "typ": "hstack",
      "x": 51,
      "y": 410,
-     "w": 520,
-     "titel": "Von der Investition zum Gesamtwert in Mio. €, netto",
-     "breiten": [
-      190,
-      66,
-      66,
-      66,
-      66,
-      66
-     ],
-     "kopf": [
-      "",
-      "Kauf",
-      "CapEx",
-      "NK, FF&amp;E",
-      "Erwerbs-NK",
-      "Summe"
-     ],
-     "hervorheben": [
-      "Investition bei Early-Commit 5,3 Mio. €"
-     ],
+     "w": 540,
+     "lw": 150,
+     "sw": 64,
+     "max": 23.2,
+     "titel": "Von der Investition zum Gesamtwert, Mio. € netto",
      "zeilen": [
       [
-       "Investition bei Listenpreis 7,0 Mio. €",
-       "7,00",
-       "8,66",
-       "3,07",
-       "0,46",
-       "19,2"
+       "Investition bei Listenpreis",
+       [
+        [
+         7.0,
+         "grey",
+         "Kauf 7,0"
+        ],
+        [
+         8.66,
+         "navy",
+         "CapEx 8,66"
+        ],
+        [
+         3.53,
+         "light",
+         "NK, FF&amp;E 3,53"
+        ]
+       ],
+       "19,2 Mio. €"
       ],
       [
-       "Investition bei Early-Commit 5,3 Mio. €",
-       "5,30",
-       "8,66",
-       "3,07",
-       "0,34",
-       "17,4"
-      ]
-     ]
-    },
-    {
-     "typ": "tabelle",
-     "x": 51,
-     "y": "folgt",
-     "abstand": 18,
-     "w": 520,
-     "titel": "Gesamtwert nach Fertigstellung, Basisfall",
-     "breiten": [
-      190,
-      110,
-      110,
-      110
-     ],
-     "kopf": [
-      "",
-      "Apartments netto",
-      "Gewerbe",
-      "Gesamtwert"
-     ],
-     "hervorheben": [
-      "Gesamtwert"
-     ],
-     "zeilen": [
+       "Investition bei Early-Commit",
+       [
+        [
+         5.3,
+         "grey",
+         "Kauf 5,3"
+        ],
+        [
+         8.66,
+         "navy",
+         "CapEx 8,66"
+        ],
+        [
+         3.41,
+         "light",
+         "NK, FF&amp;E 3,41"
+        ]
+       ],
+       "17,4 Mio. €"
+      ],
       [
-       "Gesamtwert",
-       "18,06",
-       "5,17",
-       "23,2"
+       "Gesamtwert nach Fertigstellung",
+       [
+        [
+         18.06,
+         "mid",
+         "Apartments netto 18,06"
+        ],
+        [
+         5.17,
+         "light",
+         "Gewerbe 5,17"
+        ]
+       ],
+       "23,2 Mio. €"
       ]
      ]
     },
@@ -1779,8 +1902,8 @@
      "typ": "text",
      "x": 51,
      "y": "folgt",
-     "abstand": 18,
-     "w": 520,
+     "abstand": 10,
+     "w": 540,
      "schrift": 7.8,
      "absaetze": [
       [
@@ -1793,36 +1916,29 @@
       ],
       [
        "NK, FF&amp;E:",
-       "Planungs- und Nebenkosten (0,87), Vertriebsprovision (0,90), Möblierung (1,30)."
+       "Planungs- und Nebenkosten (0,87), Vertriebsprovision (0,90), Möblierung (1,30) und Erwerbsnebenkosten (0,46 bzw. 0,34)."
       ]
      ]
     },
     {
-     "typ": "balken",
+     "typ": "kpi",
      "x": 51,
-     "y": "folgt",
-     "abstand": 22,
-     "w": 520,
-     "titel": "Investition und Gesamtwert, Mio. € netto",
-     "lw": 190,
-     "vw": 60,
-     "max": 23.2,
+     "y": 150,
+     "w": 540,
+     "hell": true,
+     "groesse": 19,
      "items": [
       [
-       "Investition bei Listenpreis",
-       19.2,
-       "19,2"
+       "17,4 Mio. €",
+       "Gesamtinvestition Early-Commit"
       ],
       [
-       "Investition bei Early-Commit",
-       17.4,
-       "17,4"
+       "23,2 Mio. €",
+       "Gesamtwert nach Fertigstellung"
       ],
       [
-       "Gesamtwert nach Fertigstellung",
-       23.2,
-       "23,2",
-       "h"
+       "5,9 Mio. €",
+       "Wertüberschuss, Basisfall"
       ]
      ]
     },
@@ -2193,7 +2309,7 @@
       },
       {
        "name": "Nebenkosten",
-       "farbe": "acc",
+       "farbe": "mid",
        "werte": [
         0.09,
         0.65,
@@ -2544,17 +2660,17 @@
        "ende": "8,5",
        "dy": -4,
        "werte": [
-        -5.62,
-        -10.18,
-        -4.07,
-        -0.28,
-        0.09,
-        0.47,
-        0.86,
-        1.25,
-        1.65,
-        2.06,
-        8.5
+        -8.42,
+        -10.19,
+        -4.05,
+        -0.26,
+        0.11,
+        0.5,
+        0.88,
+        1.27,
+        1.67,
+        2.08,
+        8.48
        ]
       }
      ]
@@ -2619,7 +2735,7 @@
    ],
    "quelle": [
     "Quelle: Berechnung GRENFORD; Kaufpreisverteilung 2,5 / 2,8 Mio. € als Modellannahme, keine zugesagte Verkäuferkondition. Vorsichtig: 4.500 €/m², Verkauf ein Jahr später, Nebenkosten 15 %, Eigentümerkosten 8 %, Exit 8,0 %.",
-    "Basis: 5.000 €/m², Nebenkosten 10 %, Eigentümerkosten 5 %, Exit 7,0 %. Chance: 5.250 €/m², Exit 6,5 %. Kurve Listenpreis: Mehrpreis 1,7 Mio. € und höhere Erwerbsnebenkosten in 2026 unterstellt. Vor Steuern, ohne Finanzierung."
+    "Basis: 5.000 €/m², Nebenkosten 10 %, Eigentümerkosten 5 %, Exit 7,0 %. Chance: 5.250 €/m², Exit 6,5 %. Vor Steuern, ohne Finanzierung."
    ]
   },
   {
@@ -2747,12 +2863,18 @@
       "Exit 7,0 %",
       "Exit 8,0 %"
      ],
-     "markiere": [
-      [
+     "heat": {
+      "zeilen": [
+       0,
        1,
        2
+      ],
+      "spalten": [
+       1,
+       2,
+       3
       ]
-     ],
+     },
      "zeilen": [
       [
        "4.875",
@@ -2793,12 +2915,18 @@
       "Exit 7,0 %",
       "Exit 8,0 %"
      ],
-     "markiere": [
-      [
+     "heat": {
+      "zeilen": [
+       0,
        1,
        2
+      ],
+      "spalten": [
+       1,
+       2,
+       3
       ]
-     ],
+     },
      "zeilen": [
       [
        "8 %",
@@ -3430,33 +3558,65 @@
      "x": 520,
      "y": 410,
      "w": 336,
-     "h": 190,
+     "h": 180,
      "titel": "Operatives Ergebnis aller Profit-Center in T€",
+     "gestapelt": true,
      "max": 731,
-     "breite": 0.4,
-     "legende": false,
+     "breite": 0.46,
      "kategorien": [
       "Jahr 2 (≈ 2027)",
       "Jahr 3 (≈ 2028)",
       "Jahr 4 (≈ 2029)"
      ],
+     "summen": [
+      "182 T€",
+      "635 T€",
+      "731 T€"
+     ],
      "serien": [
       {
-       "name": "Operatives Ergebnis",
-       "farben": [
-        "light",
-        "acc",
-        "navy"
-       ],
+       "name": "Coworking",
+       "farbe": "navy",
        "werte": [
-        182,
-        635,
-        731
-       ],
-       "labels": [
-        "182 T€",
-        "635 T€",
-        "731 T€"
+        107,
+        313,
+        332
+       ]
+      },
+      {
+       "name": "Fitness / Wellness",
+       "farbe": "mid",
+       "werte": [
+        10,
+        183,
+        237
+       ]
+      },
+      {
+       "name": "Medizin",
+       "farbe": "grey",
+       "werte": [
+        23,
+        23,
+        23
+       ]
+      },
+      {
+       "name": "Physio / Kosmetik",
+       "farbe": "light",
+       "werte": [
+        24,
+        37,
+        50
+       ]
+      },
+      {
+       "name": "Betreiber-SPV",
+       "farbe": "mist",
+       "werte": [
+        18,
+        79,
+        88
        ]
       }
      ]

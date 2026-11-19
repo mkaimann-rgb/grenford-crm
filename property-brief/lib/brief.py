@@ -297,7 +297,7 @@ def m_titel(d):
     tl = ts * 43 / 36.5
     vals = d['kennzahlen']
     ws = [max(width(v, 'S', 19), width(l.upper(), 'N', 6.6, .04)) for v, l in vals]
-    gap = (490 - sum(ws)) / 4; xs = []; x = 390 + gap
+    gap = (490 - sum(ws)) / (len(vals) + 1); xs = []; x = 390 + gap
     for w in ws: xs.append(round(x, 2)); x += w + gap
     s = (IMG(d['bild'], 0, 0, 907, 567, d.get('bild_pos', 'center'))
          + R(0, 0, COL, 567, NAVY, .6, extra=COLCUT()) + COLLINE() + MARK('white', 47, 450.63, .217335)
@@ -839,11 +839,20 @@ def m_ueberblick_kosten(d, obj):
 def m_fakten(d, obj):
     """B2B-Faktenseite: links Objekt und Kosten, rechts Kaufpreis und Rendite in Varianten-Spalten."""
     LX, LR, RX, RR = 51, 425, 482, 856
-    s = (chrome(d.get('kopf', 'Hard Facts')) + EB(51, 487, d['dachzeile']) + T(51, 450, 'S', 31, 34, INK, d['titel'])
-         + T(51, 418, 'N', 9.6, 14, INK, d['intro'], w=805) + VL(453.5, 392, 46, LINE, .5))
+    s = chrome(d.get('kopf', 'Hard Facts')) + EB(51, 487, d['dachzeile']) + T(51, 450, 'S', 31, 34, INK, d['titel'])
+    top = 384
+    if d.get('kennzahlen'):
+        k = d['kennzahlen']; bw = (805 - 10 * (len(k) - 1)) / len(k)
+        for j, (v, lab) in enumerate(k):
+            xx = round(51 + j * (bw + 10), 2)
+            s += R(xx, 380, round(bw, 2), 44, extra='border-radius:0') + T(xx + 12, 405, 'L', 17, 20, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(xx + 12, 389, lab, LIGHT, 5.8)
+        top = 360
+    else:
+        s += T(51, 418, 'N', 9.6, 14, INK, d['intro'], w=805)
+    s += VL(453.5, top + 8, 46, LINE, .5)
     rh = d.get('zeilenhoehe', 15.6)
     def side(x0, x1, blocks, cols):
-        y = 384; out = ''
+        y = top; out = ''
         for blk in blocks:
             out += EB(x0, y, blk['titel'], NAVY, 7.4)
             for j, h in enumerate(cols if blk.get('spalten', True) and cols else []):
@@ -912,7 +921,7 @@ def nlines(text, size, w, f='N'):
 
 
 def _farbe(k):
-    return {'navy': NAVY, 'acc': ACC, 'light': LIGHT, 'grey': '#b9b4ab', 'mist': MIST}.get(k, k)
+    return {'navy': NAVY, 'acc': ACC, 'mid': '#6c9f95' if NAVY == '#24534c' else '#7f97b8', 'light': LIGHT, 'grey': '#b9b4ab', 'mist': MIST}.get(k, k)
 
 
 SQ = 'border-radius:0;'
@@ -943,6 +952,10 @@ def b_tabelle(b):
         s += L(x, y, x + w, NAVY if strong else LINE, 1 if strong else .5)
         for j, c in enumerate(r):
             if (i, j) in mark: s += R(xs[j] + 2, y - rh + 1.5, cols[j] - 2, rh - 3, LIGHT, .35)
+            if b.get('heat') and i in b['heat']['zeilen'] and j in b['heat']['spalten']:
+                vals = [float(str(rr[jj]).replace('.', '').replace(',', '.').replace(' %', '').replace('&nbsp;', '')) for ii, rr in enumerate(b['zeilen']) if ii in b['heat']['zeilen'] for jj in b['heat']['spalten']]
+                v = float(str(c).replace('.', '').replace(',', '.').replace(' %', ''))
+                s += R(xs[j] + 2, y - rh + 1.5, cols[j] - 2, rh - 3, ACC, round(.1 + .45 * (v - min(vals)) / (max(vals) - min(vals) or 1), 2), extra=SQ)
             col = NAVY if (strong or (j == b.get('akzent'))) else INK
             f = 'B' if (strong or j == b.get('akzent')) else 'N'
             yb = y - zh * .66
@@ -1068,7 +1081,13 @@ def b_kpi(b):
             s += L(xx, y, xx + bw, NAVY, 1) + T(xx, y - 26, 'L', vs, vs * 1.2, NAVY, v, extra='font-variant-numeric:tabular-nums;letter-spacing:-.02em') + EB(xx, y - 46, lab, ACC, 6.2)
             if len(it) > 2: s += T(xx, y - 58, 'N', 7, 9, GREY, it[2])
         else:
-            s += R(xx, y - h, round(bw, 2), h) + T(xx + 14, y - h + 34, 'L', vs, 24, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 13, lab, LIGHT, 6.2)
+            if len(it) > 2 and it[2] == 'durch':
+                s += R(xx, y - h, round(bw, 2), h, LIGHT, .3, extra=SQ) + T(xx + 14, y - h + 34, 'L', vs, 24, GREY, v, extra='font-variant-numeric:tabular-nums;text-decoration:line-through;text-decoration-thickness:1pt') + EB(xx + 14, y - h + 13, lab, GREY, 6.2)
+            elif len(it) > 2 and it[2] == 'hell':
+                s += R(xx, y - h, round(bw, 2), h, LIGHT, 1, extra=SQ) + T(xx + 14, y - h + 34, 'L', vs, 24, NAVY, v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 13, lab, NAVY, 6.2)
+            else:
+                s += R(xx, y - h, round(bw, 2), h) + T(xx + 14, y - h + 34, 'L', vs, 24, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 13, lab, LIGHT, 6.2)
+
     b['_unten'] = y - h
     return s
 
@@ -1170,6 +1189,128 @@ BLOECKE = {'tabelle': b_tabelle, 'kv': b_kv, 'text': b_text, 'balken': b_balken,
            'kpi': b_kpi, 'dunkel': b_dunkel, 'gantt': b_gantt, 'zeitstrahl': b_zeitstrahl, 'matrix': b_matrix, 'bild': b_bild, 'schritte': b_schritte}
 
 
+def _rgba(hexc, a):
+    h = hexc.lstrip('#'); return f'rgba({int(h[0:2],16)},{int(h[2:4],16)},{int(h[4:6],16)},{a})'
+
+
+def _svg(inner, clip=None):
+    cp = ''
+    if clip:
+        x, y, w, h = clip; cid = f'c{abs(hash((x, y, w, h, C.page))) % 10**8}'
+        cp = f'<defs><clipPath id="{cid}"><rect x="{x}" y="{H-y}" width="{w}" height="{h}"/></clipPath></defs>'
+        inner = f'<g clip-path="url(#{cid})">{inner}</g>'
+    return f'<svg class="t" style="left:0;top:0;width:907pt;height:567pt;overflow:visible" viewBox="0 0 907 567">{cp}{inner}</svg>'
+
+
+def b_karte(b):
+    """Regionalkarte aus gemeinfreien Geodaten: Länder, Kantone, Rhein, Standort mit Strahlen oder Radien."""
+    x, y, w, h = b['x'], b['y'], b['w'], b['h']
+    geo = json.load(open(os.path.join(C.objdir, b['geo'])))
+    lon0, lat0, lon1, lat1 = b['bbox']; latc = (lat0 + lat1) / 2; cs = math.cos(math.radians(latc))
+    k = min(w / ((lon1 - lon0) * cs), h / (lat1 - lat0)); lonc = (lon0 + lon1) / 2
+    cx0, cy0 = x + w / 2, y - h / 2
+    P = lambda lon, lat: (cx0 + (lon - lonc) * cs * k, cy0 + (lat - latc) * k)   # Seitenkoordinaten, Ursprung unten
+    def path(g):
+        t = g['type']; cs_ = g['coordinates']
+        rings = {'Polygon': cs_, 'MultiPolygon': [r for p in cs_ for r in p], 'LineString': [cs_], 'MultiLineString': cs_}.get(t, [])
+        close = 'Z' if 'Polygon' in t else ''
+        return ''.join('M' + 'L'.join(f'{P(a, c)[0]:.1f},{H-P(a, c)[1]:.1f}' for a, c in r) + close for r in rings if r)
+    fill = {'DEU': '#ffffff', 'CHE': _rgba(LIGHT, .30), 'FRA': '#ece7df', 'AUT': '#ece7df', 'LIE': '#ece7df'}
+    sv = f'<rect x="{x}" y="{H-y}" width="{w}" height="{h}" fill="#ece7df"/>'
+    feats = geo['features']
+    for f in feats:
+        if f['properties']['typ'] == 'land': sv += f'<path d="{path(f["geometry"])}" fill="{fill.get(f["properties"]["iso"], "#ece7df")}" stroke="none"/>'
+    for f in feats:
+        if f['properties']['typ'] == 'region': sv += f'<path d="{path(f["geometry"])}" fill="none" stroke="#cfc7bb" stroke-width=".45"/>'
+    for f in feats:
+        if f['properties']['typ'] == 'see': sv += f'<path d="{path(f["geometry"])}" fill="#d3e2e8" stroke="none"/>'
+        if f['properties']['typ'] == 'fluss': sv += f'<path d="{path(f["geometry"])}" fill="none" stroke="#9dbfcc" stroke-width="1.3"/>'
+    for f in feats:
+        if f['properties']['typ'] == 'land' and f['properties']['iso'] in ('CHE',):
+            sv += f'<path d="{path(f["geometry"])}" fill="none" stroke="{NAVY}" stroke-width=".9" stroke-dasharray="3 1.6"/>'
+    z = b['ziel']; zx, zy = P(z['lon'], z['lat'])
+    for r in b.get('ringe', []):
+        rp = r / 111.2 * k
+        sv += f'<circle cx="{zx:.1f}" cy="{H-zy:.1f}" r="{rp:.1f}" fill="none" stroke="{ACC}" stroke-width=".8" stroke-dasharray="2.5 2"/>'
+    s = ''
+    for o in b.get('orte', []):
+        ox, oy = P(o['lon'], o['lat'])
+        if b.get('strahlen'): sv += f'<line x1="{zx:.1f}" y1="{H-zy:.1f}" x2="{ox:.1f}" y2="{H-oy:.1f}" stroke="{ACC}" stroke-width=".8" stroke-dasharray="3 2"/>'
+        sv += f'<circle cx="{ox:.1f}" cy="{H-oy:.1f}" r="2.6" fill="{NAVY}"/>'
+        dx, dy = o.get('dx', 6), o.get('dy', 2); al = o.get('align', 'left')
+        lx = ox + dx if al == 'left' else ox - dx - 140
+        st = '' if al == 'left' else 'text-align:right'
+        s += T(round(lx, 1), oy + dy, 'B', 7.6, 10, NAVY, o['name'], w=140, extra=st + ';text-shadow:0 0 2pt #fff,0 0 2pt #fff,0 0 1pt #fff;')
+        if o.get('sub'): s += T(round(lx, 1), oy + dy - 10, 'N', 6.6, 9, GREY, o['sub'], w=140, extra=st + ';text-shadow:0 0 2pt #fff,0 0 2pt #fff,0 0 1pt #fff;')
+    for r in b.get('ringe', []):
+        rp = r / 111.2 * k
+        s += T(round(zx + rp * .71 + 2, 1), zy - rp * .71 - 2, 'B', 6.6, 9, ACC, f'{r} km', extra='text-shadow:0 0 2pt #fff,0 0 2pt #fff,0 0 1pt #fff;')
+    for lab in b.get('laender', []):
+        lx_, ly_ = P(lab['lon'], lab['lat'])
+        s += EB(round(lx_, 1), ly_, lab['name'], _farbe(lab['farbe']) if lab.get('farbe') else GREY, 7)
+    sv += f'<circle cx="{zx:.1f}" cy="{H-zy:.1f}" r="6.5" fill="#ffffff" stroke="{NAVY}" stroke-width="1.6"/><circle cx="{zx:.1f}" cy="{H-zy:.1f}" r="3" fill="{NAVY}"/>'
+    bw = max(width(z['name'], 'B', 8.4), width(z.get('sub', ''), 'N', 6.8)) + 20
+    bx = zx + z.get('dx', 12); by = zy + z.get('dy', 10)
+    s += R(round(bx, 1), round(by - 6, 1), round(bw, 1), 30, NAVY, extra='border-radius:0') + T(round(bx + 10, 1), by + 13, 'B', 8.4, 11, '#ffffff', z['name']) + T(round(bx + 10, 1), by + 2, 'N', 6.8, 9, MIST, z.get('sub', ''))
+    out = _svg(sv, (x, y, w, h)) + f'<div class="t" style="left:{x}pt;top:{H-y}pt;width:{w}pt;height:{h}pt;border:.6pt solid {LINE}"></div>' + s
+    if b.get('nachweis'): out += T(x, y - h - 10, 'N', 6.2, 8, GREY, b['nachweis'])
+    b['_unten'] = y - h - 14
+    return out
+
+
+def b_donut(b):
+    x, y = b['x'], b['y']; r = b.get('r', 70); ring = b.get('ring', 22); items = b['items']; tot = sum(i[1] for i in items)
+    cx, cy = x + r, y - r - (18 if b.get('titel') else 0); s = ''
+    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4)
+    sv = ''; a0 = -90
+    for lab, v, col in items:
+        a1 = a0 + 360 * v / tot; rm = r - ring / 2
+        p0 = (cx + rm * math.cos(math.radians(a0)), H - cy + rm * math.sin(math.radians(a0)))
+        p1 = (cx + rm * math.cos(math.radians(a1 - .6)), H - cy + rm * math.sin(math.radians(a1 - .6)))
+        sv += f'<path d="M{p0[0]:.2f},{p0[1]:.2f} A{rm},{rm} 0 {1 if a1 - a0 > 180 else 0} 1 {p1[0]:.2f},{p1[1]:.2f}" fill="none" stroke="{_farbe(col)}" stroke-width="{ring}"/>'
+        a0 = a1
+    s += _svg(sv) + T(cx - 60, cy + 2, 'L', 15, 18, NAVY, b['mitte'][0], w=120, extra='text-align:center;font-variant-numeric:tabular-nums') + T(cx - 60, cy - 16, 'M', 6.4, 9, GREY, b['mitte'][1].upper(), w=120, extra='text-align:center;letter-spacing:.06em')
+    lx = x + 2 * r + 30; ly = cy + 9 * len(items) - 4
+    for lab, v, col in items:
+        s += R(lx, ly - 3, 8, 8, _farbe(col), extra=SQ) + T(lx + 14, ly, 'N', 7.8, 10, INK, lab) + RT(lx + b.get('lw', 190), ly, 'B', 7.8, 10, NAVY, b.get('format', '{:,.0f} m²').format(v).replace(',', '.'), 80)
+        ly -= 18
+    b['_unten'] = cy - r - 10
+    return s
+
+
+def b_hstack(b):
+    x, y, w = b['x'], b['y'], b['w']; lw = b.get('lw', 150); sw = b.get('sw', 70); mx = b['max']; s = ''
+    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 18
+    leg = []
+    for lab, segs, summe in b['zeilen']:
+        s += T(x, y - 11, 'N', 7.8, 10, INK, lab, w=lw - 8); bx = x + lw
+        for v, col, nm in segs:
+            sw_ = (w - lw - sw) * v / mx
+            s += R(round(bx, 2), y - 20, round(sw_, 2) - .8, 20, _farbe(col), extra=SQ)
+            if sw_ > 36: s += T(round(bx + 5, 2), y - 11.5, 'B', 6.8, 9, '#ffffff' if col in ('navy', 'acc', 'mid') else NAVY, nm)
+            if nm not in [l[0] for l in leg]: leg.append((nm, col))
+            bx += sw_
+        s += T(round(bx + 6, 2), y - 11, 'B', 8, 10, NAVY, summe)
+        y -= 34
+    b['_unten'] = y
+    return s
+
+
+def b_achsen(b):
+    """Achsenbeschriftung für eine Matrix: Spaltenköpfe oben, Zeilenköpfe links (gedreht)."""
+    s = ''
+    for i, t in enumerate(b['oben']):
+        s += EB(b['x'] + b['lx'] + i * b['cw'], b['y'], t, ACC, 6.8)
+    for i, t in enumerate(b['links']):
+        yy = b['y'] - 14 - b['ch'] * i - b['ch'] / 2
+        s += T(b['x'] - 30, yy, 'M', 6.4, 9, ACC, t.upper(), w=b['ch'], extra=f'letter-spacing:.06em;transform:rotate(-90deg);transform-origin:left top;left:{b["x"]}pt;top:{H-yy+b["ch"]/2:.1f}pt;text-align:center')
+    b['_unten'] = b['y']
+    return s
+
+
+BLOECKE.update({'karte': b_karte, 'donut': b_donut, 'hstack': b_hstack, 'achsen': b_achsen})
+
+
 def m_raster(d, obj):
     s = chrome(d['kopf']) + EB(51, 487, d['dachzeile']) + T(51, 450, 'S', 31, 34, INK, d['titel'])
     if d.get('intro'): s += T(51, 418, 'N', 9.6, 14, INK, d['intro'], w=805)
@@ -1185,7 +1326,9 @@ def m_raster(d, obj):
 
 def m_bildseite(d):
     """Atmosphärische Doppelseite: Foto vollflächig, Textspalte links mit Akzentfarbe, Kennzahlen unten."""
-    s = (IMG(d['bild'], 0, 0, 907, 567, d.get('bild_pos', 'center')) + R(0, 0, COL, 567, NAVY, .62)
+    over = (f'<div class="t" style="left:0;top:0;width:907pt;height:567pt;background:linear-gradient(90deg,{_rgba(NAVY,.9)} 0%,{_rgba(NAVY,.72)} 30%,{_rgba(NAVY,.15)} 62%,{_rgba(NAVY,0)} 80%)"></div>'
+            if d.get('stil') == 'voll' else R(0, 0, COL, 567, NAVY, .62))
+    s = (IMG(d['bild'], 0, 0, 907, 567, d.get('bild_pos', 'center')) + over
          + MARK('white') + HEAD(d['kopf']) .replace(f'color:{ACC}', 'color:#ffffff;' + SHADOW) + FOOT(img=True) + PN(img=True)
          + EB(51, 404, d['dachzeile'], CREAM, 8.5) + T(51, 360, 'S', 32, 37, CREAM, br(d['titel']))
          + T(51, 360 - 37 * (len(d['titel']) - 1) - 46, 'N', 9.8, 14.8, MIST, d['text'], w=270))

@@ -16,7 +16,7 @@ S.append({"modul": "titel", "id": "titel", "bild": "vis-luft.png", "bild_pos": "
   "titel": ["MONTESANA"], "untertitel": ["Serviced Living", "und Coworking"],
   "kurz": ["Genehmigtes Mixed-Use-Ensemble", "92 Apartments, vier Profit-Center", "20 km zur Schweizer Grenze"],
   "adresse": ["Dr.-Bettinger-Weg 1, 3, 5", "79862 Höchenschwand"],
-  "kennzahlen": [["5,30 Mio. €", "Kaufpreis Early-Commit"], ["13,9-fach", "Faktor Eigentümerertrag"], ["23,1 %", "IRR 10 Jahre, Basisfall"]],
+  "kennzahlen": [["92", "Serviced Apartments"], ["5,30 Mio. €", "Kaufpreis Early-Commit"], ["13,9-fach", "Faktor Eigentümerertrag"], ["23,1 %", "IRR 10 Jahre"]],
   "hinweis": "Visualisierung: Projektgesellschaft · Stand 11.11.2026"})
 
 S.append({"modul": "inhalt", "id": "inhalt", "bereich": "vor", "bild": "bestand-luft.png", "bild_pos": "30% center",
@@ -41,7 +41,8 @@ S.append({"modul": "vorwort", "id": "vorwort", "bereich": "vor", "dachzeile": "M
   "rechts": "Das Angebot: Asset Deal off-market inklusive Flst. 213. Listenpreis 7,0 Mio. €, Early-Commit 5,3 Mio. € bei LOI bis Ende November 2026; eine gestaffelte Zahlung ist verhandelbar.",
   "schluss": "Das Memo führt von den Hard Facts über Standort, Research und Konzept zur 10-Jahres-Rechnung und zum Asset Check. Im Basisfall ergibt sich über zehn Jahre eine IRR von 23,1 %. Für Rückfragen und den Zugang zum Datenraum stehen wir Ihnen persönlich zur Verfügung."})
 
-S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Facts", "zeilenhoehe": 14.6,
+S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Facts", "zeilenhoehe": 14.0,
+  "kennzahlen": [["5,3 Mio. €", "Kaufpreis Early-Commit"], ["13,9-fach", "Faktor Eigentümerertrag"], ["23,1 %", "IRR 10 Jahre, Basisfall"], ["1,62-fach", "Multiple auf Eigenkapital"], ["23,2 Mio. €", "Gesamtwert nach Fertigstellung"]],
   "dachzeile": "Zahlen, Daten, Fakten · Objekt-Nr. GI26-002", "titel": "Das Projekt in Kennzahlen",
   "intro": "Kaufpreis und Renditen in zwei Varianten: Early-Commit (5,3 Mio. €, LOI bis Ende November 2026) und Listenpreis (7,0 Mio. €). Alle Werte netto, vor Steuern und Finanzierung.",
   "links": [
@@ -67,7 +68,7 @@ S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Fac
              "Der Faktor bezieht sich auf den stabilisierten Eigentümerertrag der Gewerbeflächen."]})
 
 # 1 Standort (Bildseite)
-S.append({"modul": "bildseite", "id": "standort", "kopf": "Standort", "bild": "bestand-luft.png", "bild_pos": "center",
+S.append({"modul": "bildseite", "id": "standort", "stil": "voll", "kopf": "Standort", "bild": "bestand-luft.png", "bild_pos": "center 40%",
   "dachzeile": "Höchenschwand · Südschwarzwald", "titel": ["Kurort im", "Südschwarzwald"],
   "text": "Höchenschwand ist heilklimatischer Kurort auf dem Hochplateau des Südschwarzwalds. Die Schweizer Grenze bei Waldshut liegt 20 km entfernt; dahinter beginnen mit Aargau, Zürich und Basel einige der kaufkräftigsten Arbeitsmärkte Europas.",
   "kennzahlen": [["1.015 m", "Höhe über NN"], ["20 km", "zur Schweizer Grenze"], ["14.668", "Grenzgänger Kreis Waldshut"]],
@@ -77,9 +78,15 @@ S.append({"modul": "bildseite", "id": "standort", "kopf": "Standort", "bild": "b
 S.append({"modul": "raster", "id": "lage", "kopf": "Lage", "dachzeile": "Lage und Erreichbarkeit", "titel": "Im Dreiländerraum, abseits der Ballungszentren",
   "intro": "Basel, Zürich und Freiburg liegen in rund einer bis eineinhalb Stunden Fahrzeit. Der Schweizer Arbeitsmarkt beginnt am Rhein, 20 Kilometer entfernt; Stuttgart und München sind in einer Tagesreise erreichbar.",
   "bloecke": [
-    {"typ": "balken", "x": L0, "y": 384, "w": LW, "titel": "Strecke Pkw ab MonteSana in km (ca.)", "lw": 120, "vw": 70, "abstand": 32, "max": 330,
-     "items": [["Schweizer Grenze (Waldshut)", 20, "20 km · 25 min", "h"], ["Basel", 70, "70 km · 1 h"], ["Freiburg i. Br.", 80, "80 km · 1 h 30"],
-               ["Zürich", 85, "85 km · 1 h 15"], ["Stuttgart", 190, "190 km · 2 h 15"], ["München", 330, "330 km · 3 h 45"]]},
+    {"typ": "karte", "x": L0, "y": 392, "w": LW, "h": 300, "geo": "quelle/geo/region.geojson", "bbox": [7.35, 47.3, 9.0, 48.12], "strahlen": True,
+     "ziel": {"name": "MonteSana", "sub": "Höchenschwand · 1.015 m", "lon": 8.168, "lat": 47.733, "dx": -40, "dy": 16},
+     "orte": [{"name": "Waldshut-Tiengen", "sub": "Grenze · 20 km · 25 min", "lon": 8.215, "lat": 47.623, "dx": 8, "dy": -8},
+                {"name": "Basel", "sub": "70 km · 1 h", "lon": 7.588, "lat": 47.558},
+                {"name": "Zürich", "sub": "85 km · 1 h 15", "lon": 8.541, "lat": 47.377},
+                {"name": "Freiburg i. Br.", "sub": "80 km · 1 h 30", "lon": 7.842, "lat": 47.999},
+                {"name": "Schaffhausen", "sub": "ca. 45 km", "lon": 8.635, "lat": 47.697}],
+     "laender": [{"name": "Deutschland", "lon": 8.45, "lat": 48.05}, {"name": "Schweiz", "lon": 7.95, "lat": 47.36, "farbe": "acc"}, {"name": "Frankreich", "lon": 7.38, "lat": 47.9}],
+     "nachweis": "Kartendaten: Natural Earth (gemeinfrei) · Strecken und Fahrzeiten Pkw, gerundet"},
     {"typ": "tabelle", "x": R0, "y": 384, "w": RW, "titel": "Entfernungen ab MonteSana", "breiten": [134, 70, 80, 90],
      "kopf": ["Ziel", "Luftlinie", "Pkw (ca.)", "Fahrzeit (ca.)"],
      "zeilen": [["Schweizer Grenze (Waldshut)", "14 km", "20 km", "25 min"], ["Basel", "48 km", "70 km", "1 h"], ["Zürich", "47 km", "85 km", "1 h 15"],
@@ -92,24 +99,30 @@ S.append({"modul": "raster", "id": "lage", "kopf": "Lage", "dachzeile": "Lage un
 S.append({"modul": "raster", "id": "grenzraum", "kopf": "Standort", "dachzeile": "Deutsch-schweizer Grenze", "titel": "Schwarzwald und Schweizer Arbeitsmarkt",
   "intro": "14.668 Grenzgänger leben im Landkreis Waldshut und arbeiten in der Schweiz. Schweizer Einkommen treffen auf deutsche Lebenshaltungskosten; daraus entsteht Nachfrage nach Wohnen auf Zeit und Arbeitsplätzen im Grenzraum.",
   "bloecke": [
-    {"typ": "balken", "x": L0, "y": 384, "w": LW, "titel": "Grenzgänger aus dem Kreis Waldshut nach Kanton (2024)", "lw": 90, "vw": 50, "abstand": 26,
+    {"typ": "karte", "x": L0, "y": 392, "w": LW, "h": 300, "geo": "quelle/geo/region.geojson", "bbox": [7.3, 47.2, 9.05, 48.3], "ringe": [20, 30, 60],
+     "ziel": {"name": "MonteSana", "sub": "Heilklimatischer Kurort · 1.015 m", "lon": 8.168, "lat": 47.733, "dx": 12, "dy": 12},
+     "orte": [{"name": "Basel", "lon": 7.588, "lat": 47.558}, {"name": "Zürich", "lon": 8.541, "lat": 47.377}, {"name": "Feldberg", "sub": "ca. 30 km", "lon": 8.004, "lat": 47.874, "align": "right"},
+              {"name": "Schaffhausen", "lon": 8.635, "lat": 47.697}, {"name": "Kanton Aargau", "lon": 8.1, "lat": 47.42}],
+     "laender": [{"name": "Deutschland", "lon": 8.55, "lat": 48.1}, {"name": "Schweiz", "lon": 7.75, "lat": 47.3, "farbe": "acc"}],
+     "nachweis": "Kartendaten: Natural Earth (gemeinfrei) · Radien 20, 30 und 60 km um MonteSana"},
+    {"typ": "balken", "x": R0, "y": 384, "w": RW, "titel": "Grenzgänger aus dem Kreis Waldshut nach Kanton (2024)", "lw": 80, "vw": 50, "abstand": 22,
      "items": [["Aargau", 7249, "7.249", "h"], ["Zürich", 3419, "3.419"], ["Schaffhausen", 1338, "1.338"], ["Übrige", 2662, "2.662"]]},
-    {"typ": "kpi", "x": L0, "y": "folgt", "abstand": 20, "w": LW, "hell": True, "groesse": 19,
-     "items": [["14.668", "Grenzgänger gesamt"], ["20–55 min", "Pkw nach Aargau, Zürich, Basel"], ["ca. 30 km", "zum Feldberg"]]},
-    {"typ": "kv", "x": R0, "y": 384, "w": RW, "kw": 120, "titel": "Nachfragetreiber",
-     "zeilen": [["Kaufkraft", "Schweizer Einkommen bei deutschen Lebenshaltungskosten; hohe Zahlungsbereitschaft für möbliertes Wohnen."],
+    {"typ": "kv", "x": R0, "y": "folgt", "abstand": 14, "w": RW, "kw": 104, "schrift": 7.9, "titel": "Nachfragetreiber",
+     "zeilen": [["Kaufkraft", "14.668 Grenzgänger; Schweizer Einkommen bei deutschen Lebenshaltungskosten."],
                 ["Drei Nachfragegruppen", "Grenzgänger mit Zweitwohnsitz oder Wochenaufenthalt, Fachkräfte und Expats im Corporate Housing, Schweizer Gäste im Kurzurlaub."],
                 ["Kurort", "Ganzjahresnachfrage durch Wandern, Wellness, Reha und Wintersport (Feldberg ca. 30 km)."],
-                ["Coworking", "Remote-Arbeitsplätze zwischen Zürich, Basel und Aargau in 20 bis 55 Minuten Entfernung."]]}],
+                ["Coworking", "Remote-Arbeitsplätze zwischen Zürich, Basel und Aargau in 20 bis 55 Minuten."]]}],
   "quelle": "Quelle: Grenzgängerzentrum (grenzgaengerzentrum.de) nach Bundesamt für Statistik, Zahlen 2024; Exposé Teil A; Investment-Teaser. Zahlen nicht von GRENFORD verifiziert."})
 
 # 4 Angebot
 S.append({"modul": "raster", "id": "angebot", "kopf": "Das Angebot", "dachzeile": "Preis und Zahlungsstruktur", "titel": "Early-Commit deutlich unter Listenpreis",
   "bloecke": [
-    {"typ": "kpi", "x": L0, "y": 404, "w": LW, "items": [["7,0 Mio. €", "Listenpreis netto"], ["5,3 Mio. €", "Early-Commit-Preis netto"]], "groesse": 22},
-    {"typ": "text", "x": L0, "y": "folgt", "abstand": 18, "w": LW, "schrift": 8.4,
-     "absaetze": [["Vorteil gegenüber Listenpreis:", "1,7 Mio. € (−24,3 %). Ein LOI bis Ende November 2026 ist grundsätzlich möglich; Fristen und Bedingungen sind abzustimmen."],
-                  ["Optionale Kaufpreisstaffelung:", "mögliche Anzahlung von 2,5 Mio. € bei notariellem Kaufvertrag, verbleibende 2,8 Mio. € gemäß individuell vereinbartem Zahlungsplan. Anzahl und Fälligkeit der Teilzahlungen, spätester Zahlungstermin und Sicherheiten sind Gegenstand der Vertragsverhandlungen."]]},
+    {"typ": "kpi", "x": L0, "y": 404, "w": LW, "items": [["7,0 Mio. €", "Listenpreis netto", "durch"], ["5,3 Mio. €", "Early-Commit-Preis netto"]], "groesse": 22},
+    {"typ": "text", "x": L0, "y": "folgt", "abstand": 14, "w": LW, "schrift": 8.4,
+     "absaetze": [["Vorteil gegenüber Listenpreis:", "1,7 Mio. € (−24,3 %). Ein LOI bis Ende November 2026 ist grundsätzlich möglich; Fristen und Bedingungen sind abzustimmen."]]},
+    {"typ": "kpi", "x": L0, "y": "folgt", "abstand": 16, "w": LW, "h": 50, "groesse": 18, "items": [["2,5 Mio. €", "Mögliche Anzahlung bei Kaufvertrag"], ["2,8 Mio. €", "Restkaufpreis nach Zahlungsplan", "hell"]]},
+    {"typ": "text", "x": L0, "y": "folgt", "abstand": 10, "w": LW, "schrift": 8.2,
+     "absaetze": [["Optionale Kaufpreisstaffelung:", "Anzahl und Fälligkeit der Teilzahlungen, spätester Zahlungstermin und Sicherheiten sind Gegenstand der Vertragsverhandlungen."]]},
     {"typ": "schritte", "x": L0, "y": "folgt", "abstand": 16, "w": LW + 12,
      "items": [["01 · November 2026", "LOI", "Abstimmung der Transaktionsbedingungen"], ["02 · Kaufvertrag", "Beurkundung", "Notarieller Vertrag und vereinbarte Anzahlung"], ["03 · Projektfortschritt", "Restzahlung", "Nach vertraglich festgelegten Fälligkeiten"]]},
     {"typ": "kv", "x": R0, "y": 404, "w": RW, "kw": 110, "titel": "Konditionen im Überblick", "schrift": 7.9,
@@ -209,7 +222,7 @@ S.append({"modul": "raster", "id": "zielgruppen", "kopf": "GRENFORD Research", "
   "quelle": "Quelle: Einschätzung GRENFORD auf Basis von GRENFORD Research (Seiten {seite:wettbewerb} bis {seite:mieten-gewerbe}), Grenzgängerzentrum/BFS und Verkäuferunterlagen. Die Clusterbewertung ist eine Annahme und keine gemessene Nachfrage."})
 
 # 10 Vision (Bildseite)
-S.append({"modul": "bildseite", "id": "vision", "kopf": "Konzept", "bild": "vis-luft.png", "bild_pos": "75% center",
+S.append({"modul": "bildseite", "id": "vision", "stil": "voll", "kopf": "Konzept", "bild": "vis-luft.png", "bild_pos": "center 60%",
   "dachzeile": "Die Vision", "titel": ["Wohnen, Arbeiten", "und Gesundheit", "unter einem Dach"],
   "text": "92 möblierte Apartments, eine Business-Lounge mit Coworking, Fitness und Wellness mit Pool und Sauna, eine Arztpraxis sowie Physiotherapie und Kosmetik. Umsetzung in drei Bauabschnitten; die ersten Flächen gehen 2027 in Betrieb.",
   "kennzahlen": [["92", "Möblierte Apartments"], ["2.658 m²", "Profit-Center"], ["2027", "Beginn Betrieb"]],
@@ -218,9 +231,9 @@ S.append({"modul": "bildseite", "id": "vision", "kopf": "Konzept", "bild": "vis-
 # 11 Nutzung
 S.append({"modul": "raster", "id": "nutzung", "kopf": "Nutzungskonzept", "dachzeile": "Wohnen, Arbeiten, Gesundheit", "titel": "Ein Haus, vier Ertragssäulen",
   "bloecke": [
-    {"typ": "balken", "x": L0, "y": 410, "w": LW, "titel": "6.957 m² Nutzfläche nach Nutzung", "lw": 110, "vw": 60, "abstand": 26, "max": 4299,
-     "items": [["Apartments", 4299, "4.299 m²", "h"], ["Coworking", 1241, "1.241 m²"], ["Fitness / Wellness", 704, "704 m²"], ["Arztpraxis", 386, "386 m²"], ["Physio / Kosmetik", 327, "327 m²"]]},
-    {"typ": "kpi", "x": L0, "y": "folgt", "abstand": 18, "w": LW, "hell": True, "groesse": 19, "items": [["6.957 m²", "Nutzfläche gesamt"], ["62 %", "Anteil Apartments"], ["38 %", "Anteil Gewerbe"]]},
+    {"typ": "donut", "x": L0, "y": 410, "r": 66, "ring": 20, "lw": 150, "titel": "Nutzfläche nach Nutzung", "mitte": ["6.957 m²", "Nutzfläche"],
+     "items": [["Apartments", 4299, "navy"], ["Coworking", 1241, "light"], ["Fitness / Wellness", 704, "mid"], ["Arztpraxis", 386, "grey"], ["Physio / Kosmetik", 327, "mist"]]},
+    {"typ": "bild", "x": L0, "y": 214, "w": LW, "h": 140, "bild": "vis-wohnhaeuser.png", "pos": "35% center", "titel": "Ansicht Wohnhäuser, Visualisierung"},
     {"typ": "tabelle", "x": R0, "y": 410, "w": RW, "titel": "Vier Profit-Center ergänzen 92 Apartments", "breiten": [104, 60, 210], "links": [0, 2], "kopf": ["Profit-Center", "Fläche", "Konzept"],
      "zeilen": [["Coworking", "1.241 m²", "Flexible Arbeitsplätze, Business-Lounge, Workation"], ["Fitness / Wellness", "704 m²", "Studio, Pool, Sauna"],
                 ["Arztpraxis", "386 m²", "Direktvermietung an externen Mieter"], ["Physio / Kosmetik", "327 m²", "Therapie, Beauty, Prävention"]]},
@@ -254,15 +267,14 @@ S.append({"modul": "raster", "id": "grundrisse", "kopf": "Pläne", "dachzeile": 
 # 14 Wertschöpfung
 S.append({"modul": "raster", "id": "wert", "kopf": "Wertschöpfung", "dachzeile": "Investition und Wert", "titel": "Der Kaufpreis ist der größte Hebel",
   "bloecke": [
-    {"typ": "tabelle", "x": L0, "y": 410, "w": 520, "titel": "Von der Investition zum Gesamtwert in Mio. €, netto", "breiten": [190, 66, 66, 66, 66, 66], "kopf": ["", "Kauf", "CapEx", "NK, FF&amp;E", "Erwerbs-NK", "Summe"], "hervorheben": ["Investition bei Early-Commit 5,3 Mio. €"],
-     "zeilen": [["Investition bei Listenpreis 7,0 Mio. €", "7,00", "8,66", "3,07", "0,46", "19,2"], ["Investition bei Early-Commit 5,3 Mio. €", "5,30", "8,66", "3,07", "0,34", "17,4"]]},
-    {"typ": "tabelle", "x": L0, "y": "folgt", "abstand": 18, "w": 520, "titel": "Gesamtwert nach Fertigstellung, Basisfall", "breiten": [190, 110, 110, 110], "kopf": ["", "Apartments netto", "Gewerbe", "Gesamtwert"], "hervorheben": ["Gesamtwert"],
-     "zeilen": [["Gesamtwert", "18,06", "5,17", "23,2"]]},
-    {"typ": "text", "x": L0, "y": "folgt", "abstand": 18, "w": 520, "schrift": 7.8,
+    {"typ": "hstack", "x": L0, "y": 410, "w": 540, "lw": 150, "sw": 64, "max": 23.2, "titel": "Von der Investition zum Gesamtwert, Mio. € netto",
+     "zeilen": [["Investition bei Listenpreis", [[7.0, "grey", "Kauf 7,0"], [8.66, "navy", "CapEx 8,66"], [3.53, "light", "NK, FF&amp;E 3,53"]], "19,2 Mio. €"],
+                ["Investition bei Early-Commit", [[5.3, "grey", "Kauf 5,3"], [8.66, "navy", "CapEx 8,66"], [3.41, "light", "NK, FF&amp;E 3,41"]], "17,4 Mio. €"],
+                ["Gesamtwert nach Fertigstellung", [[18.06, "mid", "Apartments netto 18,06"], [5.17, "light", "Gewerbe 5,17"]], "23,2 Mio. €"]]},
+    {"typ": "text", "x": L0, "y": "folgt", "abstand": 10, "w": 540, "schrift": 7.8,
      "absaetze": [["Wert Gewerbe:", "Eigentümerertrag 381 T€ abzüglich 5 % Eigentümerkosten, kapitalisiert mit 7,0 % (Annahme GRENFORD)."],
-                  ["Apartments:", "4.299 m² × 5.000 €/m² brutto, geteilt durch 1,19."], ["NK, FF&amp;E:", "Planungs- und Nebenkosten (0,87), Vertriebsprovision (0,90), Möblierung (1,30)."]]},
-    {"typ": "balken", "x": L0, "y": "folgt", "abstand": 14, "w": 520, "titel": "Investition und Gesamtwert, Mio. € netto", "lw": 190, "vw": 60, "abstand": 22, "max": 23.2,
-     "items": [["Investition bei Listenpreis", 19.2, "19,2"], ["Investition bei Early-Commit", 17.4, "17,4"], ["Gesamtwert nach Fertigstellung", 23.2, "23,2", "h"]]},
+                  ["Apartments:", "4.299 m² × 5.000 €/m² brutto, geteilt durch 1,19."], ["NK, FF&amp;E:", "Planungs- und Nebenkosten (0,87), Vertriebsprovision (0,90), Möblierung (1,30) und Erwerbsnebenkosten (0,46 bzw. 0,34)."]]},
+    {"typ": "kpi", "x": L0, "y": 150, "w": 540, "hell": True, "groesse": 19, "items": [["17,4 Mio. €", "Gesamtinvestition Early-Commit"], ["23,2 Mio. €", "Gesamtwert nach Fertigstellung"], ["5,9 Mio. €", "Wertüberschuss, Basisfall"]]},
     {"typ": "dunkel", "x": 632, "y": 410, "w": 224, "h": 260, "titel": "Wertüberschuss bei Early-Commit",
      "werte": [["+5,9 Mio. €", "Gesamtwert abzüglich Investition"], ["+34 %", "auf die Gesamtinvestition von 17,4 Mio. €"]],
      "text": "Bei 7,0 Mio. € Kaufpreis: +4,1 Mio. € (+21 %). Rechnung GRENFORD, indikativ, vor Finanzierung und Steuern."}],
@@ -308,7 +320,7 @@ S.append({"modul": "raster", "id": "kosten", "kopf": "Bau und Kosten", "dachzeil
                ["Bodenbelag", 7.9, "7,9 %"], ["Sanitär", 7.2, "7,2 %"], ["Dach", 6.4, "6,4 %"], ["Übrige", 11.3, "11,3 %", "r"]]},
     {"typ": "saeulen", "x": R0, "y": 410, "w": RW, "h": 120, "titel": "Mittelabfluss je Jahr, Mio. € netto", "gestapelt": True, "max": 7.9, "breite": .5,
      "kategorien": ["2026", "2027", "2028"], "summen": ["1,0", "7,9", "1,9"],
-     "serien": [{"name": "CapEx", "farbe": "navy", "werte": [0.87, 6.50, 1.30]}, {"name": "Nebenkosten", "farbe": "acc", "werte": [0.09, 0.65, 0.13]}, {"name": "FF&amp;E", "farbe": "light", "werte": [0, 0.78, 0.52]}]},
+     "serien": [{"name": "CapEx", "farbe": "navy", "werte": [0.87, 6.50, 1.30]}, {"name": "Nebenkosten", "farbe": "mid", "werte": [0.09, 0.65, 0.13]}, {"name": "FF&amp;E", "farbe": "light", "werte": [0, 0.78, 0.52]}]},
     {"typ": "tabelle", "x": R0, "y": "folgt", "abstand": 18, "w": RW, "titel": "Technische Unterlagen", "breiten": [264, 110], "links": [0, 1], "tags": [1], "kopf": ["Unterlage", "Status"],
      "zeilen": [["Kostenberechnung, Bauzeitplan, Handwerkerangebote", "Gesichtet"], ["Baubeschreibung, Bodengutachten, Statik", "Im Datenraum"],
                 ["Wertgutachten Az. 202510340, Marktwertschätzung", "Im Datenraum"], ["Energieausweis-Unterlagen, Nutzflächenpläne", "Im Datenraum"]]},
@@ -351,7 +363,7 @@ S.append({"modul": "raster", "id": "szenarien", "kopf": "10-Jahres-Rechnung", "d
                 {"name": "Listenpreis", "farbe": "light", "werte": [6.6, 14.1, 16.5], "labels": ["6,6 %", "14,1 %", "16,5 %"]}]},
     {"typ": "text", "x": L0, "y": 112, "w": FULL, "schrift": 8.2, "absaetze": [["Break-even des kumulierten Cashflows:", "2029 bei Early-Commit, 2030 bei Listenpreis."]]}],
   "quelle": ["Quelle: Berechnung GRENFORD; Kaufpreisverteilung 2,5 / 2,8 Mio. € als Modellannahme, keine zugesagte Verkäuferkondition. Vorsichtig: 4.500 €/m², Verkauf ein Jahr später, Nebenkosten 15 %, Eigentümerkosten 8 %, Exit 8,0 %.",
-             "Basis: 5.000 €/m², Nebenkosten 10 %, Eigentümerkosten 5 %, Exit 7,0 %. Chance: 5.250 €/m², Exit 6,5 %. Kurve Listenpreis: Mehrpreis 1,7 Mio. € und höhere Erwerbsnebenkosten in 2026 unterstellt. Vor Steuern, ohne Finanzierung."]})
+             "Basis: 5.000 €/m², Nebenkosten 10 %, Eigentümerkosten 5 %, Exit 7,0 %. Chance: 5.250 €/m², Exit 6,5 %. Vor Steuern, ohne Finanzierung."]})
 
 # 20 Sensitivität und DCF
 S.append({"modul": "raster", "id": "sensitivitaet", "kopf": "10-Jahres-Rechnung", "dachzeile": "Sensitivität und DCF", "titel": "Rendite und Barwert im Stresstest",
@@ -363,10 +375,10 @@ S.append({"modul": "raster", "id": "sensitivitaet", "kopf": "10-Jahres-Rechnung"
      "kopf": ["Diskontsatz", "Early-Commit", "Listenpreis", "Vorteil"],
      "zeilen": [["8 %", "4,61", "2,59", "2,02"], ["10 %", "3,68", "1,62", "2,07"], ["12 %", "2,89", "0,78", "2,11"]]},
     {"typ": "tabelle", "x": 482, "y": 410, "w": 374, "titel": "IRR Early-Commit: Verkaufspreis × Exit-Rendite", "breiten": [110, 88, 88, 88],
-     "kopf": ["€/m² brutto", "Exit 6,5 %", "Exit 7,0 %", "Exit 8,0 %"], "markiere": [[1, 2]],
+     "kopf": ["€/m² brutto", "Exit 6,5 %", "Exit 7,0 %", "Exit 8,0 %"], "heat": {"zeilen": [0, 1, 2], "spalten": [1, 2, 3]},
      "zeilen": [["4.875", "21,8 %", "21,5 %", "20,9 %"], ["5.000", "23,4 %", "23,1 %", "22,6 %"], ["5.250", "26,8 %", "26,5 %", "26,0 %"]]},
     {"typ": "tabelle", "x": 482, "y": "folgt", "abstand": 22, "w": 374, "titel": "NPV Early-Commit: Diskontsatz × Exit-Rendite, Mio. €", "breiten": [110, 88, 88, 88],
-     "kopf": ["Diskontsatz", "Exit 6,5 %", "Exit 7,0 %", "Exit 8,0 %"], "markiere": [[1, 2]],
+     "kopf": ["Diskontsatz", "Exit 6,5 %", "Exit 7,0 %", "Exit 8,0 %"], "heat": {"zeilen": [0, 1, 2], "spalten": [1, 2, 3]},
      "zeilen": [["8 %", "4,8", "4,6", "4,3"], ["10 %", "3,9", "3,7", "3,4"], ["12 %", "3,0", "2,9", "2,6"]]},
     {"typ": "text", "x": L0, "y": "folgt", "abstand": 26, "w": FULL, "box": True, "titel": "Aussage", "schrift": 8.2,
      "absaetze": ["Der Early-Commit hebt die IRR im Basisfall von 14,1 % auf 23,1 % und senkt den Kapitalbedarf um 1,8 Mio. €. Der Barwert bei 10 % Diskontsatz steigt von 1,62 auf 3,68 Mio. €. Auch im vorsichtigen Szenario bleibt die IRR bei Early-Commit zweistellig."]}],
@@ -452,9 +464,10 @@ S.append({"modul": "raster", "id": "machbar2", "kopf": "Machbarkeitsstudie", "da
                 ["Betrieb", "Vier Profit-Center, Verträge zu finalisieren", "Mit Maßgaben"], ["Wirtschaftlichkeit", "IRR 10,6 bis 26,8 % (Szenarien), Break-even Cashflow 2029", "Gegeben"]]},
     {"typ": "text", "x": L0, "y": "folgt", "abstand": 20, "w": 420, "box": True, "titel": "Gesamtergebnis", "schrift": 8,
      "absaetze": ["Das Vorhaben ist auf Basis der Unterlagen machbar. Die Maßgaben lassen sich bis zum Signing und in der Bauphase abarbeiten."]},
-    {"typ": "saeulen", "x": 520, "y": 410, "w": 336, "h": 190, "titel": "Operatives Ergebnis aller Profit-Center in T€", "max": 731, "breite": .4, "legende": False,
-     "kategorien": ["Jahr 2 (≈ 2027)", "Jahr 3 (≈ 2028)", "Jahr 4 (≈ 2029)"],
-     "serien": [{"name": "Operatives Ergebnis", "farben": ["light", "acc", "navy"], "werte": [182, 635, 731], "labels": ["182 T€", "635 T€", "731 T€"]}]},
+    {"typ": "saeulen", "x": 520, "y": 410, "w": 336, "h": 180, "titel": "Operatives Ergebnis aller Profit-Center in T€", "gestapelt": True, "max": 731, "breite": .46,
+     "kategorien": ["Jahr 2 (≈ 2027)", "Jahr 3 (≈ 2028)", "Jahr 4 (≈ 2029)"], "summen": ["182 T€", "635 T€", "731 T€"],
+     "serien": [{"name": "Coworking", "farbe": "navy", "werte": [107, 313, 332]}, {"name": "Fitness / Wellness", "farbe": "mid", "werte": [10, 183, 237]},
+                {"name": "Medizin", "farbe": "grey", "werte": [23, 23, 23]}, {"name": "Physio / Kosmetik", "farbe": "light", "werte": [24, 37, 50]}, {"name": "Betreiber-SPV", "farbe": "mist", "werte": [18, 79, 88]}]},
     {"typ": "text", "x": 520, "y": "folgt", "abstand": 8, "w": 336, "schrift": 7.8,
      "absaetze": ["Ab Jahr 4 rund 730 T€ operatives Ergebnis; davon fließen stabilisiert rund 381 T€ an die Eigentümerin."]}],
   "quelle": "Quelle: Einschätzung GRENFORD auf Basis der Datenraum-Dokumente; Montesana Rentabilität / Profitcenter 260213 (Jahr 2 ≈ 2027). Keine Zusicherung. Die Machbarkeitsstudie ersetzt weder Gutachten noch Fachplanung."})
@@ -507,8 +520,8 @@ S.append({"modul": "raster", "id": "disclaimer", "bereich": "nach", "kopf": "Rec
 # VII AGB
 S.append({"modul": "agb", "id": "agb", "bereich": "nach", "datei": "agb_investment.html", "dachzeile": "GRENFORD Investments · Nachweis und Vermittlung", "stil": "font-size:7.9pt;line-height:10.6pt"})
 
-# Listenpreis-Kurve = Early-Commit-Kurve minus Preisvorteil 1,7 Mio. € (Zahlung 2026) und höhere Nebenkosten (0,12 Mio. €); Endwert laut Rechnung 8,5 Mio. €
-lp = [-5.62, -10.18, -4.07, -0.28, 0.09, 0.47, 0.86, 1.25, 1.65, 2.06, 8.5]
+# Listenpreis-Kurve: Werte der GRENFORD-Investorenrechnung (aus der Grafik des Memos vom 11.11.2026, Mio. €)
+lp = [-8.42, -10.19, -4.05, -0.26, 0.11, 0.50, 0.88, 1.27, 1.67, 2.08, 8.48]
 for p in S:
     for b in p.get('bloecke', []):
         for sr in b.get('serien', []):
