@@ -683,13 +683,13 @@ def m_ueberblick_kosten(d, obj):
          + VL(453.5, 352, 52, LINE, .5))
     # links: Eckdaten
     z = d['zeilen']; st = min(30, 290 / len(z))
-    s += EB(LX, 346, 'Das Objekt', NAVY, 6.8)
+    s += EB(LX, 346, 'Das Objekt', NAVY, 7.8).replace('font-weight:500', 'font-weight:700')
     for i, (lab, v) in enumerate(z):
         ln = 336 - st * i
         s += L(LX, ln, LR) + T(LX, ln - st * .55, 'N', 7.8, 11, GREY, lab) + T(LX + 100, ln - st * .55, 'N', 8.8, 12, INK, v, w=LR - LX - 100)
     s += L(LX, 336 - st * len(z), LR)
     # rechts: Kosten
-    s += EB(RX, 346, 'Kaufpreis und Erwerbsnebenkosten', NAVY, 6.8)
+    s += EB(RX, 346, 'Kaufpreis und Erwerbsnebenkosten', NAVY, 7.8).replace('font-weight:500', 'font-weight:700')
     rows = [('Kaufpreis', eur(p)), (f'Grunderwerbsteuer {k["land"]} · {pct(ge, 0)}', eur(g)),
             (f'Käufercourtage · {pct(co)} inkl. MwSt.', eur(c))]
     for i, (t, v) in enumerate(rows):

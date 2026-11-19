@@ -78,17 +78,6 @@
    "hinweis": "Foto digital bearbeitet · Flächen als Circa-Werte nach Verkäuferangabe"
   },
   {
-   "modul": "vorwort",
-   "id": "vorwort",
-   "bereich": "vor",
-   "dachzeile": "The Renewed House",
-   "titel": "Ein Haus mit neuer Zukunft.",
-   "lead": "Mit diesem Property Brief stellen wir Ihnen eine Doppelhaushälfte in Berlin-Buckow vor, die nach umfassender Kernsanierung zum Erstbezug bereitsteht.",
-   "links": "Bei Bestandsimmobilien entscheidet nicht das Baujahr über die Qualität, sondern der Zustand von Hülle, Technik und Ausbau.",
-   "rechts": "Das Tragwerk von 1976 ist geblieben. Dach, Fassade, Fenster, Heizung, Leitungen und Innenausbau sind neu.",
-   "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."
-  },
-  {
    "modul": "inhalt",
    "id": "inhalt",
    "bereich": "vor",
@@ -109,7 +98,7 @@
    ],
    "kapitel": [
     {
-     "titel": "Das Haus und der Kaufpreis",
+     "titel": "Das Haus auf einen Blick",
      "sub": "Eckdaten, Kaufpreis und Erwerbsnebenkosten",
      "seiten": [
       "ueberblick"
@@ -170,6 +159,17 @@
      ]
     }
    ]
+  },
+  {
+   "modul": "vorwort",
+   "id": "vorwort",
+   "bereich": "vor",
+   "dachzeile": "The Renewed House",
+   "titel": "Ein Haus mit neuer Zukunft.",
+   "lead": "Mit diesem Property Brief stellen wir Ihnen eine Doppelhaushälfte in Berlin-Buckow vor, die nach umfassender Kernsanierung zum Erstbezug bereitsteht.",
+   "links": "Bei Bestandsimmobilien entscheidet nicht das Baujahr über die Qualität, sondern der Zustand von Hülle, Technik und Ausbau.",
+   "rechts": "Das Tragwerk von 1976 ist geblieben. Dach, Fassade, Fenster, Heizung, Leitungen und Innenausbau sind neu.",
+   "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."
   },
   {
    "modul": "ueberblick_kosten",
@@ -236,7 +236,8 @@
     "Circa-Werte nach Verkäuferangabe.",
     "Keine Berechnung nach WoFlV."
    ],
-   "quelle": "Circa-Werte nach Verkäuferangabe, keine Berechnung nach WoFlV · Stand November 2026 · Projektstand und Übergabe siehe Seite {seite:projektstand}."
+   "quelle": "Circa-Werte nach Verkäuferangabe, keine Berechnung nach WoFlV · Stand November 2026 · Projektstand und Übergabe siehe Seite {seite:projektstand}.",
+   "bereich": "vor"
   },
   {
    "modul": "split",
