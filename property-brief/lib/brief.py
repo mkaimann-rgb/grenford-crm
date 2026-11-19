@@ -477,7 +477,7 @@ def m_energie(d):
         ln = 360 - 27 * i
         s += L(TX, ln, 856) + T(TX, ln - 17, 'N', 8.4, 12, GREY, k) + RT(856, ln - 17, 'B', 9, 12, NAVY, v, 200)
     s += L(TX, 360 - 27 * len(d['zeilen']), 856)
-    return s + (R(TX, 40, 356, 120) + EB(TX + 18, 140, 'Energieeffizienzklasse', LIGHT, 6.6) + T(TX + 18, 70, 'S', 54, 58, CREAM, d['klasse'])
+    return s + (R(TX, 40, 356, 120) + EB(TX + 18, 140, 'Energieeffizienzklasse', LIGHT, 6.6) + (T(TX + 18, 86, 'L', 34, 40, CREAM, d['klasse'], extra='letter-spacing:-.02em;') if sans_only() else T(TX + 18, 70, 'S', 54, 58, CREAM, d['klasse']))
                 + VL(TX + 150, 144, 56, 'rgba(169,184,207,.45)', .6)
                 + EB(TX + 170, 140, 'Endenergiebedarf', LIGHT, 6.6) + T(TX + 170, 86, 'S', 34, 40, CREAM, d['endenergie'])
                 + T(TX + 170, 64, 'N', 8.4, 11, MIST, 'kWh/(m²·a)'))
