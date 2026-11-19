@@ -195,13 +195,16 @@ def HEAD(label):
     return EB(600, 529, label, ACC, 9)
 
 
-SHADOW = 'text-shadow:0 0 4pt rgba(20,28,40,.65),0 0 1pt rgba(20,28,40,.5);'
+SHADOW = 'font-weight:500;text-shadow:0 0 6pt rgba(20,28,40,.9),0 0 2.5pt rgba(20,28,40,.85),0 0 1pt rgba(20,28,40,.9);'
 IMGCOL = '#ffffff'   # Fußzeile auf Fotos: weiß mit weichem Schatten; auf Papier: Grau
 
 
 def PN(color=None, img=False):
-    if img: return T(830, 12, 'N', FS, 10, IMGCOL, C.labels.get(C.page, ''), extra=SHADOW)
-    return T(830, 12, 'N', FS, 10, color or GREY, C.labels.get(C.page, ''))
+    if img:   # Seitenzahl auf Foto: kleines dunkelblaues Feld, damit sie immer lesbar ist
+        lab = C.labels.get(C.page, ''); wdt = max(20, width(lab, 'B', FS) + 12)
+        return (f'<div class="t" style="left:{833 - wdt/2:.2f}pt;top:{H-24:.2f}pt;width:{wdt:.2f}pt;height:17pt;border-radius:8.5pt;background:{NAVY};opacity:.88"></div>'
+                + T(833 - wdt/2, 12, 'B', FS, 10, '#ffffff', lab, w=wdt, extra='text-align:center'))
+    return T(830, 12, 'B', FS, 10, color or INK, C.labels.get(C.page, ''))
 
 
 def FOOT(color=GREY, text=None, img=False):
