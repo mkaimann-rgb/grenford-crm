@@ -15,7 +15,7 @@ CREAM = '#faf6f2'; LINE = '#ddd6cb'; MIST = '#dfe4ec'; LIGHT = '#a9b8cf'
 HALF = 453.5          # 50/50-Bildsplit
 TX = 500              # Textbeginn neben linkem Halbseitenbild
 COL = 368.4           # Breite der Bildspalte (Titel, Vorwort, Inhalt, Kontakt, Über GRENFORD)
-FS = 7.2              # Fußzeile und Seitenzahl
+FS = 8.2              # Fußzeile und Seitenzahl (1 pt größer, 19.11.2026)
 FONT = {'B': ("'DM Sans',sans-serif;font-weight:500", .34),
         'N': ("'DM Sans',sans-serif;font-weight:400", .34),
         'S': ("'GF Serif',serif;font-weight:400", .22),
@@ -195,19 +195,25 @@ def HEAD(label):
     return EB(600, 529, label, ACC, 9)
 
 
-def PN(color=None):
+SHADOW = 'text-shadow:0 0 4pt rgba(20,28,40,.65),0 0 1pt rgba(20,28,40,.5);'
+IMGCOL = '#ffffff'   # Fußzeile auf Fotos: weiß mit weichem Schatten; auf Papier: Grau
+
+
+def PN(color=None, img=False):
+    if img: return T(830, 12, 'N', FS, 10, IMGCOL, C.labels.get(C.page, ''), extra=SHADOW)
     return T(830, 12, 'N', FS, 10, color or GREY, C.labels.get(C.page, ''))
 
 
-def FOOT(color=GREY, text=None):
+def FOOT(color=GREY, text=None, img=False):
+    if img: return T(51, 10.8, 'N', FS, 10, IMGCOL, text or C.foot, extra='letter-spacing:.05em;' + SHADOW)
     return T(51, 10.8, 'N', FS, 10, color, text or C.foot, extra='letter-spacing:.05em')
 
 
-def chrome(label, logo='navy', foot=True):
+def chrome(label, logo='navy', foot=True, foot_img=False, pn_img=False):
     s = MARK(logo) if logo else ''
     s += HEAD(label)
-    if foot: s += FOOT()
-    return s + PN()
+    if foot: s += FOOT(img=foot_img)
+    return s + PN(img=pn_img)
 
 
 def head(eb, title, size=31, tl=34, base_t=436):
@@ -301,12 +307,12 @@ def m_vorwort(d):
             + T(447, 200, 'N', 9.8, 14.8, INK, d['schluss'], w=409)
             + IMG('signature.png', 447, 100, 214, 43, 'left center', 'contain')
             + T(447, 70, 'S', 19, 26, INK, 'Ihr Marco Kaimann') + T(447, 50, 'N', 7.5, 10, GREY, 'Geschäftsinhaber GRENFORD')
-            + FOOT(CREAM))
+            + FOOT(img=True))
 
 
 def m_inhalt(d):
     s = (HEAD('Inhalt') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'), extra=COLCUT())
-         + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(CREAM)
+         + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(img=True)
          + EB(51, 403, 'Ihr Überblick', CREAM, 8) + T(51, 349, 'S', 32, 37, CREAM, br(d['claim']))
          + L(51, 262, 331, '#aeb5be') + EB(51, 230, d['marke'], CREAM, 9)
          + T(51, 204, 'N', 10, 14.5, CREAM, br(d['text'])) + T(51, 81, 'N', 10, 14.5, CREAM, br(d['adresse'])))
@@ -346,7 +352,7 @@ def m_split(d):
     lw = d.get('label_breite', 100)
     cl, ln_ = SLANT('rechts' if right else 'links')
     s = (IMG(d['bild'], 907 - HALF if right else 0, 0, HALF, 567, d.get('bild_pos', 'center'), extra=cl) + ln_
-         + chrome(d['kopf']) + EB(x0, 487, d['dachzeile']) + T(x0, 447, 'S', 31, 34, INK, br(d['titel']))
+         + chrome(d['kopf'], foot_img=not right, pn_img=right) + EB(x0, 487, d['dachzeile']) + T(x0, 447, 'S', 31, 34, INK, br(d['titel']))
          + T(x0, 372, 'N', 9.8, 14.5, INK, d['intro'], w=356))
     for i, (h, t) in enumerate(d['liste']):
         ln = 300 - 56 * i
@@ -385,7 +391,7 @@ def m_raumprogramm(d):
     XR = 407
     cl, ln_ = SLANT('rechts')
     s = (MARK() + FOOT() + IMG(d['bild'], 907 - HALF, 0, HALF, 567, d.get('bild_pos', 'center'), extra=cl) + ln_
-         + HEAD('Das Raumprogramm') + PN(INK)
+         + HEAD('Das Raumprogramm') + PN(img=True)
          + EB(51, 481, d['dachzeile']) + T(51, 446, 'S', 24, 26, INK, br(d['titel']))
          + T(51, 392, 'N', 8.8, 12.6, INK, d['intro'], w=XR - 51)
          + EB(51, 340, 'Ebene und Räume', NAVY, 6.6) + RT(XR, 340, 'B', 6.6, 9, NAVY, 'LAUT AUFMASS', 120))
@@ -440,7 +446,7 @@ def m_sanierung(d):
         cl, ln_ = SLANT('links'); s = IMG(b[0]['bild'], 0, 0, HALF, 567, b[0].get('pos', 'center'), extra=cl) + ln_
     else:
         s = IMG(b[0]['bild'], 0, 291.92, HALF, 275.08, b[0].get('pos', 'center')) + IMG(b[1]['bild'], 0, 0, HALF, 289.92, b[1].get('pos', 'center'), extra=SLANT('links')[0]) + SLANT('links')[1]
-    s += chrome(d['kopf']) + EB(TX, 481, d['dachzeile']) + T(TX, 446, 'S', 24, 26, INK, br(d['titel']))
+    s += chrome(d['kopf'], foot_img=True) + EB(TX, 481, d['dachzeile']) + T(TX, 446, 'S', 24, 26, INK, br(d['titel']))
     for i, (h, t) in enumerate(d['bloecke']):
         ln = 392 - 108 * i
         s += (L(TX, ln, 856) + EB(TX, ln - 15, f'0{i+1}', ACC, 7) + T(TX, ln - 35, 'S', 16, 21, INK, h)
@@ -576,7 +582,7 @@ def m_einheit(d, obj):
     u = next(x for x in obj['kosten']['einheiten'] if x['id'] == d['einheit'])
     qm = u['preis'] / u['flaeche_num']
     cl, ln_ = SLANT('links')
-    s = (IMG(d['bild'], 0, 0, HALF, 567, d.get('bild_pos', 'center'), extra=cl) + ln_ + chrome(d['kopf'])
+    s = (IMG(d['bild'], 0, 0, HALF, 567, d.get('bild_pos', 'center'), extra=cl) + ln_ + chrome(d['kopf'], foot_img=True)
          + R(0, 70, 70, 70, NAVY, .6) + T(16, 96, 'S', 30, 34, CREAM, d['nummer'])
          + EB(TX, 487, d['dachzeile']) + T(TX, 452, 'S', 26, 30, INK, u['name'])
          + T(TX, 434, 'N', 8, 11, GREY, d['zuordnung'])
@@ -697,7 +703,7 @@ def m_partner(d, shared):
 
 def m_kontakt(d):
     s = (HEAD('Nächster Schritt &amp; Kontakt') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'), extra=COLCUT())
-         + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(CREAM)
+         + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(img=True)
          + T(51, 140, 'S', 29, 33, CREAM, br(d['claim'])) + EB(412, 488, d['dachzeile']) + T(412, 448, 'S', 30, 32, INK, br(d['titel'])))
     for i, (h, t) in enumerate(d['schritte']):
         ln = 382 - 64 * i
@@ -712,7 +718,7 @@ def m_kontakt(d):
 
 def m_ueber(d, shared):
     s = (HEAD('Über GRENFORD') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'), extra=COLCUT())
-         + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(CREAM)
+         + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(img=True)
          + T(51, 121, 'S', 29, 32, CREAM, 'Wir strukturieren<br>Immobilien-<br>entscheidungen' + ('' if sans_only() else '.')))
     h = round(95 * 379 / 773, 2)
     for i, (brand, t, desc, lab, logo) in enumerate(shared['geschaeftsfelder']):
