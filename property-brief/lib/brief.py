@@ -19,7 +19,8 @@ FS = 7.2              # Fußzeile und Seitenzahl
 FONT = {'B': ("'DM Sans',sans-serif;font-weight:500", .34),
         'N': ("'DM Sans',sans-serif;font-weight:400", .34),
         'S': ("'GF Serif',serif;font-weight:400", .22),
-        'SB': ("'GF Serif',serif;font-weight:700", .22)}
+        'SB': ("'GF Serif',serif;font-weight:700", .22),
+        'H': ("'DM Sans',sans-serif;font-weight:500", .34)}
 _TTF = {'S': 'texgyrepagella-regular.otf', 'N': 'dm-sans-400.ttf', 'B': 'dm-sans-500.ttf'}
 
 
@@ -46,7 +47,13 @@ def width(text, f, size, spacing=0.0):
     return font.getlength(re.sub(r'<[^>]+>', '', text)) * size / 400 * 1.0 + spacing * size * len(text)
 
 
+HEADLINE = True   # Überschriften in DM Sans Medium, eng gesetzt, ohne Schlusspunkt (wie Website)
+
+
 def T(x, base, f, size, tl, color, text, w=None, extra=''):
+    if HEADLINE and f == 'S' and size >= 22 and color == INK:
+        f = 'H'; size = round(size * .9, 1); text = re.sub(r'\.$', '', text)
+        extra = 'letter-spacing:-.035em;' + extra
     fam, k = FONT[f]
     top = H - base - tl / 2 - k * size
     ws = f'width:{w}pt;' if w else 'white-space:nowrap;'
