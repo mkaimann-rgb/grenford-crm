@@ -111,8 +111,7 @@
      "titel": "Das Haus und der Kaufpreis",
      "sub": "Eckdaten, Kaufpreis und Erwerbsnebenkosten",
      "seiten": [
-      "ueberblick",
-      "kosten"
+      "ueberblick"
      ]
     },
     {
@@ -172,7 +171,7 @@
    ]
   },
   {
-   "modul": "ueberblick",
+   "modul": "ueberblick_kosten",
    "id": "ueberblick",
    "kopf": "Das Haus auf einen Blick",
    "dachzeile": "Das Haus",
@@ -214,26 +213,17 @@
     [
      "Stellplatz",
      "Fläche für einen Kfz-Stellplatz ca. 6 × 3 m, Herstellung durch den Käufer"
-    ],
-    [
-     "Käuferprovision",
-     "3,57 % inkl. MwSt. (3,00 % zzgl. 19 % MwSt.)"
     ]
    ],
    "kennzahlen": [
-    {
-     "wert": "613.000 €",
-     "label": "Kaufpreis",
-     "sub": "ca. 5.195 €/m² Wohnfläche"
-    },
     {
      "wert": "ca. 118 m²",
      "label": "Wohnfläche",
      "sub": "Erdgeschoss bis Dachgeschoss"
     },
     {
-     "wert": "4,5",
-     "label": "Zimmer",
+     "wert": "4,5 Zimmer",
+     "label": "Raumangebot",
      "sub": "zzgl. 2 Hobbyräume im Keller"
     }
    ],
@@ -241,18 +231,7 @@
     "Circa-Werte nach Verkäuferangabe.",
     "Keine Berechnung nach WoFlV."
    ],
-   "banner": {
-    "label": "Projektstand",
-    "text": [
-     "Innenausbau im Wesentlichen abgeschlossen · Außenanlagen nicht im Leistungsumfang ·",
-     "Übergabe bezugsfertig, Termin nach Vereinbarung (Details auf Seite {seite:projektstand})"
-    ]
-   },
-   "quelle": "Quelle: Angaben des Verkäufers, Stand November 2026."
-  },
-  {
-   "modul": "kosten",
-   "id": "kosten"
+   "quelle": "Quelle: Angaben des Verkäufers, Stand November 2026. Projektstand und Übergabe siehe Seite {seite:projektstand}."
   },
   {
    "modul": "split",

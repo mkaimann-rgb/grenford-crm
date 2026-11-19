@@ -48,7 +48,7 @@ ab Partner & Service wieder römisch fortlaufend (III, IV, …). Gesteuert über
 
 ## Verfügbare Seitenmodule
 
-`titel`, `vorwort`, `inhalt`, `ueberblick`, `split` (50/50 Bild + Liste), `lage` (Berlin-Karte mit Standort aus
+`titel`, `vorwort`, `inhalt`, `ueberblick`, `ueberblick_kosten` (Eckdaten und Kosten auf einer Seite – Standard beim Haus), `split` (50/50 Bild + Liste), `lage` (Berlin-Karte mit Standort aus
 Koordinaten), `raumprogramm`, `grundrisse`, `sanierung`, `projektstand` (auch für „Gemeinschaft & Verwaltung“),
 `energie`, `kosten` (eine oder mehrere Einheiten), `vergleich`, `einheit`, `plaene`, `markt`, `rendite`,
 `partner`, `kontakt`, `ueber`, `recht`, `agb`.

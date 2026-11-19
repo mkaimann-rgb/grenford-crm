@@ -109,18 +109,17 @@
    ],
    "kapitel": [
     {
-     "titel": "Das Haus",
-     "sub": "Eckdaten, Wohnkonzept und Wohngefühl",
+     "titel": "Das Haus und der Kaufpreis",
+     "sub": "Eckdaten, Kaufpreis und Erwerbsnebenkosten",
      "seiten": [
-      "ueberblick",
-      "wohnkonzept"
+      "ueberblick"
      ]
     },
     {
-     "titel": "Ausstattung und Lage",
-     "sub": "Materialien und Bäder, Umfeld und Anbindung",
+     "titel": "Wohnen und Lage",
+     "sub": "Wohnkonzept, Ausstattung, Umfeld und Anbindung",
      "seiten": [
-      "ausstattung",
+      "wohnkonzept",
       "lage"
      ]
     },
@@ -141,10 +140,10 @@
      ]
     },
     {
-     "titel": "Kaufpreis und Kapitalanlage",
-     "sub": "Erwerbsnebenkosten und Mietorientierung",
+     "titel": "Kapitalanlage",
+     "sub": "Mietorientierung und Modellrechnung",
      "seiten": [
-      "kosten",
+      "markt",
       "rendite"
      ]
     },
@@ -173,7 +172,7 @@
    ]
   },
   {
-   "modul": "ueberblick",
+   "modul": "ueberblick_kosten",
    "id": "ueberblick",
    "kopf": "Das Haus auf einen Blick",
    "dachzeile": "Das Haus",
@@ -211,22 +210,21 @@
     [
      "Energie",
      "Bedarfsausweis · Effizienzklasse A · Luft-Wärmepumpe"
+    ],
+    [
+     "Stellplatz",
+     "Fläche für einen Kfz-Stellplatz ca. 6 × 3 m, Herstellung durch den Käufer"
     ]
    ],
    "kennzahlen": [
-    {
-     "wert": "613.000 €",
-     "label": "Kaufpreis",
-     "sub": "ca. 5.195 €/m² Wohnfläche"
-    },
     {
      "wert": "ca. 118 m²",
      "label": "Wohnfläche",
      "sub": "Erdgeschoss bis Dachgeschoss"
     },
     {
-     "wert": "4,5",
-     "label": "Zimmer",
+     "wert": "4,5 Zimmer",
+     "label": "Raumangebot",
      "sub": "zzgl. 2 Hobbyräume im Keller"
     }
    ],
@@ -234,18 +232,7 @@
     "Circa-Werte nach Verkäuferangabe.",
     "Keine Berechnung nach WoFlV."
    ],
-   "banner": {
-    "label": "Projektstand",
-    "text": [
-     "Innenausbau im Wesentlichen abgeschlossen · Außenanlagen nicht im Leistungsumfang ·",
-     "Übergabe bezugsfertig, Termin nach Vereinbarung (Details auf Seite {seite:projektstand})"
-    ]
-   },
-   "quelle": "Quelle: Angaben des Verkäufers, Stand November 2026."
-  },
-  {
-   "modul": "kosten",
-   "id": "kosten"
+   "quelle": "Quelle: Angaben des Verkäufers, Stand November 2026. Projektstand und Übergabe siehe Seite {seite:projektstand}."
   },
   {
    "modul": "split",

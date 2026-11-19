@@ -673,12 +673,55 @@ def m_agb(d, obj):
             + ''.join(f'<div class="t agb" style="left:{x}pt;top:{H-399:.1f}pt;width:255pt">{c}</div>' for x, c in zip((51, 324, 597), cols)))
 
 
-MODULE = {'titel': m_titel, 'vorwort': m_vorwort, 'inhalt': m_inhalt, 'ueberblick': m_ueberblick, 'split': m_split,
+def m_ueberblick_kosten(d, obj):
+    """Überblick und Kosten auf einer Seite (Standard bei einem einzelnen Objekt)."""
+    k = obj['kosten']; ge = k['grunderwerbsteuer']; co = k['courtage_brutto']
+    p = k['einheiten'][0]['preis']; g = p * ge / 100; c = p * co / 100; tot = p + g + c; qm = p / k['flaeche_qm']
+    s = (chrome(d.get('kopf', 'Auf einen Blick')) + head(d['dachzeile'], d['titel'])
+         + T(51, 397, 'N', 10.5, 15.5, INK, d['intro'], w=545))
+    # Eckdaten in zwei Spalten
+    z = d['zeilen']; half = (len(z) + 1) // 2; rh = 34
+    for col, items in enumerate([z[:half], z[half:]]):
+        x = 51 + col * 282
+        for i, (lab, v) in enumerate(items):
+            ln = 368 - rh * i
+            s += L(x, ln, x + 263) + T(x, ln - 10, 'N', 6.9, 9, GREY, lab.upper(), extra='letter-spacing:.04em') + T(x, ln - 23, 'N', 8.6, 11.5, INK, v, w=263)
+    s += L(51, 368 - rh * half, 314) + L(333, 368 - rh * half, 596)
+    # Kosten
+    y0 = 368 - rh * half - 22
+    s += EB(51, y0, 'Kaufpreis und Erwerbsnebenkosten', NAVY, 6.8) + RT(596, y0, 'B', 6.8, 9, NAVY, 'BETRAG', 100)
+    rows = [('Kaufpreis', p), (f'Grunderwerbsteuer {k["land"]} · {pct(ge, 0)}', g), (f'Käufercourtage · {pct(co)} ({k["courtage_netto"]} zzgl. 19 % MwSt.)', c)]
+    for i, (t, v) in enumerate(rows):
+        ln = y0 - 10 - 21 * i
+        s += L(51, ln, 596) + T(51, ln - 14, 'N', 8.8, 12, INK, t) + RT(596, ln - 14, 'S', 10.5, 13, NAVY, eur(v), 150)
+    ln = y0 - 10 - 21 * 3
+    s += (L(51, ln, 596, NAVY, 1.1) + T(51, ln - 15, 'B', 9, 12, NAVY, 'Summe ohne Notar und Grundbuch') + RT(596, ln - 15, 'SB', 11.5, 14, NAVY, eur(tot), 160)
+          + L(51, ln - 23, 596) + T(51, ln - 37, 'N', 8.8, 12, INK, 'Notar- und Grundbuchkosten') + RT(596, ln - 37, 'N', 8.4, 12, GREY, 'nach GNotKG, nicht beziffert', 200)
+          + L(51, ln - 45, 596))
+    if k.get('optionen'):
+        s += T(51, ln - 60, 'N', 7.6, 10.5, INK, 'Optional, nicht im Kaufpreis enthalten: ' + ' · '.join(f'{t} {v}' for t, v, _ in k['optionen']) + '.', w=545)
+    s += cap(51, 32, d['quelle'])
+    # blaue Spalte
+    s += (R(632, 34, 224, 464) + EB(660, 469, 'Gesamt', CREAM, 8)
+          + T(660, 424, 'S', 25, 32, CREAM, eur(tot)) + T(660, 401, 'N', 7.6, 10.5, MIST, 'Kaufpreis, Grunderwerbsteuer und<br>Käufercourtage, zzgl. Notar und Grundbuch.')
+          + L(660, 368, 828, 'rgba(169,184,207,.45)', .6)
+          + T(660, 330, 'S', 25, 32, CREAM, eur(p, 0)) + EB(660, 306, 'Kaufpreis', LIGHT, 6.8) + T(660, 292, 'N', 7.6, 10, MIST, f'ca. {eur(qm, 0)}/m² {k["flaeche_art"]}')
+          + L(660, 268, 828, 'rgba(169,184,207,.45)', .6))
+    for i, kz in enumerate(d['kennzahlen']):
+        b = 238 - 72 * i
+        s += T(660, b, 'S', 22, 28, CREAM, kz['wert']) + EB(660, b - 22, kz['label'], LIGHT, 6.8)
+        if kz.get('sub'): s += T(660, b - 35, 'N', 7.4, 10, MIST, kz['sub'])
+    return (s + EB(660, 104, 'Courtage · hälftige Teilung', LIGHT, 6.6)
+            + T(660, 90, 'N', 7.2, 10, MIST, k['courtage_text'], w=176)
+            + T(660, 44, 'N', 6.8, 9.5, MIST, br(d['kennzahlen_hinweis'])))
+
+
+MODULE = {'titel': m_titel, 'vorwort': m_vorwort, 'inhalt': m_inhalt, 'ueberblick': m_ueberblick, 'ueberblick_kosten': m_ueberblick_kosten, 'split': m_split,
           'lage': m_lage, 'raumprogramm': m_raumprogramm, 'grundrisse': m_grundrisse, 'sanierung': m_sanierung,
           'projektstand': m_projektstand, 'energie': m_energie, 'kosten': m_kosten, 'vergleich': m_vergleich,
           'einheit': m_einheit, 'plaene': m_plaene, 'markt': m_markt, 'rendite': m_rendite, 'partner': m_partner,
           'kontakt': m_kontakt, 'ueber': m_ueber, 'recht': m_recht, 'agb': m_agb}
-NEEDS_OBJ = {'kosten', 'vergleich', 'einheit', 'rendite', 'recht', 'agb'}
+NEEDS_OBJ = {'kosten', 'ueberblick_kosten', 'vergleich', 'einheit', 'rendite', 'recht', 'agb'}
 NEEDS_SHARED = {'partner', 'ueber'}
 
 ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII']
