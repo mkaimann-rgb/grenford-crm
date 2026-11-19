@@ -200,10 +200,7 @@ IMGCOL = '#ffffff'   # Fußzeile auf Fotos: weiß mit weichem Schatten; auf Papi
 
 
 def PN(color=None, img=False):
-    if img:   # Seitenzahl auf Foto: kleines dunkelblaues Feld, damit sie immer lesbar ist
-        lab = C.labels.get(C.page, ''); wdt = max(20, width(lab, 'B', FS) + 12)
-        return (f'<div class="t" style="left:{833 - wdt/2:.2f}pt;top:{H-24:.2f}pt;width:{wdt:.2f}pt;height:17pt;border-radius:8.5pt;background:{NAVY};opacity:.88"></div>'
-                + T(833 - wdt/2, 12, 'B', FS, 10, '#ffffff', lab, w=wdt, extra='text-align:center'))
+    if img: return T(830, 12, 'B', FS, 10, IMGCOL, C.labels.get(C.page, ''), extra=SHADOW)
     return T(830, 12, 'B', FS, 10, color or INK, C.labels.get(C.page, ''))
 
 
@@ -698,10 +695,10 @@ def m_partner(d, shared):
     s += (L(71, 252 - 54 * 3 + 22, 387, 'rgba(169,184,207,.35)', .6)
           + T(71, 64, 'N', 8.4, 12, CREAM, 'Ihr Ansprechpartner: Marco Kaimann') + T(71, 51, 'N', 8, 11, MIST, '+49 172 425 9087 · mkaimann@grenford.de'))
     for i, b in enumerate(d['bereiche']):
-        ln = 487 - 140 * i
+        ln = 487 - 134 * i
         s += (L(TX, ln, 856) + EB(TX, ln - 15, f'0{i+1}', ACC, 7) + T(TX, ln - 36, 'S', 17, 22, INK, b['titel'])
               + T(TX, ln - 56, 'N', 9, 13.4, INK, b['text'], w=356) + CHIPS(TX, ln - 112, b['chips']))
-    return s + L(TX, 487 - 140 * 3, 856) + cap(TX, 34, br(d['hinweis']), w=356)
+    return s + L(TX, 487 - 134 * 3, 856) + cap(TX, 68, br(d['hinweis']), w=356)
 
 
 def m_kontakt(d):
