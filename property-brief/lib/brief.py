@@ -46,6 +46,7 @@ C = None  # wird vom Builder gesetzt
 
 # ------------------------------------------------------------ Grundelemente
 def width(text, f, size, spacing=0.0):
+    text = str(text).replace('&nbsp;', ' ').replace('&amp;', '&').replace('&gt;', '>')
     if f == 'S' and sans_only():   # Titel in DM Sans Medium, 90 %, Laufweite -0,035 em
         font = ImageFont.truetype(os.path.join(SHARED, 'fonts', 'dm-sans-var.ttf'), 400)
         try: font.set_variation_by_axes([14, 500])
@@ -112,6 +113,7 @@ def T(x, base, f, size, tl, color, text, w=None, extra=''):
     elif HEADLINE and f == 'S' and size >= 22 and color == INK:
         f = 'H'; size = round(size * .9, 1); text = re.sub(r'\.$', '', text)
         extra = 'letter-spacing:-.035em;' + extra
+    text = re.sub(r'(\d) (%|€|m²|Mio\.|T€|km|ha|h\b|min\b)', '\\1&nbsp;\\2', str(text))   # Zahl und Einheit nie trennen
     fam, k = FONT[f]
     top = H - base - tl / 2 - k * size
     ws = f'width:{w}pt;' if w else 'white-space:nowrap;'
@@ -721,18 +723,19 @@ def m_partner(d, shared):
 
 
 def m_kontakt(d):
-    s = (HEAD('Nächster Schritt &amp; Kontakt') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'), extra=COLCUT())
+    st = d.get('abstand', 64); n = len(d['schritte'])
+    s = (HEAD(d.get('kopf', 'Nächster Schritt &amp; Kontakt')) + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'), extra=COLCUT())
          + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(img=True)
          + T(51, 140, 'S', 29, 33, CREAM, br(d['claim'])) + EB(412, 488, d['dachzeile']) + T(412, 448, 'S', 30, 32, INK, br(d['titel'])))
     for i, (h, t) in enumerate(d['schritte']):
-        ln = 382 - 64 * i
+        ln = 382 - st * i
         s += (L(412, ln, 856) + T(412, ln - 30, 'S', 22, 30, ACC, f'0{i+1}')
-              + T(466, ln - 22, 'S', 14.5, 19, INK, h) + T(466, ln - 39, 'N', 9, 12.8, INK, t, w=388))
-    return (s + L(412, 382 - 64 * 3, 856) + R(412, 74, 444, 102) + EB(432, 155, 'Besichtigung vereinbaren', LIGHT, 6.8)
-            + T(432, 132, 'S', 16, 21, CREAM, 'Marco Kaimann begleitet Sie persönlich.')
-            + T(432, 110, 'N', 9.2, 14, CREAM, '+49 172 425 9087 · mkaimann@grenford.de')
-            + T(432, 96, 'N', 8.4, 13, MIST, 'GRENFORD · Kurfürstendamm 96 · 10709 Berlin · www.grenford.de')
-            + T(412, 28, 'N', 6.6, 9, GREY, 'GRENFORD ist die Geschäftsbezeichnung des Einzelunternehmens Marco Kaimann · USt-IdNr.: DE362752159'))
+              + T(466, ln - 22, 'S', 14.5, 19, INK, h) + T(466, ln - 39, 'N', d.get('schrift', 9), 12.8, INK, t, w=388))
+    return (s + L(412, 382 - st * n, 856) + R(412, 48 if n > 3 else 74, 444, 92 if n > 3 else 102) + EB(432, 119 if n > 3 else 155, d.get('box_label', 'Besichtigung vereinbaren'), LIGHT, 6.8)
+            + T(432, 98 if n > 3 else 132, 'S', 16, 21, CREAM, d.get('box_titel', 'Marco Kaimann begleitet Sie persönlich.'))
+            + T(432, 78 if n > 3 else 110, 'N', 9.2, 14, CREAM, '+49 172 425 9087 · mkaimann@grenford.de')
+            + T(432, 64 if n > 3 else 96, 'N', 8.4, 13, MIST, 'GRENFORD · Kurfürstendamm 96 · 10709 Berlin · www.grenford.de')
+            + T(412, 30 if n > 3 else 28, 'N', 6.6, 9, GREY, 'GRENFORD ist die Geschäftsbezeichnung des Einzelunternehmens Marco Kaimann · USt-IdNr.: DE362752159'))
 
 
 def m_ueber(d, shared):
@@ -740,7 +743,9 @@ def m_ueber(d, shared):
          + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(img=True)
          + T(51, 121, 'S', 29, 32, CREAM, 'Wir strukturieren<br>Immobilien-<br>entscheidungen' + ('' if sans_only() else '.')))
     h = round(95 * 379 / 773, 2)
+    aktiv = C.meta.get('dokument')
     for i, (brand, t, desc, lab, logo) in enumerate(shared['geschaeftsfelder']):
+        if aktiv and lab == aktiv: lab += ' · dieses Dokument'
         ln = 500 - 122 * i
         s += (L(412, ln, 856) + PIC(logo, 418, round(ln - 48.5 - h / 2, 2), 95, h)
               + EB(522, ln - 17, brand, ACC, 6.6) + T(522, ln - 38, 'S', 17.5, 23, INK, t)
@@ -758,12 +763,12 @@ def m_recht(d, obj):
 
 def m_agb(d, obj):
     k = obj['kosten']
-    agb = open(os.path.join(SHARED, 'agb.html')).read().replace('{{courtage_satz}}', k['agb_courtage'])
+    agb = open(os.path.join(SHARED, d.get('datei', 'agb.html'))).read().replace('{{courtage_satz}}', k.get('agb_courtage', ''))
     p = re.findall(r'<h4>.*?</p>', agb)
     cols = [''.join(p[0:3]), ''.join(p[3:7]), ''.join(p[7:])]
-    return (chrome('Anhang · Allgemeine Geschäftsbedingungen') + head('GRENFORD Property · Immobilienvermittlung', 'Allgemeine Geschäftsbedingungen.', 29, 32, 438)
+    return (chrome('Anhang · Allgemeine Geschäftsbedingungen') + head(d.get('dachzeile', 'GRENFORD Property · Immobilienvermittlung'), 'Allgemeine Geschäftsbedingungen.', 29, 32, 438)
             + T(51, 417, 'N', 8, 11.6, GREY, f'Marco Kaimann, Einzelunternehmer, Geschäftsbezeichnung GRENFORD · Kurfürstendamm 96, 10709 Berlin · mkaimann@grenford.de · Stand: {obj["meta"]["agb_stand"]}')
-            + ''.join(f'<div class="t agb" style="left:{x}pt;top:{H-399:.1f}pt;width:255pt">{c}</div>' for x, c in zip((51, 324, 597), cols)))
+            + ''.join(f'<div class="t agb" style="left:{x}pt;top:{H-399:.1f}pt;width:255pt;{d.get("stil", "")}">{c}</div>' for x, c in zip((51, 324, 597), cols)))
 
 
 def m_ueberblick_kosten(d, obj):
@@ -887,12 +892,315 @@ def m_tabelle(d, obj):
     return s + cap(51, 40, br(d['quelle']), w=805)
 
 
-MODULE = {'titel': m_titel, 'vorwort': m_vorwort, 'inhalt': m_inhalt, 'ueberblick': m_ueberblick, 'fakten': m_fakten, 'tabelle': m_tabelle, 'ueberblick_kosten': m_ueberblick_kosten, 'split': m_split,
+# ------------------------------------------------------------ Raster-Seiten (Investment Memo und Berichte)
+# Eine Seite = Kopf (Dachzeile, Überschrift, optional Einleitung) + frei platzierte Blöcke.
+# Blockkoordinaten: x, y = Oberkante in pt (Ursprung unten links), w = Breite.
+POS = ('gesichtet', 'gegeben', 'erteilt', 'vorhanden')
+
+
+def nlines(text, size, w, f='N'):
+    if not w: return 1
+    n = 0
+    for part in re.split(r'<br\s*/?>', str(text)):
+        words = re.sub(r'<[^>]+>', '', part).split(); cur = ''; k = 1
+        for wd in words:
+            t = (cur + ' ' + wd).strip()
+            if cur and width(t, f, size) * 1.01 > w: k += 1; cur = wd
+            else: cur = t
+        n += k
+    return max(1, n)
+
+
+def _farbe(k):
+    return {'navy': NAVY, 'acc': ACC, 'light': LIGHT, 'grey': '#b9b4ab', 'mist': MIST}.get(k, k)
+
+
+SQ = 'border-radius:0;'
+
+
+def CHIP(x, base, text):
+    pos = text.lower().split()[0] in POS
+    st = (f'background:{ACC};color:#fff;' if pos else f'border:.6pt solid {ACC};color:{ACC};')
+    return (f'<div class="t" style="left:{x}pt;top:{H-base-7.4:.2f}pt;{st}font-family:\'DM Mono\',monospace;font-size:5.9pt;line-height:7pt;'
+            f'letter-spacing:.06em;text-transform:uppercase;padding:1.4pt 4.5pt;white-space:nowrap">{text}</div>')
+
+
+def b_tabelle(b):
+    x, y, w = b['x'], b['y'], b['w']; s = ''
+    cols = b['breiten']; fs = b.get('schrift', 7.9); zh = b.get('zh', 15.6); lft = set(b.get('links', [0]))
+    tags = set(b.get('tags', [])); hl = b.get('hervorheben', []); mark = {tuple(m) for m in b.get('markiere', [])}
+    xs = [x]; [xs.append(xs[-1] + c) for c in cols]
+    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 14
+    if b.get('kopf'):
+        for j, h in enumerate(b['kopf']):
+            if j in lft or j in tags: s += T(xs[j] + (0 if j == 0 else 6), y, 'B', 6.4, 9, GREY, h.upper(), extra='letter-spacing:.05em')
+            else: s += RT(xs[j + 1], y, 'B', 6.4, 9, GREY, h.upper(), cols[j] - 4)
+        y -= 7
+    for i, r in enumerate(b['zeilen']):
+        strong = r[0] in hl
+        nl = max(nlines(c, fs, cols[j] - 8) if (j in lft and j < len(cols)) else 1 for j, c in enumerate(r))
+        rh = zh + (nl - 1) * fs * 1.33
+        s += L(x, y, x + w, NAVY if strong else LINE, 1 if strong else .5)
+        for j, c in enumerate(r):
+            if (i, j) in mark: s += R(xs[j] + 2, y - rh + 1.5, cols[j] - 2, rh - 3, LIGHT, .35)
+            col = NAVY if (strong or (j == b.get('akzent'))) else INK
+            f = 'B' if (strong or j == b.get('akzent')) else 'N'
+            yb = y - zh * .66
+            if j in tags and c: s += CHIP(xs[j] + 6, yb + 1, c)
+            elif j in lft: s += T(xs[j] + (0 if j == 0 else 6), yb, f, fs, fs * 1.33, col if j == 0 or strong else INK, c, w=cols[j] - 8)
+            else: s += RT(xs[j + 1] - (4 if (i, j) in mark else 0), yb, f, fs, fs * 1.33, col, c, cols[j] - 4)
+        y -= rh
+    s += L(x, y, x + w)
+    b['_unten'] = y
+    return s
+
+
+def b_kv(b):
+    x, y, w = b['x'], b['y'], b['w']; kw = b.get('kw', 120); fs = b.get('schrift', 8.2); s = ''
+    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 8
+    for k, v in b['zeilen']:
+        nl = max(nlines(v, fs, w - kw - 4), nlines(k, fs - .4, kw - 8)); rh = 9 + nl * fs * 1.36
+        s += L(x, y, x + w) + T(x, y - 12, 'N', fs - .4, (fs - .4) * 1.36, GREY, k, w=kw - 8) + T(x + kw, y - 12, 'N', fs, fs * 1.36, INK, v, w=w - kw - 4)
+        y -= rh
+    b['_unten'] = y
+    return s + L(x, y, x + w)
+
+
+def b_text(b):
+    x, y, w = b['x'], b['y'], b['w']; fs = b.get('schrift', 8.6); tl = fs * 1.48; s = ''
+    inner_x, inner_w = (x + 16, w - 30) if b.get('box') else (x, w)
+    paras = []
+    for p in b['absaetze']:
+        if isinstance(p, list): paras.append((f'<span style="font-weight:500;color:{NAVY}">{p[0]}</span> {p[1]}', p[0] + ' ' + p[1]))
+        else: paras.append((p, p))
+    hts = [nlines(pl, fs, inner_w) * tl for _, pl in paras]
+    total = sum(hts) + 7 * (len(paras) - 1) + (16 if b.get('titel') else 0)
+    if b.get('box'):
+        s += R(x, y - total - 26, w, total + 26, LIGHT, .22) + R(x, y - total - 26, 2.2, total + 26, ACC, extra=SQ)
+        y -= 13
+    if b.get('titel'): s += EB(inner_x, y - 4, b['titel'], NAVY, 7.4); y -= 16
+    for (html, _), h in zip(paras, hts):
+        s += T(inner_x, y - fs * .9, 'N', fs, tl, INK, html, w=inner_w); y -= h + 7
+    b['_unten'] = y
+    return s
+
+
+def b_balken(b):
+    x, y, w = b['x'], b['y'], b['w']; lw = b.get('lw', 130); vw = b.get('vw', 60); mx = b.get('max') or max(i[1] for i in b['items'])
+    st = b.get('abstand', 19); s = ''
+    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 18
+    for it in b['items']:
+        lab, val, txt = it[0], it[1], it[2]; kind = it[3] if len(it) > 3 else ''
+        col = LIGHT if kind == 'h' else ('#b9b4ab' if kind == 'r' else NAVY)
+        bw = max(1.5, (w - lw - vw) * val / mx)
+        s += (T(x, y - 7.5, 'N', 7.8, 10, INK, lab, w=lw - 6) + R(x + lw, y - 11, round(bw, 2), 11, col, extra=SQ)
+              + T(x + lw + bw + 6, y - 7.5, 'B', 7.6, 10, NAVY, txt))
+        y -= st
+    b['_unten'] = y
+    return s
+
+
+def b_saeulen(b):
+    x, y, w, h = b['x'], b['y'], b['w'], b['h']; s = ''
+    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 22
+    kat = b['kategorien']; ser = b['serien']; stacked = b.get('gestapelt', False)
+    y0 = y - h; n = len(kat); gw = w / n
+    mx = b.get('max') or max((sum(sr['werte'][i] for sr in ser) if stacked else max(sr['werte'][i] for sr in ser)) for i in range(n))
+    bwid = gw * b.get('breite', .56) / (1 if stacked else len(ser))
+    s += L(x, y0, x + w, INK, .6)
+    for i, k in enumerate(kat):
+        cx = x + gw * i + gw * (1 - b.get('breite', .56)) / 2; acc_y = y0
+        for j, sr in enumerate(ser):
+            v = sr['werte'][i]; hh = h * v / mx
+            col = _farbe(sr.get('farben', [])[i] if sr.get('farben') else sr.get('farbe', 'navy'))
+            if stacked:
+                s += R(round(cx, 2), round(acc_y, 2), round(bwid, 2), round(hh, 2), col, extra=SQ); acc_y += hh
+            else:
+                bx = cx + j * bwid
+                s += R(round(bx + .8, 2), y0, round(bwid - 1.6, 2), round(hh, 2), col, extra=SQ)
+                if sr.get('labels'): s += T(round(bx, 2), y0 + hh + 9, 'B', 7.2, 9, NAVY, sr['labels'][i], w=round(bwid, 2), extra='text-align:center')
+        if stacked and b.get('summen'): s += T(round(cx - 10, 2), acc_y + 9, 'B', 7.4, 9, NAVY, b['summen'][i], w=round(bwid + 20, 2), extra='text-align:center')
+        s += T(round(x + gw * i, 2), y0 - 12, 'N', 7, 9, GREY, k, w=round(gw, 2), extra='text-align:center')
+    ly = y0 - 30
+    if b.get('legende', True):
+        lx = x
+        for sr in ser:
+            s += R(lx, ly - 2, 7, 7, _farbe(sr.get('farbe', 'navy')), extra=SQ) + T(lx + 11, ly + 1, 'N', 7, 9, GREY, sr['name'])
+            lx += 22 + width(sr['name'], 'N', 7)
+    b['_unten'] = ly - 10
+    return s
+
+
+def b_linie(b):
+    x, y, w, h = b['x'], b['y'], b['w'], b['h']; s = ''
+    if b.get('titel'): s += EB(x, y, b['titel'], NAVY, 7.4); y -= 20
+    lo, hi, step = b['achse']; kat = b['kategorien']; X0 = x + 24; Wd = w - 54; y0 = y - h
+    Y = lambda v: y0 + (v - lo) / (hi - lo) * h
+    v = lo
+    while v <= hi + 1e-9:
+        s += L(X0, Y(v), X0 + Wd, INK if v == 0 else '#e7e2da', .6 if v == 0 else .5) + RT(X0 - 6, Y(v) - 3, 'N', 6.6, 9, GREY, f'{v:g}'.replace('-', '−'), 30)
+        v += step
+    for i, k in enumerate(kat):
+        s += T(X0 + Wd * i / (len(kat) - 1) - 15, y0 - 13, 'N', 6.6, 9, GREY, k, w=30, extra='text-align:center')
+    pts_svg = ''
+    for sr in b['serien']:
+        col = _farbe(sr.get('farbe', 'navy'))
+        pts = [(X0 + Wd * i / (len(kat) - 1), H - Y(val)) for i, val in enumerate(sr['werte'])]
+        pts_svg += f'<polyline fill="none" stroke="{col}" stroke-width="1.6" points="' + ' '.join(f'{px:.1f},{py:.1f}' for px, py in pts) + '"/>'
+        pts_svg += ''.join(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="1.9" fill="{col}"/>' for px, py in pts)
+        lx, ly = pts[-1]
+        s += T(lx + 5, H - ly + sr.get('dy', 0) - 3, 'B', 7.4, 9, col, sr['ende'])
+    s += f'<svg class="t" style="left:0;top:0;width:907pt;height:567pt;overflow:visible" viewBox="0 0 907 567">{pts_svg}</svg>'
+    lx = X0; ly = y0 - 32
+    for sr in b['serien']:
+        s += R(lx, ly - 2, 12, 2.2, _farbe(sr.get('farbe', 'navy')), extra=SQ) + T(lx + 16, ly + 1, 'N', 7, 9, GREY, sr['name'])
+        lx += 30 + width(sr['name'], 'N', 7)
+    b['_unten'] = ly - 10
+    return s
+
+
+def b_kpi(b):
+    x, y, w = b['x'], b['y'], b['w']; k = b['items']; gap = b.get('gap', 12); h = b.get('h', 58)
+    bw = (w - gap * (len(k) - 1)) / len(k); s = ''; vs = b.get('groesse', 20)
+    for j, it in enumerate(k):
+        v, lab = it[0], it[1]; xx = round(x + j * (bw + gap), 2)
+        if b.get('hell'):
+            s += L(xx, y, xx + bw, NAVY, 1) + T(xx, y - 26, 'L', vs, vs * 1.2, NAVY, v, extra='font-variant-numeric:tabular-nums;letter-spacing:-.02em') + EB(xx, y - 46, lab, ACC, 6.2)
+            if len(it) > 2: s += T(xx, y - 58, 'N', 7, 9, GREY, it[2])
+        else:
+            s += R(xx, y - h, round(bw, 2), h) + T(xx + 14, y - h + 34, 'L', vs, 24, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 13, lab, LIGHT, 6.2)
+    b['_unten'] = y - h
+    return s
+
+
+def b_dunkel(b):
+    x, y, w, h = b['x'], b['y'], b['w'], b['h']; s = R(x, y - h, w, h)
+    yy = y - 24
+    if b.get('titel'): s += EB(x + 20, yy, b['titel'], CREAM, 7); yy -= 34
+    for it in b['werte']:
+        s += T(x + 20, yy, 'L', it[2] if len(it) > 2 else 26, 30, '#ffffff', it[0], extra='font-variant-numeric:tabular-nums;letter-spacing:-.02em') + EB(x + 20, yy - 22, it[1], LIGHT, 6.4)
+        yy -= 62
+    if b.get('text'): s += T(x + 20, y - h + 16 + nlines(b['text'], 7.4, w - 40) * 10.5, 'N', 7.4, 10.5, MIST, b['text'], w=w - 40)
+    b['_unten'] = y - h
+    return s
+
+
+def _monat(t):
+    yy, mm = t.split('-'); return int(yy) * 12 + int(mm) - 1
+
+
+def b_gantt(b):
+    x, y, w = b['x'], b['y'], b['w']; lw = b.get('lw', 190); s = ''
+    a, z = _monat(b['von']), _monat(b['bis']) + 1; n = z - a; mw = (w - lw) / n; X = lambda m: x + lw + (m - a) * mw
+    for m in range(a, z):
+        if m % 12 == 0 or m == a: s += T(X(m) + 2, y, 'B', 7.4, 9, NAVY, str(m // 12))
+        s += T(X(m), y - 13, 'N', 6.4, 9, GREY, 'JFMAMJJASOND'[m % 12], w=mw, extra='text-align:center')
+        if m % 12 == 0: s += VL(X(m), y + 4, y - 20 - 22 * len(b['zeilen']), LINE, .6)
+    yy = y - 22
+    for lab, v, bis, typ in b['zeilen']:
+        s += L(x, yy, x + w) + T(x, yy - 13, 'N', 7.8, 10, INK, lab, w=lw - 8)
+        s += R(round(X(_monat(v)), 2), yy - 17, round(max(mw * .6, (_monat(bis) + 1 - _monat(v)) * mw), 2), 9, _farbe({'bau': 'navy', 'vertrieb': 'light', 'betrieb': 'acc', 'aussen': 'grey'}[typ]), extra=SQ)
+        yy -= 22
+    s += L(x, yy, x + w)
+    if b.get('heute'):
+        hx = X(_monat(b['heute']))
+        s += f'<div class="t" style="left:{hx:.2f}pt;top:{H-y-6:.2f}pt;height:{y+6-yy:.2f}pt;border-left:.8pt dashed {ACC}"></div>' + T(hx - 20, yy - 10, 'B', 6.6, 9, ACC, 'HEUTE', w=40, extra='text-align:center;letter-spacing:.06em')
+    lx = x + lw
+    for nm, k in b.get('legende', []):
+        s += R(lx, yy - 30, 12, 6, _farbe(k), extra=SQ) + T(lx + 16, yy - 25, 'N', 7, 9, GREY, nm); lx += 34 + width(nm, 'N', 7)
+    b['_unten'] = yy - 36
+    return s
+
+
+def b_zeitstrahl(b):
+    x, y, w = b['x'], b['y'], b['w']; s = ''
+    a, z = _monat(b['von']), _monat(b['bis']); X = lambda m: x + (m - a) / (z - a) * w
+    s += L(x, y, x + w, INK, 1)
+    for yr in range(a // 12 + 1, z // 12 + 1):
+        s += VL(X(yr * 12), y + 4, y - 4, INK, .8) + T(X(yr * 12) - 15, y - 14, 'N', 6.8, 9, GREY, str(yr), w=30, extra='text-align:center')
+    for p in b['punkte']:
+        px = X(_monat(p['monat'])); up = p.get('oben', True); col = ACC if p.get('plan') else NAVY
+        s += f'<div class="t" style="left:{px-3.6:.2f}pt;top:{H-y-3.6:.2f}pt;width:7.2pt;height:7.2pt;border-radius:50%;background:{col if not p.get("plan") else CREAM};border:1.4pt solid {col}"></div>'
+        hgt = p.get('h', 34)
+        if up: s += VL(px, y + hgt, y + 5, LINE, .7) + T(px - 50, y + hgt + 20, 'B', 7.6, 10, col, p['datum'], w=100, extra='text-align:center') + T(px - 55, y + hgt + 9, 'N', 7.2, 9.4, INK, p['text'], w=110, extra='text-align:center')
+        else: s += VL(px, y - 5, y - hgt, LINE, .7) + T(px - 50, y - hgt - 9, 'B', 7.6, 10, col, p['datum'], w=100, extra='text-align:center') + T(px - 55, y - hgt - 20, 'N', 7.2, 9.4, INK, p['text'], w=110, extra='text-align:center')
+    if b.get('heute'):
+        hx = X(_monat(b['heute']))
+        s += f'<div class="t" style="left:{hx:.2f}pt;top:{H-y-90:.2f}pt;height:180pt;border-left:.8pt dashed {ACC}"></div>' + T(hx + 4, y - 84, 'B', 6.6, 9, ACC, 'HEUTE', extra='letter-spacing:.06em')
+    b['_unten'] = y - 80
+    return s
+
+
+def b_matrix(b):
+    x, y, w, h = b['x'], b['y'], b['w'], b['h']; g = b.get('gap', 10); cw = (w - g) / 2; chh = (h - g) / 2; s = ''
+    for i, c in enumerate(b['zellen']):
+        cx = x + (i % 2) * (cw + g); cy = y - (i // 2) * (chh + g)
+        s += R(round(cx, 2), round(cy - chh, 2), round(cw, 2), round(chh, 2), LIGHT, .18) + R(round(cx, 2), round(cy - 2.4, 2), round(cw, 2), 2.4, ACC if c.get('akzent') else NAVY, extra=SQ)
+        s += EB(cx + 14, cy - 18, c['titel'], NAVY, 7.2)
+        if c.get('tag'): s += RT(cx + cw - 14, cy - 18, 'B', 6.4, 9, ACC, c['tag'].upper(), 160, ) 
+        yy = cy - 34; fs = b.get('schrift', 7.8)
+        for p in c['punkte']:
+            html = f'<span style="font-weight:500;color:{NAVY}">{p[0]}</span> {p[1]}' if isinstance(p, list) else p
+            pl = (p[0] + ' ' + p[1]) if isinstance(p, list) else p
+            s += T(cx + 14, yy, 'N', fs, fs * 1.4, INK, html, w=cw - 28); yy -= nlines(pl, fs, cw - 28) * fs * 1.4 + 5
+    b['_unten'] = y - h
+    return s
+
+
+def b_bild(b):
+    x, y, w, h = b['x'], b['y'], b['w'], b['h']; s = ''
+    if b.get('weiss'): s += R(x, y - h, w, h, '#ffffff')
+    pad = b.get('pad', 0)
+    s += IMG(b['bild'], x + pad, y - h + pad, w - 2 * pad, h - 2 * pad, b.get('pos', 'center'), 'contain' if b.get('contain') else 'cover')
+    if b.get('titel'): s += EB(x, y - h - 12, b['titel'], GREY, 6.4)
+    b['_unten'] = y - h - 14
+    return s
+
+
+def b_schritte(b):
+    x, y, w = b['x'], b['y'], b['w']; s = ''; n = len(b['items']); cw = w / n
+    for i, (d_, t1, t2) in enumerate(b['items']):
+        cx = x + i * cw
+        s += L(cx, y, cx + cw - 12, NAVY, 1) + EB(cx, y - 14, d_, ACC, 6.8) + T(cx, y - 30, 'B', 8.6, 11, NAVY, t1, w=cw - 16) + T(cx, y - 44, 'N', 7.6, 10.4, INK, t2, w=cw - 16)
+    b['_unten'] = y - 70
+    return s
+
+
+BLOECKE = {'tabelle': b_tabelle, 'kv': b_kv, 'text': b_text, 'balken': b_balken, 'saeulen': b_saeulen, 'linie': b_linie,
+           'kpi': b_kpi, 'dunkel': b_dunkel, 'gantt': b_gantt, 'zeitstrahl': b_zeitstrahl, 'matrix': b_matrix, 'bild': b_bild, 'schritte': b_schritte}
+
+
+def m_raster(d, obj):
+    s = chrome(d['kopf']) + EB(51, 487, d['dachzeile']) + T(51, 450, 'S', 31, 34, INK, d['titel'])
+    if d.get('intro'): s += T(51, 418, 'N', 9.6, 14, INK, d['intro'], w=805)
+    prev = None
+    for blk in d['bloecke']:
+        if blk.get('y') == 'folgt': blk['y'] = prev['_unten'] - blk.get('abstand', 18)
+        s += BLOECKE[blk['typ']](blk); prev = blk
+    if d.get('quelle'):
+        q = br(d['quelle']); nl = nlines(q.replace('<br>', ' '), 7.4, 805) + q.count('<br>')
+        s += cap(51, 30 + 10.5 * nl, q, w=805)
+    return s
+
+
+def m_bildseite(d):
+    """Atmosphärische Doppelseite: Foto vollflächig, Textspalte links mit Akzentfarbe, Kennzahlen unten."""
+    s = (IMG(d['bild'], 0, 0, 907, 567, d.get('bild_pos', 'center')) + R(0, 0, COL, 567, NAVY, .62)
+         + MARK('white') + HEAD(d['kopf']) .replace(f'color:{ACC}', 'color:#ffffff;' + SHADOW) + FOOT(img=True) + PN(img=True)
+         + EB(51, 404, d['dachzeile'], CREAM, 8.5) + T(51, 360, 'S', 32, 37, CREAM, br(d['titel']))
+         + T(51, 360 - 37 * (len(d['titel']) - 1) - 46, 'N', 9.8, 14.8, MIST, d['text'], w=270))
+    for i, (v, lab) in enumerate(d['kennzahlen']):
+        x = 51 + i * 100
+        s += L(x, 108, x + 86, LIGHT, .8) + T(x, 82, 'L', 20, 24, '#ffffff', v, extra='font-variant-numeric:tabular-nums;letter-spacing:-.02em') + EB(x, 60, lab, LIGHT, 6.2)
+    return s + (T(51, 36, 'N', 6.2, 8.7, MIST, d['hinweis']) if d.get('hinweis') else '')
+
+
+MODULE = {'raster': m_raster, 'bildseite': m_bildseite, 'titel': m_titel, 'vorwort': m_vorwort, 'inhalt': m_inhalt, 'ueberblick': m_ueberblick, 'fakten': m_fakten, 'tabelle': m_tabelle, 'ueberblick_kosten': m_ueberblick_kosten, 'split': m_split,
           'lage': m_lage, 'raumprogramm': m_raumprogramm, 'grundrisse': m_grundrisse, 'sanierung': m_sanierung,
           'projektstand': m_projektstand, 'energie': m_energie, 'kosten': m_kosten, 'vergleich': m_vergleich,
           'einheit': m_einheit, 'plaene': m_plaene, 'markt': m_markt, 'rendite': m_rendite, 'partner': m_partner,
           'kontakt': m_kontakt, 'ueber': m_ueber, 'recht': m_recht, 'agb': m_agb}
-NEEDS_OBJ = {'fakten', 'tabelle', 'kosten', 'ueberblick_kosten', 'vergleich', 'einheit', 'rendite', 'recht', 'agb'}
+NEEDS_OBJ = {'raster', 'fakten', 'tabelle', 'kosten', 'ueberblick_kosten', 'vergleich', 'einheit', 'rendite', 'recht', 'agb'}
 NEEDS_SHARED = {'partner', 'ueber'}
 
 ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII']

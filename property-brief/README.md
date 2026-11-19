@@ -53,6 +53,11 @@ Koordinaten), `raumprogramm`, `grundrisse`, `sanierung`, `projektstand` (auch f�
 `energie`, `kosten` (eine oder mehrere Einheiten), `vergleich`, `einheit`, `plaene`, `markt`, `rendite`,
 `partner`, `kontakt`, `ueber`, `recht`, `agb`.
 
+Für Investment Memos zusätzlich: `fakten` (Hard Facts mit Variantenspalten), `tabelle` (Jahres-Cashflow mit Kennzahlenband),
+`bildseite` (Foto mit Textspalte) und `raster` – eine frei belegbare Seite aus Blöcken: `tabelle`, `kv`, `text`, `balken`, `saeulen`,
+`linie`, `kpi`, `dunkel`, `gantt`, `zeitstrahl`, `matrix`, `bild`, `schritte`. Farbthema über `meta.bereich` (`property` | `investment`).
+Beispiel: `objekte/montesana-gi26-002` (objekt.json wird aus `quelle/erzeuge_objekt.py` erzeugt).
+
 Beispiele: `objekte/schlierbacher-weg-13a` (Haus) und `objekte/soemmeringstrasse-35` (Projekt mit drei Wohnungen).
 
 Vor der Weitergabe an Interessenten: `MERKBLATT_Pflichtangaben.md` abhaken.
