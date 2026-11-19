@@ -2518,8 +2518,8 @@
        "Gesichtet"
       ],
       [
-       "Bodengutachten, Schadstoffgutachten",
-       "Fehlt"
+       "Boden- und Bausubstanzgutachten",
+       "Angefordert"
       ],
       [
        "Wertgutachten, Marktwertschätzung",
@@ -2542,7 +2542,7 @@
      "absaetze": [
       [
        "Bis zum Signing:",
-       "Schadstoffgutachten HPC mit Sanierungskosten (nicht in der Kostenbasis), Bodengutachten, Bautenstand und Auswertung der Wertgutachten."
+       "Bausubstanzgutachten HPC mit Kostenansatz, Bodengutachten, aktueller Bautenstand und Auswertung der Wertgutachten."
       ]
      ]
     }
@@ -3397,7 +3397,7 @@
    "id": "check1",
    "kopf": "GRENFORD Asset Check",
    "dachzeile": "Teil 1 von 2 · Recht und Planung",
-   "titel": "Baurecht liegt vor, Gutachten fehlen",
+   "titel": "Baurecht und Baufreigabe liegen vor",
    "bloecke": [
     {
      "typ": "kpi",
@@ -3418,12 +3418,12 @@
        "stil": "hell"
       },
       {
-       "wert": "500 T€",
-       "label": "Grundschuld Abt. III zu löschen"
+       "wert": "Lastenfrei",
+       "label": "Abt. II; Abt. III Löschung zum Vollzug"
       },
       {
-       "wert": "3 fehlen",
-       "label": "Gutachten nicht im Datenraum",
+       "wert": "3 Gutachten",
+       "label": "zur Nachreichung angefordert",
        "stil": "hell"
       }
      ]
@@ -3458,7 +3458,7 @@
       [
        "Grundbuch Blatt 1077 (27.03.2025)",
        "Gesichtet",
-       "ERIKONA GmbH seit 2020; Abt. II ohne Eintragung; Abt. III: Grundschuld 500.000 € (12 %) vom 27.03.2025, Löschung zum Vollzug"
+       "ERIKONA GmbH seit 2020; Abt. II lastenfrei; Abt. III eine Grundschuld (500 T€), Löschung zum Vollzug vorgesehen"
       ],
       [
        "Baugenehmigung 12.09.2023",
@@ -3468,12 +3468,12 @@
       [
        "Änderungsgenehmigung und Gesamtbaufreigabe 12.12.2024",
        "Gesichtet",
-       "Zwei-Achs-Apartments und Dachterrassen genehmigt; Baufreigabe erteilt; nennt zusätzlich Flst. 220/9 (Zuordnung klären)"
+       "Zwei-Achs-Apartments und Dachterrassen genehmigt; Gesamtbaufreigabe erteilt; Flst. 220/9 mitgenannt, Zuordnung wird bestätigt"
       ],
       [
        "Bebauungsplan „Im oberen Brühl – Nord“",
        "Gesichtet",
-       "Sondergebiet seit 19.04.2023; Umwelt- und Schallgutachten ohne Ausschlussgrund; Satzungstext nicht im Datenraum"
+       "Sondergebiet seit 19.04.2023; Umwelt- und Schallgutachten ohne Einwände; Satzungstext wird ergänzt"
       ],
       [
        "Teilungserklärung 14.08.2025, Abgeschlossenheit",
@@ -3481,14 +3481,14 @@
        "Aufteilung in Wohnungs- und Teileigentum vorbereitet"
       ],
       [
-       "Schadstoffuntersuchung HPC AG (2024/25)",
-       "Fehlt",
-       "Arbeiten 2024 wegen gefahrstoffverdächtiger Baustoffe eingestellt; Asbest, PAK und PCB beprobt, Gutachten abgerechnet, liegt nicht vor"
+       "Bausubstanzuntersuchung HPC AG (2024/25)",
+       "Angefordert",
+       "Anlassbezogen beauftragt und abgeschlossen (Asbest, PAK, PCB); Gutachten folgt im Datenraum"
       ],
       [
        "Flst. 213: Kaufvertrag vom 03.08.2026",
        "Gesichtet",
-       "6.511 m² Landwirtschaftsfläche, lastenfrei geschuldet; Kaufpreis 70 T€; Vollzug offen"
+       "6.511 m² Landwirtschaftsfläche, lastenfrei geschuldet; Kaufpreis 70 T€; Vollzug in Vorbereitung"
       ]
      ]
     },
@@ -3503,7 +3503,7 @@
      "absaetze": [
       [
        "Bis zum Signing:",
-       "HPC-Gutachten mit Sanierungskosten, Bodengutachten, Brandschutzgutachten Schubert (04.09.2023, Bestandteil der Genehmigung), Löschungsbewilligung der Grundschuld, Klärung Flst. 220/9 sowie Vollzugsschritte zu Flst. 213 (Vormerkung, Vorkaufsrechtsverzicht, Genehmigung nach Grundstückverkehrsrecht)."
+       "Bausubstanzgutachten HPC mit Kostenansatz, Bodengutachten und Brandschutzgutachten Schubert (04.09.2023) zum Datenraum; Löschungsbewilligung der Grundschuld, Bestätigung Flst. 220/9 sowie Vollzugsschritte zu Flst. 213 (Vormerkung, Vorkaufsrechtsverzicht, Genehmigung nach Grundstückverkehrsrecht)."
       ]
      ]
     }
@@ -3665,7 +3665,7 @@
    "id": "machbar1",
    "kopf": "Machbarkeitsstudie",
    "dachzeile": "Teil 1 von 2 · Planung, Technik und Bau",
-   "titel": "Genehmigt, mit offenen Befunden",
+   "titel": "Genehmigt und baufreigegeben",
    "bloecke": [
     {
      "typ": "kpi",
@@ -3686,11 +3686,11 @@
        "stil": "hell"
       },
       {
-       "wert": "2 × offen",
-       "label": "Schadstoffe, Baugrund"
+       "wert": "2 × Nachweis",
+       "label": "Bausubstanz, Baugrund"
       },
       {
-       "wert": "0",
+       "wert": "Keine",
        "label": "Versagungsgründe in den Bescheiden",
        "stil": "hell"
       }
@@ -3735,7 +3735,7 @@
       ],
       [
        "Brandschutz",
-       "17 Abweichungen mit Kompensation (Brandmeldeanlage, Rauchwarnmelder); Gutachten Schubert nicht im Datenraum",
+       "17 Abweichungen genehmigt, kompensiert durch Brandmeldeanlage und Rauchwarnmelder; Gutachten Schubert folgt im Datenraum",
        "Mit Maßgaben"
       ],
       [
@@ -3749,14 +3749,14 @@
        "Mit Maßgaben"
       ],
       [
-       "Schadstoffe",
-       "Gefahrstoffverdacht 2024 (Asbest, PAK, PCB); Untersuchung erfolgt, Ergebnis und Sanierungskosten nicht im Datenraum",
-       "Offen"
+       "Bausubstanz",
+       "Untersuchung auf Asbest, PAK und PCB 2024/25 abgeschlossen; Gutachten und Kostenansatz werden nachgereicht",
+       "In Klärung"
       ],
       [
        "Baugrund / Statik",
-       "Statik und Tragwerksplanung (Dagdelen, 2020) vorhanden; kein Bodengutachten im Datenraum",
-       "Offen"
+       "Statik und Tragwerksplanung (Dagdelen, 2020) vorhanden; Bodengutachten wird ergänzt",
+       "In Klärung"
       ]
      ]
     },
@@ -3771,7 +3771,7 @@
      "absaetze": [
       [
        "Ergebnis:",
-       "Die Bescheide enthalten keinen Versagungsgrund. Ein Ausschluss lässt sich erst nach Vorlage des Schadstoff- und des Bodengutachtens bewerten; bis dahin sind Sanierungskosten nicht in der Kostenbasis abgebildet."
+       "Die Bescheide enthalten keine Versagungsgründe. Mit Vorlage des Bausubstanz- und des Bodengutachtens wird die Bewertung abgeschlossen und der Kostenansatz für etwaige Maßnahmen ergänzt."
       ]
      ]
     }
@@ -3823,8 +3823,8 @@
       ],
       [
        "Kosten",
-       "Restbudget 8,66 Mio. € netto; Schadstoffsanierung nicht enthalten",
-       "Offen"
+       "Restbudget 8,66 Mio. € netto; Ansatz Bausubstanz folgt mit Gutachten",
+       "Mit Maßgaben"
       ],
       [
        "Markt und Lage",
@@ -3853,7 +3853,7 @@
      "titel": "Gesamtergebnis",
      "schrift": 9,
      "absaetze": [
-      "Das Vorhaben ist genehmigungsrechtlich machbar. Die abschließende Bewertung setzt das Schadstoff- und das Bodengutachten voraus; die übrigen Maßgaben lassen sich bis zum Signing und in der Bauphase abarbeiten."
+      "Das Vorhaben ist genehmigungsrechtlich machbar und baufreigegeben. Mit dem Bausubstanz- und dem Bodengutachten wird die Bewertung abgeschlossen; die übrigen Maßgaben lassen sich bis zum Signing und in der Bauphase umsetzen."
      ]
     },
     {
@@ -3992,7 +3992,7 @@
         ],
         [
          "Kostenbasis.",
-         "Schadstoffbefund und Reserve (10 %) vor Vergabe einpreisen."
+         "Bausubstanzbefund und Reserve (10 %) vor Vergabe einpreisen."
         ]
        ]
       },
@@ -4034,8 +4034,8 @@
          "Rund 82 Ferienunterkünfte, 52 bis 110 € je Nacht; Planpreis am oberen Ende."
         ],
         [
-         "Schadstoffe und Baugrund.",
-         "Gutachten fehlen; Sanierungskosten nicht in der Kostenbasis."
+         "Nachweise.",
+         "Bausubstanz- und Bodengutachten werden nachgereicht; Kostenansatz folgt."
         ]
        ]
       }
@@ -4052,7 +4052,7 @@
      "absaetze": [
       [
        "Investor Insight:",
-       "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption. Offen sind Schadstoff- und Bodengutachten; die übrigen Maßgaben liegen in Betrieb, Finanzierung und Bauablauf. Vertiefte Modelle und Exit-Strategien stellen wir in vertraulichen Gesprächen zur Verfügung."
+       "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption. Bausubstanz- und Bodengutachten werden zum Signing nachgereicht; die übrigen Maßgaben liegen in Betrieb, Finanzierung und Bauablauf. Vertiefte Modelle und Exit-Strategien stellen wir in vertraulichen Gesprächen zur Verfügung."
       ]
      ]
     }
