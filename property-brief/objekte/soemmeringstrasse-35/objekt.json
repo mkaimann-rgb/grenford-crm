@@ -5,7 +5,8 @@
   "ausgabe": "GRENFORD_Property_Brief_Soemmeringstrasse_35.pdf",
   "redaktionsstand": "18.11.2026",
   "agb_stand": "18.11.2026",
-  "variante": "wohnung-projekt"
+  "variante": "wohnung-projekt",
+  "typo": "sans"
  },
  "kosten": {
   "land": "Berlin",
@@ -87,9 +88,9 @@
     "Penthouse Collection"
    ],
    "kurz": [
-    "Drei Dachgeschosswohnungen.",
-    "Der Rohbau steht.",
-    "Den Ausbau gestalten Sie mit."
+    "Drei Dachgeschosswohnungen",
+    "Der Rohbau steht",
+    "Den Ausbau gestalten Sie mit"
    ],
    "adresse": [
     "Sömmeringstraße 35",
@@ -112,36 +113,32 @@
    "hinweis": "Unverbindliche Visualisierung · DIN 277 inkl. Außenflächen; keine Wohnfläche nach WoFlV"
   },
   {
-   "modul": "vorwort",
-   "id": "vorwort",
-   "bereich": "vor",
-   "dachzeile": "The Fifth Facade",
-   "titel": "Wohnen mit Weitblick.",
-   "lead": "Mit THE FIFTH FACADE | Charlottenburg Penthouse Collection präsentieren wir Ihnen ein außergewöhnliches Dachgeschossprojekt in Berlin-Charlottenburg.",
-   "links": "Immobilien werden oft über Kennzahlen beschrieben. Bei Projekten im Dachgeschoss zählen ebenso Planung, Standort und Potenzial.",
-   "rechts": "Das Dach gilt in der Architektur als „fünfte Fassade“ eines Gebäudes – ein Gedanke, der diesem Projekt seinen Namen gibt.",
-   "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen zum Projekt kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."
-  },
-  {
    "modul": "inhalt",
    "id": "inhalt",
    "bereich": "vor",
    "bild": "luftbild.jpg",
    "bild_pos": "center 40%",
    "claim": [
-    "Eine Adresse.",
-    "Drei Wohnwelten."
+    "Eine Adresse,",
+    "drei Wohnwelten"
    ],
    "marke": "The Fifth Facade",
    "text": [
-    "Architektur, Lage und Wohngefühl.",
-    "Die passende Residenz im Blick."
+    "Architektur, Lage und Wohngefühl",
+    "Die passende Residenz im Blick"
    ],
    "adresse": [
     "Sömmeringstraße 35",
     "10589 Berlin-Charlottenburg"
    ],
    "kapitel": [
+    {
+     "titel": "Vorwort",
+     "sub": "Persönliche Einführung von Marco Kaimann",
+     "seiten": [
+      "vorwort"
+     ]
+    },
     {
      "titel": "Das Projekt und die Kaufpreise",
      "sub": "Eckdaten, Kaufpreise und Erwerbsnebenkosten",
@@ -206,11 +203,22 @@
    ]
   },
   {
+   "modul": "vorwort",
+   "id": "vorwort",
+   "bereich": "vor",
+   "dachzeile": "The Fifth Facade",
+   "titel": "Wohnen mit Weitblick",
+   "lead": "Mit THE FIFTH FACADE | Charlottenburg Penthouse Collection präsentieren wir Ihnen ein außergewöhnliches Dachgeschossprojekt in Berlin-Charlottenburg.",
+   "links": "Immobilien werden oft über Kennzahlen beschrieben. Bei Projekten im Dachgeschoss zählen ebenso Planung, Standort und Potenzial.",
+   "rechts": "Das Dach gilt in der Architektur als „fünfte Fassade“ eines Gebäudes – ein Gedanke, der diesem Projekt seinen Namen gibt.",
+   "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen zum Projekt kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."
+  },
+  {
    "modul": "ueberblick",
    "id": "ueberblick",
    "kopf": "Das Projekt auf einen Blick",
    "dachzeile": "The Fifth Facade",
-   "titel": "Das Projekt auf einen Blick.",
+   "titel": "Fakten und Zahlen",
    "intro": "Dachgeschossausbau mit vollständig neuem Dachtragwerk in Holzbauweise. Drei eigenständige Residenzen verbinden individuelle Grundrisse mit privaten Dachterrassen und Loggien.",
    "zeilen": [
     [
@@ -278,11 +286,13 @@
      "voraussichtlich 4–5 Monate (Details auf Seite {seite:projektstand})"
     ]
    },
-   "quelle": "Quelle: Baubeschreibung, Stand April 2026; Baufortschritt nach Angabe des Verkäufers."
+   "quelle": "Quelle: Baubeschreibung, Stand April 2026; Baufortschritt nach Angabe des Verkäufers.",
+   "bereich": "vor"
   },
   {
    "modul": "kosten",
-   "id": "kosten"
+   "id": "kosten",
+   "bereich": "vor"
   },
   {
    "modul": "split",
@@ -293,8 +303,8 @@
    "bild_seite": "rechts",
    "dachzeile": "Das Wohnkonzept",
    "titel": [
-    "Licht. Weite.",
-    "Rückzug."
+    "Licht, Weite",
+    "und Rückzug"
    ],
    "intro": "Drei Residenzen unter einem neuen Dach – jede mit eigenem Grundriss, eigener Dachterrasse und Loggien.",
    "label_breite": 100,
@@ -317,7 +327,7 @@
     ]
    ],
    "caption": [
-    "Unverbindliche Visualisierung.",
+    "Visualisierung, unverbindlich.",
     "Möblierung und Ausstattung beispielhaft."
    ]
   },
@@ -331,7 +341,7 @@
    "dachzeile": "Individuell mit dem Verkäufer abstimmen",
    "titel": [
     "Ihre Wohnung,",
-    "Ihre Ausstattung."
+    "Ihre Ausstattung"
    ],
    "intro": "Sie wählen die Ausstattung gemeinsam mit dem Verkäufer. Eine hochwertige Ausstattungslinie ist im Kaufpreis einkalkuliert; weitergehende Sonderwünsche können einen Aufpreis auslösen.",
    "label_breite": 110,
@@ -354,7 +364,7 @@
     ]
    ],
    "caption": [
-    "Unverbindliche Visualisierung. Ausstattung gemäß Baubeschreibung, Stand April 2026.",
+    "Visualisierung, unverbindlich. Ausstattung gemäß Baubeschreibung, Stand April 2026.",
     "Maßgeblich bleiben Baubeschreibung und notarieller Kaufvertrag."
    ]
   },
@@ -372,7 +382,7 @@
    "dachzeile": "Sömmeringstraße 35 · Berlin-Charlottenburg",
    "titel": [
     "Zwischen Spree,",
-    "Schlossgarten und U7."
+    "Schlossgarten und U7"
    ],
    "intro": "Die Ecklage Sömmeringstraße / Nordhauser Straße liegt im Mierendorffkiez. Wege zum Wasser, zum Schlossgarten und in die City West ergänzen das Wohnumfeld.",
    "gruppen": [
@@ -435,7 +445,7 @@
    "plan": "plan-we1.png",
    "dachzeile": "The Charlottenburg Penthouse Collection",
    "zuordnung": "Objekt-Nr. GPR26-001 · WE 1 · WHG 52 · Farbe im Gesamtplan: Rot",
-   "headline": "Großzügigkeit als Mittelpunkt.",
+   "headline": "Großzügigkeit als Mittelpunkt",
    "text": "Der rund 68,47 m² große Wohn- und Kochbereich bildet das Herz dieser Residenz. Separate Räume ermöglichen unterschiedliche Wohn- und Lebensmodelle. Zwei Loggien und eine private Dachterrasse ergänzen die Innenräume.",
    "flaechen": [
     [
@@ -451,7 +461,7 @@
      "19,64 m²"
     ]
    ],
-   "caption": "Unverbindliche Visualisierung · Möblierung beispielhaft",
+   "caption": "Visualisierung, unverbindlich · Möblierung beispielhaft",
    "fussnote": "Alle Flächen DIN 277 inkl. Außenflächen; keine Wohnfläche nach WoFlV. Plan: Björn Kulka, Architekt; ohne Maßstab."
   },
   {
@@ -465,7 +475,7 @@
    "plan": "plan-we2.png",
    "dachzeile": "The Charlottenburg Penthouse Collection",
    "zuordnung": "Objekt-Nr. GPR26-002 · WE 2 · WHG 51 · Farbe im Gesamtplan: Gelb",
-   "headline": "Wohnen mit eigener Raumfolge.",
+   "headline": "Wohnen mit eigener Raumfolge",
    "text": "Ein eigenständiger Wohnbereich und ein großzügiger Bereich für Essen und Kochen geben der Residenz ihre Struktur. Zwei Loggien und eine private Dachterrasse schaffen insgesamt 32,83 m² ausgewiesene Außenbereiche.",
    "flaechen": [
     [
@@ -481,7 +491,7 @@
      "15,20 m²"
     ]
    ],
-   "caption": "Unverbindliche Visualisierung · Möblierung beispielhaft",
+   "caption": "Visualisierung, unverbindlich · Möblierung beispielhaft",
    "fussnote": "Alle Flächen DIN 277 inkl. Außenflächen; keine Wohnfläche nach WoFlV. Plan: Björn Kulka, Architekt; ohne Maßstab."
   },
   {
@@ -495,7 +505,7 @@
    "plan": "plan-we3.png",
    "dachzeile": "The Charlottenburg Penthouse Collection",
    "zuordnung": "Objekt-Nr. GPR26-003 · WE 3 · WHG 50 · Farbe im Gesamtplan: Blau",
-   "headline": "Offene Räume. Eigenständiger Charakter.",
+   "headline": "Offene Räume. Eigenständiger Charakter",
    "text": "Der rund 76,38 m² große Wohn- und Kochbereich prägt den offenen Charakter dieser Residenz. Eine Eckloggia und die private Dachterrasse verbinden die Innenräume mit zusätzlichen Aufenthaltsmöglichkeiten im Freien.",
    "flaechen": [
     [
@@ -511,7 +521,7 @@
      "17,73 m²"
     ]
    ],
-   "caption": "Unverbindliche Visualisierung · Möblierung beispielhaft",
+   "caption": "Visualisierung, unverbindlich · Möblierung beispielhaft",
    "fussnote": "Alle Flächen DIN 277 inkl. Außenflächen; keine Wohnfläche nach WoFlV. Plan: Björn Kulka, Architekt; ohne Maßstab."
   },
   {
@@ -519,7 +529,7 @@
    "id": "plaene",
    "kopf": "Gebäude &amp; Pläne",
    "dachzeile": "Architekt Björn Kulka · Genehmigungsplanung",
-   "titel": "Das Dachgeschoss. Im Zusammenhang.",
+   "titel": "Das Dachgeschoss im Zusammenhang",
    "zuordnung": [
     {
      "farbe": "#e8564d",
@@ -556,7 +566,7 @@
    "modul": "projektstand",
    "id": "projektstand",
    "dachzeile": "Projektstand",
-   "titel": "Rohbau fertig. Ausbau nach Ihrer Wahl.",
+   "titel": "Rohbau fertig, Ausbau nach Ihrer Wahl",
    "intro": [
     "Stand nach Angabe des Verkäufers. Der Rohbau ist fertiggestellt und kann besichtigt werden; der Innenausbau erfolgt nach",
     "Ihrer individuellen Ausstattungswahl."
@@ -637,7 +647,7 @@
    "id": "markt",
    "kopf": "Markt &amp; Mietorientierung",
    "dachzeile": "Optionales Modul · GRENFORD Research 22.10.2026",
-   "titel": "Mietorientierung für Kapitalanleger.",
+   "titel": "Mietorientierung für Kapitalanleger",
    "intro": "Für private Käufer mit Vermietungsabsicht: vier ausgewählte Neubau- und neuwertige Penthouses aus dem City-West-Umfeld. Angebotsmieten sind keine abgeschlossenen Mietverträge und keine Prognose für dieses Projekt.",
    "spanne": [
     25.67,
@@ -679,7 +689,7 @@
    "id": "rendite",
    "kopf": "Vermietung · Modellrechnung",
    "dachzeile": "Die drei Residenzen · Vergleichsmatrix",
-   "titel": "Miete, Rendite und Kaufpreisfaktor.",
+   "titel": "Miete, Rendite und Kaufpreisfaktor",
    "spanne": [
     25.67,
     31.06
@@ -735,14 +745,14 @@
    "bild": "luftbild.jpg",
    "bild_pos": "center 40%",
    "claim": [
-    "Ihre Wünsche.",
+    "Ihre Wünsche,",
     "Ihr nächster",
-    "Schritt."
+    "Schritt"
    ],
    "dachzeile": "Das Dachgeschoss persönlich erleben",
    "titel": [
     "Lernen Sie Ihre",
-    "Möglichkeiten kennen."
+    "Möglichkeiten kennen"
    ],
    "schritte": [
     [
@@ -784,7 +794,7 @@
     ],
     [
      "Flächen, Darstellungen und Ausstattung",
-     "Alle Projektflächen nach DIN 277 inklusive Außenflächen; keine Wohnfläche nach WoFlV. Visualisierungen: GRENFORD, KI-generiert; unverbindlich, Möbel und Dekoration nur bei vertraglicher Vereinbarung. Ausstattung gemäß Baubeschreibung, Stand April 2026; Aufpreise für Sonderwünsche werden im notariellen Kaufvertrag beurkundet. Pläne: Björn Kulka, Architekt; gestalterisch aufbereitet, nicht zur Maßentnahme geeignet."
+     "Alle Projektflächen nach DIN 277 inklusive Außenflächen; keine Wohnfläche nach WoFlV. Visualisierungen: GRENFORD, digital erstellt; unverbindlich, Möbel und Dekoration nur bei vertraglicher Vereinbarung. Ausstattung gemäß Baubeschreibung, Stand April 2026; Aufpreise für Sonderwünsche werden im notariellen Kaufvertrag beurkundet. Pläne: Björn Kulka, Architekt; gestalterisch aufbereitet, nicht zur Maßentnahme geeignet."
     ],
     [
      "Grundbuch und Energieausweis",
