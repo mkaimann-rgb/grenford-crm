@@ -70,14 +70,14 @@ _LOGO = None
 
 
 def _logo_w(t):
-    """Breite einer Zeile in pt bei 1 pt Schriftgröße (Versalien, Sperrung 0,1 em)."""
+    """Breite einer Zeile in pt bei 1 pt Schriftgröße (Versalien, Sperrung 0,08 em = Logo-Tracking +80)."""
     global _LOGO
     if _LOGO is None:
         _LOGO = ImageFont.truetype(os.path.join(SHARED, 'fonts', 'cormorant-garamond-var.ttf'), 400)
         try: _LOGO.set_variation_by_axes([500])
         except Exception: pass
     t = t.upper().strip()
-    return _LOGO.getlength(t) / 400 + .1 * len(t)
+    return _LOGO.getlength(t) / 400 + .08 * len(t)
 
 
 def _map_serif(f, size, color, text, w, extra, x=0):
@@ -89,7 +89,7 @@ def _map_serif(f, size, color, text, w, extra, x=0):
         return 'N', size, text, 'font-variant-numeric:tabular-nums;' + extra
     if size >= 19 and (plain.startswith('Ihr Marco') or (color == CREAM and x >= 600)):   # Name, Werte in blauen Spalten
         return 'H', round(size * .9, 1) if size >= 22 else size, strip(text), 'letter-spacing:-.035em;' + extra
-    if size >= 19:   # Hauptüberschriften in der Logo-Typografie: klassische Versalien, weit gesperrt
+    if size >= 19:   # Hauptüberschriften in der Logo-Typografie: Cormorant Garamond Medium, Versalien, Tracking +80 (Logo-Spezifikation 28.02.2026)
         t = strip(text); lines = [re.sub(r'<[^>]+>', '', l) for l in re.split(r'<br\s*/?>', t)]
         if color == CREAM and x < 100: maxw = 270
         elif x >= 400: maxw = 856 - x
@@ -98,7 +98,7 @@ def _map_serif(f, size, color, text, w, extra, x=0):
         sz = size * .78
         need = max(_logo_w(l) for l in lines)
         sz = round(min(sz, maxw / need), 2)
-        return 'G', sz, t, f'text-transform:uppercase;letter-spacing:.1em;--tl:{sz/size};' + extra
+        return 'G', sz, t, f'text-transform:uppercase;letter-spacing:.08em;--tl:{sz/size};' + extra
     if w and len(plain) > 60:
         return 'L', size, text, extra
     return 'B', round(size * .94, 1), strip(text), 'letter-spacing:-.01em;' + extra
