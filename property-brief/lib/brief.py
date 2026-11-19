@@ -678,24 +678,24 @@ def m_ueberblick_kosten(d, obj):
     k = obj['kosten']; ge = k['grunderwerbsteuer']; co = k['courtage_brutto']
     p = k['einheiten'][0]['preis']; g = p * ge / 100; c = p * co / 100; tot = p + g + c; qm = p / k['flaeche_qm']
     LX, LR, RX, RR = 51, 425, 482, 856
-    s = (chrome(d.get('kopf', 'Auf einen Blick')) + head(d['dachzeile'], d['titel'])
-         + T(51, 397, 'N', 10.5, 15.5, INK, d['intro'], w=805)
-         + VL(453.5, 352, 52, LINE, .5))
+    s = (chrome(d.get('kopf', 'Auf einen Blick')) + EB(51, 487, d['dachzeile']) + T(51, 450, 'S', 31, 34, INK, d['titel'])
+         + T(51, 415, 'N', 10.5, 15.5, INK, d['intro'], w=805)
+         + VL(453.5, 378, 52, LINE, .5))
     # links: Eckdaten
-    z = d['zeilen']; st = min(30, 290 / len(z))
-    s += EB(LX, 346, 'Das Objekt', NAVY, 7.8)
+    z = d['zeilen']; st = min(31, 300 / len(z))
+    s += EB(LX, 372, 'Das Objekt', NAVY, 7.8)
     for i, (lab, v) in enumerate(z):
-        ln = 336 - st * i
+        ln = 362 - st * i
         s += L(LX, ln, LR) + T(LX, ln - st * .55, 'N', 7.8, 11, GREY, lab) + T(LX + 100, ln - st * .55, 'N', 8.8, 12, INK, v, w=LR - LX - 100)
-    s += L(LX, 336 - st * len(z), LR)
+    s += L(LX, 362 - st * len(z), LR)
     # rechts: Kosten
-    s += EB(RX, 346, 'Kaufpreis und Erwerbsnebenkosten', NAVY, 7.8)
+    s += EB(RX, 372, 'Kaufpreis und Erwerbsnebenkosten', NAVY, 7.8)
     rows = [('Kaufpreis', eur(p)), (f'Grunderwerbsteuer {k["land"]} · {pct(ge, 0)}', eur(g)),
             (f'Käufercourtage · {pct(co)} inkl. MwSt.', eur(c))]
     for i, (t, v) in enumerate(rows):
-        ln = 336 - 27 * i
+        ln = 362 - 29 * i
         s += L(RX, ln, RR) + T(RX, ln - 17, 'N', 9, 12, INK, t) + RT(RR, ln - 17, 'S', 11, 14, NAVY, v, 150)
-    ln = 336 - 27 * 3
+    ln = 362 - 29 * 3
     s += (L(RX, ln, RR, NAVY, 1.1) + T(RX, ln - 24, 'B', 9.4, 12, NAVY, 'Gesamt ohne Notar und Grundbuch') + RT(RR, ln - 26, 'SB', 17, 20, NAVY, eur(tot), 180)
           + L(RX, ln - 38, RR))
     ln -= 38
@@ -703,9 +703,9 @@ def m_ueberblick_kosten(d, obj):
     for t, v, *_ in k.get('optionen', []):
         extra.append((t + ' (optional)', v))
     for i, (t, v) in enumerate(extra):
-        b = ln - 27 * i
-        s += T(RX, b - 17, 'N', 8.6, 12, INK, t) + RT(RR, b - 17, 'N', 8.6, 12, GREY, v, 160) + L(RX, b - 27, RR)
-    b = ln - 27 * len(extra) - 14
+        b = ln - 29 * i
+        s += T(RX, b - 17, 'N', 8.6, 12, INK, t) + RT(RR, b - 17, 'N', 8.6, 12, GREY, v, 160) + L(RX, b - 29, RR)
+    b = ln - 29 * len(extra) - 16
     s += T(RX, b - 8, 'N', 7.4, 10.5, GREY, 'Courtage: hälftige Teilung – Käufer und Verkäufer zahlen jeweils 3,00 % zzgl. 19 % MwSt. (§§ 656c, 656d BGB), fällig nach wirksamem Abschluss des notariellen Kaufvertrags.', w=RR - RX)
     return s + cap(51, 32, d['quelle'])
 
