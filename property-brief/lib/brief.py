@@ -756,7 +756,9 @@ def m_agb(d, obj):
 def m_ueberblick_kosten(d, obj):
     """Überblick und Kosten auf einer Seite, 50/50: links Eckdaten, rechts Kosten. Jede Angabe nur einmal."""
     k = obj['kosten']; ge = k['grunderwerbsteuer']; co = k['courtage_brutto']
-    p = k['einheiten'][0]['preis']; g = p * ge / 100; c = p * co / 100; tot = p + g + c; qm = p / k['flaeche_qm']
+    units = k['einheiten']
+    if len(units) == 1:
+        p = units[0]['preis']; g = p * ge / 100; c = p * co / 100; tot = p + g + c; qm = p / k['flaeche_qm']
     LX, LR, RX, RR = 51, 425, 482, 856
     s = (chrome(d.get('kopf', 'Auf einen Blick')) + EB(51, 487, d['dachzeile']) + T(51, 450, 'S', 31, 34, INK, d['titel'])
          + T(51, 415, 'N', 10.5, 15.5, INK, d['intro'], w=805)
@@ -768,6 +770,32 @@ def m_ueberblick_kosten(d, obj):
         ln = 362 - st * i
         s += L(LX, ln, LR) + T(LX, ln - st * .55, 'N', 7.8, 11, GREY, lab) + T(LX + 100, ln - st * .55, 'N', 8.8, 12, INK, v, w=LR - LX - 100)
     s += L(LX, 362 - st * len(z), LR)
+    if len(units) > 1:   # rechts: Kosten je Einheit in Spalten
+        s += EB(RX, 372, 'Kaufpreis und Erwerbsnebenkosten', NAVY, 7.8)
+        cw = 88; xs = [RR - cw * (len(units) - 1 - j) for j in range(len(units))]
+        for x_, u in zip(xs, units):
+            s += RT(x_, 352, 'B', 7.2, 9.5, NAVY, u.get('kurz', u['name']), cw - 4) + RT(x_, 341, 'N', 6.2, 8.5, GREY, u.get('nr', ''), cw - 4)
+        rows = [('Kaufpreis', lambda q: eur(q, 0), 'N', 9.4, INK),
+                (f'Grunderwerbsteuer · {pct(ge, 0)}', lambda q: eur(q * ge / 100), 'N', 8.4, INK),
+                (f'Käufercourtage · {pct(co)}', lambda q: eur(q * co / 100), 'N', 8.4, INK)]
+        ln = 334
+        for t, fn, fo, sz, col in rows:
+            s += L(RX, ln, RR) + T(RX, ln - 17, 'N', 8.6, 12, INK, t)
+            for x_, u in zip(xs, units): s += RT(x_, ln - 17, fo, sz, 12, col, fn(u['preis']), cw - 4)
+            ln -= 27
+        s += L(RX, ln, RR, NAVY, 1.1) + T(RX, ln - 20, 'B', 8.8, 12, NAVY, 'Gesamt ohne Notar<br>und Grundbuch', w=110, extra='line-height:11pt')
+        for x_, u in zip(xs, units): s += RT(x_, ln - 19, 'B', 10.4, 13, NAVY, eur(u['preis'] * (1 + (ge + co) / 100)), cw - 2)
+        ln -= 34
+        s += L(RX, ln, RR) + T(RX, ln - 17, 'N', 8.6, 12, INK, 'Preis je m² ' + k.get('flaeche_kurz', ''))
+        for x_, u in zip(xs, units): s += RT(x_, ln - 17, 'N', 8.4, 12, INK, eur(u['preis'] / u['flaeche_num']), cw - 4)
+        ln -= 27
+        extra = [('Notar- und Grundbuchkosten', 'nach GNotKG, nicht beziffert')] + [(t + ' (optional)', v) for t, v, *_ in k.get('optionen', [])]
+        for t, v in extra:
+            s += L(RX, ln, RR) + T(RX, ln - 17, 'N', 8.6, 12, INK, t) + RT(RR, ln - 17, 'N', 8.4, 12, GREY, v, 170)
+            ln -= 27
+        s += L(RX, ln, RR)
+        s += T(RX, ln - 14, 'N', 7.4, 10.5, GREY, 'Courtage: hälftige Teilung – Käufer und Verkäufer zahlen jeweils 3,00 % zzgl. 19 % MwSt. (§§ 656c, 656d BGB), fällig nach wirksamem Abschluss des notariellen Kaufvertrags.', w=RR - RX)
+        return s + cap(51, 32, d['quelle'])
     # rechts: Kosten
     s += EB(RX, 372, 'Kaufpreis und Erwerbsnebenkosten', NAVY, 7.8)
     rows = [('Kaufpreis', eur(p)), (f'Grunderwerbsteuer {k["land"]} · {pct(ge, 0)}', eur(g)),

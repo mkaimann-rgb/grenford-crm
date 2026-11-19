@@ -28,7 +28,9 @@
     "zimmer": "5",
     "aussenflaeche": "31,24 m²",
     "aussenraeume": "2 Loggien + Dachterrasse",
-    "lage": "Straßenseitig"
+    "lage": "Straßenseitig",
+    "kurz": "Schlosspark",
+    "nr": "GPR26-001"
    },
    {
     "id": "we2",
@@ -41,7 +43,9 @@
     "zimmer": "4",
     "aussenflaeche": "32,83 m²",
     "aussenraeume": "2 Loggien + Dachterrasse",
-    "lage": "Mittig"
+    "lage": "Mittig",
+    "kurz": "Mierendorff",
+    "nr": "GPR26-002"
    },
    {
     "id": "we3",
@@ -54,7 +58,9 @@
     "zimmer": "5",
     "aussenflaeche": "30,20 m²",
     "aussenraeume": "Eckloggia + Dachterrasse",
-    "lage": "Ecke Nordhauser Straße"
+    "lage": "Ecke Nordhauser Straße",
+    "kurz": "Spree Corner",
+    "nr": "GPR26-003"
    }
   ],
   "flaeche_art": "DIN 277 inkl. Außenflächen",
@@ -62,7 +68,7 @@
   "qm_hinweis": "Schlosspark Penthouse, bezogen auf DIN 277 inkl. Außenflächen",
   "optionen": [
    [
-    "Sonderwünsche über die Ausstattungslinie hinaus",
+    "Sonderwünsche über die Ausstattungslinie",
     "Aufpreis nach Vereinbarung",
     false
    ],
@@ -71,7 +77,8 @@
     "nach Angebot",
     false
    ]
-  ]
+  ],
+  "flaeche_kurz": "(DIN 277 inkl. Außen)"
  },
  "seiten": [
   {
@@ -143,8 +150,7 @@
      "titel": "Das Projekt und die Kaufpreise",
      "sub": "Eckdaten, Kaufpreise und Erwerbsnebenkosten",
      "seiten": [
-      "ueberblick",
-      "kosten"
+      "ueberblick"
      ]
     },
     {
@@ -214,7 +220,7 @@
    "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen zum Projekt kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."
   },
   {
-   "modul": "ueberblick",
+   "modul": "ueberblick_kosten",
    "id": "ueberblick",
    "kopf": "Das Projekt auf einen Blick",
    "dachzeile": "The Fifth Facade",
@@ -223,19 +229,23 @@
    "zeilen": [
     [
      "Objekt-Nr.",
-     "GPR26-001 · GPR26-002 · GPR26-003 (je Residenz)"
+     "GPR26-001 · -002 · -003 (je Residenz)"
     ],
     [
      "Objektart",
-     "Dachgeschossausbau, drei Eigentumswohnungen"
+     "Dachgeschossausbau, 3 Eigentumswohnungen"
     ],
     [
      "Adresse",
      "Sömmeringstraße 35, 10589 Berlin-Charlottenburg"
     ],
     [
+     "Flächen",
+     "170,68–196,42 m² je Residenz, gesamt 550,87 m²"
+    ],
+    [
      "Außenräume",
-     "3 Dachterrassen und 5 Loggien"
+     "3 Dachterrassen, 5 Loggien (gesamt 94,27 m²)"
     ],
     [
      "Architektur",
@@ -250,12 +260,8 @@
      "Laut Planung zwei Personenaufzüge"
     ],
     [
-     "Genehmigung",
-     "Baurechtliche Genehmigungen liegen vor"
-    ],
-    [
-     "Käuferprovision",
-     "3,57 % inkl. MwSt. (3,00 % zzgl. 19 % MwSt.)"
+     "Projektstand",
+     "Rohbau fertig, Innenausbau ca. 4–5 Monate"
     ]
    ],
    "kennzahlen": [
@@ -286,12 +292,7 @@
      "voraussichtlich 4–5 Monate (Details auf Seite {seite:projektstand})"
     ]
    },
-   "quelle": "Quelle: Baubeschreibung, Stand April 2026; Baufortschritt nach Angabe des Verkäufers.",
-   "bereich": "vor"
-  },
-  {
-   "modul": "kosten",
-   "id": "kosten",
+   "quelle": "Flächen nach DIN 277 inkl. Außenflächen, keine Wohnfläche nach WoFlV · Baubeschreibung Stand April 2026 · Projektstand siehe Seite {seite:projektstand}.",
    "bereich": "vor"
   },
   {
@@ -423,7 +424,7 @@
    "id": "vergleich",
    "dachzeile": "Drei Wohnwelten · eine Adresse",
    "titel": "Welche Residenz passt zu Ihnen?",
-   "intro": "Raumaufteilung, Außenräume und Lage im Haus im direkten Vergleich. Kaufpreise und Erwerbskosten finden Sie auf Seite {seite:kosten}.",
+   "intro": "Raumaufteilung, Außenräume und Lage im Haus im direkten Vergleich. Kaufpreise und Erwerbskosten finden Sie auf Seite {seite:ueberblick}.",
    "spalten": [
     "Residenz",
     "DIN 277 inkl. Außen",
