@@ -167,7 +167,7 @@
    "dachzeile": "MonteSana · Investment Memo",
    "titel": "Ein genehmigtes Ensemble im Grenzraum",
    "lead": "MonteSana ist ein genehmigtes Mixed-Use-Ensemble in Höchenschwand: 92 Serviced Apartments und vier Profit-Center auf 6.957 m², 20 km von der Schweizer Grenze.",
-   "links": "Das Projekt: Revitalisierung des ehemaligen Kurkomplexes zu Wohnen auf Zeit, Coworking, Fitness und Wellness sowie Medizin. Baugenehmigung seit 09/2023, Teilungserklärung seit 08/2025.",
+   "links": "Das Projekt: Revitalisierung des ehemaligen Kurkomplexes zu Wohnen auf Zeit, Coworking, Wellness und Medizin. Baugenehmigung 09/2023, Baufreigabe 12/2024.",
    "rechts": "Das Angebot: Asset Deal off-market inklusive Flst. 213. Listenpreis 7,0 Mio. €, Early-Commit 5,3 Mio. € bei LOI bis Ende November 2026; eine gestaffelte Zahlung ist verhandelbar.",
    "schluss": "Das Memo führt von den Hard Facts über Standort, Research und Konzept zur 10-Jahres-Rechnung und zum Asset Check. Im Basisfall ergibt sich über zehn Jahre eine IRR von 23,1 %. Für Rückfragen und den Zugang zum Datenraum stehen wir Ihnen persönlich zur Verfügung."
   },
@@ -176,7 +176,7 @@
    "id": "fakten",
    "bereich": "vor",
    "kopf": "Hard Facts",
-   "zeilenhoehe": 13.4,
+   "zeilenhoehe": 12.9,
    "blockabstand": 14,
    "start": 356,
    "quelle_y": 36,
@@ -211,7 +211,7 @@
      "zeilen": [
       [
        "Grundstück Hauptareal (Flst. 220/7)",
-       "16.174 m²"
+       "16.219 m²"
       ],
       [
        "Zusatzgrundstück (Flst. 213, im Paket)",
@@ -219,11 +219,11 @@
       ],
       [
        "Grundstücke gesamt",
-       "22.685 m²"
+       "22.730 m²"
       ],
       [
        "BGF (ca.)",
-       "9.900 m²"
+       "9.960 m²"
       ],
       [
        "NGF / Wohn- und Nutzfläche",
@@ -251,7 +251,7 @@
        "0,87 Mio. €"
       ],
       [
-       "Möblierung / FF&amp;E",
+       "Möblierung / FF&amp;E (Angebot Haus C)",
        "1,30 Mio. €"
       ],
       [
@@ -286,6 +286,10 @@
       [
        "Objektrendite Apartment-Käufer",
        "4,5 % (2027) bis 7,3 % (2036)"
+      ],
+      [
+       "Marktwert lt. Gutachten Gatti 01/2026*",
+       "26,5 Mio. €"
       ]
      ]
     }
@@ -310,8 +314,8 @@
       ],
       [
        "Kaufpreis je m² BGF",
-       "535 €",
-       "707 €"
+       "532 €",
+       "703 €"
       ],
       [
        "Faktor auf Eigentümerertrag 381 T€",
@@ -377,7 +381,7 @@
     }
    ],
    "quelle": [
-    "Quelle: Verkäuferunterlagen und GRENFORD-Berechnung. Renditen vor Steuern und ohne Fremdfinanzierung, indikativ; Faktor auf den stabilisierten Eigentümerertrag der Gewerbeflächen."
+    "Quelle: Verkäuferunterlagen und GRENFORD-Berechnung. Renditen vor Steuern und ohne Fremdfinanzierung, indikativ. * Laut Entwicklungsprognose des Verkäufers (07/2026); Bezugszeitpunkt im Gutachten zu bestätigen."
    ]
   },
   {
@@ -933,7 +937,7 @@
       ],
       [
        "Grundstück",
-       "ca. 1,62 ha (Grundbuch 16.174 bis 16.219 m²)"
+       "16.219 m² (Grundbuch Blatt 1077, Flst. 220/7); Genehmigungen nennen zusätzlich Flst. 220/9"
       ],
       [
        "Zusatz­grundstück",
@@ -941,7 +945,7 @@
       ],
       [
        "Gebäude",
-       "Fünf Gebäude: Bauteile A, B, C, Wohnhäuser WH 1 und WH 3; BGF ca. 9.900 m²"
+       "Altbau 1964 (Klinik ab 1975), Anbau 2003, zwei Wohnhäuser der 1960er; Bauteile A, B, C, WH 1, WH 3; BGF ca. 9.960 m²"
       ],
       [
        "Frühere Nutzung",
@@ -2050,6 +2054,10 @@
       [
        "NK, FF&amp;E:",
        "Planungs- und Nebenkosten (0,87), Vertriebsprovision (0,90), Möblierung (1,30) und Erwerbsnebenkosten (0,46 bzw. 0,34)."
+      ],
+      [
+       "Externe Werte:",
+       "Makler-Einschätzung Gesamtobjekt 8,0 bis 8,2 Mio. € (02/2025); Marktwertgutachten Gatti 26,5 Mio. € (01/2026, laut Verkäufer). Der Ansatz von 23,2 Mio. € ist konservativ."
       ]
      ]
     },
@@ -2107,7 +2115,7 @@
    "kopf": "Zeitstrahl",
    "dachzeile": "Meilensteine",
    "titel": "Die Genehmigungsphase ist abgeschlossen",
-   "intro": "Bebauungsplan, Baugenehmigung und Teilungserklärung liegen vor. Das Genehmigungsrisiko liegt hinter dem Projekt; offen sind Umsetzung, Vermietung und Vertrieb.",
+   "intro": "Bebauungsplan, Baugenehmigung, Gesamtbaufreigabe und Abgeschlossenheitsbescheinigung liegen vor. Das Genehmigungsrisiko liegt hinter dem Projekt; offen sind Umsetzung, Vermietung und Vertrieb.",
    "bloecke": [
     {
      "typ": "zeitstrahl",
@@ -2159,9 +2167,9 @@
        "h": 40
       },
       {
-       "monat": "2025-08",
-       "datum": "14.08.2025",
-       "text": "Teilungserklärung",
+       "monat": "2024-12",
+       "datum": "12/2024",
+       "text": "Baufreigabe, Abgeschlossenheit",
        "h": 66
       },
       {
@@ -2213,7 +2221,7 @@
      "items": [
       {
        "wert": "Erteilt",
-       "label": "Baurecht und Teilung"
+       "label": "Baurecht und Baufreigabe"
       },
       {
        "wert": "2 Jahre",
@@ -2232,7 +2240,7 @@
      ]
     }
    ],
-   "quelle": "Quelle: Baugenehmigung 12.09.2023; Bauantragsänderung 20.09.2024; Teilungserklärung 14.08.2025; Bauzeitplan; Ertragsprognosen; Angebot Verkäufer. Ausgefüllte Punkte: erreicht; offene Punkte: Plan."
+   "quelle": "Quelle: Baugenehmigung 12.09.2023; Änderungsgenehmigung und Gesamtbaufreigabe 12.12.2024; Abgeschlossenheitsbescheinigung 23.12.2024; Bauzeitplan; Ertragsprognosen; Angebot Verkäufer. Ausgefüllte Punkte: erreicht; offene Punkte: Plan."
   },
   {
    "modul": "raster",
@@ -2261,30 +2269,30 @@
       [
        "Gebäude A/B",
        "2026-07",
-       "2027-07",
+       "2027-08",
        "bau"
       ],
       [
        "Wohnhäuser WH 1 / 3",
-       "2026-09",
+       "2026-10",
        "2027-10",
        "bau"
       ],
       [
        "Außenanlagen Bauabschnitt 1",
-       "2026-11",
        "2027-01",
+       "2027-04",
        "aussen"
       ],
       [
        "Außenanlagen Bauabschnitt 2",
-       "2027-04",
-       "2027-06",
+       "2027-07",
+       "2027-10",
        "aussen"
       ],
       [
        "Verkauf der Apartments (Sales Plan)",
-       "2026-04",
+       "2026-06",
        "2027-12",
        "vertrieb"
       ],
@@ -2295,8 +2303,8 @@
        "betrieb"
       ],
       [
-       "Fitness (H2 2027)",
-       "2027-07",
+       "Fitness, Start 11/2027",
+       "2027-11",
        "2027-12",
        "betrieb"
       ],
@@ -2327,7 +2335,7 @@
      ]
     }
    ],
-   "quelle": "Quelle: Bauzeitplan.xlsx (Bauplan und Mittelabfluss, Baubeginn und Bauende je Gewerk); Sales Plan; Ertragsprognosen (Mietbeginne). Plandaten des Verkäufers."
+   "quelle": "Quelle: Bauzeitplan.xlsx (Bauplan und Mittelabfluss, Baubeginn und Bauende je Gewerk); Sales Plan; Ertragsprognosen und Entwicklungsprognosen 07/2026 (Mietbeginne). Plandaten des Verkäufers mit Baubeginn 04/2026; die Investorenrechnung unterstellt einen späteren Mittelabfluss."
   },
   {
    "modul": "raster",
@@ -2444,7 +2452,7 @@
      "y": 410,
      "w": 356,
      "h": 96,
-     "titel": "Mittelabfluss je Jahr, Mio. € netto",
+     "titel": "Mittelabfluss in der Investorenrechnung, Mio. € netto",
      "gestapelt": true,
      "max": 7.9,
      "breite": 0.46,
@@ -2522,12 +2530,12 @@
        "Angefordert"
       ],
       [
-       "Wertgutachten, Marktwertschätzung",
+       "Wertgutachten und Marktwertschätzung (Gatti)",
        "Im Datenraum"
       ],
       [
-       "Energieausweis-Unterlagen, Nutzflächen",
-       "Im Datenraum"
+       "Energieausweis (Energieberatung beauftragt)",
+       "Angefordert"
       ]
      ]
     },
@@ -2547,7 +2555,7 @@
      ]
     }
    ],
-   "quelle": "Quelle: Kostenberechnung Gesamt.xlsx; Bauzeitplan.xlsx; Wertgutachten Az. 202510340; Datenraum MonteSana. Anteile bezogen auf 8,06 Mio. € netto."
+   "quelle": "Quelle: Kostenberechnung Gesamt.xlsx; Bauzeitplan.xlsx; Wertgutachten Az. 202510340; Datenraum MonteSana. Anteile bezogen auf 8,06 Mio. € netto. Bauzeitplan Verkäufer: 5,2 Mio. € 2026 und 3,5 Mio. € 2027 bei Baubeginn 04/2026."
   },
   {
    "modul": "tabelle",
@@ -2555,7 +2563,7 @@
    "kopf": "10-Jahres-Rechnung",
    "dachzeile": "Investorenrechnung · Basisfall · Mio. € netto",
    "titel": "Zehn Jahre, ein Cashflow-Bild",
-   "zh": 19.6,
+   "zh": 19.0,
    "schrift": 8.4,
    "spalten": [
     "2026",
@@ -2761,7 +2769,7 @@
      "Spitzenbedarf Kapital, kumuliert"
     ]
    ],
-   "hinweis": "<b style='font-weight:500;color:#24534c'>Abhängigkeit vom Zahlungsplan:</b> Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss sinkt die IRR im Basisfall auf 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert.",
+   "hinweis": "<b style='font-weight:500;color:#24534c'>Abhängigkeit vom Zahlungsplan:</b> Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss sinkt die IRR im Basisfall auf 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert. Möblierung hochgerechnet auf 92 Einheiten (ca. 2,0 statt 1,3 Mio. €): IRR rund 20 %.",
    "quelle": [
     "Quelle: Berechnung GRENFORD auf Basis von Bauzeitplan (Restbudget 8,66 Mio. € netto), Sales Plan (5.000 €/m²) und Ertragsprognose (381 T€ ab 2029, +2 % p. a.). Alle Werte in Mio. €, netto, vor Steuern und Finanzierung; indikativ."
    ]
@@ -3473,12 +3481,12 @@
       [
        "Bebauungsplan „Im oberen Brühl – Nord“",
        "Gesichtet",
-       "Sondergebiet seit 19.04.2023; Umwelt- und Schallgutachten ohne Einwände; Satzungstext wird ergänzt"
+       "Sondergebiet „Co-Working“ (§ 11 BauNVO) seit 19.04.2023; Umwelt- und Schallgutachten ohne Einwände"
       ],
       [
-       "Teilungserklärung 14.08.2025, Abgeschlossenheit",
-       "Im Datenraum",
-       "Aufteilung in Wohnungs- und Teileigentum vorbereitet"
+       "Abgeschlossenheit 23.12.2024, Teilungserklärung",
+       "Gesichtet",
+       "Abgeschlossenheit erteilt; Teilungserklärung im Entwurf (14.08.2025) mit Ferienvermietung der Wohnungen 1–85"
       ],
       [
        "Bausubstanzuntersuchung HPC AG (2024/25)",
@@ -3487,8 +3495,8 @@
       ],
       [
        "Flst. 213: Kaufvertrag vom 03.08.2026",
-       "Gesichtet",
-       "6.511 m² Landwirtschaftsfläche, lastenfrei geschuldet; Kaufpreis 70 T€; Vollzug in Vorbereitung"
+       "Angefordert",
+       "6.511 m² Landwirtschaftsfläche, lastenfrei geschuldet; Kaufpreis 70 T€ (Verkäuferangabe); Urkunde folgt im Datenraum"
       ]
      ]
     },
@@ -3532,7 +3540,7 @@
       },
       {
        "wert": "218 T€",
-       "label": "davon Mindestpacht",
+       "label": "davon als Mindestpacht geplant",
        "stil": "hell"
       }
      ]
@@ -3605,8 +3613,8 @@
        "Gesichtet"
       ],
       [
-       "Betreiber- und Pachtverträge, Personalstruktur",
-       "Im Datenraum"
+       "Betreiberangebote IWG und stuub, Personalstruktur",
+       "Gesichtet"
       ],
       [
        "Marktanalysen (B2B, Büro/Lager, Entwicklung)",
@@ -3630,7 +3638,7 @@
       ],
       [
        "Betreiber",
-       "Coworking, Fitness und Physio/Kosmetik über die konzernverbundene Montesana Hospitality &amp; Coworking GmbH, Arztpraxis per Direktmiete. Verhandlungen mit IWG/Regus laufen."
+       "Coworking, Fitness und Physio/Kosmetik über die konzernverbundene Montesana Hospitality &amp; Coworking GmbH, Arztpraxis per Direktmiete. IWG/Regus: Eckpunkte und Vertragsentwurf liegen vor; Managementangebot stuub vom 22.09.2025."
       ],
       [
        "Auslastung",
@@ -3653,7 +3661,7 @@
      "absaetze": [
       [
        "Bis zum Signing:",
-       "unterzeichnete Betreiberverträge mit Mindestpacht, eigene Marktstudie und Verkaufsstand der Apartments."
+       "unterzeichnete Betreiber- und Pachtverträge mit Mindestpacht, Verkaufsstand der Apartments; Vertriebsstart laut LBS nach gesicherter Gesamtfinanzierung."
       ]
      ]
     }
@@ -3745,7 +3753,7 @@
       ],
       [
        "Energetik und Bauablauf",
-       "KfW 40 geplant, PV im Bauzeitplan; drei Abschnitte auf 1.015 m (Winterfenster)",
+       "KfW 40 geplant, Energieberatung und KfW-Antrag beauftragt, PV im Bauzeitplan; drei Abschnitte auf 1.015 m",
        "Mit Maßgaben"
       ],
       [
@@ -3755,7 +3763,7 @@
       ],
       [
        "Baugrund / Statik",
-       "Statik und Tragwerksplanung (Dagdelen, 2020) vorhanden; Bodengutachten wird ergänzt",
+       "Gesamtbaufreigabe erteilt; Ingenieurangebote Statik (Dagdelen, 2020); Bodengutachten wird ergänzt",
        "In Klärung"
       ]
      ]
@@ -3959,7 +3967,7 @@
        "punkte": [
         [
          "Genehmigtes Projekt.",
-         "Baugenehmigung 09/2023, Teilungserklärung 08/2025, Planungsrecht abgeschlossen."
+         "Baugenehmigung 09/2023, Gesamtbaufreigabe und Abgeschlossenheit 12/2024."
         ],
         [
          "Grenzraum-Standort.",
@@ -3984,7 +3992,7 @@
         ],
         [
          "Betreiberverträge.",
-         "Mindestpacht 218 T€ p. a. finalisieren; IWG/Regus in Verhandlung."
+         "Mindestpacht 218 T€ p. a. vertraglich fixieren; IWG/Regus und stuub in Verhandlung."
         ],
         [
          "Finanzierungsstruktur.",
@@ -4013,8 +4021,8 @@
          "Einzelverkauf, Gesamtverkauf oder Halten der Gewerbeflächen; IRR Basisfall 23,1 %."
         ],
         [
-         "ESG und Fläche.",
-         "KfW 40; Flst. 213 als Flächenreserve, planungsrechtlich zu prüfen."
+         "Förderung und Fläche.",
+         "KfW-40-Tilgungszuschuss bis ca. 1,6 Mio. € geplant (nicht in der Rechnung); Flst. 213 als Reserve."
         ]
        ]
       },
