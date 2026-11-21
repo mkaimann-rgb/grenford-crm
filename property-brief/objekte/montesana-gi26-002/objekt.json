@@ -3685,21 +3685,21 @@
      "gap": 12,
      "items": [
       {
-       "wert": "2 × gegeben",
-       "label": "Planungsrecht, Genehmigung"
+       "wert": "Erteilt",
+       "label": "Baugenehmigung und Baufreigabe"
       },
       {
-       "wert": "4 × Maßgaben",
-       "label": "Brandschutz, Energetik, Bau, Schallschutz",
+       "wert": "Genehmigt",
+       "label": "Nutzung im Sondergebiet Co-Working",
        "stil": "hell"
       },
       {
-       "wert": "2 × Nachweis",
-       "label": "Bausubstanz, Baugrund"
+       "wert": "4 × Umsetzung",
+       "label": "Brandschutz, Energie, Bau, Schallschutz"
       },
       {
-       "wert": "Keine",
-       "label": "Versagungsgründe in den Bescheiden",
+       "wert": "2 Gutachten",
+       "label": "Bausubstanz und Baugrund folgen",
        "stil": "hell"
       }
      ]
@@ -3744,27 +3744,27 @@
       [
        "Brandschutz",
        "17 Abweichungen genehmigt, kompensiert durch Brandmeldeanlage und Rauchwarnmelder; Gutachten Schubert folgt im Datenraum",
-       "Mit Maßgaben"
+       "Umsetzung"
       ],
       [
        "Auflagen und Schallschutz",
        "Barrierefreiheit nach DIN 18040, Kinderspielplatz ≥ 30 m², passiver Schallschutz zur B 500",
-       "Mit Maßgaben"
+       "Umsetzung"
       ],
       [
        "Energetik und Bauablauf",
        "KfW 40 geplant, Energieberatung und KfW-Antrag beauftragt, PV im Bauzeitplan; drei Abschnitte auf 1.015 m",
-       "Mit Maßgaben"
+       "Umsetzung"
       ],
       [
        "Bausubstanz",
-       "Untersuchung auf Asbest, PAK und PCB 2024/25 abgeschlossen; Gutachten und Kostenansatz werden nachgereicht",
-       "In Klärung"
+       "Untersuchung auf Asbest, PAK und PCB 2024/25 abgeschlossen; Gutachten und Kostenansatz folgen im Datenraum",
+       "Nachweis folgt"
       ],
       [
        "Baugrund / Statik",
        "Gesamtbaufreigabe erteilt; Ingenieurangebote Statik (Dagdelen, 2020); Bodengutachten wird ergänzt",
-       "In Klärung"
+       "Nachweis folgt"
       ]
      ]
     },
@@ -3779,7 +3779,7 @@
      "absaetze": [
       [
        "Ergebnis:",
-       "Die Bescheide enthalten keine Versagungsgründe. Mit Vorlage des Bausubstanz- und des Bodengutachtens wird die Bewertung abgeschlossen und der Kostenansatz für etwaige Maßnahmen ergänzt."
+       "Baugenehmigung und Gesamtbaufreigabe decken die geplante Nutzung vollständig ab. Die Auflagen sind übliche Umsetzungsschritte; mit dem Bausubstanz- und dem Bodengutachten wird die Prüfung abgeschlossen."
       ]
      ]
     }
@@ -3791,7 +3791,7 @@
    "id": "machbar2",
    "kopf": "Machbarkeitsstudie",
    "dachzeile": "Teil 2 von 2 · Betrieb und Ergebnis",
-   "titel": "Machbar mit klaren Maßgaben",
+   "titel": "Machbar und wirtschaftlich tragfähig",
    "bloecke": [
     {
      "typ": "tabelle",
@@ -3826,13 +3826,13 @@
       ],
       [
        "Technik und Bauablauf",
-       "Drei Bauabschnitte, Maßgaben zu Brandschutz und Energetik",
-       "Mit Maßgaben"
+       "Drei Bauabschnitte, Brandschutz und Energetik genehmigt",
+       "Umsetzung"
       ],
       [
        "Kosten",
        "Restbudget 8,66 Mio. € netto; Ansatz Bausubstanz folgt mit Gutachten",
-       "Mit Maßgaben"
+       "Umsetzung"
       ],
       [
        "Markt und Lage",
@@ -3841,8 +3841,8 @@
       ],
       [
        "Betrieb",
-       "Vier Profit-Center, Verträge zu finalisieren",
-       "Mit Maßgaben"
+       "Vier Profit-Center, Betreiberangebote liegen vor",
+       "Umsetzung"
       ],
       [
        "Wirtschaftlichkeit",
@@ -3861,7 +3861,7 @@
      "titel": "Gesamtergebnis",
      "schrift": 9,
      "absaetze": [
-      "Das Vorhaben ist genehmigungsrechtlich machbar und baufreigegeben. Mit dem Bausubstanz- und dem Bodengutachten wird die Bewertung abgeschlossen; die übrigen Maßgaben lassen sich bis zum Signing und in der Bauphase umsetzen."
+      "Das Vorhaben ist genehmigt, baufreigegeben und in allen Szenarien wirtschaftlich tragfähig. Die Umsetzungsschritte sind bis zum Signing und in der Bauphase planbar; Bausubstanz- und Bodengutachten runden die Prüfung ab."
      ]
     },
     {
