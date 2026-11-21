@@ -32,7 +32,7 @@ S.append({"modul": "inhalt", "id": "inhalt", "bereich": "vor", "bild": "bestand-
     {"titel": "Wertschöpfung, Zeitplan und Kosten", "sub": "Investition, Meilensteine, Bauzeitplan, Kostenbasis", "seiten": ["wert", "kosten"]},
     {"titel": "10-Jahres-Investorenrechnung", "sub": "Cashflow, Szenarien, Sensitivität, DCF", "seiten": ["cashflow", "sensitivitaet"]},
     {"titel": "Rendite für Apartment-Käufer", "sub": "Zehn Jahre aus Sicht der Einzelerwerber", "seiten": ["apartment"]},
-    {"titel": "Asset Check, Machbarkeit, Value Matrix", "sub": "Recht, Planung, Technik, Betrieb, Stärken und Risiken", "seiten": ["check1", "matrix"]},
+    {"titel": "Asset Check, Machbarkeit, Value Matrix", "sub": "Recht, Planung, Technik, Betrieb, Stärken und Chancen", "seiten": ["check1", "matrix"]},
     {"titel": "Nächster Schritt, GRENFORD, Anhang", "sub": "LOI, Kontakt, Disclaimer, AGB", "seiten": ["kontakt", "agb"]}]})
 
 S.append({"modul": "vorwort", "id": "vorwort", "bereich": "vor", "dachzeile": "MonteSana · Investment Memo",
@@ -121,7 +121,7 @@ S.append({"modul": "raster", "id": "angebot", "kopf": "Das Angebot", "dachzeile"
   "bloecke": [
     {"typ": "kpi", "x": L0, "y": 410, "w": 410, "h": 52, "groesse": 22, "items": [["7,0 Mio. €", "Listenpreis netto", "durch"], ["5,3 Mio. €", "Early-Commit-Preis netto"]]},
     {"typ": "text", "x": L0, "y": "folgt", "abstand": 12, "w": 410, "schrift": 8.6,
-     "absaetze": [["Vorteil gegenüber Listenpreis: 1,7 Mio. € (−24,3 %).", "Ein LOI bis Ende November 2026 ist grundsätzlich möglich; Fristen und Bedingungen sind noch abzustimmen."]]},
+     "absaetze": [["Vorteil gegenüber Listenpreis: 1,7 Mio. € (−24,3 %).", "Ein LOI bis Ende November 2026 ist grundsätzlich möglich; Fristen und Bedingungen stimmen wir gemeinsam ab."]]},
     {"typ": "kpi", "x": L0, "y": "folgt", "abstand": 10, "w": 410, "h": 42, "groesse": 18, "items": [
       {"wert": "2,5 Mio. €", "label": "Anzahlung", "text": "Mögliche Anzahlung bei notariellem Kaufvertragsabschluss"},
       {"wert": "2,8 Mio. €", "label": "Restkaufpreis", "stil": "hell", "text": "Verbleibender Kaufpreis, zahlbar gemäß individuell vereinbartem Zahlungsplan"}]},
@@ -133,12 +133,12 @@ S.append({"modul": "raster", "id": "angebot", "kopf": "Das Angebot", "dachzeile"
      "zeilen": [["Struktur", "Asset Deal: Grundstücke Flst. 220/7 und 213 (6.511 m²) mit Gebäudebestand, Genehmigungen und Planungsunterlagen"],
                 ["Kaufpreis", "7,0 Mio. € netto; Early-Commit-Angebot 5,3 Mio. € netto"],
                 ["Zahlungsoption", "Indikative Staffelung von 2,5 Mio. € und 2,8 Mio. €, vorbehaltlich individueller Vereinbarung"],
-                ["Fälligkeiten", "Einmalige Restzahlung oder mehrere projektfortschrittsabhängige Teilzahlungen möglich; noch nicht festgelegt"],
+                ["Fälligkeiten", "Einmalige Restzahlung oder mehrere projektfortschrittsabhängige Teilzahlungen möglich; Festlegung im Kaufvertrag"],
                 ["Sicherheiten", "Grundpfandrechtliche Absicherung und gegebenenfalls Teilfreigaben bei Einzelverkäufen; Ausgestaltung nach Vereinbarung"],
                 ["Erwerbsneben­kosten", "Annahme GRENFORD: Grunderwerbsteuer Baden-Württemberg 5,0 % plus Notar und Grundbuch ca. 1,5 %; bei 5,3 Mio. € rund 0,34 Mio. €"],
                 ["Maklercourtage", "5,0 % netto zzgl. gesetzlicher MwSt., fällig mit wirksamem notariellen Kaufvertrag"]]},
-    {"typ": "text", "x": 500, "y": "folgt", "abstand": 10, "w": 356, "box": True, "schrift": 7.9,
-     "absaetze": [["Hinweis:", "Die Kaufpreisstaffelung ist eine indikative Strukturierungsoption und kein verbindliches Finanzierungsangebot des Verkäufers. Zahlungsmodalitäten, Fälligkeiten, Laufzeit und Sicherheiten bedürfen einer individuellen Vereinbarung im notariellen Kaufvertrag."]]}],
+    {"typ": "text", "x": 500, "y": "folgt", "abstand": 12, "w": 356, "schrift": 7.8,
+     "absaetze": ["Vermerk: Die Kaufpreisstaffelung ist eine indikative Strukturierungsoption; Zahlungsmodalitäten, Fälligkeiten, Laufzeit und Sicherheiten werden im notariellen Kaufvertrag vereinbart."]}],
   "quelle": ["Quelle: Angaben der Verkäuferseite (ERIKONA GmbH), Stand 11.11.2026. Erwerbsnebenkosten: Annahme GRENFORD. Zahlungsstaffelung indikativ und nicht verbindlich vereinbart."]})
 
 # 5 Asset
@@ -160,7 +160,7 @@ S.append({"modul": "raster", "id": "asset", "kopf": "Asset", "dachzeile": "Das O
   "quelle": "Quelle: Grundbuch Blatt 1077 (27.03.2025); Baugenehmigung 12.09.2023; Exposé 12/2025. Visualisierungen und Luftbild: Projektgesellschaft."})
 
 # 6 Wettbewerb
-S.append({"modul": "raster", "id": "wettbewerb", "kopf": "GRENFORD Research", "dachzeile": "Markt und Wettbewerb", "titel": "Viele Einzelangebote, kein Gesamtkonzept",
+S.append({"modul": "raster", "id": "wettbewerb", "kopf": "GRENFORD Research", "dachzeile": "Markt und Wettbewerb", "titel": "Alleinstellung im 50-km-Radius",
   "bloecke": [
     {"typ": "tabelle", "x": L0, "y": 410, "w": 530, "titel": "Angebote im 50-km-Radius nach Leistungsbaustein", "breiten": [130, 118, 134, 37, 37, 37, 37], "links": [0, 1, 2], "zh": 21,
      "kopf": ["Anbieter", "Standort", "Angebot", "Serv.", "Cow.", "Well.", "Med."], "hervorheben": ["MonteSana"],
@@ -174,14 +174,14 @@ S.append({"modul": "raster", "id": "wettbewerb", "kopf": "GRENFORD Research", "d
     {"typ": "spanne", "x": L0, "y": "folgt", "abstand": 22, "w": 530, "lw": 200, "titel": "Preis je Nacht im Vergleich", "achse": [50, 175, 25], "abstand": 23,
      "items": [["Ferienwohnungen Höchenschwand (Holidu)", 52, 110, "52–110 €"], ["Ferienhäuser Höchenschwand, Ø", 145, 145, "145 €"],
                ["Stuub Schluchsee, Studio bis Maisonette", 75, 149, "75–149 €"], ["MonteSana Planannahme, Ø Erlös", 102, 110, "102–110 €", "h"]]},
-    {"typ": "dunkel", "x": 612, "y": 410, "w": 244, "h": 214, "titel": "Wettbewerb im Radius", "abstand": 56,
+    {"typ": "dunkel", "x": 612, "y": 410, "w": 244, "h": 214, "titel": "Marktposition im Radius", "abstand": 56,
      "werte": [["7", "Anbieter mit Teilangebot", 26], ["1", "Haus mit allen vier Bausteinen", 26]]},
     {"typ": "text", "x": 612, "y": "folgt", "abstand": 14, "w": 244, "box": True, "titel": "Einordnung", "schrift": 8.6,
-     "absaetze": ["Kein weiteres Objekt im Radius bündelt Serviced Living, Coworking, Wellness und Medizin. Die Planannahme liegt am oberen Ende der Ferienwohnungsspanne und verlangt ein klares Qualitätsprofil."]}],
+     "absaetze": ["MonteSana ist im Radius das einzige Haus, das Serviced Living, Coworking, Wellness und Medizin bündelt. Die Planannahme positioniert das Angebot im oberen Segment mit klarem Qualitätsprofil."]}],
   "quelle": "Quelle: GRENFORD Research auf Basis öffentlicher Quellen (Holidu 29.10.2026, TUI/Hotelspecials, workin.space, Hotelinformationen), Stand 30.10.2026. Entfernungen geschätzt; die Übersicht ist nicht abschließend."})
 
 # 7 Mieten Wohnen
-S.append({"modul": "raster", "id": "mieten-wohnen", "kopf": "GRENFORD Research", "dachzeile": "Mieten Wohnen", "titel": "Günstiger Standort, starker Grenzraum",
+S.append({"modul": "raster", "id": "mieten-wohnen", "kopf": "GRENFORD Research", "dachzeile": "Mieten Wohnen", "titel": "Möbliertes Wohnen trägt den Planansatz",
   "bloecke": [
     {"typ": "balken", "x": L0, "y": 410, "w": 410, "titel": "Angebotsmieten kalt in €/m² und Monat", "lw": 140, "vw": 60, "bis": 66, "max": 20,
      "items": [["Referenz Basel (Stadt)", 20, "ca. 20 €", "r"], ["Waldshut-Tiengen", 14.81, "14,81 €"], ["Todtmoos", 13.08, "13,08 €"], ["Rheinfelden (Baden)", 13.04, "13,04 €"],
@@ -193,7 +193,7 @@ S.append({"modul": "raster", "id": "mieten-wohnen", "kopf": "GRENFORD Research",
     {"typ": "kpi", "x": 500, "y": "folgt", "abstand": 18, "w": 356, "hell": True, "groesse": 18, "gap": 16,
      "items": [["38 €/m²", "Median möbliert"], ["10,82 €/m²", "Höchenschwand kalt"], ["35–52 €/m²", "Planerlös brutto"]]},
     {"typ": "text", "x": 500, "y": "folgt", "abstand": 6, "w": 356, "box": True, "titel": "Einordnung", "schrift": 8.4,
-     "absaetze": ["Höchenschwand liegt rund 27 % unter Waldshut-Tiengen. Der Planerlös von MonteSana (brutto 35 € in 2027 bis 52 € in 2031 je m² und Monat) liegt im Band möblierter Kleinapartments; Erlös und Miete sind nur eingeschränkt vergleichbar. Kanton Aargau: Ø rund 24 CHF/m² und Monat."]}],
+     "absaetze": ["Der Planerlös von MonteSana (brutto 35 € in 2027 bis 52 € in 2031 je m² und Monat) liegt im Band möblierter Kleinapartments der Region (30 bis 50 €/m²). Im Kanton Aargau liegen Mieten bei rund 24 CHF/m² und Monat; der Grenzraum stützt die Nachfrage. Bestandsmieten unmöbliert sind mit dem Serviced-Modell bedingt vergleichbar."]}],
   "quelle": "Quelle: GRENFORD Research: mietpreise.info (Angebotsmieten, Stände 08/2025 bis 10/2026, kleine Stichproben, Höchenschwand 13 Angebote), immoportal.com, immosuchmaschine.de (8 Angebote), realadvisor.ch (10/2026), BPD Immobilienentwicklung, Kurzpaper 04/2026 (Basel nach empirica). Angebots-, keine Bestandsmieten."})
 
 # 8 Mieten Gewerbe
@@ -300,7 +300,7 @@ S.append({"modul": "raster", "id": "wert", "kopf": "Wertschöpfung", "dachzeile"
 
 # 15 Meilensteine
 S.append({"modul": "raster", "id": "meilensteine", "kopf": "Zeitstrahl", "dachzeile": "Meilensteine", "titel": "Die Genehmigungsphase ist abgeschlossen",
-  "intro": "Bebauungsplan, Baugenehmigung, Gesamtbaufreigabe und Abgeschlossenheitsbescheinigung liegen vor. Das Genehmigungsrisiko liegt hinter dem Projekt; offen sind Umsetzung, Vermietung und Vertrieb.",
+  "intro": "Bebauungsplan, Baugenehmigung, Gesamtbaufreigabe und Abgeschlossenheitsbescheinigung liegen vor. Das Projekt hat die Genehmigungsphase abgeschlossen und geht in Umsetzung, Vermietung und Vertrieb.",
   "bloecke": [
     {"typ": "zeitstrahl", "x": 64, "y": 262, "w": 780, "von": "2023-01", "bis": "2029-12", "heute": "2026-11",
      "phasen": [["2023-01", "2026-01", "Planung und Genehmigung · abgeschlossen", "navy"], ["2026-01", "2028-01", "Bau in drei Abschnitten", "mid"], ["2028-01", "2029-12", "Hochlauf und Betrieb", "light"]],
@@ -316,7 +316,7 @@ S.append({"modul": "raster", "id": "meilensteine", "kopf": "Zeitstrahl", "dachze
     {"typ": "kpi", "x": L0, "y": 140, "w": 805, "h": 72, "groesse": 30, "gap": 14,
      "items": [{"wert": "Erteilt", "label": "Baurecht und Baufreigabe"}, {"wert": "2 Jahre", "label": "Genehmigung bis Baubeginn"},
                {"wert": "12 Monate", "label": "Bauzeit Gebäude C", "stil": "hell"}, {"wert": "2029", "label": "Stabilisierter Betrieb", "stil": "hell"}]}],
-  "quelle": "Quelle: Baugenehmigung 12.09.2023; Änderungsgenehmigung und Gesamtbaufreigabe 12.12.2024; Abgeschlossenheitsbescheinigung 23.12.2024; Bauzeitplan; Ertragsprognosen; Angebot Verkäufer. Ausgefüllte Punkte: erreicht; offene Punkte: Plan."})
+  "quelle": "Quelle: Baugenehmigung 12.09.2023; Änderungsgenehmigung und Gesamtbaufreigabe 12.12.2024; Abgeschlossenheitsbescheinigung 23.12.2024; Bauzeitplan; Ertragsprognosen; Angebot Verkäufer. Ausgefüllte Punkte: erreicht; Kreise: geplant."})
 
 # 16 Bauzeitplan
 S.append({"modul": "raster", "id": "bauzeit", "kopf": "Bauablauf", "dachzeile": "Bauzeitplan", "titel": "Fertigstellung in drei Bauabschnitten",
@@ -342,10 +342,10 @@ S.append({"modul": "raster", "id": "kosten", "kopf": "Bau und Kosten", "dachzeil
      "kategorien": ["2026", "2027", "2028"], "summen": ["1,0", "7,9", "1,9"],
      "serien": [{"name": "CapEx", "farbe": "navy", "werte": [0.87, 6.50, 1.30]}, {"name": "Nebenkosten", "farbe": "mid", "werte": [0.09, 0.65, 0.13]}, {"name": "FF&amp;E", "farbe": "light", "werte": [0, 0.78, 0.52]}]},
     {"typ": "tabelle", "x": 500, "y": "folgt", "abstand": 14, "w": 356, "titel": "Technische Unterlagen", "breiten": [246, 110], "links": [0, 1], "tags": [1], "kopf": ["Unterlage", "Status"], "schrift": 8.2, "zh": 18,
-     "zeilen": [["Kostenberechnung, Bauzeitplan, Angebote", "Gesichtet"], ["Boden- und Bausubstanzgutachten", "Angefordert"],
-                ["Wertgutachten und Marktwertschätzung (Gatti)", "Im Datenraum"], ["Energieausweis (Energieberatung beauftragt)", "Angefordert"]]},
-    {"typ": "text", "x": 500, "y": "folgt", "abstand": 10, "w": 356, "box": True, "schrift": 8,
-     "absaetze": [["Bis zum Signing:", "Bausubstanzgutachten HPC mit Kostenansatz, Bodengutachten, aktueller Bautenstand und Auswertung der Wertgutachten."]]}],
+     "zeilen": [["Kostenberechnung, Bauzeitplan, Angebote", "Gesichtet"], ["Boden- und Bausubstanzgutachten", "Folgt"],
+                ["Wertgutachten und Marktwertschätzung (Gatti)", "Im Datenraum"], ["Energieausweis (Energieberatung beauftragt)", "Folgt"]]},
+    {"typ": "text", "x": 500, "y": "folgt", "abstand": 12, "w": 356, "schrift": 7.8,
+     "absaetze": ["Vermerk: Bausubstanzgutachten HPC mit Kostenansatz, Bodengutachten und aktueller Bautenstand folgen im Datenraum."]}],
   "quelle": "Quelle: Kostenberechnung Gesamt.xlsx; Bauzeitplan.xlsx; Wertgutachten Az. 202510340; Datenraum MonteSana. Anteile bezogen auf 8,06 Mio. € netto. Bauzeitplan Verkäufer: 5,2 Mio. € 2026 und 3,5 Mio. € 2027 bei Baubeginn 04/2026."})
 
 # 18 Cashflow
@@ -366,7 +366,7 @@ S.append({"modul": "tabelle", "id": "cashflow", "kopf": "10-Jahres-Rechnung", "d
     ["Kumuliert", "−3,80", "−8,36", "−2,25", "1,54", "1,91", "2,29", "2,68", "3,07", "3,47", "3,88", "10,27", ""]],
   "label_breite": 214,
   "kennzahlen": [["23,1 %", "IRR 10 Jahre, Basis Early-Commit"], ["1,62-fach", "Multiple auf eingesetztes Kapital"], ["10,3 Mio. €", "Gesamtüberschuss vor Steuern"], ["8,4 Mio. €", "Spitzenbedarf Kapital, kumuliert"]],
-  "hinweis": "<b style='font-weight:500;color:#24534c'>Abhängigkeit vom Zahlungsplan:</b> Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss sinkt die IRR im Basisfall auf 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert. Möblierung hochgerechnet auf 92 Einheiten (ca. 2,0 statt 1,3 Mio. €): IRR rund 20 %.",
+  "hinweis": "<b style='font-weight:500;color:#24534c'>Zahlungsplan:</b> Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss beträgt die IRR im Basisfall 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert. Vermerk: Möblierung hochgerechnet auf 92 Einheiten (ca. 2,0 statt 1,3 Mio. €) ergibt eine IRR von rund 20 %.",
   "quelle": ["Quelle: Berechnung GRENFORD auf Basis von Bauzeitplan (Restbudget 8,66 Mio. € netto), Sales Plan (5.000 €/m²) und Ertragsprognose (381 T€ ab 2029, +2 % p. a.). Alle Werte in Mio. €, netto, vor Steuern und Finanzierung; indikativ."]})
 
 # 19 Szenarien
@@ -377,21 +377,21 @@ S.append({"modul": "raster", "id": "szenarien", "kopf": "10-Jahres-Rechnung", "d
      "serien": [{"name": "Early-Commit 5,3 Mio. €", "farbe": "navy", "ende": "10,3", "dy": 5, "werte": [-3.80, -8.36, -2.25, 1.54, 1.91, 2.29, 2.68, 3.07, 3.47, 3.88, 10.27]},
                 {"name": "Listenpreis 7,0 Mio. €", "farbe": "mid", "ende": "8,5", "dy": -5, "werte": "LP"}]},
     {"typ": "saeulen", "x": 520, "y": 410, "w": 336, "h": 196, "titel": "IRR über 10 Jahre nach Szenario", "max": 30,
-     "kategorien": ["Vorsichtig", "Basis", "Chance"],
+     "kategorien": ["Konservativ", "Basis", "Chance"],
      "serien": [{"name": "Early-Commit", "farbe": "navy", "werte": [10.6, 23.1, 26.8], "labels": ["10,6 %", "23,1 %", "26,8 %"]},
                 {"name": "Listenpreis", "farbe": "light", "werte": [6.6, 14.1, 16.5], "labels": ["6,6 %", "14,1 %", "16,5 %"]}]},
     {"typ": "kpi", "x": L0, "y": 118, "w": FULL, "h": 50, "groesse": 18, "gap": 12,
      "items": [{"wert": "2029", "label": "Break-even kumuliert, Early-Commit"}, {"wert": "2030", "label": "Break-even kumuliert, Listenpreis", "stil": "hell"},
                {"wert": "+9,0 Pp.", "label": "IRR-Vorteil im Basisfall"}, {"wert": "+1,8 Mio. €", "label": "Mehr Überschuss im Basisfall", "stil": "hell"}]}],
-  "quelle": ["Quelle: Berechnung GRENFORD; Kaufpreisverteilung 2,5 / 2,8 Mio. € als Modellannahme. Vorsichtig: 4.500 €/m², Verkauf ein Jahr später, Nebenkosten 15 %, Eigentümerkosten 8 %, Exit 8,0 %.",
+  "quelle": ["Quelle: Berechnung GRENFORD; Kaufpreisverteilung 2,5 / 2,8 Mio. € als Modellannahme. Konservativ: 4.500 €/m², Verkauf ein Jahr später, Nebenkosten 15 %, Eigentümerkosten 8 %, Exit 8,0 %.",
              "Basis: 5.000 €/m², Nebenkosten 10 %, Eigentümerkosten 5 %, Exit 7,0 %. Chance: 5.250 €/m², Exit 6,5 %. Vor Steuern, ohne Finanzierung."]})
 
 # 20 Sensitivität
-S.append({"modul": "raster", "id": "sensitivitaet", "kopf": "10-Jahres-Rechnung", "dachzeile": "Sensitivität und DCF", "titel": "Rendite und Barwert im Stresstest",
+S.append({"modul": "raster", "id": "sensitivitaet", "kopf": "10-Jahres-Rechnung", "dachzeile": "Sensitivität und DCF", "titel": "Rendite und Barwert in allen Varianten robust",
   "bloecke": [
     {"typ": "tabelle", "x": L0, "y": 410, "w": 400, "titel": "Szenarien im Vergleich, 10 Jahre", "breiten": [76, 54, 56, 48, 54, 62, 50], "hervorheben": ["Basis"], "zh": 26,
      "kopf": ["Szenario", "IRR EC", "Mult. EC", "Mio. €", "IRR LP", "Mult. LP", "Mio. €"],
-     "zeilen": [["Vorsichtig", "10,6 %", "1,42-fach", "7,1", "6,6 %", "1,28-fach", "5,3"], ["Basis", "23,1 %", "1,62-fach", "10,3", "14,1 %", "1,46-fach", "8,5"], ["Chance", "26,8 %", "1,70-fach", "11,6", "16,5 %", "1,53-fach", "9,8"]]},
+     "zeilen": [["Konservativ", "10,6 %", "1,42-fach", "7,1", "6,6 %", "1,28-fach", "5,3"], ["Basis", "23,1 %", "1,62-fach", "10,3", "14,1 %", "1,46-fach", "8,5"], ["Chance", "26,8 %", "1,70-fach", "11,6", "16,5 %", "1,53-fach", "9,8"]]},
     {"typ": "tabelle", "x": L0, "y": "folgt", "abstand": 24, "w": 400, "titel": "DCF: Barwert (NPV) nach Diskontsatz, Mio. €", "breiten": [100, 100, 100, 100], "hervorheben": ["10 %"], "zh": 26,
      "kopf": ["Diskontsatz", "Early-Commit", "Listenpreis", "Vorteil"],
      "zeilen": [["8 %", "4,61", "2,59", "2,02"], ["10 %", "3,68", "1,62", "2,07"], ["12 %", "2,89", "0,78", "2,11"]]},
@@ -433,7 +433,7 @@ S.append({"modul": "raster", "id": "check1", "kopf": "GRENFORD Asset Check", "da
   "bloecke": [
     {"typ": "kpi", "x": L0, "y": 410, "w": FULL, "h": 48, "groesse": 18, "gap": 12,
      "items": [{"wert": "Erteilt", "label": "Gesamtbaufreigabe 12.12.2024"}, {"wert": "17 + 1", "label": "Abweichungen und Befreiung", "stil": "hell"},
-               {"wert": "Lastenfrei", "label": "Abt. II; Abt. III Löschung zum Vollzug"}, {"wert": "3 Gutachten", "label": "zur Nachreichung angefordert", "stil": "hell"}]},
+               {"wert": "Lastenfrei", "label": "Abt. II; Abt. III Löschung zum Vollzug"}, {"wert": "Bestätigt", "label": "Abgeschlossenheit 23.12.2024", "stil": "hell"}]},
     {"typ": "tabelle", "x": L0, "y": "folgt", "abstand": 18, "w": FULL, "breiten": [236, 92, 477], "links": [0, 1, 2], "tags": [1], "bis": 150, "schrift": 8.4,
      "kopf": ["Unterlage", "Status", "Ergebnis"],
      "zeilen": [["Grundbuch Blatt 1077 (27.03.2025)", "Gesichtet", "ERIKONA GmbH seit 2020; Abt. II lastenfrei; Abt. III eine Grundschuld (500 T€), Löschung zum Vollzug vorgesehen"],
@@ -441,10 +441,10 @@ S.append({"modul": "raster", "id": "check1", "kopf": "GRENFORD Asset Check", "da
                 ["Änderungsgenehmigung und Gesamtbaufreigabe 12.12.2024", "Gesichtet", "Zwei-Achs-Apartments und Dachterrassen genehmigt; Gesamtbaufreigabe erteilt; Flst. 220/9 mitgenannt, Zuordnung wird bestätigt"],
                 ["Bebauungsplan „Im oberen Brühl – Nord“", "Gesichtet", "Sondergebiet „Co-Working“ (§ 11 BauNVO) seit 19.04.2023; Umwelt- und Schallgutachten ohne Einwände"],
                 ["Abgeschlossenheit 23.12.2024, Teilungserklärung", "Gesichtet", "Abgeschlossenheit erteilt; Teilungserklärung im Entwurf (14.08.2025) mit Ferienvermietung der Wohnungen 1–85"],
-                ["Bausubstanzuntersuchung HPC AG (2024/25)", "Angefordert", "Anlassbezogen beauftragt und abgeschlossen (Asbest, PAK, PCB); Gutachten folgt im Datenraum"],
-                ["Flst. 213: Kaufvertrag vom 03.08.2026", "Angefordert", "6.511 m² Landwirtschaftsfläche, lastenfrei geschuldet; Kaufpreis 70 T€ (Verkäuferangabe); Urkunde folgt im Datenraum"]]},
-    {"typ": "text", "x": L0, "y": "folgt", "abstand": 14, "w": FULL, "box": True, "schrift": 8.4,
-     "absaetze": [["Bis zum Signing:", "Bausubstanzgutachten HPC mit Kostenansatz, Bodengutachten und Brandschutzgutachten Schubert (04.09.2023) zum Datenraum; Löschungsbewilligung der Grundschuld, Bestätigung Flst. 220/9 sowie Vollzugsschritte zu Flst. 213 (Vormerkung, Vorkaufsrechtsverzicht, Genehmigung nach Grundstückverkehrsrecht)."]]}],
+                ["Bausubstanzuntersuchung HPC AG (2024/25)", "Folgt", "Anlassbezogen beauftragt und abgeschlossen (Asbest, PAK, PCB); Gutachten folgt im Datenraum"],
+                ["Flst. 213: Kaufvertrag vom 03.08.2026", "Folgt", "6.511 m² Landwirtschaftsfläche, lastenfrei geschuldet; Kaufpreis 70 T€ (Verkäuferangabe); Urkunde folgt im Datenraum"]]},
+    {"typ": "text", "x": L0, "y": "folgt", "abstand": 12, "w": FULL, "schrift": 7.8,
+     "absaetze": ["Vermerk: Zum Datenraum folgen Bausubstanzgutachten HPC mit Kostenansatz, Bodengutachten und Brandschutzgutachten Schubert (04.09.2023). Zum Vollzug: Löschungsbewilligung der Grundschuld, Bestätigung Flst. 220/9 sowie Vormerkung, Vorkaufsrechtsverzicht und Genehmigung nach Grundstückverkehrsrecht für Flst. 213."]}],
   "quelle": "Quelle: Grundbuch Blatt 1077 (27.03.2025); Baugenehmigungen Landratsamt Waldshut 12.09.2023 und 12.12.2024; HPC AG Angebot 23.09.2024 und Schlussrechnung 19.03.2025; Datenraum MonteSana, geprüft 19.11.2026. Der Asset Check ist keine Due Diligence im rechtlichen Sinne."})
 
 # 23 Asset Check 2
@@ -462,8 +462,8 @@ S.append({"modul": "raster", "id": "check2", "kopf": "GRENFORD Asset Check", "da
                 ["Betreiber", "Coworking, Fitness und Physio/Kosmetik über die konzernverbundene Montesana Hospitality &amp; Coworking GmbH, Arztpraxis per Direktmiete. IWG/Regus: Eckpunkte und Vertragsentwurf liegen vor; Managementangebot stuub vom 22.09.2025."],
                 ["Auslastung", "Verkäufermodell 52 % (2027) bis 71 % (2031). Break-even für 4 % Objektrendite bei ca. 45 % Auslastung."],
                 ["Marktreferenz", "Höchenschwand 33 % Bettenauslastung (2018). Coworking und Medizin zielen auf eine höhere Auslastung als klassische Ferienwohnungen."]]},
-    {"typ": "text", "x": 500, "y": "folgt", "abstand": 14, "w": 356, "box": True, "schrift": 8.6,
-     "absaetze": [["Bis zum Signing:", "unterzeichnete Betreiber- und Pachtverträge mit Mindestpacht, Verkaufsstand der Apartments; Vertriebsstart laut LBS nach gesicherter Gesamtfinanzierung."]]}],
+    {"typ": "text", "x": 500, "y": "folgt", "abstand": 12, "w": 356, "schrift": 7.8,
+     "absaetze": ["Vermerk: Betreiber- und Pachtverträge mit Mindestpacht werden zum Signing unterzeichnet; die LBS startet den Vertrieb nach gesicherter Gesamtfinanzierung."]}],
   "quelle": "Quelle: Ertragsprognosen MonteSana; Sales Plan; LBS-Schreiben 20.11.2025; Apartments.xlsx; Renditeberechnung Apt. 55."})
 
 # 24 Machbarkeit 1  (geprüft gegen Datenraum, Stand 19.11.2026)
@@ -471,7 +471,7 @@ S.append({"modul": "raster", "id": "machbar1", "kopf": "Machbarkeitsstudie", "da
   "bloecke": [
     {"typ": "kpi", "x": L0, "y": 410, "w": FULL, "h": 48, "groesse": 18, "gap": 12,
      "items": [{"wert": "Erteilt", "label": "Baugenehmigung und Baufreigabe"}, {"wert": "Genehmigt", "label": "Nutzung im Sondergebiet Co-Working", "stil": "hell"},
-               {"wert": "4 × Umsetzung", "label": "Brandschutz, Energie, Bau, Schallschutz"}, {"wert": "2 Gutachten", "label": "Bausubstanz und Baugrund folgen", "stil": "hell"}]},
+               {"wert": "4 × Umsetzung", "label": "Brandschutz, Energie, Bau, Schallschutz"}, {"wert": "KfW 40", "label": "Effizienzhaus geplant", "stil": "hell"}]},
     {"typ": "tabelle", "x": L0, "y": "folgt", "abstand": 18, "w": FULL, "breiten": [140, 550, 115], "links": [0, 1, 2], "tags": [2], "bis": 150, "schrift": 8.4,
      "kopf": ["Dimension", "Befund", "Machbarkeit"],
      "zeilen": [["Planungsrecht", "Bebauungsplan 04/2023, Sondergebiet; Nutzung Coworking, Wellness, Therapie und Apartments genehmigt", "Gegeben"],
@@ -479,10 +479,12 @@ S.append({"modul": "raster", "id": "machbar1", "kopf": "Machbarkeitsstudie", "da
                 ["Brandschutz", "17 Abweichungen genehmigt, kompensiert durch Brandmeldeanlage und Rauchwarnmelder; Gutachten Schubert folgt im Datenraum", "Umsetzung"],
                 ["Auflagen und Schallschutz", "Barrierefreiheit nach DIN 18040, Kinderspielplatz ≥ 30 m², passiver Schallschutz zur B 500", "Umsetzung"],
                 ["Energetik und Bauablauf", "KfW 40 geplant, Energieberatung und KfW-Antrag beauftragt, PV im Bauzeitplan; drei Abschnitte auf 1.015 m", "Umsetzung"],
-                ["Bausubstanz", "Untersuchung auf Asbest, PAK und PCB 2024/25 abgeschlossen; Gutachten und Kostenansatz folgen im Datenraum", "Nachweis folgt"],
-                ["Baugrund / Statik", "Gesamtbaufreigabe erteilt; Ingenieurangebote Statik (Dagdelen, 2020); Bodengutachten wird ergänzt", "Nachweis folgt"]]},
+                ["Bausubstanz", "Untersuchung auf Asbest, PAK und PCB 2024/25 abgeschlossen; Gutachten und Kostenansatz folgen im Datenraum", "Folgt"],
+                ["Baugrund / Statik", "Gesamtbaufreigabe erteilt; Ingenieurangebote Statik (Dagdelen, 2020); Bodengutachten wird ergänzt", "Folgt"]]},
     {"typ": "text", "x": L0, "y": "folgt", "abstand": 14, "w": FULL, "box": True, "schrift": 8.6,
-     "absaetze": [["Ergebnis:", "Baugenehmigung und Gesamtbaufreigabe decken die geplante Nutzung vollständig ab. Die Auflagen sind übliche Umsetzungsschritte; mit dem Bausubstanz- und dem Bodengutachten wird die Prüfung abgeschlossen."]]}],
+     "absaetze": [["Ergebnis:", "Baugenehmigung und Gesamtbaufreigabe decken die geplante Nutzung vollständig ab. Die Auflagen sind übliche Umsetzungsschritte im Bauablauf."]]},
+    {"typ": "text", "x": L0, "y": "folgt", "abstand": 12, "w": FULL, "schrift": 7.8,
+     "absaetze": ["Vermerk: Bausubstanz- und Bodengutachten folgen im Datenraum."]}],
   "quelle": "Quelle: Baugenehmigungen 12.09.2023 und 12.12.2024 (Nebenbestimmungen); Schalltechnische Untersuchung und Umweltbelange zum Bebauungsplan; HPC AG (2024/25); Datenraum MonteSana, geprüft 19.11.2026. Einschätzung GRENFORD, kein Fachgutachten."})
 
 # 25 Machbarkeit 2
@@ -504,7 +506,7 @@ S.append({"modul": "raster", "id": "machbar2", "kopf": "Machbarkeitsstudie", "da
   "quelle": "Quelle: Einschätzung GRENFORD auf Basis der Datenraum-Dokumente; Montesana Rentabilität / Profitcenter 260213 (Jahr 2 ≈ 2027), Werte gerundet. Keine Zusicherung. Die Machbarkeitsstudie ersetzt weder Gutachten noch Fachplanung."})
 
 # 26 Value Matrix
-S.append({"modul": "raster", "id": "matrix", "kopf": "Value Matrix", "dachzeile": "Stärken, Hebel, Chancen, Risiken", "titel": "Stärken nutzen, Hebel definieren",
+S.append({"modul": "raster", "id": "matrix", "kopf": "Value Matrix", "dachzeile": "Stärken, Hebel, Chancen, Marktfaktoren", "titel": "Stärken nutzen, Hebel definieren",
   "bloecke": [
     {"typ": "matrix", "x": L0, "y": 412, "w": FULL, "h": 286, "schrift": 8.8, "zellen": [
       {"titel": "Stärken", "akzent": True, "punkte": [["Genehmigtes Projekt.", "Baugenehmigung 09/2023, Gesamtbaufreigabe und Abgeschlossenheit 12/2024."], ["Grenzraum-Standort.", "20 km zur Schweizer Grenze, 14.668 Grenzgänger im Kreis Waldshut."],
@@ -513,17 +515,17 @@ S.append({"modul": "raster", "id": "matrix", "kopf": "Value Matrix", "dachzeile"
          ["Finanzierungsstruktur.", "Fremdkapital, KfW-Programme und Sicherheiten bis zum Signing."], ["Kostenbasis.", "Bausubstanzbefund und Reserve (10 %) vor Vergabe einpreisen."]]},
       {"titel": "Chancen", "akzent": True, "punkte": [["Grenzgänger und Workation.", "Wohnen auf Zeit und Coworking im Grenzraum."], ["Kombinationsangebot.", "Kein vergleichbares Gesamtkonzept im 50-km-Radius."],
          ["Exit-Optionen.", "Einzelverkauf, Gesamtverkauf oder Halten der Gewerbeflächen; IRR Basisfall 23,1 %."], ["Förderung und Fläche.", "KfW-40-Tilgungszuschuss bis ca. 1,6 Mio. € geplant (nicht in der Rechnung); Flst. 213 als Reserve."]]},
-      {"titel": "Marktrisiken", "punkte": [["Zins- und Kapitalmarkt.", "Wirkt auf Finanzierung und Exit-Rendite (6,5 bis 8,0 %)."], ["Bauablauf auf 1.015 m.", "Winterfenster und Lieferketten: Puffer im Bauzeitplan."],
-         ["Wettbewerb.", "Rund 82 Ferienunterkünfte, 52 bis 110 € je Nacht; Planpreis am oberen Ende."], ["Nachweise.", "Bausubstanz- und Bodengutachten werden nachgereicht; Kostenansatz folgt."]]}]},
+      {"titel": "Marktfaktoren", "punkte": [["Zins- und Kapitalmarkt.", "Exit-Rendite von 6,5 bis 8,0 % durchgerechnet; IRR bleibt über 20 %."], ["Bauablauf auf 1.015 m.", "Winterfenster im Bauzeitplan berücksichtigt."],
+         ["Wettbewerb.", "Rund 82 Ferienunterkünfte, 52 bis 110 € je Nacht; MonteSana im oberen Segment."], ["Regulatorik.", "Brandschutz- und Energiekonzept genehmigt; Umsetzung im Bauablauf."]]}]},
     {"typ": "text", "x": L0, "y": "folgt", "abstand": 10, "w": FULL, "box": True, "schrift": 8.6,
-     "absaetze": [["Investor Insight:", "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption. Bausubstanz- und Bodengutachten werden zum Signing nachgereicht; die übrigen Maßgaben liegen in Betrieb, Finanzierung und Bauablauf. Vertiefte Modelle und Exit-Strategien stellen wir in vertraulichen Gesprächen zur Verfügung."]]}],
-  "quelle": "Quelle: Einschätzung GRENFORD auf Basis von Verkäuferunterlagen, GRENFORD Research und Investorenrechnung (Seiten {seite:cashflow} bis {seite:sensitivitaet}). Indikativ, keine Zusicherung."})
+     "absaetze": [["Investor Insight:", "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption und einem konservativen Wertansatz. Vertiefte Modelle und Exit-Strategien stellen wir in vertraulichen Gesprächen zur Verfügung."]]}],
+  "quelle": "Vermerk: Bausubstanz- und Bodengutachten folgen im Datenraum; Kostenansatz mit Vorlage. Quelle: Einschätzung GRENFORD auf Basis von Verkäuferunterlagen, GRENFORD Research und Investorenrechnung (Seiten {seite:cashflow} bis {seite:sensitivitaet}). Indikativ, keine Zusicherung."})
 
 # IV Kontakt
 S.append({"modul": "kontakt", "id": "kontakt", "bereich": "nach", "bild": "bestand-luft.png", "bild_pos": "15% center", "abstand": 56, "schrift": 8.2,
   "claim": ["Ihr Interesse,", "Ihr nächster", "Schritt"], "dachzeile": "MonteSana · Transaktionsablauf", "titel": ["Vom LOI zum", "notariellen Vertrag"],
   "box_label": "Ansprechpartner", "box_titel": "Marco Kaimann, Founder &amp; Transaction Advisor",
-  "schritte": [["Gespräch und Letter of Intent", "Wir besprechen Ihre Investitionskriterien. Mit dem LOI bekunden Sie Ihre Kaufabsicht; er ist keine automatische Zusage des Early-Commit-Preises."],
+  "schritte": [["Gespräch und Letter of Intent", "Wir besprechen Ihre Investitionskriterien. Mit dem LOI bekunden Sie Ihre Kaufabsicht; der Early-Commit-Preis gilt mit Annahme durch die Verkäuferseite."],
                ["Identifizierung und Datenraum", "Nach Identifizierung gemäß Geldwäschegesetz und Vertraulichkeitsbestätigung erhalten Sie Zugang zu Genehmigungen, Grundbuch, Kostenmodell und Ertragsunterlagen."],
                ["Prüfung und Besichtigung", "Ihre Berater prüfen technisch, rechtlich und steuerlich. Wir koordinieren den Termin vor Ort in Höchenschwand."],
                ["Notarvertrag", "Erwerb als notariell beurkundeter Asset Deal; eine gestaffelte Kaufpreiszahlung ist nach Abstimmung von Fälligkeiten und Sicherheiten möglich."]]})

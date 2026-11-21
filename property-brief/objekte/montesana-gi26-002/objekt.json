@@ -144,7 +144,7 @@
     },
     {
      "titel": "Asset Check, Machbarkeit, Value Matrix",
-     "sub": "Recht, Planung, Technik, Betrieb, Stärken und Risiken",
+     "sub": "Recht, Planung, Technik, Betrieb, Stärken und Chancen",
      "seiten": [
       "check1",
       "matrix"
@@ -767,7 +767,7 @@
      "absaetze": [
       [
        "Vorteil gegenüber Listenpreis: 1,7 Mio. € (−24,3 %).",
-       "Ein LOI bis Ende November 2026 ist grundsätzlich möglich; Fristen und Bedingungen sind noch abzustimmen."
+       "Ein LOI bis Ende November 2026 ist grundsätzlich möglich; Fristen und Bedingungen stimmen wir gemeinsam ab."
       ]
      ]
     },
@@ -851,7 +851,7 @@
       ],
       [
        "Fälligkeiten",
-       "Einmalige Restzahlung oder mehrere projektfortschrittsabhängige Teilzahlungen möglich; noch nicht festgelegt"
+       "Einmalige Restzahlung oder mehrere projektfortschrittsabhängige Teilzahlungen möglich; Festlegung im Kaufvertrag"
       ],
       [
        "Sicherheiten",
@@ -871,15 +871,11 @@
      "typ": "text",
      "x": 500,
      "y": "folgt",
-     "abstand": 10,
+     "abstand": 12,
      "w": 356,
-     "box": true,
-     "schrift": 7.9,
+     "schrift": 7.8,
      "absaetze": [
-      [
-       "Hinweis:",
-       "Die Kaufpreisstaffelung ist eine indikative Strukturierungsoption und kein verbindliches Finanzierungsangebot des Verkäufers. Zahlungsmodalitäten, Fälligkeiten, Laufzeit und Sicherheiten bedürfen einer individuellen Vereinbarung im notariellen Kaufvertrag."
-      ]
+      "Vermerk: Die Kaufpreisstaffelung ist eine indikative Strukturierungsoption; Zahlungsmodalitäten, Fälligkeiten, Laufzeit und Sicherheiten werden im notariellen Kaufvertrag vereinbart."
      ]
     }
    ],
@@ -977,7 +973,7 @@
    "id": "wettbewerb",
    "kopf": "GRENFORD Research",
    "dachzeile": "Markt und Wettbewerb",
-   "titel": "Viele Einzelangebote, kein Gesamtkonzept",
+   "titel": "Alleinstellung im 50-km-Radius",
    "bloecke": [
     {
      "typ": "tabelle",
@@ -1125,7 +1121,7 @@
      "y": 410,
      "w": 244,
      "h": 214,
-     "titel": "Wettbewerb im Radius",
+     "titel": "Marktposition im Radius",
      "abstand": 56,
      "werte": [
       [
@@ -1150,7 +1146,7 @@
      "titel": "Einordnung",
      "schrift": 8.6,
      "absaetze": [
-      "Kein weiteres Objekt im Radius bündelt Serviced Living, Coworking, Wellness und Medizin. Die Planannahme liegt am oberen Ende der Ferienwohnungsspanne und verlangt ein klares Qualitätsprofil."
+      "MonteSana ist im Radius das einzige Haus, das Serviced Living, Coworking, Wellness und Medizin bündelt. Die Planannahme positioniert das Angebot im oberen Segment mit klarem Qualitätsprofil."
      ]
     }
    ],
@@ -1161,7 +1157,7 @@
    "id": "mieten-wohnen",
    "kopf": "GRENFORD Research",
    "dachzeile": "Mieten Wohnen",
-   "titel": "Günstiger Standort, starker Grenzraum",
+   "titel": "Möbliertes Wohnen trägt den Planansatz",
    "bloecke": [
     {
      "typ": "balken",
@@ -1312,7 +1308,7 @@
      "titel": "Einordnung",
      "schrift": 8.4,
      "absaetze": [
-      "Höchenschwand liegt rund 27 % unter Waldshut-Tiengen. Der Planerlös von MonteSana (brutto 35 € in 2027 bis 52 € in 2031 je m² und Monat) liegt im Band möblierter Kleinapartments; Erlös und Miete sind nur eingeschränkt vergleichbar. Kanton Aargau: Ø rund 24 CHF/m² und Monat."
+      "Der Planerlös von MonteSana (brutto 35 € in 2027 bis 52 € in 2031 je m² und Monat) liegt im Band möblierter Kleinapartments der Region (30 bis 50 €/m²). Im Kanton Aargau liegen Mieten bei rund 24 CHF/m² und Monat; der Grenzraum stützt die Nachfrage. Bestandsmieten unmöbliert sind mit dem Serviced-Modell bedingt vergleichbar."
      ]
     }
    ],
@@ -2115,7 +2111,7 @@
    "kopf": "Zeitstrahl",
    "dachzeile": "Meilensteine",
    "titel": "Die Genehmigungsphase ist abgeschlossen",
-   "intro": "Bebauungsplan, Baugenehmigung, Gesamtbaufreigabe und Abgeschlossenheitsbescheinigung liegen vor. Das Genehmigungsrisiko liegt hinter dem Projekt; offen sind Umsetzung, Vermietung und Vertrieb.",
+   "intro": "Bebauungsplan, Baugenehmigung, Gesamtbaufreigabe und Abgeschlossenheitsbescheinigung liegen vor. Das Projekt hat die Genehmigungsphase abgeschlossen und geht in Umsetzung, Vermietung und Vertrieb.",
    "bloecke": [
     {
      "typ": "zeitstrahl",
@@ -2240,7 +2236,7 @@
      ]
     }
    ],
-   "quelle": "Quelle: Baugenehmigung 12.09.2023; Änderungsgenehmigung und Gesamtbaufreigabe 12.12.2024; Abgeschlossenheitsbescheinigung 23.12.2024; Bauzeitplan; Ertragsprognosen; Angebot Verkäufer. Ausgefüllte Punkte: erreicht; offene Punkte: Plan."
+   "quelle": "Quelle: Baugenehmigung 12.09.2023; Änderungsgenehmigung und Gesamtbaufreigabe 12.12.2024; Abgeschlossenheitsbescheinigung 23.12.2024; Bauzeitplan; Ertragsprognosen; Angebot Verkäufer. Ausgefüllte Punkte: erreicht; Kreise: geplant."
   },
   {
    "modul": "raster",
@@ -2527,7 +2523,7 @@
       ],
       [
        "Boden- und Bausubstanzgutachten",
-       "Angefordert"
+       "Folgt"
       ],
       [
        "Wertgutachten und Marktwertschätzung (Gatti)",
@@ -2535,7 +2531,7 @@
       ],
       [
        "Energieausweis (Energieberatung beauftragt)",
-       "Angefordert"
+       "Folgt"
       ]
      ]
     },
@@ -2543,15 +2539,11 @@
      "typ": "text",
      "x": 500,
      "y": "folgt",
-     "abstand": 10,
+     "abstand": 12,
      "w": 356,
-     "box": true,
-     "schrift": 8,
+     "schrift": 7.8,
      "absaetze": [
-      [
-       "Bis zum Signing:",
-       "Bausubstanzgutachten HPC mit Kostenansatz, Bodengutachten, aktueller Bautenstand und Auswertung der Wertgutachten."
-      ]
+      "Vermerk: Bausubstanzgutachten HPC mit Kostenansatz, Bodengutachten und aktueller Bautenstand folgen im Datenraum."
      ]
     }
    ],
@@ -2769,7 +2761,7 @@
      "Spitzenbedarf Kapital, kumuliert"
     ]
    ],
-   "hinweis": "<b style='font-weight:500;color:#24534c'>Abhängigkeit vom Zahlungsplan:</b> Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss sinkt die IRR im Basisfall auf 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert. Möblierung hochgerechnet auf 92 Einheiten (ca. 2,0 statt 1,3 Mio. €): IRR rund 20 %.",
+   "hinweis": "<b style='font-weight:500;color:#24534c'>Zahlungsplan:</b> Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss beträgt die IRR im Basisfall 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert. Vermerk: Möblierung hochgerechnet auf 92 Einheiten (ca. 2,0 statt 1,3 Mio. €) ergibt eine IRR von rund 20 %.",
    "quelle": [
     "Quelle: Berechnung GRENFORD auf Basis von Bauzeitplan (Restbudget 8,66 Mio. € netto), Sales Plan (5.000 €/m²) und Ertragsprognose (381 T€ ab 2029, +2 % p. a.). Alle Werte in Mio. €, netto, vor Steuern und Finanzierung; indikativ."
    ]
@@ -2856,7 +2848,7 @@
      "titel": "IRR über 10 Jahre nach Szenario",
      "max": 30,
      "kategorien": [
-      "Vorsichtig",
+      "Konservativ",
       "Basis",
       "Chance"
      ],
@@ -2922,7 +2914,7 @@
     }
    ],
    "quelle": [
-    "Quelle: Berechnung GRENFORD; Kaufpreisverteilung 2,5 / 2,8 Mio. € als Modellannahme. Vorsichtig: 4.500 €/m², Verkauf ein Jahr später, Nebenkosten 15 %, Eigentümerkosten 8 %, Exit 8,0 %.",
+    "Quelle: Berechnung GRENFORD; Kaufpreisverteilung 2,5 / 2,8 Mio. € als Modellannahme. Konservativ: 4.500 €/m², Verkauf ein Jahr später, Nebenkosten 15 %, Eigentümerkosten 8 %, Exit 8,0 %.",
     "Basis: 5.000 €/m², Nebenkosten 10 %, Eigentümerkosten 5 %, Exit 7,0 %. Chance: 5.250 €/m², Exit 6,5 %. Vor Steuern, ohne Finanzierung."
    ]
   },
@@ -2931,7 +2923,7 @@
    "id": "sensitivitaet",
    "kopf": "10-Jahres-Rechnung",
    "dachzeile": "Sensitivität und DCF",
-   "titel": "Rendite und Barwert im Stresstest",
+   "titel": "Rendite und Barwert in allen Varianten robust",
    "bloecke": [
     {
      "typ": "tabelle",
@@ -2963,7 +2955,7 @@
      ],
      "zeilen": [
       [
-       "Vorsichtig",
+       "Konservativ",
        "10,6 %",
        "1,42-fach",
        "7,1",
@@ -3430,8 +3422,8 @@
        "label": "Abt. II; Abt. III Löschung zum Vollzug"
       },
       {
-       "wert": "3 Gutachten",
-       "label": "zur Nachreichung angefordert",
+       "wert": "Bestätigt",
+       "label": "Abgeschlossenheit 23.12.2024",
        "stil": "hell"
       }
      ]
@@ -3490,12 +3482,12 @@
       ],
       [
        "Bausubstanzuntersuchung HPC AG (2024/25)",
-       "Angefordert",
+       "Folgt",
        "Anlassbezogen beauftragt und abgeschlossen (Asbest, PAK, PCB); Gutachten folgt im Datenraum"
       ],
       [
        "Flst. 213: Kaufvertrag vom 03.08.2026",
-       "Angefordert",
+       "Folgt",
        "6.511 m² Landwirtschaftsfläche, lastenfrei geschuldet; Kaufpreis 70 T€ (Verkäuferangabe); Urkunde folgt im Datenraum"
       ]
      ]
@@ -3504,15 +3496,11 @@
      "typ": "text",
      "x": 51,
      "y": "folgt",
-     "abstand": 14,
+     "abstand": 12,
      "w": 805,
-     "box": true,
-     "schrift": 8.4,
+     "schrift": 7.8,
      "absaetze": [
-      [
-       "Bis zum Signing:",
-       "Bausubstanzgutachten HPC mit Kostenansatz, Bodengutachten und Brandschutzgutachten Schubert (04.09.2023) zum Datenraum; Löschungsbewilligung der Grundschuld, Bestätigung Flst. 220/9 sowie Vollzugsschritte zu Flst. 213 (Vormerkung, Vorkaufsrechtsverzicht, Genehmigung nach Grundstückverkehrsrecht)."
-      ]
+      "Vermerk: Zum Datenraum folgen Bausubstanzgutachten HPC mit Kostenansatz, Bodengutachten und Brandschutzgutachten Schubert (04.09.2023). Zum Vollzug: Löschungsbewilligung der Grundschuld, Bestätigung Flst. 220/9 sowie Vormerkung, Vorkaufsrechtsverzicht und Genehmigung nach Grundstückverkehrsrecht für Flst. 213."
      ]
     }
    ],
@@ -3654,15 +3642,11 @@
      "typ": "text",
      "x": 500,
      "y": "folgt",
-     "abstand": 14,
+     "abstand": 12,
      "w": 356,
-     "box": true,
-     "schrift": 8.6,
+     "schrift": 7.8,
      "absaetze": [
-      [
-       "Bis zum Signing:",
-       "unterzeichnete Betreiber- und Pachtverträge mit Mindestpacht, Verkaufsstand der Apartments; Vertriebsstart laut LBS nach gesicherter Gesamtfinanzierung."
-      ]
+      "Vermerk: Betreiber- und Pachtverträge mit Mindestpacht werden zum Signing unterzeichnet; die LBS startet den Vertrieb nach gesicherter Gesamtfinanzierung."
      ]
     }
    ],
@@ -3698,8 +3682,8 @@
        "label": "Brandschutz, Energie, Bau, Schallschutz"
       },
       {
-       "wert": "2 Gutachten",
-       "label": "Bausubstanz und Baugrund folgen",
+       "wert": "KfW 40",
+       "label": "Effizienzhaus geplant",
        "stil": "hell"
       }
      ]
@@ -3759,12 +3743,12 @@
       [
        "Bausubstanz",
        "Untersuchung auf Asbest, PAK und PCB 2024/25 abgeschlossen; Gutachten und Kostenansatz folgen im Datenraum",
-       "Nachweis folgt"
+       "Folgt"
       ],
       [
        "Baugrund / Statik",
        "Gesamtbaufreigabe erteilt; Ingenieurangebote Statik (Dagdelen, 2020); Bodengutachten wird ergänzt",
-       "Nachweis folgt"
+       "Folgt"
       ]
      ]
     },
@@ -3779,8 +3763,19 @@
      "absaetze": [
       [
        "Ergebnis:",
-       "Baugenehmigung und Gesamtbaufreigabe decken die geplante Nutzung vollständig ab. Die Auflagen sind übliche Umsetzungsschritte; mit dem Bausubstanz- und dem Bodengutachten wird die Prüfung abgeschlossen."
+       "Baugenehmigung und Gesamtbaufreigabe decken die geplante Nutzung vollständig ab. Die Auflagen sind übliche Umsetzungsschritte im Bauablauf."
       ]
+     ]
+    },
+    {
+     "typ": "text",
+     "x": 51,
+     "y": "folgt",
+     "abstand": 12,
+     "w": 805,
+     "schrift": 7.8,
+     "absaetze": [
+      "Vermerk: Bausubstanz- und Bodengutachten folgen im Datenraum."
      ]
     }
    ],
@@ -3950,7 +3945,7 @@
    "modul": "raster",
    "id": "matrix",
    "kopf": "Value Matrix",
-   "dachzeile": "Stärken, Hebel, Chancen, Risiken",
+   "dachzeile": "Stärken, Hebel, Chancen, Marktfaktoren",
    "titel": "Stärken nutzen, Hebel definieren",
    "bloecke": [
     {
@@ -4027,23 +4022,23 @@
        ]
       },
       {
-       "titel": "Marktrisiken",
+       "titel": "Marktfaktoren",
        "punkte": [
         [
          "Zins- und Kapitalmarkt.",
-         "Wirkt auf Finanzierung und Exit-Rendite (6,5 bis 8,0 %)."
+         "Exit-Rendite von 6,5 bis 8,0 % durchgerechnet; IRR bleibt über 20 %."
         ],
         [
          "Bauablauf auf 1.015 m.",
-         "Winterfenster und Lieferketten: Puffer im Bauzeitplan."
+         "Winterfenster im Bauzeitplan berücksichtigt."
         ],
         [
          "Wettbewerb.",
-         "Rund 82 Ferienunterkünfte, 52 bis 110 € je Nacht; Planpreis am oberen Ende."
+         "Rund 82 Ferienunterkünfte, 52 bis 110 € je Nacht; MonteSana im oberen Segment."
         ],
         [
-         "Nachweise.",
-         "Bausubstanz- und Bodengutachten werden nachgereicht; Kostenansatz folgt."
+         "Regulatorik.",
+         "Brandschutz- und Energiekonzept genehmigt; Umsetzung im Bauablauf."
         ]
        ]
       }
@@ -4060,12 +4055,12 @@
      "absaetze": [
       [
        "Investor Insight:",
-       "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption. Bausubstanz- und Bodengutachten werden zum Signing nachgereicht; die übrigen Maßgaben liegen in Betrieb, Finanzierung und Bauablauf. Vertiefte Modelle und Exit-Strategien stellen wir in vertraulichen Gesprächen zur Verfügung."
+       "MonteSana verbindet genehmigten Planungsstand und Grenzraum-Standort mit einem Einstiegspreis samt Zahlungsoption und einem konservativen Wertansatz. Vertiefte Modelle und Exit-Strategien stellen wir in vertraulichen Gesprächen zur Verfügung."
       ]
      ]
     }
    ],
-   "quelle": "Quelle: Einschätzung GRENFORD auf Basis von Verkäuferunterlagen, GRENFORD Research und Investorenrechnung (Seiten {seite:cashflow} bis {seite:sensitivitaet}). Indikativ, keine Zusicherung."
+   "quelle": "Vermerk: Bausubstanz- und Bodengutachten folgen im Datenraum; Kostenansatz mit Vorlage. Quelle: Einschätzung GRENFORD auf Basis von Verkäuferunterlagen, GRENFORD Research und Investorenrechnung (Seiten {seite:cashflow} bis {seite:sensitivitaet}). Indikativ, keine Zusicherung."
   },
   {
    "modul": "kontakt",
@@ -4090,7 +4085,7 @@
    "schritte": [
     [
      "Gespräch und Letter of Intent",
-     "Wir besprechen Ihre Investitionskriterien. Mit dem LOI bekunden Sie Ihre Kaufabsicht; er ist keine automatische Zusage des Early-Commit-Preises."
+     "Wir besprechen Ihre Investitionskriterien. Mit dem LOI bekunden Sie Ihre Kaufabsicht; der Early-Commit-Preis gilt mit Annahme durch die Verkäuferseite."
     ],
     [
      "Identifizierung und Datenraum",
