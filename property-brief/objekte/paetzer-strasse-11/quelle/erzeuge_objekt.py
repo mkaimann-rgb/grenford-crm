@@ -1,5 +1,5 @@
 # Erzeugt objekt.json für den Property Brief Pätzer Straße 11 (Stil Schlierbacher Weg 13a, Version v28: Serifen-Überschriften).
-# Quellen: Exposé Kaimann Consulting (Januar 2025), Objektbeschreibung des Verkäufers, Bestandspläne, Fotos.
+# Quellen: Angaben und Unterlagen des Verkäufers (Objektbeschreibung, Bestandspläne, Fotos).
 import json, os
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'objekt.json')
 FL = 'Wohn- und Nutzfläche lt. Verkäufer ca. 453 m²; die Bestandspläne weisen für die sechs Wohnungen ca. 242 m² aus, zzgl. Kellerräume ca. 43 m² und Dachgeschoss (Ausbau- und Aufstockungsreserve, ca. 100 m² Bestand).'
@@ -20,16 +20,16 @@ kosten = {"land": "Berlin", "grunderwerbsteuer": 6.0, "courtage_brutto": 7.14, "
 S = []
 S.append({"modul": "titel", "id": "titel", "bild": "garten-fassade.jpg", "bild_pos": "center 38%",
   "titel": ["THE HERITAGE", "HOUSE"], "untertitel": ["Britz", "Investment Residence"],
-  "kurz": ["Mehrfamilienhaus von 1898.", "Sieben Einheiten, voll vermietet.", "Garten, Aufstockungsreserve."],
+  "kurz": ["Mehrfamilienhaus von 1898.", "Stuckfassade, großer Garten.", "Reserve im Dachgeschoss."],
   "adresse": ["Pätzer Straße 11", "12359 Berlin-Britz"],
   "kennzahlen": [["7", "Einheiten · voll vermietet"], ["ca. 781 m²", "Grundstück mit Garten und Remise"], ["1.440.000 €", "Kaufpreis · ca. 3.179 €/m²"]],
   "hinweis": "Gartenansicht · Flächen als Circa-Werte nach Verkäuferangabe"})
 
 S.append({"modul": "vorwort", "id": "vorwort", "bereich": "vor", "dachzeile": "The Heritage House",
   "titel": "Ein Haus mit Geschichte.",
-  "lead": "Mit diesem Property Brief stellen wir Ihnen ein Mehrfamilienhaus von 1898 in Berlin-Britz vor: sieben vermietete Einheiten, ein großer Garten und Raum für die nächste Entwicklungsstufe im Dachgeschoss.",
+  "lead": "Mit diesem Property Brief stellen wir Ihnen ein Mehrfamilienhaus von 1898 in Berlin-Britz vor: sieben vermietete Einheiten und ein großer Garten in ruhiger Lage.",
   "links": "Stuckfassade, Holzdielen und Fachwerk sind erhalten. Bäder, Küchen und Heizung wurden in den vergangenen Jahren modernisiert.",
-  "rechts": "Laufende Mieteinnahmen aus sieben Einheiten einschließlich Remise, dazu Reserven im Dachgeschoss und im Garten.",
+  "rechts": "Heute laufende Mieteinnahmen, morgen zusätzliches Potenzial durch Aufstockung und Ausbau des Dachgeschosses.",
   "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."})
 
 S.append({"modul": "inhalt", "id": "inhalt", "bereich": "vor", "bild": "fassade-strasse.jpg", "bild_pos": "center 40%",
@@ -46,32 +46,32 @@ S.append({"modul": "inhalt", "id": "inhalt", "bereich": "vor", "bild": "fassade-
 
 S.append({"modul": "ueberblick", "id": "ueberblick", "kopf": "Das Haus auf einen Blick", "dachzeile": "Das Haus · Objekt-Nr. GPR26-005",
   "titel": "Das Haus auf einen Blick.",
-  "intro": "Ein Mehrfamilienhaus aus dem Jahr 1898 mit sechs Wohnungen und einer Remise, alle vermietet, dazu Keller, Dachboden und rund 781 m² Grundstück in ruhiger Lage von Berlin-Britz.",
+  "intro": "Ein Mehrfamilienhaus aus dem Jahr 1898 mit sechs Wohnungen und einer Remise, Keller, Dachboden und rund 781 m² Grundstück in ruhiger Lage von Berlin-Britz.",
   "zeilen": [["Objektart", "Mehrfamilienhaus mit Remise und Gartenhaus"], ["Lage", "Pätzer Straße 11, 12359 Berlin-Britz (Neukölln)"],
-             ["Einheiten", "7 Einheiten: 6 Wohnungen auf drei Etagen und Remise, voll vermietet"],
+             ["Einheiten", "6 Wohnungen auf drei Etagen und 1 Remise"],
              ["Grundstück", "ca. 781 m² mit Garten (Verkäuferangabe)"], ["Keller und Dach", "Kellerräume; Dachgeschoss mit Aufstockungs- und Ausbaupotenzial"],
-             ["Baujahr", "1898 · Modernisierung 2018, Bosch-Gaszentralheizung"], ["Mietverträge", "Befristete Mietverträge, Ø 15 €/m²"]],
-  "kennzahlen": [{"wert": "1.440.000 €", "label": "Kaufpreis", "sub": "ca. 3.179 €/m² Wohn-/Nutzfläche"}, {"wert": "7", "label": "Einheiten", "sub": "6 Wohnungen und Remise, vermietet"},
+             ["Baujahr", "1898 · letzte Modernisierung 2018"], ["Mietverträge", "Befristet"]],
+  "kennzahlen": [{"wert": "1.440.000 €", "label": "Kaufpreis", "sub": "ca. 3.179 €/m² Wohn-/Nutzfläche"}, {"wert": "7 von 7", "label": "Einheiten vermietet", "sub": "6 Wohnungen und Remise"},
                  {"wert": "Ø 15 €/m²", "label": "Miete", "sub": "Durchschnitt laut Verkäufer"}],
   "kennzahlen_hinweis": ["Circa-Werte nach Verkäuferangabe.", "Keine Berechnung nach WoFlV."],
   "banner": {"label": "Flächen", "text": ["Wohn- und Nutzfläche laut Verkäufer ca. 453 m²; Bestandspläne: Wohnungen ca. 242 m²,", "zzgl. Keller und Dachgeschoss (Details auf Seite {seite:raumprogramm})"]},
-  "quelle": "Quelle: Exposé (Januar 2025) und Objektbeschreibung des Verkäufers, Bestandspläne. Stand November 2026."})
+  "quelle": "Quelle: Angaben des Verkäufers und Objektunterlagen."})
 
 S.append({"modul": "split", "id": "wohnkonzept", "kopf": "Architektur &amp; Charakter", "bild": "fachwerk.jpg", "bild_pos": "center",
   "bild_seite": "rechts", "dachzeile": "Das Wohnkonzept", "titel": ["Gründerzeit.", "Gut vermietet."],
-  "intro": "Je zwei Wohnungen auf drei Etagen, ein gemeinsames Treppenhaus, Keller und Dachgeschoss als Reserve. Dazu Garten und eine vermietete Remise.",
+  "intro": "Je zwei Wohnungen auf drei Etagen um ein gemeinsames Treppenhaus, dazu die Remise im Garten. Keller und Dachgeschoss bilden die Reserve.",
   "label_breite": 100,
-  "liste": [["Erdgeschoss", "Zwei Wohnungen mit ca. 44 und 34 m², Zugang über das Treppenhaus an der Hofseite."],
-            ["1. Obergeschoss", "Zwei Wohnungen mit ca. 46 und 34 m², Küchen und Bäder modernisiert."],
-            ["2. Obergeschoss", "Zwei Wohnungen mit ca. 47 und 37 m², darunter eine mit Bad und Diele."],
-            ["Remise", "Siebte Einheit, seit rund einem Jahr vermietet; großer Garten mit Gartenhaus."]],
+  "liste": [["Erdgeschoss", "Zwei Wohnungen mit ca. 44 und 34 m²."],
+            ["1. Obergeschoss", "Zwei Wohnungen mit ca. 46 und 34 m²."],
+            ["2. Obergeschoss", "Zwei Wohnungen mit ca. 47 und 37 m²."],
+            ["Remise", "Siebte Einheit im Garten, daneben ein Gartenhaus."]],
   "caption": ["Wohnraum mit erhaltenem Fachwerk und Holzdielen.", "Fotoaufnahme Bestand."]})
 
 S.append({"modul": "split", "id": "ausstattung", "kopf": "Ausstattung", "bild": "wohnen.jpg", "bild_pos": "center 60%",
   "bild_seite": "links", "dachzeile": "Bestand &amp; Materialien", "titel": ["Altbau mit", "Substanz."],
-  "intro": "Viele Originalteile sind erhalten: Dielenböden, Holzbalken und Fachwerk. Bäder und Küchen sind modern ausgestattet.",
+  "intro": "Originalsubstanz und zeitgemäßer Komfort: Der Altbaucharakter ist erhalten, die Nassbereiche sind modernisiert.",
   "label_breite": 72,
-  "liste": [["Böden", "Originale Holzdielen in den Wohnräumen, gefliest in Küchen und Bädern."],
+  "liste": [["Böden", "Originale Holzdielen in den Wohnräumen, teils mit sichtbarem Fachwerk und Holzbalken; Fliesen in Küchen und Bädern."],
             ["Bäder", "Modernisierte Bäder mit Dusche bzw. Wanne; WC teils separat."],
             ["Fenster", "Doppelt verglaste Fenster in allen Etagen."],
             ["Küchen", "Küchen in allen sechs Wohnungen vorhanden."]],
@@ -86,7 +86,7 @@ S.append({"modul": "lage", "id": "lage", "karte": {"lat": 52.4545, "lon": 13.441
   "oepnv": [{"titel": "Bus Britzer Damm / Gradestraße", "text": "Haltestelle ca. 1 Minute zu Fuß"},
             {"titel": "U-Bahn U7", "text": "U Blaschkoallee, ca. 750 m"},
             {"titel": "S-Bahn und Autobahn", "text": "S Hermannstraße ca. 1,7 km · A100 und A113 in der Nähe"}],
-  "quelle": ["Entfernungen laut Exposé (Januar 2025); Südkreuz ca. 13 Minuten mit dem Auto, ca. 36 Minuten mit Bus und S-Bahn.",
+  "quelle": ["Entfernungen laut Verkäuferunterlagen; Südkreuz ca. 13 Minuten mit dem Auto, ca. 36 Minuten mit Bus und S-Bahn.",
              "Kartenpunkt schematisch; Linien und Wege vor Ort prüfen."]})
 
 S.append({"modul": "raumprogramm", "id": "raumprogramm", "bild": "dachgeschoss.jpg", "bild_pos": "center",
@@ -95,7 +95,7 @@ S.append({"modul": "raumprogramm", "id": "raumprogramm", "bild": "dachgeschoss.j
   "ebenen": [["Erdgeschoss", "Wohnung 44,30 m² · Wohnung 34,30 m²", "Zugang über Treppenhaus und Diele", "78,60 m²"],
              ["1. Obergeschoss", "Wohnung 46,25 m² · Wohnung 34,00 m²", "WC im Treppenhausbereich", "80,25 m²"],
              ["2. Obergeschoss", "Wohnung 46,50 m² · Wohnung 37,00 m²", "Bad mit Wanne, Diele", "83,50 m²"],
-             ["Keller und Dach", "Büro-/Aufenthaltsräume ca. 42,90 m² · Heizraum · Dachboden", "Dachgeschoss: Aufstockung und Ausbau möglich, Bauantrag erforderlich", "42,90 m²"]],
+             ["Keller und Dach", "Büro-/Aufenthaltsräume ca. 42,90 m² · Heizraum · Dachboden", "Potenzial im Dachgeschoss: Seite {seite:projektstand}", "42,90 m²"]],
   "flaechen_hinweis": "Flächen laut Bestandsplänen: sechs Wohnungen zusammen ca. 242 m². Der Verkäufer gibt die Wohn- und Nutzfläche mit ca. 453 m² an. Eine Flächenberechnung nach WoFlV liegt nicht vor.",
   "caption": "Dachgeschoss mit Holzbalken · Fotoaufnahme Bestand"})
 
@@ -117,7 +117,7 @@ S.append({"modul": "grundrisse", "id": "grundrisse-2", "dachzeile": "Wohnebene u
   "plaene": [plan("2. Obergeschoss", "Zwei Wohnungen", "plan-2og.png",
                   [["01", "Zimmer 2", "22,75", False, "wohn"], ["02", "Zimmer 1", "11,25", False, "wohn"], ["03", "Bad", "7,10", False, "nass"],
                    ["04", "Diele", "5,40", False, "weg"], ["05", "Zimmer 3", "25,50", False, "wohn"], ["06", "Küche", "11,50", False, "kueche"]],
-                  ["Wohnungen ca. 46,50 m² und ca. 37,00 m².", "Darüber Dachgeschoss mit vier Räumen; Aufstockung und Ausbau nach Bauantrag möglich."]),
+                  ["Wohnungen ca. 46,50 m² und ca. 37,00 m².", "Darüber das Dachgeschoss mit vier Räumen."]),
              plan("Kellergeschoss", "Nutzfläche · keine Wohnfläche", "plan-kg.png",
                   [["01", "Büroraum", "21,75", False, "neben"], ["02", "Büroraum", "11,65", False, "neben"], ["03", "Aufenthalt", "5,75", False, "neben"],
                    ["04", "Vorraum", "3,75", False, "weg"], ["05", "Heizraum", "–", True, "neben"], ["06", "Abstellraum, Tankraum", "–", True, "neben"]],
@@ -126,31 +126,31 @@ S.append({"modul": "grundrisse", "id": "grundrisse-2", "dachzeile": "Wohnebene u
 S.append({"modul": "sanierung", "id": "sanierung", "kopf": "Modernisierung &amp; Haustechnik",
   "bilder": [{"bild": "bad.jpg", "pos": "center"}, {"bild": "kueche-balken.jpg", "pos": "center 40%"}],
   "dachzeile": "Der Bestand", "titel": ["Substanz von 1898.", "Technik von heute."],
-  "bloecke": [["Modernisierung", "Umfassende Renovierung vor rund sechs Jahren nach Angabe des Verkäufers; letzte Modernisierung 2018. Moderne Bäder und Küchen in allen Wohnungen."],
-              ["Haustechnik", "Bosch-Gaszentralheizung mit Warmwasserspeicher, laut Exposé Baujahr 2018. Doppelt verglaste Fenster in allen Etagen."],
-              ["Charakter", "Stuckfassade, Holzdielen, Holzbalken und Fachwerk sind im Original erhalten."]],
+  "bloecke": [["Modernisierung", "Umfassende Renovierung vor rund sechs Jahren nach Angabe des Verkäufers, letzte Modernisierung 2018."],
+              ["Haustechnik", "Zentrale Gasheizung mit Warmwasserspeicher für alle Einheiten; Kennwerte auf Seite {seite:energie}."],
+              ["Fassade", "Gründerzeitliche Stuckfassade mit Gesimsen und Fensterverdachungen zur Straße und zum Garten."]],
   "caption": ["Oben: Bad, Fotoaufnahme Bestand.", "Unten: Küche mit Holzbalken, Fotoaufnahme Bestand."]})
 
 S.append({"modul": "projektstand", "id": "projektstand", "kopf": "Vermietung &amp; Potenzial", "dachzeile": "Vermietung und Potenzial",
   "titel": "Was läuft. Was möglich ist.",
-  "intro": ["Stand nach Angabe des Verkäufers. Alle sieben Einheiten sind vermietet, die Remise seit rund einem Jahr;", "Reserven bestehen im Dachgeschoss und im Garten."],
-  "bloecke": [{"titel": "Vermietung", "zeilen": [["Sechs Wohnungen und Remise", "Voll vermietet, Ø 15 €/m² laut Verkäufer", "Vermietet", False],
-                                                 ["Mietverträge", "Befristete Mietverträge", "Laufend", False],
+  "intro": ["Stand nach Angabe des Verkäufers. Die Remise ist seit rund einem Jahr vermietet;", "weitere Reserven bestehen im Dachgeschoss und im Garten."],
+  "bloecke": [{"titel": "Vermietung", "zeilen": [["Sechs Wohnungen und Remise", "Ø 15 €/m² laut Verkäufer", "Vermietet", False],
+                                                 ["Mietverträge", "Laufzeiten laut Mieterliste", "Befristet", False],
                                                  ["Mieterliste und Verträge", "Zur Prüfung vor Kaufvertrag", "Auf Anfrage", True]]},
               {"titel": "Potenzial", "zeilen": [["Aufstockung Dachgeschoss", "Zusätzliche Wohnfläche durch Aufstockung", "Bauantrag", True],
                                                 ["Ausbau Dachgeschoss", "Ausbau der vier Bestandsräume, Vorplanung liegt vor", "Bauantrag", True],
                                                 ["Stellplätze im Garten", "3 bis 5 Stellplätze bzw. Carport", "Option", True]]}],
-  "quelle": "Quelle: Exposé (Januar 2025) und Objektbeschreibung des Verkäufers. Umbau und Stellplätze vorbehaltlich Genehmigung.",
+  "quelle": "Quelle: Angaben des Verkäufers und Objektunterlagen. Umbau und Stellplätze vorbehaltlich Genehmigung.",
   "spalte_titel": "Auf einen Blick",
-  "spalte": [{"wert": "7 von 7", "label": "Einheiten vermietet"}, {"wert": "Ø 15 €/m²", "label": "Miete laut Verkäufer"},
-             {"wert": "Aufstockung", "label": "und Ausbau Dachgeschoss", "sub": "Bauantrag erforderlich"}],
+  "spalte": [{"wert": "7 von 7", "label": "Einheiten vermietet"}, {"wert": "3 Optionen", "label": "Aufstockung, Ausbau, Stellplätze"},
+             {"wert": "Bauantrag", "label": "für das Dachgeschoss", "sub": "Noch zu stellen"}],
   "spalte_hinweis": ["Angaben des Verkäufers.", "Genehmigungen nicht Teil des Angebots."]})
 
 S.append({"modul": "energie", "id": "energie", "kopf": "Energie &amp; Heizung", "dachzeile": "Heizung und Energieausweis", "bild": "heizung.jpg",
-  "caption": "Heizraum mit Bosch-Gaszentralheizung und Warmwasserspeicher. Fotoaufnahme Bestand.",
-  "titel": "Effizient beheizt.", "intro": "Zentrale Gasheizung mit Warmwasserspeicher für alle Wohnungen. Den Energieausweis erhalten Sie spätestens zur Besichtigung.",
-  "zeilen": [["Heizung", "Bosch-Gaszentralheizung"], ["Warmwasser", "Zentraler Speicher"], ["Baujahr Anlage", "2018 laut Exposé"],
-             ["Energieträger", "Erdgas"], ["Fenster", "Doppelt verglast"], ["Baujahr Gebäude", "1898"]],
+  "caption": "Heizraum im Keller. Fotoaufnahme Bestand.",
+  "titel": "Effizient beheizt.", "intro": "Wärme und Warmwasser kommen zentral aus dem Heizraum im Keller. Den Energieausweis erhalten Sie spätestens zur Besichtigung.",
+  "zeilen": [["Heizung", "Bosch-Gaszentralheizung"], ["Warmwasser", "Zentraler Speicher"], ["Baujahr Anlage", "2018 (Verkäuferangabe)"],
+             ["Energieträger", "Erdgas"]],
   "box_label": "Energieausweis", "box_titel": ["Vorlage zur Besichtigung"],
   "box_text": ["Pflichtangaben nach § 87 GEG ergänzen wir,", "sobald der Ausweis vorliegt."]})
 
@@ -168,7 +168,7 @@ S.append({"modul": "recht", "id": "recht", "bereich": "nach", "dachzeile": "The 
   "bloecke": [["Objekt und Vermietung", "Mehrfamilienhaus, Baujahr 1898, sieben vermietete Einheiten (sechs Wohnungen und Remise) mit befristeten Mietverträgen, Ø 15 €/m² laut Verkäufer. Mieterliste und Mietverträge werden vor Abschluss zur Prüfung übergeben. Aufstockung und Ausbau des Dachgeschosses erfordern einen Bauantrag; Stellplätze im Garten sind genehmigungsabhängig."],
               ["Flächen und Darstellungen", FL + " Eine Wohnflächenberechnung nach WoFlV liegt nicht vor. Grundrisse aus den Bestandsplänen, nicht zur Maßentnahme geeignet. Die Rechte an Fotos und Plänen liegen beim Verkäufer."],
               ["Grundbuch und Energieausweis", "Grundbuchauszug auf Anfrage; Einzelheiten ergeben sich aus dem Grundbuch. Der Energieausweis wird spätestens zur Besichtigung vorgelegt (§ 80 Abs. 4 GEG). Angaben zu Modernisierung und Heizung beruhen auf Verkäuferangaben."],
-              ["Quellen und Verantwortlichkeit", "Exposé (Januar 2025), Objektbeschreibung und Pläne des Verkäufers, Stand November 2026. Irrtum und Zwischenverkauf vorbehalten. GRENFORD ist die Geschäftsbezeichnung des Einzelunternehmens Marco Kaimann; Erlaubnis nach § 34c GewO, Bezirksamt Charlottenburg-Wilmersdorf von Berlin, 01.11.2022."]]})
+              ["Quellen und Verantwortlichkeit", "Angaben und Unterlagen des Verkäufers, Stand November 2026. Irrtum und Zwischenverkauf vorbehalten. GRENFORD ist die Geschäftsbezeichnung des Einzelunternehmens Marco Kaimann; Erlaubnis nach § 34c GewO, Bezirksamt Charlottenburg-Wilmersdorf von Berlin, 01.11.2022."]]})
 S.append({"modul": "agb", "id": "agb", "bereich": "nach"})
 
 json.dump({"meta": meta, "kosten": kosten, "seiten": S}, open(OUT, 'w'), ensure_ascii=False, indent=1)

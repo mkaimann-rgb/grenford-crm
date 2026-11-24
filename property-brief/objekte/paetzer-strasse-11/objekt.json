@@ -54,8 +54,8 @@
    ],
    "kurz": [
     "Mehrfamilienhaus von 1898.",
-    "Sieben Einheiten, voll vermietet.",
-    "Garten, Aufstockungsreserve."
+    "Stuckfassade, großer Garten.",
+    "Reserve im Dachgeschoss."
    ],
    "adresse": [
     "Pätzer Straße 11",
@@ -83,9 +83,9 @@
    "bereich": "vor",
    "dachzeile": "The Heritage House",
    "titel": "Ein Haus mit Geschichte.",
-   "lead": "Mit diesem Property Brief stellen wir Ihnen ein Mehrfamilienhaus von 1898 in Berlin-Britz vor: sieben vermietete Einheiten, ein großer Garten und Raum für die nächste Entwicklungsstufe im Dachgeschoss.",
+   "lead": "Mit diesem Property Brief stellen wir Ihnen ein Mehrfamilienhaus von 1898 in Berlin-Britz vor: sieben vermietete Einheiten und ein großer Garten in ruhiger Lage.",
    "links": "Stuckfassade, Holzdielen und Fachwerk sind erhalten. Bäder, Küchen und Heizung wurden in den vergangenen Jahren modernisiert.",
-   "rechts": "Laufende Mieteinnahmen aus sieben Einheiten einschließlich Remise, dazu Reserven im Dachgeschoss und im Garten.",
+   "rechts": "Heute laufende Mieteinnahmen, morgen zusätzliches Potenzial durch Aufstockung und Ausbau des Dachgeschosses.",
    "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."
   },
   {
@@ -177,7 +177,7 @@
    "kopf": "Das Haus auf einen Blick",
    "dachzeile": "Das Haus · Objekt-Nr. GPR26-005",
    "titel": "Das Haus auf einen Blick.",
-   "intro": "Ein Mehrfamilienhaus aus dem Jahr 1898 mit sechs Wohnungen und einer Remise, alle vermietet, dazu Keller, Dachboden und rund 781 m² Grundstück in ruhiger Lage von Berlin-Britz.",
+   "intro": "Ein Mehrfamilienhaus aus dem Jahr 1898 mit sechs Wohnungen und einer Remise, Keller, Dachboden und rund 781 m² Grundstück in ruhiger Lage von Berlin-Britz.",
    "zeilen": [
     [
      "Objektart",
@@ -189,7 +189,7 @@
     ],
     [
      "Einheiten",
-     "7 Einheiten: 6 Wohnungen auf drei Etagen und Remise, voll vermietet"
+     "6 Wohnungen auf drei Etagen und 1 Remise"
     ],
     [
      "Grundstück",
@@ -201,11 +201,11 @@
     ],
     [
      "Baujahr",
-     "1898 · Modernisierung 2018, Bosch-Gaszentralheizung"
+     "1898 · letzte Modernisierung 2018"
     ],
     [
      "Mietverträge",
-     "Befristete Mietverträge, Ø 15 €/m²"
+     "Befristet"
     ]
    ],
    "kennzahlen": [
@@ -215,9 +215,9 @@
      "sub": "ca. 3.179 €/m² Wohn-/Nutzfläche"
     },
     {
-     "wert": "7",
-     "label": "Einheiten",
-     "sub": "6 Wohnungen und Remise, vermietet"
+     "wert": "7 von 7",
+     "label": "Einheiten vermietet",
+     "sub": "6 Wohnungen und Remise"
     },
     {
      "wert": "Ø 15 €/m²",
@@ -236,7 +236,7 @@
      "zzgl. Keller und Dachgeschoss (Details auf Seite {seite:raumprogramm})"
     ]
    },
-   "quelle": "Quelle: Exposé (Januar 2025) und Objektbeschreibung des Verkäufers, Bestandspläne. Stand November 2026."
+   "quelle": "Quelle: Angaben des Verkäufers und Objektunterlagen."
   },
   {
    "modul": "split",
@@ -250,24 +250,24 @@
     "Gründerzeit.",
     "Gut vermietet."
    ],
-   "intro": "Je zwei Wohnungen auf drei Etagen, ein gemeinsames Treppenhaus, Keller und Dachgeschoss als Reserve. Dazu Garten und eine vermietete Remise.",
+   "intro": "Je zwei Wohnungen auf drei Etagen um ein gemeinsames Treppenhaus, dazu die Remise im Garten. Keller und Dachgeschoss bilden die Reserve.",
    "label_breite": 100,
    "liste": [
     [
      "Erdgeschoss",
-     "Zwei Wohnungen mit ca. 44 und 34 m², Zugang über das Treppenhaus an der Hofseite."
+     "Zwei Wohnungen mit ca. 44 und 34 m²."
     ],
     [
      "1. Obergeschoss",
-     "Zwei Wohnungen mit ca. 46 und 34 m², Küchen und Bäder modernisiert."
+     "Zwei Wohnungen mit ca. 46 und 34 m²."
     ],
     [
      "2. Obergeschoss",
-     "Zwei Wohnungen mit ca. 47 und 37 m², darunter eine mit Bad und Diele."
+     "Zwei Wohnungen mit ca. 47 und 37 m²."
     ],
     [
      "Remise",
-     "Siebte Einheit, seit rund einem Jahr vermietet; großer Garten mit Gartenhaus."
+     "Siebte Einheit im Garten, daneben ein Gartenhaus."
     ]
    ],
    "caption": [
@@ -287,12 +287,12 @@
     "Altbau mit",
     "Substanz."
    ],
-   "intro": "Viele Originalteile sind erhalten: Dielenböden, Holzbalken und Fachwerk. Bäder und Küchen sind modern ausgestattet.",
+   "intro": "Originalsubstanz und zeitgemäßer Komfort: Der Altbaucharakter ist erhalten, die Nassbereiche sind modernisiert.",
    "label_breite": 72,
    "liste": [
     [
      "Böden",
-     "Originale Holzdielen in den Wohnräumen, gefliest in Küchen und Bädern."
+     "Originale Holzdielen in den Wohnräumen, teils mit sichtbarem Fachwerk und Holzbalken; Fliesen in Küchen und Bädern."
     ],
     [
      "Bäder",
@@ -358,7 +358,7 @@
     }
    ],
    "quelle": [
-    "Entfernungen laut Exposé (Januar 2025); Südkreuz ca. 13 Minuten mit dem Auto, ca. 36 Minuten mit Bus und S-Bahn.",
+    "Entfernungen laut Verkäuferunterlagen; Südkreuz ca. 13 Minuten mit dem Auto, ca. 36 Minuten mit Bus und S-Bahn.",
     "Kartenpunkt schematisch; Linien und Wege vor Ort prüfen."
    ]
   },
@@ -395,7 +395,7 @@
     [
      "Keller und Dach",
      "Büro-/Aufenthaltsräume ca. 42,90 m² · Heizraum · Dachboden",
-     "Dachgeschoss: Aufstockung und Ausbau möglich, Bauantrag erforderlich",
+     "Potenzial im Dachgeschoss: Seite {seite:projektstand}",
      "42,90 m²"
     ]
    ],
@@ -582,7 +582,7 @@
      "massketten": [],
      "hinweise": [
       "Wohnungen ca. 46,50 m² und ca. 37,00 m².",
-      "Darüber Dachgeschoss mit vier Räumen; Aufstockung und Ausbau nach Bauantrag möglich."
+      "Darüber das Dachgeschoss mit vier Räumen."
      ]
     },
     {
@@ -664,15 +664,15 @@
    "bloecke": [
     [
      "Modernisierung",
-     "Umfassende Renovierung vor rund sechs Jahren nach Angabe des Verkäufers; letzte Modernisierung 2018. Moderne Bäder und Küchen in allen Wohnungen."
+     "Umfassende Renovierung vor rund sechs Jahren nach Angabe des Verkäufers, letzte Modernisierung 2018."
     ],
     [
      "Haustechnik",
-     "Bosch-Gaszentralheizung mit Warmwasserspeicher, laut Exposé Baujahr 2018. Doppelt verglaste Fenster in allen Etagen."
+     "Zentrale Gasheizung mit Warmwasserspeicher für alle Einheiten; Kennwerte auf Seite {seite:energie}."
     ],
     [
-     "Charakter",
-     "Stuckfassade, Holzdielen, Holzbalken und Fachwerk sind im Original erhalten."
+     "Fassade",
+     "Gründerzeitliche Stuckfassade mit Gesimsen und Fensterverdachungen zur Straße und zum Garten."
     ]
    ],
    "caption": [
@@ -687,8 +687,8 @@
    "dachzeile": "Vermietung und Potenzial",
    "titel": "Was läuft. Was möglich ist.",
    "intro": [
-    "Stand nach Angabe des Verkäufers. Alle sieben Einheiten sind vermietet, die Remise seit rund einem Jahr;",
-    "Reserven bestehen im Dachgeschoss und im Garten."
+    "Stand nach Angabe des Verkäufers. Die Remise ist seit rund einem Jahr vermietet;",
+    "weitere Reserven bestehen im Dachgeschoss und im Garten."
    ],
    "bloecke": [
     {
@@ -696,14 +696,14 @@
      "zeilen": [
       [
        "Sechs Wohnungen und Remise",
-       "Voll vermietet, Ø 15 €/m² laut Verkäufer",
+       "Ø 15 €/m² laut Verkäufer",
        "Vermietet",
        false
       ],
       [
        "Mietverträge",
-       "Befristete Mietverträge",
-       "Laufend",
+       "Laufzeiten laut Mieterliste",
+       "Befristet",
        false
       ],
       [
@@ -738,7 +738,7 @@
      ]
     }
    ],
-   "quelle": "Quelle: Exposé (Januar 2025) und Objektbeschreibung des Verkäufers. Umbau und Stellplätze vorbehaltlich Genehmigung.",
+   "quelle": "Quelle: Angaben des Verkäufers und Objektunterlagen. Umbau und Stellplätze vorbehaltlich Genehmigung.",
    "spalte_titel": "Auf einen Blick",
    "spalte": [
     {
@@ -746,13 +746,13 @@
      "label": "Einheiten vermietet"
     },
     {
-     "wert": "Ø 15 €/m²",
-     "label": "Miete laut Verkäufer"
+     "wert": "3 Optionen",
+     "label": "Aufstockung, Ausbau, Stellplätze"
     },
     {
-     "wert": "Aufstockung",
-     "label": "und Ausbau Dachgeschoss",
-     "sub": "Bauantrag erforderlich"
+     "wert": "Bauantrag",
+     "label": "für das Dachgeschoss",
+     "sub": "Noch zu stellen"
     }
    ],
    "spalte_hinweis": [
@@ -766,9 +766,9 @@
    "kopf": "Energie &amp; Heizung",
    "dachzeile": "Heizung und Energieausweis",
    "bild": "heizung.jpg",
-   "caption": "Heizraum mit Bosch-Gaszentralheizung und Warmwasserspeicher. Fotoaufnahme Bestand.",
+   "caption": "Heizraum im Keller. Fotoaufnahme Bestand.",
    "titel": "Effizient beheizt.",
-   "intro": "Zentrale Gasheizung mit Warmwasserspeicher für alle Wohnungen. Den Energieausweis erhalten Sie spätestens zur Besichtigung.",
+   "intro": "Wärme und Warmwasser kommen zentral aus dem Heizraum im Keller. Den Energieausweis erhalten Sie spätestens zur Besichtigung.",
    "zeilen": [
     [
      "Heizung",
@@ -780,19 +780,11 @@
     ],
     [
      "Baujahr Anlage",
-     "2018 laut Exposé"
+     "2018 (Verkäuferangabe)"
     ],
     [
      "Energieträger",
      "Erdgas"
-    ],
-    [
-     "Fenster",
-     "Doppelt verglast"
-    ],
-    [
-     "Baujahr Gebäude",
-     "1898"
     ]
    ],
    "box_label": "Energieausweis",
@@ -876,7 +868,7 @@
     ],
     [
      "Quellen und Verantwortlichkeit",
-     "Exposé (Januar 2025), Objektbeschreibung und Pläne des Verkäufers, Stand November 2026. Irrtum und Zwischenverkauf vorbehalten. GRENFORD ist die Geschäftsbezeichnung des Einzelunternehmens Marco Kaimann; Erlaubnis nach § 34c GewO, Bezirksamt Charlottenburg-Wilmersdorf von Berlin, 01.11.2022."
+     "Angaben und Unterlagen des Verkäufers, Stand November 2026. Irrtum und Zwischenverkauf vorbehalten. GRENFORD ist die Geschäftsbezeichnung des Einzelunternehmens Marco Kaimann; Erlaubnis nach § 34c GewO, Bezirksamt Charlottenburg-Wilmersdorf von Berlin, 01.11.2022."
     ]
    ]
   },
