@@ -110,7 +110,7 @@ def T(x, base, f, size, tl, color, text, w=None, extra=''):
         f, size2, text, extra = _map_serif(f, size, color, text, w, extra, x)
         if f == 'G': tl = round(tl * size2 / size * 1.08, 2)
         size = size2
-    elif HEADLINE and f == 'S' and size >= 22 and color == INK:
+    elif HEADLINE and f == 'S' and size >= 22 and color == INK and not (C and C.meta.get('typo') == 'serif'):
         f = 'H'; size = round(size * .9, 1); text = re.sub(r'\.$', '', text)
         extra = 'letter-spacing:-.035em;' + extra
     text = re.sub(r'(\d) (%|€|m²|Mio\.|T€|km|ha|h\b|min\b)', '\\1&nbsp;\\2', str(text))   # Zahl und Einheit nie trennen
@@ -425,7 +425,26 @@ PLANCOL = {'wohn': '#bbd3f7', 'kueche': '#f1deba', 'nass': '#b3e2e2', 'weg': '#d
 PLANLEG = [('wohn', 'Wohnen und Schlafen'), ('kueche', 'Küche'), ('nass', 'Bad und WC'), ('weg', 'Flur und Treppe'), ('neben', 'Technik und Abstellraum'), ('aussen', 'Außenbereich')]
 
 
+def _plancard_quer(x, p):
+    w = 394; s = R(x, 40, w, 364, '#ffffff')
+    s += T(x + 16, 381, 'S', 16, 20, INK, p['name']) + RT(x + w - 16, 382, 'B', 6.6, 9, ACC, p['art'].upper(), 200)
+    s += L(x + 16, 370, x + w - 16) + IMG(p['bild'], x + 10, 186, w - 20, 178, 'center', 'contain')
+    s += L(x + 16, 178, x + w - 16)
+    half = (len(p['raeume']) + 1) // 2; cw = (w - 32 - 16) / 2
+    for c in range(2):
+        tx = x + 16 + c * (cw + 16); tr = tx + cw
+        s += EB(tx, 164, 'Raum', GREY, 6.3) + RT(tr, 164, 'B', 6.3, 9, GREY, 'CA. M²', 50)
+        for i, (n, r, a, est, col) in enumerate(p['raeume'][c * half:(c + 1) * half]):
+            b = 148 - 16.5 * i
+            s += R(tx, b - 1.5, 8, 8, PLANCOL[col]) + T(tx + 12, b, 'N', 6.5, 9, GREY, n) + T(tx + 25, b, 'N', 8.2, 11, INK, r)
+            s += RT(tr, b, 'N' if est else 'B', 8.2, 11, GREY if est else NAVY, a + ('*' if est else ''), 50)
+    for i, n in enumerate(p['hinweise']):
+        s += T(x + 16, 72 - 9.5 * i, 'N', 6.6, 9, GREY, n, w=w - 32)
+    return s
+
+
 def _plancard(x, p):
+    if p.get('quer'): return _plancard_quer(x, p)
     w = 394; s = R(x, 40, w, 364, '#ffffff')
     s += T(x + 16, 381, 'S', 16, 20, INK, p['name']) + RT(x + w - 16, 382, 'B', 6.6, 9, ACC, p['art'].upper(), 200)
     s += L(x + 16, 370, x + w - 16) + IMG(p['bild'], x + 10, 66, 218, 296, 'center', 'contain')
@@ -450,9 +469,9 @@ def m_grundrisse(d):
     x = 51
     for k, t in PLANLEG:
         s += R(x, 415, 8, 8, PLANCOL[k]) + T(x + 12, 416.5, 'N', 7.2, 10, GREY, t); x += 22 + len(t) * 4.0
-    s += RT(856, 416.5, 'N', 7.2, 10, GREY, 'Flächen fett: laut Aufmaß · * aus dem Plan geschätzt', 300)
+    s += RT(856, 416.5, 'N', 7.2, 10, GREY, d.get('legende_rechts', 'Flächen fett: laut Aufmaß · * aus dem Plan geschätzt'), 300)
     s += _plancard(51, d['plaene'][0]) + _plancard(462, d['plaene'][1])
-    return s + RT(856, 443, 'N', 7.6, 11, GREY, 'Maße in Metern gemäß Aufmaß · nicht zur Maßentnahme geeignet', 360) + FOOT()
+    return s + RT(856, 443, 'N', 7.6, 11, GREY, d.get('hinweis_oben', 'Maße in Metern gemäß Aufmaß · nicht zur Maßentnahme geeignet'), 360) + FOOT()
 
 
 def m_sanierung(d):
@@ -497,13 +516,16 @@ def m_projektstand(d):
 
 def m_energie(d):
     s = (R(0, 0, HALF, 567, '#ffffff') + IMG(d['bild'], 40, 40, HALF - 80, 440, 'center', 'contain')
-         + chrome('Energieausweis') + cap(51, 26, d['caption'])
-         + EB(TX, 487, 'Pflichtangaben nach § 87 GEG') + T(TX, 447, 'S', 31, 34, INK, d['titel'])
+         + chrome(d.get('kopf', 'Energieausweis')) + cap(51, 26, d['caption'])
+         + EB(TX, 487, d.get('dachzeile', 'Pflichtangaben nach § 87 GEG')) + T(TX, 447, 'S', 31, 34, INK, d['titel'])
          + T(TX, 410, 'N', 9.8, 14.5, INK, d['intro'], w=356))
     for i, (k, v) in enumerate(d['zeilen']):
         ln = 360 - 27 * i
         s += L(TX, ln, 856) + T(TX, ln - 17, 'N', 8.4, 12, GREY, k) + RT(856, ln - 17, 'B', 9, 12, NAVY, v, 200)
     s += L(TX, 360 - 27 * len(d['zeilen']), 856)
+    if not d.get('klasse'):
+        return s + (R(TX, 40, 356, 120) + EB(TX + 18, 140, d.get('box_label', 'Energieausweis'), LIGHT, 6.6)
+                    + T(TX + 18, 104, 'S', 17, 22, CREAM, br(d['box_titel'])) + T(TX + 18, 62, 'N', 8.2, 12, MIST, br(d['box_text']), w=320))
     return s + (R(TX, 40, 356, 120) + EB(TX + 18, 140, 'Energieeffizienzklasse', LIGHT, 6.6) + (T(TX + 18, 86, 'L', 34, 40, CREAM, d['klasse'], extra='letter-spacing:-.02em;') if sans_only() else T(TX + 18, 70, 'S', 54, 58, CREAM, d['klasse']))
                 + VL(TX + 150, 144, 56, 'rgba(169,184,207,.45)', .6)
                 + EB(TX + 170, 140, 'Endenergiebedarf', LIGHT, 6.6) + T(TX + 170, 86, 'S', 34, 40, CREAM, d['endenergie'])
@@ -535,7 +557,7 @@ def m_kosten(d, obj):
         s += cap(51, 60, f'Preis je m² {k["flaeche_art"]}: ca. {eur(qm)} ({eur(p, 0)} bei ca. {str(k["flaeche_qm"]).replace(".", ",")} m² nach Verkäuferangabe).')
         s += (R(632, 34, 224, 464) + EB(660, 469, 'Gesamt', CREAM, 8) + T(660, 422, 'S', 25, 32, CREAM, eur(tot))
               + T(660, 398, 'N', 7.8, 11, MIST, 'Kaufpreis, Grunderwerbsteuer und<br>Käufercourtage, zzgl. Notar und<br>Grundbuch.')
-              + L(660, 340, 828, 'rgba(169,184,207,.45)', .6) + EB(660, 318, 'Courtage · hälftige Teilung', LIGHT, 6.8)
+              + L(660, 340, 828, 'rgba(169,184,207,.45)', .6) + EB(660, 318, k.get('courtage_label', 'Courtage · hälftige Teilung'), LIGHT, 6.8)
               + T(660, 298, 'N', 8.2, 12, MIST, k['courtage_text'], w=170)
               + L(660, 200, 828, 'rgba(169,184,207,.45)', .6) + EB(660, 178, 'Preis je m²', LIGHT, 6.8)
               + T(660, 150, 'S', 22, 28, CREAM, 'ca. ' + eur(qm, 0)) + T(660, 132, 'N', 7.8, 11, MIST, f'bezogen auf ca. {str(k["flaeche_qm"]).replace(".", ",")} m² {k["flaeche_art"]}')
