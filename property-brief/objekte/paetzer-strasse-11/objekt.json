@@ -6,7 +6,7 @@
   "redaktionsstand": "24.11.2026",
   "agb_stand": "18.11.2026",
   "variante": "haus",
-  "typo": "serif"
+  "typo": "sans"
  },
  "kosten": {
   "land": "Berlin",
@@ -16,13 +16,15 @@
   "courtage_label": "Courtage · Käufer",
   "courtage_text": "Käuferprovision 6,00 % zzgl. 19 % MwSt., insgesamt 7,14 % des Kaufpreises. Fällig nach wirksamem Abschluss des notariellen Kaufvertrags.",
   "agb_courtage": "Die Käufercourtage für dieses Objekt beträgt 6,00 % des notariellen Kaufpreises zzgl. 19 % MwSt., insgesamt 7,14 %. Bei Mehrfamilienhäusern gelten die §§ 656a–656d BGB nicht.",
+  "ueberblick_courtage": "Courtage: Käuferprovision 6,00 % zzgl. 19 % MwSt., insgesamt 7,14 % des Kaufpreises, fällig nach wirksamem Abschluss des notariellen Kaufvertrags. Bei Mehrfamilienhäusern gelten die §§ 656a–656d BGB nicht.",
   "flaeche_qm": 453,
   "flaeche_art": "Wohn-/Nutzfläche",
   "einheiten": [
    {
     "id": "haus",
     "name": "Mehrfamilienhaus Pätzer Straße 11",
-    "preis": 1440000
+    "preis": 1440000,
+    "innenflaeche": 453
    }
   ],
   "optionen": [
@@ -53,9 +55,9 @@
     "Investment Residence"
    ],
    "kurz": [
-    "Mehrfamilienhaus von 1898.",
-    "Stuckfassade, großer Garten.",
-    "Reserve im Dachgeschoss."
+    "Mehrfamilienhaus von 1898",
+    "Stuckfassade, großer Garten",
+    "Reserve im Dachgeschoss"
    ],
    "adresse": [
     "Pätzer Straße 11",
@@ -78,30 +80,19 @@
    "hinweis": "Gartenansicht · Flächen als Circa-Werte nach Verkäuferangabe"
   },
   {
-   "modul": "vorwort",
-   "id": "vorwort",
-   "bereich": "vor",
-   "dachzeile": "The Heritage House",
-   "titel": "Ein Haus mit Geschichte.",
-   "lead": "Mit diesem Property Brief stellen wir Ihnen ein Mehrfamilienhaus von 1898 in Berlin-Britz vor: sieben vermietete Einheiten und ein großer Garten in ruhiger Lage.",
-   "links": "Stuckfassade, Holzdielen und Fachwerk sind erhalten. Bäder, Küchen und Heizung wurden in den vergangenen Jahren modernisiert.",
-   "rechts": "Heute laufende Mieteinnahmen, morgen zusätzliches Potenzial durch Aufstockung und Ausbau des Dachgeschosses.",
-   "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."
-  },
-  {
    "modul": "inhalt",
    "id": "inhalt",
    "bereich": "vor",
    "bild": "fassade-strasse.jpg",
    "bild_pos": "center 40%",
    "claim": [
-    "Ein Haus.",
-    "Sieben Einheiten."
+    "Ein Haus,",
+    "sieben Einheiten"
    ],
    "marke": "The Heritage House",
    "text": [
     "Ein Gründerzeithaus von 1898,",
-    "modernisiert und voll vermietet."
+    "modernisiert und voll vermietet"
    ],
    "adresse": [
     "Pätzer Straße 11",
@@ -109,18 +100,24 @@
    ],
    "kapitel": [
     {
-     "titel": "Das Haus",
-     "sub": "Eckdaten, Wohnkonzept und Charakter",
+     "titel": "Vorwort",
+     "sub": "Persönliche Einführung von Marco Kaimann",
      "seiten": [
-      "ueberblick",
-      "wohnkonzept"
+      "vorwort"
      ]
     },
     {
-     "titel": "Ausstattung und Lage",
-     "sub": "Bestand und Materialien, Umfeld und Anbindung",
+     "titel": "Das Haus auf einen Blick",
+     "sub": "Eckdaten, Kaufpreis und Erwerbsnebenkosten",
      "seiten": [
-      "ausstattung",
+      "ueberblick"
+     ]
+    },
+    {
+     "titel": "Wohnen und Lage",
+     "sub": "Wohnkonzept, Ausstattung, Umfeld und Anbindung",
+     "seiten": [
+      "wohnkonzept",
       "lage"
      ]
     },
@@ -134,17 +131,18 @@
     },
     {
      "titel": "Haustechnik, Vermietung und Energie",
-     "sub": "Modernisierung, Mietstand, Potenzial, Energie",
+     "sub": "Modernisierung, Mietstand, Potenzial und Heizung",
      "seiten": [
       "sanierung",
       "energie"
      ]
     },
     {
-     "titel": "Kaufpreis und Erwerbsnebenkosten",
-     "sub": "Alle Kosten auf einen Blick",
+     "titel": "Kapitalanlage",
+     "sub": "Mietorientierung und Modellrechnung",
      "seiten": [
-      "kosten"
+      "markt",
+      "rendite"
      ]
     },
     {
@@ -172,13 +170,29 @@
    ]
   },
   {
-   "modul": "ueberblick",
+   "modul": "vorwort",
+   "id": "vorwort",
+   "bereich": "vor",
+   "dachzeile": "The Heritage House",
+   "titel": "Ein Haus mit Geschichte",
+   "lead": "Mit diesem Property Brief stellen wir Ihnen ein Mehrfamilienhaus von 1898 in Berlin-Britz vor: sieben vermietete Einheiten und ein großer Garten in ruhiger Lage.",
+   "links": "Stuckfassade, Holzdielen und Fachwerk sind erhalten. Bäder, Küchen und Heizung wurden in den vergangenen Jahren modernisiert.",
+   "rechts": "Heute laufende Mieteinnahmen, morgen zusätzliches Potenzial durch Aufstockung und Ausbau des Dachgeschosses.",
+   "schluss": "Auf den folgenden Seiten finden Sie alle wesentlichen Informationen kompakt und transparent aufbereitet. Wir freuen uns auf den persönlichen Austausch."
+  },
+  {
+   "modul": "ueberblick_kosten",
    "id": "ueberblick",
+   "bereich": "vor",
    "kopf": "Das Haus auf einen Blick",
-   "dachzeile": "Das Haus · Objekt-Nr. GPR26-005",
-   "titel": "Das Haus auf einen Blick.",
-   "intro": "Ein Mehrfamilienhaus aus dem Jahr 1898 mit sechs Wohnungen und einer Remise, Keller, Dachboden und rund 781 m² Grundstück in ruhiger Lage von Berlin-Britz.",
+   "dachzeile": "Das Haus",
+   "titel": "Fakten und Zahlen",
+   "intro": "Ein Mehrfamilienhaus aus dem Jahr 1898 mit sechs Wohnungen und einer Remise, alle sieben Einheiten vermietet – mit rund 781 m² Grundstück und Reserve im Dachgeschoss.",
    "zeilen": [
+    [
+     "Objekt-Nr.",
+     "GPR26-005"
+    ],
     [
      "Objektart",
      "Mehrfamilienhaus mit Remise und Gartenhaus"
@@ -192,51 +206,31 @@
      "6 Wohnungen auf drei Etagen und 1 Remise"
     ],
     [
+     "Vermietung",
+     "7 von 7 vermietet · befristete Mietverträge · Ø 15 €/m²"
+    ],
+    [
+     "Flächen",
+     "ca. 453 m² Wohn-/Nutzfläche laut Verkäufer (Details Seite {seite:raumprogramm})"
+    ],
+    [
      "Grundstück",
-     "ca. 781 m² mit Garten (Verkäuferangabe)"
+     "ca. 781 m² mit Garten"
     ],
     [
      "Keller und Dach",
-     "Kellerräume; Dachgeschoss mit Aufstockungs- und Ausbaupotenzial"
+     "Kellerräume; Dachgeschoss für Aufstockung und Ausbau"
     ],
     [
      "Baujahr",
      "1898 · letzte Modernisierung 2018"
     ],
     [
-     "Mietverträge",
-     "Befristet"
+     "Heizung",
+     "Gaszentralheizung mit Warmwasserspeicher"
     ]
    ],
-   "kennzahlen": [
-    {
-     "wert": "1.440.000 €",
-     "label": "Kaufpreis",
-     "sub": "ca. 3.179 €/m² Wohn-/Nutzfläche"
-    },
-    {
-     "wert": "7 von 7",
-     "label": "Einheiten vermietet",
-     "sub": "6 Wohnungen und Remise"
-    },
-    {
-     "wert": "Ø 15 €/m²",
-     "label": "Miete",
-     "sub": "Durchschnitt laut Verkäufer"
-    }
-   ],
-   "kennzahlen_hinweis": [
-    "Circa-Werte nach Verkäuferangabe.",
-    "Keine Berechnung nach WoFlV."
-   ],
-   "banner": {
-    "label": "Flächen",
-    "text": [
-     "Wohn- und Nutzfläche laut Verkäufer ca. 453 m²; Bestandspläne: Wohnungen ca. 242 m²,",
-     "zzgl. Keller und Dachgeschoss (Details auf Seite {seite:raumprogramm})"
-    ]
-   },
-   "quelle": "Quelle: Angaben des Verkäufers und Objektunterlagen."
+   "quelle": "Quelle: Angaben des Verkäufers und Objektunterlagen · Circa-Werte, keine Berechnung nach WoFlV · Stand November 2026."
   },
   {
    "modul": "split",
@@ -247,8 +241,8 @@
    "bild_seite": "rechts",
    "dachzeile": "Das Wohnkonzept",
    "titel": [
-    "Gründerzeit.",
-    "Gut vermietet."
+    "Gründerzeit,",
+    "gut vermietet"
    ],
    "intro": "Je zwei Wohnungen auf drei Etagen um ein gemeinsames Treppenhaus, dazu die Remise im Garten. Keller und Dachgeschoss bilden die Reserve.",
    "label_breite": 100,
@@ -285,7 +279,7 @@
    "dachzeile": "Bestand &amp; Materialien",
    "titel": [
     "Altbau mit",
-    "Substanz."
+    "Substanz"
    ],
    "intro": "Originalsubstanz und zeitgemäßer Komfort: Der Altbaucharakter ist erhalten, die Nassbereiche sind modernisiert.",
    "label_breite": 72,
@@ -325,8 +319,8 @@
    },
    "dachzeile": "Pätzer Straße 11 · Berlin-Britz",
    "titel": [
-    "Ruhig wohnen.",
-    "Schnell in der Stadt."
+    "Ruhig wohnen,",
+    "schnell in der Stadt"
    ],
    "intro": "Die Pätzer Straße liegt in einem ruhigen Wohnquartier in Britz, ohne Durchgangsverkehr. Bus, U-Bahn und Stadtautobahn sind in wenigen Minuten erreichbar.",
    "gruppen": [
@@ -370,7 +364,7 @@
    "dachzeile": "Fünf Ebenen · sieben Einheiten",
    "titel": [
     "Wie das Haus",
-    "aufgeteilt ist."
+    "aufgeteilt ist"
    ],
    "intro": "Sechs Wohnungen auf drei Etagen und die Remise als siebte Einheit, dazu Kellerräume und ein Dachgeschoss mit vier Räumen. Alle Grundrisse mit Raumflächen finden Sie auf den Seiten {seite:grundrisse-1} und {seite:grundrisse-2}.",
    "ebenen": [
@@ -406,7 +400,7 @@
    "modul": "grundrisse",
    "id": "grundrisse-1",
    "dachzeile": "Wohnebenen",
-   "titel": "Erdgeschoss und 1. Obergeschoss.",
+   "titel": "Erdgeschoss und 1. Obergeschoss",
    "legende_rechts": "Flächen laut Bestandsplan",
    "hinweis_oben": "Bestandspläne · nicht zur Maßentnahme geeignet",
    "plaene": [
@@ -526,7 +520,7 @@
    "modul": "grundrisse",
    "id": "grundrisse-2",
    "dachzeile": "Wohnebene und Keller",
-   "titel": "2. Obergeschoss und Keller.",
+   "titel": "2. Obergeschoss und Keller",
    "legende_rechts": "Flächen laut Bestandsplan",
    "hinweis_oben": "Bestandspläne · nicht zur Maßentnahme geeignet",
    "plaene": [
@@ -658,8 +652,8 @@
    ],
    "dachzeile": "Der Bestand",
    "titel": [
-    "Substanz von 1898.",
-    "Technik von heute."
+    "Substanz von 1898,",
+    "Technik von heute"
    ],
    "bloecke": [
     [
@@ -685,7 +679,7 @@
    "id": "projektstand",
    "kopf": "Vermietung &amp; Potenzial",
    "dachzeile": "Vermietung und Potenzial",
-   "titel": "Was läuft. Was möglich ist.",
+   "titel": "Was läuft und was möglich ist",
    "intro": [
     "Stand nach Angabe des Verkäufers. Die Remise ist seit rund einem Jahr vermietet;",
     "weitere Reserven bestehen im Dachgeschoss und im Garten."
@@ -767,7 +761,7 @@
    "dachzeile": "Heizung und Energieausweis",
    "bild": "heizung.jpg",
    "caption": "Heizraum im Keller. Fotoaufnahme Bestand.",
-   "titel": "Effizient beheizt.",
+   "titel": "Zentral und effizient beheizt",
    "intro": "Wärme und Warmwasser kommen zentral aus dem Heizraum im Keller. Den Energieausweis erhalten Sie spätestens zur Besichtigung.",
    "zeilen": [
     [
@@ -797,8 +791,127 @@
    ]
   },
   {
-   "modul": "kosten",
-   "id": "kosten"
+   "modul": "raster",
+   "id": "markt",
+   "kopf": "Markt &amp; Mietorientierung",
+   "dachzeile": "Optionales Modul · GRENFORD Research 24.11.2026",
+   "titel": "Mietorientierung für Kapitalanleger",
+   "intro": "Die Durchschnittsmiete des Hauses laut Verkäufer im Verhältnis zu veröffentlichten Marktwerten für Britz. Durchschnittswerte umfassen alle Baujahre und Zustände; modernisierte Altbauwohnungen liegen erfahrungsgemäß darüber.",
+   "bloecke": [
+    {
+     "typ": "spanne",
+     "x": 51,
+     "y": 362,
+     "w": 520,
+     "lw": 200,
+     "titel": "Nettokaltmiete in €/m² und Monat",
+     "achse": [
+      8,
+      18,
+      2
+     ],
+     "abstand": 36,
+     "items": [
+      [
+       "Pätzer Straße 11 · Ø laut Verkäufer",
+       15,
+       15,
+       "15,00 €",
+       "h"
+      ],
+      [
+       "Annahme Modellrechnung",
+       14,
+       16,
+       "14,00–16,00 €",
+       "h"
+      ],
+      [
+       "PLZ 12359 · miet-check.de",
+       11.65,
+       11.65,
+       "11,65 €"
+      ],
+      [
+       "Britz · immoportal.com",
+       10.66,
+       10.66,
+       "10,66 €"
+      ]
+     ]
+    },
+    {
+     "typ": "kpi",
+     "x": 612,
+     "y": 362,
+     "w": 244,
+     "h": 64,
+     "groesse": 22,
+     "items": [
+      {
+       "wert": "7 von 7",
+       "label": "Einheiten vermietet"
+      }
+     ]
+    },
+    {
+     "typ": "kpi",
+     "x": 612,
+     "y": 284,
+     "w": 244,
+     "h": 64,
+     "groesse": 22,
+     "items": [
+      {
+       "wert": "Ø 15 €/m²",
+       "label": "Miete laut Verkäufer",
+       "stil": "hell"
+      }
+     ]
+    },
+    {
+     "typ": "text",
+     "x": 612,
+     "y": 200,
+     "w": 244,
+     "titel": "Einordnung",
+     "absaetze": [
+      "Kleine, modernisierte Wohnungen mit Altbaucharakter sind in Britz gut nachgefragt. Die Remise ergänzt das Haus als siebte Einheit. Mieterliste und Mietverträge werden vor dem Kaufvertrag zur Prüfung übergeben."
+     ]
+    },
+    {
+     "typ": "text",
+     "x": 51,
+     "y": 172,
+     "w": 520,
+     "titel": "Lesehilfe",
+     "absaetze": [
+      "Die Marktwerte sind Durchschnittswerte aus Angebots- und Bestandsdaten, keine Vergleichsobjekte und keine Prognose für dieses Haus. Die Objektmiete ist eine Angabe des Verkäufers. Vermerk: Für Wohnraum in Berlin gilt bei Neuvermietung die Mietpreisbremse; die zulässige Miete ist im Einzelfall zu prüfen."
+     ]
+    }
+   ],
+   "quelle": [
+    "Quellen: miet-check.de, Mietpreis PLZ 12359 (2026, 181 Einträge); immoportal.com, Mietspiegel Berlin-Britz (2026). Recherche 24.11.2026, nicht repräsentativ.",
+    "Objektmiete: Angabe des Verkäufers. Mietspanne der Modellrechnung: Annahme GRENFORD."
+   ]
+  },
+  {
+   "modul": "rendite",
+   "id": "rendite",
+   "kopf": "Vermietung · Modellrechnung",
+   "dachzeile": "Kapitalanlage Mehrfamilienhaus · drei Szenarien",
+   "titel": "Miete, Rendite und Kaufpreisfaktor",
+   "spanne": [
+    14.0,
+    16.0
+   ],
+   "flaeche_label": "Wohn-/Nutzfläche",
+   "basis": "Rechenbasis: Wohn- und Nutzfläche ca. 453 m² und Durchschnittsmiete Ø 15 €/m² nach Angabe des Verkäufers. Keine Berechnung nach WoFlV.",
+   "fussnoten": [
+    "¹ Fläche nach Verkäuferangabe, keine Berechnung nach WoFlV. Vermerk: Die Bestandspläne weisen für die sechs Wohnungen ca. 242 m² aus, zzgl. Remise, Keller und Dachgeschoss. Maßgeblich für die tatsächliche Rendite ist die Mieterliste.",
+    "² Rein rechnerisches Beispiel, keine Miet- oder Renditezusage. Ohne Erwerbsnebenkosten, Leerstand, Finanzierung und Steuern. Instandhaltung, Verwaltung und nicht umlagefähige Kosten trägt der Eigentümer; die Nettorendite liegt entsprechend darunter.",
+    "Potenzial: Aufstockung und Ausbau des Dachgeschosses (Bauantrag erforderlich) sowie Stellplätze im Garten sind in der Rechnung nicht enthalten."
+   ]
   },
   {
    "modul": "partner",
@@ -813,9 +926,9 @@
    "bild": "eingang-tor.jpg",
    "bild_pos": "center 40%",
    "claim": [
-    "Ihre Anlage.",
+    "Ihre Anlage,",
     "Ihr nächster",
-    "Schritt."
+    "Schritt"
    ],
    "dachzeile": "Das Haus persönlich erleben",
    "titel": [

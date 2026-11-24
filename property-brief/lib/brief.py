@@ -854,7 +854,7 @@ def m_ueberblick_kosten(d, obj):
         b = ln - 29 * i
         s += T(RX, b - 17, 'N', 8.6, 12, INK, t) + RT(RR, b - 17, 'N', 8.6, 12, GREY, v, 160) + L(RX, b - 29, RR)
     b = ln - 29 * len(extra) - 16
-    s += T(RX, b - 8, 'N', 7.4, 10.5, GREY, 'Courtage: hälftige Teilung – Käufer und Verkäufer zahlen jeweils 3,00 % zzgl. 19 % MwSt. (§§ 656c, 656d BGB), fällig nach wirksamem Abschluss des notariellen Kaufvertrags.', w=RR - RX)
+    s += T(RX, b - 8, 'N', 7.4, 10.5, GREY, k.get('ueberblick_courtage', 'Courtage: hälftige Teilung – Käufer und Verkäufer zahlen jeweils 3,00 % zzgl. 19 % MwSt. (§§ 656c, 656d BGB), fällig nach wirksamem Abschluss des notariellen Kaufvertrags.'), w=RR - RX)
     return s + cap(51, 32, d['quelle'])
 
 
