@@ -22,7 +22,7 @@
    {
     "id": "haus",
     "name": "Mehrfamilienhaus Pätzer Straße 11",
-    "preis": 1975000
+    "preis": 1440000
    }
   ],
   "optionen": [
@@ -71,8 +71,8 @@
      "Grundstück mit Garten und Remise"
     ],
     [
-     "1.975.000 €",
-     "Kaufpreis"
+     "1.440.000 €",
+     "Kaufpreis · ca. 3.179 €/m²"
     ]
    ],
    "hinweis": "Gartenansicht · Flächen als Circa-Werte nach Verkäuferangabe"
@@ -210,9 +210,9 @@
    ],
    "kennzahlen": [
     {
-     "wert": "1.975.000 €",
+     "wert": "1.440.000 €",
      "label": "Kaufpreis",
-     "sub": "zzgl. Erwerbsnebenkosten"
+     "sub": "ca. 3.179 €/m² Wohn-/Nutzfläche"
     },
     {
      "wert": "6",

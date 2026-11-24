@@ -13,7 +13,7 @@ kosten = {"land": "Berlin", "grunderwerbsteuer": 6.0, "courtage_brutto": 7.14, "
           "courtage_text": "Käuferprovision 6,00 % zzgl. 19 % MwSt., insgesamt 7,14 % des Kaufpreises. Fällig nach wirksamem Abschluss des notariellen Kaufvertrags.",
           "agb_courtage": "Die Käufercourtage für dieses Objekt beträgt 6,00 % des notariellen Kaufpreises zzgl. 19 % MwSt., insgesamt 7,14 %. Bei Mehrfamilienhäusern gelten die §§ 656a–656d BGB nicht.",
           "flaeche_qm": 453, "flaeche_art": "Wohn-/Nutzfläche",
-          "einheiten": [{"id": "haus", "name": "Mehrfamilienhaus Pätzer Straße 11", "preis": 1975000}],
+          "einheiten": [{"id": "haus", "name": "Mehrfamilienhaus Pätzer Straße 11", "preis": 1440000}],
           "optionen": [["Dachgeschossausbau ca. 100 m² (Vorplanung des Eigentümers)", "nach Planung", False],
                        ["Stellplätze im Garten (3 bis 5, Genehmigung zu prüfen)", "nach Angebot", False]]}
 
@@ -22,7 +22,7 @@ S.append({"modul": "titel", "id": "titel", "bild": "garten-fassade.jpg", "bild_p
   "titel": ["THE HERITAGE", "HOUSE"], "untertitel": ["Britz", "Investment Residence"],
   "kurz": ["Mehrfamilienhaus von 1898.", "Sechs Wohnungen, voll vermietet.", "Garten, Remise, Ausbaureserve."],
   "adresse": ["Pätzer Straße 11", "12359 Berlin-Britz"],
-  "kennzahlen": [["6", "Wohneinheiten · voll vermietet"], ["ca. 781 m²", "Grundstück mit Garten und Remise"], ["1.975.000 €", "Kaufpreis"]],
+  "kennzahlen": [["6", "Wohneinheiten · voll vermietet"], ["ca. 781 m²", "Grundstück mit Garten und Remise"], ["1.440.000 €", "Kaufpreis · ca. 3.179 €/m²"]],
   "hinweis": "Gartenansicht · Flächen als Circa-Werte nach Verkäuferangabe"})
 
 S.append({"modul": "vorwort", "id": "vorwort", "bereich": "vor", "dachzeile": "The Heritage House",
@@ -51,7 +51,7 @@ S.append({"modul": "ueberblick", "id": "ueberblick", "kopf": "Das Haus auf einen
              ["Einheiten", "6 Wohnungen auf Erdgeschoss, 1. und 2. Obergeschoss, voll vermietet"],
              ["Grundstück", "ca. 781 m² mit Garten (Verkäuferangabe)"], ["Keller und Dach", "Kellerräume, Dachboden mit Ausbaureserve ca. 100 m²"],
              ["Baujahr", "1898 · Modernisierung 2018, Bosch-Gaszentralheizung"], ["Mietverträge", "Zeitmietverträge, Restlaufzeit ca. 1 Jahr, Ø 15 €/m²"]],
-  "kennzahlen": [{"wert": "1.975.000 €", "label": "Kaufpreis", "sub": "zzgl. Erwerbsnebenkosten"}, {"wert": "6", "label": "Wohneinheiten", "sub": "ca. 34 bis 47 m² laut Bestandsplan"},
+  "kennzahlen": [{"wert": "1.440.000 €", "label": "Kaufpreis", "sub": "ca. 3.179 €/m² Wohn-/Nutzfläche"}, {"wert": "6", "label": "Wohneinheiten", "sub": "ca. 34 bis 47 m² laut Bestandsplan"},
                  {"wert": "Ø 15 €/m²", "label": "Miete", "sub": "Durchschnitt laut Verkäufer"}],
   "kennzahlen_hinweis": ["Circa-Werte nach Verkäuferangabe.", "Keine Berechnung nach WoFlV."],
   "banner": {"label": "Flächen", "text": ["Wohn- und Nutzfläche laut Verkäufer ca. 453 m²; Bestandspläne: Wohnungen ca. 242 m²,", "zzgl. Keller und Dachgeschoss (Details auf Seite {seite:raumprogramm})"]},
