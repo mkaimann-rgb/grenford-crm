@@ -329,7 +329,8 @@
     "label": [
      "Schlierbacher Weg 13a",
      "12349 Berlin-Buckow"
-    ]
+    ],
+    "marke": "GRENFORD PROPERTY"
    },
    "dachzeile": "Schlierbacher Weg 13a · Berlin-Buckow",
    "titel": [
@@ -774,8 +775,8 @@
       ],
       [
        "Innenausbau und Bäder",
-       "Im Wesentlichen abgeschlossen",
-       "Abgeschlossen",
+       "Neue Bäder, Böden und Oberflächen; im Wesentlichen abgeschlossen",
+       "Im Abschluss",
        false
       ],
       [
@@ -947,7 +948,7 @@
    "fussnoten": [
     "¹ Wohnfläche nach Verkäuferangabe, keine Berechnung nach WoFlV; Keller und Garten nicht angesetzt. Die Modellwerte können von einer geprüften Wohnflächenberechnung abweichen.",
     "² Rein rechnerisches Beispiel, keine Miet- oder Renditezusage. Ohne Erwerbsnebenkosten, Leerstand, Finanzierung und Steuern. Bei einem vermieteten Haus trägt der Eigentümer Instandhaltung, Verwaltung und nicht umlagefähige Kosten selbst; die Nettorendite liegt entsprechend darunter.",
-    "Mietrecht: Für Wohnraum in Berlin gilt bei Neuvermietung die Mietpreisbremse; nach einer umfassenden Modernisierung kann die Ausnahme nach § 556f BGB greifen. Die zulässige Miete ist im Einzelfall zu prüfen."
+    "Mietrecht: Bei Neuvermietung gilt in Berlin die Mietpreisbremse (§§ 556d ff. BGB, verlängert bis 31.12.2029); nach einer umfassenden Modernisierung kann die Ausnahme nach § 556f BGB greifen. Die zulässige Miete ist im Einzelfall zu prüfen."
    ]
   },
   {

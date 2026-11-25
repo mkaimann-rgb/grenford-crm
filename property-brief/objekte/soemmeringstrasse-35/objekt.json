@@ -506,7 +506,7 @@
    "plan": "plan-we3.png",
    "dachzeile": "The Charlottenburg Penthouse Collection",
    "zuordnung": "Objekt-Nr. GPR26-003 · WE 3 · WHG 50 · Farbe im Gesamtplan: Blau",
-   "headline": "Offene Räume. Eigenständiger Charakter",
+   "headline": "Offene Räume, eigenständiger Charakter",
    "text": "Der rund 76,38 m² große Wohn- und Kochbereich prägt den offenen Charakter dieser Residenz. Eine Eckloggia und die private Dachterrasse verbinden die Innenräume mit zusätzlichen Aufenthaltsmöglichkeiten im Freien.",
    "flaechen": [
     [
@@ -699,6 +699,7 @@
    "fussnoten": [
     "¹ DIN 277: ausgewiesene Innenflächen, keine Wohnfläche nach WoFlV; Außenflächen bleiben unberücksichtigt. Eine geprüfte Wohnflächenberechnung für die Vermietung steht noch aus; die Modellwerte können davon abweichen.",
     "² Rein rechnerisches Beispiel auf vorläufiger Flächenbasis, keine Miet- oder Renditezusage. Gerechnet mit ungerundeten Werten; Ausgaben gerundet. Ohne Erwerbsnebenkosten, laufende Eigentümerkosten, Leerstand, Finanzierung und Steuern; keine Nettorendite oder Amortisationsdauer.",
+    "Mietrecht: Wohnungen, die nach dem 1. Oktober 2014 erstmals genutzt und vermietet werden, sind von der Mietpreisbremse ausgenommen (§ 556f Satz 1 BGB); das gilt für die neu geschaffenen Residenzen bei Erstvermietung.",
     "Methodik: Jahresnettokaltmiete ÷ Kaufpreis; vgl. Sparkasse.de, „Mietrendite richtig berechnen“, geprüft 24.10.2026."
    ]
   },
@@ -733,8 +734,8 @@
      "chips": [
       "Zwei feste Partner",
       "Terrassengestaltung",
-      "Pflanzgefäße und Begrünung",
-      "Pflanzung und Pflege"
+      "Begrünung",
+      "Pflege"
      ]
     }
    ]
@@ -762,7 +763,7 @@
     ],
     [
      "Unterlagen zur Finanzierungsprüfung",
-     "Den Grundbuchauszug erhalten Sie bei konkretem Kaufinteresse nach einer Reservierung (AGB § 8)."
+     "Baubeschreibung, Pläne und Flächenangaben für Ihre Finanzierungsprüfung; den Grundbuchauszug erhalten Sie bei konkretem Kaufinteresse."
     ],
     [
      "Vor Ort besichtigen",

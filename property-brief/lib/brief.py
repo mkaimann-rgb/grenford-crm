@@ -402,7 +402,7 @@ def m_lage(d):
     lx = min(cx + 26, HALF - 175); lb = H - cy + 6
     s += (R(round(lx, 2), round(lb, 2), 165, 44) + T(round(lx + 12, 2), round(lb + 28, 2), 'S', 11, 14, CREAM, k['label'][0])
           + T(round(lx + 12, 2), round(lb + 16, 2), 'N', 7, 9, MIST, k['label'][1])
-          + T(round(lx + 12, 2), round(lb + 6, 2), 'N', 5.6, 8, LIGHT, 'GRENFORD PROJECT SITE', extra='letter-spacing:.06em')
+          + T(round(lx + 12, 2), round(lb + 6, 2), 'N', 5.6, 8, LIGHT, k.get('marke', 'GRENFORD PROJECT SITE'), extra='letter-spacing:.06em')
           + cap(27, 40, 'Kartendarstellung schematisch, Standort ungefähr. Kartengrundlage: Bezirksgrenzen Berlin,<br>Amt für Statistik Berlin-Brandenburg (via Berliner Morgenpost, CC BY); Gestaltung: GRENFORD.')
           + EB(TX, 481, d['dachzeile']) + T(TX, 448, 'S', 24, 26, INK, br(d['titel']))
           + T(TX, 392, 'N', 8.8, 12.6, INK, d['intro'], w=356))
@@ -865,7 +865,7 @@ def m_ueberblick_kosten(d, obj):
     s += (L(RX, ln, RR, NAVY, 1.1) + T(RX, ln - 24, 'B', 9.4, 12, NAVY, 'Gesamt ohne Notar und Grundbuch') + RT(RR, ln - 26, 'SB', 17, 20, NAVY, eur(tot), 180)
           + L(RX, ln - 38, RR))
     ln -= 38
-    extra = [('Notar- und Grundbuchkosten', 'nach GNotKG, nicht beziffert'), (f'Preis je m² {k["flaeche_art"]}', 'ca. ' + eur(qm))]
+    extra = [('Notar- und Grundbuchkosten', 'nach GNotKG, nicht beziffert'), (f'Preis je m² {k["flaeche_art"]}', 'ca. ' + eur(qm, 0))]
     for t, v, *_ in k.get('optionen', []):
         extra.append((t + ' (optional)', v))
     for i, (t, v) in enumerate(extra):
