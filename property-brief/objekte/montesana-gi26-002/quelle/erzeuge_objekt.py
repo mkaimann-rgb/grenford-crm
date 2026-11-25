@@ -43,7 +43,7 @@ S.append({"modul": "vorwort", "id": "vorwort", "bereich": "vor", "dachzeile": "M
   "schluss": "Das Memo führt von den Hard Facts über Standort, Research und Konzept zur 10-Jahres-Rechnung und zum Asset Check. Im Basisfall ergibt sich über zehn Jahre eine IRR von 23,1 %. Für Rückfragen und den Zugang zum Datenraum stehen wir Ihnen persönlich zur Verfügung."})
 
 S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Facts", "zeilenhoehe": 12.9, "blockabstand": 14, "start": 356, "quelle_y": 36,
-  "kennzahlen": [["5,3 Mio. €", "Kaufpreis Early-Commit"], ["13,9-fach", "Faktor Eigentümerertrag"], ["23,1 %", "IRR 10 Jahre, Basisfall"], ["1,62-fach", "Multiple auf Eigenkapital"], ["23,2 Mio. €", "Gesamtwert nach Fertigstellung"]],
+  "kennzahlen": [["5,3 Mio. €", "Kaufpreis Early-Commit"], ["13,9-fach", "Faktor Eigentümerertrag"], ["23,1 %", "IRR 10 Jahre, Basisfall"], ["1,62-fach", "Multiple auf eingesetztes Kapital"], ["23,2 Mio. €", "Gesamtwert nach Fertigstellung"]],
   "dachzeile": "Zahlen, Daten, Fakten · Objekt-Nr. GI26-002", "titel": "Das Projekt in Kennzahlen",
   "intro": "Kaufpreis und Renditen in zwei Varianten: Early-Commit (5,3 Mio. €, LOI bis Ende November 2026) und Listenpreis (7,0 Mio. €). Alle Werte netto, vor Steuern und Finanzierung.",
   "links": [
@@ -62,7 +62,7 @@ S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Fac
       ["Kaufpreisstaffelung (indikativ)", "2,5 / 2,8 Mio. €", "–"], ["Erwerbsnebenkosten (Annahme 6,5 %)", "0,34 Mio. €", "0,46 Mio. €"],
       ["Maklercourtage (5,0 % zzgl. MwSt.)", "0,27 Mio. €", "0,35 Mio. €"]]},
     {"titel": "Rendite und Wert (Basisfall)", "zeilen": [["Gesamtinvestition netto", "17,4 Mio. €", "19,2 Mio. €"], ["Gesamtwert nach Fertigstellung", "23,2 Mio. €", "23,2 Mio. €"],
-      ["IRR 10 Jahre (vor Steuern)", "23,1 %", "14,1 %"], ["Multiple auf Eigenkapital", "1,62-fach", "1,46-fach"],
+      ["IRR 10 Jahre (vor Steuern)", "23,1 %", "14,1 %"], ["Multiple auf eingesetztes Kapital", "1,62-fach", "1,46-fach"],
       ["Überschuss nach Wiederverkauf", "10,3 Mio. €", "8,5 Mio. €"], ["Barwert DCF (10 % Diskontsatz)", "3,7 Mio. €", "1,6 Mio. €"],
       ["Spitzenbedarf Kapital", "8,4 Mio. €", "10,2 Mio. €"]]}],
   "quelle": ["Quelle: Verkäuferunterlagen und GRENFORD-Berechnung. Renditen vor Steuern und ohne Fremdfinanzierung, indikativ. * Laut Entwicklungsprognose des Verkäufers (07/2026); Bezugszeitpunkt im Gutachten zu bestätigen."]})
@@ -139,7 +139,7 @@ S.append({"modul": "raster", "id": "angebot", "kopf": "Das Angebot", "dachzeile"
                 ["Maklercourtage", "5,0 % netto zzgl. gesetzlicher MwSt., fällig mit wirksamem notariellen Kaufvertrag"]]},
     {"typ": "text", "x": 500, "y": "folgt", "abstand": 12, "w": 356, "schrift": 7.8,
      "absaetze": ["Vermerk: Die Kaufpreisstaffelung ist eine indikative Strukturierungsoption; Zahlungsmodalitäten, Fälligkeiten, Laufzeit und Sicherheiten werden im notariellen Kaufvertrag vereinbart."]}],
-  "quelle": ["Quelle: Angaben der Verkäuferseite (ERIKONA GmbH), Stand 11.11.2026. Erwerbsnebenkosten: Annahme GRENFORD. Zahlungsstaffelung indikativ und nicht verbindlich vereinbart."]})
+  "quelle": ["Quelle: Angaben der Verkäuferseite, Stand 11.11.2026. Erwerbsnebenkosten: Annahme GRENFORD. Zahlungsstaffelung indikativ und nicht verbindlich vereinbart."]})
 
 # 5 Asset
 S.append({"modul": "raster", "id": "asset", "kopf": "Asset", "dachzeile": "Das Objekt", "titel": "Vom Kurkomplex zum Mixed-Use-Ensemble",
@@ -156,7 +156,7 @@ S.append({"modul": "raster", "id": "asset", "kopf": "Asset", "dachzeile": "Das O
                 ["Neue Nutzung", "92 Serviced Apartments, Coworking, Fitness und Wellness mit Pool, Arzt, Physiotherapie und Kosmetik"],
                 ["Stellplätze", "98 Kfz und 33 Fahrrad (Auflage der Genehmigung)"],
                 ["Energie", "KfW-Effizienzhaus 40 geplant, PV auf den Dachflächen vorgesehen"],
-                ["Eigentümerin", "ERIKONA GmbH, Berlin, seit 2020 im Grundbuch"]]}],
+                ["Eigentümerin", "Projektgesellschaft, seit 2020 im Grundbuch; Benennung im Rahmen der Vertragsvorbereitung"]]}],
   "quelle": "Quelle: Grundbuch Blatt 1077 (27.03.2025); Baugenehmigung 12.09.2023; Exposé 12/2025. Visualisierungen und Luftbild: Projektgesellschaft."})
 
 # 6 Wettbewerb
@@ -436,7 +436,7 @@ S.append({"modul": "raster", "id": "check1", "kopf": "GRENFORD Asset Check", "da
                {"wert": "Lastenfrei", "label": "Abt. II; Abt. III Löschung zum Vollzug"}, {"wert": "Bestätigt", "label": "Abgeschlossenheit 23.12.2024", "stil": "hell"}]},
     {"typ": "tabelle", "x": L0, "y": "folgt", "abstand": 18, "w": FULL, "breiten": [236, 92, 477], "links": [0, 1, 2], "tags": [1], "bis": 150, "schrift": 8.4,
      "kopf": ["Unterlage", "Status", "Ergebnis"],
-     "zeilen": [["Grundbuch Blatt 1077 (27.03.2025)", "Gesichtet", "ERIKONA GmbH seit 2020; Abt. II lastenfrei; Abt. III eine Grundschuld (500 T€), Löschung zum Vollzug vorgesehen"],
+     "zeilen": [["Grundbuch Blatt 1077 (27.03.2025)", "Gesichtet", "Eigentümerin seit 2020; Abt. II lastenfrei; Abt. III eine Grundschuld (500 T€), Löschung zum Vollzug vorgesehen"],
                 ["Baugenehmigung 12.09.2023", "Gesichtet", "Umnutzung zu Coworking, Wellness, Therapie und Apartments; 17 Abweichungen (Brandschutz) und eine Befreiung (Abstand B 500)"],
                 ["Änderungsgenehmigung und Gesamtbaufreigabe 12.12.2024", "Gesichtet", "Zwei-Achs-Apartments und Dachterrassen genehmigt; Gesamtbaufreigabe erteilt; Flst. 220/9 mitgenannt, Zuordnung wird bestätigt"],
                 ["Bebauungsplan „Im oberen Brühl – Nord“", "Gesichtet", "Sondergebiet „Co-Working“ (§ 11 BauNVO) seit 19.04.2023; Umwelt- und Schallgutachten ohne Einwände"],
@@ -536,12 +536,12 @@ S.append({"modul": "ueber", "id": "ueber", "bereich": "nach", "bild": "vis-luft.
 # VI Disclaimer
 S.append({"modul": "raster", "id": "disclaimer", "bereich": "nach", "kopf": "Rechtliche Hinweise", "dachzeile": "Disclaimer", "titel": "Rechtliche Hinweise",
   "bloecke": [
-    {"typ": "text", "x": L0, "y": 412, "w": 380, "schrift": 8.3,
+    {"typ": "text", "x": L0, "y": 412, "w": 380, "schrift": 9.4,
      "absaetze": ["Dieses Investment Memo wurde von GRENFORD erstellt und dient ausschließlich der unverbindlichen Information über das Immobilienprojekt MonteSana. Es richtet sich ausschließlich an professionelle Investoren (Unternehmer im Sinne des § 14 BGB) und stellt kein Angebot im rechtlichen Sinne dar. Es ersetzt weder eine Anlage-, Rechts- noch Steuerberatung.",
                   "Alle Angaben beruhen auf Informationen Dritter, insbesondere der Verkäuferseite, von Behörden und Planungsbeteiligten, sowie auf Annahmen und Berechnungen von GRENFORD. Trotz sorgfältiger Zusammenstellung wird für Vollständigkeit, Richtigkeit und Aktualität keine Gewähr übernommen. Verbindlich sind ausschließlich notariell beurkundete Verträge. Änderungen, Irrtümer und Zwischenverkauf bleiben vorbehalten.",
                   "Prognosen, Szenarien und Renditeberechnungen sind unverbindliche Einschätzungen und keine Garantie künftiger Entwicklungen. Der GRENFORD Asset Check und die Machbarkeitsstudie sind weder Due Diligence im rechtlichen Sinne noch Gutachten. Investitionsentscheidungen sollten ausschließlich auf Grundlage einer eigenen, vollständigen Prüfung der Unterlagen unter Hinzuziehung von Rechts-, Steuer- und Finanzberatern erfolgen.",
                   ["Rechtlicher Rahmen.", "Maßgeblich sind ausschließlich die notariell beurkundeten Verträge (§ 311b Abs. 1 BGB). Das Angebot erfolgt als Asset Deal netto; Umsatzsteuer (§§ 9, 13b UStG), Grunderwerbsteuer (Baden-Württemberg 5,0 %) und Sicherungsstrukturen sind vertraglich zu regeln. Das Zusatzgrundstück Flst. 213 ist Landwirtschaftsfläche; Genehmigung und Vollzug stehen aus. GRENFORD ist Verpflichteter nach dem Geldwäschegesetz (Identifizierung, unbare Zahlung, § 16a GwG)."]]},
-    {"typ": "text", "x": 476, "y": 412, "w": 380, "schrift": 8.3,
+    {"typ": "text", "x": 476, "y": 412, "w": 380, "schrift": 9.4,
      "absaetze": [["Provisionshinweis.", "Der Erwerb ist courtagepflichtig. Die Maklercourtage beträgt 5,0 % netto zuzüglich gesetzlicher Mehrwertsteuer und wird mit Wirksamkeit des notariellen Kaufvertrags fällig. Einzelheiten regeln die Allgemeinen Geschäftsbedingungen auf Seite {seite:agb}."],
                   ["Haftungsbegrenzung.", "Eine Haftung von GRENFORD ist ausgeschlossen, außer bei Vorsatz oder grober Fahrlässigkeit, bei Verletzung von Leben, Körper oder Gesundheit und bei Verletzung wesentlicher Vertragspflichten (dann begrenzt auf den vorhersehbaren, vertragstypischen Schaden). Es gilt das Recht der Bundesrepublik Deutschland; Gerichtsstand ist, soweit zulässig, Berlin."],
                   ["Vertraulichkeit.", "Dieses Dokument ist vertraulich (Off-Market) und ausschließlich für den namentlich adressierten Empfänger bestimmt. Weitergabe, Veröffentlichung oder Vervielfältigung, auch auszugsweise, sind ohne schriftliche Zustimmung von GRENFORD unzulässig."],

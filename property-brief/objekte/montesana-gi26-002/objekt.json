@@ -195,7 +195,7 @@
     ],
     [
      "1,62-fach",
-     "Multiple auf Eigenkapital"
+     "Multiple auf eingesetztes Kapital"
     ],
     [
      "23,2 Mio. €",
@@ -358,7 +358,7 @@
        "14,1 %"
       ],
       [
-       "Multiple auf Eigenkapital",
+       "Multiple auf eingesetztes Kapital",
        "1,62-fach",
        "1,46-fach"
       ],
@@ -880,7 +880,7 @@
     }
    ],
    "quelle": [
-    "Quelle: Angaben der Verkäuferseite (ERIKONA GmbH), Stand 11.11.2026. Erwerbsnebenkosten: Annahme GRENFORD. Zahlungsstaffelung indikativ und nicht verbindlich vereinbart."
+    "Quelle: Angaben der Verkäuferseite, Stand 11.11.2026. Erwerbsnebenkosten: Annahme GRENFORD. Zahlungsstaffelung indikativ und nicht verbindlich vereinbart."
    ]
   },
   {
@@ -961,7 +961,7 @@
       ],
       [
        "Eigentümerin",
-       "ERIKONA GmbH, Berlin, seit 2020 im Grundbuch"
+       "Projektgesellschaft, seit 2020 im Grundbuch; Benennung im Rahmen der Vertragsvorbereitung"
       ]
      ]
     }
@@ -3458,7 +3458,7 @@
       [
        "Grundbuch Blatt 1077 (27.03.2025)",
        "Gesichtet",
-       "ERIKONA GmbH seit 2020; Abt. II lastenfrei; Abt. III eine Grundschuld (500 T€), Löschung zum Vollzug vorgesehen"
+       "Eigentümerin seit 2020; Abt. II lastenfrei; Abt. III eine Grundschuld (500 T€), Löschung zum Vollzug vorgesehen"
       ],
       [
        "Baugenehmigung 12.09.2023",
@@ -4121,7 +4121,7 @@
      "x": 51,
      "y": 412,
      "w": 380,
-     "schrift": 8.3,
+     "schrift": 9.4,
      "absaetze": [
       "Dieses Investment Memo wurde von GRENFORD erstellt und dient ausschließlich der unverbindlichen Information über das Immobilienprojekt MonteSana. Es richtet sich ausschließlich an professionelle Investoren (Unternehmer im Sinne des § 14 BGB) und stellt kein Angebot im rechtlichen Sinne dar. Es ersetzt weder eine Anlage-, Rechts- noch Steuerberatung.",
       "Alle Angaben beruhen auf Informationen Dritter, insbesondere der Verkäuferseite, von Behörden und Planungsbeteiligten, sowie auf Annahmen und Berechnungen von GRENFORD. Trotz sorgfältiger Zusammenstellung wird für Vollständigkeit, Richtigkeit und Aktualität keine Gewähr übernommen. Verbindlich sind ausschließlich notariell beurkundete Verträge. Änderungen, Irrtümer und Zwischenverkauf bleiben vorbehalten.",
@@ -4137,7 +4137,7 @@
      "x": 476,
      "y": 412,
      "w": 380,
-     "schrift": 8.3,
+     "schrift": 9.4,
      "absaetze": [
       [
        "Provisionshinweis.",
