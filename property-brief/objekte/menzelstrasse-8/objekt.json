@@ -608,14 +608,14 @@
    "modul": "lage",
    "id": "lage",
    "kopf": "Mikrolage",
-   "bild": "strasse-baeume.jpg",
-   "bild_pos": "55% center",
+   "bild": "vorgarten.jpg",
+   "bild_pos": "30% 75%",
    "toenung": {
     "farbe": "navy",
     "alpha": 0.3,
     "modus": "color"
    },
-   "caption": "Straßenzug im Quartier · Fotoaufnahme Umfeld",
+   "caption": "Vorgarten und Gehweg Menzelstraße · Fotoaufnahme Bestand",
    "dachzeile": "Mikrolage · Menzelstraße 8",
    "titel": [
     "Gewachsenes Quartier,",
@@ -1017,8 +1017,8 @@
      "y": 410,
      "w": 180,
      "h": 150,
-     "bild": "dach.jpg",
-     "titel": "Dach, Ausbaufläche"
+     "bild": "hof-tuer.jpg",
+     "titel": "Hofzugang Vorderhaus"
     },
     {
      "typ": "bild",
@@ -1470,7 +1470,7 @@
      "absaetze": [
       [
        "Aussage:",
-       "Bei 70 % Beleihung trägt der heutige Ist-Ertrag den Kapitaldienst nahezu; mit 60 % Beleihung ist er im ersten Jahr gedeckt. Jede Stufe der Mietentwicklung verbessert die Deckung unmittelbar."
+       "Bei 70 % Beleihung deckt der heutige Ist-Ertrag den Kapitaldienst zu rund 92 %; mit 60 % Beleihung ist er im ersten Jahr vollständig gedeckt. Jede Stufe der Mietentwicklung verbessert die Deckung unmittelbar."
       ],
       "Wichtiger Hinweis: Das Finanzierungsbeispiel beruht auf Annahmen GRENFORD und dient allein Ihrer Orientierung; es ist kein Finanzierungsangebot. Die verbindliche Berechnung erstellt ein Kreditinstitut – mit Ihren persönlichen Konditionen, Ihrem Eigenkapital und Ihrer Bonität."
      ]

@@ -156,8 +156,8 @@ S.append({"modul": "raster", "id": "standort", "kopf": "Standort", "dachzeile": 
      "absaetze": ["S-Bahn, Einkaufsmeile und Innenstadt in kurzer Distanz: Altbauwohnungen in dieser Lage sind dauerhaft nachgefragt – eine solide Basis für Neuvermietung und Mietentwicklung."]}],
   "quelle": "Luftlinie: Berechnung GRENFORD aus Koordinaten (Kartenpunkt schematisch). Fahrzeiten: gerundete Richtwerte GRENFORD von Tür zu Tür, abhängig von Tageszeit und Verbindung. Ohne Gewähr."})
 
-S.append({"modul": "lage", "id": "lage", "kopf": "Mikrolage", "bild": "strasse-baeume.jpg", "bild_pos": "55% center",
-  "toenung": {"farbe": "navy", "alpha": .3, "modus": "color"}, "caption": "Straßenzug im Quartier · Fotoaufnahme Umfeld",
+S.append({"modul": "lage", "id": "lage", "kopf": "Mikrolage", "bild": "vorgarten.jpg", "bild_pos": "30% 75%",
+  "toenung": {"farbe": "navy", "alpha": .3, "modus": "color"}, "caption": "Vorgarten und Gehweg Menzelstraße · Fotoaufnahme Bestand",
   "dachzeile": "Mikrolage · Menzelstraße 8", "titel": ["Gewachsenes Quartier,", "kurze Wege"],
   "intro": "Die Menzelstraße liegt in einem ruhigen Altbauquartier zwischen Friedenau und Steglitz. S-Bahn, Bus und die Einkaufsmeile Schloßstraße sind zu Fuß erreichbar.",
   "gruppen": [{"titel": "Einkauf &amp; Versorgung", "text": "Einkaufsmeile Schloßstraße ca. 750 m · Nahversorgung und Fachgeschäfte im Quartier."},
@@ -196,7 +196,7 @@ S.append({"modul": "raster", "id": "plaene", "kopf": "Pläne", "dachzeile": "Bes
 S.append({"modul": "raster", "id": "asset", "kopf": "Asset", "dachzeile": "Substanz, Technik und Energie", "titel": "Solide Substanz mit klarem Fahrplan",
   "bloecke": [
     {"typ": "bild", "x": 51, "y": 410, "w": 180, "h": 150, "bild": "treppenhaus.jpg", "titel": "Treppenhaus Vorderhaus"},
-    {"typ": "bild", "x": 241, "y": 410, "w": 180, "h": 150, "bild": "dach.jpg", "titel": "Dach, Ausbaufläche"},
+    {"typ": "bild", "x": 241, "y": 410, "w": 180, "h": 150, "bild": "hof-tuer.jpg", "titel": "Hofzugang Vorderhaus"},
     {"typ": "bild", "x": 51, "y": 238, "w": 180, "h": 150, "bild": "eingang.jpg", "titel": "Eingangsportal"},
     {"typ": "bild", "x": 241, "y": 238, "w": 180, "h": 150, "bild": "hof-oben.jpg", "titel": "Hof und Seitenflügel"},
     {"typ": "kv", "x": 452, "y": 410, "w": 404, "kw": 100, "titel": "Zustand im Überblick", "schrift": 8.2, "bis": 70,
@@ -260,7 +260,7 @@ S.append({"modul": "raster", "id": "finanzierung", "kopf": "Finanzierung", "dach
                 [f"Tilgung {p(TILG,1)} anfänglich", "− " + e(F1['ti']), "− " + e(F2['ti'])],
                 ["Cashflow vor Steuern", ("− " if F1['cf'] < 0 else "") + e(abs(F1['cf'])), e(F2['cf'])]]},
     {"typ": "text", "x": 51, "y": "folgt", "abstand": 10, "w": 560, "schrift": 8.0,
-     "absaetze": [["Aussage:", "Bei 70 % Beleihung trägt der heutige Ist-Ertrag den Kapitaldienst nahezu; mit 60 % Beleihung ist er im ersten Jahr gedeckt. Jede Stufe der Mietentwicklung verbessert die Deckung unmittelbar."],
+     "absaetze": [["Aussage:", f"Bei 70 % Beleihung deckt der heutige Ist-Ertrag den Kapitaldienst zu rund {F1['dscr']*100:.0f} %; mit 60 % Beleihung ist er im ersten Jahr vollständig gedeckt. Jede Stufe der Mietentwicklung verbessert die Deckung unmittelbar."],
                   "Wichtiger Hinweis: Das Finanzierungsbeispiel beruht auf Annahmen GRENFORD und dient allein Ihrer Orientierung; es ist kein Finanzierungsangebot. Die verbindliche Berechnung erstellt ein Kreditinstitut – mit Ihren persönlichen Konditionen, Ihrem Eigenkapital und Ihrer Bonität."]},
     {"typ": "dunkel", "x": 640, "y": 410, "w": 216, "h": 340, "titel": "Schuldendienstdeckung", "abstand": 82,
      "werte": [[f"{F1['dscr']:.2f}".replace('.', ','), "DSCR bei 70 % Beleihung", 30], [f"{F2['dscr']:.2f}".replace('.', ','), "DSCR bei 60 % Beleihung", 30],
