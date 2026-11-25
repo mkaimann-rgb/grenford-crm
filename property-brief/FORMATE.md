@@ -38,7 +38,7 @@ Ob Property Brief, Investment Brief, Investment Memo oder Renovation Memo: Jedes
 |---|---|---|---|
 | `property` | Navy `#212e40` / `#4f6a92` | GRENFORD Property | Property Brief |
 | `investment` | Patina `#24534c` / `#2e6b62` | GRENFORD Investments | Investment Brief, Investment Memo |
-| Projects (geplant) | eigene Akzentfarbe, gleiche Typografie | GRENFORD Projects | Renovation Memo |
+| `projects` | Terrakotta / Lehm `#4e3328` / `#a65b3c` / `#ddb39a` | GRENFORD Projects | Renovation Memo |
 
 ### Sprache
 

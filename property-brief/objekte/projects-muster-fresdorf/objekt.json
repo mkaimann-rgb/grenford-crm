@@ -1,0 +1,561 @@
+{
+ "meta": {
+  "titel": "GRENFORD Renovation Memo – Muster Gutshaus Fresdorf",
+  "fusszeile": "GRENFORD PROJECTS / GUTSHAUS FRESDORF · RENOVATION MEMO",
+  "ausgabe": "GRENFORD_Renovation_Memo_Muster_Projects_CI.pdf",
+  "redaktionsstand": "25.11.2026",
+  "agb_stand": "18.11.2026",
+  "bereich": "projects",
+  "typo": "sans",
+  "dokument": "Renovation Memo"
+ },
+ "kosten": {
+  "einheiten": []
+ },
+ "seiten": [
+  {
+   "modul": "titel",
+   "id": "titel",
+   "bild": "gutshaus.jpg",
+   "bild_pos": "center 40%",
+   "dachzeile": "Renovation Memo · Zweite Angebotsrunde",
+   "vertraulich": [
+    "Persönlich",
+    "Vertraulich"
+   ],
+   "titel": [
+    "GUTSHAUS",
+    "FRESDORF"
+   ],
+   "untertitel": [
+    "Partnervergleich",
+    "und Entscheidung"
+   ],
+   "kurz": [
+    "Drei Angebote, anonymisiert A / B / C",
+    "Kosten, Konditionen und Leistungen",
+    "Klar bis zur Unterschrift"
+   ],
+   "adresse": [
+    "Luckenwalder Straße 211",
+    "14552 Michendorf OT Fresdorf"
+   ],
+   "kennzahlen": [
+    [
+     "ca. 343 m²",
+     "Wohnfläche"
+    ],
+    [
+     "3",
+     "Angebote"
+    ],
+    [
+     "230–250 Tsd. €",
+     "Budget brutto"
+    ],
+    [
+     "Okt. 2026",
+     "Zweite Runde"
+    ]
+   ],
+   "hinweis": "Muster im neuen GRENFORD-Projects-CI · Daten aus dem Renovation Memo Gutshaus Fresdorf, Oktober 2026"
+  },
+  {
+   "modul": "raster",
+   "id": "blick",
+   "kopf": "Auf einen Blick",
+   "dachzeile": "Neu · Die Entscheidung auf einer Seite",
+   "titel": "Drei Angebote, eine Empfehlung",
+   "intro": "Alle drei Angebote liegen über der Obergrenze von 250.000 € brutto. A hat den kleinsten Abstand, Festpreis und Gewährleistung; B bildet den breitesten Umfang ab; C ist günstig, braucht aber Absicherung.",
+   "bloecke": [
+    {
+     "typ": "kpi",
+     "x": 51,
+     "y": 384,
+     "w": 560,
+     "h": 64,
+     "groesse": 22,
+     "gap": 12,
+     "items": [
+      {
+       "wert": "360.051 €",
+       "label": "Baupartner A · +44,0 %",
+       "text": "Festpreis, 5 Jahre Gewährleistung, 10 / 90 Zahlung"
+      },
+      {
+       "wert": "526.658 €",
+       "label": "Baupartner B · +110,7 %",
+       "stil": "hell",
+       "text": "Breitester Umfang, freibleibend, 15 % Projektmanagement"
+      },
+      {
+       "wert": "392.399 €",
+       "label": "Baupartner C · +57,0 %",
+       "text": "Festpreis, 30 % Anzahlung, Unternehmen in Gründung"
+      }
+     ]
+    },
+    {
+     "typ": "balken",
+     "x": 51,
+     "y": "folgt",
+     "abstand": 30,
+     "w": 560,
+     "lw": 110,
+     "vw": 120,
+     "max": 560000,
+     "titel": "Angebotssumme brutto im Vergleich zur Obergrenze",
+     "bh": 16,
+     "items": [
+      [
+       "Obergrenze",
+       250000,
+       "250.000 €",
+       "h"
+      ],
+      [
+       "Baupartner A",
+       360051.06,
+       "360.051 €"
+      ],
+      [
+       "Baupartner C",
+       392399.12,
+       "392.399 €"
+      ],
+      [
+       "Baupartner B",
+       526658.43,
+       "526.658 €"
+      ]
+     ]
+    },
+    {
+     "typ": "dunkel",
+     "x": 640,
+     "y": 384,
+     "w": 216,
+     "h": 300,
+     "titel": "Unsere Einschätzung",
+     "abstand": 74,
+     "werte": [
+      [
+       "A",
+       "Zuerst prüfen",
+       40
+      ],
+      [
+       "B · C",
+       "Im Blick behalten",
+       30
+      ]
+     ],
+     "text": "A klären: Heizboden-Option, Küchenabgrenzung, Dachnacharbeiten deckeln. Danach entscheidet ihr."
+    }
+   ],
+   "quelle": "Quelle: Angebote der Baupartner, 2. Runde (Stand 14. bis 24.10.2026); GRENFORD-Auswertung. Prozentwerte: Abstand zur Obergrenze von 250.000 € brutto."
+  },
+  {
+   "modul": "raster",
+   "id": "bereinigt",
+   "kopf": "Bereinigter Vergleich",
+   "dachzeile": "Neu · Gleicher Umfang, vergleichbare Summe",
+   "titel": "Was jedes Angebot vollständig kostet",
+   "intro": "Die Angebote decken nicht denselben Umfang ab. Ergänzt man die Leistungen, die nur einzelne Partner anbieten, mit den Ansätzen aus den anderen Angeboten, rücken A und C eng zusammen – B bleibt deutlich darüber.",
+   "bloecke": [
+    {
+     "typ": "hstack",
+     "x": 51,
+     "y": 372,
+     "w": 805,
+     "lw": 150,
+     "sw": 110,
+     "max": 560000,
+     "bh": 30,
+     "abstand": 58,
+     "titel": "Angebot brutto und indikative Ergänzungen, €",
+     "zeilen": [
+      [
+       "Baupartner A",
+       [
+        [
+         360051.06,
+         "navy",
+         "Angebot 360,1 Tsd."
+        ],
+        [
+         27527.675,
+         "acc",
+         "Heizboden"
+        ],
+        [
+         30345.0,
+         "light",
+         "Podest/Lift"
+        ]
+       ],
+       "417.924 €"
+      ],
+      [
+       "Baupartner C",
+       [
+        [
+         392399.12,
+         "navy",
+         "Angebot 392,4 Tsd."
+        ],
+        [
+         30345.0,
+         "light",
+         "Podest/Lift"
+        ],
+        [
+         9817.5,
+         "mid",
+         "Klima"
+        ]
+       ],
+       "432.562 €"
+      ],
+      [
+       "Baupartner B",
+       [
+        [
+         526658.43,
+         "navy",
+         "Angebot 526,7 Tsd. · Umfang vollständig"
+        ]
+       ],
+       "526.658 €"
+      ]
+     ]
+    },
+    {
+     "typ": "kpi",
+     "x": 51,
+     "y": 150,
+     "w": 805,
+     "h": 54,
+     "groesse": 20,
+     "gap": 12,
+     "items": [
+      {
+       "wert": "14.638 €",
+       "label": "Abstand C zu A, bereinigt"
+      },
+      {
+       "wert": "108.735 €",
+       "label": "Abstand B zu A, bereinigt",
+       "stil": "hell"
+      },
+      {
+       "wert": "167.924 €",
+       "label": "A bereinigt über Obergrenze"
+      }
+     ]
+    }
+   ],
+   "quelle": [
+    "GRENFORD-Auswertung, indikativ: Heizboden laut Option A (23.132,50 € netto), Podest und Lift laut Budget B ohne PM (25.500 € netto), Klima laut A (8.250 € netto), jeweils zzgl. 19 % MwSt.",
+    "Mengen, Ausführung und Rabatt auf Ergänzungen sind nicht geprüft. Keine Wertung der Qualität."
+   ]
+  },
+  {
+   "modul": "raster",
+   "id": "matrix",
+   "kopf": "Entscheidungsmatrix",
+   "dachzeile": "Neu · Kriterien statt Bauchgefühl",
+   "titel": "Wo jeder Partner stark ist",
+   "bloecke": [
+    {
+     "typ": "tabelle",
+     "x": 51,
+     "y": 420,
+     "w": 805,
+     "breiten": [
+      165,
+      80,
+      133,
+      80,
+      133,
+      80,
+      134
+     ],
+     "links": [
+      0,
+      2,
+      4,
+      6
+     ],
+     "tags": [
+      1,
+      3,
+      5
+     ],
+     "zh": 42,
+     "schrift": 8.8,
+     "kopf": [
+      "Kriterium",
+      "A",
+      "",
+      "B",
+      "",
+      "C",
+      ""
+     ],
+     "zeilen": [
+      [
+       "Summe und Budget",
+       "gut",
+       "Kleinster Abstand, +44 %",
+       "Prüfen",
+       "+111 % über Obergrenze",
+       "Mittel",
+       "+57 % über Obergrenze"
+      ],
+      [
+       "Preisart",
+       "gut",
+       "Festpreisgarantie",
+       "Prüfen",
+       "Freibleibend, Regie 65 €/h",
+       "gut",
+       "Festpreis je Gewerk"
+      ],
+      [
+       "Zahlung",
+       "gut",
+       "10 % / 90 % nach Fortschritt",
+       "gut",
+       "Abschläge nach Leistung",
+       "Prüfen",
+       "30 % Anzahlung"
+      ],
+      [
+       "Gewährleistung",
+       "gut",
+       "5 Jahre",
+       "Prüfen",
+       "Nicht ausgewiesen",
+       "gut",
+       "5 Jahre"
+      ],
+      [
+       "Umfang",
+       "Mittel",
+       "Heizboden optional, ohne Lift",
+       "gut",
+       "Vollständig inkl. Lift, Klima",
+       "Mittel",
+       "Ohne Lift und Klima"
+      ],
+      [
+       "Unternehmen",
+       "gut",
+       "Etabliert",
+       "gut",
+       "Etabliert, PM inklusive",
+       "Prüfen",
+       "In Gründung, ohne Register"
+      ],
+      [
+       "Zeitplan",
+       "gut",
+       "Fertig Ende April 2027",
+       "Mittel",
+       "16 Wochen Annahme",
+       "Prüfen",
+       "Start nach Eintragung"
+      ]
+     ]
+    }
+   ],
+   "quelle": "GRENFORD-Einordnung auf Basis der Angebote; keine Referenz- oder Bonitätsprüfung. „Prüfen“ heißt: vor der Unterschrift schriftlich klären, nicht ausgeschlossen."
+  },
+  {
+   "modul": "raster",
+   "id": "zahlung",
+   "kopf": "Zahlung und Absicherung",
+   "dachzeile": "Neu · Was ihr wann zahlt",
+   "titel": "Zahlungspläne im Vergleich",
+   "bloecke": [
+    {
+     "typ": "saeulen",
+     "x": 51,
+     "y": 410,
+     "w": 470,
+     "h": 250,
+     "titel": "Brutto in Tsd. €, nach Zahlungszeitpunkt",
+     "gestapelt": true,
+     "max": 560,
+     "kategorien": [
+      "Baupartner A",
+      "Baupartner B",
+      "Baupartner C"
+     ],
+     "serien": [
+      {
+       "name": "Bei Unterschrift",
+       "farbe": "acc",
+       "werte": [
+        36.005106,
+        0,
+        117.71973599999998
+       ]
+      },
+      {
+       "name": "Nach Baufortschritt",
+       "farbe": "navy",
+       "werte": [
+        324.04595400000005,
+        526.6584300000001,
+        274.67938399999997
+       ]
+      }
+     ],
+     "summen": [
+      "360,1",
+      "526,7",
+      "392,4"
+     ]
+    },
+    {
+     "typ": "kv",
+     "x": 560,
+     "y": 410,
+     "w": 296,
+     "kw": 76,
+     "titel": "Absicherung",
+     "schrift": 8.4,
+     "zeilen": [
+      [
+       "A",
+       "10 % = 36.005 € bei Unterschrift für Planung und Organisation; Rest nach Baufortschritt."
+      ],
+      [
+       "B",
+       "Abschläge nach dokumentiertem Leistungsstand; vor Unterschrift Festpreis oder Kostendeckel vereinbaren."
+      ],
+      [
+       "C",
+       "30 % = 117.720 € bei Beauftragung, Unternehmen in Gründung: Anzahlung über Bürgschaft oder Treuhand absichern."
+      ]
+     ]
+    },
+    {
+     "typ": "text",
+     "x": 560,
+     "y": "folgt",
+     "abstand": 16,
+     "w": 296,
+     "box": true,
+     "schrift": 8.4,
+     "absaetze": [
+      [
+       "Faustregel:",
+       "Je höher die Vorauszahlung, desto wichtiger ist eine Sicherheit, bevor Geld fließt."
+      ]
+     ]
+    }
+   ],
+   "quelle": "Zahlungsbedingungen laut Angeboten der 2. Runde; Beträge brutto, gerundet. Keine Liquiditätsplanung."
+  },
+  {
+   "modul": "raster",
+   "id": "verlauf",
+   "kopf": "Kostenverlauf",
+   "dachzeile": "Bestehendes Modul im neuen CI",
+   "titel": "Wo die Kosten auseinandergehen",
+   "bloecke": [
+    {
+     "typ": "linie",
+     "x": 51,
+     "y": 410,
+     "w": 805,
+     "h": 250,
+     "titel": "Kumulierte Nettokosten in Tsd. €, Gewerkefolge",
+     "achse": [
+      0,
+      450,
+      50
+     ],
+     "kategorien": [
+      "Baustelle",
+      "Trockenbau",
+      "Elektro",
+      "Sanitär",
+      "Fliesen",
+      "Boden",
+      "Maler",
+      "Türen",
+      "Außen",
+      "UG-Block",
+      "PM 15 %",
+      "Nachlass"
+     ],
+     "serien": [
+      {
+       "name": "Baupartner A",
+       "farbe": "navy",
+       "werte": [
+        36.2,
+        54.0,
+        89.4,
+        178.5,
+        196.5,
+        214.9,
+        258.5,
+        270.6,
+        270.6,
+        319.0,
+        319.0,
+        302.6
+       ],
+       "ende": "A 302,6"
+      },
+      {
+       "name": "Baupartner B",
+       "farbe": "acc",
+       "werte": [
+        39.9,
+        67.1,
+        99.9,
+        224.1,
+        262.5,
+        283.4,
+        334.2,
+        354.5,
+        384.8,
+        384.8,
+        442.6,
+        442.6
+       ],
+       "ende": "B 442,6"
+      },
+      {
+       "name": "Baupartner C",
+       "farbe": "mid",
+       "werte": [
+        61.3,
+        87.3,
+        127.3,
+        214.4,
+        247.5,
+        272.7,
+        327.6,
+        342.7,
+        347.1,
+        347.1,
+        347.1,
+        329.7
+       ],
+       "ende": "C 329,7",
+       "dy": 8
+      }
+     ]
+    }
+   ],
+   "quelle": "GRENFORD-Auswertung der Netto-Kostengruppen; Reihenfolge entspricht einer typischen Bauabfolge, keine Terminplanung. Obergrenze 250.000 € brutto = 210.084 € netto."
+  }
+ ]
+}

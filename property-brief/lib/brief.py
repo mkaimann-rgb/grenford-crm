@@ -194,6 +194,7 @@ def PIC(src, x, y, w, h):
 THEMES = {   # Dachmarke GRENFORD: gleiche Typografie und Raster, Akzentfarbe und Logo je Geschäftsbereich
     'property':   {'NAVY': '#212e40', 'ACC': '#4f6a92', 'LIGHT': '#a9b8cf', 'mark': {'navy': 'navy', 'white': 'white'}},
     'investment': {'NAVY': '#24534c', 'ACC': '#2e6b62', 'LIGHT': '#8fc7bb', 'mark': {'navy': 'inv-dark', 'white': 'inv-white'}},
+    'projects':   {'NAVY': '#4e3328', 'ACC': '#a65b3c', 'LIGHT': '#ddb39a', 'mark': {'navy': 'proj-dark', 'white': 'proj-white'}},   # Terrakotta / Lehm
 }
 
 
@@ -963,7 +964,7 @@ def nlines(text, size, w, f='N'):
 
 
 def _farbe(k):
-    return {'navy': NAVY, 'acc': ACC, 'mid': '#6c9f95' if NAVY == '#24534c' else '#7f97b8', 'light': LIGHT, 'grey': '#b9b4ab', 'mist': MIST}.get(k, k)
+    return {'navy': NAVY, 'acc': ACC, 'mid': {'#24534c': '#6c9f95', '#4e3328': '#c4876a'}.get(NAVY, '#7f97b8'), 'light': LIGHT, 'grey': '#b9b4ab', 'mist': MIST}.get(k, k)
 
 
 SQ = 'border-radius:0;'
