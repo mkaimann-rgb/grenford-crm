@@ -786,6 +786,7 @@ def m_recht(d, obj):
 def m_agb(d, obj):
     k = obj['kosten']
     agb = open(os.path.join(SHARED, d.get('datei', 'agb.html'))).read().replace('{{courtage_satz}}', k.get('agb_courtage', ''))
+    if obj['meta'].get('dokument') == 'Investment Brief': agb = agb.replace('Property Brief', 'Investment Brief')
     p = re.findall(r'<h4>.*?</p>', agb)
     cols = [''.join(p[0:3]), ''.join(p[3:7]), ''.join(p[7:])]
     return (chrome('Anhang · Allgemeine Geschäftsbedingungen') + head(d.get('dachzeile', 'GRENFORD Property · Immobilienvermittlung'), 'Allgemeine Geschäftsbedingungen.', 29, 32, 438)
