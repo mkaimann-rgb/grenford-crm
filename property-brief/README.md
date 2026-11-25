@@ -1,5 +1,7 @@
 # GRENFORD Property Brief – Vorlage
 
+> Welches Format wann (Property Brief, Investment Brief, Investment Memo, Renovation Memo), Seitenaufbau, Standardannahmen und die gemeinsame GRENFORD-CI: siehe [FORMATE.md](FORMATE.md).
+
 Ein Design, beliebig viele Objekte. Gestaltung, Partnerseite, „Über GRENFORD“ und AGB sind fest;
 pro Immobilie wird nur eine Datei `objekt.json` ausgefüllt.
 

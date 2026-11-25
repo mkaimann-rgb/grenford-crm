@@ -1,4 +1,4 @@
-# Erzeugt objekt.json für den GRENFORD Investment Brief Pätzer Straße 11.
+# Erzeugt objekt.json für den GRENFORD Investment Brief Pätzer Straße 11 (GI26-003, Nummerierung fortlaufend unter GRENFORD Investments).
 # Format „Investment Brief“: kleines Mehrfamilienhaus, Mischung aus Property Brief (Objekt, Lage, Grundrisse)
 # und Investment Memo (Hard Facts, Rendite, Finanzierung, Sensitivität, Asset Check, Value Matrix).
 # Quellen: Angaben und Unterlagen des Verkäufers; Marktwerte Recherche 24.11.2026; Annahmen GRENFORD.
@@ -201,13 +201,13 @@ S.append({"modul": "raster", "id": "finanzierung", "kopf": "Finanzierung", "dach
      "zeilen": [["Reinertrag", "nach Bewirtschaftung", e(REIN)], ["Zinsen", p(ZINS, 1) + " auf " + e(DAR), "− " + e(ZI)],
                 ["Tilgung", p(TILG, 1) + " anfänglich", "− " + e(TI)], ["Cashflow vor Steuern", "", e(CF)]]},
     {"typ": "text", "x": 51, "y": "folgt", "abstand": 16, "w": 560, "schrift": 8.6,
-     "absaetze": [["Aussage:", f"Bei 70 % Fremdfinanzierung trägt der Reinertrag Zins und Tilgung vollständig und erwirtschaftet zusätzlich rund {e(CF)} Überschuss im Jahr. Mit der Tilgung baut der Eigentümer jährlich rund {e(TI)} Vermögen auf."]]},
+     "absaetze": [["Aussage:", f"Bei 70 % Fremdfinanzierung trägt der Reinertrag Zins und Tilgung vollständig und erwirtschaftet zusätzlich rund {e(CF)} Überschuss im Jahr. Mit der Tilgung baut der Eigentümer jährlich rund {e(TI)} Vermögen auf."], "Wichtiger Hinweis: Das Finanzierungsbeispiel beruht auf Annahmen GRENFORD und dient allein Ihrer Orientierung; es ist kein Finanzierungsangebot. Die verbindliche Berechnung erstellt ein Kreditinstitut – mit Ihren persönlichen Konditionen, Ihrem Eigenkapital und Ihrer Bonität."]},
     {"typ": "dunkel", "x": 640, "y": 410, "w": 216, "h": 330, "titel": "Kennzahlen Finanzierung", "abstand": 78,
      "werte": [[f"{REIN/KD:.2f}".replace('.', ','), "Schuldendienstdeckung (DSCR)", 30], [p((CF + TI) / EK * 100, 1), "EK-Rendite inkl. Tilgung", 30],
                [p(LTV, 0), "Beleihung auf Kaufpreis", 30]],
-     "text": "Beispielrechnung, keine Finanzierungszusage. Konditionen nach Bonität und Bank."}],
-  "quelle": [f"Annahmen GRENFORD: Darlehen {p(LTV,0)} des Kaufpreises, Sollzins {p(ZINS,1)}, anfängliche Tilgung {p(TILG,1)}; Eigenkapital deckt Erwerbsnebenkosten und Restkaufpreis. Vor Steuern und Abschreibung.",
-             "Finanzierungspartner vermittelt GRENFORD auf Wunsch; Mieterliste und Mietverträge sind Grundlage der Bankprüfung."]})
+     "text": "Annahme GRENFORD zur Orientierung. Ihre verbindlichen Werte berechnet Ihr Kreditinstitut."}],
+  "quelle": [f"Annahmen GRENFORD, Stand November 2026: Darlehen {p(LTV,0)} des Kaufpreises, Sollzins {p(ZINS,1)}, anfängliche Tilgung {p(TILG,1)}; Eigenkapital deckt Erwerbsnebenkosten und Restkaufpreis. Vor Steuern und Abschreibung.",
+             "Zins, Beleihung und Tilgung legt das Kreditinstitut nach Prüfung von Bonität, Eigenkapital und Objektunterlagen fest. Finanzierungspartner vermittelt GRENFORD auf Wunsch."]})
 
 S.append({"modul": "raster", "id": "potenzial", "kopf": "Wertpotenzial", "dachzeile": "Aufstockung und Ausbau Dachgeschoss", "titel": "Reserve unter dem Dach",
   "bloecke": [
@@ -246,7 +246,7 @@ S.append({"modul": "raster", "id": "matrix", "kopf": "Value Matrix", "dachzeile"
   "bloecke": [
     {"typ": "matrix", "x": 51, "y": 412, "w": 805, "h": 286, "schrift": 8.8,
      "zellen": [{"titel": "Stärken", "akzent": True, "punkte": [["Voll vermietet.", "Sieben von sieben Einheiten, laufende Mieteinnahmen ab Übergabe."], ["Gründerzeit-Substanz.", "Stuckfassade, Dielen, Fachwerk; modernisierte Bäder und Küchen."], ["Ruhige Lage.", "Wohnquartier in Britz, Bus vor der Tür, U7 in rund 750 m."], ["Großes Grundstück.", "Rund 781 m² mit Garten und Remise."]]},
-                {"titel": "Hebel", "punkte": [["Unterlagen.", "Mieterliste und Flächenaufstellung früh anfordern und abgleichen."], ["Mietverträge.", "Befristungen nutzen, Anschlussvermietung marktgerecht gestalten."], ["Finanzierung.", f"Beispiel mit DSCR {REIN/KD:.2f}".replace('.', ',') + "; Konditionen nach Bonität."], ["Kaufpreis.", "Jede 40.000 € weniger heben die Bruttorendite um rund 0,15 Prozentpunkte."]]},
+                {"titel": "Hebel", "punkte": [["Unterlagen.", "Mieterliste und Flächenaufstellung früh anfordern und abgleichen."], ["Mietverträge.", "Befristungen nutzen, Anschlussvermietung marktgerecht gestalten."], ["Finanzierung.", f"Im GRENFORD-Beispiel DSCR {REIN/KD:.2f}".replace('.', ',') + "; verbindlich rechnet das Kreditinstitut mit Ihren Konditionen."], ["Kaufpreis.", "Jede 40.000 € weniger heben die Bruttorendite um rund 0,15 Prozentpunkte."]]},
                 {"titel": "Chancen", "akzent": True, "punkte": [["Dachgeschoss.", "Aufstockung und Ausbau mit Bauantrag, rechnerisch rund 18.000 € Mehrmiete p. a."], ["Stellplätze.", "3 bis 5 Stellplätze bzw. Carport im Garten."], ["Werterhalt.", "Berliner Altbau in gewachsener Lage, knappes Angebot."], ["Aufteilung.", "Langfristig Option zur Bildung von Wohnungseigentum (Genehmigungslage prüfen)."]]},
                 {"titel": "Marktfaktoren", "punkte": [["Mietrecht.", "Mietpreisbremse bei Neuvermietung; Befristungen rechtlich prüfen."], ["Zinsniveau.", "Rendite vor Finanzierung bei 5,3 bis 6,0 % je Mietszenario."], ["Energie.", "Gasheizung 2018; Anforderungen des GEG im Blick behalten."], ["Nachfrage.", "Kleine Wohnungen in Berlin anhaltend gefragt."]]}]},
     {"typ": "text", "x": 51, "y": "folgt", "abstand": 10, "w": 805, "box": True, "schrift": 8.6,
@@ -266,13 +266,13 @@ S.append({"modul": "raster", "id": "disclaimer", "bereich": "nach", "kopf": "Rec
     {"typ": "text", "x": 51, "y": 412, "w": 380, "schrift": 8.3,
      "absaetze": ["Dieser Investment Brief wurde von GRENFORD erstellt und dient ausschließlich der unverbindlichen Information über das Mehrfamilienhaus Pätzer Straße 11, 12359 Berlin. Er stellt kein Angebot im rechtlichen Sinne dar und ersetzt weder eine Anlage-, Rechts- noch Steuerberatung. Verkäufer: wird im Rahmen der Vertragsvorbereitung benannt.",
                   "Alle Angaben beruhen auf Informationen und Unterlagen des Verkäufers sowie auf Annahmen und Berechnungen von GRENFORD, Stand November 2026. Trotz sorgfältiger Zusammenstellung wird für Vollständigkeit, Richtigkeit und Aktualität keine Gewähr übernommen. Irrtum und Zwischenverkauf vorbehalten.",
-                  "Renditen, Finanzierungsbeispiel und Potenzialrechnung sind unverbindliche Modellrechnungen und keine Garantie künftiger Entwicklungen. Der GRENFORD Asset Check ist weder Due Diligence im rechtlichen Sinne noch Gutachten."]},
+                  "Renditen, Finanzierungsbeispiel und Potenzialrechnung sind unverbindliche Modellrechnungen und keine Garantie künftiger Entwicklungen. Das Finanzierungsbeispiel beruht auf Annahmen GRENFORD; eine verbindliche Finanzierungsberechnung kann ausschließlich ein Kreditinstitut mit den Konditionen des jeweiligen Käufers vornehmen. Der GRENFORD Asset Check ist weder Due Diligence im rechtlichen Sinne noch Gutachten."]},
     {"typ": "text", "x": 476, "y": 412, "w": 380, "schrift": 8.3,
      "absaetze": [["Flächen und Darstellungen.", "Wohn- und Nutzfläche ca. 453 m² laut Verkäufer; die Bestandspläne weisen für die sechs Wohnungen ca. 242 m² aus. Eine Berechnung nach WoFlV liegt nicht vor. Grundrisse nicht zur Maßentnahme geeignet; Rechte an Fotos und Plänen beim Verkäufer."],
                   ["Energieausweis.", "Vorlage spätestens zur Besichtigung (§ 80 Abs. 4 GEG); die Pflichtangaben nach § 87 GEG werden ergänzt."],
-                  ["Provisionshinweis.", "Der Erwerb ist für den Käufer courtagepflichtig: 6,00 % des Kaufpreises zzgl. 19 % MwSt., insgesamt 7,14 %, fällig mit Wirksamkeit des notariellen Kaufvertrags. Einzelheiten regeln die AGB auf Seite {seite:agb}."],
+                  ["Provisionshinweis.", "Der Erwerb ist für den Käufer courtagepflichtig: 6,00 % des notariellen Kaufpreises zzgl. gesetzlicher MwSt., derzeit insgesamt 7,14 %, fällig mit Wirksamkeit des notariellen Kaufvertrags. Einzelheiten regeln die AGB auf Seite {seite:agb}."],
                   ["Verantwortlich.", "GRENFORD ist die Geschäftsbezeichnung des Einzelunternehmens Marco Kaimann; Erlaubnis nach § 34c GewO, Bezirksamt Charlottenburg-Wilmersdorf von Berlin, 01.11.2022. GRENFORD ist Verpflichteter nach dem Geldwäschegesetz."]]}]})
-S.append({"modul": "agb", "id": "agb", "bereich": "nach", "dachzeile": "GRENFORD Investments · Nachweis und Vermittlung"})
+S.append({"modul": "agb", "id": "agb", "bereich": "nach", "datei": "agb_investment_brief.html", "dachzeile": "GRENFORD Investments · Investment Brief · Nachweis und Vermittlung"})
 
 json.dump({"meta": meta, "kosten": kosten, "seiten": S}, open(OUT, 'w'), ensure_ascii=False, indent=1)
 print(len(S), 'Seiten')

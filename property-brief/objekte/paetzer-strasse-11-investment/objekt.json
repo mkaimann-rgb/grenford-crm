@@ -1284,7 +1284,8 @@
       [
        "Aussage:",
        "Bei 70 % Fremdfinanzierung trägt der Reinertrag Zins und Tilgung vollständig und erwirtschaftet zusätzlich rund 10.845 € Überschuss im Jahr. Mit der Tilgung baut der Eigentümer jährlich rund 20.160 € Vermögen auf."
-      ]
+      ],
+      "Wichtiger Hinweis: Das Finanzierungsbeispiel beruht auf Annahmen GRENFORD und dient allein Ihrer Orientierung; es ist kein Finanzierungsangebot. Die verbindliche Berechnung erstellt ein Kreditinstitut – mit Ihren persönlichen Konditionen, Ihrem Eigenkapital und Ihrer Bonität."
      ]
     },
     {
@@ -1312,12 +1313,12 @@
        30
       ]
      ],
-     "text": "Beispielrechnung, keine Finanzierungszusage. Konditionen nach Bonität und Bank."
+     "text": "Annahme GRENFORD zur Orientierung. Ihre verbindlichen Werte berechnet Ihr Kreditinstitut."
     }
    ],
    "quelle": [
-    "Annahmen GRENFORD: Darlehen 70 % des Kaufpreises, Sollzins 3,8 %, anfängliche Tilgung 2,0 %; Eigenkapital deckt Erwerbsnebenkosten und Restkaufpreis. Vor Steuern und Abschreibung.",
-    "Finanzierungspartner vermittelt GRENFORD auf Wunsch; Mieterliste und Mietverträge sind Grundlage der Bankprüfung."
+    "Annahmen GRENFORD, Stand November 2026: Darlehen 70 % des Kaufpreises, Sollzins 3,8 %, anfängliche Tilgung 2,0 %; Eigenkapital deckt Erwerbsnebenkosten und Restkaufpreis. Vor Steuern und Abschreibung.",
+    "Zins, Beleihung und Tilgung legt das Kreditinstitut nach Prüfung von Bonität, Eigenkapital und Objektunterlagen fest. Finanzierungspartner vermittelt GRENFORD auf Wunsch."
    ]
   },
   {
@@ -1578,7 +1579,7 @@
         ],
         [
          "Finanzierung.",
-         "Beispiel mit DSCR 1,19; Konditionen nach Bonität."
+         "Im GRENFORD-Beispiel DSCR 1,19; verbindlich rechnet das Kreditinstitut mit Ihren Konditionen."
         ],
         [
          "Kaufpreis.",
@@ -1712,7 +1713,7 @@
      "absaetze": [
       "Dieser Investment Brief wurde von GRENFORD erstellt und dient ausschließlich der unverbindlichen Information über das Mehrfamilienhaus Pätzer Straße 11, 12359 Berlin. Er stellt kein Angebot im rechtlichen Sinne dar und ersetzt weder eine Anlage-, Rechts- noch Steuerberatung. Verkäufer: wird im Rahmen der Vertragsvorbereitung benannt.",
       "Alle Angaben beruhen auf Informationen und Unterlagen des Verkäufers sowie auf Annahmen und Berechnungen von GRENFORD, Stand November 2026. Trotz sorgfältiger Zusammenstellung wird für Vollständigkeit, Richtigkeit und Aktualität keine Gewähr übernommen. Irrtum und Zwischenverkauf vorbehalten.",
-      "Renditen, Finanzierungsbeispiel und Potenzialrechnung sind unverbindliche Modellrechnungen und keine Garantie künftiger Entwicklungen. Der GRENFORD Asset Check ist weder Due Diligence im rechtlichen Sinne noch Gutachten."
+      "Renditen, Finanzierungsbeispiel und Potenzialrechnung sind unverbindliche Modellrechnungen und keine Garantie künftiger Entwicklungen. Das Finanzierungsbeispiel beruht auf Annahmen GRENFORD; eine verbindliche Finanzierungsberechnung kann ausschließlich ein Kreditinstitut mit den Konditionen des jeweiligen Käufers vornehmen. Der GRENFORD Asset Check ist weder Due Diligence im rechtlichen Sinne noch Gutachten."
      ]
     },
     {
@@ -1732,7 +1733,7 @@
       ],
       [
        "Provisionshinweis.",
-       "Der Erwerb ist für den Käufer courtagepflichtig: 6,00 % des Kaufpreises zzgl. 19 % MwSt., insgesamt 7,14 %, fällig mit Wirksamkeit des notariellen Kaufvertrags. Einzelheiten regeln die AGB auf Seite {seite:agb}."
+       "Der Erwerb ist für den Käufer courtagepflichtig: 6,00 % des notariellen Kaufpreises zzgl. gesetzlicher MwSt., derzeit insgesamt 7,14 %, fällig mit Wirksamkeit des notariellen Kaufvertrags. Einzelheiten regeln die AGB auf Seite {seite:agb}."
       ],
       [
        "Verantwortlich.",
@@ -1746,7 +1747,8 @@
    "modul": "agb",
    "id": "agb",
    "bereich": "nach",
-   "dachzeile": "GRENFORD Investments · Nachweis und Vermittlung"
+   "datei": "agb_investment_brief.html",
+   "dachzeile": "GRENFORD Investments · Investment Brief · Nachweis und Vermittlung"
   }
  ]
 }
