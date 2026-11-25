@@ -87,7 +87,7 @@ kosten = {"land": "Berlin", "grunderwerbsteuer": GREST, "courtage_brutto": COURT
 
 Q = "Quelle: Datenraum des Verkäufers"
 S = []
-S.append({"modul": "titel", "id": "titel", "bild": "strasse.jpg", "bild_pos": "center 45%",
+S.append({"modul": "titel", "id": "titel", "bild": "strasse.jpg", "bild_pos": "center 30%",
   "dachzeile": "Investment Brief · Mehrfamilienhaus", "vertraulich": ["Off-Market · Kapitalanlage", "Vertraulich"],
   "titel": ["THE MENZEL", "HOUSE"], "untertitel": ["Schöneberg", "Value-Add Residence"],
   "kurz": ["Gründerzeithaus von 1907", "21 Einheiten, voll vermietet", "Dachgeschossausbau beantragt"],
@@ -95,7 +95,7 @@ S.append({"modul": "titel", "id": "titel", "bild": "strasse.jpg", "bild_pos": "c
   "kennzahlen": [["21", "Einheiten vermietet"], ["3,1 Mio. €", "Kaufpreis"], [f1(FAK) + "-fach", "Kaufpreisfaktor"], [p(BR), "Bruttorendite"]],
   "hinweis": "Straßenansicht · Kennzahlen auf Basis der Mieterliste 01.06.2026, Rechnung GRENFORD · Stand 25.11.2026"})
 
-S.append({"modul": "inhalt", "id": "inhalt", "bereich": "vor", "bild": "hof.jpg", "bild_pos": "center 40%",
+S.append({"modul": "inhalt", "id": "inhalt", "bereich": "vor", "bild": "strasse.jpg", "bild_pos": "70% 40%",
   "claim": ["Ein Haus,", "zwei Hebel"], "marke": "The Menzel House · GI26-004",
   "text": ["Bestand mit Mietreserve", "und Dachgeschossausbau"], "adresse": ["Menzelstraße 8", "12157 Berlin-Schöneberg"],
   "kapitel": [{"titel": "Vorwort und Hard Facts", "sub": "Einordnung, Kaufpreis, Rendite auf einen Blick", "seiten": ["vorwort", "fakten"]},
@@ -132,12 +132,12 @@ S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Fac
   "quelle": [f"{Q}: Mieterliste 01.06.2026, Flächenaufstellung 13.07.2023, Grundbuch 13.11.2024, Energieausweis 13.07.2023. Rechnung GRENFORD; Bewirtschaftung {p(BEWI,0)} der Jahresmiete (Annahme).",
              "Vermerk: Die Flächenaufstellung 2023 nennt für den Bestand 1.501,75 m² nach Altunterlagen (nicht aufgemessen); maßgeblich sind Mieterliste und Mietverträge. Bei Share Deal gelten abweichende Erwerbsnebenkosten."]})
 
-S.append({"modul": "bildseite", "id": "objekt", "kopf": "Das Objekt", "stil": "voll", "bild": "strasse.jpg", "bild_pos": "center 55%",
-  "verlauf": [[.94, 0], [.92, 36], [.72, 50], [.32, 66], [.1, 84], [.04, 100]], "toenung": {"farbe": "navy", "alpha": .25, "modus": "color"},
+S.append({"modul": "bildseite", "id": "objekt", "kopf": "Das Objekt", "stil": "voll", "bild": "hof-sonne.jpg", "bild_pos": "center 45%",
+  "verlauf": [[.94, 0], [.92, 36], [.72, 50], [.32, 66], [.1, 84], [.04, 100]], "toenung": {"farbe": "navy", "alpha": .45, "modus": "color"},
   "dachzeile": "Das Objekt", "titel": ["Gründerzeit", "in Schöneberg"],
   "text": "Vorderhaus mit Stuckfassade und Erkern, zwei Seitenflügel und ein Hof: 21 Einheiten zwischen 28 und 130 m². Die Hoffassaden sind gedämmt, das Dachgeschoss ist für zwei neue Wohnungen geplant.",
   "kennzahlen": [["1907", "Baujahr"], ["21", "Einheiten"], ["953 m²", "Grundstück"]],
-  "hinweis": "Straßenansicht · Fotoaufnahme Bestand"})
+  "hinweis": "Hof mit gedämmten Fassaden · Fotoaufnahme Bestand"})
 
 S.append({"modul": "raster", "id": "standort", "kopf": "Standort", "dachzeile": "Makrolage · Berlin und Brandenburg",
   "titel": "Zentral im Berliner Südwesten",
@@ -156,8 +156,8 @@ S.append({"modul": "raster", "id": "standort", "kopf": "Standort", "dachzeile": 
      "absaetze": ["S-Bahn, Einkaufsmeile und Innenstadt in kurzer Distanz: Altbauwohnungen in dieser Lage sind dauerhaft nachgefragt – eine solide Basis für Neuvermietung und Mietentwicklung."]}],
   "quelle": "Luftlinie: Berechnung GRENFORD aus Koordinaten (Kartenpunkt schematisch). Fahrzeiten: gerundete Richtwerte GRENFORD von Tür zu Tür, abhängig von Tageszeit und Verbindung. Ohne Gewähr."})
 
-S.append({"modul": "lage", "id": "lage", "kopf": "Mikrolage", "bild": "hof-2.jpg", "bild_pos": "center",
-  "toenung": {"farbe": "navy", "alpha": .65, "modus": "color"}, "caption": "Hof mit gedämmten Fassaden · Fotoaufnahme Bestand",
+S.append({"modul": "lage", "id": "lage", "kopf": "Mikrolage", "bild": "strasse-baeume.jpg", "bild_pos": "55% center",
+  "toenung": {"farbe": "navy", "alpha": .3, "modus": "color"}, "caption": "Straßenzug im Quartier · Fotoaufnahme Umfeld",
   "dachzeile": "Mikrolage · Menzelstraße 8", "titel": ["Gewachsenes Quartier,", "kurze Wege"],
   "intro": "Die Menzelstraße liegt in einem ruhigen Altbauquartier zwischen Friedenau und Steglitz. S-Bahn, Bus und die Einkaufsmeile Schloßstraße sind zu Fuß erreichbar.",
   "gruppen": [{"titel": "Einkauf &amp; Versorgung", "text": "Einkaufsmeile Schloßstraße ca. 750 m · Nahversorgung und Fachgeschäfte im Quartier."},
@@ -195,10 +195,10 @@ S.append({"modul": "raster", "id": "plaene", "kopf": "Pläne", "dachzeile": "Bes
 
 S.append({"modul": "raster", "id": "asset", "kopf": "Asset", "dachzeile": "Substanz, Technik und Energie", "titel": "Solide Substanz mit klarem Fahrplan",
   "bloecke": [
-    {"typ": "bild", "x": 51, "y": 410, "w": 180, "h": 150, "bild": "hof.jpg", "titel": "Hof, Fassaden gedämmt"},
+    {"typ": "bild", "x": 51, "y": 410, "w": 180, "h": 150, "bild": "treppenhaus.jpg", "titel": "Treppenhaus Vorderhaus"},
     {"typ": "bild", "x": 241, "y": 410, "w": 180, "h": 150, "bild": "dach.jpg", "titel": "Dach, Ausbaufläche"},
-    {"typ": "bild", "x": 51, "y": 238, "w": 180, "h": 150, "bild": "innen-ofen.jpg", "titel": "Altbau mit Kachelofen"},
-    {"typ": "bild", "x": 241, "y": 238, "w": 180, "h": 150, "bild": "innen-parkett.jpg", "titel": "Parkett, Kastendoppelfenster"},
+    {"typ": "bild", "x": 51, "y": 238, "w": 180, "h": 150, "bild": "eingang.jpg", "titel": "Eingangsportal"},
+    {"typ": "bild", "x": 241, "y": 238, "w": 180, "h": 150, "bild": "hof-oben.jpg", "titel": "Hof und Seitenflügel"},
     {"typ": "kv", "x": 452, "y": 410, "w": 404, "kw": 100, "titel": "Zustand im Überblick", "schrift": 8.2, "bis": 70,
      "zeilen": [["Fassaden", "Hoffassaden und hintere Giebel gedämmt; Straßenfassade und Brandwand zu Nr. 9 ungedämmt"],
                 ["Dach", "Berliner Dach, ungedämmt und erneuerungsbedürftig; Erneuerung im Zuge des Dachgeschossausbaus geplant"],
@@ -207,7 +207,7 @@ S.append({"modul": "raster", "id": "asset", "kopf": "Asset", "dachzeile": "Subst
                 ["Decken", "Holzbalkendecken; Kellerdecken in den Seitenflügeln teilweise sanierungsbedürftig"],
                 ["Energieausweis", "Bedarfsausweis 13.07.2023, gültig bis 12.07.2033; Endenergie 179,7 kWh/(m²·a), Klasse F; Erdgas"],
                 ["Energieberatung", "Fahrplan 2023: Dämmung, Fenster, Wärmepumpe mit PV; Primärenergie −73 %, Effizienzhaus 85 EE erreichbar"]]}],
-  "quelle": "Quelle: Energieberatungsbericht Ing.-Büro Arndt & Partner (19.04.2023), Energieausweis BE-2023-004632227, Baubeschreibung Dachgeschoss (27.01.2025). Fotos: Bestand 2023."})
+  "quelle": "Quelle: Energieberatungsbericht Ing.-Büro Arndt & Partner (19.04.2023), Energieausweis BE-2023-004632227, Baubeschreibung Dachgeschoss (27.01.2025). Fotos: Bestand."})
 
 S.append({"modul": "raster", "id": "markt", "kopf": "GRENFORD Research", "dachzeile": "Mietniveau · Recherche 25.11.2026", "titel": "Deutlich unter Marktniveau",
   "intro": f"Die Ist-Miete von Ø {n(MM/FL)} €/m² liegt weit unter den Werten, die sanierte Einheiten im Haus und Neuvermietungen in der Umgebung erzielen. Die Spanne zeigt die Reserve – ihr Heben richtet sich nach Mietrecht und Modernisierung.",
@@ -315,14 +315,14 @@ S.append({"modul": "raster", "id": "matrix", "kopf": "Value Matrix", "dachzeile"
      "absaetze": [["Investor Insight:", "Die Menzelstraße 8 verbindet einen voll vermieteten Altbaubestand in guter Lage mit zwei klar benannten Hebeln: einer im eigenen Haus belegten Mietreserve und dem beantragten Dachgeschossausbau. Ein Objekt für Anleger mit langfristigem Horizont."]]}],
   "quelle": "Quelle: Einschätzung GRENFORD auf Basis des Datenraums und der Rechnung auf den Seiten {seite:rendite} und {seite:finanzierung}. Indikativ, keine Zusicherung."})
 
-S.append({"modul": "kontakt", "id": "kontakt", "bereich": "nach", "bild": "hof.jpg", "bild_pos": "center 40%", "abstand": 56, "schrift": 8.4,
+S.append({"modul": "kontakt", "id": "kontakt", "bereich": "nach", "bild": "strasse-front.jpg", "bild_pos": "40% center", "abstand": 56, "schrift": 8.4,
   "claim": ["Ihr Interesse,", "Ihr nächster", "Schritt"], "dachzeile": "Menzelstraße 8 · Transaktionsablauf", "titel": ["Vom Gespräch zum", "notariellen Vertrag"],
   "box_label": "Ansprechpartner", "box_titel": "Marco Kaimann, Founder &amp; Transaction Advisor",
   "schritte": [["Gespräch und Kaufinteresse", "Wir besprechen Ihre Anlageziele, Finanzierung und die gewünschte Struktur (Asset oder Share Deal). Mit Ihrer schriftlichen Interessenbekundung leiten wir die nächsten Schritte ein."],
                ["Identifizierung und Datenraum", "Nach Identifizierung gemäß Geldwäschegesetz erhalten Sie Zugang zu Mieterliste, Grundbuch, Plänen, Energieunterlagen und Bauantrag."],
                ["Prüfung und Besichtigung", "Sie und Ihre Berater prüfen die Unterlagen; wir koordinieren die Besichtigung vor Ort in Schöneberg."],
                ["Notarvertrag", "Wir koordinieren den Kaufvertragsentwurf mit dem Notar bis zur Beurkundung."]]})
-S.append({"modul": "ueber", "id": "ueber", "bereich": "nach", "bild": "strasse.jpg", "bild_pos": "center 40%"})
+S.append({"modul": "ueber", "id": "ueber", "bereich": "nach", "bild": "eingang.jpg", "bild_pos": "center 40%"})
 S.append({"modul": "recht", "id": "recht", "bereich": "nach", "dachzeile": "The Menzel House · Menzelstraße 8", "schrift": 8.6, "zeile": 12.4,
   "intro": ["Dieser Investment Brief dient der ersten Information und ist kein Angebot im rechtlichen Sinne; er ersetzt keine Anlage-, Rechts- oder Steuerberatung.", "Maßgeblich ist der notarielle Kaufvertrag. Verkäufer: wird im Rahmen der Vertragsvorbereitung benannt."],
   "bloecke": [["Objekt und Vermietung", f"Mehrfamilienhaus, Baujahr 1907, 21 vermietete Einheiten laut Mieterliste 01.06.2026, Ist-Miete {e(MM, 2)} im Monat. Mietverträge werden vor Abschluss zur Prüfung übergeben. Nutzung WE 1 als Ferienwohnung und Souterrain-Einheiten: Genehmigungslage zu prüfen."],

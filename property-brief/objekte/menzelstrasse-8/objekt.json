@@ -29,7 +29,7 @@
    "modul": "titel",
    "id": "titel",
    "bild": "strasse.jpg",
-   "bild_pos": "center 45%",
+   "bild_pos": "center 30%",
    "dachzeile": "Investment Brief · Mehrfamilienhaus",
    "vertraulich": [
     "Off-Market · Kapitalanlage",
@@ -76,8 +76,8 @@
    "modul": "inhalt",
    "id": "inhalt",
    "bereich": "vor",
-   "bild": "hof.jpg",
-   "bild_pos": "center 40%",
+   "bild": "strasse.jpg",
+   "bild_pos": "70% 40%",
    "claim": [
     "Ein Haus,",
     "zwei Hebel"
@@ -324,8 +324,8 @@
    "id": "objekt",
    "kopf": "Das Objekt",
    "stil": "voll",
-   "bild": "strasse.jpg",
-   "bild_pos": "center 55%",
+   "bild": "hof-sonne.jpg",
+   "bild_pos": "center 45%",
    "verlauf": [
     [
      0.94,
@@ -354,7 +354,7 @@
    ],
    "toenung": {
     "farbe": "navy",
-    "alpha": 0.25,
+    "alpha": 0.45,
     "modus": "color"
    },
    "dachzeile": "Das Objekt",
@@ -377,7 +377,7 @@
      "Grundstück"
     ]
    ],
-   "hinweis": "Straßenansicht · Fotoaufnahme Bestand"
+   "hinweis": "Hof mit gedämmten Fassaden · Fotoaufnahme Bestand"
   },
   {
    "modul": "raster",
@@ -608,14 +608,14 @@
    "modul": "lage",
    "id": "lage",
    "kopf": "Mikrolage",
-   "bild": "hof-2.jpg",
-   "bild_pos": "center",
+   "bild": "strasse-baeume.jpg",
+   "bild_pos": "55% center",
    "toenung": {
     "farbe": "navy",
-    "alpha": 0.65,
+    "alpha": 0.3,
     "modus": "color"
    },
-   "caption": "Hof mit gedämmten Fassaden · Fotoaufnahme Bestand",
+   "caption": "Straßenzug im Quartier · Fotoaufnahme Umfeld",
    "dachzeile": "Mikrolage · Menzelstraße 8",
    "titel": [
     "Gewachsenes Quartier,",
@@ -1008,8 +1008,8 @@
      "y": 410,
      "w": 180,
      "h": 150,
-     "bild": "hof.jpg",
-     "titel": "Hof, Fassaden gedämmt"
+     "bild": "treppenhaus.jpg",
+     "titel": "Treppenhaus Vorderhaus"
     },
     {
      "typ": "bild",
@@ -1026,8 +1026,8 @@
      "y": 238,
      "w": 180,
      "h": 150,
-     "bild": "innen-ofen.jpg",
-     "titel": "Altbau mit Kachelofen"
+     "bild": "eingang.jpg",
+     "titel": "Eingangsportal"
     },
     {
      "typ": "bild",
@@ -1035,8 +1035,8 @@
      "y": 238,
      "w": 180,
      "h": 150,
-     "bild": "innen-parkett.jpg",
-     "titel": "Parkett, Kastendoppelfenster"
+     "bild": "hof-oben.jpg",
+     "titel": "Hof und Seitenflügel"
     },
     {
      "typ": "kv",
@@ -1079,7 +1079,7 @@
      ]
     }
    ],
-   "quelle": "Quelle: Energieberatungsbericht Ing.-Büro Arndt & Partner (19.04.2023), Energieausweis BE-2023-004632227, Baubeschreibung Dachgeschoss (27.01.2025). Fotos: Bestand 2023."
+   "quelle": "Quelle: Energieberatungsbericht Ing.-Büro Arndt & Partner (19.04.2023), Energieausweis BE-2023-004632227, Baubeschreibung Dachgeschoss (27.01.2025). Fotos: Bestand."
   },
   {
    "modul": "raster",
@@ -1872,8 +1872,8 @@
    "modul": "kontakt",
    "id": "kontakt",
    "bereich": "nach",
-   "bild": "hof.jpg",
-   "bild_pos": "center 40%",
+   "bild": "strasse-front.jpg",
+   "bild_pos": "40% center",
    "abstand": 56,
    "schrift": 8.4,
    "claim": [
@@ -1911,7 +1911,7 @@
    "modul": "ueber",
    "id": "ueber",
    "bereich": "nach",
-   "bild": "strasse.jpg",
+   "bild": "eingang.jpg",
    "bild_pos": "center 40%"
   },
   {
