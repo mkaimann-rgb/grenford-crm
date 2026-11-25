@@ -166,7 +166,7 @@
    "titel": "Ein Gründerzeithaus als Kapitalanlage",
    "lead": "Mit diesem Investment Brief stellen wir Ihnen ein voll vermietetes Mehrfamilienhaus von 1898 in Berlin-Britz vor: sechs Wohnungen und eine Remise auf rund 781 m² Grundstück.",
    "links": "Das Objekt: Stuckfassade, Holzdielen und Fachwerk sind erhalten; Bäder, Küchen und Heizung wurden in den vergangenen Jahren modernisiert. Alle sieben Einheiten sind vermietet.",
-   "rechts": "Das Angebot: Kaufpreis 1,44 Mio. €, Kaufpreisfaktor 17,7-fach und Bruttorendite 5,66 % auf Basis der Verkäuferangaben. Dazu Reserve im Dachgeschoss.",
+   "rechts": "Das Angebot: Kaufpreis 1,44 Mio. €, Kaufpreisfaktor 17,7-fach und Bruttorendite 5,66 % auf Basis der Verkäuferangaben. Hinzu kommt eine Reserve im Dachgeschoss.",
    "schluss": "Der Brief führt von den Hard Facts über Objekt, Lage und Mieteinheiten zu Rendite, Finanzierung und Potenzial und schließt mit dem GRENFORD Asset Check. Für Rückfragen und die Unterlagen stehen wir Ihnen persönlich zur Verfügung."
   },
   {
@@ -374,7 +374,7 @@
      "Grundstück"
     ]
    ],
-   "hinweis": "Straßenansicht · Fotoaufnahme Bestand"
+   "hinweis": "Seitenansicht mit Garten · Fotoaufnahme Bestand"
   },
   {
    "modul": "raster",
@@ -382,7 +382,7 @@
    "kopf": "Standort",
    "dachzeile": "Makrolage · Berlin und Brandenburg",
    "titel": "Kurze Wege in die Stadt und ins Umland",
-   "intro": "Hermannplatz in rund 20 Minuten, Potsdamer Platz und Alexanderplatz in gut einer halben Stunde, der Flughafen BER in rund 25 Minuten mit dem Auto: Britz verbindet ruhiges Wohnen mit kurzen Wegen in die Innenstadt und zu den Arbeitsplatzschwerpunkten im Südosten.",
+   "intro": "Mit Bus und Bahn erreichen Sie den Hermannplatz in rund 20 Minuten, Potsdamer Platz und Alexanderplatz in gut einer halben Stunde; der Flughafen BER liegt mit dem Auto rund 25 Minuten entfernt. Britz verbindet ruhiges Wohnen mit kurzen Wegen in die Innenstadt und zu den Arbeitsplatzschwerpunkten im Südosten.",
    "bloecke": [
     {
      "typ": "karte",
@@ -712,57 +712,57 @@
      "schrift": 8.4,
      "kopf": [
       "Einheit",
-      "Räume",
+      "Lage",
       "m² Plan",
       "Status",
       "Vertrag"
      ],
      "zeilen": [
       [
-       "EG · Wohnung 1",
-       "Zimmer 1, Küche",
+       "Wohnung 1",
+       "Erdgeschoss",
        "44,30",
        "Vermietet",
        "befristet"
       ],
       [
-       "EG · Wohnung 2",
-       "Zimmer 2 und 3, Bad",
+       "Wohnung 2",
+       "Erdgeschoss",
        "34,30",
        "Vermietet",
        "befristet"
       ],
       [
-       "1. OG · Wohnung 3",
-       "2 Zimmer, Küche",
+       "Wohnung 3",
+       "1. Obergeschoss",
        "46,25",
        "Vermietet",
        "befristet"
       ],
       [
-       "1. OG · Wohnung 4",
-       "2 Zimmer, Bad",
+       "Wohnung 4",
+       "1. Obergeschoss",
        "34,00",
        "Vermietet",
        "befristet"
       ],
       [
-       "2. OG · Wohnung 5",
-       "2 Zimmer, Bad, Diele",
+       "Wohnung 5",
+       "2. Obergeschoss",
        "46,50",
        "Vermietet",
        "befristet"
       ],
       [
-       "2. OG · Wohnung 6",
-       "Zimmer, Küche",
+       "Wohnung 6",
+       "2. Obergeschoss",
        "37,00",
        "Vermietet",
        "befristet"
       ],
       [
-       "Remise · Einheit 7",
-       "Gartenseitig, seit rund einem Jahr vermietet",
+       "Einheit 7 · Remise",
+       "Garten, seit rund einem Jahr vermietet",
        "lt. Mieterliste",
        "Vermietet",
        "befristet"
@@ -770,47 +770,13 @@
      ]
     },
     {
-     "typ": "balken",
-     "x": 610,
+     "typ": "bild",
+     "x": 600,
      "y": 336,
-     "w": 246,
-     "lw": 92,
-     "vw": 40,
-     "titel": "Wohnfläche je Wohnung, m²",
-     "abstand": 24,
-     "max": 50,
-     "items": [
-      [
-       "Wohnung 1",
-       44.3,
-       "44,3"
-      ],
-      [
-       "Wohnung 2",
-       34.3,
-       "34,3"
-      ],
-      [
-       "Wohnung 3",
-       46.25,
-       "46,3"
-      ],
-      [
-       "Wohnung 4",
-       34.0,
-       "34,0"
-      ],
-      [
-       "Wohnung 5",
-       46.5,
-       "46,5"
-      ],
-      [
-       "Wohnung 6",
-       37.0,
-       "37,0"
-      ]
-     ]
+     "w": 256,
+     "h": 196,
+     "bild": "fachwerk.jpg",
+     "titel": "Wohnraum mit Fachwerk und Dielen"
     },
     {
      "typ": "text",
@@ -821,13 +787,13 @@
      "absaetze": [
       [
        "Kompakte Einheiten:",
-       "Zwei- und Dreizimmerwohnungen zwischen 34 und 47 m² sind in Berlin breit nachgefragt und gut vermietbar. Die Remise ergänzt das Haus als siebte Einheit."
+       "Ein- und Zweizimmerwohnungen zwischen 34 und 47 m² sind in Berlin breit nachgefragt und gut vermietbar. Die Remise ergänzt das Haus als siebte Einheit."
       ],
       "Vermerk: Wohnungsflächen laut Bestandsplänen, zusammen ca. 242 m²; der Verkäufer gibt die Wohn- und Nutzfläche mit ca. 453 m² an. Einzelmieten, Laufzeiten und die Fläche der Remise ergeben sich aus der Mieterliste, die vor dem Kaufvertrag übergeben wird."
      ]
     }
    ],
-   "quelle": "Quelle: Angaben des Verkäufers und Objektunterlagen. Wohnungsbezeichnungen zur Orientierung; Zuordnung laut Mieterliste."
+   "quelle": "Quelle: Angaben des Verkäufers und Objektunterlagen. Wohnungsnummern zur Orientierung; Zuordnung laut Mieterliste. Raumaufteilung siehe Grundrisse auf den Seiten {seite:grundrisse-1} und {seite:grundrisse-2}."
   },
   {
    "modul": "grundrisse",
@@ -1133,7 +1099,7 @@
       ],
       [
        "Modernisierung",
-       "Umfassende Renovierung vor rund sechs Jahren, zuletzt 2018 (Verkäuferangabe)"
+       "Umfassend renoviert, letzte Modernisierung 2018 (Verkäuferangabe)"
       ],
       [
        "Bäder, Küchen",
@@ -1439,7 +1405,7 @@
    "id": "finanzierung",
    "kopf": "Finanzierung",
    "dachzeile": "Finanzierungsbeispiel · Annahmen GRENFORD",
-   "titel": "Tragfähig finanziert",
+   "titel": "Tragfähig finanzierbar",
    "bloecke": [
     {
      "typ": "hstack",
@@ -1704,7 +1670,7 @@
        "label": "Pläne, Fotos, Objektbeschreibung"
       },
       {
-       "wert": "Mit Vorlage",
+       "wert": "Vor Kaufvertrag",
        "label": "Mieterliste und Grundbuch",
        "stil": "hell"
       }
@@ -1841,7 +1807,7 @@
         ],
         [
          "Kaufpreis.",
-         "Jede 40.000 € weniger heben die Bruttorendite um rund 0,15 Prozentpunkte."
+         "Je 40.000 € Preisnachlass steigt die Bruttorendite um rund 0,16 Prozentpunkte."
         ]
        ]
       },
@@ -1862,8 +1828,8 @@
          "Berliner Altbau in gewachsener Lage, knappes Angebot."
         ],
         [
-         "Aufteilung.",
-         "Langfristig Option zur Bildung von Wohnungseigentum (Genehmigungslage prüfen)."
+         "Energetische Modernisierung.",
+         "Dämmung oder Wärmepumpe mit Fördermitteln können Wert und Vermietbarkeit weiter steigern."
         ]
        ]
       },
@@ -1876,7 +1842,7 @@
         ],
         [
          "Zinsniveau.",
-         "Rendite vor Finanzierung bei 5,3 bis 6,0 % je Mietszenario."
+         "Bruttorendite von 5,3 bis 6,0 % je Mietszenario über dem angenommenen Sollzins von 3,8 %."
         ],
         [
          "Energie.",
@@ -1931,7 +1897,7 @@
    "schritte": [
     [
      "Gespräch und Kaufinteresse",
-     "Wir besprechen Ihre Anlageziele und Finanzierung. Mit einer schriftlichen Interessenbekundung reservieren wir den nächsten Schritt."
+     "Wir besprechen Ihre Anlageziele und Finanzierung. Mit Ihrer schriftlichen Interessenbekundung leiten wir die nächsten Schritte ein."
     ],
     [
      "Identifizierung und Unterlagen",

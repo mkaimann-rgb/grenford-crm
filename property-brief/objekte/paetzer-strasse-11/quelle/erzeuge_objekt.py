@@ -125,7 +125,7 @@ S.append({"modul": "grundrisse", "id": "grundrisse-2", "dachzeile": "Wohnebene u
 S.append({"modul": "sanierung", "id": "sanierung", "kopf": "Modernisierung &amp; Haustechnik",
   "bilder": [{"bild": "bad.jpg", "pos": "center"}, {"bild": "kueche-balken.jpg", "pos": "center 40%"}],
   "dachzeile": "Der Bestand", "titel": ["Substanz von 1898,", "Technik von heute"],
-  "bloecke": [["Modernisierung", "Umfassende Renovierung vor rund sechs Jahren nach Angabe des Verkäufers, letzte Modernisierung 2018."],
+  "bloecke": [["Modernisierung", "Umfassend renoviert nach Angabe des Verkäufers, letzte Modernisierung 2018."],
               ["Haustechnik", "Zentrale Gasheizung mit Warmwasserspeicher für alle Einheiten; Kennwerte auf Seite {seite:energie}."],
               ["Fassade", "Gründerzeitliche Stuckfassade mit Gesimsen und Fensterverdachungen zur Straße und zum Garten."]],
   "caption": ["Oben: Bad, Fotoaufnahme Bestand.", "Unten: Küche mit Holzbalken, Fotoaufnahme Bestand."]})

@@ -781,7 +781,7 @@ def m_ueber(d, shared):
     h = round(95 * 379 / 773, 2)
     aktiv = C.meta.get('dokument')
     for i, (brand, t, desc, lab, logo) in enumerate(shared['geschaeftsfelder']):
-        if aktiv and lab == aktiv: lab += ' · dieses Dokument'
+        if aktiv and aktiv in lab.split(' · '): lab = lab.replace(aktiv, aktiv + ' (dieses Dokument)')
         ln = 500 - 122 * i
         s += (L(412, ln, 856) + PIC(logo, 418, round(ln - 48.5 - h / 2, 2), 95, h)
               + EB(522, ln - 17, brand, ACC, 6.6) + T(522, ln - 38, 'S', 17.5, 23, INK, t)

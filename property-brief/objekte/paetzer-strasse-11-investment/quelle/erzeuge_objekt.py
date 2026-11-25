@@ -69,7 +69,7 @@ S.append({"modul": "vorwort", "id": "vorwort", "bereich": "vor", "dachzeile": "T
   "titel": "Ein Gründerzeithaus als Kapitalanlage",
   "lead": "Mit diesem Investment Brief stellen wir Ihnen ein voll vermietetes Mehrfamilienhaus von 1898 in Berlin-Britz vor: sechs Wohnungen und eine Remise auf rund 781 m² Grundstück.",
   "links": "Das Objekt: Stuckfassade, Holzdielen und Fachwerk sind erhalten; Bäder, Küchen und Heizung wurden in den vergangenen Jahren modernisiert. Alle sieben Einheiten sind vermietet.",
-  "rechts": f"Das Angebot: Kaufpreis 1,44 Mio. €, Kaufpreisfaktor {f1(FAK)}-fach und Bruttorendite {p(BR)} auf Basis der Verkäuferangaben. Dazu Reserve im Dachgeschoss.",
+  "rechts": f"Das Angebot: Kaufpreis 1,44 Mio. €, Kaufpreisfaktor {f1(FAK)}-fach und Bruttorendite {p(BR)} auf Basis der Verkäuferangaben. Hinzu kommt eine Reserve im Dachgeschoss.",
   "schluss": "Der Brief führt von den Hard Facts über Objekt, Lage und Mieteinheiten zu Rendite, Finanzierung und Potenzial und schließt mit dem GRENFORD Asset Check. Für Rückfragen und die Unterlagen stehen wir Ihnen persönlich zur Verfügung."})
 
 S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Facts", "start": 352, "zeilenhoehe": 21.5, "blockabstand": 20, "schrift": 9.2, "label_groesse": 7.8,
@@ -93,11 +93,11 @@ S.append({"modul": "bildseite", "id": "objekt", "kopf": "Das Objekt", "stil": "v
   "dachzeile": "Das Objekt", "titel": ["Gründerzeit,", "gut vermietet"],
   "text": "Je zwei Wohnungen auf drei Etagen um ein gemeinsames Treppenhaus, dazu die Remise im Garten. Stuckfassade, Dielen und Fachwerk prägen das Haus; Bäder, Küchen und Heizung sind modernisiert.",
   "kennzahlen": [["1898", "Baujahr"], ["7", "Einheiten"], ["781 m²", "Grundstück"]],
-  "hinweis": "Straßenansicht · Fotoaufnahme Bestand"})
+  "hinweis": "Seitenansicht mit Garten · Fotoaufnahme Bestand"})
 
 S.append({"modul": "raster", "id": "standort", "kopf": "Standort", "dachzeile": "Makrolage · Berlin und Brandenburg",
   "titel": "Kurze Wege in die Stadt und ins Umland",
-  "intro": "Hermannplatz in rund 20 Minuten, Potsdamer Platz und Alexanderplatz in gut einer halben Stunde, der Flughafen BER in rund 25 Minuten mit dem Auto: Britz verbindet ruhiges Wohnen mit kurzen Wegen in die Innenstadt und zu den Arbeitsplatzschwerpunkten im Südosten.",
+  "intro": "Mit Bus und Bahn erreichen Sie den Hermannplatz in rund 20 Minuten, Potsdamer Platz und Alexanderplatz in gut einer halben Stunde; der Flughafen BER liegt mit dem Auto rund 25 Minuten entfernt. Britz verbindet ruhiges Wohnen mit kurzen Wegen in die Innenstadt und zu den Arbeitsplatzschwerpunkten im Südosten.",
   "bloecke": [
     {"typ": "karte", "x": 51, "y": 384, "w": 450, "h": 296, "geo": "geo/berlin_karte.geojson", "bbox": [12.98, 52.33, 13.87, 52.66], "grund": "#ece7df",
      "markiert": ["Neukölln"], "strahlen": True, "ringe": [5, 10, 20],
@@ -124,24 +124,22 @@ S.append({"modul": "lage", "id": "lage", "kopf": "Mikrolage", "bild": "remise.jp
             {"titel": "S-Bahn und Autobahn", "text": "S Hermannstraße ca. 1,7 km · A100 und A113 in der Nähe"}],
   "quelle": ["Entfernungen laut Verkäuferunterlagen; Linien und Wege vor Ort prüfen.", "Ziele in Berlin und Brandenburg: Seite {seite:standort}."]})
 
-E = [["EG · Wohnung 1", "Zimmer 1, Küche", "44,30", "Vermietet", "befristet"], ["EG · Wohnung 2", "Zimmer 2 und 3, Bad", "34,30", "Vermietet", "befristet"],
-     ["1. OG · Wohnung 3", "2 Zimmer, Küche", "46,25", "Vermietet", "befristet"], ["1. OG · Wohnung 4", "2 Zimmer, Bad", "34,00", "Vermietet", "befristet"],
-     ["2. OG · Wohnung 5", "2 Zimmer, Bad, Diele", "46,50", "Vermietet", "befristet"], ["2. OG · Wohnung 6", "Zimmer, Küche", "37,00", "Vermietet", "befristet"],
-     ["Remise · Einheit 7", "Gartenseitig, seit rund einem Jahr vermietet", "lt. Mieterliste", "Vermietet", "befristet"]]
+E = [["Wohnung 1", "Erdgeschoss", "44,30", "Vermietet", "befristet"], ["Wohnung 2", "Erdgeschoss", "34,30", "Vermietet", "befristet"],
+     ["Wohnung 3", "1. Obergeschoss", "46,25", "Vermietet", "befristet"], ["Wohnung 4", "1. Obergeschoss", "34,00", "Vermietet", "befristet"],
+     ["Wohnung 5", "2. Obergeschoss", "46,50", "Vermietet", "befristet"], ["Wohnung 6", "2. Obergeschoss", "37,00", "Vermietet", "befristet"],
+     ["Einheit 7 · Remise", "Garten, seit rund einem Jahr vermietet", "lt. Mieterliste", "Vermietet", "befristet"]]
 S.append({"modul": "raster", "id": "einheiten", "kopf": "Mieteinheiten", "dachzeile": "Sieben Einheiten · ein Haus", "titel": "Alle Einheiten vermietet",
   "bloecke": [
     {"typ": "kpi", "x": 51, "y": 410, "w": 805, "h": 48, "groesse": 18, "gap": 12,
      "items": [{"wert": "7 von 7", "label": "Einheiten vermietet"}, {"wert": "6 + 1", "label": "Wohnungen und Remise", "stil": "hell"},
                {"wert": "34–47 m²", "label": "Wohnungsgrößen laut Plan"}, {"wert": "Ø 15 €/m²", "label": "Miete laut Verkäufer", "stil": "hell"}]},
     {"typ": "tabelle", "x": 51, "y": 336, "w": 520, "titel": "Einheitenübersicht", "breiten": [128, 196, 70, 70, 56], "links": [0, 1], "tags": [3], "zh": 24, "schrift": 8.4,
-     "kopf": ["Einheit", "Räume", "m² Plan", "Status", "Vertrag"], "zeilen": E},
-    {"typ": "balken", "x": 610, "y": 336, "w": 246, "lw": 92, "vw": 40, "titel": "Wohnfläche je Wohnung, m²", "abstand": 24, "max": 50,
-     "items": [["Wohnung 1", 44.30, "44,3"], ["Wohnung 2", 34.30, "34,3"], ["Wohnung 3", 46.25, "46,3"], ["Wohnung 4", 34.00, "34,0"],
-               ["Wohnung 5", 46.50, "46,5"], ["Wohnung 6", 37.00, "37,0"]]},
+     "kopf": ["Einheit", "Lage", "m² Plan", "Status", "Vertrag"], "zeilen": E},
+    {"typ": "bild", "x": 600, "y": 336, "w": 256, "h": 196, "bild": "fachwerk.jpg", "titel": "Wohnraum mit Fachwerk und Dielen"},
     {"typ": "text", "x": 51, "y": 110, "w": 805, "schrift": 8.2,
-     "absaetze": [["Kompakte Einheiten:", "Zwei- und Dreizimmerwohnungen zwischen 34 und 47 m² sind in Berlin breit nachgefragt und gut vermietbar. Die Remise ergänzt das Haus als siebte Einheit."],
+     "absaetze": [["Kompakte Einheiten:", "Ein- und Zweizimmerwohnungen zwischen 34 und 47 m² sind in Berlin breit nachgefragt und gut vermietbar. Die Remise ergänzt das Haus als siebte Einheit."],
                   "Vermerk: Wohnungsflächen laut Bestandsplänen, zusammen ca. 242 m²; der Verkäufer gibt die Wohn- und Nutzfläche mit ca. 453 m² an. Einzelmieten, Laufzeiten und die Fläche der Remise ergeben sich aus der Mieterliste, die vor dem Kaufvertrag übergeben wird."]}],
-  "quelle": Q + ". Wohnungsbezeichnungen zur Orientierung; Zuordnung laut Mieterliste."})
+  "quelle": Q + ". Wohnungsnummern zur Orientierung; Zuordnung laut Mieterliste. Raumaufteilung siehe Grundrisse auf den Seiten {seite:grundrisse-1} und {seite:grundrisse-2}."})
 
 def plan(name, art, bild, raeume, hinweise):
     return {"name": name, "art": art, "bild": bild, "quer": True, "raeume": raeume, "massketten": [], "hinweise": hinweise}
@@ -175,7 +173,7 @@ S.append({"modul": "raster", "id": "asset", "kopf": "Asset", "dachzeile": "Subst
     {"typ": "bild", "x": 323, "y": 192, "w": 260, "h": 130, "bild": "treppe.jpg", "pos": "center", "titel": "Treppenhaus"},
     {"typ": "kv", "x": 612, "y": 410, "w": 244, "kw": 84, "titel": "Zustand im Überblick", "schrift": 8.2, "bis": 60,
      "zeilen": [["Fassade", "Gründerzeitliche Stuckfassade mit Gesimsen und Fensterverdachungen"],
-                ["Modernisierung", "Umfassende Renovierung vor rund sechs Jahren, zuletzt 2018 (Verkäuferangabe)"],
+                ["Modernisierung", "Umfassend renoviert, letzte Modernisierung 2018 (Verkäuferangabe)"],
                 ["Bäder, Küchen", "Modernisiert; Küchen in allen sechs Wohnungen"],
                 ["Böden", "Originale Holzdielen, teils sichtbares Fachwerk"],
                 ["Fenster", "Doppelt verglast in allen Etagen"],
@@ -221,7 +219,7 @@ S.append({"modul": "raster", "id": "rendite", "kopf": "Rendite", "dachzeile": "K
              "Vermerk: Bei der Wohnfläche laut Bestandsplan (ca. 242 m², ohne Remise) ergäbe sich ein entsprechend niedrigerer Ertrag; maßgeblich ist die Mieterliste."]})
 
 S.append({"modul": "raster", "id": "finanzierung", "kopf": "Finanzierung", "dachzeile": "Finanzierungsbeispiel · Annahmen GRENFORD",
-  "titel": "Tragfähig finanziert",
+  "titel": "Tragfähig finanzierbar",
   "bloecke": [
     {"typ": "hstack", "x": 51, "y": 410, "w": 560, "lw": 140, "sw": 80, "max": INV / 1e6, "bh": 26, "abstand": 44, "titel": "Mittelverwendung und Mittelherkunft, Mio. €",
      "zeilen": [["Mittelverwendung", [[PREIS/1e6, "navy", "Kaufpreis 1,44"], [NK/1e6, "light", f"NK {NK/1e6:.2f}".replace('.', ',')]], mio(INV)],
@@ -258,7 +256,7 @@ S.append({"modul": "raster", "id": "check", "kopf": "GRENFORD Asset Check", "dac
   "bloecke": [
     {"typ": "kpi", "x": 51, "y": 410, "w": 805, "h": 48, "groesse": 18, "gap": 12,
      "items": [{"wert": "Vermietet", "label": "7 von 7 Einheiten"}, {"wert": "Modernisiert", "label": "Bäder, Küchen, Heizung 2018", "stil": "hell"},
-               {"wert": "Gesichtet", "label": "Pläne, Fotos, Objektbeschreibung"}, {"wert": "Mit Vorlage", "label": "Mieterliste und Grundbuch", "stil": "hell"}]},
+               {"wert": "Gesichtet", "label": "Pläne, Fotos, Objektbeschreibung"}, {"wert": "Vor Kaufvertrag", "label": "Mieterliste und Grundbuch", "stil": "hell"}]},
     {"typ": "tabelle", "x": 51, "y": 336, "w": 805, "breiten": [236, 92, 477], "links": [0, 1, 2], "tags": [1], "bis": 92, "schrift": 8.4,
      "kopf": ["Unterlage", "Status", "Ergebnis"],
      "zeilen": [["Objektbeschreibung des Verkäufers", "Gesichtet", "Baujahr 1898, sieben Einheiten, Modernisierung 2018, Ø 15 €/m², befristete Mietverträge"],
@@ -276,9 +274,9 @@ S.append({"modul": "raster", "id": "matrix", "kopf": "Value Matrix", "dachzeile"
   "bloecke": [
     {"typ": "matrix", "x": 51, "y": 412, "w": 805, "h": 286, "schrift": 8.8,
      "zellen": [{"titel": "Stärken", "akzent": True, "punkte": [["Voll vermietet.", "Sieben von sieben Einheiten, laufende Mieteinnahmen ab Übergabe."], ["Gründerzeit-Substanz.", "Stuckfassade, Dielen, Fachwerk; modernisierte Bäder und Küchen."], ["Ruhige Lage.", "Wohnquartier in Britz, Bus vor der Tür, U7 in rund 750 m."], ["Großes Grundstück.", "Rund 781 m² mit Garten und Remise."]]},
-                {"titel": "Hebel", "punkte": [["Unterlagen.", "Mieterliste und Flächenaufstellung früh anfordern und abgleichen."], ["Mietverträge.", "Befristungen nutzen, Anschlussvermietung marktgerecht gestalten."], ["Finanzierung.", f"Im GRENFORD-Beispiel DSCR {REIN/KD:.2f}".replace('.', ',') + "; verbindlich rechnet das Kreditinstitut mit Ihren Konditionen."], ["Kaufpreis.", "Jede 40.000 € weniger heben die Bruttorendite um rund 0,15 Prozentpunkte."]]},
-                {"titel": "Chancen", "akzent": True, "punkte": [["Dachgeschoss.", "Aufstockung und Ausbau mit Bauantrag, rechnerisch rund 18.000 € Mehrmiete p. a."], ["Stellplätze.", "3 bis 5 Stellplätze bzw. Carport im Garten."], ["Werterhalt.", "Berliner Altbau in gewachsener Lage, knappes Angebot."], ["Aufteilung.", "Langfristig Option zur Bildung von Wohnungseigentum (Genehmigungslage prüfen)."]]},
-                {"titel": "Marktfaktoren", "punkte": [["Mietrecht.", "Mietpreisbremse bei Neuvermietung (§§ 556d ff. BGB, bis 31.12.2029); bestehende Verträge nicht betroffen, Befristungen prüfen."], ["Zinsniveau.", "Rendite vor Finanzierung bei 5,3 bis 6,0 % je Mietszenario."], ["Energie.", "Gasheizung 2018; Anforderungen des GEG im Blick behalten."], ["Nachfrage.", "Kleine Wohnungen in Berlin anhaltend gefragt."]]}]},
+                {"titel": "Hebel", "punkte": [["Unterlagen.", "Mieterliste und Flächenaufstellung früh anfordern und abgleichen."], ["Mietverträge.", "Befristungen nutzen, Anschlussvermietung marktgerecht gestalten."], ["Finanzierung.", f"Im GRENFORD-Beispiel DSCR {REIN/KD:.2f}".replace('.', ',') + "; verbindlich rechnet das Kreditinstitut mit Ihren Konditionen."], ["Kaufpreis.", "Je 40.000 € Preisnachlass steigt die Bruttorendite um rund 0,16 Prozentpunkte."]]},
+                {"titel": "Chancen", "akzent": True, "punkte": [["Dachgeschoss.", "Aufstockung und Ausbau mit Bauantrag, rechnerisch rund 18.000 € Mehrmiete p. a."], ["Stellplätze.", "3 bis 5 Stellplätze bzw. Carport im Garten."], ["Werterhalt.", "Berliner Altbau in gewachsener Lage, knappes Angebot."], ["Energetische Modernisierung.", "Dämmung oder Wärmepumpe mit Fördermitteln können Wert und Vermietbarkeit weiter steigern."]]},
+                {"titel": "Marktfaktoren", "punkte": [["Mietrecht.", "Mietpreisbremse bei Neuvermietung (§§ 556d ff. BGB, bis 31.12.2029); bestehende Verträge nicht betroffen, Befristungen prüfen."], ["Zinsniveau.", "Bruttorendite von 5,3 bis 6,0 % je Mietszenario über dem angenommenen Sollzins von 3,8 %."], ["Energie.", "Gasheizung 2018; Anforderungen des GEG im Blick behalten."], ["Nachfrage.", "Kleine Wohnungen in Berlin anhaltend gefragt."]]}]},
     {"typ": "text", "x": 51, "y": "folgt", "abstand": 10, "w": 805, "box": True, "schrift": 8.6,
      "absaetze": [["Investor Insight:", "Die Pätzer Straße 11 verbindet laufende Mieteinnahmen aus sieben Einheiten mit Gründerzeit-Substanz und einer Reserve im Dachgeschoss. Ein überschaubares Ticket für Anleger, die Bestand und Potenzial in einem Objekt suchen."]]}],
   "quelle": "Quelle: Einschätzung GRENFORD auf Basis der Verkäuferunterlagen und der Rechnung auf den Seiten {seite:rendite} und {seite:finanzierung}. Indikativ, keine Zusicherung."})
@@ -286,7 +284,7 @@ S.append({"modul": "raster", "id": "matrix", "kopf": "Value Matrix", "dachzeile"
 S.append({"modul": "kontakt", "id": "kontakt", "bereich": "nach", "bild": "eingang-tor.jpg", "bild_pos": "center 40%", "abstand": 56, "schrift": 8.4,
   "claim": ["Ihr Interesse,", "Ihr nächster", "Schritt"], "dachzeile": "Pätzer Straße 11 · Transaktionsablauf", "titel": ["Vom Gespräch zum", "notariellen Vertrag"],
   "box_label": "Ansprechpartner", "box_titel": "Marco Kaimann, Founder &amp; Transaction Advisor",
-  "schritte": [["Gespräch und Kaufinteresse", "Wir besprechen Ihre Anlageziele und Finanzierung. Mit einer schriftlichen Interessenbekundung reservieren wir den nächsten Schritt."],
+  "schritte": [["Gespräch und Kaufinteresse", "Wir besprechen Ihre Anlageziele und Finanzierung. Mit Ihrer schriftlichen Interessenbekundung leiten wir die nächsten Schritte ein."],
                ["Identifizierung und Unterlagen", "Nach Identifizierung gemäß Geldwäschegesetz erhalten Sie Mieterliste, Mietverträge, Grundbuch, Pläne und Energieausweis."],
                ["Prüfung und Besichtigung", "Sie und Ihre Bank prüfen die Unterlagen; wir koordinieren die Besichtigung vor Ort in Berlin-Britz."],
                ["Notarvertrag", "Wir koordinieren den Kaufvertragsentwurf mit dem Notar bis zur Beurkundung."]]})
