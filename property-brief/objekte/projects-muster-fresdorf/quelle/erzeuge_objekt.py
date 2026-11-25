@@ -37,23 +37,23 @@ S.append({"modul": "titel", "id": "titel", "bild": "gutshaus.jpg", "bild_pos": "
   "adresse": ["Luckenwalder Straße 211", "14552 Michendorf OT Fresdorf"],
   "kennzahlen": [["ca. 343 m²", "Wohnfläche"], ["3", "Angebote"], ["230–250 Tsd. €", "Budget brutto*"], ["Okt. 2026", "Zweite Runde"]],
   "hinweis": "* Budgetrahmen und Bruttobezug noch zu bestätigen · Wohnfläche laut Objektunterlagen"})
-S.append({"modul": "vorwort", "id": "vorwort", "bereich": "vor", "dachzeile": "Persönlich für euch", "titel": "Eure Wünsche, euer Weg zur Entscheidung",
-  "gruss": "Euer Marco",
-  "lead": "Lieber Till, lieber Raphael, nach unseren Vor-Ort-Terminen konnten wir alle Wünsche mit den Bauunternehmern besprechen. Auf dieser Grundlage haben alle drei neue, angepasste Angebote erstellt.",
-  "links": "Diese Angebote stelle ich euch im zweiten GRENFORD Renovation Memo vor, damit ihr eine finale Entscheidung für eine Baufirma treffen könnt. Wir vergleichen weiterhin anonymisiert als A, B und C, in der Reihenfolge des ersten Memos.",
-  "rechts": "Ein ehrliches Wort zu den Kosten: Durch den größeren Umfang ist es bei allen teurer geworden als zunächst gedacht. Alle drei sind euch beim Preis entgegengekommen, jeder in seinem Rahmen (Seite {seite:runden}).",
-  "schluss": "Das Memo ordnet Leistungen, Konditionen und Kosten ein und zeigt, was vor einer Unterschrift noch zu klären ist. Ihr entscheidet, wen ihr beauftragt. Ich berate euch dabei und bleibe bis zur Fertigstellung an eurer Seite – für euch ist meine Begleitung kostenfrei."})
-S.append({"modul": "inhalt", "id": "inhalt", "bereich": "vor", "bild": "gutshaus.jpg", "bild_pos": "30% center", "ueberblick": "Orientierung",
+S.append({"modul": "inhalt", "id": "inhalt", "bereich": "vor", "bild": "luftbild.jpg", "bild_pos": "center", "ueberblick": "Euer Überblick",
   "claim": ["Euer Vorhaben,", "klar im Überblick"], "marke": "Gutshaus Fresdorf · Renovation Memo", "text": ["So führt euch das Memo", "zur Entscheidung"],
   "adresse": ["Luckenwalder Straße 211", "14552 Michendorf OT Fresdorf"],
-  "kapitel": [{"titel": "Eure Richtung", "sub": "Auf einen Blick, Prozess, Wünsche und Budget", "seiten": ["blick", "wuensche"]},
-              {"titel": "Das Haus", "sub": "Bestand und Wunschplanung", "seiten": ["bestand", "plaene-2"]},
-              {"titel": "Die Angebote", "sub": "Entwicklung seit der ersten Runde, drei Angebote", "seiten": ["runden", "angebot-c"]},
-              {"titel": "Die Analyse", "sub": "Kosten, Budget, Leistungen, Zahlung und Klärung", "seiten": ["kosten", "klaerung"]},
-              {"titel": "Die Entscheidung", "sub": "Einschätzung und nächster Schritt", "seiten": ["einschaetzung"]},
-              {"titel": "Kontakt, Grundlagen und Anhang", "sub": "Kontakt, Transparenz, Rechte und AGB", "seiten": ["kontakt", "agb"]}]})
-# ---------------- Eure Richtung
-S.append({"modul": "raster", "id": "blick", "kopf": "Auf einen Blick", "dachzeile": "Die Entscheidung auf einer Seite", "titel": "Drei Angebote, eine Empfehlung",
+  "kapitel": [{"titel": "Vorwort und Entscheidung auf einen Blick", "sub": "Persönliche Einordnung und Ergebnis auf einer Seite", "seiten": ["vorwort", "blick"]},
+              {"titel": "Eure Richtung", "sub": "Wünsche, Budget und Prozess", "seiten": ["wuensche"]},
+              {"titel": "Das Haus", "sub": "Bestand und Wunschplanung", "seiten": ["bestand", "plaene"]},
+              {"titel": "Die Angebote", "sub": "Entwicklung seit Runde 1, drei Angebote im Porträt", "seiten": ["runden", "angebot-c"]},
+              {"titel": "Die Analyse", "sub": "Kosten, Verlauf, bereinigter Vergleich, Matrix, Zahlung", "seiten": ["kosten", "zahlung"]},
+              {"titel": "Die Entscheidung", "sub": "Klärung vor der Unterschrift und Einschätzung", "seiten": ["klaerung", "einschaetzung"]},
+              {"titel": "Kontakt und Anhang", "sub": "Nächster Schritt, GRENFORD, Transparenz und AGB", "seiten": ["kontakt", "agb"]}]})
+S.append({"modul": "vorwort", "id": "vorwort", "bereich": "vor", "dachzeile": "Persönlich für euch", "titel": "Eure Wünsche, euer Weg",
+  "gruss": "Euer Marco",
+  "lead": "Nach unseren Vor-Ort-Terminen haben alle drei Bauunternehmen neue, angepasste Angebote erstellt. Dieses zweite Renovation Memo ist eure Grundlage für die finale Entscheidung.",
+  "links": "Wir vergleichen weiterhin anonymisiert als A, B und C, in der Reihenfolge des ersten Memos. Das Memo ordnet Leistungen, Konditionen und Kosten und zeigt, was vor einer Unterschrift noch zu klären ist.",
+  "rechts": "Ein ehrliches Wort zu den Kosten: Durch den größeren Umfang ist es bei allen teurer geworden als gedacht. Alle drei sind euch im Preis entgegengekommen, jeder in seinem Rahmen.",
+  "schluss": "Ihr entscheidet, wen ihr beauftragt. Ich berate euch dabei und bleibe bis zur Fertigstellung an eurer Seite – für euch ist meine Begleitung kostenfrei."})
+S.append({"modul": "raster", "id": "blick", "bereich": "vor", "kopf": "Auf einen Blick", "dachzeile": "Die Entscheidung auf einer Seite", "titel": "Drei Angebote, eine Empfehlung",
   "intro": "Alle drei Angebote liegen über der Obergrenze von 250.000 € brutto. A hat den kleinsten Abstand, Festpreis und Gewährleistung; B bildet den breitesten Umfang ab; C ist günstig, braucht aber Absicherung.",
   "bloecke": [
     {"typ": "kpi", "x": 51, "y": 384, "w": 560, "h": 64, "groesse": 22, "gap": 12,
@@ -67,49 +67,42 @@ S.append({"modul": "raster", "id": "blick", "kopf": "Auf einen Blick", "dachzeil
      "text": "A klären: Heizboden-Option, Küchenabgrenzung, Dachnacharbeiten deckeln. Danach entscheidet ihr."}],
   "quelle": FB + " Prozentwerte: Abstand zur Obergrenze von 250.000 € brutto."})
 
-S.append({"modul": "raster", "id": "prozess", "kopf": "Euer Weg zur Entscheidung", "dachzeile": "Ein gemeinsamer Prozess", "titel": "Von euren Wünschen zur finalen Entscheidung",
-  "bloecke": [
-    {"typ": "schritte", "x": 51, "y": 384, "w": 805,
-     "items": [["01 · Erledigt", "Aufnehmen", "Wünsche, Bestand und Budget erfasst."], ["02 · Erledigt", "Vergleichen", "Erste Angebote als A / B / C analysiert."],
-               ["03 · Erledigt", "Besprechen", "Unterschiede erläutert, Vor-Ort-Termine vereinbart."], ["04 · Erledigt", "Kennenlernen", "Vor Ort mit Till, Marco und den Bauunternehmern; Wünsche besprochen, Angebote angepasst."],
-               ["05 · Wir sind hier", "Entscheiden", "Zweites Memo: finale Entscheidung für eine Baufirma."]]},
-    {"typ": "dunkel", "x": 51, "y": 262, "w": 805, "h": 196, "titel": "Erst der Vergleich, dann die Entscheidung", "abstand": 40,
-     "werte": [["A · B · C", "Die Reihenfolge aus dem ersten Memo bleibt", 40, "o"]],
-     "text": "Die Baupartner kennt ihr aus den Terminen vor Ort. Das Memo bleibt bei A, B und C aus dem ersten Memo, damit beide Runden vergleichbar sind. GRENFORD begleitet die Abstimmungen beratend bis zur Fertigstellung; ihr beauftragt das Bauunternehmen direkt."}],
-  "quelle": "Stand Oktober 2026."})
-S.append({"modul": "raster", "id": "wuensche", "kopf": "Eure Vorgaben", "dachzeile": "Das habt ihr GRENFORD anvertraut", "titel": "Euer Alltag, eure Vorgaben",
+# ---------------- Eure Richtung
+S.append({"modul": "raster", "id": "wuensche", "kopf": "Eure Richtung", "dachzeile": "Das habt ihr GRENFORD anvertraut", "titel": "Euer Alltag, eure Vorgaben",
   "intro": "Diese Wünsche und Budgetangaben bilden die Aufgabenbasis, auf der die Angebote eingeholt wurden. Bei den Terminen vor Ort haben wir sie mit den Baupartnern besprochen.",
   "bloecke": [
-    {"typ": "kv", "x": 51, "y": 382, "w": 560, "kw": 130, "schrift": 9.0, "bis": 110,
-     "zeilen": [["DG · Neu ordnen", "Küche, Wohnen und Essen neu strukturieren; Bad und WC, Heizboden in Zementoptik, Dielen und Klimageräte. Gehobener Standard."],
-                ["EG · Zwei Appartements", "Altersgerechte Bäder, Küchenanschlüsse und teils neue Böden. Mittlerer bis gehobener Standard."],
-                ["UG · Funktional ergänzen", "Großformatfliesen, Bad, Waschküche und Trocknungssystem. Einfacher bis mittlerer Standard."],
-                ["+ · Erhalten und ergänzen", "Dielen weiß/grau ölen; Türen, Wandleisten und Rundbögen bewahren. Bodengleiche Duschen, Schiebetüren, Podest und Lift prüfen; Fenster zum Torhaus."]]},
-    {"typ": "dunkel", "x": 640, "y": 382, "w": 216, "h": 272, "titel": "Eure Budgetvorgabe", "abstand": 52,
-     "werte": [["230–250", "Tsd. € brutto für den Bau*", 34, "o"], ["300.000 €", "Gesamtbudget", 18], ["− 70.000 €", "für zwei Küchen", 18]],
-     "text": "* Obergrenze und Bruttobezug gemeinsam bestätigen. Alle drei Angebotssummen liegen über der Obergrenze."}],
-  "quelle": "Grundlage: Umbauübersicht vom 10.10.2026 und persönliche Gespräche, zuletzt bei den Vor-Ort-Terminen. Die obere Vergleichsgrenze von 250.000 € ist vorläufig. Altersgerechte Ausstattung ist ein Planungsziel; eine vollständige DIN-konforme Barrierefreiheit ist mit dem Planstand nicht zugesichert."})
+    {"typ": "kv", "x": 51, "y": 382, "w": 560, "kw": 120, "schrift": 8.6,
+     "zeilen": [["Dachgeschoss · neu ordnen", "Küche, Wohnen und Essen neu strukturieren; Bad und WC, Heizboden in Zementoptik, Dielen und Klimageräte. Gehobener Standard."],
+                ["Erdgeschoss · zwei Appartements", "Altersgerechte Bäder, Küchenanschlüsse und teils neue Böden. Mittlerer bis gehobener Standard."],
+                ["Untergeschoss · funktional", "Großformatfliesen, Bad, Waschküche und Trocknungssystem. Einfacher bis mittlerer Standard."],
+                ["Erhalten und ergänzen", "Dielen weiß/grau ölen; Türen, Wandleisten und Rundbögen bewahren. Bodengleiche Duschen, Schiebetüren, Podest und Lift prüfen."]]},
+    {"typ": "dunkel", "x": 640, "y": 382, "w": 216, "h": 214, "titel": "Eure Budgetvorgabe", "abstand": 60,
+     "werte": [["230–250", "Tsd. € brutto für den Bau", 34, "o"]],
+     "text": "300.000 € Gesamtbudget abzüglich rund 70.000 € für zwei Küchen. Obergrenze und Bruttobezug gemeinsam bestätigen."},
+    {"typ": "schritte", "x": 51, "y": 140, "w": 805,
+     "items": [["01 · Erledigt", "Aufnehmen", "Wünsche, Bestand und Budget erfasst"], ["02 · Erledigt", "Vergleichen", "Erste Angebote als A / B / C analysiert"],
+               ["03 · Erledigt", "Besprechen", "Unterschiede erläutert, Termine vereinbart"], ["04 · Erledigt", "Kennenlernen", "Vor Ort mit den Bauunternehmen"],
+               ["05 · Wir sind hier", "Entscheiden", "Zweites Memo, finale Wahl"]]}],
+  "quelle": "Grundlage: Umbauübersicht vom 10.10.2026 und persönliche Gespräche. Altersgerechte Ausstattung ist ein Planungsziel; eine DIN-konforme Barrierefreiheit ist mit dem Planstand nicht zugesichert."})
 
 # ---------------- Das Haus
-S.append({"modul": "raster", "id": "bestand", "kopf": "Der Bestand", "dachzeile": "Bestandsaufnahme · Gutshaus Fresdorf", "titel": "Der Bestand, euer Ausgangspunkt",
+S.append({"modul": "bildseite", "id": "bestand", "kopf": "Der Bestand", "stil": "voll", "bild": "luftbild.jpg", "bild_pos": "center",
+  "verlauf": [[.94, 0], [.92, 36], [.72, 50], [.32, 66], [.1, 84], [.04, 100]],
+  "dachzeile": "Bestandsaufnahme", "titel": ["Der Bestand,", "euer Ausgangspunkt"],
+  "text": "Für den Innenumbau betrachten wir das Gutshaus über drei Ebenen. Vorhandene Räume, Bodenaufbauten und Installationen werden mit euren neuen Nutzungswünschen zusammengeführt; dazu kommen die benannten Zugangsmaßnahmen.",
+  "kennzahlen": [["343 m²", "Wohnfläche ca."], ["3", "Ebenen"], ["2", "Appartements EG"]],
+  "hinweis": "Luftbild und Wohnfläche aus den Objektunterlagen; kein aktuelles Zustandsprotokoll."})
+S.append({"modul": "raster", "id": "plaene", "kopf": "Planungsgrundlage", "dachzeile": "Wunschplanung · Version 10.10.2026", "titel": "Rot-Gelb-Pläne aller Ebenen",
   "bloecke": [
-    {"typ": "bild", "x": 51, "y": 420, "w": 380, "h": 330, "bild": "luftbild.jpg", "titel": "Luftbild, Objektunterlagen"},
-    {"typ": "text", "x": 460, "y": 420, "w": 396, "schrift": 9.6,
-     "absaetze": ["Für den geplanten Innenumbau betrachten wir das Gutshaus über drei Ebenen: Unter-, Erd- und Dachgeschoss. Die vorhandenen Räume, Bodenaufbauten und Installationen müssen mit euren neuen Nutzungswünschen zusammengeführt werden. Das Memo erfasst außerdem die benannten Zugangsmaßnahmen."]},
-    {"typ": "bild", "x": 460, "y": 262, "w": 190, "h": 130, "bild": "bad.jpg", "titel": "Bad"},
-    {"typ": "bild", "x": 666, "y": 262, "w": 190, "h": 130, "bild": "flur.jpg", "titel": "Flur"},
-    {"typ": "kpi", "x": 460, "y": 106, "w": 396, "h": 40, "groesse": 17, "gap": 10, "items": [{"wert": "ca. 343 m²", "label": "Wohnfläche"}, {"wert": "3 Ebenen", "label": "UG · EG · DG", "stil": "hell"}]}],
-  "quelle": "Bilder und Wohnfläche aus den Objektunterlagen; historische Aufnahmen, kein aktuelles Zustandsprotokoll. Angebot B beziffert die bearbeitete Bodenfläche mit 346,43 m² (ohne Technikraum, Außenpodest und Treppenstufen). Ausführungsmaße, Bauteile und Statik sind vor Ausführung zu prüfen."})
-S.append({"modul": "raster", "id": "plaene-1", "kopf": "Planungsgrundlage / 01", "dachzeile": "Wunschplanung · Version RM/TK 10.10.2026", "titel": "Rot-Gelb-Pläne Erd- und Dachgeschoss",
-  "intro": "Originalpläne begradigt und proportional verkleinert; Bemaßung und Markierungen erhalten. Planstand Vorabzug; Maße und technische Umsetzbarkeit vor Ausführung prüfen.",
-  "bloecke": [
-    {"typ": "bild", "x": 51, "y": 384, "w": 395, "h": 320, "bild": "plan-eg.png", "contain": True, "weiss": True, "pad": 8, "titel": "Erdgeschoss"},
-    {"typ": "bild", "x": 461, "y": 384, "w": 395, "h": 320, "bild": "plan-dg.png", "contain": True, "weiss": True, "pad": 8, "titel": "Dachgeschoss"}]})
-S.append({"modul": "raster", "id": "plaene-2", "kopf": "Planungsgrundlage / 02", "dachzeile": "Wunschplanung · Version RM/TK 10.10.2026", "titel": "Untergeschoss und Zugang",
-  "intro": "Originalpläne begradigt und proportional verkleinert. Planstand Vorabzug; Außenpodest und Lift sind vorläufig, Maße und Umsetzbarkeit vor Ausführung prüfen.",
-  "bloecke": [
-    {"typ": "bild", "x": 51, "y": 384, "w": 300, "h": 320, "bild": "plan-ug.png", "contain": True, "weiss": True, "pad": 8, "titel": "Untergeschoss"},
-    {"typ": "bild", "x": 366, "y": 384, "w": 490, "h": 320, "bild": "plan-ansicht.png", "contain": True, "weiss": True, "pad": 8, "titel": "Ansicht mit Außenzugang"}]})
+    {"typ": "bild", "x": 51, "y": 420, "w": 255, "h": 210, "bild": "plan-eg.png", "contain": True, "weiss": True, "pad": 6, "titel": "Erdgeschoss"},
+    {"typ": "bild", "x": 318, "y": 420, "w": 280, "h": 210, "bild": "plan-dg.png", "contain": True, "weiss": True, "pad": 6, "titel": "Dachgeschoss"},
+    {"typ": "bild", "x": 610, "y": 420, "w": 246, "h": 210, "bild": "plan-ansicht.png", "contain": True, "weiss": True, "pad": 6, "titel": "Ansicht mit Außenzugang"},
+    {"typ": "bild", "x": 51, "y": 182, "w": 120, "h": 140, "bild": "plan-ug.png", "contain": True, "weiss": True, "pad": 4, "titel": "Untergeschoss"},
+    {"typ": "bild", "x": 183, "y": 182, "w": 200, "h": 140, "bild": "bad.jpg", "titel": "Bestand · Bad"},
+    {"typ": "bild", "x": 395, "y": 182, "w": 200, "h": 140, "bild": "flur.jpg", "titel": "Bestand · Flur"},
+    {"typ": "text", "x": 610, "y": 182, "w": 246, "box": True, "schrift": 8.2, "h": 140,
+     "absaetze": [["Planstand:", "Vorabzug. Außenpodest und Lift sind vorläufig; Maße, Statik und technische Umsetzbarkeit vor Ausführung prüfen."]]}],
+  "quelle": "Originalpläne begradigt und proportional verkleinert; Bemaßung und Markierungen erhalten. Fotos: historische Aufnahmen aus den Objektunterlagen."})
 
 # ---------------- Die Angebote
 S.append({"modul": "raster", "id": "runden", "kopf": "Die Angebote", "dachzeile": "Vergleich der Angebotsrunden · brutto", "titel": "Was sich seit Runde 1 geändert hat",
@@ -175,42 +168,6 @@ S.append({"modul": "raster", "id": "verlauf", "kopf": "Der Kostenverlauf", "dach
                 {"name": "Baupartner B", "farbe": "acc", "werte": cum(NB), "ende": "B " + t(BN)},
                 {"name": "Baupartner C", "farbe": "#9a9690", "werte": cum(NC), "ende": "C " + t(CN), "dy": 8}]}],
   "quelle": f"GRENFORD-Auswertung der Werte von Seite {{seite:kosten}}; Reihenfolge entspricht einer typischen Bauabfolge, keine Terminplanung. Obergrenze 250.000 € brutto = {e(OBER/MWST)} netto."})
-S.append({"modul": "raster", "id": "budget", "kopf": "Budgetanalyse", "dachzeile": "Brutto · im Vergleich zur Obergrenze", "titel": "Wie weit liegen die Angebote über dem Ziel?",
-  "bloecke": [
-    {"typ": "hstack", "x": 51, "y": 410, "w": 560, "lw": 110, "sw": 150, "max": 560000, "bh": 30, "abstand": 66, "titel": "Tsd. € brutto · Obergrenze 250.000 €",
-     "zeilen": [["Baupartner A", [[OBER, "light", "bis Obergrenze"], [A - OBER, "acc", f"+{e(A-OBER, 2)}"]], f"{e(A, 2)} · {pz((A/OBER-1)*100)}"],
-                ["Baupartner B", [[OBER, "light", "bis Obergrenze"], [B - OBER, "acc", f"+{e(B-OBER, 2)}"]], f"{e(B, 2)} · {pz((B/OBER-1)*100)}"],
-                ["Baupartner C", [[OBER, "light", "bis Obergrenze"], [C - OBER, "acc", f"+{e(C-OBER, 2)}"]], f"{e(C, 2)} · {pz((C/OBER-1)*100)}"]]},
-    {"typ": "dunkel", "x": 640, "y": 410, "w": 216, "h": 250, "titel": "Die Konsequenz", "abstand": 60,
-     "werte": [[f"+{e(A-OBER)}", "A über der Obergrenze", 22, "o"]],
-     "text": f"Auch das günstigste Angebot A liegt {e(A-OBER, 2)} brutto über 250.000 €. C überschreitet sie um {e(C-OBER, 2)}, B um {e(B-OBER, 2)}. Budget, Umfang und Prioritäten gehören deshalb auf den Tisch, bevor unterschrieben wird."}],
-  "quelle": "GRENFORD-Auswertung aus den Bruttosummen der Angebote; Obergrenze und Bruttobezug des Budgets sind noch zu bestätigen. Keine Zuordnung nach Bauphasen und keine Liquiditätsplanung. Die Leistungsumfänge sind nicht identisch (siehe Seiten {seite:konditionen} bis {seite:leistungen})."})
-S.append({"modul": "raster", "id": "konditionen", "kopf": "Konditionen im Detail", "dachzeile": "Leistungsabgleich nach Themen", "titel": "Konditionen im direkten Vergleich",
-  "bloecke": [
-    {"typ": "tabelle", "x": 51, "y": 420, "w": 580, "breiten": [100, 160, 160, 160], "links": [0, 1, 2, 3], "zh": 22, "schrift": 8.4, "bis": 80,
-     "kopf": ["Thema", "A", "B", "C"],
-     "zeilen": [["Preisart", "Festpreisgarantie; 5 % Rabatt auf die Gesamtleistung", "Freibleibend, kein verbindlicher Festpreis; Regie 65 € netto/h", "Festpreis; 5 % Nachlass auf die Leistungssumme"],
-                ["Zahlung", "10 % bei Unterschrift, 90 % nach Baufortschritt", "Abschläge nach dokumentiertem Leistungsstand", "30 % Anzahlung bei Beauftragung, 70 % nach Baufortschritt"],
-                ["Planung und Management", "Im Preis: Projektplanung, Bauleitung, Qualitätskontrolle, Bemusterung", "15 % Projektmanagement = 57.726,54 € netto", "Planungsleistungen in der Anzahlung enthalten"],
-                ["Gewährleistung", "5 Jahre auf die Arbeiten", "Im Angebot nicht ausgewiesen", "5 Jahre auf die Arbeiten"],
-                ["Zeitplan", "Ziel: Fertigstellung Ende April 2027, Einzug Mai 2027", "16 Wochen Baustellenvorhaltung (Annahme); Termine nach Freigabe", "Beginn nach Handelsregistereintragung; Bauzeit auf Wunsch vertraglich"],
-                ["Stand und Gültigkeit", "Angebot vom 14.10.2026; 30 Tage gültig", "Stand 23.10.2026; freibleibend", "Stand 24.10.2026; Unternehmen i. G."]]},
-    {"typ": "text", "x": 656, "y": 420, "w": 200, "box": True, "schrift": 8.6, "titel": "Einordnung",
-     "absaetze": ["Die Konditionen unterscheiden sich stärker als die Preise vermuten lassen: Festpreis und Zahlungsplan von A und C, Anzahlung und Registereintragung bei C, freibleibende Kalkulation bei B."]}],
-  "quelle": "Die Angaben fassen die drei Angebote zusammen; „nicht ausgewiesen“ heißt: nicht als enthalten behandelt. Unterschiedliche Ansätze sind kein Qualitätsurteil."})
-S.append({"modul": "raster", "id": "leistungen", "kopf": "Leistungen im Detail", "dachzeile": "Leistungsabgleich nach Themen", "titel": "Leistungen im direkten Vergleich",
-  "bloecke": [
-    {"typ": "tabelle", "x": 51, "y": 420, "w": 580, "breiten": [100, 160, 160, 160], "links": [0, 1, 2, 3], "zh": 22, "schrift": 8.4, "bis": 80,
-     "kopf": ["Thema", "A", "B", "C"],
-     "zeilen": [["Heizboden Zementoptik", "Nur optional: ca. 92,53 m² à 250 € netto, rund 23.132,50 €; nicht in der Summe", "Enthalten: leichter Heizboden EG 54,4 m² und DG 36,8 m²; Tragfähigkeit prüfen", "Fußbodenheizung (Nasssystem, Sichtestrich) nur im DG; Kostenschätzung"],
-                ["Klima DG", "Multisplit für DG Schlafen und Büro: 8.250 € netto", "Enthalten für DG Schlafen und Büro", "Nicht ausgewiesen"],
-                ["Außenpodest und Lift", "Nicht ausgewiesen", "Vorläufiges Budget 25.500 € netto (Podest, Hublift außen)", "Nicht ausgewiesen"],
-                ["Küchen", "Rückbau und Anschlüsse; Küchenmöbel nicht genannt", "Rückbau von vier Küchen, Anschlüsse; Einbauküchen und Möbel nicht enthalten", "Rohinstallation für drei Küchenbereiche; keine Küchenmöbel"],
-                ["Dielen und Böden", "Dielen schleifen 194,2 m²; neue Dielen DG Wohnen 19,88 m²; weiß/grau geölt", "Dielen und Parkett schleifen und farbig ölen: 136,7 m²", "Dielen schleifen 231,49 m², Oberfläche gesondert; Dielenboden EG neu"],
-                ["Dach und Nebengebäude", "Dach nach Aufwand (75 € netto/h); Kutscherhaus: Rückbau Pool, Wärmepumpe, Badewanne", "Dachzustand aufnehmen (1.450 € netto); Reparatur gesondert", "Dach nicht ausgewiesen; Kutscherhaus: Rückbau Pool, Wärmepumpe, Badewanne"]]},
-    {"typ": "text", "x": 656, "y": 420, "w": 200, "box": True, "schrift": 8.6, "titel": "Bereinigung (indikativ, brutto)",
-     "absaetze": ["B ohne Außenpodest und Lift (25.500 € + 15 % PM): 491.761,68 €.", "A mit optionalem Heizboden (23.132,50 € netto): 387.578,73 €.", "Auch bereinigt liegt jedes Angebot über der Obergrenze von 250.000 €. Den vollständigen Vergleich zeigt Seite {seite:bereinigt}."]}],
-  "quelle": "Mengen und Positionen laut Angeboten; keine Prüfung durch GRENFORD vor Ort. Bereinigung nur für separat ausgewiesene Positionen; Rabatt auf Optionen und Mengenabweichungen bleiben offen."})
 S.append({"modul": "raster", "id": "bereinigt", "kopf": "Bereinigter Vergleich", "dachzeile": "Gleicher Umfang, vergleichbare Summe", "titel": "Was jedes Angebot vollständig kostet",
   "intro": "Die Angebote decken nicht denselben Umfang ab. Ergänzt man die Leistungen, die nur einzelne Partner anbieten, mit den Ansätzen aus den anderen Angeboten, rücken A und C eng zusammen – B bleibt deutlich darüber.",
   "bloecke": [
@@ -263,19 +220,13 @@ S.append({"modul": "raster", "id": "klaerung", "kopf": "Klärung vor der Untersc
     {"typ": "text", "x": 51, "y": "folgt", "abstand": 20, "w": 805, "box": True, "schrift": 8.6,
      "absaetze": [["Gemeinsame Basis:", "Bruttobezug und Obergrenze des Budgets bestätigen, Prioritäten festlegen (Heizboden, Podest und Lift, Klima), Statik bei Wanddurchbrüchen und Heizboden sowie Schadstoff- und Feuchteprüfung. Ergebnisse gelten erst nach schriftlicher Rückmeldung der Baupartner."]]}],
   "quelle": FB})
-S.append({"modul": "raster", "id": "einschaetzung", "kopf": "Einschätzung zur Entscheidung", "dachzeile": "Nach der Analyse · für eure Entscheidung", "titel": "A zuerst prüfen, B und C im Blick",
+S.append({"modul": "raster", "id": "einschaetzung", "kopf": "Einschätzung", "dachzeile": "Nach der Analyse · für eure Entscheidung", "titel": "A zuerst prüfen, B und C im Blick",
   "bloecke": [
-    {"typ": "kv", "x": 51, "y": 420, "w": 330, "kw": 30, "schrift": 8.8,
-     "zeilen": [["01", "Budget und Prioritäten festlegen. Alle drei Summen liegen über 250.000 € brutto. Ihr legt fest, was unverzichtbar ist (Heizboden, Podest und Lift, Klima) und was später folgen kann."],
-                ["02", "Offene Punkte schriftlich klären. Das gewählte Unternehmen bestätigt Umfang, Festpreis oder Kostendeckel, Zahlungsplan und Termine schriftlich vor der Unterschrift."],
-                ["03", "Entscheiden und beauftragen. Ihr beauftragt direkt, erst auf Basis des geklärten Endangebots. GRENFORD begleitet beratend bis zur Fertigstellung."]]},
-    {"typ": "text", "x": 410, "y": 420, "w": 215, "box": True, "schrift": 8.6, "titel": "Baupartner A · kleinster Budgetabstand", "h": 214,
-     "absaetze": ["Für A spricht die niedrigste Summe mit dem kleinsten Abstand zur Obergrenze, kombiniert mit Festpreisgarantie, 5 Jahren Gewährleistung und einem Zahlungsplan von 10 % / 90 %. Der Heizboden ist nur Option; Podest und Lift fehlen.", [e(A, 2) + " brutto:", "Heizboden und Küchenabgrenzung klären."]]},
-    {"typ": "text", "x": 641, "y": 420, "w": 215, "box": True, "schrift": 8.6, "titel": "Baupartner B · breitester Umfang", "h": 214,
-     "absaetze": ["Für B spricht der größte Umfang mit Heizboden, Klima, Podest und Lift. Die Summe liegt 276.658,43 € über der Obergrenze, das Angebot ist freibleibend. Ohne Podest und Lift bleibt B bei 491.761,68 € brutto.", [e(B, 2) + " brutto:", "nur sinnvoll, wenn Umfang vor Budget geht."]]},
-    {"typ": "dunkel", "x": 51, "y": 176, "w": 805, "h": 96, "titel": "Warum C nachrangig bleibt", "abstand": 40,
-     "werte": [],
-     "text": "Mit der Heizboden-Option liegt A bei 387.578,73 € brutto, nur 4.820,39 € unter C. C weist kein Klima aus und setzt den Heizboden nur im DG an. Dazu kommen 30 % Anzahlung bei einem Unternehmen in Gründung ohne Handelsregistereintragung. C bleibt eine Alternative, wenn Nachweise und Absicherung überzeugen."}],
+    {"typ": "matrix", "x": 51, "y": 412, "w": 805, "h": 336, "schrift": 9.0,
+     "zellen": [{"titel": "Baupartner A · kleinster Budgetabstand", "akzent": True, "punkte": [["Für A spricht", "die niedrigste Summe mit dem kleinsten Abstand zur Obergrenze, Festpreisgarantie, 5 Jahre Gewährleistung und Zahlung 10 / 90."], ["Zu klären:", "Heizboden-Option und Küchenabgrenzung; Podest und Lift fehlen."], [e(A, 2), "brutto."]]},
+                {"titel": "Baupartner B · breitester Umfang", "punkte": [["Für B spricht", "der größte Umfang mit Heizboden, Klima, Podest und Lift."], ["Aber:", "freibleibend und 276.658,43 € über der Obergrenze; ohne Podest und Lift 491.761,68 € brutto."], ["Sinnvoll,", "wenn Umfang vor Budget geht."]]},
+                {"titel": "Baupartner C · nachrangig", "punkte": [["Bereinigt", "liegt C nur knapp über A; ohne Klima, Heizboden nur im DG."], ["Dazu:", "30 % Anzahlung bei einem Unternehmen in Gründung ohne Registereintragung."], ["Alternative,", "wenn Nachweise und Absicherung überzeugen."]]},
+                {"titel": "Eure nächsten Schritte", "akzent": True, "punkte": [["01 · Budget und Prioritäten", "festlegen: was unverzichtbar ist, was später folgen kann."], ["02 · Offene Punkte", "schriftlich klären: Umfang, Festpreis, Zahlungsplan, Termine."], ["03 · Entscheiden", "und direkt beauftragen – auf Basis des geklärten Endangebots."]]}]}],
   "quelle": "Keine Referenz- oder Bonitätsprüfung der Baupartner; kein Angebot ist als vollständig passender Endpreis bestätigt. Ihr beauftragt direkt; GRENFORD übernimmt keine Bauleitung und keine Abnahme."})
 
 # ---------------- Anhang

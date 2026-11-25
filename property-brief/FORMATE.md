@@ -186,8 +186,33 @@ python3 build.py objekte/<objekt>
 NODE_PATH=$(npm root -g) node render.mjs objekte/<objekt>
 ```
 
-### Renovation Memo (27 Seiten, Muster `objekte/projects-muster-fresdorf`)
+### GRENFORD Projects: Renovation Brief und Renovation Memo
 
-Inhalt und Seitenfolge wie im abgeschlossenen Original (Gutshaus Fresdorf), ergänzt um vier Analyseseiten (*). Farben und Formen laut Projects-Brand-Kit: Titelspalte in Orange mit fast schwarzer Schrift, Karten mit 3 px oranger Oberkante und 14 px Rundung unten.
+Zwei Umfänge nach Bauvolumen, je zwei Stufen. Gleiche Farben und Formen (Projects-Brand-Kit), gleiche Anrede (du/ihr), gleiche Budgetlogik: Jede Fassung zeigt die Angebote gegen die Budgetvorgabe des Kunden.
 
-Titel · Vorwort (I) · Inhalt (II) · 1 Auf einen Blick* · 2 Euer Weg zur Entscheidung · 3 Eure Vorgaben · 4 Bestand · 5–6 Rot-Gelb-Pläne · 7 Rundenvergleich · 8–10 Angebot A, B, C · 11 Kostenvergleich · 12 Kostenverlauf · 13 Budgetanalyse · 14 Konditionen · 15 Leistungen · 16 Bereinigter Vergleich* · 17 Entscheidungsmatrix* · 18 Zahlungspläne* · 19 Klärung vor der Unterschrift · 20 Einschätzung · Kontakt (III) · Über GRENFORD (IV) · Transparenz (V) · AGB (VI, `shared/agb_projects.html`)
+| | bis 100.000 € netto | ab 100.000 € netto |
+|---|---|---|
+| Typische Vorhaben | Wohnungen, kleine Reihenhäuser | Penthouse, Kernsanierung, Vierseitenhof, Gewerbeeinheit bis 100 m² |
+| Format | **Renovation Brief** (8–13 Seiten) | **Renovation Memo** (22 Seiten) |
+| Stufe 1 · Angebotsvergleich | erste Angebotsrunde, Vorauswahl der Baupartner | erste Angebotsrunde, Vorauswahl der Baupartner |
+| Stufe 2 · Angebotsupdate | angepasste Angebote oder Nachträge | angepasste Angebote oder Nachträge |
+
+Die Schwelle bezieht sich auf das Angebotsvolumen netto (Mittelwert der Angebote). Liegt es knapp darüber, entscheidet die Komplexität.
+
+#### Renovation Brief · Angebotsvergleich (12 Seiten, Muster `objekte/projects-weichselstrasse-20`)
+
+Titel · Vorwort (I) · Auf einen Blick (II) · 1 Deine Vorgaben mit Budget und Prozess · 2 Bestand und Umbauplanung · 3 Drei Angebote im Profil · 4 Kosten und Budget · 5 Leistungen und Konditionen (Matrix) · 6 Klärung und Empfehlung · Kontakt (III) · Transparenz (IV) · AGB (V)
+
+#### Renovation Brief · Angebotsupdate (ca. 10 Seiten)
+
+Titel · Vorwort · Auf einen Blick · 1 Was sich geändert hat (Runde 1 → Runde 2 bzw. Hauptangebot → Nachtrag, je Partner) · 2 Die Angebote im Profil · 3 Kosten und Budget · 4 Matrix · 5 Empfehlung · Kontakt · Transparenz · AGB
+
+#### Renovation Memo · Angebotsvergleich (22 Seiten)
+
+Titel · Inhalt · Vorwort · Auf einen Blick · 1 Eure Richtung (Vorgaben, Budget, Prozess) · 2 Bestand · 3 Rot-Gelb-Pläne · 4 Budgetanalyse · 5–7 Angebot A, B, C · 8 Kostenvergleich · 9 Kostenverlauf · 10 Bereinigter Vergleich · 11 Entscheidungsmatrix · 12 Zahlungspläne · 13 Klärung · 14 Einschätzung · Kontakt · Über GRENFORD · Transparenz · AGB
+
+#### Renovation Memo · Angebotsupdate (22 Seiten, Muster `objekte/projects-muster-fresdorf`)
+
+Wie der Angebotsvergleich; statt der Budgetanalyse steht der **Rundenvergleich** („Was sich seit Runde 1 geändert hat“). Bei Nachträgen: Hauptangebot, Nachtrag und neue Gesamtsumme je Gewerk, gemessen an der Budgetvorgabe.
+
+AGB für beide Formate: `shared/agb_projects.html`.
