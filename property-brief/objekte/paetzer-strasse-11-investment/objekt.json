@@ -103,7 +103,7 @@
     },
     {
      "titel": "Objekt und Lage",
-     "sub": "Das Haus, Umfeld und Anbindung in Berlin-Britz",
+     "sub": "Das Haus, Makro- und Mikrolage in Berlin-Britz",
      "seiten": [
       "objekt",
       "lage"
@@ -174,9 +174,11 @@
    "id": "fakten",
    "bereich": "vor",
    "kopf": "Hard Facts",
-   "start": 356,
-   "zeilenhoehe": 15.2,
-   "blockabstand": 16,
+   "start": 352,
+   "zeilenhoehe": 21.5,
+   "blockabstand": 20,
+   "schrift": 9.2,
+   "label_groesse": 7.8,
    "kennzahlen": [
     [
      "1,44 Mio. €",
@@ -344,6 +346,231 @@
    "hinweis": "Straßenansicht · Fotoaufnahme Bestand"
   },
   {
+   "modul": "raster",
+   "id": "standort",
+   "kopf": "Standort",
+   "dachzeile": "Makrolage · Berlin und Brandenburg",
+   "titel": "Kurze Wege in die Stadt und ins Umland",
+   "intro": "Hermannplatz in rund 20 Minuten, Potsdamer Platz und Alexanderplatz in gut einer halben Stunde, der Flughafen BER in rund 25 Minuten mit dem Auto: Britz verbindet ruhiges Wohnen mit kurzen Wegen in die Innenstadt und zu den Arbeitsplatzschwerpunkten im Südosten.",
+   "bloecke": [
+    {
+     "typ": "karte",
+     "x": 51,
+     "y": 384,
+     "w": 450,
+     "h": 296,
+     "geo": "geo/berlin_karte.geojson",
+     "bbox": [
+      12.98,
+      52.33,
+      13.87,
+      52.66
+     ],
+     "grund": "#ece7df",
+     "markiert": [
+      "Neukölln"
+     ],
+     "strahlen": true,
+     "ringe": [
+      5,
+      10,
+      20
+     ],
+     "ziel": {
+      "name": "Pätzer Straße 11",
+      "sub": "Berlin-Britz · Neukölln",
+      "lon": 13.441,
+      "lat": 52.4545,
+      "dx": 34,
+      "dy": 34
+     },
+     "orte": [
+      {
+       "name": "1",
+       "lon": 13.4246,
+       "lat": 52.4867,
+       "dx": 5,
+       "dy": 2
+      },
+      {
+       "name": "2",
+       "lon": 13.3655,
+       "lat": 52.4752,
+       "dx": 5,
+       "dy": 2
+      },
+      {
+       "name": "3",
+       "lon": 13.3759,
+       "lat": 52.5096,
+       "dx": 5,
+       "dy": 2
+      },
+      {
+       "name": "4",
+       "lon": 13.4132,
+       "lat": 52.5219,
+       "dx": 5,
+       "dy": 2
+      },
+      {
+       "name": "5",
+       "lon": 13.3326,
+       "lat": 52.5032,
+       "dx": 5,
+       "dy": 2
+      },
+      {
+       "name": "6",
+       "lon": 13.3694,
+       "lat": 52.5251,
+       "dx": 5,
+       "dy": 2
+      },
+      {
+       "name": "7",
+       "lon": 13.53,
+       "lat": 52.4308,
+       "dx": 5,
+       "dy": 2
+      },
+      {
+       "name": "8",
+       "lon": 13.5033,
+       "lat": 52.3667,
+       "dx": 5,
+       "dy": 2
+      },
+      {
+       "name": "9",
+       "lon": 13.067,
+       "lat": 52.3917,
+       "dx": 5,
+       "dy": 2
+      },
+      {
+       "name": "10",
+       "lon": 13.79,
+       "lat": 52.394,
+       "dx": 5,
+       "dy": 2
+      }
+     ],
+     "laender": [
+      {
+       "name": "Brandenburg",
+       "lon": 13.02,
+       "lat": 52.63
+      },
+      {
+       "name": "Berlin",
+       "lon": 13.2,
+       "lat": 52.62,
+       "farbe": "acc"
+      }
+     ],
+     "nachweis": "Kartengrundlage: Bezirksgrenzen Berlin, Amt für Statistik Berlin-Brandenburg (via Berliner Morgenpost, CC BY) · Neukölln hervorgehoben"
+    },
+    {
+     "typ": "tabelle",
+     "x": 530,
+     "y": 384,
+     "w": 326,
+     "titel": "Entfernungen ab Pätzer Straße 11",
+     "breiten": [
+      146,
+      56,
+      62,
+      62
+     ],
+     "zh": 20.5,
+     "schrift": 8.4,
+     "kopf": [
+      "Ziel",
+      "Luftlinie",
+      "ÖPNV ca.",
+      "Pkw ca."
+     ],
+     "zeilen": [
+      [
+       "1  Hermannplatz",
+       "3,7 km",
+       "20 min",
+       "12 min"
+      ],
+      [
+       "2  Bahnhof Südkreuz",
+       "5,6 km",
+       "36 min",
+       "13 min"
+      ],
+      [
+       "3  Potsdamer Platz",
+       "7,5 km",
+       "35 min",
+       "25 min"
+      ],
+      [
+       "4  Alexanderplatz",
+       "7,7 km",
+       "35 min",
+       "25 min"
+      ],
+      [
+       "5  Kurfürstendamm",
+       "9,1 km",
+       "40 min",
+       "30 min"
+      ],
+      [
+       "6  Hauptbahnhof",
+       "9,2 km",
+       "40 min",
+       "30 min"
+      ],
+      [
+       "7  Adlershof",
+       "6,6 km",
+       "35 min",
+       "20 min"
+      ],
+      [
+       "8  Flughafen BER",
+       "10,6 km",
+       "40 min",
+       "25 min"
+      ],
+      [
+       "9  Potsdam",
+       "26,3 km",
+       "65 min",
+       "45 min"
+      ],
+      [
+       "10  Grünheide",
+       "24,6 km",
+       "70 min",
+       "40 min"
+      ]
+     ]
+    },
+    {
+     "typ": "text",
+     "x": 530,
+     "y": "folgt",
+     "abstand": 14,
+     "w": 326,
+     "box": true,
+     "titel": "Einordnung",
+     "schrift": 8.4,
+     "absaetze": [
+      "Innenstadt, Fernbahn und Flughafen in einer Fahrt erreichbar; Adlershof, BER und Grünheide stehen für wachsende Arbeitsplatzstandorte im Südosten – ein stabiles Fundament für die Mietnachfrage."
+     ]
+    }
+   ],
+   "quelle": "Luftlinie: Berechnung GRENFORD aus Koordinaten. Fahrzeiten: gerundete Richtwerte GRENFORD von Tür zu Tür, abhängig von Tageszeit und Verbindung; Südkreuz laut Verkäuferunterlagen. Ohne Gewähr."
+  },
+  {
    "modul": "lage",
    "id": "lage",
    "kopf": "Lage",
@@ -355,7 +582,7 @@
      "12359 Berlin-Britz"
     ]
    },
-   "dachzeile": "Pätzer Straße 11 · Berlin-Britz",
+   "dachzeile": "Mikrolage · Pätzer Straße 11",
    "titel": [
     "Ruhig wohnen,",
     "schnell in der Stadt"

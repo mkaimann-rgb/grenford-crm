@@ -91,28 +91,36 @@ Regeln:
 19. Transparenz im Detail (`recht`, 4 Blöcke in 2 × 2)
 20. AGB (`shared/agb.html`)
 
-### Investment Brief (20 Seiten, Muster `objekte/paetzer-strasse-11-investment`)
+### Investment Brief (21 Seiten, Muster `objekte/paetzer-strasse-11-investment`)
 
 1. Titel mit vier Kennzahlen
 2. Inhalt (I)
 3. Vorwort (II)
 4. Hard Facts (III)
 5. Das Objekt (Bildseite)
-6. Lage
-7. Mieteinheiten
-8. Grundrisse 1
-9. Grundrisse 2
-10. Asset
-11. GRENFORD Research (Mietniveau)
-12. Rendite mit Sensitivität
-13. Finanzierungsbeispiel
-14. Wertpotenzial
-15. GRENFORD Asset Check
-16. Value Matrix
-17. Kontakt / Transaktionsablauf
-18. Über GRENFORD
-19. Transparenz im Detail (`recht`, 6 Blöcke in 3 × 2: zusätzlich Rendite und Finanzierung sowie Provision)
-20. AGB (`shared/agb_investment_brief.html`)
+6. Standort / Makrolage (Karte Berlin und Brandenburg mit Entfernungstabelle)
+7. Lage / Mikrolage (Quartier, Nahversorgung, ÖPNV)
+8. Mieteinheiten
+9. Grundrisse 1
+10. Grundrisse 2
+11. Asset
+12. GRENFORD Research (Mietniveau)
+13. Rendite mit Sensitivität
+14. Finanzierungsbeispiel
+15. Wertpotenzial
+16. GRENFORD Asset Check
+17. Value Matrix
+18. Kontakt / Transaktionsablauf
+19. Über GRENFORD
+20. Transparenz im Detail (`recht`, 6 Blöcke in 3 × 2: zusätzlich Rendite und Finanzierung sowie Provision)
+21. AGB (`shared/agb_investment_brief.html`)
+
+#### Standortseite Berlin (Standard für alle Berliner Objekte)
+
+- **Karte:** `shared/geo/berlin_karte.geojson` (Bezirksgrenzen, CC BY). Brandenburg bildet den Hintergrund, der Bezirk des Objekts wird über `"markiert"` hervorgehoben. Dazu Radien 5 / 10 / 20 km und nummerierte Ziele mit Strahlen.
+- **Ziele:** Die Standardziele liegen in `shared/geo/berlin_ziele.json`. Es sind zehn Punkte: Hermannplatz, Südkreuz, Potsdamer Platz, Alexanderplatz, Kurfürstendamm, Hauptbahnhof, Adlershof, BER, Potsdam und Grünheide. Je nach Objektlage können Ziele getauscht werden, zum Beispiel Spandau, Tegel/Urban Tech Republic oder Ostkreuz.
+- **Tabelle:** Die Luftlinie berechnet das Skript aus den Koordinaten. ÖPNV- und Pkw-Zeiten sind gerundete Richtwerte von Tür zu Tür, gekennzeichnet als „Richtwerte GRENFORD, ohne Gewähr“. Wo vorhanden, haben Verkäuferangaben Vorrang.
+- **Einordnung:** ein kurzer Kasten zur Bedeutung der Lage für die Mietnachfrage.
 
 ### Investment Memo (ca. 34 Seiten, Muster `objekte/montesana-gi26-002`)
 

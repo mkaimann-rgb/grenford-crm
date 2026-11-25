@@ -22,6 +22,18 @@ def mio(v): return f'{v/1e6:.2f}'.replace('.', ',') + ' Mio. €'
 BR = JM / PREIS * 100; FAK = PREIS / JM; NAR = REIN / INV * 100
 print(f'Jahresmiete {JM:.0f}  NK {NK:.0f}  INV {INV:.0f}  Rein {REIN:.0f}  BR {BR:.2f}  NAR {NAR:.2f}  EK {EK:.0f}  KD {KD:.0f}  CF {CF:.0f}')
 
+# ---------- Standort: Standardziele Berlin/Brandenburg (shared/geo/berlin_ziele.json), Luftlinie berechnet
+import math
+ZIELE = {z['id']: z for z in json.load(open(os.path.join(os.path.dirname(OUT), '..', '..', 'shared', 'geo', 'berlin_ziele.json')))['ziele']}
+LON, LAT = 13.441, 52.4545                          # Pätzer Straße 11 (schematisch)
+def km(z):
+    R = 6371.0; p1, p2 = math.radians(LAT), math.radians(z['lat']); dp = p2 - p1; dl = math.radians(z['lon'] - LON)
+    return 2 * R * math.asin(math.sqrt(math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2))
+# Fahrzeiten: Richtwerte GRENFORD (Tür zu Tür, gerundet); Südkreuz laut Verkäuferunterlagen
+WEGE = [("hermannplatz", "20 min", "12 min"), ("suedkreuz", "36 min", "13 min"), ("potsdamer-platz", "35 min", "25 min"),
+        ("alexanderplatz", "35 min", "25 min"), ("kudamm", "40 min", "30 min"), ("hbf", "40 min", "30 min"),
+        ("adlershof", "35 min", "20 min"), ("ber", "40 min", "25 min"), ("potsdam", "65 min", "45 min"), ("gruenheide", "70 min", "40 min")]
+
 meta = {"titel": "GRENFORD Investment Brief – Pätzer Straße 11",
         "fusszeile": "GRENFORD INVESTMENTS / PÄTZER STRASSE 11 · INVESTMENT BRIEF · VERTRAULICH",
         "ausgabe": "GRENFORD_Investment_Brief_Paetzer_Strasse_11.pdf", "redaktionsstand": "25.11.2026", "agb_stand": "18.11.2026",
@@ -45,7 +57,7 @@ S.append({"modul": "inhalt", "id": "inhalt", "bereich": "vor", "bild": "fassade-
   "claim": ["Ein Haus,", "sieben Einheiten"], "marke": "The Heritage House · GI26-003",
   "text": ["Objekt, Zahlen und Potenzial", "der Kapitalanlage im Überblick"], "adresse": ["Pätzer Straße 11", "12359 Berlin-Britz"],
   "kapitel": [{"titel": "Vorwort und Hard Facts", "sub": "Einordnung, Kaufpreis, Rendite auf einen Blick", "seiten": ["vorwort", "fakten"]},
-              {"titel": "Objekt und Lage", "sub": "Das Haus, Umfeld und Anbindung in Berlin-Britz", "seiten": ["objekt", "lage"]},
+              {"titel": "Objekt und Lage", "sub": "Das Haus, Makro- und Mikrolage in Berlin-Britz", "seiten": ["objekt", "lage"]},
               {"titel": "Mieteinheiten und Grundrisse", "sub": "Sieben Einheiten, Flächen und Bestandspläne", "seiten": ["einheiten", "grundrisse-2"]},
               {"titel": "Asset und Haustechnik", "sub": "Substanz, Modernisierung, Heizung und Energie", "seiten": ["asset"]},
               {"titel": "Markt und Rendite", "sub": "Mietorientierung, Kaufpreis, Rendite und Sensitivität", "seiten": ["markt", "rendite"]},
@@ -60,7 +72,7 @@ S.append({"modul": "vorwort", "id": "vorwort", "bereich": "vor", "dachzeile": "T
   "rechts": f"Das Angebot: Kaufpreis 1,44 Mio. €, Kaufpreisfaktor {f1(FAK)}-fach und Bruttorendite {p(BR)} auf Basis der Verkäuferangaben. Dazu Reserve im Dachgeschoss.",
   "schluss": "Der Brief führt von den Hard Facts über Objekt, Lage und Mieteinheiten zu Rendite, Finanzierung und Potenzial und schließt mit dem GRENFORD Asset Check. Für Rückfragen und die Unterlagen stehen wir Ihnen persönlich zur Verfügung."})
 
-S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Facts", "start": 356, "zeilenhoehe": 15.2, "blockabstand": 16,
+S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Facts", "start": 352, "zeilenhoehe": 21.5, "blockabstand": 20, "schrift": 9.2, "label_groesse": 7.8,
   "kennzahlen": [["1,44 Mio. €", "Kaufpreis"], ["ca. 3.179 €/m²", "Kaufpreis je m²"], [f1(FAK) + "-fach", "Kaufpreisfaktor"], [p(BR), "Bruttorendite"], ["7 von 7", "Einheiten vermietet"]],
   "dachzeile": "Zahlen, Daten, Fakten · Objekt-Nr. GI26-003", "titel": "Das Haus in Kennzahlen",
   "links": [{"titel": "Objekt und Fläche", "zeilen": [["Objektart", "Mehrfamilienhaus mit Remise"], ["Baujahr", "1898 · Modernisierung 2018"],
@@ -82,8 +94,25 @@ S.append({"modul": "bildseite", "id": "objekt", "kopf": "Das Objekt", "stil": "v
   "kennzahlen": [["1898", "Baujahr"], ["7", "Einheiten"], ["781 m²", "Grundstück"]],
   "hinweis": "Straßenansicht · Fotoaufnahme Bestand"})
 
+S.append({"modul": "raster", "id": "standort", "kopf": "Standort", "dachzeile": "Makrolage · Berlin und Brandenburg",
+  "titel": "Kurze Wege in die Stadt und ins Umland",
+  "intro": "Hermannplatz in rund 20 Minuten, Potsdamer Platz und Alexanderplatz in gut einer halben Stunde, der Flughafen BER in rund 25 Minuten mit dem Auto: Britz verbindet ruhiges Wohnen mit kurzen Wegen in die Innenstadt und zu den Arbeitsplatzschwerpunkten im Südosten.",
+  "bloecke": [
+    {"typ": "karte", "x": 51, "y": 384, "w": 450, "h": 296, "geo": "geo/berlin_karte.geojson", "bbox": [12.98, 52.33, 13.87, 52.66], "grund": "#ece7df",
+     "markiert": ["Neukölln"], "strahlen": True, "ringe": [5, 10, 20],
+     "ziel": {"name": "Pätzer Straße 11", "sub": "Berlin-Britz · Neukölln", "lon": LON, "lat": LAT, "dx": 34, "dy": 34},
+     "orte": [{"name": str(i + 1), "lon": ZIELE[k]['lon'], "lat": ZIELE[k]['lat'], "dx": 5, "dy": 2} for i, (k, _, _) in enumerate(WEGE)],
+     "laender": [{"name": "Brandenburg", "lon": 13.02, "lat": 52.63}, {"name": "Berlin", "lon": 13.2, "lat": 52.62, "farbe": "acc"}],
+     "nachweis": "Kartengrundlage: Bezirksgrenzen Berlin, Amt für Statistik Berlin-Brandenburg (via Berliner Morgenpost, CC BY) · Neukölln hervorgehoben"},
+    {"typ": "tabelle", "x": 530, "y": 384, "w": 326, "titel": "Entfernungen ab Pätzer Straße 11", "breiten": [146, 56, 62, 62], "zh": 20.5, "schrift": 8.4,
+     "kopf": ["Ziel", "Luftlinie", "ÖPNV ca.", "Pkw ca."],
+     "zeilen": [[f"{i + 1}  {ZIELE[k]['name']}", f"{km(ZIELE[k]):.1f} km".replace('.', ','), o, a] for i, (k, o, a) in enumerate(WEGE)]},
+    {"typ": "text", "x": 530, "y": "folgt", "abstand": 14, "w": 326, "box": True, "titel": "Einordnung", "schrift": 8.4,
+     "absaetze": ["Innenstadt, Fernbahn und Flughafen in einer Fahrt erreichbar; Adlershof, BER und Grünheide stehen für wachsende Arbeitsplatzstandorte im Südosten – ein stabiles Fundament für die Mietnachfrage."]}],
+  "quelle": "Luftlinie: Berechnung GRENFORD aus Koordinaten. Fahrzeiten: gerundete Richtwerte GRENFORD von Tür zu Tür, abhängig von Tageszeit und Verbindung; Südkreuz laut Verkäuferunterlagen. Ohne Gewähr."})
+
 S.append({"modul": "lage", "id": "lage", "kopf": "Lage", "karte": {"lat": 52.4545, "lon": 13.441, "label": ["Pätzer Straße 11", "12359 Berlin-Britz"]},
-  "dachzeile": "Pätzer Straße 11 · Berlin-Britz", "titel": ["Ruhig wohnen,", "schnell in der Stadt"],
+  "dachzeile": "Mikrolage · Pätzer Straße 11", "titel": ["Ruhig wohnen,", "schnell in der Stadt"],
   "intro": "Die Pätzer Straße liegt in einem ruhigen Wohnquartier in Britz, ohne Durchgangsverkehr. Bus, U-Bahn und Stadtautobahn sind in wenigen Minuten erreichbar – eine gefragte Lage für Mieter mit Berufsweg in die Innenstadt.",
   "gruppen": [{"titel": "Einkauf &amp; Versorgung", "text": "Supermärkte und Fachgeschäfte im Quartier · Einkaufszentrum Gropius Passagen in der Nähe."},
               {"titel": "Schule &amp; Familie", "text": "Schulen, Kindergärten und Arztpraxen in Britz; Gymnasien und Hochschulen im Bezirk Neukölln."},

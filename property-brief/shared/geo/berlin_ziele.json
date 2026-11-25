@@ -1,0 +1,75 @@
+{
+ "_hinweis": "Standardziele für Standortseiten Berlin/Brandenburg (Koordinaten WGS84, gerundet). Luftlinie wird im Generator berechnet.",
+ "ziele": [
+  {
+   "id": "hermannplatz",
+   "name": "Hermannplatz",
+   "sub": "Neukölln · Kreuzberg",
+   "lon": 13.4246,
+   "lat": 52.4867
+  },
+  {
+   "id": "suedkreuz",
+   "name": "Bahnhof Südkreuz",
+   "sub": "Fern- und Regionalverkehr",
+   "lon": 13.3655,
+   "lat": 52.4752
+  },
+  {
+   "id": "potsdamer-platz",
+   "name": "Potsdamer Platz",
+   "sub": "Mitte",
+   "lon": 13.3759,
+   "lat": 52.5096
+  },
+  {
+   "id": "alexanderplatz",
+   "name": "Alexanderplatz",
+   "sub": "Mitte",
+   "lon": 13.4132,
+   "lat": 52.5219
+  },
+  {
+   "id": "kudamm",
+   "name": "Kurfürstendamm",
+   "sub": "City West",
+   "lon": 13.3326,
+   "lat": 52.5032
+  },
+  {
+   "id": "hbf",
+   "name": "Hauptbahnhof",
+   "sub": "Fernverkehr",
+   "lon": 13.3694,
+   "lat": 52.5251
+  },
+  {
+   "id": "adlershof",
+   "name": "Adlershof",
+   "sub": "Wissenschafts- und Medienstandort",
+   "lon": 13.53,
+   "lat": 52.4308
+  },
+  {
+   "id": "ber",
+   "name": "Flughafen BER",
+   "sub": "Schönefeld, Brandenburg",
+   "lon": 13.5033,
+   "lat": 52.3667
+  },
+  {
+   "id": "potsdam",
+   "name": "Potsdam",
+   "sub": "Landeshauptstadt Brandenburg",
+   "lon": 13.067,
+   "lat": 52.3917
+  },
+  {
+   "id": "gruenheide",
+   "name": "Grünheide",
+   "sub": "Tesla Gigafactory, Brandenburg",
+   "lon": 13.79,
+   "lat": 52.394
+  }
+ ]
+}

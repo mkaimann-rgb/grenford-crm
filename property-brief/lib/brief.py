@@ -880,15 +880,16 @@ def m_fakten(d, obj):
     def side(x0, x1, blocks, cols):
         y = top; out = ''
         for blk in blocks:
-            out += EB(x0, y, blk['titel'], NAVY, 7.4)
+            out += EB(x0, y, blk['titel'], NAVY, d.get('label_groesse', 7.4))
             for j, h in enumerate(cols if blk.get('spalten', True) and cols else []):
                 out += RT(x1 - 78 * (len(cols) - 1 - j), y, 'B', 6.6, 9, GREY, h.upper(), 76)
             y -= 8
             for r in blk['zeilen']:
-                out += L(x0, y, x1) + T(x0, y - rh * .66, 'N', 7.9, 10.5, INK, r[0])
+                fs = d.get('schrift', 7.9); yb = (y - rh / 2 - fs * .36) if 'schrift' in d else y - rh * .66
+                out += L(x0, y, x1) + T(x0, yb, 'N', fs, 10.5 if 'schrift' not in d else fs * 1.33, INK, r[0])
                 vals = r[1:]
                 if len(vals) == 1 and len(cols) <= 1:
-                    out += RT(x1, y - rh * .66, 'N', 7.9, 10.5, NAVY, vals[0], 220)
+                    out += RT(x1, yb, 'N', fs, fs * 1.33, NAVY, vals[0], 220)
                 else:
                     for j, v in enumerate(vals):
                         out += RT(x1 - 78 * (len(vals) - 1 - j), y - rh * .66, 'B' if j == 0 and len(vals) > 1 else 'N', 7.9, 10.5, NAVY if j == 0 else GREY, v, 76)
@@ -1299,7 +1300,8 @@ HALO = 'text-shadow:0 0 2pt #fff,0 0 2pt #fff,0 0 1pt #fff;'
 def b_karte(b):
     """Regionalkarte aus gemeinfreien Geodaten: Länder, Kantone, Rhein, Standort mit Strahlen oder Radien."""
     x, y, w, h = b['x'], b['y'], b['w'], b['h']
-    geo = json.load(open(os.path.join(C.objdir, b['geo'])))
+    gp = os.path.join(C.objdir, b['geo'])
+    geo = json.load(open(gp if os.path.exists(gp) else os.path.join(SHARED, b['geo'])))
     lon0, lat0, lon1, lat1 = b['bbox']; latc = (lat0 + lat1) / 2; cs = math.cos(math.radians(latc))
     k = min(w / ((lon1 - lon0) * cs), h / (lat1 - lat0)); lonc = (lon0 + lon1) / 2
     cx0, cy0 = x + w / 2, y - h / 2
@@ -1309,18 +1311,21 @@ def b_karte(b):
         rings = {'Polygon': cs_, 'MultiPolygon': [r for p in cs_ for r in p], 'LineString': [cs_], 'MultiLineString': cs_}.get(t, [])
         close = 'Z' if 'Polygon' in t else ''
         return ''.join('M' + 'L'.join(f'{P(a, c)[0]:.1f},{H-P(a, c)[1]:.1f}' for a, c in r) + close for r in rings if r)
-    fill = {'DEU': '#ffffff', 'CHE': _rgba(LIGHT, .30), 'FRA': '#ece7df', 'AUT': '#ece7df', 'LIE': '#ece7df'}
-    sv = f'<rect x="{x}" y="{H-y}" width="{w}" height="{h}" fill="#ece7df"/>'
+    fill = {'DEU': '#ffffff', 'CHE': _rgba(LIGHT, .30), 'FRA': '#ece7df', 'AUT': '#ece7df', 'LIE': '#ece7df', 'BEZ': '#ffffff'}
+    mark = set(b.get('markiert', []))
+    sv = f'<rect x="{x}" y="{H-y}" width="{w}" height="{h}" fill="{b.get("grund", "#ece7df")}"/>'
     feats = geo['features']
     for f in feats:
-        if f['properties']['typ'] == 'land': sv += f'<path d="{path(f["geometry"])}" fill="{fill.get(f["properties"]["iso"], "#ece7df")}" stroke="none"/>'
+        if f['properties']['typ'] == 'land':
+            fc = _rgba(LIGHT, .45) if f['properties'].get('name') in mark else fill.get(f['properties']['iso'], '#ece7df')
+            sv += f'<path d="{path(f["geometry"])}" fill="{fc}" stroke="none"/>'
     for f in feats:
         if f['properties']['typ'] == 'region': sv += f'<path d="{path(f["geometry"])}" fill="none" stroke="#cfc7bb" stroke-width=".45"/>'
     for f in feats:
         if f['properties']['typ'] == 'see': sv += f'<path d="{path(f["geometry"])}" fill="#d3e2e8" stroke="none"/>'
         if f['properties']['typ'] == 'fluss': sv += f'<path d="{path(f["geometry"])}" fill="none" stroke="#9dbfcc" stroke-width="1.3"/>'
     for f in feats:
-        if f['properties']['typ'] == 'land' and f['properties']['iso'] in ('CHE',):
+        if f['properties']['typ'] == 'land' and (f['properties']['iso'] in ('CHE',) or f['properties'].get('name') in mark):
             sv += f'<path d="{path(f["geometry"])}" fill="none" stroke="{NAVY}" stroke-width=".9" stroke-dasharray="3 1.6"/>'
     z = b['ziel']; zx, zy = P(z['lon'], z['lat'])
     for r in b.get('ringe', []):
