@@ -44,6 +44,7 @@ Ob Property Brief, Investment Brief, Investment Memo oder Renovation Memo: Jedes
 - Sachlich, positiv, investorenfreundlich.
 - Offene Punkte werden nie verschwiegen. Sie stehen als neutrale „Vermerk:“-Zeile im normalen Text, ohne Farbe und ohne Hervorhebung.
 - Quellen stehen am Seitenfuß, jede Angabe nur einmal.
+- Gesetzliche Hinweise immer mit Fundstelle und Stand, z. B. „Mietpreisbremse (§§ 556d ff. BGB, verlängert bis 31.12.2029)“; vor jeder Ausgabe auf Aktualität prüfen.
 - Der Verkäufer wird nicht namentlich genannt („wird im Rahmen der Vertragsvorbereitung benannt“).
 
 ## Welches Format wann

@@ -167,7 +167,7 @@ S.append({"modul": "raster", "id": "markt", "kopf": "Markt &amp; Mietorientierun
     {"typ": "text", "x": 612, "y": 200, "w": 244, "titel": "Einordnung",
      "absaetze": ["Kleine, modernisierte Wohnungen mit Altbaucharakter sind in Britz gut nachgefragt. Die Remise ergänzt das Haus als siebte Einheit. Mieterliste und Mietverträge werden vor dem Kaufvertrag zur Prüfung übergeben."]},
     {"typ": "text", "x": 51, "y": 172, "w": 520, "titel": "Lesehilfe",
-     "absaetze": ["Die Marktwerte sind Durchschnittswerte aus Angebots- und Bestandsdaten, keine Vergleichsobjekte und keine Prognose für dieses Haus. Die Objektmiete ist eine Angabe des Verkäufers. Vermerk: Für Wohnraum in Berlin gilt bei Neuvermietung die Mietpreisbremse; die zulässige Miete ist im Einzelfall zu prüfen."]}],
+     "absaetze": ["Die Marktwerte sind Durchschnittswerte aus Angebots- und Bestandsdaten, keine Vergleichsobjekte und keine Prognose für dieses Haus. Die Objektmiete ist eine Angabe des Verkäufers. Vermerk: Bei Neuvermietung gilt in Berlin die Mietpreisbremse (§§ 556d ff. BGB, verlängert bis 31.12.2029). Bestehende Mietverträge sind nicht betroffen; Ausnahmen wie Vormiete oder umfassende Modernisierung sind im Einzelfall zu prüfen."]}],
   "quelle": ["Quellen: miet-check.de, Mietpreis PLZ 12359 (2026, 181 Einträge); immoportal.com, Mietspiegel Berlin-Britz (2026). Recherche 24.11.2026, nicht repräsentativ.",
              "Objektmiete: Angabe des Verkäufers. Mietspanne der Modellrechnung: Annahme GRENFORD."]})
 
