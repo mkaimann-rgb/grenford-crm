@@ -43,7 +43,7 @@ S.append({"modul": "vorwort", "id": "vorwort", "bereich": "vor", "dachzeile": "M
   "schluss": "Das Memo führt von den Hard Facts über Standort, Research und Konzept zur 10-Jahres-Rechnung und zum Asset Check. Im Basisfall ergibt sich über zehn Jahre eine IRR von 23,1 %. Für Rückfragen und den Zugang zum Datenraum stehen wir Ihnen persönlich zur Verfügung."})
 
 S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Facts", "zeilenhoehe": 12.9, "blockabstand": 14, "start": 356, "quelle_y": 36,
-  "kennzahlen": [["5,3 Mio. €", "Kaufpreis Early-Commit"], ["13,9-fach", "Faktor Eigentümerertrag"], ["23,1 %", "IRR 10 Jahre, Basisfall"], ["1,62-fach", "Multiple auf eingesetztes Kapital"], ["23,2 Mio. €", "Gesamtwert nach Fertigstellung"]],
+  "kennzahlen": [["5,3 Mio. €", "Kaufpreis Early-Commit"], ["13,9-fach", "Faktor Eigentümerertrag"], ["23,1 %", "IRR 10 Jahre, Basisfall"], ["1,59-fach", "Multiple auf eingesetztes Kapital"], ["23,2 Mio. €", "Gesamtwert nach Fertigstellung"]],
   "dachzeile": "Zahlen, Daten, Fakten · Objekt-Nr. GI26-002", "titel": "Das Projekt in Kennzahlen",
   "intro": "Kaufpreis und Renditen in zwei Varianten: Early-Commit (5,3 Mio. €, LOI bis Ende November 2026) und Listenpreis (7,0 Mio. €). Alle Werte netto, vor Steuern und Finanzierung.",
   "links": [
@@ -62,7 +62,7 @@ S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Fac
       ["Kaufpreisstaffelung (indikativ)", "2,5 / 2,8 Mio. €", "–"], ["Erwerbsnebenkosten (Annahme 6,5 %)", "0,34 Mio. €", "0,46 Mio. €"],
       ["Maklercourtage (5,0 % zzgl. MwSt.)", "0,27 Mio. €", "0,35 Mio. €"]]},
     {"titel": "Rendite und Wert (Basisfall)", "zeilen": [["Gesamtinvestition netto", "17,4 Mio. €", "19,2 Mio. €"], ["Gesamtwert nach Fertigstellung", "23,2 Mio. €", "23,2 Mio. €"],
-      ["IRR 10 Jahre (vor Steuern)", "23,1 %", "14,1 %"], ["Multiple auf eingesetztes Kapital", "1,62-fach", "1,46-fach"],
+      ["IRR 10 Jahre (vor Steuern)", "23,1 %", "14,1 %"], ["Multiple auf eingesetztes Kapital", "1,59-fach", "1,44-fach"],
       ["Überschuss nach Wiederverkauf", "10,3 Mio. €", "8,5 Mio. €"], ["Barwert DCF (10 % Diskontsatz)", "3,7 Mio. €", "1,6 Mio. €"],
       ["Spitzenbedarf Kapital", "8,4 Mio. €", "10,2 Mio. €"]]}],
   "quelle": ["Quelle: Verkäuferunterlagen und GRENFORD-Berechnung. Renditen vor Steuern und ohne Fremdfinanzierung, indikativ. * Laut Entwicklungsprognose des Verkäufers (07/2026); Bezugszeitpunkt im Gutachten zu bestätigen."]})
@@ -365,9 +365,9 @@ S.append({"modul": "tabelle", "id": "cashflow", "kopf": "10-Jahres-Rechnung", "d
     ["Netto-Cashflow", "−3,80", "−4,56", "6,11", "3,79", "0,37", "0,38", "0,38", "0,39", "0,40", "0,41", "6,39", "10,27"],
     ["Kumuliert", "−3,80", "−8,36", "−2,25", "1,54", "1,91", "2,29", "2,68", "3,07", "3,47", "3,88", "10,27", ""]],
   "label_breite": 214,
-  "kennzahlen": [["23,1 %", "IRR 10 Jahre, Basis Early-Commit"], ["1,62-fach", "Multiple auf eingesetztes Kapital"], ["10,3 Mio. €", "Gesamtüberschuss vor Steuern"], ["8,4 Mio. €", "Spitzenbedarf Kapital, kumuliert"]],
-  "hinweis": "<b style='font-weight:500;color:#24534c'>Zahlungsplan:</b> Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss beträgt die IRR im Basisfall 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert. Vermerk: Möblierung hochgerechnet auf 92 Einheiten (ca. 2,0 statt 1,3 Mio. €) ergibt eine IRR von rund 20 %.",
-  "quelle": ["Quelle: Berechnung GRENFORD auf Basis von Bauzeitplan (Restbudget 8,66 Mio. € netto), Sales Plan (5.000 €/m²) und Ertragsprognose (381 T€ ab 2029, +2 % p. a.). Alle Werte in Mio. €, netto, vor Steuern und Finanzierung; indikativ."]})
+  "kennzahlen": [["23,1 %", "IRR 10 Jahre, Basis Early-Commit"], ["1,59-fach", "Multiple auf eingesetztes Kapital"], ["10,3 Mio. €", "Gesamtüberschuss vor Steuern"], ["8,4 Mio. €", "Spitzenbedarf Kapital, kumuliert"]],
+  "hinweis": "<b style='font-weight:500;color:#24534c'>Zahlungsplan:</b> Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss beträgt die IRR im Basisfall 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert. Vermerk: Das Möblierungsangebot über 1,30 Mio. € gilt für Haus C. Hochgerechnet auf alle 92 Einheiten (ca. 2,0 Mio. €) ergeben sich eine IRR von 20,3 %, ein Multiple von 1,53-fach und ein Gesamtüberschuss von 9,6 Mio. € (Variante auf Seite {seite:sensitivitaet}).",
+  "quelle": ["Quelle: Berechnung GRENFORD auf Basis von Bauzeitplan (Restbudget 8,66 Mio. € netto), Sales Plan (5.000 €/m²) und Ertragsprognose (381 T€ ab 2029, +2 % p. a.). Alle Werte in Mio. €, netto, vor Steuern und Finanzierung; indikativ. Multiple: Summe der Rückflüsse ÷ eingesetztes Kapital einschließlich Erwerbsnebenkosten."]})
 
 # 19 Szenarien
 S.append({"modul": "raster", "id": "szenarien", "kopf": "10-Jahres-Rechnung", "dachzeile": "Szenarien", "titel": "Der Early-Commit hebt die Rendite deutlich",
@@ -389,10 +389,10 @@ S.append({"modul": "raster", "id": "szenarien", "kopf": "10-Jahres-Rechnung", "d
 # 20 Sensitivität
 S.append({"modul": "raster", "id": "sensitivitaet", "kopf": "10-Jahres-Rechnung", "dachzeile": "Sensitivität und DCF", "titel": "Rendite und Barwert in allen Varianten robust",
   "bloecke": [
-    {"typ": "tabelle", "x": L0, "y": 410, "w": 400, "titel": "Szenarien im Vergleich, 10 Jahre", "breiten": [76, 54, 56, 48, 54, 62, 50], "hervorheben": ["Basis"], "zh": 26,
+    {"typ": "tabelle", "x": L0, "y": 410, "w": 400, "titel": "Szenarien im Vergleich, 10 Jahre", "breiten": [76, 54, 56, 48, 54, 62, 50], "hervorheben": ["Basis"], "zh": 24,
      "kopf": ["Szenario", "IRR EC", "Mult. EC", "Mio. €", "IRR LP", "Mult. LP", "Mio. €"],
-     "zeilen": [["Konservativ", "10,6 %", "1,42-fach", "7,1", "6,6 %", "1,28-fach", "5,3"], ["Basis", "23,1 %", "1,62-fach", "10,3", "14,1 %", "1,46-fach", "8,5"], ["Chance", "26,8 %", "1,70-fach", "11,6", "16,5 %", "1,53-fach", "9,8"]]},
-    {"typ": "tabelle", "x": L0, "y": "folgt", "abstand": 24, "w": 400, "titel": "DCF: Barwert (NPV) nach Diskontsatz, Mio. €", "breiten": [100, 100, 100, 100], "hervorheben": ["10 %"], "zh": 26,
+     "zeilen": [["Konservativ", "10,6 %", "1,40-fach", "7,1", "6,6 %", "1,27-fach", "5,3"], ["Basis", "23,1 %", "1,59-fach", "10,3", "14,1 %", "1,44-fach", "8,5"], ["Chance", "26,8 %", "1,66-fach", "11,6", "16,5 %", "1,51-fach", "9,8"], ["Basis, FF&amp;E 2,0", "20,3 %", "1,53-fach", "9,6", "12,5 %", "1,39-fach", "7,8"]]},
+    {"typ": "tabelle", "x": L0, "y": "folgt", "abstand": 24, "w": 400, "titel": "DCF: Barwert (NPV) nach Diskontsatz, Mio. €", "breiten": [100, 100, 100, 100], "hervorheben": ["10 %"], "zh": 24,
      "kopf": ["Diskontsatz", "Early-Commit", "Listenpreis", "Vorteil"],
      "zeilen": [["8 %", "4,61", "2,59", "2,02"], ["10 %", "3,68", "1,62", "2,07"], ["12 %", "2,89", "0,78", "2,11"]]},
     {"typ": "tabelle", "x": 482, "y": 410, "w": 374, "titel": "IRR Early-Commit: Verkaufspreis × Exit-Rendite", "breiten": [110, 88, 88, 88], "zh": 26,
@@ -407,7 +407,7 @@ S.append({"modul": "raster", "id": "sensitivitaet", "kopf": "10-Jahres-Rechnung"
     {"typ": "text", "x": L0, "y": "folgt", "abstand": 12, "w": FULL, "schrift": 8.8,
      "absaetze": [["Aussage:", "Selbst bei 4.875 €/m² Verkaufspreis und 8,0 % Exit-Rendite bleibt die IRR bei Early-Commit über 20 %. Der Kaufpreis wirkt stärker auf die Rendite als Verkaufspreis und Exit-Annahme."]]}],
   "quelle": ["Quelle: Berechnung GRENFORD; Annahmen siehe Seite {seite:szenarien}; EC = Early-Commit 5,3 Mio. €, LP = Listenpreis 7,0 Mio. €. Barwert: Jahres-Cashflows 2026 bis 2036 auf Ende 2026 diskontiert, vor Steuern, ohne Fremdfinanzierung.",
-             "Fremdkapital (inkl. KfW) ist nicht enthalten. Keine Zusicherung künftiger Erträge."]})
+             "Basis, FF&amp;E 2,0: Möblierung auf alle 92 Einheiten hochgerechnet (ca. 2,0 statt 1,30 Mio. €, Angebot Haus C); übrige Annahmen wie Basisfall. Multiple inkl. Erwerbsnebenkosten. Fremdkapital (inkl. KfW) ist nicht enthalten. Keine Zusicherung künftiger Erträge."]})
 
 # 21 Apartment-Käufer
 S.append({"modul": "raster", "id": "apartment", "kopf": "Apartment-Käufer", "dachzeile": "Rendite für Einzelerwerber", "titel": "Zehn Jahre aus Sicht der Apartment-Käufer",

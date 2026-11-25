@@ -194,7 +194,7 @@
      "IRR 10 Jahre, Basisfall"
     ],
     [
-     "1,62-fach",
+     "1,59-fach",
      "Multiple auf eingesetztes Kapital"
     ],
     [
@@ -359,8 +359,8 @@
       ],
       [
        "Multiple auf eingesetztes Kapital",
-       "1,62-fach",
-       "1,46-fach"
+       "1,59-fach",
+       "1,44-fach"
       ],
       [
        "Überschuss nach Wiederverkauf",
@@ -2749,7 +2749,7 @@
      "IRR 10 Jahre, Basis Early-Commit"
     ],
     [
-     "1,62-fach",
+     "1,59-fach",
      "Multiple auf eingesetztes Kapital"
     ],
     [
@@ -2761,9 +2761,9 @@
      "Spitzenbedarf Kapital, kumuliert"
     ]
    ],
-   "hinweis": "<b style='font-weight:500;color:#24534c'>Zahlungsplan:</b> Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss beträgt die IRR im Basisfall 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert. Vermerk: Möblierung hochgerechnet auf 92 Einheiten (ca. 2,0 statt 1,3 Mio. €) ergibt eine IRR von rund 20 %.",
+   "hinweis": "<b style='font-weight:500;color:#24534c'>Zahlungsplan:</b> Das Modell unterstellt 2,5 Mio. € in 2026 und 2,8 Mio. € in 2027 (Annahme GRENFORD, keine zugesagte Verkäuferkondition). Bei Zahlung des vollen Kaufpreises von 5,3 Mio. € bei Vertragsschluss beträgt die IRR im Basisfall 20,6 %; Multiple, Gesamtüberschuss und Spitzenbedarf bleiben unverändert. Vermerk: Das Möblierungsangebot über 1,30 Mio. € gilt für Haus C. Hochgerechnet auf alle 92 Einheiten (ca. 2,0 Mio. €) ergeben sich eine IRR von 20,3 %, ein Multiple von 1,53-fach und ein Gesamtüberschuss von 9,6 Mio. € (Variante auf Seite {seite:sensitivitaet}).",
    "quelle": [
-    "Quelle: Berechnung GRENFORD auf Basis von Bauzeitplan (Restbudget 8,66 Mio. € netto), Sales Plan (5.000 €/m²) und Ertragsprognose (381 T€ ab 2029, +2 % p. a.). Alle Werte in Mio. €, netto, vor Steuern und Finanzierung; indikativ."
+    "Quelle: Berechnung GRENFORD auf Basis von Bauzeitplan (Restbudget 8,66 Mio. € netto), Sales Plan (5.000 €/m²) und Ertragsprognose (381 T€ ab 2029, +2 % p. a.). Alle Werte in Mio. €, netto, vor Steuern und Finanzierung; indikativ. Multiple: Summe der Rückflüsse ÷ eingesetztes Kapital einschließlich Erwerbsnebenkosten."
    ]
   },
   {
@@ -2943,7 +2943,7 @@
      "hervorheben": [
       "Basis"
      ],
-     "zh": 26,
+     "zh": 24,
      "kopf": [
       "Szenario",
       "IRR EC",
@@ -2957,29 +2957,38 @@
       [
        "Konservativ",
        "10,6 %",
-       "1,42-fach",
+       "1,40-fach",
        "7,1",
        "6,6 %",
-       "1,28-fach",
+       "1,27-fach",
        "5,3"
       ],
       [
        "Basis",
        "23,1 %",
-       "1,62-fach",
+       "1,59-fach",
        "10,3",
        "14,1 %",
-       "1,46-fach",
+       "1,44-fach",
        "8,5"
       ],
       [
        "Chance",
        "26,8 %",
-       "1,70-fach",
+       "1,66-fach",
        "11,6",
        "16,5 %",
-       "1,53-fach",
+       "1,51-fach",
        "9,8"
+      ],
+      [
+       "Basis, FF&amp;E 2,0",
+       "20,3 %",
+       "1,53-fach",
+       "9,6",
+       "12,5 %",
+       "1,39-fach",
+       "7,8"
       ]
      ]
     },
@@ -2999,7 +3008,7 @@
      "hervorheben": [
       "10 %"
      ],
-     "zh": 26,
+     "zh": 24,
      "kopf": [
       "Diskontsatz",
       "Early-Commit",
@@ -3179,7 +3188,7 @@
    ],
    "quelle": [
     "Quelle: Berechnung GRENFORD; Annahmen siehe Seite {seite:szenarien}; EC = Early-Commit 5,3 Mio. €, LP = Listenpreis 7,0 Mio. €. Barwert: Jahres-Cashflows 2026 bis 2036 auf Ende 2026 diskontiert, vor Steuern, ohne Fremdfinanzierung.",
-    "Fremdkapital (inkl. KfW) ist nicht enthalten. Keine Zusicherung künftiger Erträge."
+    "Basis, FF&amp;E 2,0: Möblierung auf alle 92 Einheiten hochgerechnet (ca. 2,0 statt 1,30 Mio. €, Angebot Haus C); übrige Annahmen wie Basisfall. Multiple inkl. Erwerbsnebenkosten. Fremdkapital (inkl. KfW) ist nicht enthalten. Keine Zusicherung künftiger Erträge."
    ]
   },
   {

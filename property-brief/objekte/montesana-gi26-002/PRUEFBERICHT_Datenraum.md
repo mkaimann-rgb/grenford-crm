@@ -40,8 +40,8 @@ Methode: alle Text-PDFs, Excel- und Word-Dateien vollständig ausgelesen; Scans 
 
 ## 4 Hinweise für Ihre Entscheidung (nicht im Memo geändert)
 
-1. **Möblierung:** Das BAUR-Angebot vom 15.12.2025 (1,14 Mio. € netto) gilt nur für Haus C (51 Einheiten). Für 92 Einheiten ergibt sich hochgerechnet ca. 2,0 Mio. € statt 1,30 Mio. €. Auswirkung: IRR rund 20,1 % statt 23,1 %, Überschuss ca. 9,5 statt 10,3 Mio. €. Im Memo als Hinweis auf Seite 18 ergänzt; Kennzahlen unverändert.
-2. **Multiple 1,62-fach:** Aus der Cashflow-Tabelle ergeben sich 1,59-fach (Zuflüsse 27,63 / Abflüsse 17,37 Mio. €). Definition prüfen.
+1. **Möblierung:** Das BAUR-Angebot vom 15.12.2025 (1,14 Mio. € netto) gilt nur für Haus C (51 Einheiten). Seit 25.11.2026 zeigt das Memo beide Varianten: Basisfall mit 1,30 Mio. € und „Basis, FF&E 2,0“ (hochgerechnet auf 92 Einheiten) mit IRR 20,3 %, Multiple 1,53-fach, Überschuss 9,6 Mio. € (Seite 20, Vermerk auf Seite 18).
+2. **Multiple:** Seit 25.11.2026 einheitlich als Summe der Rückflüsse ÷ eingesetztes Kapital inkl. Erwerbsnebenkosten: Basis 1,59-fach (vorher 1,62), Listenpreis 1,44 (1,46); Konservativ 1,40 / 1,27, Chance 1,66 / 1,51. Nachrechnung mit dem rekonstruierten Modell (IRR 23,1 / 14,1 / 10,5–10,6 / 26,8 / 16,5 % reproduziert).
 3. **Teilungserklärung:** Wohnungen 1–85 nur zur Ferienvermietung, Eigennutzung max. 4 Wochen/Jahr, keine Zweitwohnung. Bebauungsplan schließt Dauerwohnen aus; Änderung für A, B, WH 1/3 in Verhandlung.
 4. **Bauträgererlaubnis:** Laut Entwurf der Teilungserklärung ist die Gewerbeerlaubnis als Bauträger beantragt, nicht erteilt (relevant für MaBV-Verkauf).
 5. **Betreiberkosten nicht in der Rechnung:** stuub: 5 % Umsatz + 10 % GOP, Mindestgebühr 180 T€ p. a., Branded-Residences-Lizenz 3,5 % des Verkaufspreises, Working Capital 250 T€. IWG: 14 % + 2 % vom Bruttoumsatz, Ausbau auf Kosten des Eigentümers.
