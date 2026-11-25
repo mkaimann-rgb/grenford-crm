@@ -89,6 +89,7 @@ S.append({"modul": "fakten", "id": "fakten", "bereich": "vor", "kopf": "Hard Fac
              "Vermerk: Die Bestandspläne weisen für die sechs Wohnungen ca. 242 m² aus; maßgeblich für Fläche und Ertrag sind Mieterliste und Mietverträge."]})
 
 S.append({"modul": "bildseite", "id": "objekt", "kopf": "Das Objekt", "stil": "voll", "bild": "fassade-seite.jpg", "bild_pos": "center 40%",
+  "verlauf": [[.94, 0], [.92, 36], [.72, 50], [.32, 66], [.1, 84], [.04, 100]], "toenung": {"farbe": "navy", "alpha": .28, "modus": "color"},
   "dachzeile": "Das Objekt", "titel": ["Gründerzeit,", "gut vermietet"],
   "text": "Je zwei Wohnungen auf drei Etagen um ein gemeinsames Treppenhaus, dazu die Remise im Garten. Stuckfassade, Dielen und Fachwerk prägen das Haus; Bäder, Küchen und Heizung sind modernisiert.",
   "kennzahlen": [["1898", "Baujahr"], ["7", "Einheiten"], ["781 m²", "Grundstück"]],
@@ -111,7 +112,7 @@ S.append({"modul": "raster", "id": "standort", "kopf": "Standort", "dachzeile": 
      "absaetze": ["Innenstadt, Fernbahn und Flughafen in einer Fahrt erreichbar; Adlershof, BER und Grünheide stehen für wachsende Arbeitsplatzstandorte im Südosten – ein stabiles Fundament für die Mietnachfrage."]}],
   "quelle": "Luftlinie: Berechnung GRENFORD aus Koordinaten. Fahrzeiten: gerundete Richtwerte GRENFORD von Tür zu Tür, abhängig von Tageszeit und Verbindung; Südkreuz laut Verkäuferunterlagen. Ohne Gewähr."})
 
-S.append({"modul": "lage", "id": "lage", "kopf": "Mikrolage", "bild": "remise.jpg", "bild_pos": "center",
+S.append({"modul": "lage", "id": "lage", "kopf": "Mikrolage", "bild": "remise.jpg", "bild_pos": "center", "toenung": {"farbe": "navy", "alpha": .65, "modus": "color"},
   "caption": "Garten mit Remise · Fotoaufnahme Bestand",
   "dachzeile": "Mikrolage · Pätzer Straße 11", "titel": ["Ruhiges Quartier,", "alles in der Nähe"],
   "intro": "Die Pätzer Straße liegt in einem ruhigen Wohnquartier in Britz, ohne Durchgangsverkehr. Einkauf, Schulen und Grünflächen sind fußläufig oder mit wenigen Stationen erreichbar.",

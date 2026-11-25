@@ -30,6 +30,7 @@ Ob Property Brief, Investment Brief, Investment Memo oder Renovation Memo: Jedes
 - Grundrisse auf weißen Karten
 - Kennzahlen in Farbkacheln, Diagramme in der Akzentfarbe
 - Echte Fotos bleiben Fotos; Visualisierungen werden immer gekennzeichnet.
+- Fotos mit dominanten Fremdfarben (z. B. gelbe Fassade) werden an die Bereichsfarbe angeglichen: `"toenung": {"farbe": "navy", "alpha": 0.5–0.7, "modus": "color"}`. Bei unruhigen Bildern auf Bildseiten den Verlauf über `"verlauf"` verlängern, damit keine harte Kante entsteht.
 
 ### Farbe und Logo je Bereich (`meta.bereich`)
 

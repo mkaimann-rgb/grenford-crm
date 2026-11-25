@@ -378,7 +378,8 @@ def m_split(d):
 
 def m_lage(d):
     if d.get('bild'):   # Mikrolage mit Foto statt Berlin-Karte (wenn die Makrolage eine eigene Standortseite hat)
-        s = (HEAD(d.get('kopf', 'Lage &amp; Umfeld')) + PN() + IMG(d['bild'], 0, 0, HALF, 567, d.get('bild_pos', 'center')) + MARK('white') + FOOT(img=True)
+        s = (HEAD(d.get('kopf', 'Lage &amp; Umfeld')) + PN() + IMG(d['bild'], 0, 0, HALF, 567, d.get('bild_pos', 'center'))
+             + (TOENUNG(0, HALF, d['toenung']) if d.get('toenung') else '') + MARK('white') + FOOT(img=True)
              + (T(27, 40, 'N', 6.6, 9, '#ffffff', d['caption'], extra=SHADOW) if d.get('caption') else '')
              + EB(TX, 481, d['dachzeile']) + T(TX, 448, 'S', 24, 26, INK, br(d['titel']))
              + T(TX, 392, 'N', 8.8, 12.6, INK, d['intro'], w=356))
@@ -1448,9 +1449,17 @@ def m_raster(d, obj):
     return s
 
 
+def TOENUNG(x, w, t):
+    """Farbangleichung eines Fotos an die Bereichsfarbe: t = {'farbe': 'navy'|'light'|…, 'alpha': 0–1, 'modus': CSS-Blend-Mode}."""
+    col = _farbe(t.get('farbe', 'navy'))
+    return f'<div class="t" style="left:{x}pt;top:0;width:{w}pt;height:567pt;background:{col};opacity:{t.get("alpha", .35)};mix-blend-mode:{t.get("modus", "color")}"></div>'
+
+
 def m_bildseite(d):
     """Atmosphärische Doppelseite: Foto vollflächig, Textspalte links mit Akzentfarbe, Kennzahlen unten."""
-    over = (f'<div class="t" style="left:0;top:0;width:907pt;height:567pt;background:linear-gradient(90deg,{_rgba(NAVY,.9)} 0%,{_rgba(NAVY,.72)} 30%,{_rgba(NAVY,.15)} 62%,{_rgba(NAVY,0)} 80%)"></div>'
+    vl = d.get('verlauf', [[.9, 0], [.72, 30], [.15, 62], [0, 80]])
+    over = (TOENUNG(0, 907, d['toenung']) if d.get('toenung') else '') + (
+            f'<div class="t" style="left:0;top:0;width:907pt;height:567pt;background:linear-gradient(90deg,' + ','.join(f'{_rgba(NAVY, a)} {p}%' for a, p in vl) + ')"></div>'
             if d.get('stil') == 'voll' else R(0, 0, COL, 567, NAVY, .62))
     s = (IMG(d['bild'], 0, 0, 907, 567, d.get('bild_pos', 'center')) + over
          + MARK('white') + HEAD(d['kopf']) .replace(f'color:{ACC}', 'color:#ffffff;' + SHADOW) + FOOT(img=True) + PN(img=True)

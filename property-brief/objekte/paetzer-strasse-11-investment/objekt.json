@@ -323,6 +323,37 @@
    "stil": "voll",
    "bild": "fassade-seite.jpg",
    "bild_pos": "center 40%",
+   "verlauf": [
+    [
+     0.94,
+     0
+    ],
+    [
+     0.92,
+     36
+    ],
+    [
+     0.72,
+     50
+    ],
+    [
+     0.32,
+     66
+    ],
+    [
+     0.1,
+     84
+    ],
+    [
+     0.04,
+     100
+    ]
+   ],
+   "toenung": {
+    "farbe": "navy",
+    "alpha": 0.28,
+    "modus": "color"
+   },
    "dachzeile": "Das Objekt",
    "titel": [
     "Gründerzeit,",
@@ -576,6 +607,11 @@
    "kopf": "Mikrolage",
    "bild": "remise.jpg",
    "bild_pos": "center",
+   "toenung": {
+    "farbe": "navy",
+    "alpha": 0.65,
+    "modus": "color"
+   },
    "caption": "Garten mit Remise · Fotoaufnahme Bestand",
    "dachzeile": "Mikrolage · Pätzer Straße 11",
    "titel": [
