@@ -70,6 +70,13 @@
    "sub": "Tesla Gigafactory, Brandenburg",
    "lon": 13.79,
    "lat": 52.394
+  },
+  {
+   "id": "schlossstrasse",
+   "name": "Schloßstraße",
+   "sub": "Einkaufsmeile Steglitz",
+   "lon": 13.3247,
+   "lat": 52.462
   }
  ]
 }
