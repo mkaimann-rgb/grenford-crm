@@ -111,17 +111,17 @@ S.append({"modul": "raster", "id": "standort", "kopf": "Standort", "dachzeile": 
      "absaetze": ["Innenstadt, Fernbahn und Flughafen in einer Fahrt erreichbar; Adlershof, BER und Grünheide stehen für wachsende Arbeitsplatzstandorte im Südosten – ein stabiles Fundament für die Mietnachfrage."]}],
   "quelle": "Luftlinie: Berechnung GRENFORD aus Koordinaten. Fahrzeiten: gerundete Richtwerte GRENFORD von Tür zu Tür, abhängig von Tageszeit und Verbindung; Südkreuz laut Verkäuferunterlagen. Ohne Gewähr."})
 
-S.append({"modul": "lage", "id": "lage", "kopf": "Lage", "karte": {"lat": 52.4545, "lon": 13.441, "label": ["Pätzer Straße 11", "12359 Berlin-Britz"]},
-  "dachzeile": "Mikrolage · Pätzer Straße 11", "titel": ["Ruhig wohnen,", "schnell in der Stadt"],
-  "intro": "Die Pätzer Straße liegt in einem ruhigen Wohnquartier in Britz, ohne Durchgangsverkehr. Bus, U-Bahn und Stadtautobahn sind in wenigen Minuten erreichbar – eine gefragte Lage für Mieter mit Berufsweg in die Innenstadt.",
+S.append({"modul": "lage", "id": "lage", "kopf": "Mikrolage", "bild": "remise.jpg", "bild_pos": "center",
+  "caption": "Garten mit Remise · Fotoaufnahme Bestand",
+  "dachzeile": "Mikrolage · Pätzer Straße 11", "titel": ["Ruhiges Quartier,", "alles in der Nähe"],
+  "intro": "Die Pätzer Straße liegt in einem ruhigen Wohnquartier in Britz, ohne Durchgangsverkehr. Einkauf, Schulen und Grünflächen sind fußläufig oder mit wenigen Stationen erreichbar.",
   "gruppen": [{"titel": "Einkauf &amp; Versorgung", "text": "Supermärkte und Fachgeschäfte im Quartier · Einkaufszentrum Gropius Passagen in der Nähe."},
               {"titel": "Schule &amp; Familie", "text": "Schulen, Kindergärten und Arztpraxen in Britz; Gymnasien und Hochschulen im Bezirk Neukölln."},
               {"titel": "Grün &amp; Kultur", "text": "Britzer Garten · Schloss Britz mit Gutspark · Grünflächen entlang des Teltowkanals."}],
   "oepnv": [{"titel": "Bus Britzer Damm / Gradestraße", "text": "Haltestelle ca. 1 Minute zu Fuß"},
             {"titel": "U-Bahn U7", "text": "U Blaschkoallee, ca. 750 m"},
             {"titel": "S-Bahn und Autobahn", "text": "S Hermannstraße ca. 1,7 km · A100 und A113 in der Nähe"}],
-  "quelle": ["Entfernungen laut Verkäuferunterlagen; Südkreuz ca. 13 Minuten mit dem Auto, ca. 36 Minuten mit Bus und S-Bahn.",
-             "Kartenpunkt schematisch; Linien und Wege vor Ort prüfen."]})
+  "quelle": ["Entfernungen laut Verkäuferunterlagen; Linien und Wege vor Ort prüfen.", "Ziele in Berlin und Brandenburg: Seite {seite:standort}."]})
 
 E = [["EG · Wohnung 1", "Zimmer 1, Küche", "44,30", "Vermietet", "befristet"], ["EG · Wohnung 2", "Zimmer 2 und 3, Bad", "34,30", "Vermietet", "befristet"],
      ["1. OG · Wohnung 3", "2 Zimmer, Küche", "46,25", "Vermietet", "befristet"], ["1. OG · Wohnung 4", "2 Zimmer, Bad", "34,00", "Vermietet", "befristet"],

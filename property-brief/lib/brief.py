@@ -377,6 +377,19 @@ def m_split(d):
 
 
 def m_lage(d):
+    if d.get('bild'):   # Mikrolage mit Foto statt Berlin-Karte (wenn die Makrolage eine eigene Standortseite hat)
+        s = (HEAD(d.get('kopf', 'Lage &amp; Umfeld')) + PN() + IMG(d['bild'], 0, 0, HALF, 567, d.get('bild_pos', 'center')) + MARK('white') + FOOT(img=True)
+             + (T(27, 40, 'N', 6.6, 9, '#ffffff', d['caption'], extra=SHADOW) if d.get('caption') else '')
+             + EB(TX, 481, d['dachzeile']) + T(TX, 448, 'S', 24, 26, INK, br(d['titel']))
+             + T(TX, 392, 'N', 8.8, 12.6, INK, d['intro'], w=356))
+        for i, g in enumerate(d['gruppen']):
+            ln = 336 - 58 * i
+            s += L(TX, ln, 856) + T(TX, ln - 18, 'S', 12, 16, INK, g['titel']) + T(TX, ln - 34, 'N', 7.8, 11, INK, g['text'], w=356)
+        s += R(TX, 56, 356, 108)
+        for i, o in enumerate(d['oepnv']):
+            b = 145 - 30 * i
+            s += T(TX + 14, b, 'S', 9.5, 13, CREAM, o['titel']) + T(TX + 14, b - 12, 'N', 7, 9, MIST, o['text'])
+        return s + cap(TX, 40, br(d['quelle']))
     _, P = _berlin_projection(); k = d['karte']
     tx, ty = P(k['lon'], k['lat']); tipx = 27 + tx; tipy = 73.32 + ty   # Spitze, von oben gemessen
     cx = tipx; cy = tipy - 18.03
