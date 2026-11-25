@@ -10,6 +10,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHARED = os.path.join(ROOT, 'shared')
 
 H = 567.0
+ORANGE = None; MID = None; ONDARK = None; ONORANGE = None   # nur GRENFORD Projects
 NAVY = '#212e40'; INK = '#29394e'; ACC = '#4f6a92'; GREY = '#5f6470'
 CREAM = '#faf6f2'; LINE = '#ddd6cb'; MIST = '#dfe4ec'; LIGHT = '#a9b8cf'
 HALF = 453.5          # 50/50-Bildsplit
@@ -194,7 +195,11 @@ def PIC(src, x, y, w, h):
 THEMES = {   # Dachmarke GRENFORD: gleiche Typografie und Raster, Akzentfarbe und Logo je Geschäftsbereich
     'property':   {'NAVY': '#212e40', 'ACC': '#4f6a92', 'LIGHT': '#a9b8cf', 'mark': {'navy': 'navy', 'white': 'white'}},
     'investment': {'NAVY': '#24534c', 'ACC': '#2e6b62', 'LIGHT': '#8fc7bb', 'mark': {'navy': 'inv-dark', 'white': 'inv-white'}},
-    'projects':   {'NAVY': '#4e3328', 'ACC': '#a65b3c', 'LIGHT': '#ddb39a', 'mark': {'navy': 'proj-dark', 'white': 'proj-white'}},   # Terrakotta / Lehm
+    # GRENFORD Projects laut Brand-Kit (brochure-projects/design/tokens): Orange als Fläche, #A84700 als Schrift auf Hell,
+    # #FFAD59 auf Dunkel, Fast-Schwarz auf Orange (nie Weiß); Karten mit 3 px oranger Oberkante und 14 px Rundung unten.
+    'projects':   {'NAVY': '#3A3D41', 'ACC': '#A84700', 'LIGHT': '#FFEBD8', 'ORANGE': '#FF7900', 'MID': '#FF982F', 'RUST': '#D95F00',
+                   'ONDARK': '#FFAD59', 'ONORANGE': '#1C1D20', 'INK': '#3A3D41', 'MIST': '#e9e4dd',
+                   'mark': {'navy': 'proj-dark', 'white': 'proj-white'}},
 }
 
 
@@ -300,18 +305,19 @@ def m_titel(d):
     ws = [max(width(v, 'S', 19), width(l.upper(), 'N', 6.6, .04)) for v, l in vals]
     gap = (490 - sum(ws)) / (len(vals) + 1); xs = []; x = 390 + gap
     for w in ws: xs.append(round(x, 2)); x += w + gap
+    oc = ONORANGE or CREAM; oc2 = ONORANGE or MIST
     s = (IMG(d['bild'], 0, 0, 907, 567, d.get('bild_pos', 'center'))
-         + R(0, 0, COL, 567, NAVY, .6, extra=COLCUT()) + COLLINE() + MARK('white', 47, 450.63, .217335)
-         + EB(51, 404, d.get('dachzeile', 'Property Brief'), CREAM, 8.5)
+         + R(0, 0, COL, 567, ORANGE or NAVY, .96 if ORANGE else .6, extra=COLCUT()) + COLLINE() + MARK('navy' if ORANGE else 'white', 47, 450.63, .217335)
+         + EB(51, 404, d.get('dachzeile', 'Property Brief'), oc, 8.5)
          + (RT(856, 529, 'B', 7, 10, CREAM, br(d['vertraulich']), 400, ) .replace('text-align:right', 'text-align:right;text-transform:uppercase;letter-spacing:.08em;text-shadow:0 0 4pt rgba(20,28,40,.6)') if d.get('vertraulich') else '')
-         + T(49, 297 + tl, 'S', round(ts, 2), round(tl, 2), CREAM, br(lines))
-         + T(51, 219, 'S', 19, 25, CREAM, br(d['untertitel']))
-         + T(51, 156, 'N', 10, 15, MIST, br(d['kurz']))
-         + T(51, 84, 'S', 14, 18, CREAM, d['adresse'][0]) + T(51, 68, 'N', 10, 14, CREAM, d['adresse'][1])
+         + T(49, 297 + tl, 'S', round(ts, 2), round(tl, 2), oc, br(lines))
+         + T(51, 219, 'S', 19, 25, oc, br(d['untertitel']))
+         + T(51, 156, 'N', 10, 15, oc2, br(d['kurz']))
+         + T(51, 84, 'S', 14, 18, oc, d['adresse'][0]) + T(51, 68, 'N', 10, 14, oc, d['adresse'][1])
          + R(390, 25, 490, 83, NAVY, .6))
     for x, (v, l) in zip(xs, vals):
         s += T(x, 71, 'S', 19, 26, CREAM, v) + T(x, 48, 'N', 6.6, 9, CREAM, l.upper(), extra='letter-spacing:.04em')
-    return s + T(51, 22, 'N', 6.2, 8.7, MIST, d['hinweis'])
+    return s + T(51, 22, 'N', 6.2, 8.7, oc2, d['hinweis'])
 
 
 def m_vorwort(d):
@@ -322,14 +328,14 @@ def m_vorwort(d):
             + T(655, 305, 'N', 9.8, 14.8, INK, d['rechts'], w=200)
             + T(447, 200, 'N', 9.8, 14.8, INK, d['schluss'], w=409)
             + IMG('signature.png', 447, 100, 214, 43, 'left center', 'contain')
-            + T(447, 70, 'S', 19, 26, INK, 'Ihr Marco Kaimann') + T(447, 50, 'N', 7.5, 10, GREY, 'Geschäftsinhaber GRENFORD')
+            + T(447, 70, 'S', 19, 26, INK, d.get('gruss', 'Ihr Marco Kaimann')) + T(447, 50, 'N', 7.5, 10, GREY, 'Geschäftsinhaber GRENFORD')
             + FOOT(img=True))
 
 
 def m_inhalt(d):
     s = (HEAD('Inhalt') + PN() + IMG(d['bild'], 0, 0, COL, 567, d.get('bild_pos', 'center'), extra=COLCUT())
          + R(0, 0, COL, 567, NAVY, .4, extra=COLCUT()) + COLLINE() + MARK('white') + FOOT(img=True)
-         + EB(51, 403, 'Ihr Überblick', CREAM, 8) + T(51, 349, 'S', 32, 37, CREAM, br(d['claim']))
+         + EB(51, 403, d.get('ueberblick', 'Ihr Überblick'), CREAM, 8) + T(51, 349, 'S', 32, 37, CREAM, br(d['claim']))
          + L(51, 262, 331, '#aeb5be') + EB(51, 230, d['marke'], CREAM, 9)
          + T(51, 204, 'N', 10, 14.5, CREAM, br(d['text'])) + T(51, 81, 'N', 10, 14.5, CREAM, br(d['adresse'])))
     n = len(d['kapitel']); step = min(60, 432 / n)
@@ -806,7 +812,7 @@ def m_agb(d, obj):
     k = obj['kosten']
     agb = open(os.path.join(SHARED, d.get('datei', 'agb.html'))).read().replace('{{courtage_satz}}', k.get('agb_courtage', ''))
     p = re.findall(r'<h4>.*?</p>', agb)
-    cols = [''.join(p[0:3]), ''.join(p[3:7]), ''.join(p[7:])]
+    t1, t2 = d.get('teilung', [3, 7]); cols = [''.join(p[0:t1]), ''.join(p[t1:t2]), ''.join(p[t2:])]
     return (chrome('Anhang · Allgemeine Geschäftsbedingungen') + head(d.get('dachzeile', 'GRENFORD Property · Immobilienvermittlung'), 'Allgemeine Geschäftsbedingungen.', 29, 32, 438)
             + T(51, 417, 'N', 8, 11.6, GREY, f'Marco Kaimann, Einzelunternehmer, Geschäftsbezeichnung GRENFORD · Kurfürstendamm 96, 10709 Berlin · mkaimann@grenford.de · Stand: {obj["meta"]["agb_stand"]}')
             + ''.join(f'<div class="t agb" style="left:{x}pt;top:{H-399:.1f}pt;width:255pt;{d.get("stil", "")}">{c}</div>' for x, c in zip((51, 324, 597), cols)))
@@ -964,10 +970,18 @@ def nlines(text, size, w, f='N'):
 
 
 def _farbe(k):
-    return {'navy': NAVY, 'acc': ACC, 'mid': {'#24534c': '#6c9f95', '#4e3328': '#c4876a'}.get(NAVY, '#7f97b8'), 'light': LIGHT, 'grey': '#b9b4ab', 'mist': MIST}.get(k, k)
+    if ORANGE: return {'navy': NAVY, 'acc': ORANGE, 'mid': MID, 'light': LIGHT, 'grey': '#b9b4ab', 'mist': MIST, 'rost': '#D95F00'}.get(k, k)
+    return {'navy': NAVY, 'acc': ACC, 'mid': {'#24534c': '#6c9f95'}.get(NAVY, '#7f97b8'), 'light': LIGHT, 'grey': '#b9b4ab', 'mist': MIST}.get(k, k)
 
 
 SQ = 'border-radius:0;'
+
+
+def CARD(x, y, w, h, color=None, a=1):
+    """Fläche; bei GRENFORD Projects als Karte mit 3 px oranger Oberkante und 14 px Rundung unten."""
+    if ORANGE:
+        return R(x, y, w, h, color or NAVY, a, extra=f'border-radius:0 0 10.5pt 10.5pt;border-top:2.25pt solid {ORANGE};box-sizing:border-box;')
+    return R(x, y, w, h, color, a, extra=SQ)
 
 
 def CHIP(x, base, text, gross=False):
@@ -1015,7 +1029,7 @@ def b_tabelle(b):
                 num = lambda t: float(str(t).replace('.', '').replace(',', '.').replace(' %', '').replace('&nbsp;', ''))
                 vals = [num(rr[jj]) for ii, rr in enumerate(b['zeilen']) if ii in b['heat']['zeilen'] for jj in b['heat']['spalten']]
                 v = num(c)
-                s += R(xs[j] + 2, y - rh + 1.5, cols[j] - 2, rh - 3, ACC, round(.1 + .45 * (v - min(vals)) / (max(vals) - min(vals) or 1), 2), extra=SQ)
+                s += R(xs[j] + 2, y - rh + 1.5, cols[j] - 2, rh - 3, ORANGE or ACC, round(.1 + .45 * (v - min(vals)) / (max(vals) - min(vals) or 1), 2), extra=SQ)
             col = NAVY if (strong or (j == b.get('akzent'))) else INK
             f = 'B' if (strong or j == b.get('akzent')) else 'N'
             ncell = nlines(c, fs, cols[j] - 8) if j in lft else 1
@@ -1055,7 +1069,7 @@ def b_text(b):
     total = sum(hts) + 8 * (len(paras) - 1) + (18 if b.get('titel') else 0)
     hbox = max(total + 30, b.get('h', 0))
     if b.get('box'):
-        s += R(x, y - hbox, w, hbox, LIGHT, .22, extra=SQ) + R(x, y - hbox, 2.4, hbox, ACC, extra=SQ)
+        s += (CARD(x, y - hbox, w, hbox, LIGHT) if ORANGE else R(x, y - hbox, w, hbox, LIGHT, .22, extra=SQ) + R(x, y - hbox, 2.4, hbox, ACC, extra=SQ))
         y -= 15
     if b.get('titel'): s += BT(inner_x, y - 4, b['titel']); y -= 18
     for (html, _), h in zip(paras, hts):
@@ -1072,7 +1086,7 @@ def b_balken(b):
     st = b.get('abstand', 22) if b.get('bis') is None else min(40, (y - b['bis']) / n)
     for it in b['items']:
         lab, val, txt = it[0], it[1], it[2]; kind = it[3] if len(it) > 3 else ''
-        col = LIGHT if kind == 'h' else ('#b9b4ab' if kind == 'r' else NAVY)
+        col = (ORANGE if kind == 'h' and ORANGE else LIGHT) if kind == 'h' else ('#b9b4ab' if kind == 'r' else NAVY)
         bwid = max(1.5, (w - lw - vw) * val / mx)
         s += (T(x, y - bh / 2 - 2.6, 'B' if kind == 'h' else 'N', fs, fs * 1.2, NAVY if kind == 'h' else INK, lab, w=lw - 6) + R(x + lw, y - bh, round(bwid, 2), bh, col, extra=SQ)
               + T(x + lw + bwid + 6, y - bh / 2 - 2.6, 'B', fs, fs * 1.2, NAVY, txt))
@@ -1177,9 +1191,9 @@ def b_kpi(b):
             if st == 'durch':
                 s += R(xx, y - h, round(bw, 2), h, LIGHT, .3, extra=SQ) + T(xx + 14, y - h + h * .52, 'L', vs, vs * 1.1, GREY, v, extra='font-variant-numeric:tabular-nums;text-decoration:line-through;text-decoration-thickness:1pt') + EB(xx + 14, y - h + 14, lab, GREY, 6.8)
             elif st == 'hell':
-                s += R(xx, y - h, round(bw, 2), h, LIGHT, 1, extra=SQ) + T(xx + 14, y - h + h * .52, 'L', vs, vs * 1.1, NAVY, v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 14, lab, NAVY, 6.8)
+                s += CARD(xx, y - h, round(bw, 2), h, LIGHT, 1) + T(xx + 14, y - h + h * .52, 'L', vs, vs * 1.1, NAVY, v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 14, lab, NAVY, 6.8)
             else:
-                s += R(xx, y - h, round(bw, 2), h, extra=SQ) + T(xx + 14, y - h + h * .52, 'L', vs, vs * 1.1, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 14, lab, LIGHT, 6.8)
+                s += CARD(xx, y - h, round(bw, 2), h) + T(xx + 14, y - h + h * .52, 'L', vs, vs * 1.1, '#ffffff', v, extra='font-variant-numeric:tabular-nums') + EB(xx + 14, y - h + 14, lab, ONDARK or LIGHT, 6.8)
             if it.get('text'):
                 s += T(xx, y - h - 14, 'N', 8.4, 11.4, INK, it['text'], w=bw - 4)
                 low = min(low, y - h - 10 - nlines(it['text'], 8.4, bw - 4) * 11.4)
@@ -1188,11 +1202,11 @@ def b_kpi(b):
 
 
 def b_dunkel(b):
-    x, y, w, h = b['x'], b['y'], b['w'], b['h']; s = R(x, y - h, w, h, extra=SQ)
-    yy = y - 26
-    if b.get('titel'): s += EB(x + 20, yy, b['titel'], CREAM, 7.6); yy -= 40
+    x, y, w, h = b['x'], b['y'], b['w'], b['h']; s = CARD(x, y - h, w, h)
+    yy = y - b.get('oben', 26)
+    if b.get('titel'): s += EB(x + 20, yy, b['titel'], ONDARK or CREAM, 7.6); yy -= 40
     for it in b['werte']:
-        s += T(x + 20, yy, 'L', it[2] if len(it) > 2 else 30, 34, '#ffffff', it[0], extra='font-variant-numeric:tabular-nums;letter-spacing:-.02em') + EB(x + 20, yy - 25, it[1], LIGHT, 7)
+        s += T(x + 20, yy, 'L', it[2] if len(it) > 2 else 30, (it[2] if len(it) > 2 else 30) * 1.12, (ONDARK if len(it) > 3 and ONDARK else '#ffffff'), it[0], extra='font-variant-numeric:tabular-nums;letter-spacing:-.02em') + EB(x + 20, yy - 25, it[1], LIGHT, 7)
         yy -= b.get('abstand', 72)
     if b.get('text'): s += T(x + 20, y - h + 18 + nlines(b['text'], 8.4, w - 40) * 12, 'N', 8.4, 12, MIST, b['text'], w=w - 40)
     b['_unten'] = y - h
@@ -1261,7 +1275,8 @@ def b_matrix(b):
               f'font-family:\'DM Mono\',monospace;font-size:7.2pt;line-height:10pt;letter-spacing:.06em;text-transform:uppercase;color:{ACC}">{t}</div>')
     for i, c in enumerate(b['zellen']):
         cx = x + ox + (i % 2) * (cw + g); cy = y - oy - (i // 2) * (chh + g)
-        s += R(round(cx, 2), round(cy - chh, 2), round(cw, 2), round(chh, 2), LIGHT, .18, extra=SQ) + R(round(cx, 2), round(cy - 2.6, 2), round(cw, 2), 2.6, ACC if c.get('akzent') else NAVY, extra=SQ)
+        s += (CARD(round(cx, 2), round(cy - chh, 2), round(cw, 2), round(chh, 2), LIGHT if c.get('akzent') else '#EFE9E1') if ORANGE else
+              R(round(cx, 2), round(cy - chh, 2), round(cw, 2), round(chh, 2), LIGHT, .18, extra=SQ) + R(round(cx, 2), round(cy - 2.6, 2), round(cw, 2), 2.6, ACC if c.get('akzent') else NAVY, extra=SQ))
         yy = cy - 20
         if c.get('tag'): s += CHIP(cx + 16, yy + 4, c['tag'], True); yy -= 18
         s += EB(cx + 16, yy, c['titel'], NAVY, 7.6); yy -= 18; fs = b.get('schrift', 8.8)
@@ -1413,7 +1428,7 @@ def b_hstack(b):
         for v, col, nm in segs:
             sw_ = (w - lw - sw) * v / mx
             s += R(round(bx, 2), y - bh, round(sw_, 2) - .8, bh, _farbe(col), extra=SQ)
-            if sw_ > 40: s += T(round(bx + 6, 2), y - bh / 2 - 2.8, 'B', 7.6, 9, '#ffffff' if col in ('navy', 'acc', 'mid') else NAVY, nm)
+            if sw_ > 40: s += T(round(bx + 6, 2), y - bh / 2 - 2.8, 'B', 7.6, 9, (ONORANGE if ORANGE and col in ('acc', 'mid', 'light') else '#ffffff' if col in ('navy', 'acc', 'mid') else NAVY), nm)
             if nm not in [l[0] for l in leg]: leg.append((nm, col))
             bx += sw_
         s += T(round(bx + 7, 2), y - bh / 2 - 3, 'B', 9.4, 11, NAVY, summe)
@@ -1507,8 +1522,10 @@ def build(objdir):
     obj = json.load(open(os.path.join(objdir, 'objekt.json')))
     shared = json.load(open(os.path.join(SHARED, 'grenford.json')))
     C = Ctx(objdir, obj['meta'])
-    global NAVY, ACC, LIGHT
+    global NAVY, ACC, LIGHT, ORANGE, MID, ONDARK, ONORANGE, INK, MIST
     th = THEMES[obj['meta'].get('bereich', 'property')]; NAVY, ACC, LIGHT = th['NAVY'], th['ACC'], th['LIGHT']
+    ORANGE, MID, ONDARK, ONORANGE = th.get('ORANGE'), th.get('MID'), th.get('ONDARK'), th.get('ONORANGE')
+    INK = th.get('INK', INK); MIST = th.get('MIST', MIST)
     # Seitenzählung: Titel ohne Zahl · Vorspann römisch · Objektteil arabisch · Anhang römisch fortlaufend
     labels, ids = {}, {}; rom = 0; arab = 0
     for i, sd in enumerate(obj['seiten'], 1):

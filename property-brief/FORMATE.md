@@ -38,7 +38,7 @@ Ob Property Brief, Investment Brief, Investment Memo oder Renovation Memo: Jedes
 |---|---|---|---|
 | `property` | Navy `#212e40` / `#4f6a92` | GRENFORD Property | Property Brief |
 | `investment` | Patina `#24534c` / `#2e6b62` | GRENFORD Investments | Investment Brief, Investment Memo |
-| `projects` | Terrakotta / Lehm `#4e3328` / `#a65b3c` / `#ddb39a` | GRENFORD Projects | Renovation Memo |
+| `projects` | Projects-Orange `#FF7900` (Fläche), `#A84700` (Schrift auf Hell), `#FFAD59` (auf Dunkel), Zartes Orange `#FFEBD8`, Schwarz-Grau `#3A3D41`; Schrift auf Orange `#1C1D20`, nie Weiß | GRENFORD Projects | Renovation Memo |
 
 ### Sprache
 
@@ -185,3 +185,30 @@ python3 build.py objekte/<objekt>
 ```bash
 NODE_PATH=$(npm root -g) node render.mjs objekte/<objekt>
 ```
+
+### Renovation Memo (22 Seiten, Muster `objekte/projects-muster-fresdorf`)
+
+Farben und Formen laut Projects-Brand-Kit (brochure-projects/design/tokens): Titelspalte in Orange mit fast schwarzer Schrift, Karten mit 3 px oranger Oberkante und 14 px Rundung unten, Balken und Flächen in Orange.
+
+1. Titel
+2. Inhalt (I)
+3. Vorwort (II, persönliche Anrede)
+4. Auf einen Blick (III)
+5. Eure Richtung: Wünsche, Budget, Prozess
+6. Der Bestand (Bildseite)
+7. Rot-Gelb-Pläne
+8. Rundenvergleich
+9. Angebot A
+10. Angebot B
+11. Angebot C
+12. Kostenvergleich
+13. Kostenverlauf
+14. Bereinigter Vergleich
+15. Entscheidungsmatrix
+16. Zahlungspläne
+17. Klärung vor der Unterschrift
+18. Einschätzung
+19. Kontakt
+20. Über GRENFORD
+21. Transparenz im Detail
+22. AGB (`shared/agb_projects.html`)
