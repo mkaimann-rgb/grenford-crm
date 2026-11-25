@@ -88,7 +88,7 @@ Regeln:
 16. Partner
 17. Kontakt
 18. Über GRENFORD
-19. Rechtliche Hinweise
+19. Transparenz im Detail (`recht`, 4 Blöcke in 2 × 2)
 20. AGB (`shared/agb.html`)
 
 ### Investment Brief (20 Seiten, Muster `objekte/paetzer-strasse-11-investment`)
@@ -111,7 +111,7 @@ Regeln:
 16. Value Matrix
 17. Kontakt / Transaktionsablauf
 18. Über GRENFORD
-19. Rechtliche Hinweise
+19. Transparenz im Detail (`recht`, 6 Blöcke in 3 × 2: zusätzlich Rendite und Finanzierung sowie Provision)
 20. AGB (`shared/agb_investment_brief.html`)
 
 ### Investment Memo (ca. 34 Seiten, Muster `objekte/montesana-gi26-002`)

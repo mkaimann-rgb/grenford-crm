@@ -778,8 +778,12 @@ def m_ueber(d, shared):
 def m_recht(d, obj):
     s = (chrome('Grundlagen &amp; rechtliche Hinweise') + head(d['dachzeile'], 'Transparenz im Detail.')
          + T(51, 398, 'N', 10, 15, INK, br(d['intro'])))
-    for (x, ln), (hh, t) in zip([(51, 352), (473, 352), (51, 218), (473, 218)], d['bloecke']):
-        s += L(x, ln, x + 383) + T(x, ln - 21, 'S', 12.5, 16, INK, hh) + T(x, ln - 44, 'N', d.get('schrift', 9.9), d.get('zeile', 14.6), INK, t, w=383)
+    if len(d['bloecke']) <= 4:   # 2 × 2 (Property Brief)
+        pos, bw = [(51, 352), (473, 352), (51, 218), (473, 218)], 383
+    else:                         # 3 × 2 (Investment Brief: zusätzlich Rendite/Finanzierung und Provision)
+        pos, bw = [(51, 352), (334, 352), (617, 352), (51, 210), (334, 210), (617, 210)], 239
+    for (x, ln), (hh, t) in zip(pos, d['bloecke']):
+        s += L(x, ln, x + bw) + T(x, ln - 21, 'S', 12.5, 16, INK, hh) + T(x, ln - 44, 'N', d.get('schrift', 9.9), d.get('zeile', 14.6), INK, t, w=bw)
     return s + L(51, 74, 856) + T(51, 58, 'N', 7.4, 10, GREY, f'Redaktionsstand: {obj["meta"]["redaktionsstand"]} · Vollständige AGB auf Seite {{seite:agb}} · Verbraucherinformationen und Widerrufsbelehrung werden gesondert bereitgestellt.')
 
 
